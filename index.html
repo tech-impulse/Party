@@ -3,17 +3,18 @@
 
 <head>
     <title>Party HARD</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/jquery.mobile-1.4.5.min.js"></script>
     <link rel="stylesheet" href="css/themes/PartyFiesta.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <!-- SCRIPTS NUESTROS -->
+    <script src="js/app.js"></script>
 </head>
 
 <body>
-    <div data-role="page">
-
+    <div data-role="page" id="principal">
         <div data-role="header">
             <img src="css/icons/barra.png" width="100%">
         </div>
@@ -25,11 +26,11 @@
                 </div>
                 <div>
                     <div class="ui-grid-b">
-                        <div class="ui-block-a"><img src="css/icons/catalogo.png">
+                        <div class="ui-block-a" id="btnCatalogo"><img src="css/icons/catalogo.png">
                         </div>
-                        <div class="ui-block-b"><img src="css/icons/globos.png">
+                        <div class="ui-block-b" id="btnFiesta"><img src="css/icons/globos.png">
                         </div>
-                        <div class="ui-block-c"><img src="css/icons/disfraz.png">
+                        <div class="ui-block-c" id="btnDisfraz"><img src="css/icons/disfraz.png">
                         </div>
                     </div>
                     <div class="ui-grid-b">
@@ -49,15 +50,50 @@
                 <div style="width:20%; display:inline-block; margin-left:10px">
                     <input type="search" name="search" id="" value="" />
                 </div>
-
-
             </center>
             <img src="css/icons/barra.png" width="100%">
         </div>
-        <!-- /footer -->
-
     </div>
-    <!-- /page -->
+    <div data-role="page" id="catalogo">
+        <div data-role="header">
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <a id="menu" data-role="button" data-icon="bars" data-iconpos="notext"></a>
+                </div>
+                <div class="ui-block-b"><img src="css/icons/logo.png" width="100%">
+                </div>
+                <div class="ui-block-c" style="text-align:right">
+                    <a href="" data-role="button" data-icon="shop" data-iconpos="notext"></a>
+                </div>
+            </div>
+            <img src="css/icons/barra.png" height="5px" width="100%">
+
+        </div>
+        <div data-role="content">
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="width:65%">
+                    <img src="css/icons/catalogoLogo.png" width="100%" height="100%">
+                </div>
+                <div class="ui-block-b" style="width:30%; margin:2%">
+                    <div style="text-align:right">
+                        <a data-role="button">Globos</a>
+                        <a data-role="button">Decora tu Fiesta</a>
+                        <a data-role="button">Velas y bengalas</a>
+                        <a data-role="button">Pastelería</a>
+                        <a data-role="button">Piñatas</a>
+                        <a data-role="button">Bromas</a>
+                        <a data-role="button">Bolsa y cajas</a>
+                        <a data-role="button">Accesorios</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <img src="css/icons/barra.png" width="100%">
+        </div>
+    </div>
 </body>
 
 </html>
