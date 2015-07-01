@@ -11,24 +11,99 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
 	font-family: Flaticon;
-        font-size: 100px;
+        font-size: 20px;
 font-style: normal;
 margin-left: 20px;
-}.flaticon-balloons2:before {
+}.flaticon-back:before {
 	content: "\e000";
+    font-size: 25px;
 }
-.flaticon-books2:before {
+.flaticon-balloons-b:before {
 	content: "\e001";
+    font-size: 100px;
 }
-.flaticon-offer1:before {
+.flaticon-catalog-b:before {
 	content: "\e002";
+    font-size: 100px;
 }
-.flaticon-party14:before {
+.flaticon-leftarrow:before {
 	content: "\e003";
+    font-size: 25px;
 }
-.flaticon-question3:before {
+.flaticon-menu:before {
 	content: "\e004";
+    font-size: 25px;
 }
-.flaticon-thinking3:before {
+.flaticon-offer-b:before {
 	content: "\e005";
+    font-size: 100px;
 }
+.flaticon-shop:before {
+	content: "\e006";
+    font-size: 25px;
+}
+.flaticon-party-b:before {
+	content: "\e007";
+    font-size: 100px;
+}
+.flaticon-question-b:before {
+	content: "\e008";
+    font-size: 100px;
+}
+.flaticon-thinking-b:before {
+	content: "\e009";
+    font-size: 100px;
+}
+
+
+
+.flaticon-balloons-icon:before {
+	content: "\e001";
+    font-size: 2em;
+}
+.flaticon-catalog-icon:before {
+	content: "\e002";
+    font-size: 2em;
+}
+.flaticon-offer-icon:before {
+	content: "\e005";
+    font-size: 2em;
+}
+.flaticon-party-icon:before {
+	content: "\e007";
+    font-size: 2em;
+}
+.flaticon-question-icon:before {
+	content: "\e008";
+    font-size: 2em;
+}
+.flaticon-thinking-icon:before {
+	content: "\e009";
+    font-size: 2em;
+}
+
+.flaticon-balloons-h:before {
+	content: "\e001";
+    font-size: 18em;
+}
+.flaticon-catalog-h:before {
+	content: "\e002";
+    font-size: 18em;
+}
+.flaticon-offer-h:before {
+	content: "\e005";
+    font-size: 18em;
+}
+.flaticon-party-h:before {
+	content: "\e007";
+    font-size: 18em;
+}
+.flaticon-question-h:before {
+	content: "\e008";
+    font-size: 18em;
+}
+.flaticon-thinking-h:before {
+	content: "\e009";
+    font-size: 18em;
+}
+

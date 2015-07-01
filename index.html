@@ -20,7 +20,7 @@
         <div data-role="header">
             <img src="css/icons/barra.png" width="100%">
         </div>
-        <div data-role="content">
+        <div data-role="content" id="divContent">
             <center>
                 <div>
                     <img src="css/icons/logo.png">
@@ -30,21 +30,21 @@
 
                         <div class="ui-block-a" id="btnCatalogo">
                             <a data-role="button" data-theme="f">
-                                <span class="flaticon-books2" style="color:#EE7F01"></span>
+                                <span class="flaticon-catalog-b" style="color:#EE7F01"></span>
                                 <br>
                                 <strong> ACCESO A CATALOGO</strong>
                             </a>
                         </div>
-                        <div class="ui-block-b" id="btnFiesta">
+                        <div class="ui-block-b" id="">
                             <a data-role="button" data-theme="f">
-                                <span class="flaticon-offer1" style="color:#0097D3"></span>
+                                <span class="flaticon-offer-b" style="color:#0097D3"></span>
                                 <br>
                                 <strong> PROMOCIONES</strong>
                             </a>
                         </div>
-                        <div class="ui-block-c" id="btnDisfraz">
+                        <div class="ui-block-c" id="btnFiesta">
                             <a data-role="button" data-theme="f">
-                                <span class="flaticon-balloons2" style="color:#E3005D"></span>
+                                <span class="flaticon-balloons-b" style="color:#E3005D"></span>
                                 <br>
                                 <strong> ASISTENTE DE FIESTAS</strong>
                             </a>
@@ -52,23 +52,23 @@
                     </div>
                     <br>
                     <div class="ui-grid-b">
-                        <div class="ui-block-a" id="btnCatalogo">
+                        <div class="ui-block-a" id="btnDisfraz">
                             <a data-role="button" data-theme="f">
-                                <span class="flaticon-party14" style="color:#79B51C"></span>
+                                <span class="flaticon-party-b" style="color:#79B51C"></span>
                                 <br>
                                 <strong> ASISTENTE DE DISFRACES</strong>
                             </a>
                         </div>
-                        <div class="ui-block-b" id="btnFiesta">
+                        <div class="ui-block-b" id="">
                             <a data-role="button" data-theme="f">
-                                <span class="flaticon-thinking3" style="color:#FDCD20"></span>
+                                <span class="flaticon-thinking-b" style="color:#FDCD20"></span>
                                 <br>
                                 <strong> SUGERENCIAS</strong>
                             </a>
                         </div>
-                        <div class="ui-block-c" id="btnDisfraz" <a data-role="button">
+                        <div class="ui-block-c" id="" <a data-role="button">
                             <a data-role="button" data-theme="f">
-                                <span class="flaticon-question3" style="color:#0097D3"></span>
+                                <span class="flaticon-question-b" style="color:#0097D3"></span>
                                 <br>
                                 <strong> NO ESTA EN TIENDA?</strong>
                             </a>
@@ -76,9 +76,7 @@
                     </div>
                 </div>
             </center>
-            <!-- /grid-a -->
         </div>
-        <!-- /content -->
 
         <div data-role="footer" data-position="fixed">
             <!--
@@ -93,30 +91,51 @@
 
         </div>
     </div>
-    <div data-role="page" id="catalogo">
+    <div data-role="page" id="contenido">
         <div data-role="header">
+            <img src="css/icons/barra.png" width="100%">
             <div class="ui-grid-b">
-                <div class="ui-block-a">
-                    <a id="menu" data-role="button" data-icon="bars" data-iconpos="notext"></a>
+                <div class="ui-block-a" style="margin-top:10px" id="path">
+
                 </div>
-                <div class="ui-block-b"><img src="css/icons/logo.png" width="100%">
+                <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%">
                 </div>
-                <div class="ui-block-c" style="text-align:right">
-                    <a href="" data-role="button" data-icon="shop" data-iconpos="notext"></a>
+                <div class="ui-block-c" style="text-align:right;">
+                    <a id="btnMenuLateral" onclick="openMenu()">
+                        <span class="flaticon-menu"></span>
+                    </a>
                 </div>
             </div>
             <img src="css/icons/barra.png" height="5px" width="100%">
-
         </div>
         <div data-role="content">
-            <div class="ui-grid-a">
-                <div class="ui-block-a" style="width:65%">
-                    <img src="css/icons/catalogoLogo.png" width="100%">
+            <div data-role="panel" id="menuLateral" data-display="overlay" data-position="right">
+                <h2>Menú</h2>
+                <ul data-role="listview">
+                    <li id="btnMenuCatalog"><span class="flaticon-catalog-icon" style="margin-right: 2em;"></span>Catálogo</li>
+                    <li id="btnMenuPromo"><span class="flaticon-offer-icon" style="color:#0097D3; margin-right: 2em;"></span>Promociones</li>
+                    <li id="btnMenuParty"><span class="flaticon-balloons-icon" style="color:#E3005D; margin-right: 2em;"></span>Asistente de Fiestas</li>
+                    <li id="btnMenuCostumes"><span class="flaticon-party-icon" style="color:#79B51C; margin-right: 2em;"></span>Asistente de Disfraces</li>
+                    <li id="btnMenuSuggestions"><span class="flaticon-thinking-icon" style="color:#FDCD20; margin-right: 2em;"></span>Sugerencias?</li>
+                    <li id="btnMenuIdea"><span class="flaticon-question-icon" id="btnMenuIdea" style="color:#0097D3; margin-right: 2em;"></span>No está a la venta?</li>
+                    <li id="btnMenu">
+                        <center><a data-role="button" data-icon="home" data-theme="e">Ir al Menú</a>
+                        </center>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ui-grid-a" id="page_catalog">
+                <div class="ui-block-a" style="width:66%">
+                    <center>
+                        <span class="flaticon-catalog-h" style="color:#E3005D;"></span>
+
+                    </center>
                 </div>
-                <div class="ui-block-b" style="width:30%; margin:2%">
+                <div class="ui-block-b" style="width:30%; margin: 2%">
                     <div style="text-align:right">
                         <a data-role="button">Globos</a>
-                        <a data-role="button">Decora tu Fiesta</a>
+                        <a data-role="button">Decora tu fiesta</a>
                         <a data-role="button">Velas y bengalas</a>
                         <a data-role="button">Pastelería</a>
                         <a data-role="button">Piñatas</a>
@@ -126,79 +145,142 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div data-role="footer" data-position="fixed">
-            <img src="css/icons/barra.png" width="100%">
-        </div>
-    </div>
-    <div data-role="page" id="fiesta">
-        <div data-role="header">
-            <div class="ui-grid-b">
-                <div class="ui-block-a">
-                    <a id="menu" data-role="button" data-icon="bars" data-iconpos="notext"></a>
-                </div>
-                <div class="ui-block-b"><img src="css/icons/logo.png" width="100%">
-                </div>
-                <div class="ui-block-c" style="text-align:right">
-                    <a href="" data-role="button" data-icon="shop" data-iconpos="notext"></a>
-                </div>
-            </div>
-            <img src="css/icons/barra.png" height="5px" width="100%">
+            <div class="ui-grid-a" id="page_party">
+                <div class="ui-block-a" style="width:66%">
+                    <center>
+                        <span class="flaticon-balloons-h" style="color:#E3005D;"></span>
 
-        </div>
-        <div data-role="content">
-            <div class="ui-grid-a">
-                <div class="ui-block-a" style="width:65%">
-                    <img src="css/icons/catalogoLogo.png" width="100%">
+                    </center>
                 </div>
-                <div class="ui-block-b" style="width:30%; margin:2%">
+                <div class="ui-block-b" style="width:30%; margin: 2%">
                     <div style="text-align:right">
-                        <a data-role="button" data-theme="b">Globos</a>
-                        <a data-role="button" data-theme="b">Decora tu Fiesta</a>
-                        <a data-role="button" data-theme="b">Velas y bengalas</a>
-                        <a data-role="button" data-theme="b">Pastelería</a>
-                        <a data-role="button" data-theme="b">Piñatas</a>
-                        <a data-role="button" data-theme="b">Bromas</a>
-                        <a data-role="button" data-theme="b">Bolsa y cajas</a>
-                        <a data-role="button" data-theme="b">Accesorios</a>
+                        <a data-role="button" id="btn1" data-theme="c">Cumpleaños</a>
+                        <a data-role="button" id="btn2" data-theme="c">Fiestas tematícas</a>
+                        <a data-role="button" id="btn3" data-theme="c">Despedidas</a>
+                        <a data-role="button" id="btn4" data-theme="c">Aniversarios</a>
+                        <a data-role="button" id="btn5" data-theme="c">Bodas</a>
+                        <a data-role="button" id="btn6" data-theme="c">Fiestas anuales</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div data-role="footer" data-position="fixed">
-            <img src="css/icons/barra.png" width="100%">
-        </div>
-    </div>
-    <div data-role="page" id="disfraz">
-        <div data-role="header">
-            <div class="ui-grid-b">
-                <div class="ui-block-a">
-                    <a id="menu" data-role="button" data-icon="bars" data-iconpos="notext"></a>
+            <div class="ui-grid-a" id="page_costumes">
+                <div class="ui-block-a" style="width:66%">
+                    <center>
+                        <span class="flaticon-party-h" style="color:#E3005D;"></span>
+
+                    </center>
                 </div>
-                <div class="ui-block-b"><img src="css/icons/logo.png" width="100%">
-                </div>
-                <div class="ui-block-c" style="text-align:right">
-                    <a href="" data-role="button" data-icon="shop" data-iconpos="notext"></a>
+                <div class="ui-block-b" style="width:30%; margin: 2%">
+                    <div style="text-align:right">
+                        <a data-role="button" data-theme="d">Disfraces bebé</a>
+                        <a data-role="button" data-theme="d">Disfraces niña</a>
+                        <a data-role="button" data-theme="d">Disfraces niño</a>
+                        <a data-role="button" data-theme="d">Cumpleaños mujer</a>
+                        <a data-role="button" data-theme="d">Cumpleaños hombre</a>
+                        <a data-role="button" data-theme="d">Licencias</a>
+                        <a data-role="button" data-theme="d">Sexy</a>
+                    </div>
                 </div>
             </div>
-            <img src="css/icons/barra.png" height="5px" width="100%">
 
-        </div>
-        <div data-role="content">
-            <div class="ui-grid-a">
-                <div class="ui-block-a" style="width:65%">
-                    <img src="css/icons/catalogoLogo.png" width="100%">
+            <div class="ui-grid-c" id="page_theme">
+                <div class="ui-block-a">
+                    <a data-role="button" data-theme="f" onclick="showPage('count')"><img src="css/maqueta/frozen.jpg">
+                        <br> FROZEN</a>
                 </div>
-                <div class="ui-block-b" style="width:30%; margin:2%">
-                    <div style="text-align:right">
-                        <a data-role="button" data-theme="c">Globos</a>
-                        <a data-role="button" data-theme="c">Decora tu Fiesta</a>
-                        <a data-role="button" data-theme="c">Velas y bengalas</a>
-                        <a data-role="button" data-theme="c">Pastelería</a>
-                        <a data-role="button" data-theme="c">Piñatas</a>
-                        <a data-role="button" data-theme="c">Bromas</a>
-                        <a data-role="button" data-theme="c">Bolsa y cajas</a>
-                        <a data-role="button" data-theme="c">Accesorios</a>
+                <div class="ui-block-b">
+                    <a data-role="button" data-theme="f"><img src="css/maqueta/hawai.jpg">
+                        <br> HAWAI</a>
+                </div>
+                <div class="ui-block-c">
+                    <a data-role="button" data-theme="f"><img src="css/maqueta/toy.jpg">
+                        <br> TOY STORY</a>
+                </div>
+                <div class="ui-block-d">
+                    <a data-role="button" data-theme="f"><img src="css/maqueta/casino.jpg">
+                        <br> CASINO</a>
+                </div>
+            </div>
+
+            <div id="page_count">
+                <center>
+                    <h2> ¿Para cuantas personas es la fiesta?</h2>
+                    <br>
+                    <div style="width:100px">
+                        <input type="number" name="quantity" min="1">
+                    </div>
+                    <br>
+                    <a style="width:150px" id="btnNext" data-role="button" data-theme="b">CONTINUAR</a>
+                </center>
+            </div>
+
+            <div id="page_chart">
+                <div class="ui-grid-d">
+                    <div class="ui-block-a">
+                        SKU
+                    </div>
+                    <div class="ui-block-b">
+                        Producto
+                    </div>
+                    <div class="ui-block-c">
+                        Cantidad
+                    </div>
+                    <div class="ui-block-d">
+                        Precio Unitario
+                    </div>
+                    <div class="ui-block-e">
+                        Precio Total
+                    </div>
+                </div>
+                 <div class="ui-grid-d">
+                    <div class="ui-block-a">
+                       <img src="http://partycity1.scene7.com/is/image/PartyCity/_ml_p2p_pc_mini_badge_normal1?$_ml_p2p_pc_mini_thumb$&$product=PartyCity/660591&$hide_view-all=0">
+                    </div>
+                    <div class="ui-block-b">
+                        Pack Gafas Frozen
+                    </div>
+                    <div class="ui-block-c">
+                        2
+                    </div>
+                    <div class="ui-block-d">
+                        9.99€
+                    </div>
+                    <div class="ui-block-e">
+                        19.98€
+                    </div>
+                </div>
+                 <div class="ui-grid-d">
+                    <div class="ui-block-a">
+                        SKU
+                    </div>
+                    <div class="ui-block-b">
+                        Producto
+                    </div>
+                    <div class="ui-block-c">
+                        Cantidad
+                    </div>
+                    <div class="ui-block-d">
+                        Precio Unitario
+                    </div>
+                    <div class="ui-block-e">
+                        Precio Total
+                    </div>
+                </div>
+                 <div class="ui-grid-d">
+                    <div class="ui-block-a">
+                        SKU
+                    </div>
+                    <div class="ui-block-b">
+                        Producto
+                    </div>
+                    <div class="ui-block-c">
+                        Cantidad
+                    </div>
+                    <div class="ui-block-d">
+                        Precio Unitario
+                    </div>
+                    <div class="ui-block-e">
+                        Precio Total
                     </div>
                 </div>
             </div>
@@ -209,6 +291,9 @@
         <div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
         </div>
     </div>
+
+    </div>
+
 </body>
 
 </html>
