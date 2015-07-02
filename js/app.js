@@ -2,54 +2,58 @@ var pages = ["catalog", "party", "costumes", "birthday", "theme", "count", "char
 
 var seccion = ["Catálogo", "Asistente de fiestas", "Asistente de disfraces", "Fiestas de cumpleaños", "Fiestas temáticas", "Numero de personas", "Carrito de la compra"];
 
-var currentPage = '';
-var pageBefore = '';
+var historySection = [];
+var IdhistorySection = [];
+
+
 
 $(document).ready(function () {
+    IdhistorySection.push("menu");
+    historySection.push("Menú");
     $("#btnCatalogo").bind("click", function (event, ui) {
         //$('#divContent').html( $(contenido).html() );
         $("body").pagecontainer("change", "#contenido");
-        showPage("catalog", 0);
+        showPage("catalog");
     });
     $("#btnFiesta").bind("click", function (event, ui) {
         $("body").pagecontainer("change", "#contenido");
-        showPage("party", 0);
+        showPage("party");
     });
     $("#btnDisfraz").bind("click", function (event, ui) {
         $("body").pagecontainer("change", "#contenido");
-        showPage("costumes", 0);
+        showPage("costumes");
     });
     $("#btnMenu").bind("click", function (event, ui) {
-        $("body").pagecontainer("change", "#principal");
+        principal();
     });
 
     $("#btn1").bind("click", function (event, ui) {
-        showPage("birthday", 1);
+        showPage("birthday");
     });
 
     $("#btn2").bind("click", function (event, ui) {
-        showPage("theme", 1);
+        showPage("theme");
     });
 
     $("#btnNext").bind("click", function (event, ui) {
-        showPage("chart", 1);
-        loadChart();
+        showPage("chart");
+        // loadChart();
     });
 
     // BOTONES DEL MENU
 
     $("#btnMenuParty").bind("click", function (event, ui) {
-        showPage("party", 0);
+        showPage("party", "menu");
         openMenu();
     });
 
     $("#btnMenuCostumes").bind("click", function (event, ui) {
-        showPage("costumes", 0);
+        showPage("costumes", "menu");
         openMenu();
     });
 
     $("#btnMenuCatalog").bind("click", function (event, ui) {
-        showPage("catalog", 0);
+        showPage("catalog", "menu");
         openMenu();
     });
 
@@ -65,25 +69,52 @@ function openMenu() {
 
 function principal() {
     $("body").pagecontainer("change", "#principal");
+    IdhistorySection = [];
+    historySection = [];
+    IdhistorySection.push("menu");
+    historySection.push("Menú");
 }
 
-function showPage(page, status) {
+function showPage(page, type) {
+    if (type == "menu") {
+        IdhistorySection = [];
+        historySection = [];
+        IdhistorySection.push("menu");
+        historySection.push("Menú");
+    }
+    var position = (historySection.length);
     for (var i = 0; i < pages.length; i++) {
         if (pages[i] != page) {
             $("#page_" + pages[i]).hide();
         }
         if (pages[i] == page) {
-            if (status = 0) {
-                currentPage = page;
+            if (historySection[position - 2] == "menu") {
+                $("body").pagecontainer("change", "#principal");
             } else {
-                pageBefore = currentPage;
-                currentPage = page;
+                if (type != "back") {
+                    IdhistorySection.push(page);
+                    historySection.push(seccion[i]);
+                    $("#divBack").html("<div onclick='backPage()'> <span  class='flaticon-leftarrow' style='font-size:14px; margin-right:10px'></span>" + historySection[position - 1] + "</div>");
+                    $("#path").html(historySection[position]);
+                } else {
+                    $("#divBack").html("<div onclick='backPage()'> <span  class='flaticon-leftarrow' style='font-size:14px; margin-right:10px'></span>" + historySection[position-2] + "</div>");
+                    $("#path").html(historySection[position-1]);
+                }
+                $("#page_" + page).show();
+                $("#divBack").trigger("create");
             }
-            $("#page_" + page).show();
-            var contenido = ""; //$("#path").html();
-            $("#path").html(contenido + "<div onclick='showPage(pageBefore)'> <span  class='flaticon-leftarrow' style='font-size:16px; margin-right:10px'></span>" + seccion[i] + "</div>");
-            $("#path").trigger("create");
         }
     }
 }
 
+function backPage() {
+    var position = (historySection.length);
+    if (position > 2) {
+        position = historySection.length;
+        historySection.splice(position - 1, position);
+        IdhistorySection.splice(position - 1, position);
+        showPage(IdhistorySection[position - 2], "back");
+    } else {
+        principal();
+    }
+}
