@@ -101,7 +101,7 @@
                 <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%">
                 </div>
                 <div class="ui-block-c" style="text-align:right;">
-                    <a id="btnMenuLateral" onclick="openMenu()">
+                    <a id="btnMenuLateral" onclick="openMenu()" style="margin:10px">
                         <span class="flaticon-menu"></span>
                     </a>
                 </div>
@@ -215,74 +215,99 @@
             </div>
 
             <div id="page_chart">
-                <div class="ui-grid-d">
-                    <div class="ui-block-a">
-                        SKU
-                    </div>
-                    <div class="ui-block-b">
-                        Producto
-                    </div>
-                    <div class="ui-block-c">
-                        Cantidad
-                    </div>
-                    <div class="ui-block-d">
-                        Precio Unitario
-                    </div>
-                    <div class="ui-block-e">
-                        Precio Total
-                    </div>
-                </div>
-                 <div class="ui-grid-d">
-                    <div class="ui-block-a">
-                       <img src="http://partycity1.scene7.com/is/image/PartyCity/_ml_p2p_pc_mini_badge_normal1?$_ml_p2p_pc_mini_thumb$&$product=PartyCity/660591&$hide_view-all=0">
-                    </div>
-                    <div class="ui-block-b">
-                        Pack Gafas Frozen
-                    </div>
-                    <div class="ui-block-c">
-                        2
-                    </div>
-                    <div class="ui-block-d">
-                        9.99€
-                    </div>
-                    <div class="ui-block-e">
-                        19.98€
-                    </div>
-                </div>
-                 <div class="ui-grid-d">
-                    <div class="ui-block-a">
-                        SKU
-                    </div>
-                    <div class="ui-block-b">
-                        Producto
-                    </div>
-                    <div class="ui-block-c">
-                        Cantidad
-                    </div>
-                    <div class="ui-block-d">
-                        Precio Unitario
-                    </div>
-                    <div class="ui-block-e">
-                        Precio Total
-                    </div>
-                </div>
-                 <div class="ui-grid-d">
-                    <div class="ui-block-a">
-                        SKU
-                    </div>
-                    <div class="ui-block-b">
-                        Producto
-                    </div>
-                    <div class="ui-block-c">
-                        Cantidad
-                    </div>
-                    <div class="ui-block-d">
-                        Precio Unitario
-                    </div>
-                    <div class="ui-block-e">
-                        Precio Total
-                    </div>
-                </div>
+                
+                    <ul data-role="listview">                        
+                        <li data-role="list-divider" style="background-color:#0096D2; font-size:20px; color:white;">
+                            <div class="ui-grid-d">
+                                <div class="ui-block-a" style="width:15%">
+                                    SKU
+                                </div>
+                                <div class="ui-block-b" style="width:35%">
+                                    Producto
+                                </div>
+                                <div class="ui-block-c" style="width:15%">
+                                    Cantidad
+                                </div>
+                                <div class="ui-block-d" style="width:16%">
+                                    Precio Unitario
+                                </div>
+                                <div class="ui-block-e" style="width:16%; text-align:right;" >
+                                    Precio Total
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ui-grid-d">
+                                <div class="ui-block-a" style="width:15%">
+                                    <img src="http://partycity1.scene7.com/is/image/PartyCity/_ml_p2p_pc_mini_badge_normal1?$_ml_p2p_pc_mini_thumb$&$product=PartyCity/660591&$hide_view-all=0">
+                                </div>
+                                <div class="ui-block-b" style="width:35%">
+                                    Pack Gafas Frozen<br>
+                                    ID: 660591<br>
+                                    Descuento: 20%<br>
+                                    SOLO ONLINE
+                                </div>
+                                <div class="ui-block-c" style="width:15%; text-align:center">
+                                    2
+                                </div>
+                                <div class="ui-block-d" style="width:16%; text-align:center">
+                                    9.99€
+                                </div>
+                                <div class="ui-block-e" style="width:16%; text-align:center">
+                                    19.98€
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ui-grid-d">
+                                <div class="ui-block-a" style="width:15%">
+                                    <img src="http://partycity1.scene7.com/is/image/PartyCity/_ml_p2p_pc_mini_badge_normal1?$_ml_p2p_pc_mini_thumb$&$product=PartyCity/588713&$hide_view-all=0">
+                                </div>
+                                <div class="ui-block-b" style="width:35%">
+                                    Kit de disfraz Frozen<br>
+                                    ID: 660593<br>
+                                    Descuento: 10%<br>
+                                    SOLO ONLINE
+                                </div>
+                                <div class="ui-block-c" style="width:15%; text-align:center">
+                                    2
+                                </div>
+                                <div class="ui-block-d" style="width:16%; text-align:center">
+                                    45.99€
+                                </div>
+                                <div class="ui-block-e" style="width:16%; text-align:center">
+                                    91.98€
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ui-grid-d">
+                                <div class="ui-block-a" style="width:15%">
+                                    <img src="http://partycity1.scene7.com/is/image/PartyCity/_ml_p2p_pc_mini_badge_normal1?$_ml_p2p_pc_mini_thumb$&$product=PartyCity/660461&$hide_view-all=0">
+                                </div>
+                                <div class="ui-block-b" style="width:35%">
+                                    Pack de decoración Frozen<br>
+                                    ID: 660592<br>
+                                    Descuento: 30%<br>
+                                    SOLO ONLINE
+                                </div>
+                                <div class="ui-block-c" style="width:15%; text-align:center">
+                                    2
+                                </div>
+                                <div class="ui-block-d" style="width:16%; text-align:center">
+                                    14.99€
+                                </div>
+                                <div class="ui-block-e" style="width:16%; text-align:center">
+                                    29.98€
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                <br>
+                <center>
+                    <a style="width:150px" id="btnNext" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b">PROCESAR</a>
+                </center>
+                </center>
             </div>
         </div>
         <div data-role="footer" data-position="fixed">
