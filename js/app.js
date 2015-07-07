@@ -1,6 +1,6 @@
-var pages = ["catalog", "party", "costumes", "birthday", "theme", "count", "chart"];
+var pages = ["catalog", "party", "costumes", "birthday", "theme", "count", "chart", "send"];
 
-var seccion = ["Catálogo", "Asistente de fiestas", "Asistente de disfraces", "Fiestas de cumpleaños", "Fiestas temáticas", "Configuración del asistente", "Carrito de la compra"];
+var seccion = ["Catálogo", "Asistente de fiestas", "Asistente de disfraces", "Fiestas de cumpleaños", "Fiestas temáticas", "Configuración del asistente", "Carrito de la compra", "Envío"];
 
 var historySection = [];
 var IdhistorySection = [];

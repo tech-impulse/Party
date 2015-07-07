@@ -100,6 +100,9 @@
                 <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%">
                 </div>
                 <div class="ui-block-c" style="text-align:right;">
+                    <a style="margin:10px">
+                        <span>Ya soy Cliente!</span>
+                    </a>
                     <a id="btnMenuLateral" onclick="openMenu()" style="margin:10px">
                         <span class="flaticon-menu"></span>
                     </a>
@@ -187,7 +190,7 @@
                 </div>
             </div>
 
-            <div class="ui-grid-c" id="page_theme">
+            <div class="ui-grid-d" id="page_theme">
                 <div class="ui-block-a">
                     <a data-role="button" data-theme="f" onclick="showPage('count')"><img src="css/maqueta/frozen.jpg">
                         <br> FROZEN</a>
@@ -203,6 +206,10 @@
                 <div class="ui-block-d">
                     <a data-role="button" data-theme="f"><img src="css/maqueta/casino.jpg">
                         <br> CASINO</a>
+                </div>
+                <div class="ui-block-e">
+                    <a data-role="button" data-theme="f"><img src="css/maqueta/minions.jpg">
+                        <br> MINIONS</a>
                 </div>
             </div>
 
@@ -237,7 +244,7 @@
                                     </div>
                                     <div class="ui-block-v" style="width:40%">
                                         Ubicación
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
                             <div class="ui-block-b" style="width:30%">
@@ -252,7 +259,7 @@
                                         Total
                                     </div>
                                     <div class="ui-block-d" style="width:25%; text-align:right;">
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -292,8 +299,8 @@
                                     <div class="ui-block-c" style="width:25%; text-align:right;">
                                         19.98€
                                     </div>
-                                     <div class="ui-block-d" style="width:25%; text-align:right;">
-                                        <img src="css/maqueta/eliminar.png">
+                                    <div class="ui-block-d" style="width:25%; text-align:right;">
+                                        <img src="css/maqueta/eliminar.png" onclick='$("#popup").popup("open");'>
                                     </div>
                                 </div>
                             </div>
@@ -333,7 +340,7 @@
                                         91.98€
                                     </div>
                                     <div class="ui-block-d" style="width:25%; text-align:right;">
-                                        <img src="css/maqueta/eliminar.png">
+                                        <img src="css/maqueta/eliminar.png" onclick='$("#popup").popup("open");'>
                                     </div>
                                 </div>
                             </div>
@@ -356,7 +363,7 @@
                                         Sección: NAV
                                         <br> Estantería : 16
                                         <br> Nivel: 11
-                                        <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
+                                        <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif" >
                                     </div>
                                 </div>
                             </div>
@@ -371,8 +378,8 @@
                                     <div class="ui-block-e" style="width:25%; text-align:right;">
                                         29.98€
                                     </div>
-                                     <div class="ui-block-d" style="width:25%; text-align:right;">
-                                        <img src="css/maqueta/eliminar.png">
+                                    <div class="ui-block-d" style="width:25%; text-align:right;">
+                                        <img src="css/maqueta/eliminar.png" onclick='$("#popup").popup("open");'>
                                     </div>
                                 </div>
                             </div>
@@ -390,16 +397,37 @@
                 </ul>
                 <br>
                 <div style="float:right">
-                    <a style="width:150px" id="btnNext" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b">PROCESAR</a>
+                    <a style="width:150px" id="btnNext" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('send');">PROCESAR</a>
                 </div>
                 </center>
             </div>
         </div>
-        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-            <img src="css/icons/barra.png" width="100%">
+
+        <div id="page_send">
+            <center>
+                <h3> ¿Que deseas hacer con el pedido?</h3>
+                <br>
+                <a style="width:300px" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b">Mostrar listado para recoger</a>
+                <br>
+                <a style="width:300px" data-role="button" data-icon="home" data-iconpos="right" data-theme="b">Enviar a Casa</a>
+                <br>
+                <a style="width:300px" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b">Recoger en Mi Tienda</a>
+            </center>
+
         </div>
-        <div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+        <div data-role="popup" data-theme="a" data-dismissible="false" id="popup" class="" data-overlay-theme="a" data-transition="flip">
+            <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <center>
+                <h3 style="margin:20px">Desea eliminar el artículo?</h3>
+                <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#popup").popup("close");' data-theme="c">Eliminar</a>
+            </center>
         </div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <img src="css/icons/barra.png" width="100%">
+    </div>
+    <div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+    </div>
     </div>
 
     </div>
