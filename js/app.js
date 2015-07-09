@@ -1,104 +1,66 @@
-var pages = ["catalog", "party", "costumes", "birthday", "theme", "count", "chart", "send"];
+var nodeName = [];
+var nodeId = [];
 
-var seccion = ["Catálogo", "Asistente de fiestas", "Asistente de disfraces", "Fiestas de cumpleaños", "Fiestas temáticas", "Configuración del asistente", "Carrito de la compra", "Envío"];
+// CONFIGURACIÓN DE LA APLICACIÓN AL INICIARSE
+$(document).bind("mobileinit", function () {
 
-var historySection = [];
-var IdhistorySection = [];
+    $.support.touchOverflow = false;
+    $.mobile.touchOverflowEnabled = false;
 
-
-
-$(document).ready(function () {
-    IdhistorySection.push("menu");
-    historySection.push("Menú");
-    $("#btnCatalogo").bind("click", function (event, ui) {
-        //$('#divContent').html( $(contenido).html() );
-        $("body").pagecontainer("change", "#contenido");
-        showPage("catalog");
-    });
-    $("#btnFiesta").bind("click", function (event, ui) {
-        $("body").pagecontainer("change", "#contenido");
-        showPage("party");
-    });
-    $("#btnDisfraz").bind("click", function (event, ui) {
-        $("body").pagecontainer("change", "#contenido");
-        showPage("costumes");
-    });
-    $("#btnMenu").bind("click", function (event, ui) {
-        principal();
-    });
-
-    $("#btn1").bind("click", function (event, ui) {
-        showPage("birthday");
-    });
-
-    $("#btn2").bind("click", function (event, ui) {
-        showPage("theme");
-    });
-
-    $("#btnNext").bind("click", function (event, ui) {
-        showPage("chart");
-        // loadChart();
-    });
-
-    // BOTONES DEL MENU
-
-    $("#btnMenuParty").bind("click", function (event, ui) {
-        showPage("party", "menu");
-        openMenu();
-    });
-
-    $("#btnMenuCostumes").bind("click", function (event, ui) {
-        showPage("costumes", "menu");
-        openMenu();
-    });
-
-    $("#btnMenuCatalog").bind("click", function (event, ui) {
-        showPage("catalog", "menu");
-        openMenu();
+    $.ajaxSetup({
+        timeout: 10000, //Time in milliseconds
+        crossDomain: true
     });
 
 });
 
+
+$(document).ready(function () {
+    nodeId.push(0);
+    nodeName.push("Menú");
+    getNodes(0);
+});
+
 function openMenu() {
-    if ($("#menuLateral").hasClass("ui-panel-open") == true) {
-        $("#menuLateral").panel("close");
+    if ($("#lateralMenu").hasClass("ui-panel-open") == true) {
+        $("#lateralMenu").panel("close");
     } else {
-        $("#menuLateral").panel("open");
+        $("#lateralMenu").panel("open");
     }
 }
 
 function principal() {
     $("body").pagecontainer("change", "#principal");
-    IdhistorySection = [];
-    historySection = [];
-    IdhistorySection.push("menu");
-    historySection.push("Menú");
+    nodeId = [];
+    nodeName = [];
+    nodeId.push("menu");
+    nodeName.push("Menú");
 }
 
 function showPage(page, type) {
     if (type == "menu") {
-        IdhistorySection = [];
-        historySection = [];
-        IdhistorySection.push("menu");
-        historySection.push("Menú");
+        nodeId = [];
+        nodeName = [];
+        nodeId.push("menu");
+        nodeName.push("Menú");
     }
-    var position = (historySection.length);
+    var position = (nodeName.length);
     for (var i = 0; i < pages.length; i++) {
         if (pages[i] != page) {
             $("#page_" + pages[i]).hide();
         }
         if (pages[i] == page) {
-            if (historySection[position - 2] == "menu") {
+            if (nodeName[position - 2] == 0) {
                 $("body").pagecontainer("change", "#principal");
             } else {
                 if (type != "back") {
-                    IdhistorySection.push(page);
-                    historySection.push(seccion[i]);
-                    $("#divBack").html("<div onclick='backPage()'> <span  class='flaticon-leftarrow' style='font-size:14px; margin-right:10px'></span>" + historySection[position - 1] + "</div>");
-                    $("#path").html(historySection[position]);
+                    nodeId.push(page);
+                    nodeName.push(seccion[i]);
+                    $("#divBack").html("<div onclick='backPage()'> <span  class='flaticon-leftarrow' style='font-size:14px; margin-right:10px'></span>" + nodeName[position - 1] + "</div>");
+                    $("#path").html(nodeName[position]);
                 } else {
-                    $("#divBack").html("<div onclick='backPage()'> <span  class='flaticon-leftarrow' style='font-size:14px; margin-right:10px'></span>" + historySection[position-2] + "</div>");
-                    $("#path").html(historySection[position-1]);
+                    $("#divBack").html("<div onclick='backPage()'> <span  class='flaticon-leftarrow' style='font-size:14px; margin-right:10px'></span>" + nodeName[position - 2] + "</div>");
+                    $("#path").html(nodeName[position - 1]);
                 }
                 $("#page_" + page).show();
                 $("#divBack").trigger("create");
@@ -108,12 +70,12 @@ function showPage(page, type) {
 }
 
 function backPage() {
-    var position = (historySection.length);
+    var position = (nodeName.length);
     if (position > 2) {
-        position = historySection.length;
-        historySection.splice(position - 1, position);
-        IdhistorySection.splice(position - 1, position);
-        showPage(IdhistorySection[position - 2], "back");
+        position = nodeName.length;
+        nodeName.splice(position - 1, position);
+        nodeId.splice(position - 1, position);
+        showPage(nodeId[position - 2], "back");
     } else {
         principal();
     }

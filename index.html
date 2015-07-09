@@ -11,13 +11,54 @@
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="css/flaticon/flaticon.css" />
     <!-- SCRIPTS NUESTROS -->
+    <script src="js/config.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/rest.js"></script>
+    <script src="js/display.js"></script>
 
 </head>
 
 <body>
     <div data-role="page" id="principal">
+        <div data-role="header" id="divHeader">
+
+        </div>
+
+        <div data-role="content">
+            <div data-role="panel" id="lateralMenu" data-display="overlay" data-position="right">
+                <h2>Menú</h2>
+                <ul data-role="listview" id="options">
+                </ul>
+            </div>
+            <div data-role="content" id="divContent">
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <img src="css/icons/barra.png" width="100%">
+        </div>
+        <div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+        </div>
+    </div>
+    <!--
         <div data-role="header">
+            <div class="ui-field-contain">
+                <ul data-role="listview" data-inset="true" data-shadow="false">
+                    <li data-role="collapsible" data-iconpos="right" data-inset="false">
+                        <h2>Spanish</h2>
+                        <form>
+                            <fieldset data-role="controlgroup" data-type="horizontal">
+                                <a data-role="button" data-theme="f"><img src="css/banderas/catalunya.png">
+                                </a>
+                                <a data-role="button" data-theme="f"><img src="css/banderas/spain.png">
+                                </a>
+                                <a data-role="button" data-theme="f"><img src="css/banderas/england.png">
+                                </a>
+
+                            </fieldset>
+                        </form>
+                    </li>
+                </ul>
+            </div>
             <img src="css/icons/barra.png" width="100%">
         </div>
         <div data-role="content" id="divContent">
@@ -79,14 +120,7 @@
         </div>
 
         <div data-role="footer" data-position="fixed">
-            <!--
-            <center>
-                Encuentra directamente lo que buscas
-                <div style="width:20%; display:inline-block; margin-left:10px">
-                    <input type="search" name="search" id="" value="" />
-                </div>
-            </center>
--->
+
             <img src="css/icons/barra.png" width="100%">
 
         </div>
@@ -363,7 +397,7 @@
                                         Sección: NAV
                                         <br> Estantería : 16
                                         <br> Nivel: 11
-                                        <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif" >
+                                        <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
                                     </div>
                                 </div>
                             </div>
@@ -431,7 +465,7 @@
     </div>
 
     </div>
-
+-->
 </body>
 
 </html>
