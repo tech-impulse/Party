@@ -1,35 +1,25 @@
-// request.abort(); // Esto aborta la conexión al webservice
+// request.abort(); // Esto aborta la conexión al webservice (Por si se necesitara)
 
-function getLanguages(node) {
 
-    request = $.ajax({
-        url: urlServices + 'ws.php',
-        dataType: 'json',
-        success: function (response) {
-            restOk(response, "lang");
-        },
-        error: function (response) {
-            restError(response, "lang");
-        },
-    });
-}
-
-function getNodes(node) {
+/* Función que solicita la información al webservice de Nodos
+    - idNode: id del nodo que se est´ña solicitando
+    - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
+    */
+function getNodes(idNode, nodeName) {
 
     // Datos que se van a enviar
     var dataSend = {
         lang: language,
         origin: origin,
-        id: node
+        id: idNode
     };
-
     request = $.ajax({
         data: dataSend,
         url: urlServices + 'getNodes.php',
         dataType: 'json',
         type: 'POST',
         success: function (response) {
-            restOk(response, "nodes", node);
+            restOk(response, "nodes", idNode, nodeName);
         },
         error: function (response) {
             restError(response, "nodes");
@@ -37,7 +27,13 @@ function getNodes(node) {
     });
 }
 
-function restOk(res, typ, param) {
+/* Función que controla que la petición Ajax ha ido bien
+    - res: Respuesta del webservice
+    - typ: tipo de solicitud del webservice
+    - param: parametro extra que queramos pasar
+    - param2: idem
+    */
+function restOk(res, typ, param, param2) {
     console.log("Todo bien desde " + typ);
     console.log("La respuesta es ");
     console.log(res);
@@ -50,7 +46,7 @@ function restOk(res, typ, param) {
         };
     case "nodes":
         {
-            displayNode(res, param);
+            displayNode(res, param, param2);
             break;
         };
     default:
@@ -61,6 +57,10 @@ function restOk(res, typ, param) {
 
 }
 
+/* Función que controla que la petición Ajax ha ido mal
+    - res: Respuesta del webservice
+    - typ: tipo de solicitud del webservice
+    */
 function restError(res, typ) {
     console.log("fallo de ws, tipo " + typ);
     console.log(res);
