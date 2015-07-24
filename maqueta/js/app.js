@@ -1,6 +1,7 @@
 var pages = ["catalog", "party", "costumes", "birthday", "theme", "count", "chart", "send"];
 
-var seccion = ["Catálogo", "Asistente de fiestas", "Asistente de disfraces", "Fiestas de cumpleaños", "Fiestas temáticas", "Configuración del asistente", "Carrito de la compra", "Envío"];
+//var seccion = ["Catálogo", "Asistente de fiestas", "Asistente de disfraces", "Fiestas de cumpleaños", "Fiestas temáticas", "Configuración del asistente", "Carrito de la compra", "Envío"];
+var seccion = ["Catálogo", "Asistente de fiestas", "Asistente de disfraces", "Fiestas de cumpleaños", "Fiestas temáticas", "Configuración del asistente", "", "Envío"];
 
 var historySection = [];
 var IdhistorySection = [];
@@ -117,4 +118,33 @@ function backPage() {
     } else {
         principal();
     }
+}
+
+function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos)   {
+    //$("#masinfo").popup("close");
+    $(popupNAme).popup("close");
+    
+    //console.group("closing videos %i", vecIdsVideos.length);
+    
+    for (i=0; i < vecIdsVideos.length; i++) {
+        //console.log("%i Closing video %s", i, vecIdsVideos[i]);
+        
+        $(vecIdsVideos[i]).hide();
+        stopYoutubeVideo(vecIdsVideos[i]);
+    }
+    
+    //console.groupEnd();
+    
+    $(tableName).show();
+}
+
+function stopYoutubeVideo(idOfIframe) {
+    //First get the  iframe URL
+    var url = $(idOfIframe).attr('src');
+
+    //Then assign the src to null, this then stops the video been playing
+    $(idOfIframe).attr('src', '');
+
+    // Finally you reasign the URL back to your iframe, so when you hide and load it again you still have the link
+    $(idOfIframe).attr('src', url);
 }
