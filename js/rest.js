@@ -109,10 +109,10 @@ function restOk_tiendas(res, typ, param, param2) {
     var count = res.stores.length;
     var select = $('#select_tienda');
 
-    for ($i = 0; $i < count; $i++) {
+    for (var i = 0; i < count; i++) {
 
-        var val = res.stores[$i].id;
-        var text = res.stores[$i].name;
+        var val = res.stores[i].id;
+        var text = res.stores[i].name;
 
         console.log("Val es " + val + " texto " + text);
 

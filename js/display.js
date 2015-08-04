@@ -97,7 +97,9 @@ function displayNode(data, originNode, originName) {
                         position = 0;
                         block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
                     }
-                    var element = block + '<a data-role="button" data-theme="f"><img src="data:image/png;base64,' + data.nodes[i].image + '"><br><strong>' + data.nodes[i].name + '</strong></a></div>';
+                    var element = block + '<a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name + '</strong></a></div>';
+                    
+                    console.log(element);
 
                     htmlContent = htmlContent + element;
                     if (position == "c") {
