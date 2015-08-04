@@ -14,8 +14,13 @@ $(document).bind("mobileinit", function () {
 
 // PRECARGA DE LA APLICACIÓN
 $(document).ready(function () {
-    getNodes(0);
+    //getNodes(0);
+
+    // Obtenermos el listado de tiendas
+    getTiendas(); 
+    
 });
+
 
 // FUNCIÓN QUE ABRE/CIERRA EL MENÚ LATERAL
 function openMenu() {

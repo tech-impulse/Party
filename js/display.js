@@ -150,3 +150,9 @@ function loadMenu(data) {
     $("#divHeader").hide();
     $("#lateralMenu").panel("close");
 }
+
+function selectTiendas(){
+
+
+
+}

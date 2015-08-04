@@ -19,20 +19,46 @@
 </head>
 
 <body>
+
+
+
     <div data-role="page" id="principal">
+
+        <!--     HEADER    -->
         <div data-role="header" id="divHeader">
 
         </div>
 
+        <!--     CONTENT    -->
         <div data-role="content">
+
+            <div id="texto_tienda" align="center" style="margin-top: 33vh;">
+                <div class="ui-grid-a">
+                    <label for="select">Seleccione una tienda:</label>
+                </div>
+                <div class="ui-grid-b" style="width: 25%">
+                    <div class="ui-field-contain">
+
+                        <select name="select_tienda" id="select_tienda" data-native-menu="false">
+                        </select>
+                    </div>
+                </div>
+                <div class="ui-grid-c" style="width: 10%">
+                    <button data-theme="b">Acceder</button>
+                </div>
+            </div>
+
             <div data-role="panel" id="lateralMenu" data-display="overlay" data-position="right">
                 <h2>Menú</h2>
                 <ul data-role="listview" id="options">
                 </ul>
             </div>
-            <div data-role="content" id="divContent">
+            <div data-role="content" id="divContent" style="display: none;">
             </div>
+
         </div>
+
+        <!--     FOOTER    -->
         <div data-role="footer" data-position="fixed" data-tap-toggle="false">
             <img src="css/icons/barra.png" width="100%">
         </div>
