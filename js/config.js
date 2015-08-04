@@ -6,4 +6,4 @@ var language = 1; // El idioma de la aplicación por defecto de momento CATALAN
 var origin = 2; // Dispositivo desde el que se solicita la información al service: 1 Web, 2 App
 var nodeNames = [];
 var nodeIds = [];
-var STORE = "PRTF0003";
+var STORE = "";

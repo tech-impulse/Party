@@ -14,11 +14,26 @@ $(document).bind("mobileinit", function () {
 
 // PRECARGA DE LA APLICACIÓN
 $(document).ready(function () {
-    //getNodes(0);
+
 
     // Obtenermos el listado de tiendas
-    getTiendas(); 
-    
+    getTiendas();
+
+
+
+    $("#btn_acceder").click(function () {
+
+        $("#divTienda").hide();
+        $("#divContent").show();
+        
+        STORE = $("select#select_tienda option").filter(":selected").val();
+        console.log("Item seleccionado "+STORE);
+        
+        getNodes(0);
+
+
+    });
+
 });
 
 
