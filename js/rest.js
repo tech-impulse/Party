@@ -19,7 +19,23 @@ function getNodes(idNode, nodeName) {
         dataType: 'json',
         type: 'POST',
         success: function (response) {
-            restOk(response, "nodes", idNode, nodeName);
+
+            if (response.result == 1) {
+
+                restOk(response, "nodes", idNode, nodeName);
+
+            } else if (response.result == 0) {
+
+                console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
+                console.log(idNode);
+                getProducts(idNode, nodeName);
+
+            } else if (response.result == -1) {
+
+                console.log("Error en el envio de parametros");
+
+            }
+
         },
         error: function (response) {
             restError(response, "nodes");
@@ -74,7 +90,24 @@ function getProducts(idNode, nodeName) {
         dataType: 'json',
         type: 'POST',
         success: function (response) {
-            restOk(response, "nodes", idNode, nodeName);
+            console.log("Respuesta: ");
+            console.log(response);
+
+
+            if (response.result == 1) {
+
+                restOk_products(response, "nodes", idNode, nodeName);
+
+            } else if (response.result == 0) {
+
+                console.log("No hay productos para este nodo");
+             
+            } else if (response.result == -1) {
+
+                console.log("Error en el envio de parametros");
+
+            }
+
         },
         error: function (response) {
             restError(response, "nodes");
@@ -82,6 +115,29 @@ function getProducts(idNode, nodeName) {
     });
 }
 
+function restOk_products(res, typ, param, param2) {
+    console.log("Todo bien desde " + typ);
+    console.log("La respuesta es ");
+    console.log(res);
+
+    switch (typ) {
+    case "lang":
+        {
+            displayFlags(res);
+            break;
+        };
+    case "nodes":
+        {
+            displayProducts(res, param, param2);
+            break;
+        };
+    default:
+        console.log(res);
+        break;
+    }
+
+
+}
 
 //Nos devuelve el listados de tiendas disponibles antes de cargar la ventana principal
 function getTiendas() {
@@ -102,9 +158,9 @@ function getTiendas() {
 
 function restOk_tiendas(res, typ, param, param2) {
 
-    console.log("Todo bien desde " + typ);
-    console.log("La respuesta es ");
-    console.log(res);
+    console.log("Las tiendas nos han llegado, cargamos el select" + typ);
+    //console.log("La respuesta es ");
+    //console.log(res);
 
     var count = res.stores.length;
     var select = $('#select_tienda');
@@ -114,22 +170,22 @@ function restOk_tiendas(res, typ, param, param2) {
         var val = res.stores[i].id;
         var text = res.stores[i].name;
 
-        console.log("Val es " + val + " texto " + text);
+        //console.log("Val es " + val + " texto " + text);
 
         select.append($('<option>', {
             value: val,
             text: text
         }));
-        
+
         select.selectmenu('refresh', true);
 
     }
 
-        
-    var option1 = $($("option", select).get(0));
+
+    var option1 = $($("option", select).get(1));
     option1.attr('selected', 'selected');
     select.selectmenu();
-    
+
 
 
 }

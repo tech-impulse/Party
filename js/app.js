@@ -16,20 +16,35 @@ $(document).bind("mobileinit", function () {
 $(document).ready(function () {
 
 
+    htmlHeader_menu = '<img src="css/icons/barra.png" width="100%"> </div>';
+    $("#divHeader_menu").html(htmlHeader_menu);
+    $("#divHeader_menu").trigger('create');
+    $("#divHeader_menu").show();
+
     // Obtenermos el listado de tiendas
     getTiendas();
 
-
-
     $("#btn_acceder").click(function () {
 
-        $("#divTienda").hide();
-        $("#divContent").show();
-        
-        STORE = $("select#select_tienda option").filter(":selected").val();
-        console.log("Item seleccionado "+STORE);
-        
-        getNodes(0);
+        var seleccion = $("select#select_tienda option").filter(":selected").val();
+
+        if (seleccion != "") {
+
+            $("#divTienda").hide();
+            $("#divContent").show();
+
+            STORE = seleccion;
+            console.log("Item seleccionado " + STORE);
+
+            getNodes(0);
+
+        } else {
+
+            alert("¿Seleccione una tienda!");
+
+        }
+
+
 
 
     });
@@ -58,5 +73,6 @@ function backPage(idNode, nodeName) {
         getNodes(0);
         nodeIds = [];
         nodeNames = [];
+        $("#divHeader_menu").show();
     }
 }
