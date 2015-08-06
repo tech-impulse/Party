@@ -13,6 +13,7 @@ function getNodes(idNode, nodeName) {
         origin: origin,
         id: idNode
     };
+
     request = $.ajax({
         data: dataSend,
         url: urlServices + 'getNodes.php',
@@ -22,9 +23,15 @@ function getNodes(idNode, nodeName) {
 
             if (response.result == 1) {
 
+                console.log("Respuesta del nodo");
+                console.log(response);
+
                 restOk(response, "nodes", idNode, nodeName);
 
             } else if (response.result == 0) {
+
+                console.log("Respuesta del nodo cero");
+                console.log(response);
 
                 console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 console.log(idNode);
@@ -50,24 +57,27 @@ function getNodes(idNode, nodeName) {
     - param2: idem
     */
 function restOk(res, typ, param, param2) {
-    console.log("Todo bien desde " + typ);
-    console.log("La respuesta es ");
+
+    console.log("Cargamos nuevos nodos " + typ);
+    //console.log("La respuesta es ");
     console.log(res);
 
     switch (typ) {
     case "lang":
-        {
-            displayFlags(res);
-            break;
-        };
+
+        displayFlags(res);
+        break;
+
     case "nodes":
-        {
-            displayNode(res, param, param2);
-            break;
-        };
+
+        displayNode(res, param, param2);
+        break;
+
     default:
+
         console.log(res);
         break;
+
     }
 
 
@@ -96,12 +106,14 @@ function getProducts(idNode, nodeName) {
 
             if (response.result == 1) {
 
+                console.log(response);
+
                 restOk_products(response, "nodes", idNode, nodeName);
 
             } else if (response.result == 0) {
 
                 console.log("No hay productos para este nodo");
-             
+
             } else if (response.result == -1) {
 
                 console.log("Error en el envio de parametros");
@@ -122,15 +134,15 @@ function restOk_products(res, typ, param, param2) {
 
     switch (typ) {
     case "lang":
-        {
-            displayFlags(res);
-            break;
-        };
+
+        displayFlags(res);
+        break;
+
     case "nodes":
-        {
-            displayProducts(res, param, param2);
-            break;
-        };
+
+        displayProducts(res, param, param2);
+        break;
+
     default:
         console.log(res);
         break;
@@ -142,10 +154,13 @@ function restOk_products(res, typ, param, param2) {
 //Nos devuelve el listados de tiendas disponibles antes de cargar la ventana principal
 function getTiendas() {
 
+    console.log("Pedimos las tiendas");
+
     request = $.ajax({
         url: urlServices + 'getStores.php',
         dataType: 'json',
         type: 'GET',
+        timeout: 10000, //10 seg
         success: function (response) {
             restOk_tiendas(response, "tiendas");
         },
@@ -182,8 +197,8 @@ function restOk_tiendas(res, typ, param, param2) {
     }
 
 
-    var option1 = $($("option", select).get(1));
-    option1.attr('selected', 'selected');
+    //var option1 = $($("option", select).get(1));
+    //option1.attr('selected', 'selected');
     select.selectmenu();
 
 

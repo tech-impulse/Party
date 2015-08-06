@@ -7,6 +7,9 @@
 function displayNode(data, originNode, originName) {
 
     console.log("DisplayNode-> Nodes es " + data.result);
+    console.log(data);
+    
+    var extra = "";
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -14,9 +17,12 @@ function displayNode(data, originNode, originName) {
         var block = '';
         var position = 0;
         var type;
+
+
         if (originNode == 0) {
             loadMenu(data);
         } else {
+
             if (nodeIds.length == 0) {
                 nodeIds.push(0);
                 nodeNames.push("Menú");
@@ -26,40 +32,40 @@ function displayNode(data, originNode, originName) {
                 nodeIds.push(originNode);
                 nodeNames.push(originName);
             }
-            $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 1] + '</div>');
+            $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 1] + '</div>');
             //$("#divHeader").show();
         }
         switch (parseInt(data.columns)) {
         case 1:
-            {
-                grid = "<div class='ui-grid-a'>";
-                type = "vertical";
-                break;
-            }
+
+            grid = "<div class='ui-grid-a'>";
+            type = "vertical";
+            break;
+
         case 2:
-            {
-                grid = "<div class='ui-grid-a'>";
-                type = "horizontal";
-                break;
-            }
+
+            grid = "<div class='ui-grid-a'>";
+            type = "horizontal";
+            break;
+
         case 3:
-            {
-                grid = "<div class='ui-grid-b'>";
-                type = "horizontal";
-                break;
-            }
+
+            grid = "<div class='ui-grid-b'>";
+            type = "horizontal";
+            break;
+
         case 4:
-            {
-                grid = "<div class='ui-grid-c'>";
-                type = "horizontal";
-                break;
-            }
+
+            grid = "<div class='ui-grid-c'>";
+            type = "horizontal";
+            break;
+
         case 5:
-            {
-                grid = "<div class='ui-grid-d'>";
-                type = "horizontal";
-                break;
-            }
+
+            grid = "<div class='ui-grid-d'>";
+            type = "horizontal";
+            break;
+
         }
 
         switch (type) {
@@ -69,35 +75,44 @@ function displayNode(data, originNode, originName) {
                 position = "a";
                 for (var i = 0; i < data.nodes.length; i++) {
 
-                    console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
+                    //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
+
+                    console.log("Is party? " + data.nodes[i].isParty);
+
+                    if (data.nodes[i].nodes == 1) {
+                        extra = 1;
+                    } else {
+                        extra = 0;
+                    }
+
 
                     if (position < parseInt(data.columns)) {
                         switch (position) {
                         case 0:
-                            {
-                                block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            break;
+
                         case 1:
-                            {
-                                block = '<div class="ui-block-b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            break;
+
                         case 2:
-                            {
-                                block = '<div class="ui-block-c" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-c" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            break;
+
                         case 3:
-                            {
-                                block = '<div class="ui-block-d" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-d" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            break;
+
                         case 4:
-                            {
-                                block = '<div class="ui-block-e" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-e" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            break;
+
                         }
                     } else {
                         position = 0;
@@ -116,13 +131,23 @@ function displayNode(data, originNode, originName) {
                 htmlContent = htmlContent + '</div>';
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
-                //break;
+                break;
             };
         case "vertical":
             {
                 htmlContent = grid + " <div class='ui-block-a' style='width:66%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
                 block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
                 for (var i = 0; i < data.nodes.length; i++) {
+
+                    console.log("Is party? " + data.nodes[i].isParty);
+
+                    if (data.nodes[i].isParty == 1) {
+                        extra = 1;
+                    } else {
+                        extra = 0;
+                    }
+
+
                     if (data.nodes[i].short_name == "") {
                         var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
                     } else {
@@ -135,7 +160,7 @@ function displayNode(data, originNode, originName) {
                 $("#divContent").trigger('create');
                 $("#divHeader_catalogo").show();
                 $("#divHeader_menu").hide();
-                //break;
+                break;
             };
         }
 
@@ -172,40 +197,40 @@ function displayProducts(data, originNode, originName) {
                 nodeIds.push(originNode);
                 nodeNames.push(originName);
             }
-            $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 1] + '</div>');
+            $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 1] + '</div>');
             //$("#divHeader").show();
         }
         switch (parseInt(data.columns)) {
         case 1:
-            {
-                grid = "<div class='ui-grid-a'>";
-                type = "vertical";
-                break;
-            }
+
+            grid = "<div class='ui-grid-a'>";
+            type = "vertical";
+            break;
+
         case 2:
-            {
-                grid = "<div class='ui-grid-a'>";
-                type = "horizontal";
-                break;
-            }
+
+            grid = "<div class='ui-grid-a'>";
+            type = "horizontal";
+            break;
+
         case 3:
-            {
-                grid = "<div class='ui-grid-b'>";
-                type = "horizontal";
-                break;
-            }
+
+            grid = "<div class='ui-grid-b'>";
+            type = "horizontal";
+            break;
+
         case 4:
-            {
-                grid = "<div class='ui-grid-c'>";
-                type = "horizontal";
-                break;
-            }
+
+            grid = "<div class='ui-grid-c'>";
+            type = "horizontal";
+            break;
+
         case 5:
-            {
-                grid = "<div class='ui-grid-d'>";
-                type = "horizontal";
-                break;
-            }
+
+            grid = "<div class='ui-grid-d'>";
+            type = "horizontal";
+            break;
+
         }
 
         switch (type) {
@@ -213,43 +238,47 @@ function displayProducts(data, originNode, originName) {
             {
                 htmlContent = "<center><div><img src='css/icons/logo.png'></div></center>" + grid;
                 position = "a";
-                for (var i = 0; i < data.nodes.length; i++) {
+                for (var i = 0; i < data.products.length; i++) {
 
-                    console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
+                    //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
+                    
+                    var extra = "";
 
                     if (position < parseInt(data.columns)) {
+
                         switch (position) {
                         case 0:
-                            {
-                                block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-a" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            break;
+
                         case 1:
-                            {
-                                block = '<div class="ui-block-b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-b" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            break;
+
                         case 2:
-                            {
-                                block = '<div class="ui-block-c" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-c" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            break;
+
                         case 3:
-                            {
-                                block = '<div class="ui-block-d" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-d" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            break;
+
                         case 4:
-                            {
-                                block = '<div class="ui-block-e" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
-                                break;
-                            }
+
+                            block = '<div class="ui-block-e" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            break;
+
+
                         }
                     } else {
                         position = 0;
-                        block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                        block = '<div class="ui-block-a" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
                     }
-                    var element = block + '<a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name + '</strong></a></div>';
+                    var element = block + '<a data-role="button" data-theme="f"><img src="' + data.products[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.products[i].name + '</strong></a></div>';
 
                     //console.log(element);
 
@@ -268,12 +297,12 @@ function displayProducts(data, originNode, originName) {
             {
                 htmlContent = grid + " <div class='ui-block-a' style='width:66%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
                 block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
-                for (var i = 0; i < data.nodes.length; i++) {
+                for (var i = 0; i < data.products.length; i++) {
 
-                    if (data.nodes[i].short_name == "") {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
+                    if (data.products[i].short_name == "") {
+                        var element = '<a data-role="button" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].name + '\')">' + data.products[i].name + '</a>';
                     } else {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].short_name + '</a>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].name + '\')">' + data.products[i].short_name + '</a>';
                     }
 
                     htmlContent = htmlContent + element;
@@ -284,7 +313,7 @@ function displayProducts(data, originNode, originName) {
                 $("#divContent").trigger('create');
                 $("#divHeader_catalogo").show();
                 $("#divHeader_menu").hide();
-                //break;
+                break;
             };
         }
 
@@ -300,10 +329,11 @@ function displayProducts(data, originNode, originName) {
 /* Función que carga el menú lateral
  */
 function loadMenu(data) {
+
     var options = '';
     var htmlHeader = '';
-    for (var i = 0; i < data.nodes.length; i++) {
-        options = options + '<li onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'); openMenu()"><img src="data:image/png;base64,' + data.nodes[i].image + '" style="width:12em">' + data.nodes[i].short_name + '</li>';
+    for (var i = 0; i < data.nodes.length; i++) { //data:image/png;base64,
+        options = options + '<li onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'); openMenu()"><img src="' + data.nodes[i].linkext + '" style="width:12em">' + data.nodes[i].short_name + '</li>';
     }
     options = options + '<li onclick="getNodes(0);"><center><a data-role="button" data-icon="home" data-theme="e">Ir al Menú</a></center></li>';
     $("#options").html(options);
@@ -315,7 +345,5 @@ function loadMenu(data) {
     $("#divHeader_catalogo").trigger('create');
     $("#divHeader_catalogo").hide();
     $("#lateralMenu").panel("close");
-
-
 
 }

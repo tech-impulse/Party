@@ -27,8 +27,9 @@ $(document).ready(function () {
     $("#btn_acceder").click(function () {
 
         var seleccion = $("select#select_tienda option").filter(":selected").val();
+        console.log("Seleccion es " + seleccion);
 
-        if (seleccion != "") {
+        if (seleccion != undefined) {
 
             $("#divTienda").hide();
             $("#divContent").show();
@@ -43,9 +44,6 @@ $(document).ready(function () {
             alert("¿Seleccione una tienda!");
 
         }
-
-
-
 
     });
 
