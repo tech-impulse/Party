@@ -36,8 +36,24 @@
 
             <div id="divTienda" align="center" style="margin-top: 8%;">
 
-                <div data-role="popup" id="popupAlert" data-rel="back"class="ui-content" style="max-width:280px">
-                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a><label id="texto_popup"></label>
+                <div data-role="popup" id="popupLogin" class="ui-content" style="min-width:250px;">
+                    <form method="post" action="demoform.asp">
+                        <div>
+                            <h3>Inicia sessión</h3>
+                            <label for="usrnm" class="ui-hidden-accessible"></label>
+                            <input type="text" name="user" id="usrnm" placeholder="Introduce tu correo electrónico">
+                            <label for="pswd" class="ui-hidden-accessible">Contraseña</label>
+                            <input type="password" name="passw" id="pswd" placeholder="Contraseña">
+                            <label for="log">No cerrar sessión</label>
+                            <input type="checkbox" name="login" id="log" value="1" data-mini="true">
+                            <input type="submit" data-inline="true" value="Iniciar sessión">
+                        </div>
+                    </form>
+                </div>
+
+                <div data-role="popup" id="popupAlert" data-rel="back" class="ui-content" style="max-width:280px">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                    <label id="texto_popup"></label>
                 </div>
 
                 <div style="margin-bottom: 20px;"><img src="css/icons/logo.png">

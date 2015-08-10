@@ -149,7 +149,7 @@ function displayNode(data, originNode, originName) {
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
                 $("#divHeader_catalogo").show();
-                $("#divHeader_menu").hide();
+                //$("#divHeader_menu").hide();
                 break;
             };
         }
@@ -328,7 +328,7 @@ function loadMenu(data) {
     $("#options").listview('refresh');
     $("#lateralMenu").trigger('create');
 
-    htmlHeader = '<div><img src="css/icons/barra.png" width="100%"> <div class="ui-grid-b"> <div class="ui-block-a" style="margin-top:10px" id="divBack"> </div> <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%"> </div> <div class="ui-block-c" style="text-align:right;"> <a style="margin:10px"> <span>Ya soy Cliente!</span> </a> <a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a> </div> </div> <img src="css/icons/barra.png" height="5px" width="100%"> <ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
+    htmlHeader = '<div><div class="ui-grid-b"> <div class="ui-block-a" style="margin-top:10px" id="divBack"> </div> <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%"> </div> <div class="ui-block-c" style="text-align:right;"> <a id="login" onclick="login();" style="margin:10px"> <span>Ya soy Cliente!</span> </a> <a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a> </div> </div> <img src="css/icons/barra.png" height="5px" width="100%"> <ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
     $("#divHeader_catalogo").html(htmlHeader);
     $("#divHeader_catalogo").trigger('create');
     $("#divHeader_catalogo").hide();

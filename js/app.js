@@ -19,6 +19,7 @@ $(document).ready(function () {
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
     $("#divHeader_menu").show();
+    $("#registro").hide();
 
     // Obtenermos el listado de tiendas
     getTiendas();
@@ -106,5 +107,38 @@ function displayProductos(idNode, nodeName) { // botton de acceso a la app despu
         $('#popupAlert').popup('open');
 
     }
+
+}
+
+
+function login() { // botton de acceso a la app despus de escoger una tienda
+
+    console.log("Login");
+
+    /*$("#texto_popup").html('<div id="registro">'+
+                        '<form>'+
+                            '<label>Usuario</label>'+
+                            '<input type="text">'+
+                            '<br>'+
+                            '<label>Password</label>'+
+                            '<input type="password">'+
+                            '<br>'+
+                            '<div class="checkbox">'+
+                                '<input id="send_updates" type="checkbox">'+
+                                '<label for="send_updates">Guardar acceso</label>'+
+                            '</div>'+
+                            '<div class="action_btns">'+
+                                '<div class="one_half">'+
+                                    '<a class="btn back_btn" href="#">Back</a>'+
+                                '</div>'+
+                                '<div class="one_half last">'+
+                                    '<a class="btn btn_red" href="#">Register</a>'+
+                                '</div>'+
+                           '</div>'+
+                        '</form>'+
+                    '</div>');*/
+    $('#popupLogin').popup('open');
+
+
 
 }
