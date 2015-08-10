@@ -7,9 +7,7 @@
 function displayNode(data, originNode, originName) {
 
     console.log("DisplayNode-> Nodes es " + data.result);
-    console.log(data);
-    
-    var extra = "";
+    //console.log(data);
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -68,6 +66,8 @@ function displayNode(data, originNode, originName) {
 
         }
 
+        var extra = "";
+
         switch (type) {
         case "horizontal":
             {
@@ -75,48 +75,45 @@ function displayNode(data, originNode, originName) {
                 position = "a";
                 for (var i = 0; i < data.nodes.length; i++) {
 
-                    //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
-
-                    console.log("Is party? " + data.nodes[i].isParty);
-
-                    if (data.nodes[i].nodes == 1) {
-                        extra = 1;
+                    if (data.nodes[i].isParty == 1 || data.nodes[i].isCostume == 1) {
+                        extra = ",1";
                     } else {
-                        extra = 0;
+                        extra = ",0";
                     }
 
+                    //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
 
                     if (position < parseInt(data.columns)) {
                         switch (position) {
                         case 0:
 
-                            block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
                             break;
 
                         case 1:
 
-                            block = '<div class="ui-block-b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            block = '<div class="ui-block-b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
                             break;
 
                         case 2:
 
-                            block = '<div class="ui-block-c" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            block = '<div class="ui-block-c" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
                             break;
 
                         case 3:
 
-                            block = '<div class="ui-block-d" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            block = '<div class="ui-block-d" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
                             break;
 
                         case 4:
 
-                            block = '<div class="ui-block-e" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                            block = '<div class="ui-block-e" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
                             break;
 
                         }
                     } else {
                         position = 0;
-                        block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')">';
+                        block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
                     }
                     var element = block + '<a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name + '</strong></a></div>';
 
@@ -140,13 +137,6 @@ function displayNode(data, originNode, originName) {
                 for (var i = 0; i < data.nodes.length; i++) {
 
                     console.log("Is party? " + data.nodes[i].isParty);
-
-                    if (data.nodes[i].isParty == 1) {
-                        extra = 1;
-                    } else {
-                        extra = 0;
-                    }
-
 
                     if (data.nodes[i].short_name == "") {
                         var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
@@ -241,35 +231,33 @@ function displayProducts(data, originNode, originName) {
                 for (var i = 0; i < data.products.length; i++) {
 
                     //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
-                    
-                    var extra = "";
 
                     if (position < parseInt(data.columns)) {
 
                         switch (position) {
                         case 0:
 
-                            block = '<div class="ui-block-a" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            block = '<div class="ui-block-a" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
                             break;
 
                         case 1:
 
-                            block = '<div class="ui-block-b" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            block = '<div class="ui-block-b" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
                             break;
 
                         case 2:
 
-                            block = '<div class="ui-block-c" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            block = '<div class="ui-block-c" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
                             break;
 
                         case 3:
 
-                            block = '<div class="ui-block-d" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            block = '<div class="ui-block-d" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
                             break;
 
                         case 4:
 
-                            block = '<div class="ui-block-e" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\,' + extra + ' )">';
+                            block = '<div class="ui-block-e" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
                             break;
 
 
@@ -345,5 +333,28 @@ function loadMenu(data) {
     $("#divHeader_catalogo").trigger('create');
     $("#divHeader_catalogo").hide();
     $("#lateralMenu").panel("close");
+
+}
+
+
+function displayPantallaIntermedia(data) {
+    
+    console.log(data);
+
+    htmlContent = '<div id="page_count" style="display: block;">' +
+        '<center>' +
+        '<img src="' + data.linkint + '" alt="">' +
+        '<h3> ¿Para cuantas personas es la fiesta?</h3>' +
+        '<div style="width:100px">' +
+        '<input id="num_personas" type="number" name="quantity" min="1">' +
+        '</div>' +
+        '<br>' +
+        '<a style="width:150px" id="btn_continuar" onclick="displayProductos('+data.id+',\''+data.name+'\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
+        '</center>' +
+        '</div>';
+    htmlContent = htmlContent + '</div>';
+    $("#divContent").html(htmlContent);
+    $("#divContent").trigger('create');
+
 
 }

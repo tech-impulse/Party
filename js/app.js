@@ -15,7 +15,6 @@ $(document).bind("mobileinit", function () {
 // PRECARGA DE LA APLICACIÓN
 $(document).ready(function () {
 
-
     htmlHeader_menu = '<img src="css/icons/barra.png" width="100%"> </div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -24,7 +23,7 @@ $(document).ready(function () {
     // Obtenermos el listado de tiendas
     getTiendas();
 
-    $("#btn_acceder").click(function () {
+    $("#btn_acceder").click(function () { // botton de acceso a la app despus de escoger una tienda
 
         var seleccion = $("select#select_tienda option").filter(":selected").val();
         console.log("Seleccion es " + seleccion);
@@ -35,7 +34,20 @@ $(document).ready(function () {
             $("#divContent").show();
 
             STORE = seleccion;
-            console.log("Item seleccionado " + STORE);
+
+            var countTiendas = TIENDAS.stores.length;
+
+            for (var i = 0; i < countTiendas; i++) {
+
+                if (TIENDAS.stores[i].id == STORE) {
+                    SHOPDELIVERY = TIENDAS.stores[i].shopDelivery;
+                    break;
+                    TIENDAS = "";
+                }
+
+            }
+
+            console.log("Item seleccionado " + STORE + " y tiene entraga en tienda? " + SHOPDELIVERY);
 
             getNodes(0);
 
@@ -46,6 +58,7 @@ $(document).ready(function () {
         }
 
     });
+
 
 });
 
@@ -73,4 +86,25 @@ function backPage(idNode, nodeName) {
         nodeNames = [];
         $("#divHeader_menu").show();
     }
+}
+
+
+
+function displayProductos(idNode, nodeName) { // botton de acceso a la app despus de escoger una tienda
+
+    var val = $("#num_personas").val();
+    console.log("Seleccion es " + val);
+
+    if (val >= 1) {
+
+        getProducts(idNode, nodeName);
+
+
+    } else {
+
+        $("#texto_popup").text("Añada alguna persona para poder continuar");
+        $('#popupAlert').popup('open');
+
+    }
+
 }
