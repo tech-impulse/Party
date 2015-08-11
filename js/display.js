@@ -385,11 +385,6 @@ function displayLogin() { //muestra el pop up de inicio de session
     setTimeout(function () {
         $("#popupLogin").popup("open");
     }, 50);
-    /*$("#popupLogin").popup({
-        afteropen: function (event, ui) {//posisciona el foco en el primer campo
-            $('#usrnm').focus();
-        }
-    });*/
 
 
 }
