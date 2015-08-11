@@ -369,6 +369,15 @@ function displayRegistro() { //muestra el pop up de registro
 
 }
 
+function displaySugerencias() { //muestra el pop up de registro
+
+    $("#popupLogin").popup("close");
+    setTimeout(function () {
+        $("#popupRegistro").popup("open");
+    }, 50);
+
+}
+
 function displayLogin() { //muestra el pop up de inicio de session
 
     $('#usrnm').val("");
@@ -376,11 +385,11 @@ function displayLogin() { //muestra el pop up de inicio de session
     setTimeout(function () {
         $("#popupLogin").popup("open");
     }, 50);
-    $("#popupLogin").popup({
+    /*$("#popupLogin").popup({
         afteropen: function (event, ui) {//posisciona el foco en el primer campo
             $('#usrnm').focus();
         }
-    });
+    });*/
 
 
 }
