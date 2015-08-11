@@ -36,7 +36,7 @@ $(document).ready(function () {
         console.log("No hace falta hacer nada");
     }*/
 
-    $("#btn_acceder").click(function () { // botton de acceso a la app despus de escoger una tienda
+    $("#btn_acceder").click(function () { // botton de acceso a la app 
 
         var seleccion = $("select#select_tienda option").filter(":selected").val();
         console.log("Seleccion es " + seleccion);
@@ -53,9 +53,9 @@ $(document).ready(function () {
             for (var i = 0; i < countTiendas; i++) {
 
                 if (TIENDAS.stores[i].id == STORE) {
-                    SHOPDELIVERY = TIENDAS.stores[i].shopDelivery;
-                    break;
+                    SHOPDELIVERY = TIENDAS.stores[i].shopDelivery; //guardamos el id de la tienda
                     TIENDAS = "";
+                    break;
                 }
 
             }
@@ -72,7 +72,7 @@ $(document).ready(function () {
 
     });
 
-    $("#iniciar_session").click(function () { // botton de acceso a la app 
+    $("#iniciar_session").click(function () { // botton de login de la app
 
         console.log("Logeandose");
         var usuario = $('#usrnm').val();
@@ -87,7 +87,7 @@ $(document).ready(function () {
 
     });
     
-    $("#enviar_registro").click(function () { // botton de acceso a la app 
+    $("#enviar_registro").click(function () { // botton de registro a la app 
 
         console.log("Logeandose");
         var usuario = $('#emailsignup').val();

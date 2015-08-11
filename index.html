@@ -35,13 +35,13 @@
         <div data-role="content">
 
             <div id="divTienda" align="center" style="margin-top: 8%;">
-
+                <!--POPUP DE LOGIN -->
                 <div data-role="popup" id="popupLogin" class="ui-content" style="min-width:250px;">
                     <form method="post">
                         <div id="div_session">
                             <h3>Inicia sessión</h3>
                             <label for="usrnm" class="ui-hidden-accessible"></label>
-                            <input type="text" name="user" id="usrnm" placeholder="Introduce tu correo electrónico">
+                            <input type="text" name="user" id="usrnm" placeholder="Email">
                             <label for="pswd" class="ui-hidden-accessible">Contraseña</label>
                             <input type="password" name="passw" id="pswd" placeholder="Contraseña">
                             <!--<label for="recordar_session">No cerrar sessión</label>
@@ -54,7 +54,7 @@
                         </div>
                     </form>
                 </div>
-
+                <!--POPUP DE REGISTRO -->
                 <div data-role="popup" id="popupRegistro" class="ui-content" style="min-width:250px;">
                     <div id="div_registrarse">
                         <form action="mysuperscript.php" autocomplete="on">
@@ -65,11 +65,11 @@
                             </p>
                             <p>
                                 <label for="passwordsignup" class="youpasswd" data-icon="p"> Contraseña </label>
-                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO" >
+                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO">
                             </p>
                             <p>
                                 <label for="passwordsignup_confirm" class="youpasswd" data-icon="p"> Confirmar contraseña </label>
-                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO" >
+                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO">
                             </p>
                             <p>
                                 <button type="button" id="enviar_registro">Crear cuenta</button>
@@ -82,7 +82,7 @@
                     </div>
                     </form>
                 </div>
-
+                <!--POPUP PARA ALERTAS-ERRORES WS -->
                 <div data-role="popup" id="popupAlert" data-rel="back" class="ui-content" style="max-width:280px">
                     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                     <label id="texto_popup"></label>
@@ -120,8 +120,8 @@
         <div data-role="footer" data-position="fixed" data-tap-toggle="false">
             <img src="css/icons/barra.png" width="100%">
         </div>
-        <div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-        </div>
+        <!--<div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a  href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+        </div>-->
     </div>
     <!--
         <div data-role="header">

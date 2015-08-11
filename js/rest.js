@@ -1,6 +1,6 @@
 // request.abort(); // Esto aborta la conexión al webservice (Por si se necesitara)
 
-
+//WS de login en la app
 function getlogin(usario, contraseña) {
 
     // Datos que se van a enviar
@@ -60,6 +60,8 @@ function getlogin(usario, contraseña) {
 
 }
 
+
+//WS para realizar el registro del usuario
 function getRegistro(usario, contraseña) {
 
     // Datos que se van a enviar
@@ -294,7 +296,7 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
 
 }
 
-
+//WS que devuelve el listado de productos para un nodo
 function getProducts(idNode, nodeName) {
 
     // Datos que se van a enviar
