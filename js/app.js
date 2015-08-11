@@ -15,14 +15,26 @@ $(document).bind("mobileinit", function () {
 // PRECARGA DE LA APLICACIÓN
 $(document).ready(function () {
 
-    htmlHeader_menu = '<img src="css/icons/barra.png" width="100%"> </div>';
+    var htmlHeader_menu = '<img src="css/icons/barra.png" width="100%"> </div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
     $("#divHeader_menu").show();
     $("#registro").hide();
 
+
     // Obtenermos el listado de tiendas
     getTiendas();
+
+    //comprobamos si el checkbox de guardar session esta activado para mostrar el nombre en el link del login
+    /*var checkBoxSession = document.getElementById("recordar_session").checked;
+    //console.log(checkBoxSession);
+    if (checkBoxSession == true) {
+        var html_login = '<a id="cerrar_session" onclick="cerrar_session();" style="margin:10px">' +
+            '<label id="ya_soy_cliente"><span>Ya soy Cliente!</span></label></a>';
+        $("#session").html(html_login);
+    } else {
+        console.log("No hace falta hacer nada");
+    }*/
 
     $("#btn_acceder").click(function () { // botton de acceso a la app despus de escoger una tienda
 
@@ -49,7 +61,7 @@ $(document).ready(function () {
             }
 
             console.log("Item seleccionado " + STORE + " y tiene entraga en tienda? " + SHOPDELIVERY);
-
+            $("#logo_inicio").hide();
             getNodes(0);
 
         } else {
@@ -59,6 +71,38 @@ $(document).ready(function () {
         }
 
     });
+
+    $("#iniciar_session").click(function () { // botton de acceso a la app 
+
+        console.log("Logeandose");
+        var usuario = $('#usrnm').val();
+        var contraseña = $('#pswd').val();
+
+        if (usuario == "" || contraseña == "") {
+            $("#texto_popup").text("Usuario o contraseña vacios...");
+            $('#popupAlert').popup('open');
+        } else {
+            getlogin(usuario, contraseña);
+        }
+
+    });
+    
+    $("#enviar_registro").click(function () { // botton de acceso a la app 
+
+        console.log("Logeandose");
+        var usuario = $('#emailsignup').val();
+        var contraseña = $('#passwordsignup').val();
+        var rep_contraseña = $('#passwordsignup_confirm').val();
+
+        if (usuario == "" || contraseña == "" || rep_contraseña == "" ) {
+            $("#texto_popup").text("Rellene todos los campos. Gracias");
+            $('#popupAlert').popup('open');
+        } else if( usuario != "" && contraseña == rep_contraseña ){
+            getRegistro(usuario, contraseña);
+        }
+
+    });
+
 
 
 });
@@ -110,35 +154,3 @@ function displayProductos(idNode, nodeName) { // botton de acceso a la app despu
 
 }
 
-
-function login() { // botton de acceso a la app despus de escoger una tienda
-
-    console.log("Login");
-
-    /*$("#texto_popup").html('<div id="registro">'+
-                        '<form>'+
-                            '<label>Usuario</label>'+
-                            '<input type="text">'+
-                            '<br>'+
-                            '<label>Password</label>'+
-                            '<input type="password">'+
-                            '<br>'+
-                            '<div class="checkbox">'+
-                                '<input id="send_updates" type="checkbox">'+
-                                '<label for="send_updates">Guardar acceso</label>'+
-                            '</div>'+
-                            '<div class="action_btns">'+
-                                '<div class="one_half">'+
-                                    '<a class="btn back_btn" href="#">Back</a>'+
-                                '</div>'+
-                                '<div class="one_half last">'+
-                                    '<a class="btn btn_red" href="#">Register</a>'+
-                                '</div>'+
-                           '</div>'+
-                        '</form>'+
-                    '</div>');*/
-    $('#popupLogin').popup('open');
-
-
-
-}

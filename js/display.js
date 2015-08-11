@@ -19,8 +19,9 @@ function displayNode(data, originNode, originName) {
 
         if (originNode == 0) {
             loadMenu(data);
+            var imagen_partyfiesta = "<div><img src='css/icons/logo.png'></div>";
         } else {
-
+            var imagen_partyfiesta = "";
             if (nodeIds.length == 0) {
                 nodeIds.push(0);
                 nodeNames.push("Menú");
@@ -71,7 +72,7 @@ function displayNode(data, originNode, originName) {
         switch (type) {
         case "horizontal":
             {
-                htmlContent = "<center><div><img src='css/icons/logo.png'></div></center>" + grid;
+                htmlContent = "<center>" + imagen_partyfiesta + "</center>" + grid;
                 position = "a";
                 for (var i = 0; i < data.nodes.length; i++) {
 
@@ -226,7 +227,7 @@ function displayProducts(data, originNode, originName) {
         switch (type) {
         case "horizontal":
             {
-                htmlContent = "<center><div><img src='css/icons/logo.png'></div></center>" + grid;
+                htmlContent = "<center></center>" + grid;
                 position = "a";
                 for (var i = 0; i < data.products.length; i++) {
 
@@ -328,7 +329,7 @@ function loadMenu(data) {
     $("#options").listview('refresh');
     $("#lateralMenu").trigger('create');
 
-    htmlHeader = '<div><div class="ui-grid-b"> <div class="ui-block-a" style="margin-top:10px" id="divBack"> </div> <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%"> </div> <div class="ui-block-c" style="text-align:right;"> <a id="login" onclick="login();" style="margin:10px"> <span>Ya soy Cliente!</span> </a> <a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a> </div> </div> <img src="css/icons/barra.png" height="5px" width="100%"> <ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
+    htmlHeader = '<div><div class="ui-grid-b"> <div class="ui-block-a" style="margin-top:10px" id="divBack"> </div> <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%"> </div> <div class="ui-block-c" style="text-align:right;"> <div id="session"><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Ya soy Cliente!</span> </a><a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a> </div> </div> </div> <img src="css/icons/barra.png" height="5px" width="100%"> <ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
     $("#divHeader_catalogo").html(htmlHeader);
     $("#divHeader_catalogo").trigger('create');
     $("#divHeader_catalogo").hide();
@@ -338,7 +339,7 @@ function loadMenu(data) {
 
 
 function displayPantallaIntermedia(data) {
-    
+
     console.log(data);
 
     htmlContent = '<div id="page_count" style="display: block;">' +
@@ -349,12 +350,49 @@ function displayPantallaIntermedia(data) {
         '<input id="num_personas" type="number" name="quantity" min="1">' +
         '</div>' +
         '<br>' +
-        '<a style="width:150px" id="btn_continuar" onclick="displayProductos('+data.id+',\''+data.name+'\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
+        '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
         '</center>' +
         '</div>';
     htmlContent = htmlContent + '</div>';
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
+
+
+}
+
+function displayRegistro() { //muestra el pop up de registro
+
+    $("#popupLogin").popup("close");
+    setTimeout(function () {
+        $("#popupRegistro").popup("open");
+    }, 50);
+
+}
+
+function displayLogin() { //muestra el pop up de inicio de session
+
+    $('#usrnm').val("");
+    $("#popupRegistro").popup("close");
+    setTimeout(function () {
+        $("#popupLogin").popup("open");
+    }, 50);
+    $("#popupLogin").popup({
+        afteropen: function (event, ui) {//posisciona el foco en el primer campo
+            $('#usrnm').focus();
+        }
+    });
+
+
+}
+
+function loginOut() { //muestra el pop up de inicio de session
+
+    console.log("Cerramos session");
+    html = '<div id="session"><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Ya soy Cliente!</span> </a><a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a> </div>';
+    $("#session").html(html);
+    INFO_USU = "";
+    $('#usrnm').val("");
+    $('#pswd').val("");
 
 
 }

@@ -1,6 +1,125 @@
 // request.abort(); // Esto aborta la conexión al webservice (Por si se necesitara)
 
 
+function getlogin(usario, contraseña) {
+
+    // Datos que se van a enviar
+    var dataSend = {
+        user: usario,
+        password: contraseña
+    };
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'login.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+
+            if (response.result == 1) {
+
+                console.log(response.info);
+                INFO_USU = response.info;
+                $('#popupLogin').popup('close');
+                $("#login").text("Bienvenido/a " + usario + ",");
+                $('#login').attr('onclick',"loginOut()");
+                $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 25px;">');
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#texto_popup").text("Usuario o contraseña incorrectos");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -1) {
+
+                $("#texto_popup").text("Error...");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
+}
+
+function getRegistro(usario, contraseña) {
+
+    // Datos que se van a enviar
+    var dataSend = {
+        user: usario,
+        password: contraseña
+    };
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'signup.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+
+            if (response.result == 1) {
+
+                console.log(response);
+                displayLogin();
+                $("#usrnm").val(usario);
+
+
+            } else if (response.result == -2) {
+
+                //console.log("No hay productos para este nodo");
+                $("#texto_popup").text("El usuario ya existe");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -1) {
+
+                $("#texto_popup").text("Error...");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
+}
+
+
+
+
 /* Función que solicita la información al webservice de Nodos
     - idNode: id del nodo que se esta solicitando
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
@@ -126,7 +245,7 @@ function restOk(res, typ, param, param2) {
 
 }
 
-function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo
+function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id de un nodo
 
     // Datos que se van a enviar
     var dataSend = {
