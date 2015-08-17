@@ -68,6 +68,7 @@ function displayNode(data, originNode, originName) {
         }
 
         var extra = "";
+        console.log("Tipo " + type);
 
         switch (type) {
         case "horizontal":
@@ -76,45 +77,51 @@ function displayNode(data, originNode, originName) {
                 position = "a";
                 for (var i = 0; i < data.nodes.length; i++) {
 
-                    if (data.nodes[i].isParty == 1 || data.nodes[i].isCostume == 1) {
-                        extra = ",1";
-                    } else {
-                        extra = ",0";
-                    }
-
+                    if (originNode == 0) { //solo se mostrar en el menu inicial de la app getNodes(0)
+                        switch (parseInt(data.nodes[i].type)) {
+                        case 1: //catalogo
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\',0)';
+                            break;
+                        case 2: //promos
+                            extra = '';
+                            break;
+                        case 3: // asis fistas
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\',1)';
+                            break;
+                        case 4: // asis disfra
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\',1)';
+                            break;
+                        case 5: // sugerencias
+                            extra = '';
+                            break;
+                        case 6: // fuera tienda
+                            extra = '';
+                            break;
+                        }
+                    } else extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')';
                     //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
 
-                    if (position < parseInt(data.columns)) {
+                    if (position < parseInt(data.columns)) { //numero maximo de columnas que tendra la pantalla
                         switch (position) {
                         case 0:
-
-                            block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
+                            block = '<div class="ui-block-a" onclick="' + extra + '">';
                             break;
-
                         case 1:
-
-                            block = '<div class="ui-block-b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
+                            block = '<div class="ui-block-b" onclick="' + extra + '">';
                             break;
-
                         case 2:
-
-                            block = '<div class="ui-block-c" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
+                            block = '<div class="ui-block-c" onclick="' + extra + '">';
                             break;
-
                         case 3:
-
-                            block = '<div class="ui-block-d" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
+                            block = '<div class="ui-block-d" onclick="' + extra + '">';
                             break;
-
                         case 4:
-
-                            block = '<div class="ui-block-e" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
+                            block = '<div class="ui-block-e" onclick="' + extra + '">';
                             break;
-
                         }
                     } else {
                         position = 0;
-                        block = '<div class="ui-block-a" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'' + extra + ')">';
+                        block = '<div class="ui-block-a" onclick="' + extra + '">';
                     }
                     var element = block + '<a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name + '</strong></a></div>';
 
@@ -238,36 +245,47 @@ function displayProducts(data, originNode, originName) {
                         switch (position) {
                         case 0:
 
-                            block = '<div class="ui-block-a" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
+                            block = '<div class="ui-block-a" onclick="">';
                             break;
 
                         case 1:
 
-                            block = '<div class="ui-block-b" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
+                            block = '<div class="ui-block-b" onclick="">';
                             break;
 
                         case 2:
 
-                            block = '<div class="ui-block-c" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
+                            block = '<div class="ui-block-c" onclick="">';
                             break;
 
                         case 3:
 
-                            block = '<div class="ui-block-d" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
+                            block = '<div class="ui-block-d" onclick="">';
                             break;
 
                         case 4:
 
-                            block = '<div class="ui-block-e" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
+                            block = '<div class="ui-block-e" onclick="">';
                             break;
 
 
                         }
                     } else {
                         position = 0;
-                        block = '<div class="ui-block-a" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].short_name + '\')">';
+                        block = '<div class="ui-block-a" onclick="">';
                     }
-                    var element = block + '<a data-role="button" data-theme="f"><img src="' + data.products[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.products[i].name + '</strong></a></div>';
+                    var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].sku + '" class="circulo" style="width: 30px;height: 30px;display: none;position: absolute;">' +
+                        '<label id="quantity' + data.products[i].sku + '" style="display:block;padding-top: 5px;">10</label></div>' +
+                        '<img src="' + data.products[i].linkext + '" style="width: 120px;height: 120px;">' +
+                        '<br>' + data.products[i].name +
+                        '<br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
+                        '<br><button id="añadir_producto' + data.products[i].sku + '" onclick="carrito(' + data.products[i].sku + ',1,' + data.products[i].price_x_region.totalPrice + ');">Añadir</button>' +
+                        '<div class="ui-grid-b" id="grid' + data.products[i].sku + '" style="display:none;">' +
+                        '<div class="ui-block-a" onclick="" style="width: 45%;"><button id="restar" onclick="carrito(' + data.products[i].sku + ',0);" >-</button></div>' +
+                        '<div class="ui-block-b" style="width:10%;"></div>' +
+                        '<div class="ui-block-c" onclick="" style="width: 45%;"><button id="sumar" onclick="carrito(' + data.products[i].sku + ',1,' + data.products[i].price_x_region.totalPrice + ');">+</button></div>' +
+                        '</div></a></div>';
+
 
                     //console.log(element);
 
@@ -280,6 +298,7 @@ function displayProducts(data, originNode, originName) {
                 htmlContent = htmlContent + '</div>';
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
+
                 break;
             };
         case "vertical":
@@ -289,9 +308,9 @@ function displayProducts(data, originNode, originName) {
                 for (var i = 0; i < data.products.length; i++) {
 
                     if (data.products[i].short_name == "") {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].name + '\')">' + data.products[i].name + '</a>';
+                        var element = '<a data-role="button" onclick="">' + data.products[i].name + '</a>';
                     } else {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.products[i].id + ', \'' + data.products[i].name + '\')">' + data.products[i].short_name + '</a>';
+                        var element = '<a data-role="button" onclick="">' + data.products[i].short_name + '</a>';
                     }
 
                     htmlContent = htmlContent + element;
@@ -314,6 +333,55 @@ function displayProducts(data, originNode, originName) {
 
 }
 
+/*
+    Enseña o esconde los botones de añadir o restar productos 
+    Parametros:
+    -0: mostrar botones de restar y sumas
+    -else: esconderlos
+*/
+function displayMasMenos(param, id_producto) {
+
+    console.log("Que es escondemos " + param);
+
+    if (param == 0) {
+
+        $("#añadir_producto" + id_producto).hide();
+        $("#grid" + id_producto).show();
+
+
+    } else {
+
+        $("#añadir_producto" + id_producto).show();
+        $("#grid" + id_producto).hide();
+
+    }
+
+
+}
+
+/*
+    Enseña o esconde el icono del numero de productos seleccionados 
+    Parametros:
+    -0: mostrar botones de restar y sumas
+    -else: esconderlos
+*/
+function displayQantidadProducto(cantidad, id_producto) {
+
+    if (cantidad == 0) {
+
+        $("#circulo" + id_producto).hide();
+        displayMasMenos(1, id_producto);
+
+    } else {
+
+        $("#circulo" + id_producto).show();
+        console.log("Cantidad " + cantidad + " para el circulo -> $('#quantity" + id_producto + "').val(" + cantidad + ")");
+        $("#quantity" + id_producto).text(cantidad);
+
+    }
+
+}
+
 
 /* Función que carga el menú lateral
  */
@@ -329,7 +397,17 @@ function loadMenu(data) {
     $("#options").listview('refresh');
     $("#lateralMenu").trigger('create');
 
-    htmlHeader = '<div><div class="ui-grid-b"> <div class="ui-block-a" style="margin-top:10px" id="divBack"> </div> <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%"> </div> <div class="ui-block-c" style="text-align:right;"> <div id="session"><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Ya soy Cliente!</span> </a><a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a> </div> </div> </div> <img src="css/icons/barra.png" height="5px" width="100%"> <ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
+    /*div que muestra las compras realizadas*/
+    var cart = '<div class="ui-grid-b" >' +
+        '<div class="ui-block-a" style="width: 70%;"><img src="http://partyfiesta.youtter.com/webservices/img/nodos/carrito.png" style="width: initial;"></div> ' +
+        '<div class="ui-block-b" style="width: 30%;">' +
+        '<div id="num_products_cart" class="ui-grid-a center" ><label id="label_info_cart_num" >2 productos</label></div>' +
+        '<div id="precio_total" class="ui-grid-a center" ><label id="label_info_cart_precio"> 2,75</label></div></div>' +
+        '</div>';
+
+
+    /*HEADER  de la pantalla*/
+    htmlHeader = '<div><div class="ui-grid-b"><div class="ui-block-a" style="margin-top:10px" id="divBack"></div><div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%"> </div> <div class="ui-block-c" style="text-align:right;"> <div id="session"><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Ya soy Cliente!</span> </a><a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a>' + cart + '</div> </div></div> <img src="css/icons/barra.png" height="5px" width="100%"><ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
     $("#divHeader_catalogo").html(htmlHeader);
     $("#divHeader_catalogo").trigger('create');
     $("#divHeader_catalogo").hide();

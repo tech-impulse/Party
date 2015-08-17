@@ -22,7 +22,7 @@ function getlogin(usario, contraseña) {
                 INFO_USU = response.info;
                 $('#popupLogin').popup('close');
                 $("#login").text("Bienvenido/a " + usario + ",");
-                $('#login').attr('onclick',"loginOut()");
+                $('#login').attr('onclick', "loginOut()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 25px;">');
 
             } else if (response.result == 0) {
@@ -135,7 +135,9 @@ function getNodes(idNode, nodeName, isAlgo) {
         id: idNode
     };
 
-    if (idNode == 0) {
+    if (isAlgo == 1) {
+        ISFIESTA = 1;
+    } else if(isAlgo == 0){
         ISFIESTA = 0;
     }
 
@@ -151,11 +153,11 @@ function getNodes(idNode, nodeName, isAlgo) {
                 console.log("Respuesta del nodo");
                 console.log(response);
 
-                if (isAlgo == 1) { // si es 1 estaremos en el aistente de fiestas o de disfraces
+                /*if (isAlgo == 1) { // si es 1 estaremos en el aistente de fiestas o de disfraces
                     ISFIESTA = 1;
                 } else if (isAlgo == 0) {
                     ISFIESTA = 0;
-                }
+                }*/
 
                 restOk(response, "nodes", idNode, nodeName);
 

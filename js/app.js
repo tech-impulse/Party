@@ -86,7 +86,7 @@ $(document).ready(function () {
         }
 
     });
-    
+
     $("#enviar_registro").click(function () { // botton de registro a la app 
 
         console.log("Logeandose");
@@ -94,10 +94,10 @@ $(document).ready(function () {
         var contraseña = $('#passwordsignup').val();
         var rep_contraseña = $('#passwordsignup_confirm').val();
 
-        if (usuario == "" || contraseña == "" || rep_contraseña == "" ) {
+        if (usuario == "" || contraseña == "" || rep_contraseña == "") {
             $("#texto_popup").text("Rellene todos los campos. Gracias");
             $('#popupAlert').popup('open');
-        } else if( usuario != "" && contraseña == rep_contraseña ){
+        } else if (usuario != "" && contraseña == rep_contraseña) {
             getRegistro(usuario, contraseña);
         }
 
@@ -154,3 +154,147 @@ function displayProductos(idNode, nodeName) { // botton de acceso a la app despu
 
 }
 
+
+/**
+ * Da formato a un número para su visualización
+ *
+ * @param {(number|string)} numero Número que se mostrará
+ * @param {number} [decimales=null] Nº de decimales (por defecto, auto); admite valores negativos
+ * @param {string} [separadorDecimal=","] Separador decimal
+ * @param {string} [separadorMiles=""] Separador de miles
+ * @param {string} [simbolo=""] simbolo de la moneda
+ * @returns {string} Número formateado o cadena vacía si no es un número
+ *
+ * @version 2014-07-18
+ */
+function formatoNumero(numero, decimales, separadorDecimal, separadorMiles, simbolo) {
+    var partes, array;
+
+    if (!isFinite(numero) || isNaN(numero = parseFloat(numero))) {
+        return "";
+    }
+    if (typeof separadorDecimal === "undefined") {
+        separadorDecimal = ",";
+    }
+    if (typeof separadorMiles === "undefined") {
+        separadorMiles = "";
+    }
+
+    // Redondeamos
+    if (!isNaN(parseInt(decimales))) {
+        if (decimales >= 0) {
+            numero = numero.toFixed(decimales);
+        } else {
+            numero = (
+                Math.round(numero / Math.pow(10, Math.abs(decimales))) * Math.pow(10, Math.abs(decimales))
+            ).toFixed();
+        }
+    } else {
+        numero = numero.toString();
+    }
+
+    // Damos formato
+    partes = numero.split(".", 2);
+    array = partes[0].split("");
+    for (var i = array.length - 3; i > 0 && array[i - 1] !== "-"; i -= 3) {
+        array.splice(i, 0, separadorMiles);
+    }
+    numero = array.join("");
+
+    if (partes.length > 1) {
+        numero += separadorDecimal + partes[1];
+    }
+
+    return numero + " " + simbolo;
+}
+
+
+/************************************************************************************
+  Esta funcion sirve para añadir o restar articulos al carrito del cliente y hacer los cambios en la interfaz grafica
+  Parametros : 
+  producto: info del producto a guardar
+  operacion: si es añadir o restar articulos  1 sera sumar  0 restar
+**************************************************************************************/
+
+function carrito(id_producto, operacion,precio) {
+
+    console.log("Longitud del array " + CARRITO.length);
+    console.log(id_producto);
+    console.log(CARRITO);
+
+    if (CARRITO.length == 0) {
+
+        displayMasMenos(0, id_producto);
+        displayQantidadProducto(1, id_producto);
+        var aux = [];
+
+        aux['id_producto'] = id_producto;
+        aux['cantidad'] = 1;
+        aux['precio'] = precio;
+        CARRITO.push(aux);
+
+        console.log(CARRITO);
+
+    } else {
+
+        if (operacion == 1) { //sumamos
+
+            var encontrado = 0;
+            var count = "";
+            for (var i = 0; i < CARRITO.length; i++) {
+                count++;
+                if (id_producto == CARRITO[i].id_producto) {
+
+                    CARRITO[i].cantidad = CARRITO[i].cantidad + 1;
+                    encontrado = 1;
+                    displayQantidadProducto(CARRITO[i].cantidad, id_producto);
+                    break;
+
+                }
+
+            }
+
+            if (encontrado == 0) { //no existe ese articulo en nuestro array aun, lo añadimos
+                var aux = [];
+
+                aux['id_producto'] = id_producto;
+                aux['cantidad'] = 1;
+                aux['precio'] = precio;
+                CARRITO.push(aux);
+                displayMasMenos(0, id_producto);
+                displayQantidadProducto(1, id_producto);
+
+            }
+
+        } else if (operacion == 0) { //restamos
+
+            var count = "";
+            if (CARRITO.length > 0) {
+
+                for (var i = 0; i < CARRITO.length; i++) {
+
+                    count++;
+                    if (id_producto == CARRITO[i].id_producto) {
+
+                        CARRITO[i].cantidad = CARRITO[i].cantidad - 1;
+                        encontrado = 1;
+                        displayQantidadProducto(CARRITO[i].cantidad, id_producto);
+                        if (CARRITO[i].cantidad == 0) {
+                            CARRITO.splice(i, 1);
+                            console.log(CARRITO);
+                        }
+                        break;
+
+                    }
+
+                }
+
+
+            }
+
+
+        }
+
+    }
+
+}
