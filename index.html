@@ -19,25 +19,109 @@
 </head>
 
 <body>
+
+
+
     <div data-role="page" id="principal">
+
+        <!--     HEADER    -->
         <div data-role="header" id="divHeader">
+            <div id="divHeader_menu"></div>
+            <div id="divHeader_catalogo"></div>
 
         </div>
 
+        <!--     CONTENT    -->
         <div data-role="content">
+
+            <div id="divTienda" align="center" style="margin-top: 8%;">
+                <!--POPUP DE LOGIN -->
+                <div data-role="popup" id="popupLogin" class="ui-content" style="min-width:250px;">
+                    <form autocomplete="on">
+                        <div id="div_session">
+                            <h3>Inicia sessión</h3>
+                            <label for="usrnm" class="ui-hidden-accessible"></label>
+                            <input type="text" name="user" id="usrnm" placeholder="Email">
+                            <label for="pswd" class="ui-hidden-accessible">Contraseña</label>
+                            <input type="password" name="passw" id="pswd" placeholder="Contraseña">
+                            <!--<label for="recordar_session">No cerrar sessión</label>
+                            <input type="checkbox" name="login" id="recordar_session" value="1" data-mini="true">
+                            -->
+                            <button type="button" id="iniciar_session">Iniciar sessión</button>
+                            <center>
+                                <a id="registrarse" onclick="displayRegistro();" style="margin:10px" class="ui-link">Registrarse</a>
+                            </center>
+                        </div>
+                    </form>
+                </div>
+                <!--POPUP DE REGISTRO -->
+                <div data-role="popup" id="popupRegistro" class="ui-content" style="min-width:250px;">
+                    <div id="div_registrarse">
+                        <form autocomplete="on">
+                            <h3> Registrarse </h3>
+                            <p>
+                                <label for="usernamesignup" class="uname" data-icon="u"> Usuario </label>
+                                <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus>
+                            </p>
+                            <p>
+                                <label for="passwordsignup" class="youpasswd" data-icon="p"> Contraseña </label>
+                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO">
+                            </p>
+                            <p>
+                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p"> Confirmar contraseña </label>
+                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO">
+                            </p>
+                            <p>
+                                <button type="button" id="enviar_registro">Crear cuenta</button>
+                            </p>
+                            <p class="change_link">
+                                ¿Ya es cliente?
+                                <a href="#" onclick="displayLogin();" > Iniciar sessión </a>
+                            </p>
+                        </form>
+                    </div>
+                    </form>
+                </div>
+                <!--POPUP PARA ALERTAS-ERRORES WS -->
+                <div data-role="popup" id="popupAlert" data-rel="back" class="ui-content" style="max-width:280px">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                    <label id="texto_popup"></label>
+                </div>
+
+                <div id="logo_inicio" style="margin-bottom: 20px;"><img src="css/icons/logo.png">
+                </div>
+
+                <div class="ui-grid-a">
+                    <label for="select">Seleccione una tienda:</label>
+                </div>
+                <div class="ui-grid-b" style="width: 25%">
+                    <div class="ui-field-contain">
+
+                        <select name="select_tienda" id="select_tienda" data-native-menu="false">
+                        </select>
+                    </div>
+                </div>
+                <div class="ui-grid-c" style="width: 10%">
+                    <button data-theme="b" id="btn_acceder">Acceder</button>
+                </div>
+            </div>
+
             <div data-role="panel" id="lateralMenu" data-display="overlay" data-position="right">
                 <h2>Menú</h2>
                 <ul data-role="listview" id="options">
                 </ul>
             </div>
-            <div data-role="content" id="divContent">
+            <div data-role="content" id="divContent" style="display: none;">
             </div>
+
         </div>
+
+        <!--     FOOTER    -->
         <div data-role="footer" data-position="fixed" data-tap-toggle="false">
             <img src="css/icons/barra.png" width="100%">
         </div>
-        <div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-        </div>
+        <!--<div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a  href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+        </div>-->
     </div>
     <!--
         <div data-role="header">
