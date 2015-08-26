@@ -11,4 +11,6 @@ var STORE = "";
 var SHOPDELIVERY = "";
 var ISFIESTA = "";
 var INFO_USU = [];
+var PRODUCTS = [];
+var CART = [];
 var CARRITO = [];

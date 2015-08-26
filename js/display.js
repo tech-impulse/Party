@@ -279,14 +279,14 @@ function displayProducts(data, originNode, originName) {
                         '<img src="' + data.products[i].linkext + '" style="width: 120px;height: 120px;">' +
                         '<br>' + data.products[i].name +
                         '<br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
-                        '<br><button id="añadir_producto' + data.products[i].sku + '" onclick="carrito(' + data.products[i].sku + ',1,' + data.products[i].price_x_region.totalPrice + ');">Añadir</button>' +
+                        '<br><button id="btnAddProduct' + data.products[i].sku + '" onclick="addToCart(' + data.products[i].sku + ',1);">Añadir</button>' +
                         '<div class="ui-grid-b" id="grid' + data.products[i].sku + '" style="display:none;">' +
-                        '<div class="ui-block-a" onclick="" style="width: 45%;"><button id="restar" onclick="carrito(' + data.products[i].sku + ',0);" >-</button></div>' +
+                        '<div class="ui-block-a" onclick="" style="width: 45%;"><button id="restar" onclick="addToCart(' + data.products[i].sku + ',-1);" >-</button></div>' +
                         '<div class="ui-block-b" style="width:10%;"></div>' +
-                        '<div class="ui-block-c" onclick="" style="width: 45%;"><button id="sumar" onclick="carrito(' + data.products[i].sku + ',1,' + data.products[i].price_x_region.totalPrice + ');">+</button></div>' +
+                        '<div class="ui-block-c" onclick="" style="width: 45%;"><button id="sumar" onclick="addToCart(' + data.products[i].sku + ',1);">+</button></div>' +
                         '</div></a></div>';
 
-
+                    PRODUCTS = data.products;
                     //console.log(element);
 
                     htmlContent = htmlContent + element;
@@ -339,23 +339,62 @@ function displayProducts(data, originNode, originName) {
     -0: mostrar botones de restar y sumas
     -else: esconderlos
 */
+function displayItemOperations(id, param, position) {
+    if (param > 0) {
+        $("#btnAddProduct" + id).hide();
+        $("#grid" + id).show();
+        $("#quantity" + id).text(param);
+        $("#circulo" + id).show();
+
+    } else {
+        $("#btnAddProduct" + id).show();
+        $("#grid" + id).hide();
+        $("#circulo" + id).hide();
+        CART.splice(position, 1);
+    }
+    $("#spPopupCartCount").text(CART.length);
+    $("#spPopupTotalAmmount").text(CART.ammount + "€");
+
+
+}
+
+function displayPopupItemList() {
+    $("#popupCart").popup("close");
+    setTimeout(function() { $("#popupListItems").popup("open"); }, 200 );
+    
+    var html = '';
+    for (var i = 0; i < CART.length; i++) { //data:image/png;base64,
+      //  html = html + '<li><div class="ui-grid-b"><div class="ui-block-a" style="width:11%; margin:5px" ><img class="thumb" src="'+CART[i].linkext+'"></div><div class="ui-block-b" style="width:60%"><a href="#" data-role="button" data-theme="f">'+CART[i].name+'<span class="ui-li-count">'+CART[i].quantity+'</span></a></div><div class="ui-block-b" style="width:24%; margin:5px"><div class="ui-grid-b"><div class="ui-block-a"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart('+CART[i].sku+',-1); displayPopupItemList();"></a></div><div class="ui-block-b"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart('+CART[i].sku+',1); displayPopupItemList();"></a></div><div class="ui-block-c"><a onclick="addToCart('+CART[i].sku+',-'+CART[i].ammount+'); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a></div></div></div></li>';
+          html = html + '<li><div class="ui-grid-b"><div class="ui-block-a" style="width:11%; margin:5px" ><img class="thumb" src="'+CART[i].linkext+'"></div><div class="ui-block-b" style="width:60%"><a href="#" data-role="button" data-theme="f">'+CART[i].name+'<span class="ui-li-count">'+CART[i].quantity+'</span></a></div><div class="ui-block-b" style="width:24%; margin:5px"><div class="ui-grid-b"><div class="ui-block-a"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart('+CART[i].sku+',-1); displayPopupItemList();"></a></div><div class="ui-block-b"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart('+CART[i].sku+',1); displayPopupItemList();"></a></div><div class="ui-block-c"><a onclick="addToCart('+CART[i].sku+',-'+CART[i].ammount+'); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a></div></div></div></li>';
+    }
+    html = '<li data-role="list-divider"><h3><center>Lista de Productos</center></h3></li>' + html;
+    $("#ulpopupListItems").html(html);
+    $("#ulpopupListItems").trigger("create");    
+
+}
+
+
 function displayMasMenos(param, id_producto) {
+    /*
 
     console.log("Que es escondemos " + param);
 
-    if (param == 0) {
+    if (param == 1) {
 
-        $("#añadir_producto" + id_producto).hide();
+        $("#btnAddProduct" + id_producto).hide();
         $("#grid" + id_producto).show();
+        $("#circulo" + id_producto).show();
+
 
 
     } else {
 
-        $("#añadir_producto" + id_producto).show();
+        $("#btnAddProduct" + id_producto).show();
         $("#grid" + id_producto).hide();
+        $("#circulo" + id_producto).hide();
 
     }
-
+*/
 
 }
 
@@ -366,6 +405,7 @@ function displayMasMenos(param, id_producto) {
     -else: esconderlos
 */
 function displayQantidadProducto(cantidad, id_producto) {
+    /*
 
     if (cantidad == 0) {
 
@@ -379,6 +419,7 @@ function displayQantidadProducto(cantidad, id_producto) {
         $("#quantity" + id_producto).text(cantidad);
 
     }
+    */
 
 }
 
@@ -398,12 +439,15 @@ function loadMenu(data) {
     $("#lateralMenu").trigger('create');
 
     /*div que muestra las compras realizadas*/
+    /*
     var cart = '<div class="ui-grid-b" >' +
         '<div class="ui-block-a" style="width: 70%;"><img src="http://partyfiesta.youtter.com/webservices/img/nodos/carrito.png" style="width: initial;"></div> ' +
         '<div class="ui-block-b" style="width: 30%;">' +
         '<div id="num_products_cart" class="ui-grid-a center" ><label id="label_info_cart_num" >2 productos</label></div>' +
         '<div id="precio_total" class="ui-grid-a center" ><label id="label_info_cart_precio"> 2,75</label></div></div>' +
         '</div>';
+        */
+    var cart = '<br><a href="#popupCart" data-rel="popup" data-role="button" data-icon="shop" data-theme="e" data-transition="pop">Items</a>';
 
 
     /*HEADER  de la pantalla*/

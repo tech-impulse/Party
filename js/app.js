@@ -216,7 +216,7 @@ function formatoNumero(numero, decimales, separadorDecimal, separadorMiles, simb
   operacion: si es añadir o restar articulos  1 sera sumar  0 restar
 **************************************************************************************/
 
-function carrito(id_producto, operacion,precio) {
+function carrito(id_producto, operacion, precio) {
 
     console.log("Longitud del array " + CARRITO.length);
     console.log(id_producto);
@@ -297,4 +297,65 @@ function carrito(id_producto, operacion,precio) {
 
     }
 
+}
+
+function addToCart(item, param) {
+    var product;
+    var foundInCart = 0;
+    for (var i = 0; i < PRODUCTS.length; i++) {
+        console.log("buscando  " + item + " en " + PRODUCTS[i]['sku']);
+        if (PRODUCTS[i]['sku'] == item) {
+            console.log("este " + PRODUCTS[i]['sku'] + " es igual a " + item);
+            product = PRODUCTS[i];
+        }
+    }
+
+    for (var j = 0; j < CART.length; j++) {
+        console.log("buscando  " + item + " en carrito " + CART[j]['sku']);
+        if (CART[j]['sku'] == item) {
+            console.log("este " + CART[j]['sku'] + " es igual a " + item);
+            foundInCart = 1;
+            CART[j].quantity = CART[j].quantity + param;
+            CART.ammount = parseFloat((product.price_x_region.totalPrice * param)) + parseFloat(CART.ammount);
+            displayItemOperations(item, parseInt(CART[j].quantity), j);
+        }
+    }
+    if (foundInCart == 0) {
+        if (CART.ammount == undefined) {
+            CART.ammount = 0;
+        }
+        CART.ammount = parseFloat(product.price_x_region.totalPrice) + parseFloat(CART.ammount);
+        product.quantity = 1;
+        CART.push(product);
+        displayItemOperations(item, product.quantity);
+    }
+}
+
+function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos) {
+    //$("#masinfo").popup("close");
+    $(popupNAme).popup("close");
+
+    //console.group("closing videos %i", vecIdsVideos.length);
+
+    for (i = 0; i < vecIdsVideos.length; i++) {
+        //console.log("%i Closing video %s", i, vecIdsVideos[i]);
+
+        $(vecIdsVideos[i]).hide();
+        stopYoutubeVideo(vecIdsVideos[i]);
+    }
+
+    //console.groupEnd();
+
+    $(tableName).show();
+}
+
+function stopYoutubeVideo(idOfIframe) {
+    //First get the  iframe URL
+    var url = $(idOfIframe).attr('src');
+
+    //Then assign the src to null, this then stops the video been playing
+    $(idOfIframe).attr('src', '');
+
+    // Finally you reasign the URL back to your iframe, so when you hide and load it again you still have the link
+    $(idOfIframe).attr('src', url);
 }

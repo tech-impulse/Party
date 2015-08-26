@@ -127,93 +127,98 @@ function getRegistro(usario, contraseña) {
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
     */
 function getNodes(idNode, nodeName, isAlgo) {
+    if (idNode == 30 && nodeName == 'FROZEN') {
+        $("#page_count").show();
+        $("#divContent").hide();
+        console.log("Es FROZEN");
+    } else {
+        // Datos que se van a enviar
+        var dataSend = {
+            lang: language,
+            origin: origin,
+            id: idNode
+        };
 
-    // Datos que se van a enviar
-    var dataSend = {
-        lang: language,
-        origin: origin,
-        id: idNode
-    };
+        if (isAlgo == 1) {
+            ISFIESTA = 1;
+        } else if (isAlgo == 0) {
+            ISFIESTA = 0;
+        }
 
-    if (isAlgo == 1) {
-        ISFIESTA = 1;
-    } else if(isAlgo == 0){
-        ISFIESTA = 0;
-    }
+        request = $.ajax({
+            data: dataSend,
+            url: urlServices + 'getNodes.php',
+            dataType: 'json',
+            type: 'POST',
+            success: function (response) {
 
-    request = $.ajax({
-        data: dataSend,
-        url: urlServices + 'getNodes.php',
-        dataType: 'json',
-        type: 'POST',
-        success: function (response) {
+                if (response.result == 1) {
 
-            if (response.result == 1) {
+                    console.log("Respuesta del nodo");
+                    console.log(response);
 
-                console.log("Respuesta del nodo");
-                console.log(response);
+                    /*if (isAlgo == 1) { // si es 1 estaremos en el aistente de fiestas o de disfraces
+                        ISFIESTA = 1;
+                    } else if (isAlgo == 0) {
+                        ISFIESTA = 0;
+                    }*/
 
-                /*if (isAlgo == 1) { // si es 1 estaremos en el aistente de fiestas o de disfraces
-                    ISFIESTA = 1;
-                } else if (isAlgo == 0) {
-                    ISFIESTA = 0;
-                }*/
+                    restOk(response, "nodes", idNode, nodeName);
 
-                restOk(response, "nodes", idNode, nodeName);
+                } else if (response.result == 0) { // ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
-            } else if (response.result == 0) { // ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
+                    console.log("Resultado del nodo es cero");
+                    console.log(response);
 
-                console.log("Resultado del nodo es cero");
-                console.log(response);
+                    console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
+                    //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-                console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
-                //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
+                    if (ISFIESTA == 1) { // si estamos en algun asistente, ya sea de fistas o disfraces, hayq ue mostrar una pantalla intermadia
 
-                if (ISFIESTA == 1) { // si estamos en algun asistente, ya sea de fistas o disfraces, hayq ue mostrar una pantalla intermadia
+                        console.log("Asistentes");
+                        var info = getInfoNode(idNode);
 
-                    console.log("Asistentes");
-                    var info = getInfoNode(idNode);
+                        //console.log(info);
 
-                    //console.log(info);
+                        if (info != "undefined") {
+                            console.log("DisplayPantalla intermadia");
+                            displayPantallaIntermedia(info.node);
+                        } else {
+                            $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
+                            $('#popupAlert').popup('open');
+                        }
 
-                    if (info != "undefined") {
-                        console.log("DisplayPantalla intermadia");
-                        displayPantallaIntermedia(info.node);
                     } else {
-                        $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
-                        $('#popupAlert').popup('open');
+                        getProducts(idNode, nodeName);
                     }
 
-                } else {
-                    getProducts(idNode, nodeName);
+
+                } else if (response.result == -1) {
+
+                    console.log("Error en el envio de parametros");
+
                 }
 
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
 
-            } else if (response.result == -1) {
+                if (textStatus === "timeout") {
+                    //do something on timeout
+                    console.log("Timeout");
+                    alert("Error de TimeOut... compruebe su conexion de internet");
 
-                console.log("Error en el envio de parametros");
+                } else {
 
-            }
+                    restError(jqXHR, "tiendas");
+                    console.log("Sin conexion");
+                    //alert("Sin conexion a internet...");
+                    $("#texto_popup").text("Sin conexion a internet");
+                    $('#popupAlert').popup('open');
 
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-
-            if (textStatus === "timeout") {
-                //do something on timeout
-                console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
-
-            } else {
-
-                restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
-                //alert("Sin conexion a internet...");
-                $("#texto_popup").text("Sin conexion a internet");
-                $('#popupAlert').popup('open');
-
-            }
-        },
-    });
+                }
+            },
+        });
+    }
 }
 
 /* Función que controla que la petición Ajax ha ido bien
