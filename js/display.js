@@ -360,7 +360,7 @@ function displayItemOperations(id, param, position) {
 
 function displayPopupItemList() {
     $("#popupCart").popup("close");
-    setTimeout(function() { $("#popupListItems").popup("open"); }, 200 );
+    setTimeout(function() { $("#popupListItems").popup("open"); }, 1000 );
     
     var html = '';
     for (var i = 0; i < CART.length; i++) { //data:image/png;base64,
