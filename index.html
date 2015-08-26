@@ -141,67 +141,66 @@
                 <ul data-role="listview" id="options">
                 </ul>
             </div>
-            <div data-role="content" id="divContent" style="display: none;">
-            </div>
-
-
-            <div id="page_count" style="display:none">
-                <center>
-                    <img src="css/maqueta/FrozenFull_2.jpg" alt="" />
-                    <h3> ¿Para cuantas personas es la fiesta?</h3>
-                    <div style="width:100px">
-                        <input type="number" name="quantity" min="1">
-                    </div>
-                    <br>
-                    <!-- <h3> ¿Cual es vuestro presupuesto individual?</h3>
+            <div data-role="content">
+                <div id="divContent" style="display: none;">
+                </div>
+                <div id="page_count" style="display:none">
+                    <center>
+                        <img src="css/maqueta/FrozenFull_2.jpg" alt="" />
+                        <h3> ¿Para cuantas personas es la fiesta?</h3>
+                        <div style="width:100px">
+                            <input type="number" name="quantity" min="1">
+                        </div>
+                        <br>
+                        <!-- <h3> ¿Cual es vuestro presupuesto individual?</h3>
                     <div style="width:100px">
                         <input type="number" name="quantity" min="1">
                     </div>
                     <br> -->
-                    <a style="width:150px" onclick="$('#page_count').hide(); $('#page_chart').show();" data-role="button" data-theme="b">CONTINUAR</a>
-                </center>
-            </div>
-
-            <div id="page_chart" style="display:none">
-                <!--<li data-role="list-divider" style="text-align:left; list-style-type: none;">-->
-                <div>
-                    <a style="width:150px" id="btnRelacionados" data-role="button" data-icon="bars" data-iconpos="right" data-theme="b" data-rel="popup" href="#relacionados">SUGERENCIAS</a>
-                    <!--<a data-rel="popup" href="#popupYoutube" >Papel de regalo</a>-->
+                        <a style="width:150px" onclick="$('#page_count').hide(); $('#page_chart').show();" data-role="button" data-theme="b">CONTINUAR</a>
+                    </center>
                 </div>
-                <!--</li>-->
 
-                <br/>
+                <div id="page_chart" style="display:none">
+                    <!--<li data-role="list-divider" style="text-align:left; list-style-type: none;">-->
+                    <div>
+                        <a style="width:150px" id="btnRelacionados" data-role="button" data-icon="bars" data-iconpos="right" data-theme="b" data-rel="popup" href="#relacionados">SUGERENCIAS</a>
+                        <!--<a data-rel="popup" href="#popupYoutube" >Papel de regalo</a>-->
+                    </div>
+                    <!--</li>-->
 
-                <ul data-role="listview">
+                    <br/>
 
-                    <table style="width:100%">
-                        <tr>
-                            <td style="text-align:center">
-                                <img src="css/maqueta/decoracionfrozen.png">
-                            </td>
-                            <td style="text-align:center">
-                                <img src="css/maqueta/globofrozen.png">
-                            </td>
-                            <td style="text-align:center">
-                                <img src="css/maqueta/papelfrozen.png" onclick='$("#masinfo").popup("open");'>
-                                <!--<img src="css/maqueta/papelfrozen.png" onclick='$("#popupYoutube").popup("open");'>-->
-                            </td>
-                            <td style="text-align:center">
-                                <img src="css/maqueta/tiarasfrozen.png">
-                            </td>
-                            <td style="text-align:center">
-                                <img src="css/maqueta/pompasfrozen.png">
-                            </td>
-                        </tr>
-                    </table>
+                    <ul data-role="listview">
+
+                        <table style="width:100%">
+                            <tr>
+                                <td style="text-align:center">
+                                    <img src="css/maqueta/decoracionfrozen.png">
+                                </td>
+                                <td style="text-align:center">
+                                    <img src="css/maqueta/globofrozen.png">
+                                </td>
+                                <td style="text-align:center">
+                                    <img src="css/maqueta/papelfrozen.png" onclick='$("#masinfo").popup("open");'>
+                                    <!--<img src="css/maqueta/papelfrozen.png" onclick='$("#popupYoutube").popup("open");'>-->
+                                </td>
+                                <td style="text-align:center">
+                                    <img src="css/maqueta/tiarasfrozen.png">
+                                </td>
+                                <td style="text-align:center">
+                                    <img src="css/maqueta/pompasfrozen.png">
+                                </td>
+                            </tr>
+                        </table>
 
 
-                    <li data-role="list-divider" style="text-align:left;">
-                        <span style="font-size:13px;"> * Productos que tienen más de un uso, ver "Más Información" para detalles </span>
-                        <br>
-                    </li>
+                        <li data-role="list-divider" style="text-align:left;">
+                            <span style="font-size:13px;"> * Productos que tienen más de un uso, ver "Más Información" para detalles </span>
+                            <br>
+                        </li>
 
-                    <!--<li data-role="list-divider" style="text-align:right;">
+                        <!--<li data-role="list-divider" style="text-align:right;">
                         <span style="font-size:13px;"> Total: 141.94€ </span>
                         <br>
                         <span style="font-size:13px;">Gastos de envío: 6.99€ </span>
@@ -210,203 +209,208 @@
                         <br>
 
                     </li>-->
-                </ul>
+                    </ul>
 
-                <br>
-                <div style="float:left">
-                    <a style="width:75px;" id="btnNext" data-role="button" data-icon="star" data-iconpos="right" data-theme="b">5,5</a>
+                    <br>
+                    <div style="float:left">
+                        <a style="width:75px;" id="btnNext" data-role="button" data-icon="star" data-iconpos="right" data-theme="b">5,5</a>
+                    </div>
+                    <div style="float:right">
+                        <a style="width:150px" id="btnNext" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('send');">PROCESAR</a>
+                    </div>
+                    </center>
                 </div>
-                <div style="float:right">
-                    <a style="width:150px" id="btnNext" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('send');">PROCESAR</a>
-                </div>
+            </div>
+
+            <div id="page_send" style="display:none">
+                <center>
+                    <h3> ¿Que deseas hacer con el pedido?</h3>
+                    <br>
+                    <a style="width:300px" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Mostrar listado para recoger</a>
+                    <br>
+                    <a style="width:300px" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Enviar a Casa</a>
+                    <br>
+                    <a style="width:300px" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Recoger en Mi Tienda</a>
+                </center>
+            </div>
+
+
+            <!-- POPUP RELACIONADOS -->
+            <div data-role="popup" data-theme="a" data-dismissible="false" id="relacionados" class="" data-overlay-theme="a" data-transition="flip">
+
+                <!--<a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>-->
+                <a onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <center>
+                    <div class="ui-grid-a">
+                        <table id="tableRelacionados">
+                            <tr style="width:100%; background-color:#0096D2; font-size:20px; color:white;">
+                                <td style="width:30%">
+                                    Producto
+                                </td>
+                                <td style="width:30%">
+                                    Ubicación
+                                </td>
+                                <td style="width:20%">
+                                    Precio
+                                </td>
+                                <td style="width:20%">
+                                    Edad Recomendada
+                                </td>
+                                <td style="width:30%">
+                                    Otros usos
+                                </td>
+                            </tr>
+                            <tr style="width:100%">
+                                <td style="width:30%">
+                                    SERV 75 GLOBOS PINTADOS 25X25 A P
+                                    <br> ID: P10065
+                                    <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
+                                </td>
+                                <td style="width:30%">
+                                    Sección: NAV
+                                    <br> Estantería : 16
+                                    <br> Nivel: 11
+                                    <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
+                                </td>
+                                <td style="width:20%">
+                                    1.75€
+                                </td>
+                                <td style="width:20%">
+                                    +3
+                                </td>
+                                <td style="width:30%">
+                                    <ul data-role="listview" data-theme="f">
+                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo1").show("slow");'>Papel de regalo</a>
+                                        </li>
+                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo2").show("slow");'>Cubremesa</a>
+                                        </li>
+                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo3").show("slow");'>Fondo pared para fotografías</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr style="width:100%">
+                                <td style="width:30%">
+                                    SERV CEMENTERIO TERROR 20U 33X33
+                                    <br> ID: 96211
+                                    <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
+                                </td>
+                                <td style="width:30%">
+                                    Sección: NAV
+                                    <br> Estantería : 16
+                                    <br> Nivel: 11
+                                    <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
+                                </td>
+                                <td style="width:20%">
+                                    2,2€
+                                </td>
+                                <td style="width:20%">
+                                    +3
+                                </td>
+                                <td style="width:30%">
+                                    <ul data-role="listview" data-theme="f">
+                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo1").show("slow");'>Papel de regalo</a>
+                                        </li>
+                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo2").show("slow");'>Cubremesa</a>
+                                        </li>
+                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo3").show("slow");'>Fondo pared para fotografías</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <iframe id="iframeVideo1" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/L0MK7qz13bU"></iframe>
+                        <iframe id="iframeVideo2" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/EPd5X9ccKqo"></iframe>
+                        <iframe id="iframeVideo3" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/lB77I0kXGG4"></iframe>
+
+                        <!--<a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#relacionados").popup("close");' data-theme="c">Cerrar</a>-->
+                        <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" data-theme="c">Cerrar</a>
+                    </div>
+                </center>
+            </div>
+
+            <div data-role="popup" data-theme="a" data-dismissible="false" id="popup" class="" data-overlay-theme="a" data-transition="flip">
+                <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <center>
+                    <h3 style="margin:20px">Desea eliminar el artículo?</h3>
+                    <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#popup").popup("close");' data-theme="c">Eliminar</a>
+                </center>
+            </div>
+
+            <!-- PopUp Youtube -->
+            <div data-role="popup" data-theme="a" data-dismissible="false" id="popupYoutube" class="" data-overlay-theme="a" data-transition="flip">
+                <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <center>
+                    <iframe src="https://www.youtube.com/embed/L0MK7qz13bU" style="display:none;width:100%; height:100%;"></iframe>
+                </center>
+            </div>
+
+            <!-- POPUP MAS INFO -->
+            <div data-role="popup" data-theme="a" data-dismissible="false" id="masinfo" class="" data-overlay-theme="a" data-transition="flip">
+                <a onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <center>
+                    <div class="ui-grid-a">
+                        <table id="tableMasInfo">
+                            <tr style="width:100%; background-color:#0096D2; font-size:20px; color:white;">
+                                <td style="width:30%">
+                                    Producto
+                                </td>
+                                <td style="width:30%">
+                                    Ubicación
+                                </td>
+                                <td style="width:20%">
+                                    Precio
+                                </td>
+                                <td style="width:20%">
+                                    Edad Recomendada
+                                </td>
+                                <td style="width:30%">
+                                    Otros usos
+                                </td>
+                            </tr>
+                            <tr style="width:100%">
+                                <td style="width:30%">
+                                    * ROLLO PAPEL FROZEN 0,7X2M
+                                    <br> ID: 660592
+                                    <br> Descuento: 30%
+                                    <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
+                                </td>
+                                <td style="width:30%">
+                                    Sección: NAV
+                                    <br> Estantería : 16
+                                    <br> Nivel: 11
+                                    <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
+                                </td>
+                                <td style="width:20%">
+                                    1.50€
+                                </td>
+                                <td style="width:20%">
+                                    +3
+                                </td>
+                                <td style="width:30%">
+                                    <ul data-role="listview" data-theme="f">
+                                        <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo4").show("slow");'>Papel de regalo</a>
+                                        </li>
+                                        <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo5").show("slow");'>Cubremesa</a>
+                                        </li>
+                                        <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo6").show("slow");'>Fondo pared para fotografías</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <iframe id="iframeVideo4" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/L0MK7qz13bU"></iframe>
+                        <iframe id="iframeVideo5" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/EPd5X9ccKqo"></iframe>
+                        <iframe id="iframeVideo6" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/lB77I0kXGG4"></iframe>
+
+                        <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" data-theme="c">Cerrar</a>
+
+                    </div>
                 </center>
             </div>
         </div>
-
-        <div id="page_send" style="display:none">
-            <center>
-                <h3> ¿Que deseas hacer con el pedido?</h3>
-                <br>
-                <a style="width:300px" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Mostrar listado para recoger</a>
-                <br>
-                <a style="width:300px" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Enviar a Casa</a>
-                <br>
-                <a style="width:300px" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Recoger en Mi Tienda</a>
-            </center>
-        </div>
-
-
-        <!-- POPUP RELACIONADOS -->
-        <div data-role="popup" data-theme="a" data-dismissible="false" id="relacionados" class="" data-overlay-theme="a" data-transition="flip">
-
-            <!--<a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>-->
-            <a onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-            <center>
-                <div class="ui-grid-a">
-                    <table id="tableRelacionados">
-                        <tr style="width:100%; background-color:#0096D2; font-size:20px; color:white;">
-                            <td style="width:30%">
-                                Producto
-                            </td>
-                            <td style="width:30%">
-                                Ubicación
-                            </td>
-                            <td style="width:20%">
-                                Precio
-                            </td>
-                            <td style="width:20%">
-                                Edad Recomendada
-                            </td>
-                            <td style="width:30%">
-                                Otros usos
-                            </td>
-                        </tr>
-                        <tr style="width:100%">
-                            <td style="width:30%">
-                                SERV 75 GLOBOS PINTADOS 25X25 A P
-                                <br> ID: P10065
-                                <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                            </td>
-                            <td style="width:30%">
-                                Sección: NAV
-                                <br> Estantería : 16
-                                <br> Nivel: 11
-                                <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
-                            </td>
-                            <td style="width:20%">
-                                1.75€
-                            </td>
-                            <td style="width:20%">
-                                +3
-                            </td>
-                            <td style="width:30%">
-                                <ul data-role="listview" data-theme="f">
-                                    <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo1").show("slow");'>Papel de regalo</a>
-                                    </li>
-                                    <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo2").show("slow");'>Cubremesa</a>
-                                    </li>
-                                    <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo3").show("slow");'>Fondo pared para fotografías</a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr style="width:100%">
-                            <td style="width:30%">
-                                SERV CEMENTERIO TERROR 20U 33X33
-                                <br> ID: 96211
-                                <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                            </td>
-                            <td style="width:30%">
-                                Sección: NAV
-                                <br> Estantería : 16
-                                <br> Nivel: 11
-                                <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
-                            </td>
-                            <td style="width:20%">
-                                2,2€
-                            </td>
-                            <td style="width:20%">
-                                +3
-                            </td>
-                            <td style="width:30%">
-                                <ul data-role="listview" data-theme="f">
-                                    <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo1").show("slow");'>Papel de regalo</a>
-                                    </li>
-                                    <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo2").show("slow");'>Cubremesa</a>
-                                    </li>
-                                    <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo3").show("slow");'>Fondo pared para fotografías</a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
-
-             
-
-                    <!--<a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#relacionados").popup("close");' data-theme="c">Cerrar</a>-->
-                    <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" data-theme="c">Cerrar</a>
-                </div>
-            </center>
-        </div>
-
-        <div data-role="popup" data-theme="a" data-dismissible="false" id="popup" class="" data-overlay-theme="a" data-transition="flip">
-            <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-            <center>
-                <h3 style="margin:20px">Desea eliminar el artículo?</h3>
-                <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#popup").popup("close");' data-theme="c">Eliminar</a>
-            </center>
-        </div>
-
-        <!-- PopUp Youtube -->
-        <div data-role="popup" data-theme="a" data-dismissible="false" id="popupYoutube" class="" data-overlay-theme="a" data-transition="flip">
-            <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-            <center>
-            
-            </center>
-        </div>
-
-        <!-- POPUP MAS INFO -->
-        <div data-role="popup" data-theme="a" data-dismissible="false" id="masinfo" class="" data-overlay-theme="a" data-transition="flip">
-            <a onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-            <center>
-                <div class="ui-grid-a">
-                    <table id="tableMasInfo">
-                        <tr style="width:100%; background-color:#0096D2; font-size:20px; color:white;">
-                            <td style="width:30%">
-                                Producto
-                            </td>
-                            <td style="width:30%">
-                                Ubicación
-                            </td>
-                            <td style="width:20%">
-                                Precio
-                            </td>
-                            <td style="width:20%">
-                                Edad Recomendada
-                            </td>
-                            <td style="width:30%">
-                                Otros usos
-                            </td>
-                        </tr>
-                        <tr style="width:100%">
-                            <td style="width:30%">
-                                * ROLLO PAPEL FROZEN 0,7X2M
-                                <br> ID: 660592
-                                <br> Descuento: 30%
-                                <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                            </td>
-                            <td style="width:30%">
-                                Sección: NAV
-                                <br> Estantería : 16
-                                <br> Nivel: 11
-                                <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
-                            </td>
-                            <td style="width:20%">
-                                1.50€
-                            </td>
-                            <td style="width:20%">
-                                +3
-                            </td>
-                            <td style="width:30%">
-                                <ul data-role="listview" data-theme="f">
-                                    <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo4").show("slow");'>Papel de regalo</a>
-                                    </li>
-                                    <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo5").show("slow");'>Cubremesa</a>
-                                    </li>
-                                    <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo6").show("slow");'>Fondo pared para fotografías</a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
-
-                  
-                    <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" data-theme="c">Cerrar</a>
-
-                </div>
-            </center>
-        </div>
-
 
 
         <!--     FOOTER    -->
