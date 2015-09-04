@@ -28,8 +28,6 @@
 
 <body>
 
-
-
     <div data-role="page" id="principal">
 
         <!--     HEADER    -->
@@ -45,7 +43,9 @@
             <div id="divTienda" align="center" style="margin-top: 8%;">
                 <!--POPUP DE LOGIN -->
                 <div data-role="popup" id="popupCart" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:300px;">
+                    <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
+
                         <li data-role="list-divider" style="text-align:right">
                             <h3>Tu carrito</h3>
                             <img style="display:inline" src="http://partyfiesta.youtter.com/webservices/img/nodos/carrito.png" style="width: initial;">
@@ -62,10 +62,31 @@
                     </ul>
                 </div>
                 <div data-role="popup" id="popupListItems" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:600px;">
-                    <ul style="margin:5px" id="ulpopupListItems" data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
-
-                    </ul>
+                    <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <div class="ui-bar ui-bar-b" data-theme="b">
+                        <h3>Lista de productos</h3>
+                    </div>
+                    <div class="ui-body ui-body-b">
+                        <ul style="margin:5px" id="ulpopupListItems" data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
+                        </ul>
+                        <button data-theme="d" data-icon="check" data-iconpos="right" style="width:13em; float:right; margin:10px">Checkout</button>
+                    </div>
                 </div>
+
+                <div data-role="popup" id="popupAction" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:400px;">
+                    <div class="ui-bar ui-bar-b" data-theme="b">
+                        <h3>Alerta</h3>
+                        <label id="lbpopupAction" style="display:none"></label>
+                    </div>
+                    <div class="ui-body ui-body-b">
+                        <center>
+                            <h3>¿Desea eliminar el articulo?</h3>
+                        </center>
+                        <button id="btnPopupActionLeft" onclick='$("#popupAction").popup("close");' data-theme="c" data-icon="delete" data-iconpos="right" style="width:13em; float:left; margin:10px">No</button>
+                        <button id="btnPopupActionRight" onclick='$("#popupAction").popup("close");' data-theme="d" data-icon="check" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
+                    </div>
+                </div>
+
                 <div data-role="popup" id="popupLogin" class="ui-content" style="min-width:250px;">
                     <form autocomplete="on">
                         <div id="div_session">
@@ -144,6 +165,7 @@
             <div data-role="content">
                 <div id="divContent" style="display: none;">
                 </div>
+                <!--
                 <div id="page_count" style="display:none">
                     <center>
                         <img src="css/maqueta/FrozenFull_2.jpg" alt="" />
@@ -156,18 +178,14 @@
                     <div style="width:100px">
                         <input type="number" name="quantity" min="1">
                     </div>
-                    <br> -->
                         <a style="width:150px" onclick="$('#page_count').hide(); $('#page_chart').show();" data-role="button" data-theme="b">CONTINUAR</a>
                     </center>
                 </div>
 
                 <div id="page_chart" style="display:none">
-                    <!--<li data-role="list-divider" style="text-align:left; list-style-type: none;">-->
                     <div>
                         <a style="width:150px" id="btnRelacionados" data-role="button" data-icon="bars" data-iconpos="right" data-theme="b" data-rel="popup" href="#relacionados">SUGERENCIAS</a>
-                        <!--<a data-rel="popup" href="#popupYoutube" >Papel de regalo</a>-->
                     </div>
-                    <!--</li>-->
 
                     <br/>
 
@@ -183,7 +201,6 @@
                                 </td>
                                 <td style="text-align:center">
                                     <img src="css/maqueta/papelfrozen.png" onclick='$("#masinfo").popup("open");'>
-                                    <!--<img src="css/maqueta/papelfrozen.png" onclick='$("#popupYoutube").popup("open");'>-->
                                 </td>
                                 <td style="text-align:center">
                                     <img src="css/maqueta/tiarasfrozen.png">
@@ -200,7 +217,6 @@
                             <br>
                         </li>
 
-                        <!--<li data-role="list-divider" style="text-align:right;">
                         <span style="font-size:13px;"> Total: 141.94€ </span>
                         <br>
                         <span style="font-size:13px;">Gastos de envío: 6.99€ </span>
@@ -208,7 +224,6 @@
                         <span style="font-size:16px;">Total Final: 148.93€ </span>
                         <br>
 
-                    </li>-->
                     </ul>
 
                     <br>
@@ -233,12 +248,12 @@
                     <a style="width:300px" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Recoger en Mi Tienda</a>
                 </center>
             </div>
+    -->
 
+                <!-- POPUP RELACIONADOS -->
+                <div data-role="popup" data-theme="a" data-dismissible="false" id="relacionados" class="" data-overlay-theme="a" data-transition="flip">
 
-            <!-- POPUP RELACIONADOS -->
-            <div data-role="popup" data-theme="a" data-dismissible="false" id="relacionados" class="" data-overlay-theme="a" data-transition="flip">
-
-                <!--<a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>-->
+                    <!--
                 <a onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                 <center>
                     <div class="ui-grid-a">
@@ -320,9 +335,10 @@
                             </tr>
                         </table>
 
-                       
+                        <iframe id="iframeVideo1" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/L0MK7qz13bU"></iframe>
+                        <iframe id="iframeVideo2" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/EPd5X9ccKqo"></iframe>
+                        <iframe id="iframeVideo3" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/lB77I0kXGG4"></iframe>
 
-                        <!--<a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#relacionados").popup("close");' data-theme="c">Cerrar</a>-->
                         <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" data-theme="c">Cerrar</a>
                     </div>
                 </center>
@@ -335,88 +351,96 @@
                     <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#popup").popup("close");' data-theme="c">Eliminar</a>
                 </center>
             </div>
+-->
 
-            <!-- PopUp Youtube -->
+
+                    <!-- PopUp Youtube -->
+
+                    <!--
             <div data-role="popup" data-theme="a" data-dismissible="false" id="popupYoutube" class="" data-overlay-theme="a" data-transition="flip">
                 <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                 <center>
-      
+                    <iframe src="https://www.youtube.com/embed/L0MK7qz13bU" style="display:none;width:100%; height:100%;"></iframe>
                 </center>
             </div>
+-->
+                    <!-- POPUP MAS INFO -->
+                    <!--
+                    <div data-role="popup" data-theme="a" data-dismissible="false" id="masinfo" class="" data-overlay-theme="a" data-transition="flip">
+                        <a onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                        <center>
+                            <div class="ui-grid-a">
+                                <table id="tableMasInfo">
+                                    <tr style="width:100%; background-color:#0096D2; font-size:20px; color:white;">
+                                        <td style="width:30%">
+                                            Producto
+                                        </td>
+                                        <td style="width:30%">
+                                            Ubicación
+                                        </td>
+                                        <td style="width:20%">
+                                            Precio
+                                        </td>
+                                        <td style="width:20%">
+                                            Edad Recomendada
+                                        </td>
+                                        <td style="width:30%">
+                                            Otros usos
+                                        </td>
+                                    </tr>
+                                    <tr style="width:100%">
+                                        <td style="width:30%">
+                                            * ROLLO PAPEL FROZEN 0,7X2M
+                                            <br> ID: 660592
+                                            <br> Descuento: 30%
+                                            <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
+                                        </td>
+                                        <td style="width:30%">
+                                            Sección: NAV
+                                            <br> Estantería : 16
+                                            <br> Nivel: 11
+                                            <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
+                                        </td>
+                                        <td style="width:20%">
+                                            1.50€
+                                        </td>
+                                        <td style="width:20%">
+                                            +3
+                                        </td>
+                                        <td style="width:30%">
+                                            <ul data-role="listview" data-theme="f">
+                                                <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo4").show("slow");'>Papel de regalo</a>
+                                                </li>
+                                                <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo5").show("slow");'>Cubremesa</a>
+                                                </li>
+                                                <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo6").show("slow");'>Fondo pared para fotografías</a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
 
-            <!-- POPUP MAS INFO -->
-            <div data-role="popup" data-theme="a" data-dismissible="false" id="masinfo" class="" data-overlay-theme="a" data-transition="flip">
-                <a onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                <center>
-                    <div class="ui-grid-a">
-                        <table id="tableMasInfo">
-                            <tr style="width:100%; background-color:#0096D2; font-size:20px; color:white;">
-                                <td style="width:30%">
-                                    Producto
-                                </td>
-                                <td style="width:30%">
-                                    Ubicación
-                                </td>
-                                <td style="width:20%">
-                                    Precio
-                                </td>
-                                <td style="width:20%">
-                                    Edad Recomendada
-                                </td>
-                                <td style="width:30%">
-                                    Otros usos
-                                </td>
-                            </tr>
-                            <tr style="width:100%">
-                                <td style="width:30%">
-                                    * ROLLO PAPEL FROZEN 0,7X2M
-                                    <br> ID: 660592
-                                    <br> Descuento: 30%
-                                    <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                                </td>
-                                <td style="width:30%">
-                                    Sección: NAV
-                                    <br> Estantería : 16
-                                    <br> Nivel: 11
-                                    <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
-                                </td>
-                                <td style="width:20%">
-                                    1.50€
-                                </td>
-                                <td style="width:20%">
-                                    +3
-                                </td>
-                                <td style="width:30%">
-                                    <ul data-role="listview" data-theme="f">
-                                        <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo4").show("slow");'>Papel de regalo</a>
-                                        </li>
-                                        <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo5").show("slow");'>Cubremesa</a>
-                                        </li>
-                                        <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo6").show("slow");'>Fondo pared para fotografías</a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>
+                                <iframe id="iframeVideo4" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/L0MK7qz13bU"></iframe>
+                                <iframe id="iframeVideo5" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/EPd5X9ccKqo"></iframe>
+                                <iframe id="iframeVideo6" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/lB77I0kXGG4"></iframe>
 
-                       
+                                <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" data-theme="c">Cerrar</a>
 
-                        <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" data-theme="c">Cerrar</a>
-
+                            </div>
+                        </center>
                     </div>
-                </center>
-            </div>
-        </div>
+-->
+                </div>
 
 
-        <!--     FOOTER    -->
-        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-            <img src="css/icons/barra.png" width="100%">
-        </div>
-        <!--<div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a  href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+                <!--     FOOTER    -->
+                <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+                    <img src="css/icons/barra.png" width="100%">
+                </div>
+                <!--<div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a  href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
         </div>-->
-    </div>
-    <!--
+            </div>
+            <!--
         <div data-role="header">
             <div class="ui-field-contain">
                 <ul data-role="listview" data-inset="true" data-shadow="false">

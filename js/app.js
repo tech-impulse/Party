@@ -103,6 +103,16 @@ $(document).ready(function () {
 
     });
 
+    $("#btnPopupActionRight").click(function () { 
+
+        var action = $("#lbpopupAction").text();
+        switch (action) {
+        case "deleteItem":
+            deleteItemCart($("#lbpopupAction").val());
+            break;
+        }
+    });
+
 
 
 });
@@ -303,32 +313,42 @@ function addToCart(item, param) {
     var product;
     var foundInCart = 0;
     for (var i = 0; i < PRODUCTS.length; i++) {
-        console.log("buscando  " + item + " en " + PRODUCTS[i]['sku']);
+        console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS[i]['sku']);
         if (PRODUCTS[i]['sku'] == item) {
-            console.log("este " + PRODUCTS[i]['sku'] + " es igual a " + item);
+            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['sku'] + " es igual a " + item);
             product = PRODUCTS[i];
+            i = PRODUCTS.length;
         }
     }
 
     for (var j = 0; j < CART.length; j++) {
         console.log("buscando  " + item + " en carrito " + CART[j]['sku']);
         if (CART[j]['sku'] == item) {
-            console.log("este " + CART[j]['sku'] + " es igual a " + item);
+            console.log("ENCONTRADO EN CARRITO " + CART[j]['sku'] + " es igual a " + item);
             foundInCart = 1;
             CART[j].quantity = CART[j].quantity + param;
             CART.ammount = parseFloat((product.price_x_region.totalPrice * param)) + parseFloat(CART.ammount);
             displayItemOperations(item, parseInt(CART[j].quantity), j);
+            j = PRODUCTS.length;
         }
     }
     if (foundInCart == 0) {
         if (CART.ammount == undefined) {
+            console.log("EL carrito está vació, lo inicializamos");
             CART.ammount = 0;
         }
+        console.log("Producto no esta en carrito, lo añadimos");
         CART.ammount = parseFloat(product.price_x_region.totalPrice) + parseFloat(CART.ammount);
         product.quantity = 1;
         CART.push(product);
         displayItemOperations(item, product.quantity);
     }
+}
+
+function deleteItemCart(position) {
+    console.log("Eliminar item en posicion " + position + " SKU: " + CART[position].sku);
+    //CART.splice(position, 1);
+    displayItemOperations(CART[position].sku, 0, position);
 }
 
 function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos) {

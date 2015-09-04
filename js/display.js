@@ -351,25 +351,38 @@ function displayItemOperations(id, param, position) {
         $("#grid" + id).hide();
         $("#circulo" + id).hide();
         CART.splice(position, 1);
+        //deleteItemCart(position);        
     }
     $("#spPopupCartCount").text(CART.length);
-    $("#spPopupTotalAmmount").text(CART.ammount + "€");
-
+    $("#spPopupTotalAmmount").text(CART.ammount);
 
 }
 
+function openPopupAction(param) {
+    $("#lbpopupAction").text(param);
+    switch (param) {
+    case 'deleteItem':
+        $("#popupListItems").popup("close");
+        setTimeout(function () {
+            $("#popupAction").popup("open");
+        }, 800);
+        break;
+    }
+}
+
+
 function displayPopupItemList() {
     $("#popupCart").popup("close");
-    setTimeout(function() { $("#popupListItems").popup("open"); }, 1000 );
-    
+    setTimeout(function () {
+        $("#popupListItems").popup("open");
+    }, 800);
+
     var html = '';
-    for (var i = 0; i < CART.length; i++) { //data:image/png;base64,
-      //  html = html + '<li><div class="ui-grid-b"><div class="ui-block-a" style="width:11%; margin:5px" ><img class="thumb" src="'+CART[i].linkext+'"></div><div class="ui-block-b" style="width:60%"><a href="#" data-role="button" data-theme="f">'+CART[i].name+'<span class="ui-li-count">'+CART[i].quantity+'</span></a></div><div class="ui-block-b" style="width:24%; margin:5px"><div class="ui-grid-b"><div class="ui-block-a"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart('+CART[i].sku+',-1); displayPopupItemList();"></a></div><div class="ui-block-b"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart('+CART[i].sku+',1); displayPopupItemList();"></a></div><div class="ui-block-c"><a onclick="addToCart('+CART[i].sku+',-'+CART[i].ammount+'); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a></div></div></div></li>';
-          html = html + '<li><div class="ui-grid-b"><div class="ui-block-a" style="width:11%; margin:5px" ><img class="thumb" src="'+CART[i].linkext+'"></div><div class="ui-block-b" style="width:60%"><a href="#" data-role="button" data-theme="f">'+CART[i].name+'<span class="ui-li-count">'+CART[i].quantity+'</span></a></div><div class="ui-block-b" style="width:24%; margin:5px"><div class="ui-grid-b"><div class="ui-block-a"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart('+CART[i].sku+',-1); displayPopupItemList();"></a></div><div class="ui-block-b"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart('+CART[i].sku+',1); displayPopupItemList();"></a></div><div class="ui-block-c"><a onclick="addToCart('+CART[i].sku+',-'+CART[i].ammount+'); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a></div></div></div></li>';
+    for (var i = 0; i < CART.length; i++) { 
+        html = html + '<li><div class="ui-grid-b"><div class="ui-block-a" style="width:10%; margin:5px" ><img class="thumb" src="' + CART[i].linkext + '"></div><div class="ui-block-b" style="width:60%"><a href="#" data-role="button" data-theme="b">' + CART[i].name + '<span class="ui-li-count" style="background-color:white; color:black">' + CART[i].quantity + '</span></a></div><div class="ui-block-c" style="width:24%; margin:5px"><div class="ui-grid-b"><div class="ui-block-a"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div><div class="ui-block-b"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div><div class="ui-block-c"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val('+i+'); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a></div></div></div></li>';
     }
-    html = '<li data-role="list-divider"><h3><center>Lista de Productos</center></h3></li>' + html;
     $("#ulpopupListItems").html(html);
-    $("#ulpopupListItems").trigger("create");    
+    $("#ulpopupListItems").trigger("create");
 
 }
 
