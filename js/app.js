@@ -347,8 +347,7 @@ function addToCart(item, param) {
 
 function deleteItemCart(position) {
     console.log("Eliminar item en posicion " + position + " SKU: " + CART[position].sku);
-    //CART.splice(position, 1);
-    displayItemOperations(CART[position].sku, 0, position);
+    displayItemOperations(CART[position].sku, 0, position); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
 }
 
 function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos) {
