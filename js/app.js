@@ -140,8 +140,7 @@ $(document).ready(function () {
 
     });
 
-<<<<<<< HEAD
-=======
+
     $("#btnPopupActionLeft").click(function () {
 
         var action = $("#lbpopupAction").text();
@@ -153,7 +152,7 @@ $(document).ready(function () {
         }
     });
 
->>>>>>> origin/master
+
     $("#btnPopupActionRight").click(function () {
 
         var action = $("#lbpopupAction").text();
