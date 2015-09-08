@@ -103,12 +103,24 @@ $(document).ready(function () {
 
     });
 
-    $("#btnPopupActionRight").click(function () { 
+    $("#btnPopupActionLeft").click(function () {
+
+        var action = $("#lbpopupAction").text();
+        switch (action) {
+        case "deleteItem":
+
+            displayPopupItemList();
+            break;
+        }
+    });
+
+    $("#btnPopupActionRight").click(function () {
 
         var action = $("#lbpopupAction").text();
         switch (action) {
         case "deleteItem":
             deleteItemCart($("#lbpopupAction").val());
+            displayPopupItemList();
             break;
         }
     });

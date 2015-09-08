@@ -4,9 +4,10 @@
 <head>
     <title>Party Fiesta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
-    <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
+
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/themes/PartyFiesta.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="css/flaticon/flaticon.css" />
@@ -61,18 +62,29 @@
                         </li>
                     </ul>
                 </div>
-                <div data-role="popup" id="popupListItems" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:600px;">
+                <div data-role="popup" id="popupListItems" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:700px;">
                     <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                    <div class="ui-bar ui-bar-b" data-theme="b">
-                        <h3>Lista de productos</h3>
-                    </div>
-                    <div class="ui-body ui-body-b">
-                        <ul style="margin:5px" id="ulpopupListItems" data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
-                        </ul>
-                        <button data-theme="d" data-icon="check" data-iconpos="right" style="width:13em; float:right; margin:10px">Checkout</button>
+                    <div>
+                        <div class="ui-grid-b" style="margin:10px">
+                            <div class="ui-block-a" style="width:60%">
+                                <label style="margin:11px; margin-left:20px">Producto</label>
+                            </div>
+                            <div class="ui-block-b" style="width:20%">
+                                <label style="margin:11px; margin-left:35px">Cantidad</label>
+                            </div>
+                            <div class="ui-block-c" style="width:20%">
+                                <label style="margin:11px">Precio</label>
+                            </div>
+                        </div>
+                        <div class="ui-body ui-body-b">
+                            <ul style="margin:5px" id="ulpopupListItems" data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
+                            </ul>
+                            <label style="width:8em; float:right; margin:10px;" id="lbPopupListItems"></label>
+                            <br>
+                            <button data-theme="d" data-icon="shop" data-iconpos="right" style="width:13em; float:center; margin:10px">Checkout</button>
+                        </div>
                     </div>
                 </div>
-
                 <div data-role="popup" id="popupAction" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:400px;">
                     <div class="ui-bar ui-bar-b" data-theme="b">
                         <h3>Alerta</h3>
@@ -142,12 +154,11 @@
                 <div id="logo_inicio" style="margin-bottom: 20px;"><img src="css/icons/logo.png">
                 </div>
 
-                <div class="ui-grid-a">
+                <div>
                     <label for="select">Seleccione una tienda:</label>
                 </div>
-                <div class="ui-grid-b" style="width: 25%">
+                <div style="width: 25%">
                     <div class="ui-field-contain">
-
                         <select name="select_tienda" id="select_tienda" data-native-menu="false">
                         </select>
                     </div>
@@ -162,10 +173,12 @@
                 <ul data-role="listview" id="options">
                 </ul>
             </div>
-            <div data-role="content">
-                <div id="divContent" style="display: none;">
-                </div>
-                <!--
+
+            <div id="divContent" style="display: none;">
+            </div>
+           
+        
+        <!--
                 <div id="page_count" style="display:none">
                     <center>
                         <img src="css/maqueta/FrozenFull_2.jpg" alt="" />
@@ -174,7 +187,7 @@
                             <input type="number" name="quantity" min="1">
                         </div>
                         <br>
-                        <!-- <h3> ¿Cual es vuestro presupuesto individual?</h3>
+                         <h3> ¿Cual es vuestro presupuesto individual?</h3>
                     <div style="width:100px">
                         <input type="number" name="quantity" min="1">
                     </div>
@@ -248,12 +261,11 @@
                     <a style="width:300px" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Recoger en Mi Tienda</a>
                 </center>
             </div>
-    -->
 
-                <!-- POPUP RELACIONADOS -->
-                <div data-role="popup" data-theme="a" data-dismissible="false" id="relacionados" class="" data-overlay-theme="a" data-transition="flip">
+            
+                    <div data-role="popup" data-theme="a" data-dismissible="false" id="relacionados" class="" data-overlay-theme="a" data-transition="flip">
 
-                    <!--
+                       
                 <a onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                 <center>
                     <div class="ui-grid-a">
@@ -351,21 +363,21 @@
                     <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#popup").popup("close");' data-theme="c">Eliminar</a>
                 </center>
             </div>
+
 -->
 
+            <!-- PopUp Youtube -->
 
-                    <!-- PopUp Youtube -->
-
-                    <!--
+            <!--
             <div data-role="popup" data-theme="a" data-dismissible="false" id="popupYoutube" class="" data-overlay-theme="a" data-transition="flip">
                 <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                 <center>
                     <iframe src="https://www.youtube.com/embed/L0MK7qz13bU" style="display:none;width:100%; height:100%;"></iframe>
                 </center>
             </div>
--->
-                    <!-- POPUP MAS INFO -->
-                    <!--
+
+            <!-- POPUP MAS INFO -->
+            <!--
                     <div data-role="popup" data-theme="a" data-dismissible="false" id="masinfo" class="" data-overlay-theme="a" data-transition="flip">
                         <a onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                         <center>
@@ -429,17 +441,17 @@
                             </div>
                         </center>
                     </div>
--->
-                </div>
+
+                    </div>
 
 
-                <!--     FOOTER    -->
-                <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-                    <img src="css/icons/barra.png" width="100%">
-                </div>
-                <!--<div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a  href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-        </div>-->
+            <!--     FOOTER    -->
+            <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+                <img src="css/icons/barra.png" width="100%">
             </div>
+            <!--<div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a  href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+        </div>-->
+
             <!--
         <div data-role="header">
             <div class="ui-field-contain">
@@ -869,6 +881,16 @@
 -->
 
 
+
+
+
+
+
+
+
+        </div>
+    </div>
+    </div>
 
 </body>
 

@@ -438,7 +438,7 @@ function restOk_tiendas(res, typ, param, param2) {
         var val = res.stores[i].id;
         var text = res.stores[i].name;
 
-        //console.log("Val es " + val + " texto " + text);
+        console.log("Val es " + val + " texto " + text);
 
         select.append($('<option>', {
             value: val,
