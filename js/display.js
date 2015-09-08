@@ -92,7 +92,7 @@ function displayNode(data, originNode, originName) {
                             extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\',1)';
                             break;
                         case 5: // sugerencias
-                            extra = '';
+                            extra = 'displayPantallaSugerencias()';
                             break;
                         case 6: // fuera tienda
                             extra = '';
@@ -532,6 +532,56 @@ function loginOut() { //muestra el pop up de inicio de session
     INFO_USU = "";
     $('#usrnm').val("");
     $('#pswd').val("");
+
+
+}
+
+
+
+function displayPantallaSugerencias(){
+
+    console.log("Entramos en la pantalla de sugerencias");
+    
+    
+    html_sug =  '<div id="form_sugerencias" >'+
+        '<form action="mailto:emaildelaempresaquehaceelformulario@email.com" method="post" enctype="text/plain">'+
+                        'Nombre:'+
+                        '<input type="text" id="nombre" size="25" maxlength="50">'+
+                        'Correo electrónico:'+
+                        '<input type="text" value="" id="correo" size="40" maxlength="100">'+
+                        'Provincia:'+
+                        '<input type="text" id="provincia" size="15" maxlength="50">'+
+                        'Población:'+
+                        '<input type="text" id="poblacion" size="15" maxlength="50">'+
+                        'Edad:'+
+                        '<select name="edad" >'+
+                            '<option value="1">Menor de 18'+
+                            '<option value="2">18-40'+
+                            '<option value="3">40-65'+
+                            '<option value="4">Mas de 65'+
+                        '</select>'+
+                        '<br> Tiene alguna sugerencia...'+
+                        '<textarea cols="40" rows="5" id="sugerencias">Escriba aquí sus sugerencias...</textarea>'+
+                        '<table width="50%" border="0" align="center" cellpadding="10" cellspacing="0">'+
+                            '<tr>'+
+                                '<td>'+
+                                    '<div align="center">'+
+                                        '<input id="enviar_sugerencia" type="submit" value="Enviar sugerencia">'+
+                                    '</div>'+
+                                '</td>'+
+                                '<td>'+
+                                    '<div align="center">'+
+                                        '<input id="volver_menu" value="Volver">'+
+                                    '</div>'+
+                                '</td>'+
+                            '</tr>'+
+                        '</table>'+
+                    '</form>'+
+                '</div>';
+                                
+                                
+    $("#divContent").html(html_sug);
+    $("#divContent").trigger('create');
 
 
 }

@@ -481,3 +481,55 @@ function restError(res, typ) {
     }
     */
 }
+
+
+function sendSugerencias(formulario) {
+
+    request = $.ajax({
+        data: formulario,
+        url: urlServices + '.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+            //console.log("Respuesta: ");
+            //console.log(response);
+
+            if (response.result == 1) {
+
+                //console.log(response);
+
+                restOk_products(response, "nodes", idNode, nodeName);
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#texto_popup").text("No hay productos...");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -1) {
+
+                $("#texto_popup").text("Error...");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}

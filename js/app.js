@@ -13,6 +13,7 @@ $(document).bind("mobileinit", function () {
 });
 
 // PRECARGA DE LA APLICACIÓN
+
 $(document).ready(function () {
 
     var htmlHeader_menu = '<img src="css/icons/barra.png" width="100%"> </div>';
@@ -26,15 +27,15 @@ $(document).ready(function () {
     getTiendas();
 
     //comprobamos si el checkbox de guardar session esta activado para mostrar el nombre en el link del login
-    /*var checkBoxSession = document.getElementById("recordar_session").checked;
+    //var checkBoxSession = document.getElementById("recordar_session").checked;
     //console.log(checkBoxSession);
-    if (checkBoxSession == true) {
-        var html_login = '<a id="cerrar_session" onclick="cerrar_session();" style="margin:10px">' +
-            '<label id="ya_soy_cliente"><span>Ya soy Cliente!</span></label></a>';
-        $("#session").html(html_login);
-    } else {
-        console.log("No hace falta hacer nada");
-    }*/
+    //if (checkBoxSession == true) {
+    // var html_login = '<a id="cerrar_session" onclick="cerrar_session();" style="margin:10px">' +
+    //    '<label id="ya_soy_cliente"><span>Ya soy Cliente!</span></label></a>';
+    // $("#session").html(html_login);
+    //} else {
+    //  console.log("No hace falta hacer nada");
+    //}
 
     $("#btn_acceder").click(function () { // botton de acceso a la app 
 
@@ -87,6 +88,42 @@ $(document).ready(function () {
 
     });
 
+
+    $("#enviar_sugerencia").click(function () { // botton de acceso a la app 
+
+        var edad = $("select#edad option").filter(":selected").val();
+
+        var nombre = $("#nombre").val();
+        var correo = $("#correo").val();
+        var provincia = $("#provincia").val();
+        var poblacion = $("#poblacion").val();
+        
+        console.log("Enviar sugenrencia. Seleccion edad " + edad);
+        if (nombre != "") {
+
+            if (edad != undefined) {
+
+                $("#divTienda").hide();
+                $("#divContent").show();
+
+                $("#texto_popup").text("No hay productos...");
+                $('#popupAlert').popup('open');
+
+            } else {
+
+                alert("¿Seleccione una tienda!");
+
+            }
+
+        } else {
+
+
+        }
+
+
+
+    });
+
     $("#enviar_registro").click(function () { // botton de registro a la app 
 
         console.log("Logeandose");
@@ -103,7 +140,7 @@ $(document).ready(function () {
 
     });
 
-    $("#btnPopupActionRight").click(function () { 
+    $("#btnPopupActionRight").click(function () {
 
         var action = $("#lbpopupAction").text();
         switch (action) {
@@ -112,7 +149,6 @@ $(document).ready(function () {
             break;
         }
     });
-
 
 
 });
