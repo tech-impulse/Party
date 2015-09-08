@@ -274,9 +274,9 @@ function displayProducts(data, originNode, originName) {
                         position = 0;
                         block = '<div class="ui-block-a" onclick="">';
                     }
-                    var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].sku + '" class="circulo" style="width: 30px;height: 30px;display: none;position: absolute;">' +
+                    var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].sku + '"  class="circulo" style="width: 30px;height: 30px;display: none;position: absolute;">' +
                         '<label id="quantity' + data.products[i].sku + '" style="display:block;padding-top: 5px;">10</label></div>' +
-                        '<img src="' + data.products[i].linkext + '" style="width: 120px;height: 120px;">' +
+                        '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + i + ',\'PRODUCTS\')" style="width: 120px;height: 120px;">' +
                         '<br>' + data.products[i].name +
                         '<br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
                         '<br><button id="btnAddProduct' + data.products[i].sku + '" onclick="addToCart(' + data.products[i].sku + ',1);">Añadir</button>' +
@@ -354,7 +354,7 @@ function displayItemOperations(id, param, position) {
         //deleteItemCart(position);        
     }
     $("#spPopupCartCount").text(CART.length);
-    $("#spPopupTotalAmmount").text(CART.ammount);
+    $("#spPopupTotalAmmount").text(parseFloat(CART.ammount).toFixed(2) + ' €');
 
 }
 
@@ -372,41 +372,110 @@ function openPopupAction(param) {
 
 
 function displayPopupItemList() {
+
+    var html = '';
+    html = '<img class="imgMedium" scr="http://www.partyfiesta.com/es/tienda-online/imagen-producto/product-hightQuality/partyfiesta/193368">' +
+        '<div class="ui-grid-b" style="margin:10px">' +
+        '<div class="ui-block-a" style="width:60%">' +
+        '<label style="margin:11px; margin-left:20px">Producto</label>' +
+        '</div>' +
+        '<div class="ui-block-b" style="width:20%">' +
+        '<label style="margin:11px; margin-left:35px">Cantidad</label>' +
+        '</div>' +
+        '<div class="ui-block-c" style="width:20%">' +
+        '<label style="margin:11px">Precio</label>' +
+        '</div>' +
+        '</div>' +
+        '<div class="ui-body ui-body-b">' +
+        '<ul style="margin:5px" id="ulpopupListItems" data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">' +
+        '</ul>' +
+        '<label style="width:8em; float:right; margin:10px;" id="lbPopupListItems"></label>' +
+        '<br>' +
+        '<button data-theme="d" data-icon="shop" data-iconpos="right" style="width:13em; float:center; margin:10px">Checkout</button>' +
+        '</div>';
+
+    $("#contentPopupListItems").html(html);
+    $("#contentPopupListItems").trigger("create");
+    html = '';
     $("#popupCart").popup("close");
     setTimeout(function () {
         $("#popupListItems").popup("open");
     }, 800);
 
-    var html = '';
+
     for (var i = 0; i < CART.length; i++) {
-        html = html + 
-            '<li> '+ 
-            '<div class="ui-grid-b">'+
-            '<div class="ui-block-a" style="width:10%"><img class="thumb" src="' + CART[i].linkext + '"></div>'+
-            '<div class="ui-block-b" style="width:50%"><label style="margin:11px">' + CART[i].name + '</label></div>'+
-            '<div class="ui-block-c" style="width:40%">'+
-                '<div class="ui-grid-d">'+
-                    '<div class="ui-block-a" style="width:18%"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div>'+
-                    '<div class="ui-block-b" style="width:18%"><center><label style="margin-top:11px">' + CART[i].quantity + '</label></center></div>'+
-                    '<div class="ui-block-c" style="width:18%"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div>'+
-                    '<div class="ui-block-d" style="width:28%"><label style="margin:11px">'+parseFloat(CART[0].price_x_region.totalPrice).toFixed(2)+' €</label></div>'+
-                    '<div class="ui-block-e" style="width:18%"><a data-icon="delete" data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>'+
-                '</div>'+
-            '</div>'+
+        html = html +
+            '<li> ' +
+            '<div class="ui-grid-b" onclick="displayPopupItemDetail(' + i + ',\'CART\');">' +
+            '<div class="ui-block-a" style="width:10%"><img class="thumb" src="' + CART[i].linkext + '"></div>' +
+            '<div class="ui-block-b" style="width:50%"><label style="margin:11px">' + CART[i].name + '</label></div>' +
+            '<div class="ui-block-c" style="width:40%">' +
+            '<div class="ui-grid-d">' +
+            '<div class="ui-block-a" style="width:18%"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div>' +
+            '<div class="ui-block-b" style="width:18%"><center><label style="margin-top:11px">' + CART[i].quantity + '</label></center></div>' +
+            '<div class="ui-block-c" style="width:18%"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div>' +
+            '<div class="ui-block-d" style="width:28%"><label style="margin:11px">' + parseFloat(CART[i].price_x_region.totalPrice).toFixed(2) + ' €</label></div>' +
+            '<div class="ui-block-e" style="width:18%"><a data-icon="delete" data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+            '</div>' +
+            '</div>' +
             '</li>';
     }
-        $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");   
+    $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
     $("#ulpopupListItems").html(html);
     $("#ulpopupListItems").trigger("create");
-    
-    //<a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a>
-
-    /*
-      html = html + '<li><div class="ui-grid-b"><div class="ui-block-a" style="width:10%; margin:5px" ><img class="thumb" src="' + CART[i].linkext + '"></div><div class="ui-block-b" style="width:60%"><a href="#" data-role="button" data-theme="b">' + CART[i].name + '<span class="ui-li-count" style="background-color:white; color:black">' + CART[i].quantity + '</span></a></div><div class="ui-block-c" style="width:24%; margin:5px"><div class="ui-grid-b"><div class="ui-block-a"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div><div class="ui-block-b"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div><div class="ui-block-c"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val('+i+'); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a></div></div></div></li>';
-      */
-
 }
 
+function displayPopupItemDetail(id, param) {
+    console.log("click");
+    switch (param) {
+    case "CART":
+        var productList = CART;
+        var quantity = productList[id].quantity;
+        var buttonBack = '<center><br><a data-icon="back" data-role="button" data-theme="b" style="width:120px" onclick="displayPopupItemList();">Atrás</a></center>';
+        break;
+    case "PRODUCTS":
+        var productList = PRODUCTS;
+        var quantity = 0;
+        var buttonBack = "";
+        break;
+    }
+
+    $("#popupListItems").popup("open");
+    var imgAvailability;
+    switch (productList[id].status) {
+    case 1:
+        imgAvailability = "css/maqueta/barraVerde.gif";
+        break;
+    case 2:
+        imgAvailability = "css/maqueta/barraAmarilla.gif";
+        break;
+    default:
+        imgAvailability = "css/maqueta/barraVerde.gif";
+        break;
+    }
+
+    var html = '';
+    html = html +
+        '<ul data-role="listview" data-inset="true">' +
+        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + productList[id].name + '</h2><span class="ui-li-count">' + quantity + '</span></li>' +
+        '<li>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a"><img src="' + productList[id].linkext + '" style="width: 300px;height: 300px;"></div>' +
+        '<div class="ui-block-b">' +
+        '<br><h1>Precio Total: ' + parseFloat(productList[id].price_x_region.totalPrice).toFixed(2) + ' €</h1>' +
+        '<p><strong>' + productList[id].definition + '</strong></p>' +
+        '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
+        '</div>' +
+        '</li>' +
+        '</ul>';
+    if (buttonBack != "") {
+        html = html + buttonBack;
+    }
+
+    $("#contentPopupListItems").html(html);
+    $("#contentPopupListItems").trigger("create");
+
+}
 
 function displayMasMenos(param, id_producto) {
     /*
@@ -559,48 +628,48 @@ function loginOut() { //muestra el pop up de inicio de session
 
 
 
-function displayPantallaSugerencias(){
+function displayPantallaSugerencias() {
 
     console.log("Entramos en la pantalla de sugerencias");
-    
-    
-    html_sug =  '<div id="form_sugerencias" >'+
-        '<form action="mailto:emaildelaempresaquehaceelformulario@email.com" method="post" enctype="text/plain">'+
-                        'Nombre:'+
-                        '<input type="text" id="nombre" size="25" maxlength="50">'+
-                        'Correo electrónico:'+
-                        '<input type="text" value="" id="correo" size="40" maxlength="100">'+
-                        'Provincia:'+
-                        '<input type="text" id="provincia" size="15" maxlength="50">'+
-                        'Población:'+
-                        '<input type="text" id="poblacion" size="15" maxlength="50">'+
-                        'Edad:'+
-                        '<select name="edad" >'+
-                            '<option value="1">Menor de 18'+
-                            '<option value="2">18-40'+
-                            '<option value="3">40-65'+
-                            '<option value="4">Mas de 65'+
-                        '</select>'+
-                        '<br> Tiene alguna sugerencia...'+
-                        '<textarea cols="40" rows="5" id="sugerencias">Escriba aquí sus sugerencias...</textarea>'+
-                        '<table width="50%" border="0" align="center" cellpadding="10" cellspacing="0">'+
-                            '<tr>'+
-                                '<td>'+
-                                    '<div align="center">'+
-                                        '<input id="enviar_sugerencia" type="submit" value="Enviar sugerencia">'+
-                                    '</div>'+
-                                '</td>'+
-                                '<td>'+
-                                    '<div align="center">'+
-                                        '<input id="volver_menu" value="Volver">'+
-                                    '</div>'+
-                                '</td>'+
-                            '</tr>'+
-                        '</table>'+
-                    '</form>'+
-                '</div>';
-                                
-                                
+
+
+    html_sug = '<div id="form_sugerencias" >' +
+        '<form action="mailto:emaildelaempresaquehaceelformulario@email.com" method="post" enctype="text/plain">' +
+        'Nombre:' +
+        '<input type="text" id="nombre" size="25" maxlength="50">' +
+        'Correo electrónico:' +
+        '<input type="text" value="" id="correo" size="40" maxlength="100">' +
+        'Provincia:' +
+        '<input type="text" id="provincia" size="15" maxlength="50">' +
+        'Población:' +
+        '<input type="text" id="poblacion" size="15" maxlength="50">' +
+        'Edad:' +
+        '<select name="edad" >' +
+        '<option value="1">Menor de 18' +
+        '<option value="2">18-40' +
+        '<option value="3">40-65' +
+        '<option value="4">Mas de 65' +
+        '</select>' +
+        '<br> Tiene alguna sugerencia...' +
+        '<textarea cols="40" rows="5" id="sugerencias">Escriba aquí sus sugerencias...</textarea>' +
+        '<table width="50%" border="0" align="center" cellpadding="10" cellspacing="0">' +
+        '<tr>' +
+        '<td>' +
+        '<div align="center">' +
+        '<input id="enviar_sugerencia" type="submit" value="Enviar sugerencia">' +
+        '</div>' +
+        '</td>' +
+        '<td>' +
+        '<div align="center">' +
+        '<input id="volver_menu" value="Volver">' +
+        '</div>' +
+        '</td>' +
+        '</tr>' +
+        '</table>' +
+        '</form>' +
+        '</div>';
+
+
     $("#divContent").html(html_sug);
     $("#divContent").trigger('create');
 
