@@ -378,11 +378,32 @@ function displayPopupItemList() {
     }, 800);
 
     var html = '';
-    for (var i = 0; i < CART.length; i++) { 
-        html = html + '<li><div class="ui-grid-b"><div class="ui-block-a" style="width:10%; margin:5px" ><img class="thumb" src="' + CART[i].linkext + '"></div><div class="ui-block-b" style="width:60%"><a href="#" data-role="button" data-theme="b">' + CART[i].name + '<span class="ui-li-count" style="background-color:white; color:black">' + CART[i].quantity + '</span></a></div><div class="ui-block-c" style="width:24%; margin:5px"><div class="ui-grid-b"><div class="ui-block-a"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div><div class="ui-block-b"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div><div class="ui-block-c"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val('+i+'); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a></div></div></div></li>';
+    for (var i = 0; i < CART.length; i++) {
+        html = html + 
+            '<li> '+ 
+            '<div class="ui-grid-b">'+
+            '<div class="ui-block-a" style="width:10%"><img class="thumb" src="' + CART[i].linkext + '"></div>'+
+            '<div class="ui-block-b" style="width:50%"><label style="margin:11px">' + CART[i].name + '</label></div>'+
+            '<div class="ui-block-c" style="width:40%">'+
+                '<div class="ui-grid-d">'+
+                    '<div class="ui-block-a" style="width:18%"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div>'+
+                    '<div class="ui-block-b" style="width:18%"><center><label style="margin-top:11px">' + CART[i].quantity + '</label></center></div>'+
+                    '<div class="ui-block-c" style="width:18%"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div>'+
+                    '<div class="ui-block-d" style="width:28%"><label style="margin:11px">'+parseFloat(CART[0].price_x_region.totalPrice).toFixed(2)+' €</label></div>'+
+                    '<div class="ui-block-e" style="width:18%"><a data-icon="delete" data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>'+
+                '</div>'+
+            '</div>'+
+            '</li>';
     }
+        $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");   
     $("#ulpopupListItems").html(html);
     $("#ulpopupListItems").trigger("create");
+    
+    //<a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a>
+
+    /*
+      html = html + '<li><div class="ui-grid-b"><div class="ui-block-a" style="width:10%; margin:5px" ><img class="thumb" src="' + CART[i].linkext + '"></div><div class="ui-block-b" style="width:60%"><a href="#" data-role="button" data-theme="b">' + CART[i].name + '<span class="ui-li-count" style="background-color:white; color:black">' + CART[i].quantity + '</span></a></div><div class="ui-block-c" style="width:24%; margin:5px"><div class="ui-grid-b"><div class="ui-block-a"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div><div class="ui-block-b"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div><div class="ui-block-c"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val('+i+'); displayPopupItemList();"><img src="css/maqueta/eliminar.png"></a></div></div></div></li>';
+      */
 
 }
 

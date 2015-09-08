@@ -140,12 +140,27 @@ $(document).ready(function () {
 
     });
 
+<<<<<<< HEAD
+=======
+    $("#btnPopupActionLeft").click(function () {
+
+        var action = $("#lbpopupAction").text();
+        switch (action) {
+        case "deleteItem":
+
+            displayPopupItemList();
+            break;
+        }
+    });
+
+>>>>>>> origin/master
     $("#btnPopupActionRight").click(function () {
 
         var action = $("#lbpopupAction").text();
         switch (action) {
         case "deleteItem":
             deleteItemCart($("#lbpopupAction").val());
+            displayPopupItemList();
             break;
         }
     });
