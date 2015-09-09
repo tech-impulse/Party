@@ -274,8 +274,8 @@ function displayProducts(data, originNode, originName) {
                         position = 0;
                         block = '<div class="ui-block-a" onclick="">';
                     }
-                    var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].sku + '"  class="circulo" style="width: 30px;height: 30px;display: none;position: absolute;">' +
-                        '<label id="quantity' + data.products[i].sku + '" style="display:block;padding-top: 5px;">10</label></div>' +
+                    var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].sku + '"  class="circulo" style="width: 35px;height: 35px;display: none;position: absolute;">' +
+                        '<label id="quantity' + data.products[i].sku + '" style="display:block;padding-top: 5px;font-size: 22px;">10</label></div>' +
                         '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + i + ',\'PRODUCTS\')" style="width: 120px;height: 120px;">' +
                         '<br>' + data.products[i].name +
                         '<br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
