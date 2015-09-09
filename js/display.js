@@ -178,6 +178,7 @@ function displayProducts(data, originNode, originName) {
     console.log("DisplayProducts-> Node product es " + data.result);
 
     if (data.result == 1) { // Hay resultados
+        PRODUCTS = data.products;
         var htmlContent = '';
         var grid = '';
         var block = '';
@@ -238,68 +239,68 @@ function displayProducts(data, originNode, originName) {
                 position = "a";
                 for (var i = 0; i < data.products.length; i++) {
 
-                    //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
+                    if (data.products[i].price_x_region.totalPrice != undefined) { // Controlamos que el precio exista
+                        if (position < parseInt(data.columns)) {
 
-                    if (position < parseInt(data.columns)) {
+                            switch (position) {
+                            case 0:
 
-                        switch (position) {
-                        case 0:
+                                block = '<div class="ui-block-a" onclick="">';
+                                break;
 
+                            case 1:
+
+                                block = '<div class="ui-block-b" onclick="">';
+                                break;
+
+                            case 2:
+
+                                block = '<div class="ui-block-c" onclick="">';
+                                break;
+
+                            case 3:
+
+                                block = '<div class="ui-block-d" onclick="">';
+                                break;
+
+                            case 4:
+
+                                block = '<div class="ui-block-e" onclick="">';
+                                break;
+
+
+                            }
+                        } else {
+                            position = 0;
                             block = '<div class="ui-block-a" onclick="">';
-                            break;
-
-                        case 1:
-
-                            block = '<div class="ui-block-b" onclick="">';
-                            break;
-
-                        case 2:
-
-                            block = '<div class="ui-block-c" onclick="">';
-                            break;
-
-                        case 3:
-
-                            block = '<div class="ui-block-d" onclick="">';
-                            break;
-
-                        case 4:
-
-                            block = '<div class="ui-block-e" onclick="">';
-                            break;
-
-
                         }
-                    } else {
-                        position = 0;
-                        block = '<div class="ui-block-a" onclick="">';
-                    }
-                    var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].sku + '"  class="circulo" style="width: 35px;height: 35px;display: none;position: absolute;">' +
-                        '<label id="quantity' + data.products[i].sku + '" style="display:block;padding-top: 5px;font-size: 22px;">10</label></div>' +
-                        '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + i + ',\'PRODUCTS\')" style="width: 120px;height: 120px;">' +
-                        '<br>' + data.products[i].name +
-                        '<br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
-                        '<br><button id="btnAddProduct' + data.products[i].sku + '" onclick="addToCart(' + data.products[i].sku + ',1);">Añadir</button>' +
-                        '<div class="ui-grid-b" id="grid' + data.products[i].sku + '" style="display:none;">' +
-                        '<div class="ui-block-a" onclick="" style="width: 45%;"><button id="restar" onclick="addToCart(' + data.products[i].sku + ',-1);" >-</button></div>' +
-                        '<div class="ui-block-b" style="width:10%;"></div>' +
-                        '<div class="ui-block-c" onclick="" style="width: 45%;"><button id="sumar" onclick="addToCart(' + data.products[i].sku + ',1);">+</button></div>' +
-                        '</div></a></div>';
+                        var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].sku + '"  class="circulo" style="width: 35px;height: 35px;display: none;position: absolute;">' +
+                            '<label id="quantity' + data.products[i].sku + '" style="display:block;padding-top: 5px;font-size: 22px;">10</label></div>' +
+                            '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + i + ',\'PRODUCTS\')" style="width: 120px;height: 120px;">' +
+                            '<br>' + data.products[i].name +
+                            '<br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
+                            '<br><button id="btnAddProduct' + data.products[i].sku + '" onclick="addToCart(' + data.products[i].sku + ',1);">Añadir</button>' +
+                            '<div class="ui-grid-b" id="grid' + data.products[i].sku + '" style="display:none;">' +
+                            '<div class="ui-block-a" onclick="" style="width: 45%;"><button id="restar" onclick="addToCart(' + data.products[i].sku + ',-1);" >-</button></div>' +
+                            '<div class="ui-block-b" style="width:10%;"></div>' +
+                            '<div class="ui-block-c" onclick="" style="width: 45%;"><button id="sumar" onclick="addToCart(' + data.products[i].sku + ',1);">+</button></div>' +
+                            '</div></a></div>';
 
-                    PRODUCTS = data.products;
-                    //console.log(element);
+                        //console.log(element);
 
-                    htmlContent = htmlContent + element;
-                    if (position == "c") {
-                        htmlContent = htmlContent + grid;
+                        htmlContent = htmlContent + element;
+                        if (position == "c") {
+                            htmlContent = htmlContent + grid;
+                        }
+                        position++;
                     }
-                    position++;
                 }
                 htmlContent = htmlContent + '</div>';
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
 
                 break;
+
             };
         case "vertical":
             {
@@ -353,8 +354,14 @@ function displayItemOperations(id, param, position) {
         CART.splice(position, 1);
         //deleteItemCart(position);        
     }
-    $("#spPopupCartCount").text(CART.length);
-    $("#spPopupTotalAmmount").text(parseFloat(CART.ammount).toFixed(2) + ' €');
+    var total = 0;
+    for (var i = 0; i < CART.length; i++) {
+        total = total + CART[i].quantity;
+    }
+    $("#spBtnPopupCartProducts").text(total);
+    $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+    $("#spPopupCartCount").text(total);
+    $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
 
 }
 
@@ -376,13 +383,13 @@ function displayPopupItemList() {
     var html = '';
     html = '<img class="imgMedium" scr="http://www.partyfiesta.com/es/tienda-online/imagen-producto/product-hightQuality/partyfiesta/193368">' +
         '<div class="ui-grid-b" style="margin:10px">' +
-        '<div class="ui-block-a" style="width:60%">' +
+        '<div class="ui-block-a" style="width:54%">' +
         '<label style="margin:11px; margin-left:20px">Producto</label>' +
         '</div>' +
-        '<div class="ui-block-b" style="width:20%">' +
+        '<div class="ui-block-b" style="width:22%">' +
         '<label style="margin:11px; margin-left:35px">Cantidad</label>' +
         '</div>' +
-        '<div class="ui-block-c" style="width:20%">' +
+        '<div class="ui-block-c" style="width:24%">' +
         '<label style="margin:11px">Precio</label>' +
         '</div>' +
         '</div>' +
@@ -406,16 +413,16 @@ function displayPopupItemList() {
     for (var i = 0; i < CART.length; i++) {
         html = html +
             '<li> ' +
-            '<div class="ui-grid-b" onclick="displayPopupItemDetail(' + i + ',\'CART\');">' +
+            '<div class="ui-grid-b">' +
             '<div class="ui-block-a" style="width:10%"><img class="thumb" src="' + CART[i].linkext + '"></div>' +
-            '<div class="ui-block-b" style="width:50%"><label style="margin:11px">' + CART[i].name + '</label></div>' +
+            '<div class="ui-block-b" style="width:45%" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="margin:11px">' + CART[i].name + '</label></div>' +
             '<div class="ui-block-c" style="width:40%">' +
             '<div class="ui-grid-d">' +
-            '<div class="ui-block-a" style="width:18%"><a data-icon="minus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div>' +
-            '<div class="ui-block-b" style="width:18%"><center><label style="margin-top:11px">' + CART[i].quantity + '</label></center></div>' +
-            '<div class="ui-block-c" style="width:18%"><a data-icon="plus" data-role="button" data-theme="f" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div>' +
-            '<div class="ui-block-d" style="width:28%"><label style="margin:11px">' + parseFloat(CART[i].price_x_region.totalPrice).toFixed(2) + ' €</label></div>' +
-            '<div class="ui-block-e" style="width:18%"><a data-icon="delete" data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+            '<div class="ui-block-a" style="width:16%"><a style="padding:2px" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',-1); displayPopupItemList();"></a></div>' +
+            '<div class="ui-block-b" style="width:16%"><center><label style="margin-top:11px">' + CART[i].quantity + '</label></center></div>' +
+            '<div class="ui-block-c" style="width:16%"><a style="padding:2px" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].sku + ',1); displayPopupItemList();"></a></div>' +
+            '<div class="ui-block-d" style="width:36%"><label style="margin:11px; float:right">' + parseFloat(CART[i].quantity * CART[i].price_x_region.totalPrice).toFixed(2) + ' €</label></div>' +
+            '<div class="ui-block-e" style="width:16%"><a data-icon="delete" data-role="button" data-theme="f" style="background-color: red; padding:2px" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
             '</div>' +
             '</div>' +
             '</li>';
@@ -460,9 +467,10 @@ function displayPopupItemDetail(id, param) {
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + productList[id].name + '</h2><span class="ui-li-count">' + quantity + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><img src="' + productList[id].linkext + '" style="width: 300px;height: 300px;"></div>' +
+        '<div class="ui-block-a"><img src="' + productList[id].linkext + '" style="max-width: 250px;max-height: 250px;"></div>' +
         '<div class="ui-block-b">' +
         '<br><h1>Precio Total: ' + parseFloat(productList[id].price_x_region.totalPrice).toFixed(2) + ' €</h1>' +
+        '<p><strong> Ubicación: ' + productList[id].definition + '</strong></p>' +
         '<p><strong>' + productList[id].definition + '</strong></p>' +
         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
         '</div>' +
@@ -550,11 +558,48 @@ function loadMenu(data) {
         '<div id="precio_total" class="ui-grid-a center" ><label id="label_info_cart_precio"> 2,75</label></div></div>' +
         '</div>';
         */
-    var cart = '<br><a href="#popupCart" data-rel="popup" data-role="button" data-icon="shop" data-theme="e" data-transition="pop">Items</a>';
+    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral" data-transition="pop"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">'+ 
+    '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
 
 
     /*HEADER  de la pantalla*/
-    htmlHeader = '<div><div class="ui-grid-b"><div class="ui-block-a" style="margin-top:10px" id="divBack"></div><div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%"> </div> <div class="ui-block-c" style="text-align:right;"> <div id="session"><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Ya soy Cliente!</span> </a><a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a>' + cart + '</div> </div></div> <img src="css/icons/barra.png" height="5px" width="100%"><ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
+
+    htmlHeader = '<div>' +
+        '<div class="ui-grid-d">' +
+        '<div class="ui-block-a" style="margin-top:10px; width:20%" id="divBack"></div>' +
+        '<div class="ui-block-b" style="margin-top:10px; width:30%"><img src="css/icons/logo.png" width="100%"> </div>' +
+        '<div class="ui-block-c" style="margin-top:10px;width:20%" id="session">' +
+        '<center><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Identificate!</span> </a>' +
+        '</div>' +
+        '<div class="ui-block-d" style="margin-top:10px; width:25%">' + cart +
+        '</div>' +
+        '<div class="ui-block-e" style="margin-top:10px; width:5%">' +
+        '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<img src="css/icons/barra.png" height="5px" width="100%"><ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
+    /*
+    htmlHeader = '<div>'+
+        '<div class="ui-grid-b">'+
+        '<div class="ui-block-a" style="margin-top:10px; width:20%" id="divBack"></div>'+
+        '<div class="ui-block-b" style="margin-top:10px;width:30%"><img src="css/icons/logo.png" width="100%"> </div>'+
+        '<div class="ui-block-c" style="text-align:right; width:50%">'+
+        '<div class="ui-grid-b">'+
+        '<div class="ui-block-a" style="width:30%" id="session">'+
+        '<a id="login" onclick="displayLogin();" style="margin:10px"> <span>Identificate!</span> </a>'+
+        '</div>'+
+        '<div class="ui-block-b" style="width:50%">'+ cart +
+        '</div>'+
+        '<div class="ui-block-c" style="width:20%">'+
+        '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+        '<img src="css/icons/barra.png" height="5px" width="100%"><ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
+        */
+
     $("#divHeader_catalogo").html(htmlHeader);
     $("#divHeader_catalogo").trigger('create');
     $("#divHeader_catalogo").hide();
