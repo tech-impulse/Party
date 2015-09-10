@@ -12,11 +12,13 @@
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="css/flaticon/flaticon.css" />
     <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="stylesheet" href="lib/all-animation.min.css" />
     <!-- SCRIPTS NUESTROS -->
     <script src="js/config.js"></script>
     <script src="js/app.js"></script>
     <script src="js/rest.js"></script>
     <script src="js/display.js"></script>
+    <script src="js/functions.js"></script>
 
 </head>
 
@@ -52,7 +54,7 @@
 
             <div id="divTienda" align="center" style="margin-top: 8%;">
                 <!--POPUP DE LOGIN -->
-                <div data-role="popup" id="popupCart" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:300px;">
+                <div data-role="popup" id="popupCart" class=" ui-corner-all ui-shadow ui-btn-inline"  style="min-width:300px;">
                     <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
 
@@ -60,24 +62,24 @@
                             <h3>Tu carrito</h3>
                             <img style="display:inline" src="http://partyfiesta.youtter.com/webservices/img/nodos/carrito.png" style="width: initial;">
                         </li>
-                        <li><a onclick="displayPopupItemList()" data-rel="popup" data-role="button" data-transition="pop" data-theme="b">Ver items <span id="spPopupCartCount" class="ui-li-count">0</span></a>
+                        <li><a onclick="displayPopupItemList()" data-rel="popup" data-role="button" data-theme="b">Ver items <span id="spPopupCartCount" class="ui-li-count">0</span></a>
                         </li>
                         <li><span>Total: </span><span id="spPopupTotalAmmount"></span>
                         </li>
                         <li>
                             <center>
-                                <button data-theme="d" data-icon="check" data-iconpos="right">Checkout</button>
+                                <button data-theme="d" data-icon="check" data-iconpos="right" onclick="checkOut()">Checkout</button>
                             </center>
                         </li>
                     </ul>
                 </div>
-                <div data-role="popup" id="popupListItems" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:700px;">
+                <div data-role="popup" id="popupListItems" class=" ui-corner-all ui-shadow ui-btn-inline" style="min-width:700px;">
                     <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div id="contentPopupListItems">
 
                     </div>
                 </div>
-                <div data-role="popup" id="popupAction" class=" ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" style="min-width:400px;">
+                <div data-role="popup" id="popupAction" class=" ui-corner-all ui-shadow ui-btn-inline" style="min-width:400px;">
                     <div class="ui-bar ui-bar-b" data-theme="b">
                         <h3>Alerta</h3>
                         <label id="lbpopupAction" style="display:none"></label>
@@ -169,7 +171,7 @@
                     <label id="texto_popup"></label>
                 </div>
 
-                <div id="logo_inicio" style="margin-bottom: 20px;"><img src="css/icons/logo.png">
+                <div class="dance" id="logo_inicio" style="margin-bottom: 20px;"><img src="css/icons/logo.png">
                 </div>
 
                 <div>

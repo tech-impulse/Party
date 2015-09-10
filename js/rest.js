@@ -1,7 +1,7 @@
 // request.abort(); // Esto aborta la conexión al webservice (Por si se necesitara)
 
 //WS de login en la app
-function getlogin(usario, contraseña) {
+function getLogin(usario, contraseña) {
 
     // Datos que se van a enviar
     var dataSend = {
@@ -17,12 +17,12 @@ function getlogin(usario, contraseña) {
         success: function (response) {
 
             if (response.result == 1) {
-
+                LOGGED = true;
                 console.log(response.info);
                 INFO_USU = response.info;
                 $('#popupLogin').popup('close');
                 $("#login").text("Bienvenido/a " + usario + ",");
-                $('#login').attr('onclick', "loginOut()");
+                $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 25px;">');
 
             } else if (response.result == 0) {
