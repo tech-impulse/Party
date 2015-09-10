@@ -62,12 +62,13 @@ function getlogin(usario, contraseña) {
 
 
 //WS para realizar el registro del usuario
-function getRegistro(usario, contraseña) {
+function getRegistro(usario, contraseña,cod_pos) {
 
     // Datos que se van a enviar
     var dataSend = {
         user: usario,
-        password: contraseña
+        password: contraseña,
+        codigo:cod_pos
     };
 
     request = $.ajax({

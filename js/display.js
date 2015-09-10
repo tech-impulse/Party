@@ -639,6 +639,15 @@ function displayRegistro() { //muestra el pop up de registro
 
 }
 
+function displayCambioContra() { //muestra el pop up de registro
+
+    $("#popupLogin").popup("close");
+    setTimeout(function () {
+        $("#popupCambioContra").popup("open");
+    }, 50);
+
+}
+
 function displaySugerencias() { //muestra el pop up de registro
 
     $("#popupLogin").popup("close");
@@ -688,12 +697,12 @@ function displayPantallaSugerencias() {
         '<input type="text" id="provincia" size="15" maxlength="50">' +
         'Población:' +
         '<input type="text" id="poblacion" size="15" maxlength="50">' +
-        'Edad:' +
+        'Fecha de nacimiento:' +
+        '<input type="text" id="fecha_naci" size="15" maxlength="50">' +
+        'Tipo de sugerencia:' +
         '<select name="edad" >' +
-        '<option value="1">Menor de 18' +
-        '<option value="2">18-40' +
-        '<option value="3">40-65' +
-        '<option value="4">Mas de 65' +
+        '<option value="1">Incidencia' +
+        '<option value="2">Petición' +
         '</select>' +
         '<br> Tiene alguna sugerencia...' +
         '<textarea cols="40" rows="5" id="sugerencias">Escriba aquí sus sugerencias...</textarea>' +

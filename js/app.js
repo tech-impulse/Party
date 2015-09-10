@@ -97,7 +97,7 @@ $(document).ready(function () {
         var correo = $("#correo").val();
         var provincia = $("#provincia").val();
         var poblacion = $("#poblacion").val();
-        
+
         console.log("Enviar sugenrencia. Seleccion edad " + edad);
         if (nombre != "") {
 
@@ -130,12 +130,13 @@ $(document).ready(function () {
         var usuario = $('#emailsignup').val();
         var contraseña = $('#passwordsignup').val();
         var rep_contraseña = $('#passwordsignup_confirm').val();
+        var cod_pos = $('#cod_pos').val();
 
-        if (usuario == "" || contraseña == "" || rep_contraseña == "") {
+        if (usuario == "" || contraseña == "" || rep_contraseña == "" || cod_pos == "") {
             $("#texto_popup").text("Rellene todos los campos. Gracias");
             $('#popupAlert').popup('open');
-        } else if (usuario != "" && contraseña == rep_contraseña) {
-            getRegistro(usuario, contraseña);
+        } else if (usuario != "" && contraseña == rep_contraseña && cod_pos != "") {
+            getRegistro(usuario, contraseña,cod_pos);
         }
 
     });
@@ -162,6 +163,22 @@ $(document).ready(function () {
             displayPopupItemList();
             break;
         }
+    });
+
+    $("#cam_contraseña").click(function () { // botton de login de la app
+
+        console.log("Cambio passwrod");
+        var usuarioCambio = $('#usuarioCambio').val();
+
+        console.log("Email " + usuarioCambio);
+
+        if (usuarioCambio != "") {
+            sendContra(usuarioCambio);
+        } else {
+            $("#texto_popup").text("Escriba un usuario");
+            $('#popupAlert').popup('open');
+        }
+
     });
 
 

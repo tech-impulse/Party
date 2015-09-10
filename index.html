@@ -104,7 +104,10 @@
                             -->
                             <button type="button" id="iniciar_session">Iniciar sessión</button>
                             <center>
-                                <a id="registrarse" onclick="displayRegistro();" style="margin:10px" class="ui-link">Registrarse</a>
+                                <br><a id="registrarse" onclick="displayRegistro();" style="margin:10px;color: green;" class="ui-link">Registrarse</a>
+                            </center>
+                            <center>
+                                <br><a id="olviContra" onclick="displayCambioContra();" style="margin:10px;color: #FF4700;" class="ui-link">¿Has olvidado la contraseña?</a>
                             </center>
                         </div>
                     </form>
@@ -127,11 +130,34 @@
                                 <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO">
                             </p>
                             <p>
+                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p"> Código postal </label>
+                                <input id="cod_pos" name="" required="required" type="number" placeholder="08041">
+                            </p>
+                            <p>
                                 <button type="button" id="enviar_registro">Crear cuenta</button>
                             </p>
                             <p class="change_link">
                                 ¿Ya es cliente?
                                 <a href="#" onclick="displayLogin();"> Iniciar sessión </a>
+                            </p>
+                        </form>
+                    </div>
+                    </form>
+                </div>
+                <!--POPUP DE CAMBIO PASSWORD -->
+                <div data-role="popup" id="popupCambioContra" class="ui-content" style="min-width:250px;">
+                    <div id="div_cambioContra">
+                        <form autocomplete="on">
+                            <h3> Cambio de contraseña </h3>
+                            <p>
+                                <label for="contrauno" class="youpasswd" data-icon="u"> Su usuario: </label>
+                                <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus>
+                            </p>
+                            <p>
+                                <button type="button" id="cam_contraseña">¡Pedir!</button>
+                            </p>
+                            <p>
+                                <button type="button" onclick="displayLogin();" id="volver">Volver</button>
                             </p>
                         </form>
                     </div>
