@@ -26,7 +26,10 @@ function getLogin(usario, contraseña) {
                 $("#login").text("Bienvenido/a " + usario + ",");
                 $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 25px;">');
-
+                if(REDIRECT){
+                    REDIRECT = false;
+                    checkOut();
+                }
             } else if (response.result == 0) {
 
                 console.log("No exite");
