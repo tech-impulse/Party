@@ -14,3 +14,5 @@ var INFO_USU = [];
 var PRODUCTS = [];
 var CART = [];
 var CARRITO = [];
+var LOGGED = false;
+var popupTimeout = 50;

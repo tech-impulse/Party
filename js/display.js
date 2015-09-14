@@ -123,7 +123,8 @@ function displayNode(data, originNode, originName) {
                         position = 0;
                         block = '<div class="ui-block-a" onclick="' + extra + '">';
                     }
-                    var element = block + '<a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name + '</strong></a></div>';
+                    var element = block + '<div class="pulse-slow"><a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name + 
+                        '</strong></a></div></div>';
 
                     //console.log(element);
 
@@ -147,9 +148,9 @@ function displayNode(data, originNode, originName) {
                     console.log("Is party? " + data.nodes[i].isParty);
 
                     if (data.nodes[i].short_name == "") {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a></div>';
                     } else {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].short_name + '</a>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].short_name + '</a></div>';
                     }
                     htmlContent = htmlContent + element;
                 }
@@ -372,7 +373,7 @@ function openPopupAction(param) {
         $("#popupListItems").popup("close");
         setTimeout(function () {
             $("#popupAction").popup("open");
-        }, 800);
+        }, popupTimeout);
         break;
     }
 }
@@ -398,7 +399,7 @@ function displayPopupItemList() {
         '</ul>' +
         '<label style="width:8em; float:right; margin:10px;" id="lbPopupListItems"></label>' +
         '<br>' +
-        '<button data-theme="d" data-icon="shop" data-iconpos="right" style="width:13em; float:center; margin:10px">Checkout</button>' +
+        '<button data-theme="d" data-icon="shop" data-iconpos="right" style="width:13em; float:center; margin:10px" onclick="checkOut()">Checkout</button>' +
         '</div>';
 
     $("#contentPopupListItems").html(html);
@@ -407,7 +408,7 @@ function displayPopupItemList() {
     $("#popupCart").popup("close");
     setTimeout(function () {
         $("#popupListItems").popup("open");
-    }, 800);
+    }, popupTimeout);
 
 
     for (var i = 0; i < CART.length; i++) {
@@ -558,8 +559,13 @@ function loadMenu(data) {
         '<div id="precio_total" class="ui-grid-a center" ><label id="label_info_cart_precio"> 2,75</label></div></div>' +
         '</div>';
         */
+<<<<<<< HEAD
     var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral" data-transition="pop"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">' +
         '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
+=======
+    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">'+ 
+    '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
+>>>>>>> origin/master
 
 
     /*HEADER  de la pantalla*/
@@ -635,7 +641,7 @@ function displayRegistro() { //muestra el pop up de registro
     $("#popupLogin").popup("close");
     setTimeout(function () {
         $("#popupRegistro").popup("open");
-    }, 50);
+    }, popupTimeout);
 
 }
 
@@ -644,7 +650,7 @@ function displayCambioContra() { //muestra el pop up de registro
     $("#popupLogin").popup("close");
     setTimeout(function () {
         $("#popupCambioContra").popup("open");
-    }, 50);
+    }, popupTimeout);
 
 }
 
@@ -653,7 +659,7 @@ function displaySugerencias() { //muestra el pop up de registro
     $("#popupLogin").popup("close");
     setTimeout(function () {
         $("#popupRegistro").popup("open");
-    }, 50);
+    }, popupTimeout);
 
 }
 
@@ -663,11 +669,12 @@ function displayLogin() { //muestra el pop up de inicio de session
     $("#popupRegistro").popup("close");
     setTimeout(function () {
         $("#popupLogin").popup("open");
-    }, 50);
+    }, popupTimeout);
 
 
 }
 
+<<<<<<< HEAD
 function displayLogin2() { //muestra el pop up de inicio de session
 
     $('#usrnm').val("");
@@ -689,11 +696,15 @@ function displayMenu() { //muestra el pop up de inicio de session
 }
 
 function loginOut() { //muestra el pop up de inicio de session
+=======
+function logout() { //muestra el pop up de inicio de session
+>>>>>>> origin/master
 
     console.log("Cerramos session");
-    html = '<div id="session"><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Ya soy Cliente!</span> </a><a id="btnMenuLateral" onclick="openMenu()" style="margin:10px"> <span class="flaticon-menu"></span> </a> </div>';
+    html = '<div id="session"><center><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Identificate!</span> </a></center> </div>';
     $("#session").html(html);
     INFO_USU = "";
+    LOGGED = false;
     $('#usrnm').val("");
     $('#pswd').val("");
 

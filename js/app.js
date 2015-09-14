@@ -83,7 +83,7 @@ $(document).ready(function () {
             $("#texto_popup").text("Usuario o contraseña vacios...");
             $('#popupAlert').popup('open');
         } else {
-            getlogin(usuario, contraseña);
+            getLogin(usuario, contraseña);
         }
 
     });
