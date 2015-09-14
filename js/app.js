@@ -88,42 +88,6 @@ $(document).ready(function () {
 
     });
 
-
-    $("#enviar_sugerencia").click(function () { // botton de acceso a la app 
-
-        var edad = $("select#edad option").filter(":selected").val();
-
-        var nombre = $("#nombre").val();
-        var correo = $("#correo").val();
-        var provincia = $("#provincia").val();
-        var poblacion = $("#poblacion").val();
-
-        console.log("Enviar sugenrencia. Seleccion edad " + edad);
-        if (nombre != "") {
-
-            if (edad != undefined) {
-
-                $("#divTienda").hide();
-                $("#divContent").show();
-
-                $("#texto_popup").text("No hay productos...");
-                $('#popupAlert').popup('open');
-
-            } else {
-
-                alert("¿Seleccione una tienda!");
-
-            }
-
-        } else {
-
-
-        }
-
-
-
-    });
-
     $("#enviar_registro").click(function () { // botton de registro a la app 
 
         console.log("Logeandose");
@@ -136,11 +100,10 @@ $(document).ready(function () {
             $("#texto_popup").text("Rellene todos los campos. Gracias");
             $('#popupAlert').popup('open');
         } else if (usuario != "" && contraseña == rep_contraseña && cod_pos != "") {
-            getRegistro(usuario, contraseña,cod_pos);
+            getRegistro(usuario, contraseña, cod_pos);
         }
 
     });
-
 
     $("#btnPopupActionLeft").click(function () {
 
@@ -444,4 +407,89 @@ function stopYoutubeVideo(idOfIframe) {
 
     // Finally you reasign the URL back to your iframe, so when you hide and load it again you still have the link
     $(idOfIframe).attr('src', url);
+}
+
+
+function enviarSugerencia() {
+
+    var edad = $("select#sugerencia_tipo option").filter(":selected").val();
+    var nombre = $("#nombre").val();
+    var correo = $("#correo").val();
+    var provincia = $("#provincia").val();
+    var poblacion = $("#poblacion").val();
+    var telefono = $("#telf").val();
+    var fecha_naci = $("#fecha_naci").val();
+
+    console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + correo + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + ".");
+
+    if (nombre != "") {
+
+        if (correo != "") {
+
+            if (provincia != "") {
+
+                if (poblacion != "") {
+
+                    if (telefono != "") {
+
+                        if (fecha_naci != "") {
+
+
+
+
+                        } else {
+
+                            $("#texto_popup").text("Escriba un telefono");
+                            $('#popupAlert').popup('open');
+                            console.log("No has escrito el correo");
+
+                        }
+
+
+                    } else {
+
+                        $("#texto_popup").text("Escriba un telefono");
+                        $('#popupAlert').popup('open');
+                        console.log("No has escrito el correo");
+
+                    }
+
+
+
+                } else {
+
+                    $("#texto_popup").text("Escriba una poblacion");
+                    $('#popupAlert').popup('open');
+                    console.log("No has escrito el correo");
+
+                }
+
+
+            } else {
+
+                $("#texto_popup").text("Escriba una provincia");
+                $('#popupAlert').popup('open');
+                console.log("No has escrito el correo");
+
+            }
+
+        } else {
+
+            $("#texto_popup").text("Escriba un correo electronico");
+            $('#popupAlert').popup('open');
+            console.log("No has escrito el correo");
+
+        }
+
+    } else {
+
+        $("#texto_popup").text("Escriba el nombre");
+        $('#popupAlert').popup('open');
+        console.log("No has escrito el nombre");
+
+
+    }
+
+
+
 }

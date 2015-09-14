@@ -558,8 +558,8 @@ function loadMenu(data) {
         '<div id="precio_total" class="ui-grid-a center" ><label id="label_info_cart_precio"> 2,75</label></div></div>' +
         '</div>';
         */
-    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral" data-transition="pop"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">'+ 
-    '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
+    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral" data-transition="pop"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">' +
+        '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
 
 
     /*HEADER  de la pantalla*/
@@ -668,6 +668,26 @@ function displayLogin() { //muestra el pop up de inicio de session
 
 }
 
+function displayLogin2() { //muestra el pop up de inicio de session
+
+    $('#usrnm').val("");
+    $("#popupCambioContra").popup("close");
+    setTimeout(function () {
+        $("#popupLogin").popup("open");
+    }, 50);
+
+
+}
+
+
+
+function displayMenu() { //muestra el pop up de inicio de session
+
+    console.log("Volver al menu");
+    getNodes(0);
+
+}
+
 function loginOut() { //muestra el pop up de inicio de session
 
     console.log("Cerramos session");
@@ -688,34 +708,36 @@ function displayPantallaSugerencias() {
 
 
     html_sug = '<div id="form_sugerencias" >' +
-        '<form action="mailto:emaildelaempresaquehaceelformulario@email.com" method="post" enctype="text/plain">' +
+        '<form  enctype="text/plain">' +
         'Nombre:' +
-        '<input type="text" id="nombre" size="25" maxlength="50">' +
+        '<div style="width: 25%"><input type="text" id="nombre" size="25" maxlength="50" ></div>' +
         'Correo electrónico:' +
-        '<input type="text" value="" id="correo" size="40" maxlength="100">' +
+        '<div style="width: 25%"><input type="text" value="" id="correo" size="40" maxlength="100"></div>' +
         'Provincia:' +
-        '<input type="text" id="provincia" size="15" maxlength="50">' +
+        '<div style="width: 25%"><input type="text" id="provincia" size="15" maxlength="50"></div>' +
         'Población:' +
-        '<input type="text" id="poblacion" size="15" maxlength="50">' +
+        '<div style="width: 25%"><input type="text" id="poblacion" size="15" maxlength="50"></div>' +
+        'Teléfono:' +
+        '<div style="width: 25%"><input type="text" id="telf" size="9" maxlength="15"></div>' +
         'Fecha de nacimiento:' +
-        '<input type="text" id="fecha_naci" size="15" maxlength="50">' +
+        '<div style="width: 25%"><input type="date" id="fecha_naci" ></div>' +
         'Tipo de sugerencia:' +
-        '<select name="edad" >' +
+        '<div style="width: 25%"><select name="sugerencia_tipo" >' +
         '<option value="1">Incidencia' +
         '<option value="2">Petición' +
-        '</select>' +
+        '</select></div>' +
         '<br> Tiene alguna sugerencia...' +
         '<textarea cols="40" rows="5" id="sugerencias">Escriba aquí sus sugerencias...</textarea>' +
         '<table width="50%" border="0" align="center" cellpadding="10" cellspacing="0">' +
         '<tr>' +
         '<td>' +
         '<div align="center">' +
-        '<input id="enviar_sugerencia" type="submit" value="Enviar sugerencia">' +
+        '<button type="button" onclick="enviarSugerencia();" id="enviar_sugerencia">¡Enviar!</button>' +
         '</div>' +
         '</td>' +
         '<td>' +
         '<div align="center">' +
-        '<input id="volver_menu" value="Volver">' +
+        '<button type="button" onclick="displayMenu();" id="volver_menu">Volver</button>' +
         '</div>' +
         '</td>' +
         '</tr>' +
