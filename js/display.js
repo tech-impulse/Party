@@ -123,7 +123,7 @@ function displayNode(data, originNode, originName) {
                         position = 0;
                         block = '<div class="ui-block-a" onclick="' + extra + '">';
                     }
-                    var element = block + '<div class="pulse-slow"><a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name + 
+                    var element = block + '<div class="pulse-slow"><a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name +
                         '</strong></a></div></div>';
 
                     //console.log(element);
@@ -148,9 +148,9 @@ function displayNode(data, originNode, originName) {
                     console.log("Is party? " + data.nodes[i].isParty);
 
                     if (data.nodes[i].short_name == "") {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a></div>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
                     } else {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].short_name + '</a></div>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].short_name + '</a>';
                     }
                     htmlContent = htmlContent + element;
                 }
@@ -268,8 +268,6 @@ function displayProducts(data, originNode, originName) {
 
                                 block = '<div class="ui-block-e" onclick="">';
                                 break;
-
-
                             }
                         } else {
                             position = 0;
@@ -405,11 +403,16 @@ function displayPopupItemList() {
     $("#contentPopupListItems").html(html);
     $("#contentPopupListItems").trigger("create");
     html = '';
-    $("#popupCart").popup("close");
-    setTimeout(function () {
-        $("#popupListItems").popup("open");
-    }, popupTimeout);
-
+    switch (CART.length) {
+    case 0:
+        console.log("No hay items");
+        break;
+    default:
+        $("#popupCart").popup("close");
+        setTimeout(function () {
+            $("#popupListItems").popup("open");
+        }, popupTimeout);
+    }
 
     for (var i = 0; i < CART.length; i++) {
         html = html +
@@ -559,8 +562,8 @@ function loadMenu(data) {
         '<div id="precio_total" class="ui-grid-a center" ><label id="label_info_cart_precio"> 2,75</label></div></div>' +
         '</div>';
         */
-    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">'+ 
-    '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
+    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">' +
+        '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
 
 
     /*HEADER  de la pantalla*/

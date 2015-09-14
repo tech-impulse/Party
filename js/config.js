@@ -15,4 +15,4 @@ var PRODUCTS = [];
 var CART = [];
 var CARRITO = [];
 var LOGGED = false;
-var popupTimeout = 50;
+var popupTimeout = 250;
