@@ -22,16 +22,7 @@ function displayNode(data, originNode, originName) {
             var imagen_partyfiesta = "<div><img src='css/icons/logo.png'></div>";
         } else {
             var imagen_partyfiesta = "";
-            if (nodeIds.length == 0) {
-                nodeIds.push(0);
-                nodeNames.push("Menú");
-                nodeIds.push(originNode);
-                nodeNames.push(originName);
-            } else {
-                nodeIds.push(originNode);
-                nodeNames.push(originName);
-            }
-            $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 1] + '</div>');
+           updateBackButton(originNode, originName);
             //$("#divHeader").show();
         }
         switch (parseInt(data.columns)) {
@@ -80,16 +71,16 @@ function displayNode(data, originNode, originName) {
                     if (originNode == 0) { //solo se mostrar en el menu inicial de la app getNodes(0)
                         switch (parseInt(data.nodes[i].type)) {
                         case 1: //catalogo
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\',0)';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0)';
                             break;
                         case 2: //promos
                             extra = '';
                             break;
                         case 3: // asis fistas
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\',1)';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',1)';
                             break;
                         case 4: // asis disfra
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\',1)';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',1)';
                             break;
                         case 5: // sugerencias
                             extra = 'displayPantallaSugerencias()';
@@ -98,7 +89,7 @@ function displayNode(data, originNode, originName) {
                             extra = '';
                             break;
                         }
-                    } else extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\')';
+                    } else extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')';
                     //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
 
                     if (position < parseInt(data.columns)) { //numero maximo de columnas que tendra la pantalla
@@ -123,7 +114,7 @@ function displayNode(data, originNode, originName) {
                         position = 0;
                         block = '<div class="ui-block-a" onclick="' + extra + '">';
                     }
-                    var element = block + '<div class="pulse-slow"><a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name +
+                    var element = block + '<div class=""><a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name +
                         '</strong></a></div></div>';
 
                     //console.log(element);
@@ -147,10 +138,10 @@ function displayNode(data, originNode, originName) {
 
                     console.log("Is party? " + data.nodes[i].isParty);
 
-                    if (data.nodes[i].short_name == "") {
+                    if (data.nodes[i].name == "") {
                         var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
                     } else {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].short_name + '</a>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
                     }
                     htmlContent = htmlContent + element;
                 }
@@ -177,7 +168,8 @@ function displayNode(data, originNode, originName) {
 function displayProducts(data, originNode, originName) {
 
     console.log("DisplayProducts-> Node product es " + data.result);
-
+    console.log("DisplayProducts-> Nodo Origen Id" + originNode);
+    console.log("DisplayProducts-> Nodo Origen Nombre" + originName);
     if (data.result == 1) { // Hay resultados
         PRODUCTS = data.products;
         var htmlContent = '';
@@ -187,18 +179,8 @@ function displayProducts(data, originNode, originName) {
         var type;
         if (originNode == 0) {
             loadMenu(data);
-        } else {
-            if (nodeIds.length == 0) {
-                nodeIds.push(0);
-                nodeNames.push("Menú");
-                nodeIds.push(originNode);
-                nodeNames.push(originName);
-            } else {
-                nodeIds.push(originNode);
-                nodeNames.push(originName);
-            }
-            $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 1] + '</div>');
-            //$("#divHeader").show();
+        } else {            
+           updateBackButton(originNode, originName);
         }
         switch (parseInt(data.columns)) {
         case 1:
@@ -307,10 +289,10 @@ function displayProducts(data, originNode, originName) {
                 block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
                 for (var i = 0; i < data.products.length; i++) {
 
-                    if (data.products[i].short_name == "") {
+                    if (data.products[i].name == "") {
                         var element = '<a data-role="button" onclick="">' + data.products[i].name + '</a>';
                     } else {
-                        var element = '<a data-role="button" onclick="">' + data.products[i].short_name + '</a>';
+                        var element = '<a data-role="button" onclick="">' + data.products[i].name + '</a>';
                     }
 
                     htmlContent = htmlContent + element;
@@ -546,7 +528,7 @@ function loadMenu(data) {
     var options = '';
     var htmlHeader = '';
     for (var i = 0; i < data.nodes.length; i++) { //data:image/png;base64,
-        options = options + '<li onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].short_name + '\'); openMenu()"><img src="' + data.nodes[i].linkext + '" style="width:12em">' + data.nodes[i].short_name + '</li>';
+        options = options + '<li onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\'); openMenu()"><img src="' + data.nodes[i].linkext + '" style="width:12em">' + data.nodes[i].name + '</li>';
     }
     options = options + '<li onclick="getNodes(0);"><center><a data-role="button" data-icon="home" data-theme="e">Ir al Menú</a></center></li>';
     $("#options").html(options);

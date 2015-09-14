@@ -1,8 +1,9 @@
-function checkOut(param) {
-    console.log(param.onclick);
+function checkOut() {
     if (LOGGED == true) {
         if (CART.length > 0) {
-            var html = '<div id="page_send" style="display:none">' +
+            console.log("Actualizar div");
+            $('.ui-popup').popup('close');
+            var html = '<div>' +
                 '<center>' +
                 '<h3> ¿Que deseas hacer con el pedido?</h3>' +
                 '<br>' +
@@ -13,23 +14,32 @@ function checkOut(param) {
                 '<a style="width:300px" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="">Recoger en Mi Tienda</a>' +
                 '</center>' +
                 '</div>';
-            nodeIds.push(originNode);
-            nodeNames.push(originName);
-            $("#divContent").html(htmlContent);
+            $("#divContent").html(html);
             $("#divContent").trigger('create');
-
+            var n = nodeIds.length+1;            
+            updateBackButton(nodeIds[n], nodeNames[n]);
         } else {
             alert("No hay productos");
         }
-
     } else {
         $('.ui-popup').popup('close');
         setTimeout(function () {
             REDIRECT = true;
             $("#popupLogin").popup("open");
         }, popupTimeout);
-
         console.log("No estás logado");
     }
+}
 
+function updateBackButton(originNode, originName) {
+    if (nodeIds.length == 0) {
+        nodeIds.push(0);
+        nodeNames.push("Menú");
+        nodeIds.push(originNode);
+        nodeNames.push(originName);
+    } else {
+        nodeIds.push(originNode);
+        nodeNames.push(originName);
+    }
+    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 1] + '</div>');
 }
