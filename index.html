@@ -54,7 +54,7 @@
 
             <div id="divTienda" align="center" style="margin-top: 8%;">
                 <!--POPUP DE LOGIN -->
-                <div data-role="popup" id="popupCart" class=" ui-corner-all ui-shadow ui-btn-inline"  style="min-width:300px;">
+                <div data-role="popup" id="popupCart" class=" ui-corner-all ui-shadow ui-btn-inline" style="min-width:300px;">
                     <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
 
@@ -92,8 +92,9 @@
                         <button id="btnPopupActionRight" onclick='$("#popupAction").popup("close");' data-theme="d" data-icon="check" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
                     </div>
                 </div>
-
+                <!--POPUP DE LOGIN -->
                 <div data-role="popup" id="popupLogin" class="ui-content" style="min-width:250px;">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                     <form autocomplete="on">
                         <div id="div_session">
                             <h3>Iniciar sessión</h3>
@@ -116,6 +117,7 @@
                 </div>
                 <!--POPUP DE REGISTRO -->
                 <div data-role="popup" id="popupRegistro" class="ui-content" style="min-width:250px;">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                     <div id="div_registrarse">
                         <form autocomplete="on">
                             <h3> Registrarse </h3>
@@ -148,6 +150,7 @@
                 </div>
                 <!--POPUP DE CAMBIO PASSWORD -->
                 <div data-role="popup" id="popupCambioContra" class="ui-content" style="min-width:250px;">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                     <div id="div_cambioContra">
                         <form autocomplete="on">
                             <h3> Cambio de contraseña </h3>
@@ -156,7 +159,7 @@
                                 <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus>
                             </p>
                             <p>
-                                <button type="button" id="cam_contraseña">¡Pedir!</button>
+                                <button type="button" id="cam_contraseña">¡Pedir una nueva contraseña!</button>
                             </p>
                             <p>
                                 <button type="button" onclick="displayLogin2();" id="volver">Volver</button>

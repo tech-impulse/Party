@@ -746,7 +746,7 @@ function displayPantallaSugerencias() {
         '<option value="2">Petición' +
         '</select></div>' +
         '<br> Tiene alguna sugerencia...' +
-        '<textarea cols="40" rows="5" id="sugerencias">Escriba aquí sus sugerencias...</textarea>' +
+        '<textarea cols="40" rows="5" id="sugerencias" placeholder="Escriba aquí sus sugerencias..."></textarea>' +
         '<table width="50%" border="0" align="center" cellpadding="10" cellspacing="0">' +
         '<tr>' +
         '<td>' +

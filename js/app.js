@@ -75,7 +75,7 @@ $(document).ready(function () {
 
     $("#iniciar_session").click(function () { // botton de login de la app
 
-        console.log("Logeandose");
+        console.log("Logandose");
         var usuario = $('#usrnm').val();
         var contraseña = $('#pswd').val();
 
@@ -90,7 +90,7 @@ $(document).ready(function () {
 
     $("#enviar_registro").click(function () { // botton de registro a la app 
 
-        console.log("Logeandose");
+        console.log("registrandose");
         var usuario = $('#emailsignup').val();
         var contraseña = $('#passwordsignup').val();
         var rep_contraseña = $('#passwordsignup_confirm').val();
@@ -412,15 +412,16 @@ function stopYoutubeVideo(idOfIframe) {
 
 function enviarSugerencia() {
 
-    var edad = $("select#sugerencia_tipo option").filter(":selected").val();
+    var sugerencia_tipo = $("select#sugerencia_tipo option").filter(":selected").val();
     var nombre = $("#nombre").val();
     var correo = $("#correo").val();
     var provincia = $("#provincia").val();
     var poblacion = $("#poblacion").val();
     var telefono = $("#telf").val();
     var fecha_naci = $("#fecha_naci").val();
+    var sugerencias = $("#sugerencias").val();
 
-    console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + correo + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + ".");
+    console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + correo + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + " sugerencia " + sugerencias);
 
     if (nombre != "") {
 
@@ -434,14 +435,38 @@ function enviarSugerencia() {
 
                         if (fecha_naci != "") {
 
+                            if (sugerencias != "") {
+                                
+                                console.log("Llegamos hasta el final");
+
+                                var info = {
+                                    nombre: nombre,
+                                    correo: correo,
+                                    provincia: provincia,
+                                    poblacion: poblacion,
+                                    telefono: telefono,
+                                    fecha_naci: fecha_naci,
+                                    sugerencia_tipo: sugerencia_tipo,
+                                    sugerencia: sugerencia
+                                };
+
+                                sendSugerencias(info);
+
+                            } else {
+
+                                $("#texto_popup").text("Escriba una sugerencia o incidencia");
+                                $('#popupAlert').popup('open');
+                                console.log("No has escrito la sugerencia");
+
+                            }
 
 
 
                         } else {
 
-                            $("#texto_popup").text("Escriba un telefono");
+                            $("#texto_popup").text("Escriba un fecha de nacimiento");
                             $('#popupAlert').popup('open');
-                            console.log("No has escrito el correo");
+                            console.log("No has escrito la fecha de nacimiento");
 
                         }
 
@@ -450,7 +475,7 @@ function enviarSugerencia() {
 
                         $("#texto_popup").text("Escriba un telefono");
                         $('#popupAlert').popup('open');
-                        console.log("No has escrito el correo");
+                        console.log("No has escrito el telefono");
 
                     }
 
@@ -460,7 +485,7 @@ function enviarSugerencia() {
 
                     $("#texto_popup").text("Escriba una poblacion");
                     $('#popupAlert').popup('open');
-                    console.log("No has escrito el correo");
+                    console.log("No has escrito el poblacion");
 
                 }
 
@@ -469,7 +494,7 @@ function enviarSugerencia() {
 
                 $("#texto_popup").text("Escriba una provincia");
                 $('#popupAlert').popup('open');
-                console.log("No has escrito el correo");
+                console.log("No has escrito el provincia");
 
             }
 
@@ -477,7 +502,7 @@ function enviarSugerencia() {
 
             $("#texto_popup").text("Escriba un correo electronico");
             $('#popupAlert').popup('open');
-            console.log("No has escrito el correo");
+            console.log("No has escrito el correo electronico");
 
         }
 

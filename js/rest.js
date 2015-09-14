@@ -17,6 +17,8 @@ function getLogin(usario, contraseña) {
         success: function (response) {
 
             if (response.result == 1) {
+                
+                console.log("Todo ok");
                 LOGGED = true;
                 console.log(response.info);
                 INFO_USU = response.info;
@@ -27,7 +29,7 @@ function getLogin(usario, contraseña) {
 
             } else if (response.result == 0) {
 
-                //console.log("No hay productos para este nodo");
+                console.log("No exite");
                 $("#texto_popup").text("Usuario o contraseña incorrectos");
                 $('#popupAlert').popup('open');
 
@@ -484,10 +486,10 @@ function restError(res, typ) {
 }
 
 
-function sendSugerencias(formulario) {
+function sendSugerencias(info) {
 
     request = $.ajax({
-        data: formulario,
+        data: info,
         url: urlServices + '.php',
         dataType: 'json',
         type: 'POST',
@@ -498,8 +500,63 @@ function sendSugerencias(formulario) {
             if (response.result == 1) {
 
                 //console.log(response);
+                getNodes(0);
 
-                restOk_products(response, "nodes", idNode, nodeName);
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#texto_popup").text("No hay productos...");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -1) {
+
+                $("#texto_popup").text("Error...");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
+
+function sendContra(usuario) {
+    
+    var dataSend = {
+        usuario: usuario
+    };
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + '.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+            //console.log("Respuesta: ");
+            //console.log(response);
+
+            if (response.result == 1) {
+
+                //console.log(response);
+                getNodes(0);
+
 
             } else if (response.result == 0) {
 
