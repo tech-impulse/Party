@@ -136,6 +136,7 @@ $(document).ready(function () {
         console.log("Email " + usuarioCambio);
 
         if (usuarioCambio != "") {
+            console.log("Procedemos...")
             sendContra(usuarioCambio);
         } else {
             $("#texto_popup").text("Escriba un usuario");
