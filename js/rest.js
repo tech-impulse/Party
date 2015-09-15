@@ -543,15 +543,11 @@ function sendSugerencias(info) {
 }
 
 function sendContra(usuario) {
-<<<<<<< HEAD
 
-=======
-    
     console.log("Funcion enviar contra");
     
     usuario = "alberto.alarcon@esadecreapolis.com";
     
->>>>>>> 841438cd5e758497895a2a93405763306ce77b59
     var dataSend = {
         user: usuario
     };
