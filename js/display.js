@@ -22,7 +22,7 @@ function displayNode(data, originNode, originName) {
             var imagen_partyfiesta = "<div><img src='css/icons/logo.png'></div>";
         } else {
             var imagen_partyfiesta = "";
-           updateBackButton(originNode, originName);
+            updateBackButton(originNode, originName);
             //$("#divHeader").show();
         }
         switch (parseInt(data.columns)) {
@@ -179,8 +179,8 @@ function displayProducts(data, originNode, originName) {
         var type;
         if (originNode == 0) {
             loadMenu(data);
-        } else {            
-           updateBackButton(originNode, originName);
+        } else {
+            updateBackButton(originNode, originName);
         }
         switch (parseInt(data.columns)) {
         case 1:
@@ -751,4 +751,91 @@ function displayPantallaSugerencias() {
     $("#divContent").trigger('create');
 
 
+}
+
+function displaySummary(param) {
+    var html = '';
+    if (LOGGED == true) {
+        if (CART.length > 0) {
+            console.log("Actualizar div");
+            $('.ui-popup').popup('close');
+            var htmlHeader = '<ul data-role="listview">' +
+                '<li data-role="list-divider" style="background-color:#0096D2; font-size:20px; color:white;">' +
+                    '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a" style="width:70%">' +
+                            '<div class="ui-grid-b">' +
+                                '<div class="ui-block-a" style="width:20%">SKU</div>' +
+                                '<div class="ui-block-b" style="width:40%">Producto</div>' +
+                                '<div class="ui-block-v" style="width:40%">Ubicación</div>' +
+                            '</div>'+
+                        '</div>' +
+                        '<div class="ui-block-b" style="width:30%">'+
+                            '<div class="ui-grid-b">'+
+                                '<div class="ui-block-a" style="width:25%; text-align:center;">Unds</div>' +
+                                '<div class="ui-block-b" style="width:25%; text-align:center;">Precio</div>' +
+                                '<div class="ui-block-c" style="width:25%; text-align:center;">Total</div>' +
+                                '<div class="ui-block-d" style="width:25%; text-align:right;"></div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</li>';
+            /*
+            var htmlContent = '';
+            for (var i = 0; i<CART.length ; i++){
+                htmlContent = htmlContent +
+                '<li>'+
+                        '<div class="ui-grid-a">
+                            '<div class="ui-block-a" style="width:65%">
+                                '<div class="ui-grid-b">
+                                    '<div class="ui-block-a" style="width:20%"><img src="'+CART[i].linkext+'"></div>'+
+                                    '<div class="ui-block-b" style="width:40%">'+
+                                        Pack Gafas Frozen
+                                        <br> ID: 660591
+                                        <br> Descuento: 20%
+                                        <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
+                                    </div>
+                                    <div class="ui-block-c" style="width:40%">
+                                        Sección: NAV
+                                        <br> Estantería : 17
+                                        <br> Nivel: 9
+                                        <br> Stock Tienda: <img src="css/maqueta/barraAmarilla.gif">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="ui-block-b" style="width:35%">
+                                <div class="ui-grid-c">
+                                    <div class="ui-block-a" style="width:25%; text-align:right;">
+                                        2
+                                    </div>
+                                    <div class="ui-block-b" style="width:25%; text-align:right;">
+                                        9.99€
+                                    </div>
+                                    <div class="ui-block-c" style="width:25%; text-align:right;">
+                                        19.98€
+                                    </div>
+                                    <div class="ui-block-d" style="width:25%; text-align:right;">
+                                        <img src="css/maqueta/eliminar.png" onclick='$("#popup").popup("open");'>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li> 
+                    
+            }
+            */
+
+            html = htmlHeader + htmlContent + '</ul>';
+            $("#divContent").html(html);
+            $("#divContent").trigger('create');
+            var n = nodeIds.length + 1;
+            updateBackButton(nodeIds[n], nodeNames[n]);
+        } else {
+            alert("No hay productos");
+        }
+    } else {
+
+        console.log("No estás logado");
+    }
 }

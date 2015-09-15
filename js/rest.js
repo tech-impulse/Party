@@ -543,14 +543,22 @@ function sendSugerencias(info) {
 }
 
 function sendContra(usuario) {
+<<<<<<< HEAD
 
+=======
+    
+    console.log("Funcion enviar contra");
+    
+    usuario = "alberto.alarcon@esadecreapolis.com";
+    
+>>>>>>> 841438cd5e758497895a2a93405763306ce77b59
     var dataSend = {
-        usuario: usuario
+        user: usuario
     };
 
     request = $.ajax({
         data: dataSend,
-        url: urlServices + '.php',
+        url: urlServices + 'email.php',
         dataType: 'json',
         type: 'POST',
         success: function (response) {
@@ -559,9 +567,8 @@ function sendContra(usuario) {
 
             if (response.result == 1) {
 
-                //console.log(response);
-                getNodes(0);
-
+                console.log(response.password);
+             
 
             } else if (response.result == 0) {
 
