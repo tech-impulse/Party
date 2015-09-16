@@ -179,18 +179,39 @@ function backPage(idNode, nodeName) {
 function displayProductos(idNode, nodeName) { // botton de acceso a la app despus de escoger una tienda
 
     var sexo = $("select#select_sexo option").filter(":selected").val();
-    var edad = $("select#select_edad option").filter(":selected").val();
+    //var edad = $("select#select_edad option").filter(":selected").val();
     var talla = $("select#select_talla option").filter(":selected").val();
-    console.log("Seleccion es " + val);
 
-    if (val >= 1) {
+    var info_aux = {
+        sexo: sexo,
+        talla: talla
+    };
 
-        getProducts(idNode, nodeName);
+    if (sexo != 0 && talla != 0 && ISFIESTA == 4) {
 
+        console.log("Todos los selects ok");
+        getProducts(idNode, nodeName, info_aux);
+
+
+    } else if (ISFIESTA == 3) {
+
+        var num_persosnas = $('#personas_fiesta').val();
+
+        if (num_persosnas > 0) {
+
+            console.log("Todos los selects ok. ASIS. FIESTAS");
+            getProducts(idNode, nodeName);
+
+        } else {
+            
+            $("#texto_popup").text("Añada alguna persona a la fiesta");
+            $('#popupAlert').popup('open');
+
+        }
 
     } else {
 
-        $("#texto_popup").text("Añada alguna persona para poder continuar");
+        $("#texto_popup").text("Seleccione un campo valido para poder continuar");
         $('#popupAlert').popup('open');
 
     }
@@ -439,7 +460,7 @@ function enviarSugerencia() {
                         if (fecha_naci != "") {
 
                             if (sugerencias != "") {
-                                
+
                                 console.log("Llegamos hasta el final");
 
                                 var info = {

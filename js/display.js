@@ -7,7 +7,7 @@
 function displayNode(data, originNode, originName) {
 
     console.log("DisplayNode-> Nodes es " + data.result);
-    //console.log(data);
+    console.log(data);
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -77,10 +77,10 @@ function displayNode(data, originNode, originName) {
                             extra = '';
                             break;
                         case 3: // asis fistas
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',1)';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\','+data.nodes[i].type+')';
                             break;
                         case 4: // asis disfra
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',1)';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\','+data.nodes[i].type+')';
                             break;
                         case 5: // sugerencias
                             extra = 'displayPantallaSugerencias()';
@@ -604,20 +604,20 @@ function loadMenu(data) {
 }
 
 
-function displayPantallaIntermedia(data) {
+function displayPantallaIntermediaAsistDisfra(data) {
 
     //console.log(data);
 
     htmlContent = '<div id="page_count" style="display: block;">' +
         '<center>' +
         '<img src="' + data.linkint + '" alt="">' +
-        '<h3> ¿Para quién es el disfraz?</h3>' +
+        //'<h3> ¿Para quién es el disfraz?</h3>' +
         '<div style="width: 25%"><select id="select_sexo" >' +
         '</select></div>' +
-        '<h3> Edad </h3>' +
-        '<div style="width: 25%"><select id="select_edad" >' +
-        '</select></div>' +
-        '<h3> Talla </h3>' +
+        //'<h3> Edad </h3>' +
+        //'<div style="width: 25%"><select id="select_edad" >' +
+        //'</select></div>' +
+        //'<h3> Talla </h3>' +
         '<div style="width: 25%"><select id="select_talla" >' +
         '</select></div>' +
         '<br>' +
@@ -631,11 +631,33 @@ function displayPantallaIntermedia(data) {
     
     getGender();
     getSize();
-    getAge();
+    //getAge();
     //getSubject();
 
 
 }
+
+
+function displayPantallaIntermediaAsistFiestas(data) {
+
+    console.log(data);
+    console.log("Asistente de fiestas");
+
+    htmlContent = '<div id="page_count" style="display: block;">' +
+        '<center>' +
+        '<img src="' + data.linkint + '" alt="">' +
+        '<div style="width: 10%"><input type="number" id="personas_fiesta" min="1"></div>' +
+        '<br>' +
+        '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
+        '</center>' +
+        '</div>';
+    htmlContent = htmlContent + '</div>';
+    $("#divContent").html(htmlContent);
+    $("#divContent").trigger('create');
+    
+
+}
+
 
 function displayRegistro() { //muestra el pop up de registro
 

@@ -147,11 +147,11 @@ function getNodes(idNode, nodeName, isAlgo) {
         id: idNode
     };
 
-    if (isAlgo == 1) {
-        ISFIESTA = 1;
-    } else if (isAlgo == 0) {
-        ISFIESTA = 0;
+    if (isAlgo != undefined) {
+        ISFIESTA = isAlgo;
     }
+    
+    console.log("Is algo es "+isAlgo);
 
     request = $.ajax({
         data: dataSend,
@@ -172,6 +172,7 @@ function getNodes(idNode, nodeName, isAlgo) {
                 }*/
 
                 restOk(response, "nodes", idNode, nodeName);
+                
 
             } else if (response.result == 0) { // ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
@@ -181,24 +182,41 @@ function getNodes(idNode, nodeName, isAlgo) {
                 console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-                if (ISFIESTA == 1) { // si estamos en algun asistente, ya sea de fistas o disfraces, hayq ue mostrar una pantalla intermadia
+                if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hayq ue mostrar una pantalla intermadia
 
-                    console.log("Asistentes");
+                    console.log("Asistentes de disfraces");
                     var info = getInfoNode(idNode);
 
                     //console.log(info);
 
                     if (info != "undefined") {
                         console.log("DisplayPantalla intermadia");
-                        displayPantallaIntermedia(info.node);
+                        displayPantallaIntermediaAsistDisfra(info.node);
+                    } else {
+                        $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
+                        $('#popupAlert').popup('open');
+                    }
+
+                } else if (ISFIESTA == 3) {
+
+                    console.log("Asistentes de fiestas");
+                    var info = getInfoNode(idNode);
+
+                    //console.log(info);
+
+                    if (info != "undefined") {
+                        console.log("DisplayPantalla intermadia");
+                        displayPantallaIntermediaAsistFiestas(info.node);
                     } else {
                         $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
                         $('#popupAlert').popup('open');
                     }
 
                 } else {
+
                     console.log("Dame productos de " + nodeName);
                     getProducts(idNode, nodeName);
+
                 }
 
 
@@ -313,15 +331,33 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
 }
 
 //WS que devuelve el listado de productos para un nodo
-function getProducts(idNode, nodeName) {
+function getProducts(idNode, nodeName, info_aux) {
 
-    // Datos que se van a enviar
-    var dataSend = {
-        lang: language,
-        origin: origin,
-        store: STORE,
-        id: idNode
-    };
+    if (info_aux != undefined) { //cuando estemos en el asist. de disfraces
+
+        console.log("Venimos del asist. de disfraces");
+        var dataSend = {
+            lang: language,
+            origin: origin,
+            store: STORE,
+            gender: info_aux.sexo,
+            size: info_aux.talla,
+            id: idNode
+        };
+
+
+    } else {
+
+        console.log("No estamos en el asist. de disfraces");
+        // Datos que se van a enviar
+        var dataSend = {
+            lang: language,
+            origin: origin,
+            store: STORE,
+            id: idNode
+        };
+
+    }
 
     request = $.ajax({
         data: dataSend,
@@ -374,7 +410,7 @@ function getProducts(idNode, nodeName) {
 
 function restOk_products(res, typ, param, param2) {
     console.log("Todo bien desde " + typ);
-    console.log("La respuesta es ");
+    //console.log("La respuesta es ");
     console.log(res);
 
     switch (typ) {
@@ -545,9 +581,9 @@ function sendSugerencias(info) {
 function sendContra(usuario) {
 
     console.log("Funcion enviar contra");
-    
+
     usuario = "alberto.alarcon@esadecreapolis.com";
-    
+
     var dataSend = {
         user: usuario
     };
@@ -564,7 +600,7 @@ function sendContra(usuario) {
             if (response.result == 1) {
 
                 console.log(response.password);
-             
+
 
             } else if (response.result == 0) {
 
@@ -603,7 +639,7 @@ function sendContra(usuario) {
 //WS que devuelve el listado de sexo mas-feme
 function getGender() {
 
-     request = $.ajax({
+    request = $.ajax({
         url: urlServices + 'getGender.php',
         dataType: 'json',
         type: 'GET',
@@ -621,16 +657,29 @@ function getGender() {
 
                 for (var i = 0; i < count; i++) {
 
-                    var val = response.genders[i].nombre;
+                    if (i == 0) {
 
-                    console.log("Val es " + val );
+                        select.append($('<option>', {
+                            value: 0,
+                            text: "¿Para quién es el disfraz?"
+                        }));
 
-                    select.append($('<option>', {
-                        value: val,
-                        text: val
-                    }));
 
-                    select.selectmenu('refresh', true);
+                    } else {
+
+
+                        var val = response.genders[i].nombre;
+
+                        console.log("Val es " + val);
+
+                        select.append($('<option>', {
+                            value: val,
+                            text: val
+                        }));
+
+                        select.selectmenu('refresh', true);
+
+                    }
 
                 }
 
@@ -673,10 +722,10 @@ function getGender() {
     });
 }
 
-//WS que devuelve el listado de tallas
+//WS que devuelve el listado de tallas      
 function getSize() {
 
-     request = $.ajax({
+    request = $.ajax({
         url: urlServices + 'getSize.php',
         dataType: 'json',
         type: 'GET',
@@ -694,16 +743,28 @@ function getSize() {
 
                 for (var i = 0; i < count; i++) {
 
-                    var val = response.sizes[i].nombre;
+                    if (i == 0) {
 
-                    console.log("Val es " + val );
+                        select.append($('<option>', {
+                            value: 0,
+                            text: "¿Que talla tiene?"
+                        }));
 
-                    select.append($('<option>', {
-                        value: val,
-                        text: val
-                    }));
 
-                    select.selectmenu('refresh', true);
+                    } else {
+
+                        var val = response.sizes[i].nombre;
+
+                        console.log("Val es " + val);
+
+                        select.append($('<option>', {
+                            value: val,
+                            text: val
+                        }));
+
+                        select.selectmenu('refresh', true);
+
+                    }
 
                 }
 
@@ -749,7 +810,7 @@ function getSize() {
 //WS que devuelve el listado edades
 function getAge() {
 
-     request = $.ajax({
+    request = $.ajax({
         url: urlServices + 'getAge.php',
         dataType: 'json',
         type: 'GET',
@@ -766,26 +827,29 @@ function getAge() {
                 var select = $('#select_edad');
 
                 for (var i = 0; i < count; i++) {
-                    
-                    if( i == 0 ){
-                        
-                        
-                    
-                    }else{
-                    
-                    
+
+                    if (i == 0) {
+
+                        select.append($('<option>', {
+                            value: 0,
+                            text: "¿Que edad tiene?"
+                        }));
+
+
+                    } else {
+
+                        var val = response.age[i].nombre;
+
+                        console.log("Val es " + val);
+
+                        select.append($('<option>', {
+                            value: val,
+                            text: val
+                        }));
+
+                        select.selectmenu('refresh', true);
+
                     }
-
-                    var val = response.age[i].nombre;
-
-                    console.log("Val es " + val );
-
-                    select.append($('<option>', {
-                        value: val,
-                        text: val
-                    }));
-
-                    select.selectmenu('refresh', true);
 
                 }
 
