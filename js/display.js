@@ -606,15 +606,20 @@ function loadMenu(data) {
 
 function displayPantallaIntermedia(data) {
 
-    console.log(data);
+    //console.log(data);
 
     htmlContent = '<div id="page_count" style="display: block;">' +
         '<center>' +
         '<img src="' + data.linkint + '" alt="">' +
-        '<h3> ¿Para cuantas personas es la fiesta?</h3>' +
-        '<div style="width:100px">' +
-        '<input id="num_personas" type="number" name="quantity" min="1">' +
-        '</div>' +
+        '<h3> ¿Para quién es el disfraz?</h3>' +
+        '<div style="width: 25%"><select id="select_sexo" >' +
+        '</select></div>' +
+        '<h3> Edad </h3>' +
+        '<div style="width: 25%"><select id="select_edad" >' +
+        '</select></div>' +
+        '<h3> Talla </h3>' +
+        '<div style="width: 25%"><select id="select_talla" >' +
+        '</select></div>' +
         '<br>' +
         '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
         '</center>' +
@@ -622,6 +627,12 @@ function displayPantallaIntermedia(data) {
     htmlContent = htmlContent + '</div>';
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
+    
+    
+    getGender();
+    getSize();
+    getAge();
+    //getSubject();
 
 
 }

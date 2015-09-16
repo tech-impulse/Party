@@ -178,7 +178,9 @@ function backPage(idNode, nodeName) {
 
 function displayProductos(idNode, nodeName) { // botton de acceso a la app despus de escoger una tienda
 
-    var val = $("#num_personas").val();
+    var sexo = $("select#select_sexo option").filter(":selected").val();
+    var edad = $("select#select_edad option").filter(":selected").val();
+    var talla = $("select#select_talla option").filter(":selected").val();
     console.log("Seleccion es " + val);
 
     if (val >= 1) {

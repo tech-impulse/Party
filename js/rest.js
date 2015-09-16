@@ -599,3 +599,231 @@ function sendContra(usuario) {
         },
     });
 }
+
+//WS que devuelve el listado de sexo mas-feme
+function getGender() {
+
+     request = $.ajax({
+        url: urlServices + 'getGender.php',
+        dataType: 'json',
+        type: 'GET',
+        timeout: 10000, //10 seg
+        success: function (response) {
+            //console.log("Respuesta: ");
+            console.log(response);
+
+            if (response.result == 1) {
+
+                //console.log(response);
+
+                var count = response.genders.length;
+                var select = $('#select_sexo');
+
+                for (var i = 0; i < count; i++) {
+
+                    var val = response.genders[i].nombre;
+
+                    console.log("Val es " + val );
+
+                    select.append($('<option>', {
+                        value: val,
+                        text: val
+                    }));
+
+                    select.selectmenu('refresh', true);
+
+                }
+
+
+                //var option1 = $($("option", select).get(1));
+                //option1.attr('selected', 'selected');
+                select.selectmenu();
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#texto_popup").text("No hay productos...");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -1) {
+
+                $("#texto_popup").text("Error...");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
+
+//WS que devuelve el listado de tallas
+function getSize() {
+
+     request = $.ajax({
+        url: urlServices + 'getSize.php',
+        dataType: 'json',
+        type: 'GET',
+        timeout: 10000, //10 seg
+        success: function (response) {
+            //console.log("Respuesta: ");
+            //console.log(response);
+
+            if (response.result == 1) {
+
+                console.log(response);
+
+                var count = response.sizes.length;
+                var select = $('#select_talla');
+
+                for (var i = 0; i < count; i++) {
+
+                    var val = response.sizes[i].nombre;
+
+                    console.log("Val es " + val );
+
+                    select.append($('<option>', {
+                        value: val,
+                        text: val
+                    }));
+
+                    select.selectmenu('refresh', true);
+
+                }
+
+
+                //var option1 = $($("option", select).get(1));
+                //option1.attr('selected', 'selected');
+                select.selectmenu();
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#texto_popup").text("No hay productos...");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -1) {
+
+                $("#texto_popup").text("Error...");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
+
+//WS que devuelve el listado edades
+function getAge() {
+
+     request = $.ajax({
+        url: urlServices + 'getAge.php',
+        dataType: 'json',
+        type: 'GET',
+        timeout: 10000, //10 seg
+        success: function (response) {
+            //console.log("Respuesta: ");
+            console.log(response);
+
+            if (response.result == 1) {
+
+                //console.log(response);
+
+                var count = response.age.length;
+                var select = $('#select_edad');
+
+                for (var i = 0; i < count; i++) {
+                    
+                    if( i == 0 ){
+                        
+                        
+                    
+                    }else{
+                    
+                    
+                    }
+
+                    var val = response.age[i].nombre;
+
+                    console.log("Val es " + val );
+
+                    select.append($('<option>', {
+                        value: val,
+                        text: val
+                    }));
+
+                    select.selectmenu('refresh', true);
+
+                }
+
+
+                //var option1 = $($("option", select).get(1));
+                //option1.attr('selected', 'selected');
+                select.selectmenu();
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#texto_popup").text("No hay productos...");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -1) {
+
+                $("#texto_popup").text("Error...");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
