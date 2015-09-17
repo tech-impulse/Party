@@ -16,7 +16,11 @@ $(document).bind("mobileinit", function () {
 
 $(document).ready(function () {
 
-    var htmlHeader_menu = '<img src="css/icons/barra.png" width="100%"> </div>';
+    var htmlHeader_menu = '<div id="barra_sup" style="position:relative">'+
+                            '<img src="css/icons/barra.png" width="100%"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">'+
+                                '<img src="css/banderas/england.png" style="width: 40px;margin-right: 5px;height: 28px;"><img src="css/banderas/france.png" style="width: 40px;margin-right: 5px;height: 28px;"><img src="css/banderas/portugal.png" style="width: 40px;margin-right: 5px;height: 28px;"><img src="css/banderas/spain.png" style="width: 40px;margin-right: 5px;height: 28px;"><img src="css/banderas/catalunya.png" style="width: 40px;margin-right: 5px;height: 28px;">'+
+                            '</div>'+
+                          '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
     $("#divHeader_menu").show();
