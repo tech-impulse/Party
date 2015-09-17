@@ -17,7 +17,7 @@ $(document).bind("mobileinit", function () {
 $(document).ready(function () {
 
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">'+
-                            '<img src="css/icons/barra.png" width="100%"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">'+
+                            '<img src="css/icons/barra.png" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">'+
                                 '<img src="css/banderas/england.png" onclick="changeIdiom("ingles");" style="width: 40px;margin-right: 5px;height: 28px;">'+
                                 '<img src="css/banderas/france.png" onclick="changeIdiom("frances");" style="width: 40px;margin-right: 5px;height: 28px;">'+
                                 '<img src="css/banderas/portugal.png" onclick="changeIdiom("portugues");" style="width: 40px;margin-right: 5px;height: 28px;">'+

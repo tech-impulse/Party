@@ -8,6 +8,9 @@ function displayNode(data, originNode, originName) {
 
     console.log("DisplayNode-> Nodes es " + data.result);
     console.log(data);
+    
+    var filas = data.nodes.length / data.columns;
+    var count = 1;
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -19,7 +22,8 @@ function displayNode(data, originNode, originName) {
 
         if (originNode == 0) {
             loadMenu(data);
-            var imagen_partyfiesta = "<div><img src='css/icons/logo.png'></div>";
+            //var imagen_partyfiesta = "<div><img src='css/icons/logo.png'></div>";
+            var imagen_partyfiesta = "";
         } else {
             var imagen_partyfiesta = "";
             updateBackButton(originNode, originName);
@@ -64,11 +68,12 @@ function displayNode(data, originNode, originName) {
         switch (type) {
         case "horizontal":
             {
-                htmlContent = "<center>" + imagen_partyfiesta + "</center>" + grid;
-                position = "a";
+                htmlContent = /* "<center>" + imagen_partyfiesta + "</center>" +*/ grid;
+                //position = "a";
                 for (var i = 0; i < data.nodes.length; i++) {
 
-                    if (originNode == 0) { //solo se mostrar en el menu inicial de la app getNodes(0)
+                    //solo se mostrar en el menu inicial de la app getNodes(0) diferenciamos entre los diferentes bloques del menu principal
+                    if (originNode == 0) {
                         switch (parseInt(data.nodes[i].type)) {
                         case 1: //catalogo
                             extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0)';
@@ -77,10 +82,10 @@ function displayNode(data, originNode, originName) {
                             extra = '';
                             break;
                         case 3: // asis fistas
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\','+data.nodes[i].type+')';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ')';
                             break;
                         case 4: // asis disfra
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\','+data.nodes[i].type+')';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ')';
                             break;
                         case 5: // sugerencias
                             extra = 'displayPantallaSugerencias()';
@@ -88,43 +93,68 @@ function displayNode(data, originNode, originName) {
                         case 6: // fuera tienda
                             extra = '';
                             break;
+                        default: // caso elemento principal
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ')';
+                            break;
                         }
                     } else extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')';
-                    //console.log("DisplayNode-> Nodes es " + data.result + " getNodes(" + data.nodes[i].id + "," + data.nodes[i].short_name + " )");
+
 
                     if (position < parseInt(data.columns)) { //numero maximo de columnas que tendra la pantalla
                         switch (position) {
                         case 0:
-                            block = '<div class="ui-block-a" onclick="' + extra + '">';
+                            block = '<div class="ui-block-a" onclick="' + extra + '" >';
                             break;
                         case 1:
-                            block = '<div class="ui-block-b" onclick="' + extra + '">';
+                            block = '<div class="ui-block-b" onclick="' + extra + '" >';
                             break;
                         case 2:
-                            block = '<div class="ui-block-c" onclick="' + extra + '">';
+                            block = '<div class="ui-block-c" onclick="' + extra + '" >';
                             break;
                         case 3:
-                            block = '<div class="ui-block-d" onclick="' + extra + '">';
+                            block = '<div class="ui-block-d" onclick="' + extra + '" >';
                             break;
                         case 4:
-                            block = '<div class="ui-block-e" onclick="' + extra + '">';
+                            block = '<div class="ui-block-e" onclick="' + extra + '" >';
                             break;
                         }
                     } else {
                         position = 0;
-                        block = '<div class="ui-block-a" onclick="' + extra + '">';
+                        block = '<div class="ui-block-a" onclick="' + extra + '" >';
                     }
-                    var element = block + '<div class=""><a data-role="button" data-theme="f"><img src="' + data.nodes[i].linkext + '" style="width: 120px;height: 120px;"><br><strong>' + data.nodes[i].name +
-                        '</strong></a></div></div>';
+
+                    if ( (position+1) == parseInt(data.columns) && count < filas ) { //despues de la primera fila se mostrara el elemento principal
+                        
+                        console.log("Entramos para mostrar el nuevo elemeto");
+                        var element2 = '<div class="ui-block-a" style="width: 25%;"></div><div class="ui-block-b" style="width: 50%;"><a data-role="button" data-theme="f" style="background-color: lightblue;"><img src="' +
+                            data.nodes[i].linkext + '" style="width: 100px;height: 100px;" ><br><strong>' + data.nodes[i].name +
+                            '</strong></a></div><div class="ui-block-c" style="width: 25%;"></div>';
+
+                        var element = block + '<div><a data-role="button" data-theme="f"><img src="' +
+                            data.nodes[i].linkext + '" style="width: 85px;height: 85px;"><br><strong>' + data.nodes[i].name +
+                            '</strong></a></div></div>';
+                    
+                        count++;
+                        htmlContent = htmlContent + element + element2;
+
+                    } else {
+
+                        var element = block + '<div><a data-role="button" data-theme="f"><img src="' +
+                            data.nodes[i].linkext + '" style="width: 85px;height: 85px;"><br><strong>' + data.nodes[i].name +
+                            '</strong></a></div></div>';
+                        htmlContent = htmlContent + element;
+
+                    }
 
                     //console.log(element);
 
-                    htmlContent = htmlContent + element;
-                    if (position == "c") {
+                    //htmlContent = htmlContent + element;
+                    /*if (position == "c") {
                         htmlContent = htmlContent + grid;
-                    }
+                    }*/
                     position++;
                 }
+
                 htmlContent = htmlContent + '</div>';
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
@@ -627,8 +657,8 @@ function displayPantallaIntermediaAsistDisfra(data) {
     htmlContent = htmlContent + '</div>';
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
-    
-    
+
+
     getGender();
     getSize();
     //getAge();
@@ -654,7 +684,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
     htmlContent = htmlContent + '</div>';
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
-    
+
 
 }
 
@@ -794,23 +824,23 @@ function displaySummary(param) {
             $('.ui-popup').popup('close');
             var htmlHeader = '<ul data-role="listview">' +
                 '<li data-role="list-divider" style="background-color:#0096D2; font-size:20px; color:white;">' +
-                    '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a" style="width:70%">' +
-                            '<div class="ui-grid-b">' +
-                                '<div class="ui-block-a" style="width:20%">SKU</div>' +
-                                '<div class="ui-block-b" style="width:40%">Producto</div>' +
-                                '<div class="ui-block-v" style="width:40%">Ubicación</div>' +
-                            '</div>'+
-                        '</div>' +
-                        '<div class="ui-block-b" style="width:30%">'+
-                            '<div class="ui-grid-b">'+
-                                '<div class="ui-block-a" style="width:25%; text-align:center;">Unds</div>' +
-                                '<div class="ui-block-b" style="width:25%; text-align:center;">Precio</div>' +
-                                '<div class="ui-block-c" style="width:25%; text-align:center;">Total</div>' +
-                                '<div class="ui-block-d" style="width:25%; text-align:right;"></div>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="width:70%">' +
+                '<div class="ui-grid-b">' +
+                '<div class="ui-block-a" style="width:20%">SKU</div>' +
+                '<div class="ui-block-b" style="width:40%">Producto</div>' +
+                '<div class="ui-block-v" style="width:40%">Ubicación</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="ui-block-b" style="width:30%">' +
+                '<div class="ui-grid-b">' +
+                '<div class="ui-block-a" style="width:25%; text-align:center;">Unds</div>' +
+                '<div class="ui-block-b" style="width:25%; text-align:center;">Precio</div>' +
+                '<div class="ui-block-c" style="width:25%; text-align:center;">Total</div>' +
+                '<div class="ui-block-d" style="width:25%; text-align:right;"></div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
                 '</li>';
             /*
             var htmlContent = '';
