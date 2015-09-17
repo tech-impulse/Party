@@ -8,9 +8,11 @@ function displayNode(data, originNode, originName) {
 
     console.log("DisplayNode-> Nodes es " + data.result);
     console.log(data);
-    
+
     var filas = data.nodes.length / data.columns;
     var count = 1;
+
+    var alturaBox = parseInt(100 / (filas + 1));
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -103,19 +105,19 @@ function displayNode(data, originNode, originName) {
                     if (position < parseInt(data.columns)) { //numero maximo de columnas que tendra la pantalla
                         switch (position) {
                         case 0:
-                            block = '<div class="ui-block-a" onclick="' + extra + '" >';
+                            block = '<div class="ui-block-a" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                             break;
                         case 1:
-                            block = '<div class="ui-block-b" onclick="' + extra + '" >';
+                            block = '<div class="ui-block-b" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                             break;
                         case 2:
-                            block = '<div class="ui-block-c" onclick="' + extra + '" >';
+                            block = '<div class="ui-block-c" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                             break;
                         case 3:
-                            block = '<div class="ui-block-d" onclick="' + extra + '" >';
+                            block = '<div class="ui-block-d" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                             break;
                         case 4:
-                            block = '<div class="ui-block-e" onclick="' + extra + '" >';
+                            block = '<div class="ui-block-e" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                             break;
                         }
                     } else {
@@ -123,24 +125,24 @@ function displayNode(data, originNode, originName) {
                         block = '<div class="ui-block-a" onclick="' + extra + '" >';
                     }
 
-                    if ( (position+1) == parseInt(data.columns) && count < filas ) { //despues de la primera fila se mostrara el elemento principal
-                        
+                    if ((position + 1) == parseInt(data.columns) && count < filas) { //despues de la primera fila se mostrara el elemento principal
+
                         console.log("Entramos para mostrar el nuevo elemeto");
-                        var element2 = '<div class="ui-block-a" style="width: 25%;"></div><div class="ui-block-b" style="width: 50%;"><a data-role="button" data-theme="f" style="background-color: lightblue;"><img src="' +
+                        var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + '%"></div><div class="ui-block-b" style="width: 50%;height:' + alturaBox + '%"><a data-role="button" data-theme="f" style="background-color: lightblue;"><img src="' +
                             data.nodes[i].linkext + '" style="width: 100px;height: 100px;" ><br><strong>' + data.nodes[i].name +
-                            '</strong></a></div><div class="ui-block-c" style="width: 25%;"></div>';
+                            '</strong></a></div><div class="ui-block-c" style="width: 25%;height:' + alturaBox + '%"></div>';
 
                         var element = block + '<div><a data-role="button" data-theme="f"><img src="' +
-                            data.nodes[i].linkext + '" style="width: 85px;height: 85px;"><br><strong>' + data.nodes[i].name +
+                            data.nodes[i].linkext + '" style="width: 85px;height: 85px;height:' + alturaBox + '%"><br><strong>' + data.nodes[i].name +
                             '</strong></a></div></div>';
-                    
+
                         count++;
                         htmlContent = htmlContent + element + element2;
 
                     } else {
 
                         var element = block + '<div><a data-role="button" data-theme="f"><img src="' +
-                            data.nodes[i].linkext + '" style="width: 85px;height: 85px;"><br><strong>' + data.nodes[i].name +
+                            data.nodes[i].linkext + '" style="width: 85px;height: 85px;height:' + alturaBox + '%"><br><strong>' + data.nodes[i].name +
                             '</strong></a></div></div>';
                         htmlContent = htmlContent + element;
 
