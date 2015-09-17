@@ -122,7 +122,7 @@ function displayNode(data, originNode, originName) {
                         }
                     } else {
                         position = 0;
-                        block = '<div class="ui-block-a" onclick="' + extra + '" >';
+                        block = '<div class="ui-block-a" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                     }
 
                     if ((position + 1) == parseInt(data.columns) && count < filas) { //despues de la primera fila se mostrara el elemento principal
