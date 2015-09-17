@@ -16,7 +16,7 @@ function checkOut() {
                 '</div>';
             $("#divContent").html(html);
             $("#divContent").trigger('create');
-            var n = nodeIds.length+1;            
+            var n = nodeIds.length + 1;
             updateBackButton(nodeIds[n], nodeNames[n]);
         } else {
             alert("No hay productos");
@@ -42,4 +42,45 @@ function updateBackButton(originNode, originName) {
         nodeNames.push(originName);
     }
     $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 1] + '</div>');
+}
+
+
+function changeIdiom(idioma) {
+
+
+    console.log("El idioma a cambiar es " + idioma);
+
+    switch (idioma) {
+
+    case "español":
+
+        break;
+
+    case "ingles":
+
+        break;
+
+    case "portugues":
+
+        break;
+
+    case "catalan":
+
+        break;
+
+    case "frances":
+
+        break;
+
+    default:
+
+        break;
+
+
+
+    }
+
+
+
+
 }
