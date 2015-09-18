@@ -19,13 +19,14 @@ function getLogin(usario, contraseña) {
             if (response.result == 1) {
 
                 console.log("Todo ok");
+                console.log(response);
                 LOGGED = true;
-                console.log(response.info);
+                //console.log(response.info);
                 INFO_USU = response.info;
                 $('#popupLogin').popup('close');
-                $("#login").text("Bienvenido/a " + usario + ",");
+                $("#login").text("Bienvenido/a "+response.info.name+",");  // + usario + "
                 $('#login').attr('onclick', "logout()");
-                $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 25px;">');
+                $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
                 if (REDIRECT) {
                     console.log("Redirigeme");
                     REDIRECT = false;
