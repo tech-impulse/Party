@@ -578,14 +578,14 @@ function loadMenu(data) {
         */
 
 
-    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral" data-transition="pop"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">' +
+    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral" data-transition="pop"> <div class="ui-grid-a"><div class="ui-block-a" style="width:30%"><span class="flaticon-shop" style="margin-left: 20%;"></span></div><div class="ui-block-b" style="width: 70%;">' +
+        '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
+
+    /*var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">' +
         '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
 
     var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">' +
-        '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
-
-    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">' +
-        '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
+        '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';*/
 
 
 
@@ -594,19 +594,19 @@ function loadMenu(data) {
 
     htmlHeader = '<div>' +
         '<div class="ui-grid-d">' +
-        '<div class="ui-block-a" style="margin-top:10px; width:20%" id="divBack"></div>' +
-        '<div class="ui-block-b" style="margin-top:10px; width:30%"><img src="css/icons/logo.png" width="100%"> </div>' +
-        '<div class="ui-block-c" style="margin-top:10px;width:20%" id="session">' +
-        '<center><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Identificate!</span> </a>' +
+        '<div class="ui-block-a" style="margin-top:10px; width:30%" id="divBack"></div>' +
+        '<div class="ui-block-b" style="margin-top:10px; width:15%;margin-left: 10%;margin-right: 12%;"><img src="css/icons/logo.png" width="100%"> </div>' +
+        '<div class="ui-block-c" style="margin-top:10px;width:10%" id="session">' +
+        '<center><a id="login" onclick="displayLogin();" style="margin:10px; width:10%"> <span>Identificate!</span> </a>' +
         '</div>' +
-        '<div class="ui-block-d" style="margin-top:10px; width:25%">' + cart +
+        '<div class="ui-block-d" style="margin-top:10px; width:19%">' + cart +
         '</div>' +
-        '<div class="ui-block-e" style="margin-top:10px; width:5%">' +
+        '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
         '</div>' +
         '</div>' +
-        '</div>' +
-        '<img src="css/icons/barra.png" height="5px" width="100%"><ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
+        '</div>' ;
+        //'<img src="css/icons/barra.png" height="5px" width="100%"><ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
     /*
     htmlHeader = '<div>'+
         '<div class="ui-grid-b">'+

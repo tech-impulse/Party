@@ -60,7 +60,7 @@ function updateBackButton(originNode, originName) {
         nodeIds.push(originNode);
         nodeNames.push(originName);
     }
-    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:14px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 2] + '</div>');
+    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:10px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 2] + '</div>');
 }
 
 
