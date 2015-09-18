@@ -595,7 +595,7 @@ function loadMenu(data) {
     htmlHeader = '<div>' +
         '<div class="ui-grid-d">' +
         '<div class="ui-block-a" style="margin-top:10px; width:30%" id="divBack"></div>' +
-        '<div class="ui-block-b" style="margin-top:10px; width:15%;margin-left: 10%;margin-right: 12%;"><img src="css/icons/logo.png" width="100%"> </div>' +
+        '<div class="ui-block-b" style="margin-top:10px; width:15%;margin-left: 10%;margin-right: 12%;"><img src="css/icons/logo.png" width="150%"> </div>' +
         '<div class="ui-block-c" style="margin-top:10px;width:10%" id="session">' +
         '<center><a id="login" onclick="displayLogin();" style="margin:10px; width:10%"> <span>Identificate!</span> </a>' +
         '</div>' +
