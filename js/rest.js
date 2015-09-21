@@ -150,9 +150,9 @@ function getNodes(idNode, nodeName, isAlgo) {
 
     if (isAlgo != undefined) {
         ISFIESTA = isAlgo;
+        console.log("Is algo es "+isAlgo);
     }
-    
-    console.log("Is algo es "+isAlgo);
+
 
     request = $.ajax({
         data: dataSend,
@@ -165,12 +165,6 @@ function getNodes(idNode, nodeName, isAlgo) {
 
                 console.log("Respuesta del nodo");
                 console.log(response);
-
-                /*if (isAlgo == 1) { // si es 1 estaremos en el aistente de fiestas o de disfraces
-                    ISFIESTA = 1;
-                } else if (isAlgo == 0) {
-                    ISFIESTA = 0;
-                }*/
 
                 restOk(response, "nodes", idNode, nodeName);
                 
@@ -187,8 +181,6 @@ function getNodes(idNode, nodeName, isAlgo) {
 
                     console.log("Asistentes de disfraces");
                     var info = getInfoNode(idNode);
-
-                    //console.log(info);
 
                     if (info != "undefined") {
                         console.log("DisplayPantalla intermadia");

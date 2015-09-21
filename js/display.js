@@ -9,7 +9,7 @@ function displayNode(data, originNode, originName) {
     console.log("DisplayNode-> Nodes es " + data.result);
     console.log(data);
 
-    var filas = data.nodes.length / data.columns;
+    var filas = data.nodes.length / data.columns; //isMain
     var count = 1;
 
     var alturaBox = parseInt(100 / (filas + 1));
@@ -76,7 +76,16 @@ function displayNode(data, originNode, originName) {
 
                     //solo se mostrar en el menu inicial de la app getNodes(0) diferenciamos entre los diferentes bloques del menu principal
                     if (originNode == 0) {
-                        switch (parseInt(data.nodes[i].type)) {
+                        
+                        //comprobamos si existe algun nodo principal
+                        console.log("Este es el principal??? "+data.nodes[i].isMain);
+                        if(parseInt(data.nodes[i].isMain) == 1 ){
+                            console.log("este es el principal "+data.nodes[i].isMain);
+                            var valorSwitch = 7;
+                        }else{
+                            var valorSwitch = parseInt(data.nodes[i].type);
+                        }
+                        switch (valorSwitch) {
                         case 1: //catalogo
                             extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0)';
                             break;
@@ -95,7 +104,7 @@ function displayNode(data, originNode, originName) {
                         case 6: // fuera tienda
                             extra = '';
                             break;
-                        default: // caso elemento principal
+                        case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
                             extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ')';
                             break;
                         }
@@ -125,7 +134,7 @@ function displayNode(data, originNode, originName) {
                         block = '<div class="ui-block-a" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                     }
 
-                    if ((position + 1) == parseInt(data.columns) && count < filas) { //despues de la primera fila se mostrara el elemento principal
+                    if (/*(position + 1) == parseInt(data.columns) && count < filas && */valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal
 
                         console.log("Entramos para mostrar el nuevo elemeto");
                         var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + '%"></div><div class="ui-block-b" style="width: 50%;height:' + alturaBox + '%"><a data-role="button" data-theme="f" style="background-color: lightblue;"><img src="' +
@@ -605,8 +614,8 @@ function loadMenu(data) {
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
         '</div>' +
         '</div>' +
-        '</div>' ;
-        //'<img src="css/icons/barra.png" height="5px" width="100%"><ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
+        '</div>';
+    //'<img src="css/icons/barra.png" height="5px" width="100%"><ul data-role="listview" style="margin:0px"> <li data-role="list-divider" id="path"> </li> </ul>';
     /*
     htmlHeader = '<div>'+
         '<div class="ui-grid-b">'+
