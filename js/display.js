@@ -626,7 +626,7 @@ function loadMenu(data) {
         '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%"> <span>Identificate!</span> </a>' +
         '</div>' +
-        '<div class="ui-block-d" style="margin-top:10px; width:18%" id="compras">' + cart +
+        '<div class="ui-block-d" style="margin-top:10px; width:18%" id="car_compra">' + cart +
         '</div>' +
         '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
@@ -817,6 +817,12 @@ function displayPantallaSugerencias() {
     $("#divHeader_catalogo").show();
 
     html_sug = '<div id="form_sugerencias" >' +
+        /*'<div class="ui-grid-d">' +
+        '<div class="ui-block-a" style="margin-top:10px; width:30%" id="divBack"></div>' +
+        '<div class="ui-block-b" style="margin-top:10px; width:27%;"><img src="css/icons/logo.png" width="75%" style="margin-left: 20%"> </div>' +
+        '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
+        '<center><a id="login" onclick="displayLogin();" style="width:10%"> <span>Identificate!</span> </a>' +
+        '</div>' +*/
         '<form  enctype="text/plain">' +
         'Nombre:' +
         '<div style="width: 25%"><input type="text" id="nombre" size="25" maxlength="50" ></div>' +
