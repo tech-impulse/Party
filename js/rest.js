@@ -24,7 +24,7 @@ function getLogin(usario, contraseña) {
                 //console.log(response.info);
                 INFO_USU = response.info;
                 $('#popupLogin').popup('close');
-                $("#login").text("Bienvenido/a "+response.info.name+",");  // + usario + "
+                $("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
                 $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
                 if (REDIRECT) {
@@ -150,7 +150,7 @@ function getNodes(idNode, nodeName, isAlgo) {
 
     if (isAlgo != undefined) {
         ISFIESTA = isAlgo;
-        console.log("Is algo es "+isAlgo);
+        console.log("Is algo es " + isAlgo);
     }
 
 
@@ -166,8 +166,12 @@ function getNodes(idNode, nodeName, isAlgo) {
                 console.log("Respuesta del nodo");
                 console.log(response);
 
+                if (idNode == 0) {
+                    node_cero = response;
+                }
+
                 restOk(response, "nodes", idNode, nodeName);
-                
+
 
             } else if (response.result == 0) { // ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
@@ -184,7 +188,7 @@ function getNodes(idNode, nodeName, isAlgo) {
 
                     if (info != "undefined") {
                         console.log("DisplayPantalla intermadia");
-                        displayPantallaIntermediaAsistDisfra(info.node);
+                        displayPantallaIntermediaAsistDisfra(info);
                     } else {
                         $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
                         $('#popupAlert').popup('open');
@@ -274,7 +278,7 @@ function restOk(res, typ, param, param2) {
 
 }
 
-function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id de un nodo
+function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
     // Datos que se van a enviar
     var dataSend = {

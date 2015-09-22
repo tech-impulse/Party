@@ -76,13 +76,13 @@ function displayNode(data, originNode, originName) {
 
                     //solo se mostrar en el menu inicial de la app getNodes(0) diferenciamos entre los diferentes bloques del menu principal
                     if (originNode == 0) {
-                        
+
                         //comprobamos si existe algun nodo principal
-                        console.log("Este es el principal??? "+data.nodes[i].isMain);
-                        if(parseInt(data.nodes[i].isMain) == 1 ){
-                            console.log("este es el principal "+data.nodes[i].isMain);
+                        console.log("Este es el principal??? " + data.nodes[i].isMain);
+                        if (parseInt(data.nodes[i].isMain) == 1) {
+                            console.log("este es el principal " + data.nodes[i].isMain);
                             var valorSwitch = 7;
-                        }else{
+                        } else {
                             var valorSwitch = parseInt(data.nodes[i].type);
                         }
                         switch (valorSwitch) {
@@ -134,7 +134,7 @@ function displayNode(data, originNode, originName) {
                         block = '<div class="ui-block-a" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                     }
 
-                    if (/*(position + 1) == parseInt(data.columns) && count < filas && */valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal
+                    if ( /*(position + 1) == parseInt(data.columns) && count < filas && */ valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal
 
                         console.log("Entramos para mostrar el nuevo elemeto");
                         var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + '%"></div><div class="ui-block-b" style="width: 50%;height:' + alturaBox + '%"><a data-role="button" data-theme="f" style="background-color: lightblue;"><img src="' +
@@ -568,9 +568,27 @@ function loadMenu(data) {
 
     var options = '';
     var htmlHeader = '';
-    for (var i = 0; i < data.nodes.length; i++) { //data:image/png;base64,
-        options = options + '<li onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\'); openMenu()"><img src="' + data.nodes[i].linkext + '" style="width:12em">' + data.nodes[i].name + '</li>';
+
+    console.log(data);
+
+    if (data.nodes == undefined) {
+        var len = data.node.length;
+        var node = data.node;
+    } else {
+        var len = data.nodes.length;
+        var node = data.nodes;
     }
+
+    // var len = data.nodes.length;
+    //var node = data.nodes;
+
+    if (len > 0) {
+        for (var i = 0; i < len; i++) { //data:image/png;base64,
+            options = options + '<li onclick="getNodes(' + node[i].id + ', \'' + node[i].name + '\'); openMenu()"><img src="' + node[i].linkext + '" style="width:12em">' + node[i].name + '</li>';
+        }
+
+    }
+
     options = options + '<li onclick="getNodes(0);"><center><a data-role="button" data-icon="home" data-theme="e">Ir al Menú</a></center></li>';
     $("#options").html(options);
     $("#options").listview('refresh');
@@ -608,7 +626,7 @@ function loadMenu(data) {
         '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%"> <span>Identificate!</span> </a>' +
         '</div>' +
-        '<div class="ui-block-d" style="margin-top:10px; width:18%">' + cart +
+        '<div class="ui-block-d" style="margin-top:10px; width:18%" id="compras">' + cart +
         '</div>' +
         '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
@@ -649,31 +667,44 @@ function displayPantallaIntermediaAsistDisfra(data) {
 
     //console.log(data);
 
+    loadMenu(node_cero);
+    updateBackButton(0, "Menú");
+    $("#divHeader_catalogo").show();
+
+    var info = data.node;
+
     htmlContent = '<div id="page_count" style="display: block;">' +
         '<center>' +
-        '<img src="' + data.linkint + '" alt="">' +
+        '<img src="' + info.linkint + '" alt="">' +
         //'<h3> ¿Para quién es el disfraz?</h3>' +
-        '<div style="width: 25%"><select id="select_sexo" >' +
+        '<div style="width: 25%"><select id="select_sexo" data-native-menu="false">' +
         '</select></div>' +
         //'<h3> Edad </h3>' +
         //'<div style="width: 25%"><select id="select_edad" >' +
         //'</select></div>' +
         //'<h3> Talla </h3>' +
-        '<div style="width: 25%"><select id="select_talla" >' +
+        '<div style="width: 25%"><select id="select_talla" data-native-menu="false">' +
         '</select></div>' +
         '<br>' +
-        '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
+        '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
         '</center>' +
         '</div>';
     htmlContent = htmlContent + '</div>';
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
 
+    $("#select_sexo").attr("data-native-menu", "false");
+    $("#select_talla").attr("data-native-menu", "false");
+
+    $('#select_sexo').scrollTop(5);
+    $('#select_talla').scrollTop(5);
+
 
     getGender();
     getSize();
     //getAge();
     //getSubject();
+
 
 
 }
@@ -781,6 +812,9 @@ function displayPantallaSugerencias() {
 
     console.log("Entramos en la pantalla de sugerencias");
 
+    loadMenu(node_cero);
+    updateBackButton(0, "Menú");
+    $("#divHeader_catalogo").show();
 
     html_sug = '<div id="form_sugerencias" >' +
         '<form  enctype="text/plain">' +
@@ -797,7 +831,7 @@ function displayPantallaSugerencias() {
         'Fecha de nacimiento:' +
         '<div style="width: 25%"><input type="date" id="fecha_naci" ></div>' +
         'Tipo de sugerencia:' +
-        '<div style="width: 25%"><select name="sugerencia_tipo" >' +
+        '<div style="width: 25%"><select name="sugerencia_tipo" data-native-menu="false">' +
         '<option value="1">Incidencia' +
         '<option value="2">Petición' +
         '</select></div>' +
@@ -811,9 +845,9 @@ function displayPantallaSugerencias() {
         '</div>' +
         '</td>' +
         '<td>' +
-        '<div align="center">' +
-        '<button type="button" onclick="displayMenu();" id="volver_menu">Volver</button>' +
-        '</div>' +
+        //'<div align="center">' +
+        //'<button type="button" onclick="displayMenu();" id="volver_menu">Volver</button>' +
+        //'</div>' +
         '</td>' +
         '</tr>' +
         '</table>' +
