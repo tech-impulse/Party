@@ -66,40 +66,49 @@ function updateBackButton(originNode, originName) {
 
 function changeIdiom(idioma) {
 
-
     console.log("El idioma a cambiar es " + idioma);
 
     switch (idioma) {
 
     case "español":
-
+        console.log("español");
         break;
 
     case "ingles":
-
+        console.log("ingles");
         break;
 
     case "portugues":
-
+        console.log("portugues");
         break;
 
     case "catalan":
-
+        console.log("catalan");
         break;
 
     case "frances":
-
+        console.log("frances");
         break;
 
     default:
-
+        console.log("default");
         break;
 
 
 
     }
 
-
-
+    $("#popupIdiomas").popup("open");
+    
 
 }
+
+
+function timerIncrement() {
+    
+    console.log("Estas incativo "+idleTime);
+    getNodes(0);
+    
+}
+
+

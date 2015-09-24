@@ -16,14 +16,44 @@ $(document).bind("mobileinit", function () {
 
 $(document).ready(function () {
 
+    /*
+    //Increment the idle time counter every minute.
+    var idleInterval = setInterval(timerIncrement, 5000); // 1 minute
+
+    //Zero the idle timer on mouse movement.
+    $(this).mousemove(function (e) {
+        idleTime = 0;
+    });
+
+    $(this).keypress(function (e) {
+        idleTime = 0;
+    });*/
+
+    $(window).on("touchstart", function (ev) {
+        var e = ev.originalEvent;
+        console.log(" screen? " +idleTimeActive );//"Touchend" + e.touches + 
+
+        if (idleTimeActive == true) {
+            idleTimeActive = false;
+            $('#principal').show();
+            $('#contentPopupScreenSaver').fadeIn();
+            $('#contentPopupScreenSaver').hide();
+        }
+
+        setTimeout(function () {
+            displayScreenSaver();
+        }, idleTime);
+        
+    });
+
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">' +
         '<img src="css/icons/barra.png" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">' +
         '<img src="css/banderas/england.png" onclick="changeIdiom("ingles");" style="width: 40px;margin-right: 5px;height: 28px;">' +
-        '<img src="css/banderas/france.png" onclick="changeIdiom("frances");" style="width: 40px;margin-right: 5px;height: 28px;">' +
+        /*'<img src="css/banderas/france.png" onclick="changeIdiom("frances");" style="width: 40px;margin-right: 5px;height: 28px;">' +
         '<img src="css/banderas/portugal.png" onclick="changeIdiom("portugues");" style="width: 40px;margin-right: 5px;height: 28px;">' +
         '<img src="css/banderas/spain.png" onclick="changeIdiom("español");" style="width: 40px;margin-right: 5px;height: 28px;">' +
-        '<img src="css/banderas/catalunya.png" onclick="changeIdiom("catalan");" style="width: 40px;margin-right: 5px;height: 28px;">' +
-        '</div>' +
+        '<img src="css/banderas/catalunya.png" onclick="changeIdiom("catalan");" style="width: 40px;margin-right: 5px;height: 28px;">' +*/
+        //'</div>' +
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -444,11 +474,12 @@ function stopYoutubeVideo(idOfIframe) {
 
 function enviarSugerencia() {
 
-    var sugerencia_tipo = $("select#sugerencia_tipo option").filter(":selected").val();
+    var sug_inci = $("select#suge_inci option").filter(":selected").val();
     var nombre = $("#nombre").val();
     var correo = $("#correo").val();
     var provincia = $("#provincia").val();
     var poblacion = $("#poblacion").val();
+    var t_sugere = $("#tipo_sugenrencia").val();
     var telefono = $("#telf").val();
     var fecha_naci = $("#fecha_naci").val();
     var sugerencias = $("#sugerencias").val();
@@ -467,28 +498,39 @@ function enviarSugerencia() {
 
                         if (fecha_naci != "") {
 
-                            if (sugerencias != "") {
+                            if (t_sugere != "") {
 
-                                console.log("Llegamos hasta el final");
+                                if (sugerencias != "") {
 
-                                var info = {
-                                    nombre: nombre,
-                                    correo: correo,
-                                    provincia: provincia,
-                                    poblacion: poblacion,
-                                    telefono: telefono,
-                                    fecha_naci: fecha_naci,
-                                    sugerencia_tipo: sugerencia_tipo,
-                                    sugerencia: sugerencia
-                                };
+                                    console.log("Llegamos hasta el final");
 
-                                sendSugerencias(info);
+                                    var info = {
+                                        nombre: nombre,
+                                        correo: correo,
+                                        provincia: provincia,
+                                        poblacion: poblacion,
+                                        telefono: telefono,
+                                        fecha_naci: fecha_naci,
+                                        suge_inci: sug_inci,
+                                        sugerencia_tipo: t_sugere,
+                                        sugerencia: sugerencia
+                                    };
+
+                                    sendSugerencias(info);
+
+                                } else {
+
+                                    $("#texto_popup").text("Escriba algo en el campo petición/sugerencia");
+                                    $('#popupAlert').popup('open');
+                                    console.log("No has escrito la sugerencia1");
+
+                                }
 
                             } else {
 
                                 $("#texto_popup").text("Escriba una sugerencia o incidencia");
                                 $('#popupAlert').popup('open');
-                                console.log("No has escrito la sugerencia");
+                                console.log("No has escrito la sugerencia2");
 
                             }
 

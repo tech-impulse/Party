@@ -134,13 +134,7 @@ function getRegistro(usario, contraseña, cod_pos) {
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
     */
 function getNodes(idNode, nodeName, isAlgo) {
-    /*
-        if (idNode == 30 && nodeName == 'FROZEN') {
-            $("#page_count").show();
-            $("#divContent").hide();
-            console.log("Es FROZEN");
-        } else {
-        */
+   
     // Datos que se van a enviar
     var dataSend = {
         lang: language,
@@ -479,7 +473,7 @@ function restOk_tiendas(res, typ, param, param2) {
         var val = res.stores[i].id;
         var text = res.stores[i].name;
 
-        console.log("Val es " + val + " texto " + text);
+        //console.log("Val es " + val + " texto " + text);
 
         select.append($('<option>', {
             value: val,
@@ -667,7 +661,7 @@ function getGender() {
 
                         var val = response.genders[i].nombre;
 
-                        console.log("Val es " + val);
+                        //console.log("Val es " + val);
 
                         select.append($('<option>', {
                             value: val,

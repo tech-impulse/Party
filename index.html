@@ -37,6 +37,9 @@
 
 <body>
 
+    <!-- DIV DE SCREENSAVER -->
+    <div id="contentPopupScreenSaver" style="display:none"><img src="lib/images/party-fiesta.jpg" class="ui-li-icon ui-corner-none" style="height: 100vh;width: 100%;"></div>
+
     <div data-role="page" id="principal">
 
         <!--     HEADER    -->
@@ -70,12 +73,42 @@
                         </li>
                     </ul>
                 </div>
+                <!--POPUP DE LOGIN -->
                 <div data-role="popup" id="popupListItems" class=" ui-corner-all ui-shadow ui-btn-inline" style="min-width:700px;">
                     <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div id="contentPopupListItems">
 
                     </div>
                 </div>
+                <!--POPUP PARA IDIOMAS -->
+                <div data-role="popup" id="popupIdiomas" style="right: 0;top: 6%;">
+                    <div id="contentPopupIdioma">
+                        <ul data-role="listview" data-inset="true">
+                            <li>
+                                <a href="#"><img src="" class="ui-li-icon ui-corner-none">France</a>
+                            </li>
+
+                            <li>
+                                <a href="#"><img src="" class="ui-li-icon">Germany</a>
+                            </li>
+
+                            <li>
+                                <a href="#"><img src="" class="ui-li-icon">Great Britain</a>
+                            </li>
+
+                            <li>
+                                <a href="#"><img src="" class="ui-li-icon">Finland</a>
+                            </li>
+
+                            <li>
+                                <a href="#"><img src="" class="ui-li-icon ui-corner-none">United States</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <!-- POP DE ARTICULOS -->
                 <div data-role="popup" id="popupAction" class=" ui-corner-all ui-shadow ui-btn-inline" style="min-width:400px;">
                     <div class="ui-bar ui-bar-b" data-theme="b">
                         <h3>Alerta</h3>

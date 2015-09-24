@@ -137,7 +137,7 @@ function displayNode(data, originNode, originName) {
                     if ( /*(position + 1) == parseInt(data.columns) && count < filas && */ valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal
 
                         console.log("Entramos para mostrar el nuevo elemeto");
-                        var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + '%"></div><div class="ui-block-b" style="width: 50%;height:' + alturaBox + '%"><a data-role="button" data-theme="f" style="background-color: lightblue;"><img src="' +
+                        var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + '%"></div><div class="ui-block-b" style="width: 50%;height:' + alturaBox + '%"><a data-role="button" data-theme="f" style="background-color: lightgray;"><img src="' +
                             data.nodes[i].linkext + '" style="width: 100px;height: 100px;" ><br><strong>' + data.nodes[i].name +
                             '</strong></a></div><div class="ui-block-c" style="width: 25%;height:' + alturaBox + '%"></div>';
 
@@ -297,7 +297,7 @@ function displayProducts(data, originNode, originName) {
                             block = '<div class="ui-block-a" onclick="">';
                         }
                         var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].sku + '"  class="circulo" style="width: 35px;height: 35px;display: none;position: absolute;">' +
-                            '<label id="quantity' + data.products[i].sku + '" style="display:block;padding-top: 5px;font-size: 22px;">10</label></div>' +
+                            '<label id="quantity' + data.products[i].sku + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label></div>' +
                             '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + i + ',\'PRODUCTS\')" style="width: 120px;height: 120px;">' +
                             '<br>' + data.products[i].name +
                             '<br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
@@ -806,6 +806,17 @@ function logout() { //muestra el pop up de inicio de session
 
 }
 
+function displayScreenSaver() { //muestra el pop up de inicio de session
+
+    console.log("Protector de pantalla activado");
+    //$('#contentPopupScreenSaver').show();
+    $('#principal').hide();
+    //$('#contentPopupScreenSaver').fadeIn();
+    $('#contentPopupScreenSaver').show();
+    idleTimeActive = true;
+
+}
+
 
 
 function displayPantallaSugerencias() {
@@ -817,46 +828,29 @@ function displayPantallaSugerencias() {
     $("#divHeader_catalogo").show();
 
     html_sug = '<div id="form_sugerencias" >' +
-        /*'<div class="ui-grid-d">' +
-        '<div class="ui-block-a" style="margin-top:10px; width:30%" id="divBack"></div>' +
-        '<div class="ui-block-b" style="margin-top:10px; width:27%;"><img src="css/icons/logo.png" width="75%" style="margin-left: 20%"> </div>' +
-        '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
-        '<center><a id="login" onclick="displayLogin();" style="width:10%"> <span>Identificate!</span> </a>' +
-        '</div>' +*/
         '<form  enctype="text/plain">' +
-        'Nombre:' +
-        '<div style="width: 25%"><input type="text" id="nombre" size="25" maxlength="50" ></div>' +
-        'Correo electrónico:' +
-        '<div style="width: 25%"><input type="text" value="" id="correo" size="40" maxlength="100"></div>' +
-        'Provincia:' +
-        '<div style="width: 25%"><input type="text" id="provincia" size="15" maxlength="50"></div>' +
-        'Población:' +
-        '<div style="width: 25%"><input type="text" id="poblacion" size="15" maxlength="50"></div>' +
-        'Teléfono:' +
-        '<div style="width: 25%"><input type="text" id="telf" size="9" maxlength="15"></div>' +
-        'Fecha de nacimiento:' +
-        '<div style="width: 25%"><input type="date" id="fecha_naci" ></div>' +
-        'Tipo de sugerencia:' +
-        '<div style="width: 25%"><select name="sugerencia_tipo" data-native-menu="false">' +
-        '<option value="1">Incidencia' +
-        '<option value="2">Petición' +
-        '</select></div>' +
+        '<div class="ui-grid-b">' +
+        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label>Nombre:</label><input type="text" id="nombre" size="25" maxlength="50" ></div>' +
+        '<div class="ui-block-b" style="width: 31%;margin-right: 1%;"><label>Fecha de nacimiento:</label><input type="date" value="" id="fecha_naci" size="40" maxlength="100"></div>' +
+        '<div class="ui-block-c" style=""><label>Correo electrónico:</label><input type="email" value="" id="correo" size="40" maxlength="100"></div>' +
+        '</div>' +
+        '<div class="ui-grid-b">' +
+        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label>Población:</label><input type="text" id="poblacion" size="25" maxlength="50" ></div>' +
+        '<div class="ui-block-b" style="width: 31%;margin-right: 1%;"><label>Provincia:</label><input type="text" value="" id="provincia" size="40" maxlength="100"></div>' +
+        '<div class="ui-block-c" style=""><label>Teléfono:</label><input type="number" value="" id="correo" size="40" maxlength="100"></div>' +
+        '</div>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label>Tipo de sugerencia:</label><select name="suge_inci" data-native-menu="false"><option value="1">Incidencia<option value="2">Petición</select></div>' +
+        '<div class="ui-block-b" style="width: 65%;"><label>¿Sobre que es la petición/sugerencia?</label><input type="text" value="" id="tipo_sugenrencia" size="40" maxlength="100"></div>' +
+        '</div>' +
         '<br> Tiene alguna sugerencia...' +
-        '<textarea cols="40" rows="5" id="sugerencias" placeholder="Escriba aquí sus sugerencias..."></textarea>' +
-        '<table width="50%" border="0" align="center" cellpadding="10" cellspacing="0">' +
+        '<textarea cols="40" rows="3" id="sugerencias" placeholder="Escriba aquí sus sugerencias..."></textarea>' +
+        '<table width="25%" border="0" align="center" cellpadding="10" cellspacing="0">' +
         '<tr>' +
         '<td>' +
         '<div align="center">' +
         '<button type="button" onclick="enviarSugerencia();" id="enviar_sugerencia">¡Enviar!</button>' +
         '</div>' +
-        '</td>' +
-        '<td>' +
-        //'<div align="center">' +
-        //'<button type="button" onclick="displayMenu();" id="volver_menu">Volver</button>' +
-        //'</div>' +
-        '</td>' +
-        '</tr>' +
-        '</table>' +
         '</form>' +
         '</div>';
 
