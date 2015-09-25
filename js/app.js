@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">' +
         '<img src="css/icons/barra.png" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">' +
-        '<a onclick="changeIdiom();"><img src="css/banderas/england.png"  style="width: 40px;margin-right: 5px;height: 28px;"></a>' +
+        '<a onclick="changeIdiom();"><img src="css/banderas/spain.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -93,6 +93,7 @@ $(document).ready(function () {
 
                 if (TIENDAS.stores[i].id == STORE) {
                     SHOPDELIVERY = TIENDAS.stores[i].deliveryStore; //guardamos el id de la tienda
+                    idiomStore = TIENDAS.stores[i].language;
                     TIENDAS = "";
                     break;
                 }
