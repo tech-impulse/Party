@@ -947,3 +947,28 @@ function displaySummary(param) {
         console.log("No estás logado");
     }
 }
+
+
+function displayFlags(res) {
+
+    console.log("Cargamos el popUp de idiomas");
+
+    var html = '<ul data-role="listview" data-inset="true">';
+
+    var count = res.flags.length;
+    var info = res.flags;
+
+    for (var i = 0; i < count; i++) {
+
+        html += '<li data-icon="false">' +
+            '<a href="#" onclick="changeIdiom("' + info[i].shortname + '");"><img src="' + info[i].image + '" class="ui-li-icon ui-corner-none">' + info[i].name + '</a>' +
+            '</li>';
+
+    }
+
+    html += '</ul></div>';
+
+    $("#contentPopupIdioma").html(html);
+    $("#contentPopupIdioma").trigger('create');
+
+}

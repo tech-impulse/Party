@@ -126,6 +126,46 @@ function getRegistro(usario, contraseña, cod_pos) {
 
 }
 
+function getFlags() {
+
+    console.log("Pedimos los idiomas");
+
+    request = $.ajax({
+        url: urlServices + 'getFlags.php',
+        dataType: 'json',
+        type: 'GET',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            console.log("Los paises nos han llegado, cargamos el popup");
+            //console.log("La respuesta es ");
+            console.log(response);
+
+            displayFlags(response);
+            
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                $("#texto_popup").text('Error de TimeOut... compruebe su conexion de internet');
+                $('#popupAlert').popup('open');
+
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                $("#texto_popup").text('Sin conexion a internet...');
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
+}
+
 
 
 
@@ -134,7 +174,7 @@ function getRegistro(usario, contraseña, cod_pos) {
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
     */
 function getNodes(idNode, nodeName, isAlgo) {
-   
+
     // Datos que se van a enviar
     var dataSend = {
         lang: language,
@@ -428,7 +468,7 @@ function getTiendas() {
     console.log("Pedimos las tiendas");
 
     request = $.ajax({
-        url: urlServices + 'getStores.php',
+        url: urlServices + 'getShops.php',
         dataType: 'json',
         type: 'GET',
         timeout: 10000, //10 seg
@@ -466,7 +506,7 @@ function restOk_tiendas(res, typ, param, param2) {
     var count = res.stores.length;
     var select = $('#select_tienda');
 
-    TIENDAS = res; //array con todas las tiendas, para luego obtener si tiene entrega o no en tienda
+    TIENDAS = res; //array con todas las tiendas
 
     for (var i = 0; i < count; i++) {
 
@@ -492,7 +532,6 @@ function restOk_tiendas(res, typ, param, param2) {
 
 
 }
-
 
 /* Función que controla que la petición Ajax ha ido mal
     - res: Respuesta del webservice

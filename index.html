@@ -73,39 +73,17 @@
                         </li>
                     </ul>
                 </div>
+
                 <!--POPUP DE LOGIN -->
-                <div data-role="popup" id="popupListItems" class=" ui-corner-all ui-shadow ui-btn-inline" style="min-width:700px;">
+                <div data-role="popup" id="popupListItems" class="ui-corner-all ui-shadow ui-btn-inline" style="min-width:700px;">
                     <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                    <div id="contentPopupListItems">
-
-                    </div>
+                    <div id="contentPopupListItems"></div>
                 </div>
+
                 <!--POPUP PARA IDIOMAS -->
-                <div data-role="popup" id="popupIdiomas" style="right: 0;top: 6%;">
-                    <div id="contentPopupIdioma">
-                        <ul data-role="listview" data-inset="true">
-                            <li>
-                                <a href="#"><img src="" class="ui-li-icon ui-corner-none">France</a>
-                            </li>
-
-                            <li>
-                                <a href="#"><img src="" class="ui-li-icon">Germany</a>
-                            </li>
-
-                            <li>
-                                <a href="#"><img src="" class="ui-li-icon">Great Britain</a>
-                            </li>
-
-                            <li>
-                                <a href="#"><img src="" class="ui-li-icon">Finland</a>
-                            </li>
-
-                            <li>
-                                <a href="#"><img src="" class="ui-li-icon ui-corner-none">United States</a>
-                            </li>
-                        </ul>
-
-                    </div>
+                <div data-role="popup" id="popupIdiomas" class="ui-corner-all ui-shadow ui-btn-inline" style="">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                    <div id="contentPopupIdioma"></div>
                 </div>
 
                 <!-- POP DE ARTICULOS -->
@@ -122,7 +100,7 @@
                         <button id="btnPopupActionRight" onclick='$("#popupAction").popup("close");' data-theme="d" data-icon="check" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
                     </div>
                 </div>
-                <!--POPUP DE LOGIN -->
+                <!-- POPUP DE LOGIN -->
                 <div data-role="popup" id="popupLogin" class="ui-content" style="min-width:250px;">
                     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                     <form autocomplete="on">
@@ -145,7 +123,8 @@
                         </div>
                     </form>
                 </div>
-                <!--POPUP DE REGISTRO -->
+
+                <!-- POPUP DE REGISTRO -->
                 <div data-role="popup" id="popupRegistro" class="ui-content" style="min-width:250px;">
                     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                     <div id="div_registrarse">
@@ -178,11 +157,12 @@
                     </div>
                     </form>
                 </div>
-                <!--POPUP DE CAMBIO PASSWORD -->
+
+                <!-- POPUP DE CAMBIO PASSWORD -->
                 <div data-role="popup" id="popupCambioContra" class="ui-content" style="min-width:250px;">
                     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                     <div id="div_cambioContra">
-                        <form autocomplete="on">
+                        <form>
                             <h3> Cambio de contraseña </h3>
                             <p>
                                 <label for="contrauno" class="youpasswd" data-icon="u"> Su usuario: </label>
@@ -198,7 +178,8 @@
                     </div>
                     </form>
                 </div>
-                <!--POPUP PARA ALERTAS-ERRORES WS -->
+
+                <!-- POPUP PARA ALERTAS-ERRORES WS -->
                 <div data-role="popup" id="popupAlert" data-rel="back" class="ui-content" style="max-width:280px">
                     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                     <label id="texto_popup"></label>
@@ -235,8 +216,6 @@
             <div id="divContent" style="display: none;">
             </div>
            
-        
-        <!--
 
                 <div id="page_count" style="display:none">
                     <center>

@@ -31,29 +31,28 @@ $(document).ready(function () {
 
     $(window).on("touchstart", function (ev) {
         var e = ev.originalEvent;
-        console.log(" screen? " +idleTimeActive );//"Touchend" + e.touches + 
+        console.log(" screen? " + idleTimeActive); //"Touchend" + e.touches + 
 
         if (idleTimeActive == true) {
             idleTimeActive = false;
-            $('#principal').show();
+
             $('#contentPopupScreenSaver').fadeIn();
             $('#contentPopupScreenSaver').hide();
+
+            setTimeout(function () {
+                $('#principal').show();
+            }, 100);
         }
 
         setTimeout(function () {
             displayScreenSaver();
         }, idleTime);
-        
+
     });
 
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">' +
         '<img src="css/icons/barra.png" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">' +
-        '<img src="css/banderas/england.png" onclick="changeIdiom("ingles");" style="width: 40px;margin-right: 5px;height: 28px;">' +
-        /*'<img src="css/banderas/france.png" onclick="changeIdiom("frances");" style="width: 40px;margin-right: 5px;height: 28px;">' +
-        '<img src="css/banderas/portugal.png" onclick="changeIdiom("portugues");" style="width: 40px;margin-right: 5px;height: 28px;">' +
-        '<img src="css/banderas/spain.png" onclick="changeIdiom("español");" style="width: 40px;margin-right: 5px;height: 28px;">' +
-        '<img src="css/banderas/catalunya.png" onclick="changeIdiom("catalan");" style="width: 40px;margin-right: 5px;height: 28px;">' +*/
-        //'</div>' +
+        '<a onclick="changeIdiom();"><img src="css/banderas/england.png"  style="width: 40px;margin-right: 5px;height: 28px;"></a>' +
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -61,8 +60,9 @@ $(document).ready(function () {
     $("#registro").hide();
 
 
-    // Obtenermos el listado de tiendas
+    // Obtenermos el listado de tiendas y banderas
     getTiendas();
+    getFlags();
 
     //comprobamos si el checkbox de guardar session esta activado para mostrar el nombre en el link del login
     //var checkBoxSession = document.getElementById("recordar_session").checked;
@@ -92,7 +92,7 @@ $(document).ready(function () {
             for (var i = 0; i < countTiendas; i++) {
 
                 if (TIENDAS.stores[i].id == STORE) {
-                    SHOPDELIVERY = TIENDAS.stores[i].shopDelivery; //guardamos el id de la tienda
+                    SHOPDELIVERY = TIENDAS.stores[i].deliveryStore; //guardamos el id de la tienda
                     TIENDAS = "";
                     break;
                 }
