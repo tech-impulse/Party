@@ -68,7 +68,9 @@ function changeIdiom() {
 
     console.log("PopUp idiomas");
 
-    $("#popupIdiomas").popup("open");
+    setTimeout(function () {
+        $("#popupIdiomas").popup("open");
+    }, popupTimeout);
 
 }
 
@@ -80,3 +82,9 @@ function timerIncrement() {
 
 }
 
+function changeFlag(idioma) {
+
+
+
+
+}

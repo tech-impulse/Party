@@ -584,7 +584,39 @@ function loadMenu(data) {
 
     if (len > 0) {
         for (var i = 0; i < len; i++) { //data:image/png;base64,
-            options = options + '<li onclick="getNodes(' + node[i].id + ', \'' + node[i].name + '\'); openMenu()"><img src="' + node[i].linkext + '" style="width:12em">' + node[i].name + '</li>';
+
+            if (parseInt(data.nodes[i].isMain) == 1) {
+                console.log("este es el principal " + node[i].isMain);
+                var valorSwitch = 7;
+            } else {
+                var valorSwitch = parseInt(node[i].type);
+            }
+
+            switch (valorSwitch) {
+            case 1: //catalogo
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',0)';
+                break;
+            case 2: //promos
+                extra = '';
+                break;
+            case 3: // asis fistas
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ')';
+                break;
+            case 4: // asis disfra
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ')';
+                break;
+            case 5: // sugerencias
+                extra = 'displayPantallaSugerencias()';
+                break;
+            case 6: // fuera tienda
+                extra = '';
+                break;
+            case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ')';
+                break;
+            }
+
+            options = options + '<li onclick="' + extra + ';"; openMenu()"><img src="' + node[i].linkext + '" style="width:12em">' + node[i].name + '</li>';
         }
 
     }
