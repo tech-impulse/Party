@@ -61,8 +61,16 @@ $(document).ready(function () {
 
 
     // Obtenermos el listado de tiendas y banderas
-    getTiendas();
-    getFlags();
+
+
+    setTimeout(function () {
+        getFlags();
+    }, 1000);
+
+    setTimeout(function () {
+        getTiendas();
+    }, 1000);
+
 
     //comprobamos si el checkbox de guardar session esta activado para mostrar el nombre en el link del login
     //var checkBoxSession = document.getElementById("recordar_session").checked;
@@ -184,7 +192,7 @@ $(document).ready(function () {
 
     });
 
-    
+
 
 });
 
