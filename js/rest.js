@@ -520,13 +520,14 @@ function restOk_tiendas(res, typ, param, param2) {
             text: text
         }));
 
-        select.selectmenu('refresh', true);
+
 
     }
 
 
     //var option1 = $($("option", select).get(1));
     //option1.attr('selected', 'selected');
+    select.selectmenu('refresh', true);
     select.selectmenu();
 
 
