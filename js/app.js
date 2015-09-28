@@ -31,7 +31,7 @@ $(document).ready(function () {
 
     $(window).on("touchstart", function (ev) {
         var e = ev.originalEvent;
-        console.log(" screen? " + idleTimeActive); //"Touchend" + e.touches + 
+        console.log(" screen activa? " + idleTimeActive); //"Touchend" + e.touches + 
 
         if (idleTimeActive == true) {
             idleTimeActive = false;
@@ -184,6 +184,7 @@ $(document).ready(function () {
 
     });
 
+    
 
 });
 

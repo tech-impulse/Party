@@ -715,7 +715,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
         //'<div style="width: 25%"><select id="select_edad" >' +
         //'</select></div>' +
         //'<h3> Talla </h3>' +
-        '<div style="width: 25%"><select id="select_talla" data-native-menu="false">' +
+        '<div id="div_selectTalla" style="width: 25%;display:none"><select id="select_talla" data-native-menu="false">' +
         '</select></div>' +
         '<br>' +
         '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
@@ -731,11 +731,26 @@ function displayPantallaIntermediaAsistDisfra(data) {
     $('#select_sexo').scrollTop(5);
     $('#select_talla').scrollTop(5);
 
+    getGender();//llamamos al webservice que tiene los sexos
 
-    getGender();
-    getSize();
-    //getAge();
-    //getSubject();
+    $('#select_sexo').change(function () {
+        var optionSelected = $(this).find('option:selected');
+        //var optTextSelected = optionSelected.text();
+        var optValueSelected = optionSelected.val();
+        console.log("Opcion seleccionada es " + optValueSelected);
+
+        if (optValueSelected != 0) {
+            
+            getSize(optValueSelected);
+            $("#div_selectTalla").show();
+
+        } else {
+            $("#texto_popup").text('Seleccione una opcion válida');
+            $('#popupAlert').popup('open');
+            
+            $("#div_selectTalla").hide();
+        }
+    });
 
 
 

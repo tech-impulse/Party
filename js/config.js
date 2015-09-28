@@ -20,5 +20,5 @@ var LOGGED = false;
 var REDIRECT = false;
 var popupTimeout = 250;
 var idleTime = 180000; /// tiempo de inactividad
-var idleTimeActive;
+var idleTimeActive = false;
 var idiomStore;

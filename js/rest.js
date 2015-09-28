@@ -142,7 +142,7 @@ function getFlags() {
             console.log(response);
 
             displayFlags(response);
-            
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
 
@@ -753,12 +753,19 @@ function getGender() {
 }
 
 //WS que devuelve el listado de tallas      
-function getSize() {
+function getSize(gender) {
+
+    var dataSend = {
+        sex: gender
+    };
+
+    console.log("EL gender es " + gender);
 
     request = $.ajax({
+        data: dataSend,
         url: urlServices + 'getSize.php',
         dataType: 'json',
-        type: 'GET',
+        type: 'POST',
         timeout: 10000, //10 seg
         success: function (response) {
             //console.log("Respuesta: ");
@@ -806,13 +813,15 @@ function getSize() {
             } else if (response.result == 0) {
 
                 //console.log("No hay productos para este nodo");
-                $("#texto_popup").text("No hay productos...");
+                $("#texto_popup").text("No tenemos tallas...");
                 $('#popupAlert').popup('open');
+                console.log(response);
 
             } else if (response.result == -1) {
 
                 $("#texto_popup").text("Error...");
                 $('#popupAlert').popup('open');
+                console.log(response);
 
             }
 
