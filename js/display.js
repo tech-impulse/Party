@@ -855,6 +855,7 @@ function logout() { //muestra el pop up de inicio de session
 
 function displayScreenSaver() { //muestra el pop up de inicio de session
 
+    $('.ui-popup').popup('close');
     console.log("Protector de pantalla activado");
     //$('#contentPopupScreenSaver').show();
     $('#principal').hide();
@@ -909,6 +910,7 @@ function displayPantallaSugerencias() {
 }
 
 function displaySummary(param) {
+    
     var html = '';
     if (LOGGED == true) {
         if (CART.length > 0) {
@@ -1019,3 +1021,4 @@ function displayFlags(res) {
     $("#contentPopupIdioma").trigger('create');
 
 }
+

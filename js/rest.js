@@ -473,7 +473,9 @@ function getTiendas() {
         type: 'GET',
         timeout: 10000, //10 seg
         success: function (response) {
+            
             restOk_tiendas(response, "tiendas");
+            
         },
         error: function (jqXHR, textStatus, errorThrown) {
 
@@ -767,7 +769,7 @@ function getSize(gender) {
         url: urlServices + 'getSize.php',
         dataType: 'json',
         type: 'POST',
-        timeout: 10000, //10 seg
+        //timeout: 10000, //10 seg
         success: function (response) {
             //console.log("Respuesta: ");
             //console.log(response);
@@ -775,9 +777,13 @@ function getSize(gender) {
             if (response.result == 1) {
 
                 console.log(response);
+                
+                $('#select_talla  option').remove();
 
                 var count = response.sizes.length;
                 var select = $('#select_talla');
+                
+                
 
                 for (var i = 0; i < count; i++) {
 

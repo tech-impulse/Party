@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">' +
         '<img src="css/icons/barra.png" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">' +
-        '<a onclick="changeIdiom();"><img src="css/banderas/spain.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +
+        '<a onclick="changeIdiomPopUp();"><img id="img_banderas" src="css/banderas/spain.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -61,15 +61,8 @@ $(document).ready(function () {
 
 
     // Obtenermos el listado de tiendas y banderas
-
-
-    setTimeout(function () {
-        getFlags();
-    }, 1000);
-
-    setTimeout(function () {
-        getTiendas();
-    }, 1000);
+    getFlags();
+    getTiendas();
 
 
     //comprobamos si el checkbox de guardar session esta activado para mostrar el nombre en el link del login
@@ -235,13 +228,12 @@ function displayProductos(idNode, nodeName) { // botton de acceso a la app despu
         talla: talla
     };
 
-    if (sexo != 0 && talla != 0 && ISFIESTA == 4) {
-
+    if (sexo != 0 && talla != 0 && ISFIESTA == 4) { //por aqui se accede desde el asistente de disfraces
         console.log("Todos los selects ok");
         getProducts(idNode, nodeName, info_aux);
 
 
-    } else if (ISFIESTA == 3) {
+    } else if (ISFIESTA == 3) { //por aqui se accede desde el asistente de fiestas
 
         var num_persosnas = $('#personas_fiesta').val();
 

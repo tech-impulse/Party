@@ -64,7 +64,7 @@ function updateBackButton(originNode, originName) {
 }
 
 
-function changeIdiom() {
+function changeIdiomPopUp() {
 
     console.log("PopUp idiomas");
 
@@ -82,9 +82,9 @@ function timerIncrement() {
 
 }
 
-function changeFlag(idioma) {
+function changeIdiom(idioma) {
 
-
+    console.log("Cambiamos el idioma " + idioma);
 
 
 }
