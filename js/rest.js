@@ -473,9 +473,9 @@ function getTiendas() {
         type: 'GET',
         timeout: 10000, //10 seg
         success: function (response) {
-            
+
             restOk_tiendas(response, "tiendas");
-            
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
 
@@ -688,31 +688,23 @@ function getGender() {
                 var count = response.genders.length;
                 var select = $('#select_sexo');
 
+                select.append($('<option>', {
+                    value: 0,
+                    text: "¿Para quién es el disfraz?"
+                }));
+
                 for (var i = 0; i < count; i++) {
 
-                    if (i == 0) {
+                    var val = response.genders[i].nombre;
 
-                        select.append($('<option>', {
-                            value: 0,
-                            text: "¿Para quién es el disfraz?"
-                        }));
+                    //console.log("Val es " + val);
 
+                    select.append($('<option>', {
+                        value: val,
+                        text: val
+                    }));
 
-                    } else {
-
-
-                        var val = response.genders[i].nombre;
-
-                        //console.log("Val es " + val);
-
-                        select.append($('<option>', {
-                            value: val,
-                            text: val
-                        }));
-
-                        select.selectmenu('refresh', true);
-
-                    }
+                    select.selectmenu('refresh', true);
 
                 }
 
@@ -777,38 +769,30 @@ function getSize(gender) {
             if (response.result == 1) {
 
                 console.log(response);
-                
+
                 $('#select_talla  option').remove();
 
                 var count = response.sizes.length;
                 var select = $('#select_talla');
-                
-                
+
+                select.append($('<option>', {
+                    value: 0,
+                    text: "¿Que talla tiene?"
+                }));
+
 
                 for (var i = 0; i < count; i++) {
 
-                    if (i == 0) {
+                    var val = response.sizes[i].nombre;
 
-                        select.append($('<option>', {
-                            value: 0,
-                            text: "¿Que talla tiene?"
-                        }));
+                    //console.log("Val es " + val);
 
+                    select.append($('<option>', {
+                        value: val,
+                        text: val
+                    }));
 
-                    } else {
-
-                        var val = response.sizes[i].nombre;
-
-                        console.log("Val es " + val);
-
-                        select.append($('<option>', {
-                            value: val,
-                            text: val
-                        }));
-
-                        select.selectmenu('refresh', true);
-
-                    }
+                    select.selectmenu('refresh', true);
 
                 }
 

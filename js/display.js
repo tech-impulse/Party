@@ -731,7 +731,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
     $('#select_sexo').scrollTop(5);
     $('#select_talla').scrollTop(5);
 
-    getGender();//llamamos al webservice que tiene los sexos
+    getGender(); //llamamos al webservice que tiene los sexos
 
     $('#select_sexo').change(function () {
         var optionSelected = $(this).find('option:selected');
@@ -740,14 +740,14 @@ function displayPantallaIntermediaAsistDisfra(data) {
         console.log("Opcion seleccionada es " + optValueSelected);
 
         if (optValueSelected != 0) {
-            
+
             getSize(optValueSelected);
             $("#div_selectTalla").show();
 
         } else {
             $("#texto_popup").text('Seleccione una opcion válida');
             $('#popupAlert').popup('open');
-            
+
             $("#div_selectTalla").hide();
         }
     });
@@ -855,13 +855,27 @@ function logout() { //muestra el pop up de inicio de session
 
 function displayScreenSaver() { //muestra el pop up de inicio de session
 
-    $('.ui-popup').popup('close');
-    console.log("Protector de pantalla activado");
-    //$('#contentPopupScreenSaver').show();
-    $('#principal').hide();
-    //$('#contentPopupScreenSaver').fadeIn();
-    $('#contentPopupScreenSaver').show();
-    idleTimeActive = true;
+    /*if (idleTimeActive == true) {
+
+        idleTimeActive = false;
+
+        //$('#contentPopupScreenSaver').fadeIn();
+        $('#contentPopupScreenSaver').hide();
+
+        setTimeout(function () {
+            $('#principal').show();
+        }, 100);
+
+    } else {*/
+
+        $('.ui-popup').popup('close');
+        idleTimeActive = true;
+        console.log("Protector de pantalla activado");
+        $('#principal').hide();
+        $('#contentPopupScreenSaver').show();
+
+    //}
+
 
 }
 
@@ -910,7 +924,7 @@ function displayPantallaSugerencias() {
 }
 
 function displaySummary(param) {
-    
+
     var html = '';
     if (LOGGED == true) {
         if (CART.length > 0) {
@@ -1021,4 +1035,3 @@ function displayFlags(res) {
     $("#contentPopupIdioma").trigger('create');
 
 }
-
