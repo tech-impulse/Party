@@ -379,7 +379,7 @@ function getProducts(idNode, nodeName, info_aux) {
 
     } else {
 
-        console.log("No estamos en el asist. de disfraces");
+        console.log("No estamos en el asist. de fiestas");
         // Datos que se van a enviar
         var dataSend = {
             lang: language,

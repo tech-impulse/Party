@@ -211,7 +211,9 @@ function displayProducts(data, originNode, originName) {
     console.log("DisplayProducts-> Node product es " + data.result);
     console.log("DisplayProducts-> Nodo Origen Id" + originNode);
     console.log("DisplayProducts-> Nodo Origen Nombre" + originName);
+    
     if (data.result == 1) { // Hay resultados
+        
         PRODUCTS = data.products;
         var htmlContent = '';
         var grid = '';
@@ -460,6 +462,7 @@ function displayPopupItemList() {
 }
 
 function displayPopupItemDetail(id, param) {
+    
     console.log("click");
     switch (param) {
     case "CART":
@@ -637,7 +640,7 @@ function loadMenu(data) {
         */
 
 
-    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral" data-transition="pop"> <div class="ui-grid-a"><div class="ui-block-a" style="width:30%"><span class="flaticon-shop" ></span></div><div class="ui-block-b" style="width: 70%;">' +
+    var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral" data-transition="pop"> <div class="ui-grid-a"><div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-left: 20%"></div><div class="ui-block-b" style="width: 70%;">' +
         '<span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div></div></a>';
 
     /*var cart = '<a href="#popupCart" data-rel="popup" data-position-to="#btnMenuLateral"> <div class="ui-grid-a"><div class="ui-block-a" style="width:20%"><span class="flaticon-shop"></span></div><div class="ui-block-b">' +

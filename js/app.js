@@ -263,16 +263,18 @@ function backPage(idNode, nodeName) {
 
 function displayProductos(idNode, nodeName) { // botton de acceso a la app despus de escoger una tienda
 
-    var sexo = $("select#select_sexo option").filter(":selected").val();
-    //var edad = $("select#select_edad option").filter(":selected").val();
-    var talla = $("select#select_talla option").filter(":selected").val();
-
-    var info_aux = {
-        sexo: sexo,
-        talla: talla
-    };
 
     if (sexo != 0 && talla != 0 && ISFIESTA == 4) { //por aqui se accede desde el asistente de disfraces
+
+        var sexo = $("select#select_sexo option").filter(":selected").val();
+        //var edad = $("select#select_edad option").filter(":selected").val();
+        var talla = $("select#select_talla option").filter(":selected").val();
+
+        var info_aux = {
+            sexo: sexo,
+            talla: talla
+        };
+
         console.log("Todos los selects ok");
         getProducts(idNode, nodeName, info_aux);
 
