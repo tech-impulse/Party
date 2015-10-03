@@ -406,16 +406,7 @@ function displayPopupItemList() {
 
     var html = '';
 
-    switch (CART.length) {
-    case 0:
-        console.log("No hay items");
-        break;
-    default:
-        $("#popupCart").popup("close");
-        setTimeout(function () {
-            $("#popupListItems").popup("open");
-        }, popupTimeout);
-    }
+    //$("#popupListItems").html("");
 
     for (var i = 0; i < CART.length; i++) {
         html = html +
@@ -435,8 +426,23 @@ function displayPopupItemList() {
             '</li>';
     }
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
-    $("#ulpopupListItems").html(html);
-    $("#ulpopupListItems").trigger("create");
+    //$("#ulpopupListItems").html(html);
+    //$("#ulpopupListItems").trigger("create");
+
+
+    $("#contentPopupListItems").html(html);
+    $("#contentPopupListItems").trigger("create");
+
+    switch (CART.length) {
+    case 0:
+        console.log("No hay items");
+        break;
+    default:
+        $("#popupCart").popup("close");
+        setTimeout(function () {
+            $("#popupListItems").popup("open");
+        }, popupTimeout);
+    }
 }
 
 function displayPopupItemDetail(id, param) {
@@ -463,7 +469,7 @@ function displayPopupItemDetail(id, param) {
             for (var i = 0; i < productList[id].alternatives_products.length; i++) {
 
                 carrusel = carrusel + '<div class="swiper-slide">' +
-                    '<img onclick="" src="' + productList[id].alternatives_products[i].linkext + '" style="max-width:90%;">' +
+                    '<img onclick="" src="' + productList[id].alternatives_products[i].linkext + '" style="max-width:100%;">' +
                     //'<span>Test</span>'+
                     '</div>';
 
@@ -472,25 +478,17 @@ function displayPopupItemDetail(id, param) {
 
             var div_carrusel = '<li data-role="list-divider" data-theme="c"><span>Productos alternativos</span></li>' +
                 '<li><div class="ui-grid-a" id="img_prod_alter">' +
-                '<div class="swiper-container"><div class="swiper-wrapper" id="carrusel">' + carrusel + '</div></div>' +
+                '<div class="swiper-container"><div class="swiper-wrapper" id="carrusel"  style="width:75%;">' + carrusel + '</div></div>' +
                 '</div>' +
                 '</li>';
         }
 
 
-        var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            slidesPerView: 4,
-            centeredSlides: true,
-            paginationClickable: true,
-            spaceBetween: 30
-        });
-
         break;
     }
 
 
-    var imgAvailability="";
+    var imgAvailability = "";
     switch (productList[id].status) {
     case 1:
         imgAvailability = "css/maqueta/barraVerde.gif";
@@ -528,6 +526,16 @@ function displayPopupItemDetail(id, param) {
 
     $("#contentPopupListItems").html(html);
     $("#contentPopupListItems").trigger("create");
+
+
+
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
 
 
     setTimeout(function () {

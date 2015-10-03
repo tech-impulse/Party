@@ -3,7 +3,7 @@
 		xmlns:gap = "http://phonegap.com/ns/1.0"
 		id        = "party.fiesta"
 		versionCode="4.1.0"
-		version   = "1.0.0">
+		version   = "5.2.0">
 		<name>Party Fiesta</name>
 		<description> Aplicacion oficial para tiendas de Party fiesta		</description>
 		<author href="" email=""> Tech-impulse
