@@ -16,18 +16,15 @@ $(document).bind("mobileinit", function () {
 
 $(document).ready(function () {
 
-    /*
-    //Increment the idle time counter every minute.
-    var idleInterval = setInterval(timerIncrement, 5000); // 1 minute
-
-    //Zero the idle timer on mouse movement.
-    $(this).mousemove(function (e) {
-        idleTime = 0;
+   //Initialize Swiper 
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30
     });
 
-    $(this).keypress(function (e) {
-        idleTime = 0;
-    });*/
 
     console.log(" screen activa? en clicks " + idleTimeActive); //"Touchend" + e.touches + 
 
