@@ -468,17 +468,14 @@ function displayPopupItemDetail(id, param) {
 
             for (var i = 0; i < productList[id].alternatives_products.length; i++) {
 
-                carrusel = carrusel + '<div class="swiper-slide">' +
-                    '<img onclick="" src="' + productList[id].alternatives_products[i].linkext + '" style="max-width:100%;">' +
-                    //'<span>Test</span>'+
-                    '</div>';
+                carrusel = carrusel + '<div class="swiper-slide"><img onclick="" src="' + productList[id].alternatives_products[i].linkext + '" style="max-width: 75px;max-height: 75px;"></div>';
 
             }
 
-
+            
             var div_carrusel = '<li data-role="list-divider" data-theme="c"><span>Productos alternativos</span></li>' +
                 '<li><div class="ui-grid-a" id="img_prod_alter">' +
-                '<div class="swiper-container"><div class="swiper-wrapper" id="carrusel"  style="width:75%;">' + carrusel + '</div></div>' +
+                '<div class="swiper-container"><div class="swiper-wrapper" id="carrusel"  style="">' + carrusel + '</div></div>' +
                 '</div>' +
                 '</li>';
         }
@@ -522,25 +519,22 @@ function displayPopupItemDetail(id, param) {
     if (buttonBack != "") {
         html = html + buttonBack;
     }
-
-
+    
     $("#contentPopupListItems").html(html);
     $("#contentPopupListItems").trigger("create");
 
 
-
-    var swiper = new Swiper('.swiper-container', {
+    setTimeout(function () {
+        $("#popupListItems").popup("open");
+    }, popupTimeout);
+    
+     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         slidesPerView: 4,
         centeredSlides: true,
         paginationClickable: true,
         spaceBetween: 30
     });
-
-
-    setTimeout(function () {
-        $("#popupListItems").popup("open");
-    }, popupTimeout);
 
 }
 
