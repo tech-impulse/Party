@@ -157,8 +157,8 @@ function getFlags() {
 
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
-                $("#texto_popup").text('Sin conexion a internet...');
-                $('#popupAlert').popup('open');
+                //$("#texto_popup").text('Sin conexion a internet...');
+                //$('#popupAlert').popup('open');
 
             }
         },
