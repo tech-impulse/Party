@@ -506,7 +506,7 @@ function restOk_tiendas(res, typ, param, param2) {
     console.log(res);
 
     var count = res.stores.length;
-    var select = $('#select_tienda');
+    var selectTienda = $('#select_tienda');
 
     TIENDAS = res; //array con todas las tiendas
 
@@ -520,11 +520,11 @@ function restOk_tiendas(res, typ, param, param2) {
             text: text
         }));
 
-        select.selectmenu('refresh', true);
+        select.selectTienda('refresh', true);
 
     }
     
-    select.selectmenu('refresh', true);
+    select.selectTienda('refresh', true);
 
 }
 
