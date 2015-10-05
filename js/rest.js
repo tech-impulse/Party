@@ -510,7 +510,7 @@ function restOk_tiendas(res, typ, param, param2) {
 
     TIENDAS = res; //array con todas las tiendas
 
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < 25; i++) {
 
         var val = res.stores[i].id;
         var text = res.stores[i].name;
@@ -876,9 +876,6 @@ function getAge() {
 
                 }
 
-
-                //var option1 = $($("option", select).get(1));
-                //option1.attr('selected', 'selected');
                 select.selectmenu();
 
             } else if (response.result == 0) {
