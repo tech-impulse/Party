@@ -510,7 +510,7 @@ function restOk_tiendas(res, typ, param, param2) {
 
     TIENDAS = res; //array con todas las tiendas
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < count; i++) {
 
         var val = res.stores[i].id;
         var text = res.stores[i].name;

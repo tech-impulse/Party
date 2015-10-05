@@ -16,7 +16,15 @@ $(document).bind("mobileinit", function () {
 
 $(document).ready(function () {
 
-    console.log(" screen activa? en clicks " + idleTimeActive); //"Touchend" + e.touches + 
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
+
+    console.log(" screen activa? en clicks " + idleTimeActive);
 
     protector = setInterval(function () {
         displayScreenSaver();
@@ -87,8 +95,8 @@ $(document).ready(function () {
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
-    $("#divHeader_menu").show();
-    $("#registro").hide();
+    //$("#divHeader_menu").show();
+    //$("#registro").hide();
 
 
     // Obtenermos el listado de tiendas y banderas

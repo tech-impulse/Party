@@ -345,7 +345,7 @@ function displayProducts(data, originNode, originName) {
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
                 $("#divHeader_catalogo").show();
-                $("#divHeader_menu").hide();
+                //$("#divHeader_menu").hide();
                 break;
             };
         }
