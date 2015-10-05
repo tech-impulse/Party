@@ -471,7 +471,7 @@ function getTiendas() {
         url: urlServices + 'getShops.php',
         dataType: 'json',
         type: 'GET',
-        timeout: 10000, //10 seg
+        //timeout: 10000, //10 seg
         success: function (response) {
 
             restOk_tiendas(response, "tiendas");
@@ -493,7 +493,7 @@ function getTiendas() {
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
                 console.log(response);
-                $("#texto_popup").text("Error ..."+response.result);
+                $("#texto_popup").text("Error..."+response.result);
                 $('#popupAlert').popup('open');
 
             }
@@ -537,6 +537,7 @@ function restOk_tiendas(res, typ, param, param2) {
     - typ: tipo de solicitud del webservice
     */
 function restError(res, typ) {
+    
     console.log("fallo de ws, tipo " + typ);
     console.log(res);
     /*
