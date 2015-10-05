@@ -18,21 +18,13 @@ $(document).ready(function () {
     
     getTiendas();
 
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 4,
-        centeredSlides: true,
-        paginationClickable: true,
-        spaceBetween: 30
-    });
-
     console.log(" screen activa? en clicks " + idleTimeActive);
 
     protector = setInterval(function () {
         displayScreenSaver();
     }, idleTime);
 
-    $(window).on("touchstart", function (ev) {
+    /*$(window).on("touchstart", function (ev) {
 
         var e = ev.originalEvent;
         clearInterval(protector);
@@ -46,7 +38,7 @@ $(document).ready(function () {
             displayScreenSaver();
         }, idleTime);
 
-    });
+    });*/
 
     $(window).on("click", function (ev) {
 
@@ -77,18 +69,13 @@ $(document).ready(function () {
     // Obtenermos el listado de tiendas y banderas
     getFlags();
     
-
-
-    //comprobamos si el checkbox de guardar session esta activado para mostrar el nombre en el link del login
-    //var checkBoxSession = document.getElementById("recordar_session").checked;
-    //console.log(checkBoxSession);
-    //if (checkBoxSession == true) {
-    // var html_login = '<a id="cerrar_session" onclick="cerrar_session();" style="margin:10px">' +
-    //    '<label id="ya_soy_cliente"><span>Ya soy Cliente!</span></label></a>';
-    // $("#session").html(html_login);
-    //} else {
-    //  console.log("No hace falta hacer nada");
-    //}
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
 
     $("#btn_acceder").click(function () { // botton de acceso a la app 
 
