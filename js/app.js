@@ -15,6 +15,8 @@ $(document).bind("mobileinit", function () {
 // PRECARGA DE LA APLICACIÓN
 
 $(document).ready(function () {
+    
+    getTiendas();
 
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -74,7 +76,7 @@ $(document).ready(function () {
 
     // Obtenermos el listado de tiendas y banderas
     getFlags();
-    getTiendas();
+    
 
 
     //comprobamos si el checkbox de guardar session esta activado para mostrar el nombre en el link del login
