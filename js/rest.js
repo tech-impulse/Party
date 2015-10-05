@@ -515,8 +515,6 @@ function restOk_tiendas(res, typ, param, param2) {
         var val = res.stores[i].id;
         var text = res.stores[i].name;
 
-        //console.log("Val es " + val + " texto " + text);
-
         select.append($('<option>', {
             value: val,
             text: text
@@ -525,15 +523,11 @@ function restOk_tiendas(res, typ, param, param2) {
         select.selectmenu('refresh');
 
     }
-
-
-    //var option1 = $($("option", select).get(1));
-    //option1.attr('selected', 'selected');
-
-
-
+    
+    select.selectmenu('refresh');
 
 }
+
 
 /* Función que controla que la petición Ajax ha ido mal
     - res: Respuesta del webservice

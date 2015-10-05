@@ -32,32 +32,6 @@ $(document).ready(function () {
 
     $(window).on("touchstart", function (ev) {
 
-        /* var e = ev.originalEvent;
-         console.log(" screen activa? " + idleTimeActive); //"Touchend" + e.touches + 
-
-         if (idleTimeActive == true) {
-
-             idleTimeActive = false;
-
-             //$('#contentPopupScreenSaver').fadeIn();
-             $('#contentPopupScreenSaver').hide();
-
-             setTimeout(function () {
-                 $('#principal').show();
-             }, 100);
-
-         } else {
-             
-             idleTimeActive = true;
-
-             if (idleTimeActive != true) {
-                 setTimeout(function () {
-                     displayScreenSaver();
-                 }, idleTime);
-
-             }
-         }*/
-
         var e = ev.originalEvent;
         clearInterval(protector);
 
@@ -69,7 +43,6 @@ $(document).ready(function () {
         protector = setInterval(function () {
             displayScreenSaver();
         }, idleTime);
-
 
     });
 
