@@ -493,7 +493,7 @@ function getTiendas() {
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
                 console.log(response);
-                $("#texto_popup").text(response);
+                $("#texto_popup").text(response.result);
                 $('#popupAlert').popup('open');
 
             }
