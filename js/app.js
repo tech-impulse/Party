@@ -16,16 +16,6 @@ $(document).bind("mobileinit", function () {
 
 $(document).ready(function () {
 
-   //Initialize Swiper 
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 4,
-        centeredSlides: true,
-        paginationClickable: true,
-        spaceBetween: 30
-    });
-
-
     console.log(" screen activa? en clicks " + idleTimeActive); //"Touchend" + e.touches + 
 
     protector = setInterval(function () {
