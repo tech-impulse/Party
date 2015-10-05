@@ -474,7 +474,9 @@ function getTiendas() {
         timeout: 10000, //10 seg
         success: function (response) {
 
-            restOk_tiendas(response, "tiendas");
+            //restOk_tiendas(response, "tiendas");
+            $("#texto_popup").text(response.result);
+                $('#popupAlert').popup('open');
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -490,7 +492,8 @@ function getTiendas() {
 
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
-                $("#texto_popup").text('Sin conexion a internet...');
+                console.log(response);
+                $("#texto_popup").text(response);
                 $('#popupAlert').popup('open');
 
             }
