@@ -507,9 +507,6 @@ function restOk_tiendas(res, typ, param, param2) {
     //console.log("La respuesta es ");
     console.log(res);
 
-    $("#texto_popup").text("Todo ok,cargamos tiendas");
-    $('#popupAlert').popup('open');
-
     var count = res.stores.length;
     var select = $('#select_tienda');
 
