@@ -8,7 +8,7 @@
         <access origin="http://partyfiesta.youtter.com/" />
 
         <!-- versionCode is optional and Android only -->
-        <preference name="phonegap-version" value="cli-5.2.0" />
+        <preference name="phonegap-version" value="cli-5.1.0" />
 
         <preference name="orientation" value="landscape" />
         <preference name="fullscreen" value="false" />
