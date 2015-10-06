@@ -478,7 +478,7 @@ function getTiendas() {
                 restOk_tiendas(response, "tiendas");
             }, 500);
 
-            $("#texto_popup").text('Error de TimeOut... compruebe su conexion de internet');
+            $("#texto_popup").text('Todo ok');
             $('#popupAlert').popup('open');
 
         },
@@ -500,6 +500,7 @@ function getTiendas() {
                 $('#popupAlert').popup('open');
 
             }
+
         },
     });
 }
@@ -516,7 +517,7 @@ function restOk_tiendas(res, typ, param, param2) {
 
     TIENDAS = res; //array con todas las tiendas
 
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < count; i++) {
 
         var val = res.stores[i].id;
         var text = res.stores[i].name;

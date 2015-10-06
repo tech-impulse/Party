@@ -66,8 +66,8 @@ $(document).ready(function () {
     //$("#registro").hide();
 
 
-    // Obtenermos el listado de tiendas y banderas
-    getFlags();
+    // Obtenermos el listado banderas
+    //getFlags();
     
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
