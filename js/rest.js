@@ -476,7 +476,10 @@ function getTiendas() {
 
             setTimeout(function () {
                 restOk_tiendas(response, "tiendas");
-            }, 350);
+            }, 500);
+
+            $("#texto_popup").text('Error de TimeOut... compruebe su conexion de internet');
+            $('#popupAlert').popup('open');
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
