@@ -134,7 +134,7 @@ function getFlags() {
         url: urlServices + 'getFlags.php',
         dataType: 'json',
         type: 'GET',
-        timeout: 10000, //10 seg
+        //timeout: 10000, //10 seg
         success: function (response) {
 
             console.log("Los paises nos han llegado, cargamos el popup");
@@ -474,9 +474,9 @@ function getTiendas() {
         //timeout: 10000, //10 seg
         success: function (response) {
 
-            restOk_tiendas(response, "tiendas");
-            $("#texto_popup").text(response.result);
-            $('#popupAlert').popup('open');
+            setTimeout(function () {
+                restOk_tiendas(response, "tiendas");
+            }, 350);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -493,7 +493,7 @@ function getTiendas() {
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
                 console.log(response);
-                $("#texto_popup").text("Error..."+response.result);
+                $("#texto_popup").text("Error..." + response.result);
                 $('#popupAlert').popup('open');
 
             }
@@ -526,7 +526,7 @@ function restOk_tiendas(res, typ, param, param2) {
         select.selectmenu('refresh', true);
 
     }
-    
+
     select.selectmenu();
 
 }
@@ -537,7 +537,7 @@ function restOk_tiendas(res, typ, param, param2) {
     - typ: tipo de solicitud del webservice
     */
 function restError(res, typ) {
-    
+
     console.log("fallo de ws, tipo " + typ);
     console.log(res);
     /*
