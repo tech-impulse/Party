@@ -67,7 +67,7 @@ $(document).ready(function () {
 
 
     // Obtenermos el listado banderas
-    //getFlags();
+    getFlags();
     
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',

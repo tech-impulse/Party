@@ -474,12 +474,7 @@ function getTiendas() {
         //timeout: 10000, //10 seg
         success: function (response) {
 
-            setTimeout(function () {
-                restOk_tiendas(response, "tiendas");
-            }, 500);
-
-            $("#texto_popup").text('Todo ok');
-            $('#popupAlert').popup('open');
+            restOk_tiendas(response, "tiendas");
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -512,6 +507,9 @@ function restOk_tiendas(res, typ, param, param2) {
     //console.log("La respuesta es ");
     console.log(res);
 
+    $("#texto_popup").text("Todo ok,cargamos tiendas");
+    $('#popupAlert').popup('open');
+
     var count = res.stores.length;
     var select = $('#select_tienda');
 
@@ -527,11 +525,11 @@ function restOk_tiendas(res, typ, param, param2) {
             text: text
         }));
 
-        select.selectmenu('refresh', true);
+        //select.selectmenu('refresh', true);
 
     }
-
-    select.selectmenu();
+    
+    select.selectmenu('refresh', true);
 
 }
 
