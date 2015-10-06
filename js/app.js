@@ -80,7 +80,7 @@ $(document).ready(function () {
 
     $("#btn_acceder").click(function () { // botton de acceso a la app 
 
-        var seleccion = $("select#select_tienda option").filter(":selected").val();
+        var seleccion = $("#select_tienda option:selected").val();
         console.log("Seleccion es " + seleccion);
 
         $("#texto_popup").text("Pretamos el boton de acceder, seleccion es "+seleccion);
