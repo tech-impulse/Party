@@ -16,9 +16,8 @@ $(document).bind("mobileinit", function () {
 
 $(document).ready(function () {
     
-    getTiendas();
 
-    console.log(" screen activa? en clicks " + idleTimeActive);
+    //console.log(" screen activa? en clicks " + idleTimeActive);
 
     protector = setInterval(function () {
         displayScreenSaver();
@@ -64,10 +63,12 @@ $(document).ready(function () {
     $("#divHeader_menu").trigger('create');
     //$("#divHeader_menu").show();
     //$("#registro").hide();
-
-
+    
+    
     // Obtenermos el listado banderas
     getFlags();
+    getTiendas();
+
     
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
