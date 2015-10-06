@@ -15,7 +15,7 @@ $(document).bind("mobileinit", function () {
 // PRECARGA DE LA APLICACIÓN
 
 $(document).ready(function () {
-    
+
 
     //console.log(" screen activa? en clicks " + idleTimeActive);
 
@@ -63,13 +63,13 @@ $(document).ready(function () {
     $("#divHeader_menu").trigger('create');
     //$("#divHeader_menu").show();
     //$("#registro").hide();
-    
-    
+
+
     // Obtenermos el listado banderas
     getFlags();
     getTiendas();
 
-    
+
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         slidesPerView: 4,
@@ -82,6 +82,9 @@ $(document).ready(function () {
 
         var seleccion = $("select#select_tienda option").filter(":selected").val();
         console.log("Seleccion es " + seleccion);
+
+        $("#texto_popup").text("Pretamos el boton de acceder, seleccion es "+seleccion);
+        $('#popupAlert').popup('open');
 
         if (seleccion != undefined) {
 
