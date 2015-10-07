@@ -124,8 +124,11 @@ $(document).ready(function () {
         paginationClickable: true,
         spaceBetween: 30
     });
+    
+    var btnAcceder = document.getElementById('btn_acceder');
 
-    $("#btn_acceder").unbind('click').bind('click', function () { // botton de acceso a la app 
+    //$("#btn_acceder").on("touchend", function () { // botton de acceso a la app 
+    btnAcceder.addEventListener("click",function(){ // botton de acceso a la app 
 
         var seleccion = $("#select_tienda option:selected").val();
         console.log("Seleccion es " + seleccion);
@@ -164,8 +167,9 @@ $(document).ready(function () {
         }
 
     });
+    
 
-    $("#iniciar_session").unbind('click').bind('click', function () { // botton de login de la app
+    $("#iniciar_session").on("touchend", function () { // botton de login de la app
 
         console.log("Logandose");
         var usuario = $('#usrnm').val();
@@ -180,7 +184,7 @@ $(document).ready(function () {
 
     });
 
-    $("#enviar_registro").unbind('click').bind('click', function () { // botton de registro a la app 
+    $("#enviar_registro").on("touchend", function () { // botton de registro a la app 
 
         console.log("registrandose");
         var usuario = $('#emailsignup').val();
@@ -197,7 +201,7 @@ $(document).ready(function () {
 
     });
 
-    $("#btnPopupActionLeft").unbind('click').bind('click', function () {
+    $("#btnPopupActionLeft").on("touchend", function () {
 
         var action = $("#lbpopupAction").text();
         switch (action) {
@@ -209,7 +213,7 @@ $(document).ready(function () {
     });
 
 
-    $("#btnPopupActionRight").unbind('click').bind('click', function () {
+    $("#btnPopupActionRight").on("touchend", function () {
 
         var action = $("#lbpopupAction").text();
         switch (action) {
@@ -220,7 +224,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#cam_contraseña").unbind('click').bind('click', function () { // botton de login de la app
+    $("#cam_contraseña").on("touchend", function () { // botton de login de la app
 
         console.log("Cambio passwrod");
         var usuarioCambio = $('#usuarioCambio').val();
