@@ -14,6 +14,71 @@ $(document).bind("mobileinit", function () {
 
 // PRECARGA DE LA APLICACIÓN
 
+
+function onLoad() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+}
+
+
+function onDeviceReady() {
+
+    console.log("Device ready");
+
+    getFlags();
+    getTiendas();
+
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
+
+
+    $("#btn_acceder").click(function () { // botton de acceso a la app 
+
+        var seleccion = $("#select_tienda option:selected").val();
+        console.log("Seleccion es " + seleccion);
+
+        $("#texto_popup").text("Pretamos el boton de acceder, seleccion es " + seleccion);
+        $('#popupAlert').popup('open');
+
+        if (seleccion != undefined) {
+
+            $("#divTienda").hide();
+            $("#divContent").show();
+
+            STORE = seleccion;
+
+            var countTiendas = TIENDAS.stores.length;
+
+            for (var i = 0; i < countTiendas; i++) {
+
+                if (TIENDAS.stores[i].id == STORE) {
+                    SHOPDELIVERY = TIENDAS.stores[i].deliveryStore; //guardamos el id de la tienda
+                    idiomStore = TIENDAS.stores[i].language;
+                    TIENDAS = "";
+                    break;
+                }
+
+            }
+
+            console.log("Item seleccionado " + STORE + " y tiene entraga en tienda? " + SHOPDELIVERY);
+            $("#logo_inicio").hide();
+            getNodes(0);
+
+        } else {
+
+            alert("¿Seleccione una tienda!");
+
+        }
+
+    });
+
+}
+
+
 $(document).ready(function () {
 
 
@@ -22,22 +87,6 @@ $(document).ready(function () {
     protector = setInterval(function () {
         displayScreenSaver();
     }, idleTime);
-
-    /*$(window).on("touchstart", function (ev) {
-
-        var e = ev.originalEvent;
-        clearInterval(protector);
-
-        $('#principal').show();
-        $('#contentPopupScreenSaver').hide();
-
-        console.log("Touch");
-
-        protector = setInterval(function () {
-            displayScreenSaver();
-        }, idleTime);
-
-    });*/
 
     $(window).on("click", function (ev) {
 
@@ -61,8 +110,6 @@ $(document).ready(function () {
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
-    //$("#divHeader_menu").show();
-    //$("#registro").hide();
 
 
     // Obtenermos el listado banderas
@@ -83,7 +130,7 @@ $(document).ready(function () {
         var seleccion = $("#select_tienda option:selected").val();
         console.log("Seleccion es " + seleccion);
 
-        $("#texto_popup").text("Pretamos el boton de acceder, seleccion es "+seleccion);
+        $("#texto_popup").text("Pretamos el boton de acceder, seleccion es " + seleccion);
         $('#popupAlert').popup('open');
 
         if (seleccion != undefined) {
