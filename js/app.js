@@ -14,73 +14,7 @@ $(document).bind("mobileinit", function () {
 
 // PRECARGA DE LA APLICACIÓN
 
-/*
-function onLoad() {
-    document.addEventListener("deviceready", onDeviceReady, false);
-}
-
-
-function onDeviceReady() {
-
-    console.log("Device ready");
-
-    getFlags();
-    getTiendas();
-
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 4,
-        centeredSlides: true,
-        paginationClickable: true,
-        spaceBetween: 30
-    });
-
-
-    $("#btn_acceder").click(function () { // botton de acceso a la app 
-
-        var seleccion = $("#select_tienda option:selected").val();
-        console.log("Seleccion es " + seleccion);
-
-        $("#texto_popup").text("Pretamos el boton de acceder, seleccion es " + seleccion);
-        $('#popupAlert').popup('open');
-
-        if (seleccion != undefined) {
-
-            $("#divTienda").hide();
-            $("#divContent").show();
-
-            STORE = seleccion;
-
-            var countTiendas = TIENDAS.stores.length;
-
-            for (var i = 0; i < countTiendas; i++) {
-
-                if (TIENDAS.stores[i].id == STORE) {
-                    SHOPDELIVERY = TIENDAS.stores[i].deliveryStore; //guardamos el id de la tienda
-                    idiomStore = TIENDAS.stores[i].language;
-                    TIENDAS = "";
-                    break;
-                }
-
-            }
-
-            console.log("Item seleccionado " + STORE + " y tiene entraga en tienda? " + SHOPDELIVERY);
-            $("#logo_inicio").hide();
-            getNodes(0);
-
-        } else {
-
-            alert("¿Seleccione una tienda!");
-
-        }
-
-    });
-
-}
-*/
-
 $(document).ready(function () {
-
 
     //console.log(" screen activa? en clicks " + idleTimeActive);
 
@@ -115,26 +49,11 @@ $(document).ready(function () {
     // Obtenermos el listado banderas
     getFlags();
     getTiendas();
-
-
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 4,
-        centeredSlides: true,
-        paginationClickable: true,
-        spaceBetween: 30
-    });
     
-    var btnAcceder = document.getElementById('btn_acceder');
-
-    //$("#btn_acceder").on("touchend", function () { // botton de acceso a la app 
-    btnAcceder.addEventListener("click",function(){ // botton de acceso a la app 
-
+    $("#btn_acceder").click(function () { // botton de acceso a la app 
+   
         var seleccion = $("#select_tienda option:selected").val();
         console.log("Seleccion es " + seleccion);
-
-        $("#texto_popup").text("Pretamos el boton de acceder, seleccion es " + seleccion);
-        $('#popupAlert').popup('open');
 
         if (seleccion != undefined) {
 
@@ -169,7 +88,7 @@ $(document).ready(function () {
     });
     
 
-    $("#iniciar_session").on("touchend", function () { // botton de login de la app
+    $("#iniciar_session").click(function () { // botton de login de la app
 
         console.log("Logandose");
         var usuario = $('#usrnm').val();
@@ -184,7 +103,7 @@ $(document).ready(function () {
 
     });
 
-    $("#enviar_registro").on("touchend", function () { // botton de registro a la app 
+    $("#enviar_registro").click( function () { // botton de registro a la app 
 
         console.log("registrandose");
         var usuario = $('#emailsignup').val();
@@ -201,7 +120,7 @@ $(document).ready(function () {
 
     });
 
-    $("#btnPopupActionLeft").on("touchend", function () {
+    $("#btnPopupActionLeft").click( function () {
 
         var action = $("#lbpopupAction").text();
         switch (action) {
@@ -213,7 +132,7 @@ $(document).ready(function () {
     });
 
 
-    $("#btnPopupActionRight").on("touchend", function () {
+    $("#btnPopupActionRight").click(function () {
 
         var action = $("#lbpopupAction").text();
         switch (action) {
@@ -224,7 +143,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#cam_contraseña").on("touchend", function () { // botton de login de la app
+    $("#cam_contraseña").click(function () { // botton de login de la app
 
         console.log("Cambio passwrod");
         var usuarioCambio = $('#usuarioCambio').val();

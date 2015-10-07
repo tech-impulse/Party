@@ -406,8 +406,6 @@ function displayPopupItemList() {
 
     var html = '';
 
-    //$("#popupListItems").html("");
-
     for (var i = 0; i < CART.length; i++) {
         html = html +
             '<li> ' +
@@ -426,8 +424,6 @@ function displayPopupItemList() {
             '</li>';
     }
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
-    //$("#ulpopupListItems").html(html);
-    //$("#ulpopupListItems").trigger("create");
 
 
     $("#contentPopupListItems").html(html);
