@@ -174,6 +174,10 @@ function getFlags() {
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
     */
 function getNodes(idNode, nodeName, isAlgo) {
+    
+    if(idNode != 0){
+        $("#banderas").hide();    
+    }
 
     // Datos que se van a enviar
     var dataSend = {
@@ -202,6 +206,7 @@ function getNodes(idNode, nodeName, isAlgo) {
 
                 if (idNode == 0) {
                     node_cero = response;
+                    $("#banderas").show();  
                 }
 
                 restOk(response, "nodes", idNode, nodeName);

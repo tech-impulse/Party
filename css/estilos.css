@@ -19,3 +19,20 @@
     margin: auto;
 }
 
+.contenedor {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    position: absolute;
+    /*width: 300px;*/
+    /** Extra para decoracion **/
+    /*background-color: #d0d0d0;*/
+    padding: 10px 10px 10px 10px;
+    border-radius: 8px;
+}
+
+.contenedor:hover {
+    white-space: normal;
+    /** Extra para decoracion **/
+    /*background-color: #f0f0f0;*/
+}

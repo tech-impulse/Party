@@ -13,6 +13,7 @@ var SHOPDELIVERY = "";
 var ISFIESTA = "";
 var INFO_USU = [];
 var PRODUCTS = [];
+var PRODUCTS_ALTER = [];
 var CART = [];
 var CARRITO = [];
 var node_cero = [];

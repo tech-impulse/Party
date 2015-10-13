@@ -49,9 +49,9 @@ $(document).ready(function () {
     // Obtenermos el listado banderas
     getFlags();
     getTiendas();
-    
+
     $("#btn_acceder").click(function () { // botton de acceso a la app 
-   
+
         var seleccion = $("#select_tienda option:selected").val();
         console.log("Seleccion es " + seleccion);
 
@@ -86,7 +86,7 @@ $(document).ready(function () {
         }
 
     });
-    
+
 
     $("#iniciar_session").click(function () { // botton de login de la app
 
@@ -103,7 +103,7 @@ $(document).ready(function () {
 
     });
 
-    $("#enviar_registro").click( function () { // botton de registro a la app 
+    $("#enviar_registro").click(function () { // botton de registro a la app 
 
         console.log("registrandose");
         var usuario = $('#emailsignup').val();
@@ -120,7 +120,7 @@ $(document).ready(function () {
 
     });
 
-    $("#btnPopupActionLeft").click( function () {
+    $("#btnPopupActionLeft").click(function () {
 
         var action = $("#lbpopupAction").text();
         switch (action) {
@@ -381,21 +381,22 @@ function carrito(id_producto, operacion, precio) {
 }
 
 function addToCart(item, param) {
+
     var product;
     var foundInCart = 0;
     for (var i = 0; i < PRODUCTS.length; i++) {
-        console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS[i]['sku']);
-        if (PRODUCTS[i]['sku'] == item) {
-            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['sku'] + " es igual a " + item);
+        console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS[i]['id']);
+        if (PRODUCTS[i]['id'] == item) {
+            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
             product = PRODUCTS[i];
             i = PRODUCTS.length;
         }
     }
 
     for (var j = 0; j < CART.length; j++) {
-        console.log("buscando  " + item + " en carrito " + CART[j]['sku']);
-        if (CART[j]['sku'] == item) {
-            console.log("ENCONTRADO EN CARRITO " + CART[j]['sku'] + " es igual a " + item);
+        console.log("buscando  " + item + " en carrito " + CART[j]['id']);
+        if (CART[j]['id'] == item) {
+            console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
             foundInCart = 1;
             CART[j].quantity = CART[j].quantity + param;
             CART.ammount = parseFloat((product.price_x_region.totalPrice * param)) + parseFloat(CART.ammount);
@@ -414,11 +415,55 @@ function addToCart(item, param) {
         CART.push(product);
         displayItemOperations(item, product.quantity);
     }
+
+}
+
+
+function addToCartAlter(item) {
+
+    var product;
+    var cantidad = $("#cantidad_prod_alter").val();
+    console.log("Numero de productos es " + cantidad);
+    
+    var foundInCart = 0;
+    for (var i = 0; i < PRODUCTS_ALTER.length; i++) {
+        console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS_ALTER[i]['id']);
+        if (PRODUCTS_ALTER[i]['id'] == item) {
+            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS_ALTER[i]['id'] + " es igual a " + item);
+            product = PRODUCTS_ALTER[i];
+            i = PRODUCTS_ALTER.length;
+        }
+    }
+
+    for (var j = 0; j < CART.length; j++) {
+        console.log("buscando  " + item + " en carrito " + CART[j]['id']);
+        if (CART[j]['id'] == item) {
+            console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
+            foundInCart = 1;
+            CART[j].quantity = CART[j].quantity + cantidad;
+            CART.ammount = parseFloat((product.price_x_region.totalPrice * cantidad)) + parseFloat(CART.ammount);
+            displayItemOperations(item, parseInt(CART[j].quantity), j);
+            j = PRODUCTS_ALTER.length;
+        }
+    }
+
+    if (foundInCart == 0) {
+        if (CART.ammount == undefined) {
+            console.log("EL carrito está vació, lo inicializamos");
+            CART.ammount = 0;
+        }
+        console.log("Producto no esta en carrito, lo añadimos");
+        CART.ammount = parseFloat(product.price_x_region.totalPrice) + parseFloat(CART.ammount);
+        product.quantity = 1;
+        CART.push(product);
+        displayItemOperations(item, product.quantity);
+    }
+
 }
 
 function deleteItemCart(position) {
-    console.log("Eliminar item en posicion " + position + " SKU: " + CART[position].sku);
-    displayItemOperations(CART[position].sku, 0, position); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
+    console.log("Eliminar item en posicion " + position + " id: " + CART[position].id);
+    displayItemOperations(CART[position].id, 0, position); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
 }
 
 function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos) {

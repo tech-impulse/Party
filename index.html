@@ -157,9 +157,9 @@
                         <div id="div_session">
                             <h3>Iniciar sessión</h3>
                             <label class="">Usuario</label>
-                            <input type="text" name="user" id="usrnm" placeholder="Email">
+                            <input type="text" name="user" id="usrnm" placeholder="Email" data-clear-btn="true">
                             <label class="">Contraseña</label>
-                            <input type="password" name="passw" id="pswd" placeholder="">
+                            <input type="password" name="passw" id="pswd" placeholder="" data-clear-btn="true">
                             <!--<label for="recordar_session">No cerrar sessión</label>
                             <input type="checkbox" name="login" id="recordar_session" value="1" data-mini="true">
                             -->
@@ -182,19 +182,19 @@
                             <h3> Registrarse </h3>
                             <p>
                                 <label for="usernamesignup" class="uname" data-icon="u"> Usuario </label>
-                                <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus>
+                                <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
                             </p>
                             <p>
                                 <label for="passwordsignup" class="youpasswd" data-icon="p"> Contraseña </label>
-                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO">
+                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
                             </p>
                             <p>
                                 <label for="passwordsignup_confirm" class="youpasswd" data-icon="p"> Confirmar contraseña </label>
-                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO">
+                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
                             </p>
                             <p>
                                 <label for="passwordsignup_confirm" class="youpasswd" data-icon="p"> Código postal </label>
-                                <input id="cod_pos" name="" required="required" type="number" placeholder="08041">
+                                <input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true">
                             </p>
                             <p>
                                 <button type="button" id="enviar_registro">Crear cuenta</button>
@@ -216,7 +216,7 @@
                             <h3> Cambio de contraseña </h3>
                             <p>
                                 <label for="contrauno" class="youpasswd" data-icon="u"> Su usuario: </label>
-                                <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus>
+                                <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
                             </p>
                             <p>
                                 <button type="button" id="cam_contraseña">¡Pedir una nueva contraseña!</button>
@@ -772,7 +772,7 @@
                             <div class="ui-block-a" style="width:70%">
                                 <div class="ui-grid-b">
                                     <div class="ui-block-a" style="width:20%">
-                                        SKU
+                                        id
                                     </div>
                                     <div class="ui-block-b" style="width:40%">
                                         Producto
