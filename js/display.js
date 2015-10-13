@@ -12,7 +12,9 @@ function displayNode(data, originNode, originName) {
     var filas = data.nodes.length / data.columns; //isMain
     var count = 1;
 
-    var alturaBox = parseInt(100 / (filas + 1));
+    var alturaBox = parseInt(100 / (filas));
+    
+    console.log("-------Altura es : "+alturaBox);
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -168,6 +170,7 @@ function displayNode(data, originNode, originName) {
 
                 htmlContent = htmlContent + '</div>';
                 $("#divContent").html(htmlContent);
+                $("#divContent").css({'position': 'absolute','top':'25%','width': '97%','margin-right': '1%'});//'position': 'relative','top':'0%','width': '100%'
                 $("#divContent").trigger('create');
                 break;
             };
