@@ -86,7 +86,9 @@ function changeIdiom(idioma) {
 
     console.log("Cambiamos el idioma " + idioma);
     
+    idiomStore = idioma;
     
+    getTraduccion(idioma);
 
 
 }
