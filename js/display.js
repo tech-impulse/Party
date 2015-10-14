@@ -13,8 +13,8 @@ function displayNode(data, originNode, originName) {
     var count = 1;
 
     var alturaBox = parseInt(100 / (filas));
-    
-    console.log("-------Altura es : "+alturaBox);
+
+    console.log("-------Altura es : " + alturaBox);
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -170,7 +170,7 @@ function displayNode(data, originNode, originName) {
 
                 htmlContent = htmlContent + '</div>';
                 $("#divContent").html(htmlContent);
-                $("#divContent").css({'position': 'absolute','top':'25%','width': '97%','margin-right': '1%'});//'position': 'relative','top':'0%','width': '100%'
+                //$("#divContent").css({'position': 'absolute','top':'25%','width': '97%','margin-right': '1%'});//'position': 'relative','top':'0%','width': '100%'
                 $("#divContent").trigger('create');
                 break;
             };
@@ -305,7 +305,7 @@ function displayProducts(data, originNode, originName) {
                         '<label id="quantity' + data.products[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label></div>' +
                         '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + i + ',\'PRODUCTS\')" style="width: 120px;height: 120px;">' +
                         '<br><div class="contenedor">' + data.products[i].name + '</div>' +
-                        '<br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
+                        '<br><br><strong>' + formatoNumero(data.products[i].price_x_region.totalPrice, 2, ",", ".", "€") + '</strong>' +
                         '<br><button id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
                         '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
                         '<div class="ui-block-a" onclick="" style="width: 45%;"><button id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
@@ -577,7 +577,7 @@ function displayPopupItemDetail(id, param) {
         '</div>' +
         '</li>' + div_carrusel +
 
-        '</ul>';
+    '</ul>';
 
     if (buttonBack != "") {
         html = html + buttonBack;
@@ -683,16 +683,16 @@ function loadMenu(data) {
 
             switch (valorSwitch) {
             case 1: //catalogo
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',0)';
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',0,1)';
                 break;
             case 2: //promos
                 extra = '';
                 break;
             case 3: // asis fistas
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ')';
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',1)';
                 break;
             case 4: // asis disfra
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ')';
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',1)';
                 break;
             case 5: // sugerencias
                 extra = 'displayPantallaSugerencias()';
@@ -701,7 +701,7 @@ function loadMenu(data) {
                 extra = '';
                 break;
             case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ')';
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',1)';
                 break;
             }
 
@@ -797,14 +797,14 @@ function displayPantallaIntermediaAsistDisfra(data) {
     htmlContent = '<div id="page_count" style="display: block;">' +
         '<center>' +
         '<img src="' + info.linkint + '" alt="">' +
-        //'<h3> ¿Para quién es el disfraz?</h3>' +
-        '<div style="width: 25%"><select id="select_sexo" data-native-menu="false">' +
+    //'<h3> ¿Para quién es el disfraz?</h3>' +
+    '<div style="width: 25%"><select id="select_sexo" data-native-menu="false">' +
         '</select></div>' +
-        //'<h3> Edad </h3>' +
-        //'<div style="width: 25%"><select id="select_edad" >' +
-        //'</select></div>' +
-        //'<h3> Talla </h3>' +
-        '<div id="div_selectTalla" style="width: 25%;display:none"><select id="select_talla" data-native-menu="false">' +
+    //'<h3> Edad </h3>' +
+    //'<div style="width: 25%"><select id="select_edad" >' +
+    //'</select></div>' +
+    //'<h3> Talla </h3>' +
+    '<div id="div_selectTalla" style="width: 25%;display:none"><select id="select_talla" data-native-menu="false">' +
         '</select></div>' +
         '<br>' +
         '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
@@ -973,9 +973,12 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
 function displayPantallaSugerencias() {
 
     console.log("Entramos en la pantalla de sugerencias");
-
+    nodeIds = [];
+    nodeNames = [];
     loadMenu(node_cero);
+
     updateBackButton(0, "Menú");
+
     $("#divHeader_catalogo").show();
 
     html_sug = '<div id="form_sugerencias" >' +
@@ -1008,7 +1011,6 @@ function displayPantallaSugerencias() {
 
     $("#divContent").html(html_sug);
     $("#divContent").trigger('create');
-
 
 }
 
@@ -1113,7 +1115,7 @@ function displayFlags(res) {
     for (var i = 0; i < count; i++) {
 
         html += '<li data-icon="false">' +
-            '<a onclick="changeIdiom(\''+info[i].shortname +'\');"><img src="' + info[i].image + '" class="ui-li-icon ui-corner-none">' + info[i].name + '</a>' +
+            '<a onclick="changeIdiom(\'' + info[i].shortname + '\');"><img src="' + info[i].image + '" class="ui-li-icon ui-corner-none">' + info[i].name + '</a>' +
             '</li>';
 
     }
@@ -1124,6 +1126,3 @@ function displayFlags(res) {
     $("#contentPopupIdioma").trigger('create');
 
 }
-
-
-

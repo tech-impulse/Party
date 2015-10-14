@@ -173,10 +173,16 @@ function getFlags() {
     - idNode: id del nodo que se esta solicitando
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
     */
-function getNodes(idNode, nodeName, isAlgo) {
+function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
 
     if (idNode != 0) {
         $("#banderas").hide();
+    }
+
+    if (dondeVenimos == 1) {
+        nodeIds = [];
+        nodeNames = [];
+        openMenu();
     }
 
     // Datos que se van a enviar
@@ -936,50 +942,50 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
         products: aux
     };
 
-    
-        var request = $.ajax({
-            data: dataSend,
-            async: false,
-            url: urlServices + 'getInfoNode.php',
-            dataType: 'json',
-            type: 'POST',
-            success: function (response) {
-                console.log("Respuesta: ");
-                console.log(response);
-                
-                for(var i = 0; i < CART.length; i++){
-                    
-                    if(response[i].id == CART[i].id ){
-                        
-                        CART[i].definition = response[i].definition;
-                        CART[i].name = response[i].name;
-                        CART[i].short_name = response[i].short_name;
-                        CART[i].suggestions = response[i].suggestions;
-                    
-                    }
-                
-                }
 
+    var request = $.ajax({
+        data: dataSend,
+        async: false,
+        url: urlServices + 'getInfoNode.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+            console.log("Respuesta: ");
+            console.log(response);
 
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
+            for (var i = 0; i < CART.length; i++) {
 
-                if (textStatus === "timeout") {
+                if (response[i].id == CART[i].id) {
 
-                    console.log("Timeout");
-                    alert("Error de TimeOut... compruebe su conexion de internet");
-
-                } else {
-
-                    restError(jqXHR, "tiendas");
-                    console.log("Sin conexion");
-                    //alert("Sin conexion a internet...");
-                    $("#texto_popup").text("Sin conexion a internet");
-                    $('#popupAlert').popup('open');
+                    CART[i].definition = response[i].definition;
+                    CART[i].name = response[i].name;
+                    CART[i].short_name = response[i].short_name;
+                    CART[i].suggestions = response[i].suggestions;
 
                 }
-            },
-        });
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
 
 
 }
