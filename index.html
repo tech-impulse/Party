@@ -2,14 +2,14 @@
 <html>
 
 <head>
-    
+
     <title>Party Fiesta</title>
     <meta name="viewport" content="width=device-width, height=device-height,user-scalable=yes" charset="utf-8">
 
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src="lib/jquery.mobile-1.4.5.min.js"></script>
     <script src="js/swiper.min.js"></script>
-    
+
     <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/themes/PartyFiesta.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="stylesheet" href="lib/all-animation.min.css" />
     <link rel="stylesheet" href="css/swiper.min.css">
-    
+
     <!-- SCRIPTS NUESTROS -->
     <script src="js/app.js"></script>
     <script src="js/config.js"></script>
@@ -32,7 +32,6 @@
         max-width: 50px;
         max-height: 50px;
     }
-    
     .imgMedium {
         max-width: 300px;
         max-height: 300px;
@@ -46,7 +45,6 @@
         height: 100px;
         margin: 10px auto;
     }
-    
     .swiper-slide {
         text-align: center;
         font-size: 18px;
@@ -66,918 +64,220 @@
         -webkit-align-items: center;
         align-items: center;
     }
-    
     .swiper-slide:nth-child(2n) {
         width: 40%;
     }
-    
     .swiper-slide:nth-child(3n) {
         width: 20%;
+    }
+    .border-header{
+      border-bottom: solid 1px;
     }
 </style>
 
 <body>
 
     <!-- DIV DE SCREENSAVER -->
-    <div id="contentPopupScreenSaver" style="display:none"><img src="lib/images/party-fiesta.jpg" class="ui-li-icon ui-corner-none" style="height: 100vh;width: 100%;"></div>
+    <div id="contentPopupScreenSaver" style="display:none">
+        <img src="lib/images/party-fiesta.jpg" class="ui-li-icon ui-corner-none" style="height: 100vh;width: 100%;">
+    </div>
 
-    <div data-role="page" id="principal">
+    <div data-role="page" id="principal" role="main">
 
         <!--     HEADER    -->
-        <div data-role="header" id="divHeader">
+        <div data-role="header" id="divHeader" data-position="fixed" style="border-style: none;min-height: 15%;">
             <div id="divHeader_menu"></div>
             <div id="divHeader_catalogo"></div>
-
         </div>
 
         <!--     CONTENT    -->
-        <div data-role="content" style="">
+        <div data-role="content" id="content_page" class="ui-content">
 
-            <div id="divTienda" align="center" style="margin-top: 8%;">
-                <!--POPUP DE LOGIN -->
-                <div data-role="popup" id="popupCart" class=" ui-corner-all ui-shadow ui-btn-inline" style="min-width:300px;">
-                    <a href="#" data-theme="b" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                    <ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
+            <div id="divTienda" align="center" style="">
 
-                        <li data-role="list-divider" style="text-align:right">
-                            <h3>Tu carrito</h3>
-                            <img style="display:inline" src="http://partyfiesta.youtter.com/webservices/img/nodos/carrito.png" style="width: initial;">
-                        </li>
-                        <li><a onclick="displayPopupItemList()" data-rel="popup" data-role="button" data-theme="b">Ver items <span id="spPopupCartCount" class="ui-li-count">0</span></a>
-                        </li>
-                        <li><span>Total: </span><span id="spPopupTotalAmmount"></span>
-                        </li>
-                        <li>
-                            <center>
-                                <button data-theme="d" data-icon="check" data-iconpos="right" onclick="checkOut()">Checkout</button>
-                            </center>
-                        </li>
-                    </ul>
-                </div>
-
-                <!--POPUP DE Preview items -->
-                <div data-role="popup" id="popupListItems" class="ui-corner-all" style="width:100vh;">
-                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
-                    <div id="contentPopupListItems"></div>
-                </div>
-
-                <!--POPUP DE SHOW ITEM -->
-                <div data-role="popup" id="popupShowItem" class="ui-corner-all ui-shadow ui-btn-inline" style="width:600px;">
-                    <div id="contentPopupShowItem">
-                        <div class="ui-grid-a">
-                            <div class="ui-block-a"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--POPUP PARA IDIOMAS -->
-                <div data-role="popup" id="popupIdiomas" class="ui-corner-all ui-shadow ui-btn-inline" style="right:2px;top:6%;position:fixed;">
-                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-left"></a>
-                    <div id="contentPopupIdioma"></div>
-                </div>
-
-                <!-- POP DE ARTICULOS -->
-                <div data-role="popup" id="popupAction" class="ui-corner-all ui-shadow ui-btn-inline" style="min-width:400px;">
-                    <div class="ui-bar ui-bar-b" data-theme="b">
-                        <h3>Alerta</h3>
-                        <label id="lbpopupAction" style="display:none"></label>
-                    </div>
-                    <div class="ui-body ui-body-b">
-                        <center>
-                            <h3>¿Desea eliminar el articulo?</h3>
-                        </center>
-                        <button id="btnPopupActionLeft" onclick='$("#popupAction").popup("close");' data-theme="c" data-icon="delete" data-iconpos="right" style="width:13em; float:left; margin:10px">No</button>
-                        <button id="btnPopupActionRight" onclick='$("#popupAction").popup("close");' data-theme="d" data-icon="check" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
-                    </div>
-                </div>
-                <!-- POPUP DE LOGIN -->
-                <div data-role="popup" id="popupLogin" class="ui-content" style="min-width:250px;">
-                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
-                    <form autocomplete="on">
-                        <div id="div_session">
-                            <h3>Iniciar sessión</h3>
-                            <label class="">Usuario</label>
-                            <input type="text" name="user" id="usrnm" placeholder="Email" data-clear-btn="true">
-                            <label class="">Contraseña</label>
-                            <input type="password" name="passw" id="pswd" placeholder="" data-clear-btn="true">
-                            <!--<label for="recordar_session">No cerrar sessión</label>
-                            <input type="checkbox" name="login" id="recordar_session" value="1" data-mini="true">
-                            -->
-                            <button type="button" id="iniciar_session">Iniciar sessión</button>
-                            <center>
-                                <br><a id="registrarse" onclick="displayRegistro();" style="margin:10px;color: green;" class="ui-link">Registrarse</a>
-                            </center>
-                            <center>
-                                <br><a id="olviContra" onclick="displayCambioContra();" style="margin:10px;color: #FF4700;" class="ui-link">¿Has olvidado la contraseña?</a>
-                            </center>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- POPUP DE REGISTRO -->
-                <div data-role="popup" id="popupRegistro" class="ui-content" style="min-width:250px;">
-                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
-                    <div id="div_registrarse">
-                        <form autocomplete="on">
-                            <h3> Registrarse </h3>
-                            <p>
-                                <label for="usernamesignup" class="uname" data-icon="u"> Usuario </label>
-                                <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
-                            </p>
-                            <p>
-                                <label for="passwordsignup" class="youpasswd" data-icon="p"> Contraseña </label>
-                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
-                            </p>
-                            <p>
-                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p"> Confirmar contraseña </label>
-                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
-                            </p>
-                            <p>
-                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p"> Código postal </label>
-                                <input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true">
-                            </p>
-                            <p>
-                                <button type="button" id="enviar_registro">Crear cuenta</button>
-                            </p>
-                            <p class="change_link">
-                                ¿Ya es cliente?
-                                <a href="#" onclick="displayLogin();"> Iniciar sessión </a>
-                            </p>
-                        </form>
-                    </div>
-                    </form>
-                </div>
-
-                <!-- POPUP DE CAMBIO PASSWORD -->
-                <div data-role="popup" id="popupCambioContra" class="ui-content" style="min-width:250px;">
-                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
-                    <div id="div_cambioContra">
-                        <form>
-                            <h3> Cambio de contraseña </h3>
-                            <p>
-                                <label for="contrauno" class="youpasswd" data-icon="u"> Su usuario: </label>
-                                <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
-                            </p>
-                            <p>
-                                <button type="button" id="cam_contraseña">¡Pedir una nueva contraseña!</button>
-                            </p>
-                            <p>
-                                <button type="button" onclick="displayLogin2();" id="volver">Volver</button>
-                            </p>
-                        </form>
-                    </div>
-                    </form>
-                </div>
-
-                <!-- POPUP PARA ALERTAS-ERRORES WS -->
-                <div data-role="popup" id="popupAlert" data-rel="back" class="ui-content" style="max-width:280px">
-                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
-                    <label id="texto_popup"></label>
-                </div>
-
-                <div class="dance" id="logo_inicio" style="margin-bottom: 20px;"><img src="css/icons/logo.png">
+                <div class="dance" id="logo_inicio" style="margin-bottom:20px;">
+                    <img src="css/icons/logo.png">
                 </div>
 
                 <div>
                     <label for="select">Seleccione una tienda:</label>
                 </div>
                 <div style="width: 25%">
-                    <!--<div class="ui-field-contain">-->
+
                     <select id="select_tienda" data-native-menu="false">
                     </select>
-                    <!--</div>-->
+
                 </div>
                 <div class="ui-grid-c" style="width: 10%">
-                    <button data-theme="b" id="btn_acceder" >Acceder</button>
+                    <button data-theme="b" id="btn_acceder">Acceder</button>
                 </div>
 
             </div>
 
             <div data-role="panel" id="lateralMenu" data-display="overlay" data-position="right" style="heigth:100%">
-                <div style="margin-bottom: 7%;"><strong>Menú</strong></div>
+                <div style="margin-bottom: 7%;"><strong>Menú</strong>
+                </div>
                 <ul data-role="listview" id="options">
                 </ul>
             </div>
-            <div>
-                <div id="divContent" style="display: none;">
-                </div>
-                <!--
 
-            <div id="divContent" style="display: none;">
+            <div id="divContent" style="display:none;">
             </div>
-           
 
-                <div id="page_count" style="display:none">
-                    <center>
-                        <img src="css/maqueta/FrozenFull_2.jpg" alt="" />
-                        <h3> ¿Para cuantas personas es la fiesta?</h3>
-                        <div style="width:100px">
-                            <input type="number" name="quantity" min="1">
+            <!--POPUP DE LOGIN -->
+            <div data-role="popup" id="popupCart" class="ui-corner-all ui-shadow ui-btn-inline" style="min-width:15%;right:2px;top:6%;position:fixed;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
+                    <li data-role="list-divider" style="text-align:left">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a" style="width:20%">
+                                <img src="css/icons/cesta.png" style="max-width: 50%;">
+                            </div>
+                            <div class="ui-block-b" style="width:80%">
+                                <label style="margin-top: 2%;">Tu carrito</label>
+                            </div>
                         </div>
-                        <br>
-                         <h3> ¿Cual es vuestro presupuesto individual?</h3>
-                    <div style="width:100px">
-                        <input type="number" name="quantity" min="1">
-                    </div>
-                        <a style="width:150px" onclick="$('#page_count').hide(); $('#page_chart').show();" data-role="button" data-theme="b">CONTINUAR</a>
-                    </center>
-                </div>
-
-                <div id="page_chart" style="display:none">
-                    <div>
-                        <a style="width:150px" id="btnRelacionados" data-role="button" data-icon="bars" data-iconpos="right" data-theme="b" data-rel="popup" href="#relacionados">SUGERENCIAS</a>
-                    </div>
-
-                    <br/>
-
-                    <ul data-role="listview">
-
-                        <table style="width:100%">
-                            <tr>
-                                <td style="text-align:center">
-                                    <img src="css/maqueta/decoracionfrozen.png">
-                                </td>
-                                <td style="text-align:center">
-                                    <img src="css/maqueta/globofrozen.png">
-                                </td>
-                                <td style="text-align:center">
-                                    <img src="css/maqueta/papelfrozen.png" onclick='$("#masinfo").popup("open");'>
-                                </td>
-                                <td style="text-align:center">
-                                    <img src="css/maqueta/tiarasfrozen.png">
-                                </td>
-                                <td style="text-align:center">
-                                    <img src="css/maqueta/pompasfrozen.png">
-                                </td>
-                            </tr>
-                        </table>
-
-
-                        <li data-role="list-divider" style="text-align:left;">
-                            <span style="font-size:13px;"> * Productos que tienen más de un uso, ver "Más Información" para detalles </span>
-                            <br>
-                        </li>
-
-                        <span style="font-size:13px;"> Total: 141.94€ </span>
-                        <br>
-                        <span style="font-size:13px;">Gastos de envío: 6.99€ </span>
-                        <br>
-                        <span style="font-size:16px;">Total Final: 148.93€ </span>
-                        <br>
-
-                    </ul>
-
-                    <br>
-                    <div style="float:left">
-                        <a style="width:75px;" id="btnNext" data-role="button" data-icon="star" data-iconpos="right" data-theme="b">5,5</a>
-                    </div>
-                    <div style="float:right">
-                        <a style="width:150px" id="btnNext" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('send');">PROCESAR</a>
-                    </div>
-                    </center>
-                </div>
-            </div>
-
-            <div id="page_send" style="display:none">
-                <center>
-                    <h3> ¿Que deseas hacer con el pedido?</h3>
-                    <br>
-                    <a style="width:300px" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Mostrar listado para recoger</a>
-                    <br>
-                    <a style="width:300px" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Enviar a Casa</a>
-                    <br>
-                    <a style="width:300px" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('sendemail');">Recoger en Mi Tienda</a>
-                </center>
-            </div>
-
-            
-                    <div data-role="popup" data-theme="a" data-dismissible="false" id="relacionados" class="" data-overlay-theme="a" data-transition="flip">
-
-                       
-                <a onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                <center>
-                    <div class="ui-grid-a">
-                        <table id="tableRelacionados">
-                            <tr style="width:100%; background-color:#0096D2; font-size:20px; color:white;">
-                                <td style="width:30%">
-                                    Producto
-                                </td>
-                                <td style="width:30%">
-                                    Ubicación
-                                </td>
-                                <td style="width:20%">
-                                    Precio
-                                </td>
-                                <td style="width:20%">
-                                    Edad Recomendada
-                                </td>
-                                <td style="width:30%">
-                                    Otros usos
-                                </td>
-                            </tr>
-                            <tr style="width:100%">
-                                <td style="width:30%">
-                                    SERV 75 GLOBOS PINTADOS 25X25 A P
-                                    <br> ID: P10065
-                                    <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                                </td>
-                                <td style="width:30%">
-                                    Sección: NAV
-                                    <br> Estantería : 16
-                                    <br> Nivel: 11
-                                    <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
-                                </td>
-                                <td style="width:20%">
-                                    1.75€
-                                </td>
-                                <td style="width:20%">
-                                    +3
-                                </td>
-                                <td style="width:30%">
-                                    <ul data-role="listview" data-theme="f">
-                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo1").show("slow");'>Papel de regalo</a>
-                                        </li>
-                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo2").show("slow");'>Cubremesa</a>
-                                        </li>
-                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo3").show("slow");'>Fondo pared para fotografías</a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr style="width:100%">
-                                <td style="width:30%">
-                                    SERV CEMENTERIO TERROR 20U 33X33
-                                    <br> ID: 96211
-                                    <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                                </td>
-                                <td style="width:30%">
-                                    Sección: NAV
-                                    <br> Estantería : 16
-                                    <br> Nivel: 11
-                                    <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
-                                </td>
-                                <td style="width:20%">
-                                    2,2€
-                                </td>
-                                <td style="width:20%">
-                                    +3
-                                </td>
-                                <td style="width:30%">
-                                    <ul data-role="listview" data-theme="f">
-                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo1").show("slow");'>Papel de regalo</a>
-                                        </li>
-                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo2").show("slow");'>Cubremesa</a>
-                                        </li>
-                                        <li><a href="#" onclick='$("#tableRelacionados").hide(); $("#iframeVideo3").show("slow");'>Fondo pared para fotografías</a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <iframe id="iframeVideo1" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/L0MK7qz13bU"></iframe>
-                        <iframe id="iframeVideo2" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/EPd5X9ccKqo"></iframe>
-                        <iframe id="iframeVideo3" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/lB77I0kXGG4"></iframe>
-
-                        <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableRelacionados', '#relacionados', ['#iframeVideo1', '#iframeVideo2', '#iframeVideo3'])" data-theme="c">Cerrar</a>
-                    </div>
-                </center>
-            </div>
-
-            <div data-role="popup" data-theme="a" data-dismissible="false" id="popup" class="" data-overlay-theme="a" data-transition="flip">
-                <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                <center>
-                    <h3 style="margin:20px">Desea eliminar el artículo?</h3>
-                    <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#popup").popup("close");' data-theme="c">Eliminar</a>
-                </center>
-            </div>
-
--->
-
-                <!-- PopUp Youtube -->
-
-                <!--
-            <div data-role="popup" data-theme="a" data-dismissible="false" id="popupYoutube" class="" data-overlay-theme="a" data-transition="flip">
-                <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                <center>
-                    <iframe src="https://www.youtube.com/embed/L0MK7qz13bU" style="display:none;width:100%; height:100%;"></iframe>
-                </center>
-            </div>
-
-            <!-- POPUP MAS INFO -->
-                <!--
-                    <div data-role="popup" data-theme="a" data-dismissible="false" id="masinfo" class="" data-overlay-theme="a" data-transition="flip">
-                        <a onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" href="#" data-theme="c" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    </li>
+                    <li><a onclick="displayPopupItemList()" data-rel="popup" data-role="button" data-theme="b">Items<span id="spPopupCartCount" class="ui-li-count">0</span></a>
+                    </li>
+                    <li><span>Total: </span><span id="spPopupTotalAmmount"></span>
+                    </li>
+                    <li>
                         <center>
-                            <div class="ui-grid-a">
-                                <table id="tableMasInfo">
-                                    <tr style="width:100%; background-color:#0096D2; font-size:20px; color:white;">
-                                        <td style="width:30%">
-                                            Producto
-                                        </td>
-                                        <td style="width:30%">
-                                            Ubicación
-                                        </td>
-                                        <td style="width:20%">
-                                            Precio
-                                        </td>
-                                        <td style="width:20%">
-                                            Edad Recomendada
-                                        </td>
-                                        <td style="width:30%">
-                                            Otros usos
-                                        </td>
-                                    </tr>
-                                    <tr style="width:100%">
-                                        <td style="width:30%">
-                                            * ROLLO PAPEL FROZEN 0,7X2M
-                                            <br> ID: 660592
-                                            <br> Descuento: 30%
-                                            <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                                        </td>
-                                        <td style="width:30%">
-                                            Sección: NAV
-                                            <br> Estantería : 16
-                                            <br> Nivel: 11
-                                            <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
-                                        </td>
-                                        <td style="width:20%">
-                                            1.50€
-                                        </td>
-                                        <td style="width:20%">
-                                            +3
-                                        </td>
-                                        <td style="width:30%">
-                                            <ul data-role="listview" data-theme="f">
-                                                <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo4").show("slow");'>Papel de regalo</a>
-                                                </li>
-                                                <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo5").show("slow");'>Cubremesa</a>
-                                                </li>
-                                                <li><a href="#" onclick='$("#tableMasInfo").hide(); $("#iframeVideo6").show("slow");'>Fondo pared para fotografías</a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <iframe id="iframeVideo4" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/L0MK7qz13bU"></iframe>
-                                <iframe id="iframeVideo5" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/EPd5X9ccKqo"></iframe>
-                                <iframe id="iframeVideo6" style="display:none;width:100%; height:100%;" src="https://www.youtube.com/embed/lB77I0kXGG4"></iframe>
-
-                                <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick="closingPopUpWithVideos('#tableMasInfo', '#masinfo', ['#iframeVideo4', '#iframeVideo5', '#iframeVideo6'])" data-theme="c">Cerrar</a>
-
-                            </div>
-                        </center>
-                    </div>
-
-                    </div>
-
-
-            <!--     FOOTER    -->
-                <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-                    <img src="css/icons/barra.png" width="100%" style="height: 38px;">
-                </div>
-                <!--<div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a  href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-        </div>-->
-
-                <!--
-        <div data-role="header">
-            <div class="ui-field-contain">
-                <ul data-role="listview" data-inset="true" data-shadow="false">
-                    <li data-role="collapsible" data-iconpos="right" data-inset="false">
-                        <h2>Spanish</h2>
-                        <form>
-                            <fieldset data-role="controlgroup" data-type="horizontal">
-                                <a data-role="button" data-theme="f"><img src="css/banderas/catalunya.png">
-                                </a>
-                                <a data-role="button" data-theme="f"><img src="css/banderas/spain.png">
-                                </a>
-                                <a data-role="button" data-theme="f"><img src="css/banderas/england.png">
-                                </a>
-
-                            </fieldset>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-            <img src="css/icons/barra.png" width="100%">
-        </div>
-        <div data-role="content" id="divContent">
-            <center>
-                <div>
-                    <img src="css/icons/logo.png">
-                </div>
-                <div>
-                    <div class="ui-grid-b">
-
-                        <div class="ui-block-a" id="btnCatalogo">
-                            <a data-role="button" data-theme="f">
-                                <span class="flaticon-catalog-b" style="color:#EE7F01"></span>
-                                <br>
-                                <strong> ACCESO A CATALOGO</strong>
-                            </a>
-                        </div>
-                        <div class="ui-block-b" id="">
-                            <a data-role="button" data-theme="f">
-                                <span class="flaticon-offer-b" style="color:#0097D3"></span>
-                                <br>
-                                <strong> PROMOCIONES</strong>
-                            </a>
-                        </div>
-                        <div class="ui-block-c" id="btnFiesta">
-                            <a data-role="button" data-theme="f">
-                                <span class="flaticon-balloons-b" style="color:#E3005D"></span>
-                                <br>
-                                <strong> ASISTENTE DE FIESTAS</strong>
-                            </a>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="ui-grid-b">
-                        <div class="ui-block-a" id="btnDisfraz">
-                            <a data-role="button" data-theme="f">
-                                <span class="flaticon-party-b" style="color:#79B51C"></span>
-                                <br>
-                                <strong> ASISTENTE DE DISFRACES</strong>
-                            </a>
-                        </div>
-                        <div class="ui-block-b" id="">
-                            <a data-role="button" data-theme="f">
-                                <span class="flaticon-thinking-b" style="color:#FDCD20"></span>
-                                <br>
-                                <strong> SUGERENCIAS</strong>
-                            </a>
-                        </div>
-                        <div class="ui-block-c" id="" <a data-role="button">
-                            <a data-role="button" data-theme="f">
-                                <span class="flaticon-question-b" style="color:#0097D3"></span>
-                                <br>
-                                <strong> NO ESTA EN TIENDA?</strong>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </center>
-        </div>
-
-        <div data-role="footer" data-position="fixed">
-
-            <img src="css/icons/barra.png" width="100%">
-
-        </div>
-    </div>
-    <div data-role="page" id="contenido">
-        <div data-role="header">
-            <img src="css/icons/barra.png" width="100%">
-            <div class="ui-grid-b">
-                <div class="ui-block-a" style="margin-top:10px" id="divBack">
-                </div>
-                <div class="ui-block-b" style="margin-top:10px"><img src="css/icons/logo.png" width="100%">
-                </div>
-                <div class="ui-block-c" style="text-align:right;">
-                    <a style="margin:10px">
-                        <span>Ya soy Cliente!</span>
-                    </a>
-                    <a id="btnMenuLateral" onclick="openMenu()" style="margin:10px">
-                        <span class="flaticon-menu"></span>
-                    </a>
-                </div>
-            </div>
-            <img src="css/icons/barra.png" height="5px" width="100%">
-            <ul data-role="listview" style="margin:0px">
-                <li data-role="list-divider" id="path">
-
-                </li>
-            </ul>
-        </div>
-        <div data-role="content">
-            <div data-role="panel" id="menuLateral" data-display="overlay" data-position="right">
-                <h2>Menú</h2>
-                <ul data-role="listview">
-                    <li id="btnMenuCatalog"><span class="flaticon-catalog-icon" style="margin-right: 2em;"></span>Catálogo</li>
-                    <li id="btnMenuPromo"><span class="flaticon-offer-icon" style="color:#0097D3; margin-right: 2em;"></span>Promociones</li>
-                    <li id="btnMenuParty"><span class="flaticon-balloons-icon" style="color:#E3005D; margin-right: 2em;"></span>Asistente de Fiestas</li>
-                    <li id="btnMenuCostumes"><span class="flaticon-party-icon" style="color:#79B51C; margin-right: 2em;"></span>Asistente de Disfraces</li>
-                    <li id="btnMenuSuggestions"><span class="flaticon-thinking-icon" style="color:#FDCD20; margin-right: 2em;"></span>Sugerencias?</li>
-                    <li id="btnMenuIdea"><span class="flaticon-question-icon" id="btnMenuIdea" style="color:#0097D3; margin-right: 2em;"></span>No está a la venta?</li>
-                    <li id="btnMenu">
-                        <center><a data-role="button" data-icon="home" data-theme="e">Ir al Menú</a>
+                            <button data-theme="d" data-icon="check" data-iconpos="right" onclick="checkOut()">Checkout</button>
                         </center>
                     </li>
                 </ul>
             </div>
 
-            <div class="ui-grid-a" id="page_catalog">
-                <div class="ui-block-a" style="width:66%">
+            <!--POPUP DE Preview items -->
+            <div data-role="popup" id="popupListItems" class="ui-corner-all" style="width:75%;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <div id="contentPopupListItems"></div>
+            </div>
+
+            <!--POPUP DE SHOW ITEM -->
+            <div data-role="popup" id="popupShowItem" class="ui-corner-all ui-shadow ui-btn-inline" style="width:600px;">
+                <div id="contentPopupShowItem">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--POPUP PARA IDIOMAS -->
+            <div data-role="popup" id="popupIdiomas" class="ui-corner-all ui-shadow ui-btn-inline" style="right:2px;top:6%;position:fixed;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-left"></a>
+                <div id="contentPopupIdioma"></div>
+            </div>
+
+            <!-- POP DE ARTICULOS -->
+            <div data-role="popup" id="popupAction" class="ui-corner-all ui-shadow ui-btn-inline" style="min-width:400px;">
+                <div class="ui-bar ui-bar-b" data-theme="b">
+                    <h3>Alerta</h3>
+                    <label id="lbpopupAction" style="display:none"></label>
+                </div>
+                <div class="ui-body ui-body-b">
                     <center>
-                        <span class="flaticon-catalog-h" style="color:#EE7F01;"></span>
-
+                        <h3>¿Desea eliminar el articulo?</h3>
                     </center>
+                    <button id="btnPopupActionLeft" onclick='$("#popupAction").popup("close");' data-theme="c" data-icon="delete" data-iconpos="right" style="width:13em; float:left; margin:10px">No</button>
+                    <button id="btnPopupActionRight" onclick='$("#popupAction").popup("close");' data-theme="d" data-icon="check" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
                 </div>
-                <div class="ui-block-b" style="width:30%; margin: 2%">
-                    <div style="text-align:right">
-                        <a data-role="button">Globos</a>
-                        <a data-role="button">Decora tu fiesta</a>
-                        <a data-role="button">Velas y bengalas</a>
-                        <a data-role="button">Pastelería</a>
-                        <a data-role="button">Piñatas</a>
-                        <a data-role="button">Bromas</a>
-                        <a data-role="button">Bolsa y cajas</a>
-                        <a data-role="button">Accesorios</a>
+            </div>
+            <!-- POPUP DE LOGIN -->
+            <div data-role="popup" id="popupLogin" class="ui-content" style="min-width:250px;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <form autocomplete="on">
+                    <div id="div_session">
+                        <h3>Iniciar sessión</h3>
+                        <label class="">Usuario</label>
+                        <input type="text" name="user" id="usrnm" placeholder="Email" data-clear-btn="true">
+                        <label class="">Contraseña</label>
+                        <input type="password" name="passw" id="pswd" placeholder="" data-clear-btn="true">
+                        <!--<label for="recordar_session">No cerrar sessión</label>
+                            <input type="checkbox" name="login" id="recordar_session" value="1" data-mini="true">
+                            -->
+                        <button type="button" id="iniciar_session">Iniciar sessión</button>
+                        <center>
+                            <br><a id="registrarse" onclick="displayRegistro();" style="margin:10px;color: green;" class="ui-link">Registrarse</a>
+                        </center>
+                        <center>
+                            <br><a id="olviContra" onclick="displayCambioContra();" style="margin:10px;color: #FF4700;" class="ui-link">¿Has olvidado la contraseña?</a>
+                        </center>
                     </div>
-                </div>
-            </div>
-            <div class="ui-grid-a" id="page_party">
-                <div class="ui-block-a" style="width:66%">
-                    <center>
-                        <span class="flaticon-balloons-h" style="color:#E3005D;"></span>
-
-                    </center>
-                </div>
-                <div class="ui-block-b" style="width:30%; margin: 2%">
-                    <div style="text-align:right">
-                        <a data-role="button" id="btn1" data-theme="c">Cumpleaños</a>
-                        <a data-role="button" id="btn2" data-theme="c">Fiestas tematícas</a>
-                        <a data-role="button" id="btn3" data-theme="c">Despedidas</a>
-                        <a data-role="button" id="btn4" data-theme="c">Aniversarios</a>
-                        <a data-role="button" id="btn5" data-theme="c">Bodas</a>
-                        <a data-role="button" id="btn6" data-theme="c">Fiestas anuales</a>
-                    </div>
-                </div>
-            </div>
-            <div class="ui-grid-a" id="page_costumes">
-                <div class="ui-block-a" style="width:66%">
-                    <center>
-                        <span class="flaticon-party-h" style="color:#79B51C;"></span>
-
-                    </center>
-                </div>
-                <div class="ui-block-b" style="width:30%; margin: 2%">
-                    <div style="text-align:right">
-                        <a data-role="button" data-theme="d">Disfraces bebé</a>
-                        <a data-role="button" data-theme="d">Disfraces niña</a>
-                        <a data-role="button" data-theme="d">Disfraces niño</a>
-                        <a data-role="button" data-theme="d">Cumpleaños mujer</a>
-                        <a data-role="button" data-theme="d">Cumpleaños hombre</a>
-                        <a data-role="button" data-theme="d">Licencias</a>
-                        <a data-role="button" data-theme="d">Sexy</a>
-                    </div>
-                </div>
+                </form>
             </div>
 
-            <div class="ui-grid-d" id="page_theme">
-                <div class="ui-block-a">
-                    <a data-role="button" data-theme="f" onclick="showPage('count')"><img src="css/maqueta/frozen.jpg">
-                        <br> FROZEN</a>
+            <!-- POPUP DE REGISTRO -->
+            <div data-role="popup" id="popupRegistro" class="ui-content" style="min-width:250px;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <div id="div_registrarse">
+                    <form autocomplete="on">
+                        <h3> Registrarse </h3>
+                        <p>
+                            <label for="usernamesignup" class="uname" data-icon="u">Usuario</label>
+                            <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
+                        </p>
+                        <p>
+                            <label for="passwordsignup" class="youpasswd" data-icon="p">Contraseña</label>
+                            <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
+                        </p>
+                        <p>
+                            <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Confirmar contraseña</label>
+                            <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
+                        </p>
+                        <p>
+                            <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Código postal</label>
+                            <input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true">
+                        </p>
+                        <p>
+                            <button type="button" id="enviar_registro">Crear cuenta</button>
+                        </p>
+                        <p class="change_link">
+                            ¿Ya es cliente?
+                            <a href="#" onclick="displayLogin();"> Iniciar sessión </a>
+                        </p>
+                    </form>
                 </div>
-                <div class="ui-block-b">
-                    <a data-role="button" data-theme="f"><img src="css/maqueta/hawai.jpg">
-                        <br> HAWAI</a>
-                </div>
-                <div class="ui-block-c">
-                    <a data-role="button" data-theme="f"><img src="css/maqueta/toy.jpg">
-                        <br> TOY STORY</a>
-                </div>
-                <div class="ui-block-d">
-                    <a data-role="button" data-theme="f"><img src="css/maqueta/casino.jpg">
-                        <br> CASINO</a>
-                </div>
-                <div class="ui-block-e">
-                    <a data-role="button" data-theme="f"><img src="css/maqueta/minions.jpg">
-                        <br> MINIONS</a>
-                </div>
+                </form>
             </div>
 
-            <div id="page_count">
-                <center>
-                    <h3> ¿Para cuantas personas es la fiesta?</h3>
-                    <div style="width:100px">
-                        <input type="number" name="quantity" min="1">
-                    </div>
-                    <br>
-                    <h3> ¿Cual es vuestro presupuesto individual?</h3>
-                    <div style="width:100px">
-                        <input type="number" name="quantity" min="1">
-                    </div>
-                    <br>
-                    <a style="width:150px" id="btnNext" data-role="button" data-theme="b">CONTINUAR</a>
-                </center>
-            </div>
-
-            <div id="page_chart">
-
-                <ul data-role="listview">
-                    <li data-role="list-divider" style="background-color:#0096D2; font-size:20px; color:white;">
-                        <div class="ui-grid-a">
-                            <div class="ui-block-a" style="width:70%">
-                                <div class="ui-grid-b">
-                                    <div class="ui-block-a" style="width:20%">
-                                        id
-                                    </div>
-                                    <div class="ui-block-b" style="width:40%">
-                                        Producto
-                                    </div>
-                                    <div class="ui-block-v" style="width:40%">
-                                        Ubicación
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ui-block-b" style="width:30%">
-                                <div class="ui-grid-b">
-                                    <div class="ui-block-a" style="width:25%; text-align:center;">
-                                        Unds
-                                    </div>
-                                    <div class="ui-block-b" style="width:25%; text-align:center;">
-                                        Precio
-                                    </div>
-                                    <div class="ui-block-c" style="width:25%; text-align:center;">
-                                        Total
-                                    </div>
-                                    <div class="ui-block-d" style="width:25%; text-align:right;">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </li>
-                    <li>
-                        <div class="ui-grid-a">
-                            <div class="ui-block-a" style="width:65%">
-                                <div class="ui-grid-b">
-                                    <div class="ui-block-a" style="width:20%">
-                                        <img src="http://partycity1.scene7.com/is/image/PartyCity/_ml_p2p_pc_mini_badge_normal1?$_ml_p2p_pc_mini_thumb$&$product=PartyCity/660591&$hide_view-all=0">
-                                    </div>
-                                    <div class="ui-block-b" style="width:40%">
-                                        Pack Gafas Frozen
-                                        <br> ID: 660591
-                                        <br> Descuento: 20%
-                                        <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                                    </div>
-                                    <div class="ui-block-c" style="width:40%">
-                                        Sección: NAV
-                                        <br> Estantería : 17
-                                        <br> Nivel: 9
-                                        <br> Stock Tienda: <img src="css/maqueta/barraAmarilla.gif">
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="ui-block-b" style="width:35%">
-                                <div class="ui-grid-c">
-                                    <div class="ui-block-a" style="width:25%; text-align:right;">
-                                        2
-                                    </div>
-                                    <div class="ui-block-b" style="width:25%; text-align:right;">
-                                        9.99€
-                                    </div>
-                                    <div class="ui-block-c" style="width:25%; text-align:right;">
-                                        19.98€
-                                    </div>
-                                    <div class="ui-block-d" style="width:25%; text-align:right;">
-                                        <img src="css/maqueta/eliminar.png" onclick='$("#popup").popup("open");'>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </li>
-                    <li>
-                        <div class="ui-grid-a">
-                            <div class="ui-block-a" style="width:65%">
-                                <div class="ui-grid-a">
-                                    <div class="ui-block-a" style="width:20%">
-                                        <img src="http://partycity1.scene7.com/is/image/PartyCity/_ml_p2p_pc_mini_badge_normal1?$_ml_p2p_pc_mini_thumb$&$product=PartyCity/660591&$hide_view-all=0">
-                                    </div>
-                                    <div class="ui-block-b" style="width:40%">
-                                        Kit de disfraz Frozen
-                                        <br> ID: 660593
-                                        <br> Descuento: 10%
-                                        <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                                    </div>
-                                    <div class="ui-block-c" style="width:40%">
-                                        Sección: NAV
-                                        <br> Estantería : 16
-                                        <br> Nivel: 6
-                                        <br> Stock Tienda: <img src="css/maqueta/barraRoja.gif">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ui-block-b" style="width:35%">
-                                <div class="ui-grid-c">
-                                    <div class="ui-block-a" style="width:25%; text-align:right;">
-                                        2
-                                    </div>
-                                    <div class="ui-block-b" style="width:25%; text-align:right;">
-                                        45.99€
-                                    </div>
-                                    <div class="ui-block-c" style="width:25%; text-align:right;">
-                                        91.98€
-                                    </div>
-                                    <div class="ui-block-d" style="width:25%; text-align:right;">
-                                        <img src="css/maqueta/eliminar.png" onclick='$("#popup").popup("open");'>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="ui-grid-a">
-                            <div class="ui-block-a" style="width:65%">
-                                <div class="ui-grid-a">
-                                    <div class="ui-block-a" style="width:20%">
-                                        <img src="http://partycity1.scene7.com/is/image/PartyCity/_ml_p2p_pc_mini_badge_normal1?$_ml_p2p_pc_mini_thumb$&$product=PartyCity/660591&$hide_view-all=0">
-                                    </div>
-                                    <div class="ui-block-b" style="width:40%">
-                                        Pack de decoración Frozen
-                                        <br> ID: 660592
-                                        <br> Descuento: 30%
-                                        <br>Stock Central: <img src="css/maqueta/barraVerde.gif">
-                                    </div>
-                                    <div class="ui-block-c" style="width:40%">
-                                        Sección: NAV
-                                        <br> Estantería : 16
-                                        <br> Nivel: 11
-                                        <br> Stock Tienda: <img src="css/maqueta/barraVerde.gif">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ui-block-c" style="width:35%">
-                                <div class="ui-grid-d">
-                                    <div class="ui-block-c" style="width:25%; text-align:right;">
-                                        2
-                                    </div>
-                                    <div class="ui-block-d" style="width:25%; text-align:right;">
-                                        14.99€
-                                    </div>
-                                    <div class="ui-block-e" style="width:25%; text-align:right;">
-                                        29.98€
-                                    </div>
-                                    <div class="ui-block-d" style="width:25%; text-align:right;">
-                                        <img src="css/maqueta/eliminar.png" onclick='$("#popup").popup("open");'>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li data-role="list-divider" style="text-align:right;">
-                        <span style="font-size:13px;"> Total: 141.94€ </span>
-                        <br>
-                        <span style="font-size:13px;">Gastos de envío: 6.99€ </span>
-                        <br>
-                        <span style="font-size:16px;">Total Final: 148.93€ </span>
-                        <br>
-
-                    </li>
-                </ul>
-                <br>
-                <div style="float:right">
-                    <a style="width:150px" id="btnNext" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="showPage('send');">PROCESAR</a>
+            <!-- POPUP DE CAMBIO PASSWORD -->
+            <div data-role="popup" id="popupCambioContra" class="ui-content" style="min-width:250px;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <div id="div_cambioContra">
+                    <form>
+                        <h3> Cambio de contraseña </h3>
+                        <p>
+                            <label for="contrauno" class="youpasswd" data-icon="u">Su usuario:</label>
+                            <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
+                        </p>
+                        <p>
+                            <button type="button" id="cam_contraseña">¡Pedir una nueva contraseña!</button>
+                        </p>
+                        <p>
+                            <button type="button" onclick="displayLogin2();" id="volver">Volver</button>
+                        </p>
+                    </form>
                 </div>
-                </center>
+                </form>
             </div>
-        </div>
 
-        <div id="page_send">
-            <center>
-                <h3> ¿Que deseas hacer con el pedido?</h3>
-                <br>
-                <a style="width:300px" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b">Mostrar listado para recoger</a>
-                <br>
-                <a style="width:300px" data-role="button" data-icon="home" data-iconpos="right" data-theme="b">Enviar a Casa</a>
-                <br>
-                <a style="width:300px" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b">Recoger en Mi Tienda</a>
-            </center>
-
-        </div>
-        <div data-role="popup" data-theme="a" data-dismissible="false" id="popup" class="" data-overlay-theme="a" data-transition="flip">
-            <a href="#" data-theme="c" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-            <center>
-                <h3 style="margin:20px">Desea eliminar el artículo?</h3>
-                <a style="width:150px" data-role="button" data-icon="delete" data-iconpos="right" onclick='$("#popup").popup("close");' data-theme="c">Eliminar</a>
-            </center>
-        </div>
-    </div>
-    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-        <img src="css/icons/barra.png" width="100%">
-    </div>
-    <div style="display:none">Icons made by <a href="http://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-    </div>
-    </div>
--->
+            <!-- POPUP PARA ALERTAS-ERRORES WS -->
+            <div data-role="popup" id="popupAlert" data-rel="back" class="ui-content" style="max-width:280px">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <label id="texto_popup"></label>
             </div>
+
 
         </div>
 
+        <!--     FOOTER    -->
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style: none;">
+            <img src="css/icons/barra.png" width="100%" style="height: 38px;">
+        </div>
 
-
-
-
-
-
-
-    </div>
-    </div>
     </div>
 
 </body>

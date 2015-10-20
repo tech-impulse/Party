@@ -85,9 +85,9 @@ function timerIncrement() {
 function changeIdiom(idioma) {
 
     console.log("Cambiamos el idioma " + idioma);
-    
+
     idiomStore = idioma;
-    
+
     getTraduccion(idioma);
 
 
@@ -96,8 +96,52 @@ function changeIdiom(idioma) {
 // The "callback" argument is called with either true or false
 // depending on whether the image at "url" exists or not.
 function imageExists(url, callback) {
-  var img = new Image();
-  img.onload = function() { callback(true); };
-  img.onerror = function() { callback(false); };
-  img.src = url;
+    var img = new Image();
+    img.onload = function () {
+        callback(true);
+    };
+    img.onerror = function () {
+        callback(false);
+    };
+    img.src = url;
+}
+
+function addPeople(oparation) {
+
+    var valor = $("#personas_fiesta").val();
+    console.log("Valor de personas es " + valor);
+
+    if (valor == "") valor = 0;
+
+    if (oparation == 0 && valor > 1) {
+        if (valor != 0 || valor != "") {
+            valor = parseInt(valor) - 1;
+            $("#personas_fiesta").val(valor);
+            console.log("Sumamos " + valor);
+        } else {
+            console.log("No hacemos nada ya que es cero");
+        }
+    } else if (oparation == 1) {
+        valor = parseInt(valor) + 1;
+        console.log("Sumamos " + valor);
+        $("#personas_fiesta").val(valor);
+    }
+
+
+
+}
+
+
+function sleep2(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break;
+        }
+    }
+}
+
+function sleep(millisegundos) {
+    var inicio = new Date().getTime();
+    while ((new Date().getTime() - inicio) < millisegundos) {}
 }

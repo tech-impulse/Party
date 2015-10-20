@@ -9,11 +9,12 @@ function getLogin(usario, contraseña) {
         password: contraseña
     };
 
-    request = $.ajax({
+    var request = $.ajax({
         data: dataSend,
         url: urlServices + 'login.php',
         dataType: 'json',
         type: 'POST',
+        timeout: 10000, //10 seg
         success: function (response) {
 
             if (response.result == 1) {
@@ -77,11 +78,12 @@ function getRegistro(usario, contraseña, cod_pos) {
         codigo: cod_pos
     };
 
-    request = $.ajax({
+    var request = $.ajax({
         data: dataSend,
         url: urlServices + 'signup.php',
         dataType: 'json',
         type: 'POST',
+        timeout: 10000, //10 seg
         success: function (response) {
 
             if (response.result == 1) {
@@ -130,11 +132,11 @@ function getFlags() {
 
     console.log("Pedimos los idiomas");
 
-    request = $.ajax({
+    var request = $.ajax({
         url: urlServices + 'getFlags.php',
         dataType: 'json',
         type: 'GET',
-        //timeout: 10000, //10 seg
+        timeout: 10000, //10 seg
         success: function (response) {
 
             console.log("Los paises nos han llegado, cargamos el popup");
@@ -198,11 +200,12 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
     }
 
 
-    request = $.ajax({
+    var request = $.ajax({
         data: dataSend,
         url: urlServices + 'getNodes.php',
         dataType: 'json',
         type: 'POST',
+        timeout: 10000, //10 seg
         success: function (response) {
 
             if (response.result == 1) {
@@ -241,31 +244,31 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
 
                 } else if (ISFIESTA == 3) {
 
-                    console.log("Asistentes de fiestas");
+                    console.log("Asistentes de fiestas.Pedimos info del nodo");
                     var info = getInfoNode(idNode);
 
-                    //console.log(info);
+                    console.log("Enviar info es 4");
+                    console.log(info);
 
-                    if (info != "undefined") {
+                    if (info != undefined) {
+
                         console.log("DisplayPantalla intermadia");
                         displayPantallaIntermediaAsistFiestas(info.node);
+
                     } else {
-                        $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
-                        $('#popupAlert').popup('open');
+
+                        console.log("Dame productos de " + nodeName);
+                        getProducts(idNode, nodeName);
+
                     }
 
-                } else {
 
-                    console.log("Dame productos de " + nodeName);
-                    getProducts(idNode, nodeName);
+
+                } else if (response.result == -1) {
+
+                    console.log("Error en el envio de parametros");
 
                 }
-
-
-            } else if (response.result == -1) {
-
-                console.log("Error en el envio de parametros");
-
             }
 
         },
@@ -332,20 +335,17 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
         id: idNode
     };
 
-    var enviarInfo = [];
+    var enviarInfo = new Array();
 
     request = $.ajax({
         data: dataSend,
-        async: false,
         url: urlServices + 'getInfoNode.php',
         dataType: 'json',
+        async: false,
         type: 'POST',
+        timeout: 1000, //10 seg
         success: function (response) {
-            console.log("Respuesta: ");
-            console.log(response);
-
             enviarInfo = response;
-            //console.log(enviarInfo);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -367,8 +367,8 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
         },
     });
 
-    return enviarInfo;
 
+    return enviarInfo;
 
 }
 
@@ -390,7 +390,7 @@ function getProducts(idNode, nodeName, info_aux) {
 
     } else {
 
-        console.log("No estamos en el asist. de fiestas");
+        console.log("Estamos en el asist. de fiestas");
         // Datos que se van a enviar
         var dataSend = {
             lang: language,
@@ -398,17 +398,23 @@ function getProducts(idNode, nodeName, info_aux) {
             store: STORE,
             id: idNode
         };
+        console.log("Datos para enviar");
+        console.log(dataSend);
 
     }
+
+    console.log("Enviamos el ajax");
 
     request = $.ajax({
         data: dataSend,
         url: urlServices + 'getProducts.php',
         dataType: 'json',
         type: 'POST',
+        //async:false,
+        timeout: 1000, //10 seg
         success: function (response) {
-            //console.log("Respuesta: ");
-            //console.log(response);
+            console.log("Respuesta: ");
+            console.log(response);
 
             if (response.result == 1) {
 
@@ -478,11 +484,11 @@ function getTiendas() {
 
     console.log("Pedimos las tiendas");
 
-    request = $.ajax({
+    var request = $.ajax({
         url: urlServices + 'getShops.php',
         dataType: 'json',
         type: 'GET',
-        //timeout: 10000, //10 seg
+        timeout: 10000, //10 seg
         success: function (response) {
 
             restOk_tiendas(response, "tiendas");
@@ -569,11 +575,12 @@ function restError(res, typ) {
 
 function sendSugerencias(info) {
 
-    request = $.ajax({
+    var request = $.ajax({
         data: info,
         url: urlServices + '.php',
         dataType: 'json',
         type: 'POST',
+        timeout: 10000, //10 seg
         success: function (response) {
             //console.log("Respuesta: ");
             //console.log(response);
@@ -628,11 +635,12 @@ function sendContra(usuario) {
         user: usuario
     };
 
-    request = $.ajax({
+    var request = $.ajax({
         data: dataSend,
         url: urlServices + 'email.php',
         dataType: 'json',
         type: 'POST',
+        timeout: 10000, //10 seg
         success: function (response) {
             //console.log("Respuesta: ");
             //console.log(response);
@@ -679,7 +687,7 @@ function sendContra(usuario) {
 //WS que devuelve el listado de sexo mas-feme
 function getGender() {
 
-    request = $.ajax({
+    var request = $.ajax({
         url: urlServices + 'getGender.php',
         dataType: 'json',
         type: 'GET',
@@ -763,12 +771,12 @@ function getSize(gender) {
 
     console.log("EL gender es " + gender);
 
-    request = $.ajax({
+    var request = $.ajax({
         data: dataSend,
         url: urlServices + 'getSize.php',
         dataType: 'json',
         type: 'POST',
-        //timeout: 10000, //10 seg
+        timeout: 10000, //10 seg
         success: function (response) {
             //console.log("Respuesta: ");
             //console.log(response);
@@ -847,7 +855,7 @@ function getSize(gender) {
 //WS que devuelve el listado edades
 function getAge() {
 
-    request = $.ajax({
+    var request = $.ajax({
         url: urlServices + 'getAge.php',
         dataType: 'json',
         type: 'GET',
@@ -946,7 +954,7 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
     var request = $.ajax({
         data: dataSend,
         async: false,
-        url: urlServices + 'getInfoNode.php',
+        url: urlServices + '.php',
         dataType: 'json',
         type: 'POST',
         success: function (response) {

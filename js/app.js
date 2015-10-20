@@ -59,7 +59,7 @@ $(document).ready(function () {
 
             $("#divTienda").hide();
             $("#divContent").show();
-
+            
             STORE = seleccion;
 
             var countTiendas = TIENDAS.stores.length;
@@ -186,7 +186,7 @@ function backPage(idNode, nodeName) {
         getNodes(0);
         nodeIds = [];
         nodeNames = [];
-        $("#divHeader_menu").show();
+        //$("#divHeader_menu").show();
     }
 }
 
@@ -424,7 +424,7 @@ function addToCartAlter(item) {
     var product;
     var cantidad = $("#cantidad_prod_alter").val();
     console.log("Numero de productos es " + cantidad);
-    
+
     var foundInCart = 0;
     for (var i = 0; i < PRODUCTS_ALTER.length; i++) {
         console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS_ALTER[i]['id']);
