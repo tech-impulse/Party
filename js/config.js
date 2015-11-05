@@ -3,11 +3,13 @@
 //var urlServices = "http://partyfiesta.youtter.com:8990/webservices/"; // URL del servidor de Webservices fuera de creapolis
 var urlServices = "http://partyfiesta.youtter.com/webservices/"; // URL del servidor de Webservices
 var request;
-var language = 1; // El idioma de la aplicación por defecto de momento CATALAN
+var language; // El idioma de la aplicación por defecto de momento CATALAN
 var origin = 2; // Dispositivo desde el que se solicita la información al service: 1 Web, 2 App
 var nodeNames = [];
 var nodeIds = [];
 var TIENDAS = [];
+var W_WIDTH = "";
+var W_HEIGTH = "";
 var STORE = "";
 var SHOPDELIVERY = "";
 var ISFIESTA = "";
@@ -24,3 +26,4 @@ var idleTime = 180000; /// tiempo de inactividad
 var idleTimeActive = false;
 var idiomStore;
 var protector;
+var jsonIdiomas;

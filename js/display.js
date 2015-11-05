@@ -9,12 +9,20 @@ function displayNode(data, originNode, originName) {
     console.log("DisplayNode-> Nodes es " + data.result);
     console.log(data);
 
-    var filas = data.nodes.length / data.columns; //isMain
+    var len = data.nodes.length;
+
+    if (parseInt(len) < parseInt(data.columns)) {
+        len = data.columns;
+    }
+    var alturaMin = parseInt(W_WIDTH * 0.7);
+    var filas = len / data.columns; //isMain
     var count = 1;
+    
+    var aux = parseInt( alturaMin / filas ); //altura de la patanlla por el% del div partido por el numero de filas
+    
+    var alturaBox = ( aux / W_WIDTH) * 100; //obtenemos el valor en % 
 
-    var alturaBox = parseInt(100 / (filas));
-
-    console.log("-------Altura es : " + alturaBox);
+    console.log("*Filas "+filas+" Altura min "+alturaMin+"  Altura es : " + alturaBox +" aux "+aux);
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -119,7 +127,7 @@ function displayNode(data, originNode, originName) {
                             block = '<div class="ui-block-a" onclick="' + extra + '" style="height:' + alturaBox + '%">';
                             break;
                         case 1:
-                            block = '<div class="ui-block-b" onclick="' + extra + '" style="height:' + alturaBox + '%">';
+                            block = '<div class="ui-block-b" onclick="' + extra + '" style="height:' + alturaBox + '%">'; //style="height:' + alturaBox + '%"
                             break;
                         case 2:
                             block = '<div class="ui-block-c" onclick="' + extra + '" style="height:' + alturaBox + '%">';
@@ -177,16 +185,39 @@ function displayNode(data, originNode, originName) {
             };
         case "vertical":
             {
-                htmlContent = grid + " <div class='ui-block-a' style='width:66%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
+                htmlContent = grid + " <div class='ui-block-a' style='width:66%;height:" + alturaBox + "%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
                 block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
                 for (var i = 0; i < data.nodes.length; i++) {
 
                     console.log("Is party? " + data.nodes[i].isParty);
 
+                    switch (i) { //color para los botones
+                    case 0:
+                        var bacgroundColor = "mediumvioletred";
+                        break;
+
+                    case 1:
+                        var bacgroundColor = "gold";
+                        break;
+
+                    case 2:
+                        var bacgroundColor = "darkorange";
+                        break;
+
+                    case 3:
+                        var bacgroundColor = "yellowgreen";
+                        break;
+
+                    case 4:
+                        var bacgroundColor = "dodgerblue";
+                        break;
+
+                    }
+
                     if (data.nodes[i].name == "") {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')" style="background-color:' + bacgroundColor + ';">' + data.nodes[i].name + '</a>';
                     } else {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')">' + data.nodes[i].name + '</a>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')" style="background-color:' + bacgroundColor + ';">' + data.nodes[i].name + '</a>';
                     }
                     htmlContent = htmlContent + element;
                 }
@@ -265,7 +296,7 @@ function displayProducts(data, originNode, originName) {
         switch (type) {
         case "horizontal":
             {
-                htmlContent = /*"<center></center>"*/ + grid;
+                htmlContent = /*"<center></center>"*/ +grid;
                 position = "a";
                 for (var i = 0; i < data.products.length; i++) {
 
@@ -275,17 +306,17 @@ function displayProducts(data, originNode, originName) {
                         switch (position) {
                         case 0:
 
-                            block = '<div class="ui-block-a" style="position: relative;">';
+                            block = '<div class="ui-block-a">';
                             break;
 
                         case 1:
 
-                            block = '<div class="ui-block-b" style="position: relative;">';
+                            block = '<div class="ui-block-b">';
                             break;
 
                         case 2:
 
-                            block = '<div class="ui-block-c" style="position: relative;">';
+                            block = '<div class="ui-block-c">';
                             break;
 
                         case 3:
@@ -300,7 +331,7 @@ function displayProducts(data, originNode, originName) {
                         }
                     } else {
                         position = 0;
-                        block = '<div class="ui-block-a" style="position: relative;">';
+                        block = '<div class="ui-block-a">';
                     }
                     var element = block + '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 35px;height: 35px;display: none;position: absolute;">' +
                         '<label id="quantity' + data.products[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label></div>' +
@@ -727,7 +758,7 @@ function loadMenu(data) {
 
     }
 
-    options = options + '<li onclick="getNodes(0);"><center><a data-role="button" data-icon="home" data-theme="e">Ir al Menú</a></center></li>';
+    options = options + '<li onclick="getNodes(0);"><center><a data-role="button" data-icon="home" data-theme="e">'+jsonIdiomas.menu_lateral.menu+'</a></center></li>';
     $("#options").html(options);
     $("#options").listview('refresh');
     $("#lateralMenu").trigger('create');
@@ -736,17 +767,17 @@ function loadMenu(data) {
     var cart = '<a href="#" onclick="displayCar();" data-position-to="origin">' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-left: 20%"></div>' +
-        '<div class="ui-block-b" style="width: 70%;"><span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span> Productos </span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div>' +
+        '<div class="ui-block-b" style="width: 70%;"><span style="margin-left:15px" id="spBtnPopupCartProducts">0</span><span id="labelProductos">'+jsonIdiomas.header.labelProductos+'</span><br> <span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span></div>' +
         '</div></a>';
 
 
     /*HEADER  de la pantalla*/
 
     htmlHeader = '<div class="ui-grid-d">' +
-        '<div class="ui-block-a" style="margin-top:10px; width:30%" id="divBack"></div>' +
+        '<div class="ui-block-a" style="margin-top:10px; width:30%;color: rgb(70, 130, 180);" id="divBack"></div>' +
         '<div class="ui-block-b" style="margin-top:10px; width:27%;"><img src="css/icons/logo.png" width="75%" style="margin-left: 20%"> </div>' +
         '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
-        '<center><a id="login" onclick="displayLogin();" style="width:10%"> <span>Identificate!</span> </a>' +
+        '<center><a id="login" onclick="displayLogin();" style="width:10%"> <span>'+jsonIdiomas.header.login+'</span> </a>' +
         '</div>' +
         '<div class="ui-block-d" style="margin-top:10px; width:18%" id="car_compra">' + cart +
         '</div>' +
@@ -790,7 +821,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
     //console.log(data);
 
     loadMenu(node_cero);
-    updateBackButton(0, "Menú");
+    updateBackButton(0, jsonIdiomas.header.menu);
     $("#divHeader_catalogo").show();
 
     var info = data.node;
@@ -799,7 +830,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
         '<center>' +
         '<img src="' + info.linkint + '" alt="">' +
     //'<h3> ¿Para quién es el disfraz?</h3>' +
-    '<div style="width: 25%"><select id="select_sexo" data-native-menu="false">' +
+    '<div style="width: 30%"><select id="select_sexo" data-native-menu="false">' +
         '</select></div>' +
     //'<h3> Edad </h3>' +
     //'<div style="width: 25%"><select id="select_edad" >' +
@@ -808,7 +839,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
     '<div id="div_selectTalla" style="width: 25%;display:none"><select id="select_talla" data-native-menu="false">' +
         '</select></div>' +
         '<br>' +
-        '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
+        '<a style="width:150px" id="btn_continuar" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">'+jsonIdiomas.asistente_disfraces.btn_continuar+'</a>' +
         '</center>' +
         '</div>';
     htmlContent = htmlContent + '</div>';
@@ -835,7 +866,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
             $("#div_selectTalla").show();
 
         } else {
-            $("#texto_popup").text('Seleccione una opcion válida');
+            $("#texto_popup").text(jsonIdiomas.popup_errores.opcion_no_valida);
             $('#popupAlert').popup('open');
 
             $("#div_selectTalla").hide();
@@ -856,12 +887,13 @@ function displayPantallaIntermediaAsistFiestas(data) {
         '<center>' +
         '<br>' +
         '<img src="' + data.linkint + '" style="max-width:30%;">' +
+        '<h4><label id="label_num_per_fiesta" style="">'+jsonIdiomas.asistente_fiestas.label_num_per_fiesta+'</label></h4>'+
         '<div class="ui-grid-b" style="max-width:25%;">' +
         '<div class="ui-block-a" style="width:30%;margin-right:3%;"><a id="menos_fiesta" onclick="addPeople(0);" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">-</a></div>' +
         '<div class="ui-block-b" style="width:30%;margin-right:3%;"><input type="number" id="personas_fiesta" min="1" data-clear-btn="true"></div>' +
         '<div class="ui-block-c" style="width:30%;"><a id="mas_fiesta" onclick="addPeople(1);" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">+</a></div>' +
         '</div>' +
-        '<a style="max-width:15%;" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">CONTINUAR</a>' +
+        '<a style="max-width:15%;" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">'+jsonIdiomas.asistente_fiestas.btn_continuar+'</a>' +
         '</center>' +
         '</div>';
     htmlContent = htmlContent + '</div>';
@@ -948,7 +980,7 @@ function logout() { //muestra el pop up de inicio de session
 
 
     console.log("Cerramos session");
-    html = '<div id="session" style="float: right;"><center><a id="login" onclick="displayLogin();" style="margin:10px"> <span>Identificate!</span> </a></center> </div>';
+    html = '<div id="session" style="float: right;"><center><a id="login" onclick="displayLogin();" style="margin:10px"><span>'+jsonIdiomas.header.login+'</span></a></center> </div>';
     $("#session").html(html);
     INFO_USU = "";
     LOGGED = false;
@@ -989,37 +1021,38 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
 function displayPantallaSugerencias() {
 
     console.log("Entramos en la pantalla de sugerencias");
+    $("#banderas").hide();
     nodeIds = [];
     nodeNames = [];
     loadMenu(node_cero);
 
-    updateBackButton(0, "Menú");
+    updateBackButton(0, jsonIdiomas.header.menu);
 
     $("#divHeader_catalogo").show();
 
     html_sug = '<div id="form_sugerencias" style="margin-top:2%;">' +
         '<form  enctype="text/plain">' +
         '<div class="ui-grid-b">' +
-        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label>Nombre:</label><input type="text" id="nombre" size="25" maxlength="50" data-clear-btn="true"></div>' +
-        '<div class="ui-block-b" style="width: 31%;margin-right: 1%;"><label>Fecha de nacimiento:</label><input type="date" value="" id="fecha_naci" size="40" maxlength="100" data-clear-btn="true"></div>' +
-        '<div class="ui-block-c" style=""><label>Correo electrónico:</label><input type="email" value="" id="correo" size="40" maxlength="100" data-clear-btn="true"></div>' +
+        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label id="labelSugNom">'+jsonIdiomas.form_sugerencias.labelSugNom+'</label><input type="text" id="nombre" size="25" maxlength="50" data-clear-btn="true"></div>' +
+        '<div class="ui-block-b" style="width: 31%;margin-right: 1%;"><label id="labelSugNaci">'+jsonIdiomas.form_sugerencias.labelSugNaci+'</label><input type="date" value="" id="fecha_naci" size="40" maxlength="100" data-clear-btn="true"></div>' +
+        '<div class="ui-block-c" style=""><label id="labelSugMail">'+jsonIdiomas.form_sugerencias.labelSugMail+'</label ><input type="email" value="" id="correo" size="40" maxlength="100" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-grid-b">' +
-        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label>Población:</label><input type="text" id="poblacion" size="25" maxlength="50" data-clear-btn="true"></div>' +
-        '<div class="ui-block-b" style="width: 31%;margin-right: 1%;"><label>Provincia:</label><input type="text" value="" id="provincia" size="40" maxlength="100" data-clear-btn="true"></div>' +
-        '<div class="ui-block-c" style=""><label>Teléfono:</label><input type="number" value="" id="correo" size="40" maxlength="100" data-clear-btn="true"></div>' +
+        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label id="labelSugNPob">'+jsonIdiomas.form_sugerencias.labelSugNPob+'</label ><input type="text" id="poblacion" size="25" maxlength="50" data-clear-btn="true"></div>' +
+        '<div class="ui-block-b" style="width: 31%;margin-right: 1%;"><label id="labelSugProv">'+jsonIdiomas.form_sugerencias.labelSugProv+'</label><input type="text" value="" id="provincia" size="40" maxlength="100" data-clear-btn="true"></div>' +
+        '<div class="ui-block-c" style=""><label id="labelSugTelf">'+jsonIdiomas.form_sugerencias.labelSugTelf+'</label><input type="number" value="" id="correo" size="40" maxlength="100" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label>Tipo de sugerencia:</label><select name="suge_inci" data-native-menu="false"><option value="1">Incidencia<option value="2">Petición</select></div>' +
-        '<div class="ui-block-b" style="width: 65%;"><label>¿Sobre que es la petición/sugerencia?</label><input type="text" value="" id="tipo_sugenrencia" size="40" maxlength="100" data-clear-btn="true"></div>' +
+        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label id="labelSugTipo">'+jsonIdiomas.form_sugerencias.labelSugTipo+'</label><select name="suge_inci" data-native-menu="false"><option value="1">'+jsonIdiomas.form_sugerencias.selectOption+'<option value="2">Petición</select></div>' +
+        '<div class="ui-block-b" style="width: 65%;"><label id="labelSugNSugPreg">'+jsonIdiomas.form_sugerencias.labelSugNSugPreg+'</label><input type="text" value="" id="tipo_sugenrencia" size="40" maxlength="100" data-clear-btn="true"></div>' +
         '</div>' +
-        '¿Tiene alguna sugerencia?' +
-        '<textarea cols="40" rows="3" id="sugerencias" style="height: 52px;" placeholder="Escríbalas aquí..."></textarea>' +
+        '<label id="labelSugPreg">' +jsonIdiomas.form_sugerencias.labelSugPreg+
+        '<textarea cols="40" rows="3" id="sugerencias" style="height: 52px;" placeholder="'+jsonIdiomas.form_sugerencias.sugerenciasPlaceholder+'"></textarea>' +
         '<table width="25%" border="0" align="center" cellpadding="10" cellspacing="0">' +
         '<tr>' +
         '<td>' +
         '<div align="center">' +
-        '<button type="button" onclick="enviarSugerencia();" id="enviar_sugerencia">¡Enviar!</button>' +
+        '<button type="button" onclick="enviarSugerencia();" id="enviar_sugerencia">'+jsonIdiomas.form_sugerencias.enviar_sugerencia+'</button>' +
         '</div>' +
         '</form>' +
         '</div>';
@@ -1127,11 +1160,13 @@ function displayFlags(res) {
 
     var count = res.flags.length;
     var info = res.flags;
+    
+    console.log(info);
 
     for (var i = 0; i < count; i++) {
 
         html += '<li data-icon="false">' +
-            '<a onclick="changeIdiom(\'' + info[i].shortname + '\');"><img src="' + info[i].image + '" class="ui-li-icon ui-corner-none">' + info[i].name + '</a>' +
+            '<a onclick="changeIdiom(\'' + info[i].shortname + '\','+info[i].id+');"><img src="' + info[i].image + '" class="ui-li-icon ui-corner-none">' + info[i].name + '</a>' +
             '</li>';
 
     }

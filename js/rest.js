@@ -33,6 +33,7 @@ function getLogin(usario, contraseña) {
                     REDIRECT = false;
                     checkOut();
                 }
+
             } else if (response.result == 0) {
 
                 console.log("No exite");
@@ -187,9 +188,10 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
         openMenu();
     }
 
+    language=1;
     // Datos que se van a enviar
     var dataSend = {
-        lang: language,
+        lang: parseInt(language),
         origin: origin,
         id: idNode
     };
@@ -220,13 +222,12 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
 
                 restOk(response, "nodes", idNode, nodeName);
 
-
-            } else if (response.result == 0) { // ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
+            } else if (response.result == 0) { //ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
                 console.log("Resultado del nodo es cero");
                 console.log(response);
 
-                console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
+                //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
                 if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hayq ue mostrar una pantalla intermadia
@@ -268,6 +269,9 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
 
                     console.log("Error en el envio de parametros");
 
+                } else {
+
+                    console.log("Error...");
                 }
             }
 
@@ -411,7 +415,7 @@ function getProducts(idNode, nodeName, info_aux) {
         dataType: 'json',
         type: 'POST',
         //async:false,
-        timeout: 1000, //10 seg
+        timeout: 100000, //10 seg
         success: function (response) {
             console.log("Respuesta: ");
             console.log(response);
@@ -705,7 +709,7 @@ function getGender() {
 
                 select.append($('<option>', {
                     value: 0,
-                    text: "¿Para quién es el disfraz?"
+                    text: jsonIdiomas.asistente_disfraces.select_sexo_button
                 }));
 
                 for (var i = 0; i < count; i++) {
@@ -792,7 +796,7 @@ function getSize(gender) {
 
                 select.append($('<option>', {
                     value: 0,
-                    text: "¿Que talla tiene?"
+                    text: jsonIdiomas.asistente_disfraces.talla
                 }));
 
 
@@ -945,16 +949,22 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
         };
     }
 
+    console.log("Datos del carrito");
+    console.log(aux);
+
     var dataSend = {
         language: idiomStore,
         products: aux
     };
 
+    console.log("Datos del carrito2");
+    console.log(dataSend);
+
 
     var request = $.ajax({
         data: dataSend,
         async: false,
-        url: urlServices + '.php',
+        url: urlServices + 'getProductLanguage.php',
         dataType: 'json',
         type: 'POST',
         success: function (response) {
@@ -962,19 +972,13 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
             console.log(response);
 
             for (var i = 0; i < CART.length; i++) {
-
                 if (response[i].id == CART[i].id) {
-
                     CART[i].definition = response[i].definition;
                     CART[i].name = response[i].name;
                     CART[i].short_name = response[i].short_name;
                     CART[i].suggestions = response[i].suggestions;
-
                 }
-
             }
-
-
         },
         error: function (jqXHR, textStatus, errorThrown) {
 

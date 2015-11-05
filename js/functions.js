@@ -53,7 +53,7 @@ function checkOut() {
 function updateBackButton(originNode, originName) {
     if (nodeIds.length == 0) {
         nodeIds.push(0);
-        nodeNames.push("Menú");
+        nodeNames.push(jsonIdiomas.header.menu);
         nodeIds.push(originNode);
         nodeNames.push(originName);
     } else {
@@ -82,14 +82,18 @@ function timerIncrement() {
 
 }
 
-function changeIdiom(idioma) {
+function changeIdiom(idioma, idiomaId) {
 
     console.log("Cambiamos el idioma " + idioma);
 
     idiomStore = idioma;
+    language = idiomaId;
 
-    getTraduccion(idioma);
+    if (CART.length > 0) {
+        getTraduccion(idioma);
+    }
 
+    translateButtons(idiomStore);
 
 }
 

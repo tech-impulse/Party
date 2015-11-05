@@ -37,11 +37,30 @@
     /*background-color: #f0f0f0;*/
 }
 
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+header {
+    width: 100%;
+    height: 20%;
+    position: fixed;
+    top: 0;
+}
+#content {
+    width: 70%;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+footer {
+    width: 100%;
+    height: 8%;
+    position: fixed;
+    bottom: 0;
+}
+
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .content_page {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  
-        margin:-90px 0px 0px -198px; 
-                                      
-    }
+    
 }

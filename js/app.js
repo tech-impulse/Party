@@ -13,10 +13,20 @@ $(document).bind("mobileinit", function () {
 });
 
 // PRECARGA DE LA APLICACIÓN
-
 $(document).ready(function () {
 
     //console.log(" screen activa? en clicks " + idleTimeActive);
+
+    W_WIDTH = $(window).width();
+    W_HEIGTH = $(window).height();
+
+    //detectamos la orientacion de la pantalla
+    $(window).bind("orientationchange", function (event) {
+        if (event.orientation) {
+            console.log("Me han reorientado a " + event.orientation);
+        }
+    });
+
 
     protector = setInterval(function () {
         displayScreenSaver();
@@ -40,7 +50,7 @@ $(document).ready(function () {
 
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">' +
         '<img src="css/icons/barra.png" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">' +
-        '<a onclick="changeIdiomPopUp();"><img id="img_banderas" src="css/banderas/spain.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +
+        '<a onclick="changeIdiomPopUp();"><img id="img_banderas" src="css/banderas/idioma_codigo.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -49,6 +59,7 @@ $(document).ready(function () {
     // Obtenermos el listado banderas
     getFlags();
     getTiendas();
+    translateButtons("ca");//por defecto se carga en catalan
 
     $("#btn_acceder").click(function () { // botton de acceso a la app 
 
@@ -59,7 +70,7 @@ $(document).ready(function () {
 
             $("#divTienda").hide();
             $("#divContent").show();
-            
+
             STORE = seleccion;
 
             var countTiendas = TIENDAS.stores.length;
@@ -68,7 +79,7 @@ $(document).ready(function () {
 
                 if (TIENDAS.stores[i].id == STORE) {
                     SHOPDELIVERY = TIENDAS.stores[i].deliveryStore; //guardamos el id de la tienda
-                    idiomStore = TIENDAS.stores[i].language;
+                    language = TIENDAS.stores[i].language;
                     TIENDAS = "";
                     break;
                 }
@@ -81,7 +92,7 @@ $(document).ready(function () {
 
         } else {
 
-            alert("¿Seleccione una tienda!");
+            console.log("¿Seleccione una tienda!");
 
         }
 
@@ -95,9 +106,26 @@ $(document).ready(function () {
         var contraseña = $('#pswd').val();
 
         if (usuario == "" || contraseña == "") {
-            $("#texto_popup").text("Usuario o contraseña vacios...");
-            $('#popupAlert').popup('open');
+            /*$('.ui-popup').popup('close');
+            $("#texto_popup").text(jsonIdiomas.popup_errores.evento_click.iniciar_session);
+            $('#popupAlert').popup('open');*/
+            if (usuario == "" && contraseña != "") {
+                $("#usrnm").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+                $('#usrnm').addClass('colorText');
+            } else if (usuario != "" && contraseña == "") {
+                $("#pswd").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+                $('#pswd').addClass('colorText');
+            } else {
+                $("#usrnm").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+                $('#usrnm').addClass('colorText');
+                $("#pswd").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+                $('#pswd').addClass('colorText');
+            }
+
+
         } else {
+            $('#usrnm').removeClass('colorText');
+            $('#pswd').removeClass('colorText');
             getLogin(usuario, contraseña);
         }
 
@@ -110,12 +138,38 @@ $(document).ready(function () {
         var contraseña = $('#passwordsignup').val();
         var rep_contraseña = $('#passwordsignup_confirm').val();
         var cod_pos = $('#cod_pos').val();
+        console.log("Contra " + contraseña + " dos " + rep_contraseña + " mas " + cod_pos);
 
-        if (usuario == "" || contraseña == "" || rep_contraseña == "" || cod_pos == "") {
-            $("#texto_popup").text("Rellene todos los campos. Gracias");
-            $('#popupAlert').popup('open');
+        if (contraseña != rep_contraseña) { //usuario == "" || contraseña == "" || rep_contraseña == "" || cod_pos == ""
+
+            console.log("AQUI333");
+            $('#passwordsignup').val("");
+            $('#passwordsignup_confirm').val("");
+            $("#passwordsignup").attr("placeholder", jsonIdiomas.popup_errores.evento_click.contra_nocoinciden);
+            $('#passwordsignup').addClass('colorText');
+            $("#passwordsignup_confirm").attr("placeholder", jsonIdiomas.popup_errores.evento_click.contra_nocoinciden);
+            $('#passwordsignup_confirm').addClass('colorText');
+
         } else if (usuario != "" && contraseña == rep_contraseña && cod_pos != "") {
+            
+            console.log("AQUI222");
+            $('#emailsignup').removeClass('colorText');
+            $('#passwordsignup').removeClass('colorText');
+            $('#passwordsignup_confirm').removeClass('colorText');
+            $('#cod_pos').removeClass('colorText');
             getRegistro(usuario, contraseña, cod_pos);
+            
+        } else {
+            console.log("AQUI");
+            $("#emailsignup").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+            $('#emailsignup').addClass('colorText');
+            $("#passwordsignup").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+            $('#passwordsignup').addClass('colorText');
+            $("#passwordsignup_confirm").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+            $('#passwordsignup_confirm').addClass('colorText');
+            $("#cod_pos").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+            $('#cod_pos').addClass('colorText');
+
         }
 
     });

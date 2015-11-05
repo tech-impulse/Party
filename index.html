@@ -24,10 +24,17 @@
     <script src="js/rest.js"></script>
     <script src="js/display.js"></script>
     <script src="js/functions.js"></script>
+    <script src="idiomas/translateApp.js"></script>
 
 </head>
 
 <style>
+    .colorText::-webkit-input-placeholder {
+        color: red;
+    }
+    /*::-webkit-input-placeholder {
+        color: red;
+    }*/
     .thumb {
         max-width: 50px;
         max-height: 50px;
@@ -70,8 +77,8 @@
     .swiper-slide:nth-child(3n) {
         width: 20%;
     }
-    .border-header{
-      border-bottom: solid 1px;
+    .border-header {
+        border-bottom: solid 1px rgb(52, 127, 188);
     }
 </style>
 
@@ -85,13 +92,13 @@
     <div data-role="page" id="principal" role="main">
 
         <!--     HEADER    -->
-        <div data-role="header" id="divHeader" data-position="fixed" style="border-style: none;min-height: 15%;">
+        <div data-role="header" id="divHeader" data-position="fixed" data-tap-toggle="false" style="border-style:none;min-height:20%;">
             <div id="divHeader_menu"></div>
             <div id="divHeader_catalogo"></div>
         </div>
 
         <!--     CONTENT    -->
-        <div data-role="content" id="content_page" class="ui-content">
+        <div data-role="content" id="content_page" data-tap-toggle="false" style="max-height:70%">
 
             <div id="divTienda" align="center" style="">
 
@@ -100,7 +107,7 @@
                 </div>
 
                 <div>
-                    <label for="select">Seleccione una tienda:</label>
+                    <label id="labelInicio">Seleccione una tienda:</label>
                 </div>
                 <div style="width: 25%">
 
@@ -108,7 +115,7 @@
                     </select>
 
                 </div>
-                <div class="ui-grid-c" style="width: 10%">
+                <div class="ui-grid-c" style="width: 15%">
                     <button data-theme="b" id="btn_acceder">Acceder</button>
                 </div>
 
@@ -134,11 +141,12 @@
                                 <img src="css/icons/cesta.png" style="max-width: 50%;">
                             </div>
                             <div class="ui-block-b" style="width:80%">
-                                <label style="margin-top: 2%;">Tu carrito</label>
+                                <label id="labelCarrito" style="margin-top: 2%;">Tu carrito</label>
                             </div>
                         </div>
                     </li>
-                    <li><a onclick="displayPopupItemList()" data-rel="popup" data-role="button" data-theme="b">Items<span id="spPopupCartCount" class="ui-li-count">0</span></a>
+                    <li>
+                        <a id="labelItems" onclick="displayPopupItemList()" data-rel="popup" data-role="button" data-theme="b" style="border-radius: 0px;">Items<span id="spPopupCartCount" class="ui-li-count">0</span></a>
                     </li>
                     <li><span>Total: </span><span id="spPopupTotalAmmount"></span>
                     </li>
@@ -190,10 +198,10 @@
                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                 <form autocomplete="on">
                     <div id="div_session">
-                        <h3>Iniciar sessión</h3>
-                        <label class="">Usuario</label>
+                        <label id="labelIniciarSession">Iniciar sessión</label>
+                        <label id="labelLoginUsuario">Usuario</label>
                         <input type="text" name="user" id="usrnm" placeholder="Email" data-clear-btn="true">
-                        <label class="">Contraseña</label>
+                        <label id="labelLoginContra">Contraseña</label>
                         <input type="password" name="passw" id="pswd" placeholder="" data-clear-btn="true">
                         <!--<label for="recordar_session">No cerrar sessión</label>
                             <input type="checkbox" name="login" id="recordar_session" value="1" data-mini="true">
@@ -214,29 +222,31 @@
                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                 <div id="div_registrarse">
                     <form autocomplete="on">
-                        <h3> Registrarse </h3>
+                        <label id="labelRegistrarse"><strong>
+                             Registrarse </strong>
+                        </label>
                         <p>
-                            <label for="usernamesignup" class="uname" data-icon="u">Usuario</label>
+                            <label id="usernamesignup" class="uname" data-icon="u">Usuario</label>
                             <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
                         </p>
                         <p>
-                            <label for="passwordsignup" class="youpasswd" data-icon="p">Contraseña</label>
+                            <label id="labelpasswordsignup" class="youpasswd" data-icon="p">Contraseña</label>
                             <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
                         </p>
                         <p>
-                            <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Confirmar contraseña</label>
+                            <label id="labelpasswordsignup_confirm" class="youpasswd" data-icon="p">Confirmar contraseña</label>
                             <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
                         </p>
                         <p>
-                            <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Código postal</label>
+                            <label id="labelcodpos" class="youpasswd" data-icon="p">Código postal</label>
                             <input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true">
                         </p>
                         <p>
                             <button type="button" id="enviar_registro">Crear cuenta</button>
                         </p>
                         <p class="change_link">
-                            ¿Ya es cliente?
-                            <a href="#" onclick="displayLogin();"> Iniciar sessión </a>
+                            <label id="labelYAesClient" class="youpasswd" data-icon="p">¿Ya es cliente?</label>
+                            <a id="linkIniSes" onclick="displayLogin();">Iniciar sessión</a>
                         </p>
                     </form>
                 </div>
@@ -248,9 +258,11 @@
                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                 <div id="div_cambioContra">
                     <form>
-                        <h3> Cambio de contraseña </h3>
+                        <label id="tituloCamContra">
+                            <h3>Cambio de contraseña</h3>
+                        </label>
                         <p>
-                            <label for="contrauno" class="youpasswd" data-icon="u">Su usuario:</label>
+                            <label id="labelSuUsuario" class="youpasswd" data-icon="u">Su usuario:</label>
                             <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
                         </p>
                         <p>
@@ -274,7 +286,7 @@
         </div>
 
         <!--     FOOTER    -->
-        <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style: none;">
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style: none;max-height:8%;">
             <img src="css/icons/barra.png" width="100%" style="height: 38px;">
         </div>
 
