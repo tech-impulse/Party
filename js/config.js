@@ -27,3 +27,5 @@ var idleTimeActive = false;
 var idiomStore;
 var protector;
 var jsonIdiomas;
+var pantallaActual;
+var auxTest;

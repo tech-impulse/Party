@@ -1,3 +1,7 @@
+/*************************************************************
+  Esta funcion muestra la pantalla de pago cuando se clica en 
+  el boton de checkout
+**************************************************************/
 function checkOut() {
 
     if (LOGGED == true) {
@@ -50,6 +54,15 @@ function checkOut() {
     }
 }
 
+/*********************************************************************
+  Esta funcion sirve para actualizar el boton de atras de la pantalla
+  Parametros:
+  originNode: el node de donde venimos
+  originName: nombre del nodo del que venimos
+  Variables:
+  nodeIds:lista de nodos por los que hemos pasado
+  nodeNames: lista de los nombres de los nodos por los que hemos pasado
+*********************************************************************/
 function updateBackButton(originNode, originName) {
     if (nodeIds.length == 0) {
         nodeIds.push(0);
@@ -64,6 +77,9 @@ function updateBackButton(originNode, originName) {
 }
 
 
+/******************************************
+ Esta funcion enseña el pop up de idiomas
+******************************************/
 function changeIdiomPopUp() {
 
     console.log("PopUp idiomas");
@@ -74,14 +90,20 @@ function changeIdiomPopUp() {
 
 }
 
-
+/* No se utiliza
 function timerIncrement() {
 
     console.log("Estas incativo " + idleTime);
     getNodes(0);
 
-}
+}*/
 
+/**************************************************************************
+  Esta funcion se utiliza para cambiar el idioma de la app
+  Parametros:
+  idioma:el nuevo idioma que queremos ( es el nombre corto, ej: es de españa)
+  idiomaId: el id del idioma nuevo
+**************************************************************************/
 function changeIdiom(idioma, idiomaId) {
 
     console.log("Cambiamos el idioma " + idioma);
@@ -97,19 +119,12 @@ function changeIdiom(idioma, idiomaId) {
 
 }
 
-// The "callback" argument is called with either true or false
-// depending on whether the image at "url" exists or not.
-function imageExists(url, callback) {
-    var img = new Image();
-    img.onload = function () {
-        callback(true);
-    };
-    img.onerror = function () {
-        callback(false);
-    };
-    img.src = url;
-}
-
+/************************************************************************************************
+  Esta funcion se utiliza en la pantalla intermedia antes de entrar al asist. fiesta o disfraces
+  para añadir o quitar personas del input
+  Parametros:  
+  oparation:sumar o restar personas
+*************************************************************************************************/
 function addPeople(oparation) {
 
     var valor = $("#personas_fiesta").val();
@@ -117,7 +132,7 @@ function addPeople(oparation) {
 
     if (valor == "") valor = 0;
 
-    if (oparation == 0 && valor > 1) {
+    if (oparation == 0 && valor > 2) { //para que el minimo de personsa sea 2
         if (valor != 0 || valor != "") {
             valor = parseInt(valor) - 1;
             $("#personas_fiesta").val(valor);
@@ -135,17 +150,13 @@ function addPeople(oparation) {
 
 }
 
-
-function sleep2(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds) {
-            break;
-        }
-    }
-}
-
+/**************************************************************************
+  Esta funcion para la app durante el tiempo que le digamos en milisegundos
+***************************************************************************/
 function sleep(millisegundos) {
     var inicio = new Date().getTime();
     while ((new Date().getTime() - inicio) < millisegundos) {}
 }
+
+
+

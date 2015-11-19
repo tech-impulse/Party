@@ -175,6 +175,7 @@ function getFlags() {
 /* Función que solicita la información al webservice de Nodos
     - idNode: id del nodo que se esta solicitando
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
+    -isAlgo: variable para saber si es el asis de fiestas o disfraces
     */
 function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
 
@@ -188,7 +189,7 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
         openMenu();
     }
 
-    language=1;
+    language = 1;
     // Datos que se van a enviar
     var dataSend = {
         lang: parseInt(language),
@@ -196,7 +197,7 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
         id: idNode
     };
 
-    if (isAlgo != undefined) {
+    if (isAlgo != undefined) { // estamos en el asistente de disfraces o fiestas?????
         ISFIESTA = isAlgo;
         console.log("Is algo es " + isAlgo);
     }
@@ -218,9 +219,12 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
                 if (idNode == 0) {
                     node_cero = response;
                     $("#banderas").show();
+                    pantallaActual = "menu principal";
+                   
                 }
 
                 restOk(response, "nodes", idNode, nodeName);
+                pantallaActual = "nodos";
 
             } else if (response.result == 0) { //ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
@@ -230,13 +234,15 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-                if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hayq ue mostrar una pantalla intermadia
+                if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hay que mostrar una pantalla intermadia
 
                     console.log("Asistentes de disfraces");
                     var info = getInfoNode(idNode);
 
                     if (info != "undefined") {
                         console.log("DisplayPantalla intermadia");
+                        pantallaActual = "Asistente disfraces";
+                        $("#divHeader_catalogo").show();
                         displayPantallaIntermediaAsistDisfra(info);
                     } else {
                         $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
@@ -254,6 +260,7 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
                     if (info != undefined) {
 
                         console.log("DisplayPantalla intermadia");
+                        pantallaActual = "Asistente fiestas";
                         displayPantallaIntermediaAsistFiestas(info.node);
 
                     } else {
@@ -263,16 +270,15 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
 
                     }
 
-
-
-                } else if (response.result == -1) {
-
-                    console.log("Error en el envio de parametros");
-
                 } else {
 
                     console.log("Error...");
                 }
+                
+            } else if (response.result == -1) {
+
+                console.log("Error en el envio de parametros");
+
             }
 
         },
@@ -379,15 +385,16 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
 //WS que devuelve el listado de productos para un nodo
 function getProducts(idNode, nodeName, info_aux) {
 
-    if (info_aux != undefined) { //cuando estemos en el asist. de disfraces
+    if (info_aux != undefined) { // asist. de disfraces
 
         console.log("Venimos del asist. de disfraces");
+        pantallaActual = "Asistente disfraces";
         var dataSend = {
             lang: language,
             origin: origin,
             store: STORE,
-            gender: info_aux.sexo,
-            size: info_aux.talla,
+            //gender: info_aux.sexo,// no se utiliza filtramos nosotros
+            //size: info_aux.talla,// no se utiliza filtramos nosotros
             id: idNode
         };
 
@@ -395,6 +402,7 @@ function getProducts(idNode, nodeName, info_aux) {
     } else {
 
         console.log("Estamos en el asist. de fiestas");
+        pantallaActual = "Asistente fiestas";
         // Datos que se van a enviar
         var dataSend = {
             lang: language,
@@ -415,7 +423,7 @@ function getProducts(idNode, nodeName, info_aux) {
         dataType: 'json',
         type: 'POST',
         //async:false,
-        timeout: 100000, //10 seg
+        timeout: 25000, //10 seg
         success: function (response) {
             console.log("Respuesta: ");
             console.log(response);

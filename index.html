@@ -29,16 +29,24 @@
 </head>
 
 <style>
+    #popupListItems-popup {
+        right: 20% !important;
+        left: 20% !important;
+        width: 60%;
+    }
+    
     .colorText::-webkit-input-placeholder {
         color: red;
     }
     /*::-webkit-input-placeholder {
         color: red;
     }*/
+    
     .thumb {
         max-width: 50px;
         max-height: 50px;
     }
+    
     .imgMedium {
         max-width: 300px;
         max-height: 300px;
@@ -52,6 +60,7 @@
         height: 100px;
         margin: 10px auto;
     }
+    
     .swiper-slide {
         text-align: center;
         font-size: 18px;
@@ -71,12 +80,15 @@
         -webkit-align-items: center;
         align-items: center;
     }
+    
     .swiper-slide:nth-child(2n) {
         width: 40%;
     }
+    
     .swiper-slide:nth-child(3n) {
         width: 20%;
     }
+    
     .border-header {
         border-bottom: solid 1px rgb(52, 127, 188);
     }
@@ -92,15 +104,16 @@
     <div data-role="page" id="principal" role="main">
 
         <!--     HEADER    -->
-        <div data-role="header" id="divHeader" data-position="fixed" data-tap-toggle="false" style="border-style:none;min-height:20%;">
+        <div data-role="header" id="divHeader" data-position="fixed" data-tap-toggle="false" style="border-style:none;min-height:17%;">
             <div id="divHeader_menu"></div>
             <div id="divHeader_catalogo"></div>
         </div>
 
         <!--     CONTENT    -->
-        <div data-role="content" id="content_page" data-tap-toggle="false" style="max-height:70%">
+        <div data-role="content" id="content_page" data-tap-toggle="false" style="">
+            <!-- max-height:70% -->
 
-            <div id="divTienda" align="center" style="">
+            <div id="divTienda" align="center" style="padding-top: 5%;">
 
                 <div class="dance" id="logo_inicio" style="margin-bottom:20px;">
                     <img src="css/icons/logo.png">
@@ -145,8 +158,14 @@
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <a id="labelItems" onclick="displayPopupItemList()" data-rel="popup" data-role="button" data-theme="b" style="border-radius: 0px;">Items<span id="spPopupCartCount" class="ui-li-count">0</span></a>
+                    <li onclick="displayPopupItemList()" style="background-color: dodgerblue;">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <a id="labelItems" style="border-radius: 5px;width: 100%;color: black;">Items</a><span id="spPopupCartCount" class="ui-li-count">0</span>
+                            </div>
+                            <div class="ui-block-b">
+                            </div>
+                        </div>
                     </li>
                     <li><span>Total: </span><span id="spPopupTotalAmmount"></span>
                     </li>
@@ -159,7 +178,7 @@
             </div>
 
             <!--POPUP DE Preview items -->
-            <div data-role="popup" id="popupListItems" class="ui-corner-all" style="width:75%;">
+            <div data-role="popup" id="popupListItems" class="ui-corner-all" style="">
                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                 <div id="contentPopupListItems"></div>
             </div>
@@ -286,8 +305,8 @@
         </div>
 
         <!--     FOOTER    -->
-        <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style: none;max-height:8%;">
-            <img src="css/icons/barra.png" width="100%" style="height: 38px;">
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style:none;max-height:8%;">
+            <img src="css/icons/barra.png" width="100%" style="height: 8%;">
         </div>
 
     </div>

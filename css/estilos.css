@@ -21,20 +21,20 @@
 
 .contenedor {
     overflow: hidden;
-    text-overflow: clip;
+    text-overflow: ellipsis;
     white-space: nowrap;
-    position: absolute;
+    /*position: inherit;*/
     /*width: 300px;*/
     /** Extra para decoracion **/
     /*background-color: #d0d0d0;*/
-    padding: 10px 10px 10px 10px;
-    border-radius: 8px;
+    padding: 10px 0px 0px 0px;
+    border-radius: 5px;
 }
 
 .contenedor:hover {
     white-space: normal;
     /** Extra para decoracion **/
-    /*background-color: #f0f0f0;*/
+    background-color: #BDBDBD;
 }
 
 html, body {

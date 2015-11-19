@@ -1,4 +1,6 @@
-// CONFIGURACIÓN DE LA APLICACIÓN AL INICIARSE
+/******************************************
+Esto se ejecuta antes que la app se inicie
+******************************************/
 $(document).bind("mobileinit", function () {
 
     $.support.touchOverflow = false;
@@ -12,26 +14,28 @@ $(document).bind("mobileinit", function () {
 
 });
 
-// PRECARGA DE LA APLICACIÓN
+/******************************************
+Esto se ejecuta antes que la app se inicie
+******************************************/
 $(document).ready(function () {
 
-    //console.log(" screen activa? en clicks " + idleTimeActive);
-
+    //Guardamos el alto y ancho de la pantalla
     W_WIDTH = $(window).width();
     W_HEIGTH = $(window).height();
 
-    //detectamos la orientacion de la pantalla
+    //Detectamos la orientacion de la pantalla
     $(window).bind("orientationchange", function (event) {
         if (event.orientation) {
             console.log("Me han reorientado a " + event.orientation);
         }
     });
 
-
+    //Protector de pantalla de la app
     protector = setInterval(function () {
         displayScreenSaver();
     }, idleTime);
 
+    //Detectamos cuando clicamos en la pantalla para desactivar el protector de pantalla
     $(window).on("click", function (ev) {
 
         var e = ev.originalEvent;
@@ -55,13 +59,15 @@ $(document).ready(function () {
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
 
-
-    // Obtenermos el listado banderas
+    // Obtenermos el listado banderas y tiendas
     getFlags();
     getTiendas();
-    translateButtons("ca");//por defecto se carga en catalan
 
-    $("#btn_acceder").click(function () { // botton de acceso a la app 
+    //Cargamos el idioma por defecto de la app
+    translateButtons("ca");
+
+    //Boton de acceso a la app
+    $("#btn_acceder").click(function () {
 
         var seleccion = $("#select_tienda option:selected").val();
         console.log("Seleccion es " + seleccion);
@@ -98,8 +104,8 @@ $(document).ready(function () {
 
     });
 
-
-    $("#iniciar_session").click(function () { // botton de login de la app
+    //Boton de login de la app
+    $("#iniciar_session").click(function () {
 
         console.log("Logandose");
         var usuario = $('#usrnm').val();
@@ -131,7 +137,8 @@ $(document).ready(function () {
 
     });
 
-    $("#enviar_registro").click(function () { // botton de registro a la app 
+    //Boton de registro de la app
+    $("#enviar_registro").click(function () {
 
         console.log("registrandose");
         var usuario = $('#emailsignup').val();
@@ -151,14 +158,14 @@ $(document).ready(function () {
             $('#passwordsignup_confirm').addClass('colorText');
 
         } else if (usuario != "" && contraseña == rep_contraseña && cod_pos != "") {
-            
+
             console.log("AQUI222");
             $('#emailsignup').removeClass('colorText');
             $('#passwordsignup').removeClass('colorText');
             $('#passwordsignup_confirm').removeClass('colorText');
             $('#cod_pos').removeClass('colorText');
             getRegistro(usuario, contraseña, cod_pos);
-            
+
         } else {
             console.log("AQUI");
             $("#emailsignup").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
@@ -173,6 +180,7 @@ $(document).ready(function () {
         }
 
     });
+
 
     $("#btnPopupActionLeft").click(function () {
 
@@ -230,6 +238,7 @@ function openMenu() {
 
 // FUNCIÓN QUE EMULA EL BOTÓN DE ATRÁS DE LA APLICACIÓN
 function backPage(idNode, nodeName) {
+
     var position = (nodeIds.length);
     if (position > 2) {
         position = nodeIds.length;
@@ -242,27 +251,68 @@ function backPage(idNode, nodeName) {
         nodeNames = [];
         //$("#divHeader_menu").show();
     }
+
+    if (pantallaActual == "Asistente fiestas") {
+
+        for (var i = CART.length - 1; i >= 0; i--) {
+            //console.log("Comprobamos el item " + CART[i].id + " length total " + CART.length);
+            if (CART[i].dedonde == "Asistente fiestas") {
+                console.log("Borramos el item " + CART[i].id);
+
+                CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity)
+                //CART.splice(i, 1);
+                //console.log("Eliminamos el item .Nuevo ammount "+CART.ammount);
+                //console.log(CART);
+                //displayItemOperations(CART[i].id, 1, i);
+                //i=CART.length;
+
+                deleteItemCart(i);
+                //i = CART.length;
+            }
+
+        }
+
+        var total = 0;
+        for (var i = 0; i < CART.length; i++) {
+            total = total + CART[i].quantity;
+        }
+        $("#spBtnPopupCartProducts").text(total);
+        $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+        $("#spPopupCartCount").text(total);
+        $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+
+    }
+
+
+
 }
 
 
+/*********************************************************************************************
+  Esta funcion carga la lista de productos una vez que no hay mas nodos que mostrar. Segun en 
+  que pantalla estemos muestra una cosa o otra.
+  Parametros:
+  idNode: id del node del cual venimos.
+  nodeName: nombre del nodo del cual venimos.  
+**********************************************************************************************/
+function displayProductos(idNode, nodeName) {
 
-function displayProductos(idNode, nodeName) { // botton de acceso a la app despus de escoger una tienda
-
-
-    if (sexo != 0 && talla != 0 && ISFIESTA == 4) { //por aqui se accede desde el asistente de disfraces
-
-        var sexo = $("select#select_sexo option").filter(":selected").val();
-        //var edad = $("select#select_edad option").filter(":selected").val();
+    if (ISFIESTA == 4) { //por aqui se accede al asistente de disfraces
+        
+        var sexo = $("select#select_sexo option").filter(":selected").val(); // en los dos selects en caso de que no haya seleccionado nada sera cero
         var talla = $("select#select_talla option").filter(":selected").val();
 
-        var info_aux = {
-            sexo: sexo,
-            talla: talla
-        };
+        if (sexo != 0 && talla != 0) {
+            
+            var info_aux = {
+                talla:talla,
+                sexo:sexo
+            }
 
-        console.log("Todos los selects ok");
-        getProducts(idNode, nodeName, info_aux);
+            console.log("Todos los selects ok. Entramos en el asistente de disfraces.");
+            getProducts(idNode, nodeName,info_aux);
 
+        }
 
     } else if (ISFIESTA == 3) { //por aqui se accede desde el asistente de fiestas
 
@@ -290,18 +340,15 @@ function displayProductos(idNode, nodeName) { // botton de acceso a la app despu
 }
 
 
-/**
- * Da formato a un número para su visualización
- *
- * @param {(number|string)} numero Número que se mostrará
- * @param {number} [decimales=null] Nº de decimales (por defecto, auto); admite valores negativos
- * @param {string} [separadorDecimal=","] Separador decimal
- * @param {string} [separadorMiles=""] Separador de miles
- * @param {string} [simbolo=""] simbolo de la moneda
- * @returns {string} Número formateado o cadena vacía si no es un número
- *
- * @version 2014-07-18
- */
+/**************************************************************************************************
+ Da formato a un número para su visualización
+ @param {(number|string)} numero Número que se mostrará
+ @param {number} [decimales=null] Nº de decimales (por defecto, auto); admite valores negativos
+ @param {string} [separadorDecimal=","] Separador decimal
+ @param {string} [separadorMiles=""] Separador de miles
+ @param {string} [simbolo=""] simbolo de la moneda
+ @returns {string} Número formateado o cadena vacía si no es un número
+****************************************************************************************************/
 function formatoNumero(numero, decimales, separadorDecimal, separadorMiles, simbolo) {
     var partes, array;
 
@@ -344,12 +391,13 @@ function formatoNumero(numero, decimales, separadorDecimal, separadorMiles, simb
 }
 
 
-/************************************************************************************
+/********************************************************************************************************************
   Esta funcion sirve para añadir o restar articulos al carrito del cliente y hacer los cambios en la interfaz grafica
+  No se utiliza.
   Parametros : 
   producto: info del producto a guardar
   operacion: si es añadir o restar articulos  1 sera sumar  0 restar
-**************************************************************************************/
+*********************************************************************************************************************/
 
 function carrito(id_producto, operacion, precio) {
 
@@ -359,8 +407,8 @@ function carrito(id_producto, operacion, precio) {
 
     if (CARRITO.length == 0) {
 
-        displayMasMenos(0, id_producto);
-        displayQantidadProducto(1, id_producto);
+        //displayMasMenos(0, id_producto);
+        //displayQantidadProducto(1, id_producto);
         var aux = [];
 
         aux['id_producto'] = id_producto;
@@ -382,7 +430,7 @@ function carrito(id_producto, operacion, precio) {
 
                     CARRITO[i].cantidad = CARRITO[i].cantidad + 1;
                     encontrado = 1;
-                    displayQantidadProducto(CARRITO[i].cantidad, id_producto);
+                    //displayQantidadProducto(CARRITO[i].cantidad, id_producto);
                     break;
 
                 }
@@ -396,8 +444,8 @@ function carrito(id_producto, operacion, precio) {
                 aux['cantidad'] = 1;
                 aux['precio'] = precio;
                 CARRITO.push(aux);
-                displayMasMenos(0, id_producto);
-                displayQantidadProducto(1, id_producto);
+                //displayMasMenos(0, id_producto);
+                //displayQantidadProducto(1, id_producto);
 
             }
 
@@ -413,7 +461,7 @@ function carrito(id_producto, operacion, precio) {
 
                         CARRITO[i].cantidad = CARRITO[i].cantidad - 1;
                         encontrado = 1;
-                        displayQantidadProducto(CARRITO[i].cantidad, id_producto);
+                        //displayQantidadProducto(CARRITO[i].cantidad, id_producto);
                         if (CARRITO[i].cantidad == 0) {
                             CARRITO.splice(i, 1);
                             console.log(CARRITO);
@@ -434,12 +482,19 @@ function carrito(id_producto, operacion, precio) {
 
 }
 
+/********************************************************************************************************************
+  Esta funcion sirve para añadir o restar articulos al carrito del cliente y hacer los cambios en la interfaz grafica
+  Parametros : 
+  producto: info del producto a guardar
+  operacion: si es añadir o restar articulos  1 sera sumar  0 restar
+*********************************************************************************************************************/
+
 function addToCart(item, param) {
 
     var product;
     var foundInCart = 0;
-    for (var i = 0; i < PRODUCTS.length; i++) {
-        console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS[i]['id']);
+    for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
+        //console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS[i]['id']);
         if (PRODUCTS[i]['id'] == item) {
             console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
             product = PRODUCTS[i];
@@ -448,30 +503,61 @@ function addToCart(item, param) {
     }
 
     for (var j = 0; j < CART.length; j++) {
-        console.log("buscando  " + item + " en carrito " + CART[j]['id']);
+        //console.log("buscando  " + item + " en carrito " + CART[j]['id']);
         if (CART[j]['id'] == item) {
             console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
             foundInCart = 1;
-            CART[j].quantity = CART[j].quantity + param;
-            CART.ammount = parseFloat((product.price_x_region.totalPrice * param)) + parseFloat(CART.ammount);
-            displayItemOperations(item, parseInt(CART[j].quantity), j);
+            CART[j].quantity = CART[j].quantity + parseInt(param);
+            CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
+
+            var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
+            console.log("Precio del articulo es " + precioArticulo);
+            $("#labelPrecioTotalProducto" + CART[j].id).text("Total artículo: " + formatoNumero(precioArticulo, 2, ",", ".", "€"));
+
+            displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
             j = PRODUCTS.length;
+            //console.log("Añadimos mas "+CART[j].quantity);
+
         }
     }
+
     if (foundInCart == 0) {
         if (CART.ammount == undefined) {
             console.log("EL carrito está vació, lo inicializamos");
             CART.ammount = 0;
         }
         console.log("Producto no esta en carrito, lo añadimos");
-        CART.ammount = parseFloat(product.price_x_region.totalPrice) + parseFloat(CART.ammount);
-        product.quantity = 1;
+
+        if (parseInt(param) > 1) {
+            product.quantity = parseInt(param);
+        } else {
+            product.quantity = 1;
+        }
+        CART.ammount = (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice)) + parseFloat(CART.ammount);
+        product.dedonde = pantallaActual;
+        console.log("La cantidad antes de enviarla es " + product.quantity);
+
         CART.push(product);
+
+        var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+
+        console.log($("#labelPrecioTotalProducto" + product.id));
+        $("#labelPrecioTotalProducto" + product.id).text("Total artículo: " + formatoNumero(precioArticulo, 2, ",", ".", "€"));
+        $("#labelPrecioTotalProducto" + product.id).show();
+
         displayItemOperations(item, product.quantity);
     }
 
+
+
 }
 
+/********************************************************************************************************************
+  Esta funcion sirve para añadir o restar articulos al carrito del cliente y hacer los cambios en la interfaz grafica
+  Parametros : 
+  item: id del producto a guardar
+  
+*********************************************************************************************************************/
 
 function addToCartAlter(item) {
 
@@ -495,9 +581,10 @@ function addToCartAlter(item) {
             console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
             foundInCart = 1;
             CART[j].quantity = CART[j].quantity + cantidad;
-            CART.ammount = parseFloat((product.price_x_region.totalPrice * cantidad)) + parseFloat(CART.ammount);
+            CART.ammount = parseFloat((product.price_x_region[0].totalPrice * cantidad)) + parseFloat(CART.ammount);
             displayItemOperations(item, parseInt(CART[j].quantity), j);
             j = PRODUCTS_ALTER.length;
+
         }
     }
 
@@ -507,16 +594,19 @@ function addToCartAlter(item) {
             CART.ammount = 0;
         }
         console.log("Producto no esta en carrito, lo añadimos");
-        CART.ammount = parseFloat(product.price_x_region.totalPrice) + parseFloat(CART.ammount);
+        CART.ammount = parseFloat(product.price_x_region[0].totalPrice) + parseFloat(CART.ammount);
         product.quantity = 1;
         CART.push(product);
         displayItemOperations(item, product.quantity);
+
     }
 
 }
 
 function deleteItemCart(position) {
     console.log("Eliminar item en posicion " + position + " id: " + CART[position].id);
+    $("#labelPrecioTotalProducto" + CART[position].id).text("");
+    console.log("Eliminamos el " + CART[position]);
     displayItemOperations(CART[position].id, 0, position); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
 }
 

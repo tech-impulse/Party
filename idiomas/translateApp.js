@@ -1,7 +1,7 @@
 function translateButtons(idioma) {
 
     console.log("Cambiamos el idioma " + idioma);
-    $("#popupIdiomas").popup("close");
+    //$("#popupIdiomas").popup("close");
 
     switch (idioma) {
 
@@ -43,6 +43,7 @@ function translateButtons(idioma) {
                 "labelSugPreg": "Do you have any suggestions?"
             },
             "popup_errores": {
+                "tituloPopUp":"",
                 "campo_vacio": "Fill in this field",
                 "displayProductos": {
                     "isfiesta_3": "All selects ok",
@@ -133,6 +134,7 @@ function translateButtons(idioma) {
                 "talla": "¿Que talla tiene?"
             },
             "popup_errores": {
+                "tituloPopUp":"Productos en la cesta",
                 "campo_vacio": "Rellene este campo",
                 "displayProductos": {
                     "isfiesta_3": "Todos los selects ok",
@@ -200,7 +202,7 @@ function translateButtons(idioma) {
                 "labelProductos": " Productes",
             },
             "menu_lateral": {
-                "menu": "Anar al Menú"
+                "menu": "Tornar al Menú"
             },
             "asistente_fiestas": {
                 "label_num_per_fiesta": "¿Quantes persones assistiran a la festa?",
@@ -226,6 +228,7 @@ function translateButtons(idioma) {
                 "labelSugPreg": "Té algun suggeriment?"
             },
             "popup_errores": {
+                "tituloPopUp":"Productes en la cistella",
                 "campo_vacio": "Ompli aquest camp",
                 "displayProductos": {
                     "isfiesta_3": "Tots els selects ok",
