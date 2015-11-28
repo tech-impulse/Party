@@ -14,7 +14,7 @@ function checkOut() {
                     '<center>' +
                     '<h3> ¿Que deseas hacer con el pedido?</h3>' +
                     '<br>' +
-                    '<a style="width:300px" onclick="displaySummary(\'list\');" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">Mostrar listado para recoger</a>' +
+                    '<a style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">'+jsonIdiomas.pagina_pago.envio_email+'</a>' +
                     '<br>' +
                     '<a style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="">Enviar a Casa</a>' +
                     '</center>' +
@@ -29,7 +29,7 @@ function checkOut() {
                     '<center>' +
                     '<h3> ¿Que deseas hacer con el pedido?</h3>' +
                     '<br>' +
-                    '<a style="width:300px" onclick="displaySummary(\'list\');" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">Mostrar listado para recoger</a>' +
+                    '<a style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">'+jsonIdiomas.pagina_pago.envio_email+'</a>' +
                     '<br>' +
                     '<a style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="">Enviar a Casa</a>' +
                     '<br>' +
@@ -52,6 +52,9 @@ function checkOut() {
         }, popupTimeout);
         console.log("No estás logado");
     }
+    
+    $("#page_count").hide();
+    
 }
 
 /*********************************************************************
@@ -73,7 +76,13 @@ function updateBackButton(originNode, originName) {
         nodeIds.push(originNode);
         nodeNames.push(originName);
     }
-    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:10px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 2] + '</div>');
+    if (LINKINT == "") {
+        $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 2] + '</div>');
+
+    } else {
+        $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + LINKINT + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 2] + '</div>');
+    }
+
 }
 
 
@@ -90,13 +99,6 @@ function changeIdiomPopUp() {
 
 }
 
-/* No se utiliza
-function timerIncrement() {
-
-    console.log("Estas incativo " + idleTime);
-    getNodes(0);
-
-}*/
 
 /**************************************************************************
   Esta funcion se utiliza para cambiar el idioma de la app
@@ -151,7 +153,7 @@ function addPeople(oparation) {
 }
 
 /**************************************************************************
-  Esta funcion para la app durante el tiempo que le digamos en milisegundos
+  Esta funcion para dormir la app durante el tiempo que le digamos en milisegundos
 ***************************************************************************/
 function sleep(millisegundos) {
     var inicio = new Date().getTime();

@@ -24,11 +24,13 @@ function translateButtons(idioma) {
                 "select_sexo_button": "Who is the disguise?",
                 "btn_continuar": "CONTINUE"
             },
-            "form_sugerencias": {
-                "select_sexo_button": "Who is the disguise?",
-                "btn_continuar": "CONTINUE"
+            "pagina_pago": {
+                "envio_email": "Send email",
+                "envio_casa": ""
             },
             "form_sugerencias": {
+                "select_sexo_button": "Who is the disguise?",
+                "btn_continuar": "CONTINUE",
                 "labelSugNom": "Name:",
                 "labelSugNaci": "Birthdate:",
                 "labelSugMail": "Email:",
@@ -114,6 +116,10 @@ function translateButtons(idioma) {
                 "label_num_per_fiesta": "¿Cuantas personas asistirán a la fiesta?",
                 "btn_continuar": "CONTINUAR"
             },
+            "pagina_pago": {
+                "envio_email": "Enviar correo",
+                "envio_casa": ""
+            },
             "form_sugerencias": {
                 "labelSugNom": "Nombre:",
                 "labelSugNaci": "Fecha de nacimiento:",
@@ -134,6 +140,7 @@ function translateButtons(idioma) {
                 "talla": "¿Que talla tiene?"
             },
             "popup_errores": {
+                "labelCargando":"Cargando...",
                 "tituloPopUp":"Productos en la cesta",
                 "campo_vacio": "Rellene este campo",
                 "displayProductos": {
@@ -208,6 +215,10 @@ function translateButtons(idioma) {
                 "label_num_per_fiesta": "¿Quantes persones assistiran a la festa?",
                 "btn_continuar": "CONTINUAR"
             },
+            "pagina_pago": {
+                "envio_email": "Enviar correo",
+                "envio_casa": ""
+            },
             "asistente_disfraces": {
                 "select_sexo_button": "Per a qui és la disfressa?",
                 "btn_continuar": "CONTINUAR",
@@ -228,6 +239,7 @@ function translateButtons(idioma) {
                 "labelSugPreg": "Té algun suggeriment?"
             },
             "popup_errores": {
+                "labelCargando":"Carregant...",
                 "tituloPopUp":"Productes en la cistella",
                 "campo_vacio": "Ompli aquest camp",
                 "displayProductos": {

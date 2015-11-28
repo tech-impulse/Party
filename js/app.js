@@ -22,6 +22,18 @@ $(document).ready(function () {
     //Guardamos el alto y ancho de la pantalla
     W_WIDTH = $(window).width();
     W_HEIGTH = $(window).height();
+    
+    $("#popupCargando").popup({
+        beforeposition: function () {
+            $(this).css({
+                width: W_WIDTH,
+                height: W_HEIGTH
+            });
+        },
+        x: 0,
+        y: 0
+    });
+
 
     //Detectamos la orientacion de la pantalla
     $(window).bind("orientationchange", function (event) {
@@ -86,13 +98,14 @@ $(document).ready(function () {
                 if (TIENDAS.stores[i].id == STORE) {
                     SHOPDELIVERY = TIENDAS.stores[i].deliveryStore; //guardamos el id de la tienda
                     language = TIENDAS.stores[i].language;
+                    STORE = TIENDAS.stores[i];
                     TIENDAS = "";
                     break;
                 }
 
             }
 
-            console.log("Item seleccionado " + STORE + " y tiene entraga en tienda? " + SHOPDELIVERY);
+            //console.log("Item seleccionado " + STORE + " y tiene entraga en tienda? " + SHOPDELIVERY);
             $("#logo_inicio").hide();
             getNodes(0);
 
@@ -132,6 +145,7 @@ $(document).ready(function () {
         } else {
             $('#usrnm').removeClass('colorText');
             $('#pswd').removeClass('colorText');
+            EMAIL_USER = usuario;
             getLogin(usuario, contraseña);
         }
 
@@ -237,37 +251,28 @@ function openMenu() {
 }
 
 // FUNCIÓN QUE EMULA EL BOTÓN DE ATRÁS DE LA APLICACIÓN
-function backPage(idNode, nodeName) {
+function backPage(idNode, nodeName,linkint) {
 
     var position = (nodeIds.length);
     if (position > 2) {
         position = nodeIds.length;
         nodeIds.splice(position - 2, position);
         nodeNames.splice(position - 2, position);
-        getNodes(idNode, nodeName);
+        getNodes(idNode, nodeName,"",linkint);
     } else {
         getNodes(0);
         nodeIds = [];
         nodeNames = [];
-        //$("#divHeader_menu").show();
     }
 
     if (pantallaActual == "Asistente fiestas") {
 
         for (var i = CART.length - 1; i >= 0; i--) {
-            //console.log("Comprobamos el item " + CART[i].id + " length total " + CART.length);
             if (CART[i].dedonde == "Asistente fiestas") {
                 console.log("Borramos el item " + CART[i].id);
 
                 CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity)
-                //CART.splice(i, 1);
-                //console.log("Eliminamos el item .Nuevo ammount "+CART.ammount);
-                //console.log(CART);
-                //displayItemOperations(CART[i].id, 1, i);
-                //i=CART.length;
-
                 deleteItemCart(i);
-                //i = CART.length;
             }
 
         }
@@ -298,19 +303,19 @@ function backPage(idNode, nodeName) {
 function displayProductos(idNode, nodeName) {
 
     if (ISFIESTA == 4) { //por aqui se accede al asistente de disfraces
-        
+
         var sexo = $("select#select_sexo option").filter(":selected").val(); // en los dos selects en caso de que no haya seleccionado nada sera cero
         var talla = $("select#select_talla option").filter(":selected").val();
 
         if (sexo != 0 && talla != 0) {
-            
+
             var info_aux = {
-                talla:talla,
-                sexo:sexo
+                talla: talla,
+                sexo: sexo
             }
 
             console.log("Todos los selects ok. Entramos en el asistente de disfraces.");
-            getProducts(idNode, nodeName,info_aux);
+            getProducts(idNode, nodeName, info_aux);
 
         }
 
@@ -533,6 +538,8 @@ function addToCart(item, param) {
         } else {
             product.quantity = 1;
         }
+        
+       
         CART.ammount = (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice)) + parseFloat(CART.ammount);
         product.dedonde = pantallaActual;
         console.log("La cantidad antes de enviarla es " + product.quantity);
@@ -541,7 +548,7 @@ function addToCart(item, param) {
 
         var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
-        console.log($("#labelPrecioTotalProducto" + product.id));
+        //console.log($("#labelPrecioTotalProducto" + product.id));
         $("#labelPrecioTotalProducto" + product.id).text("Total artículo: " + formatoNumero(precioArticulo, 2, ",", ".", "€"));
         $("#labelPrecioTotalProducto" + product.id).show();
 

@@ -34,19 +34,24 @@
         left: 20% !important;
         width: 60%;
     }
-    
+    #popupCargando-popup {
+        right: 0% !important;
+        left: 0% !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+    }
     .colorText::-webkit-input-placeholder {
         color: red;
     }
     /*::-webkit-input-placeholder {
         color: red;
     }*/
-    
     .thumb {
         max-width: 50px;
         max-height: 50px;
     }
-    
     .imgMedium {
         max-width: 300px;
         max-height: 300px;
@@ -60,7 +65,6 @@
         height: 100px;
         margin: 10px auto;
     }
-    
     .swiper-slide {
         text-align: center;
         font-size: 18px;
@@ -80,15 +84,12 @@
         -webkit-align-items: center;
         align-items: center;
     }
-    
     .swiper-slide:nth-child(2n) {
         width: 40%;
     }
-    
     .swiper-slide:nth-child(3n) {
         width: 20%;
     }
-    
     .border-header {
         border-bottom: solid 1px rgb(52, 127, 188);
     }
@@ -175,6 +176,17 @@
                         </center>
                     </li>
                 </ul>
+            </div>
+
+            <!--POPUP DE Carga -->
+            <div data-role="popup" id="popupCargando" class="ui-corner-all" data-theme="none" style="background-color: rgb(0, 0, 0);opacity: 0.8;max-width: none;height: 100%;">
+                <center>
+                    <br>
+                    <div>
+                        <img src="css/icons/cargando.gif">
+                    </div>
+                    <label id="labelCargando" style="font-size: 30px; color:white;">Cargando...</label>
+                </center>
             </div>
 
             <!--POPUP DE Preview items -->

@@ -21,7 +21,7 @@ var CARRITO = [];
 var node_cero = [];
 var LOGGED = false;
 var REDIRECT = false;
-var popupTimeout = 250;
+var popupTimeout = 150;
 var idleTime = 180000; /// tiempo de inactividad
 var idleTimeActive = false;
 var idiomStore;
@@ -29,3 +29,5 @@ var protector;
 var jsonIdiomas;
 var pantallaActual;
 var auxTest;
+var LINKINT="";
+var EMAIL_USER ="";

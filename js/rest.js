@@ -42,7 +42,7 @@ function getLogin(usario, contraseña) {
 
             } else if (response.result == -1) {
 
-                $("#texto_popup").text("Error...");
+                $("#texto_popup").text("Error login...");
                 $('#popupAlert').popup('open');
 
             }
@@ -102,7 +102,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 
             } else if (response.result == -1) {
 
-                $("#texto_popup").text("Error...");
+                $("#texto_popup").text("Error registro...");
                 $('#popupAlert').popup('open');
 
             }
@@ -177,13 +177,13 @@ function getFlags() {
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
     -isAlgo: variable para saber si es el asis de fiestas o disfraces
     */
-function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
+function getNodes(idNode, nodeName, isAlgo, aux) {
 
     if (idNode != 0) {
         $("#banderas").hide();
     }
 
-    if (dondeVenimos == 1) {
+    if (aux == 1) {
         nodeIds = [];
         nodeNames = [];
         openMenu();
@@ -220,10 +220,10 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
                     node_cero = response;
                     $("#banderas").show();
                     pantallaActual = "menu principal";
-                   
+
                 }
 
-                restOk(response, "nodes", idNode, nodeName);
+                restOk(response, "nodes", idNode, nodeName, aux);
                 pantallaActual = "nodos";
 
             } else if (response.result == 0) { //ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
@@ -272,9 +272,9 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
 
                 } else {
 
-                    console.log("Error...");
+                    console.log("Error nodes...");
                 }
-                
+
             } else if (response.result == -1) {
 
                 console.log("Error en el envio de parametros");
@@ -309,7 +309,7 @@ function getNodes(idNode, nodeName, isAlgo, dondeVenimos) {
     - param: parametro extra que queramos pasar
     - param2: idem
     */
-function restOk(res, typ, param, param2) {
+function restOk(res, typ, param, param2, aux) {
 
     console.log("Cargamos nuevos nodos " + typ);
     //console.log("La respuesta es ");
@@ -323,7 +323,7 @@ function restOk(res, typ, param, param2) {
 
     case "nodes":
 
-        displayNode(res, param, param2);
+        displayNode(res, param, param2, aux);
         break;
 
     default:
@@ -333,6 +333,53 @@ function restOk(res, typ, param, param2) {
 
     }
 
+
+}
+
+function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+
+    // Datos que se van a enviar
+    var dataSend = {
+        lang: language,
+        origin: origin,
+        product: idproduct,
+        store: STORE.id,
+        id: idnode
+    };
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'getAlternativeProducts.php',
+        dataType: 'json',
+        async: false,
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            console.log("Datos ");
+            console.log(response);
+            PRODUCTS_ALTER = response;
+
+            displayAlternativeProducts();
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
 
 }
 
@@ -385,6 +432,8 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
 //WS que devuelve el listado de productos para un nodo
 function getProducts(idNode, nodeName, info_aux) {
 
+    $("#popupCargando").popup("open");
+
     if (info_aux != undefined) { // asist. de disfraces
 
         console.log("Venimos del asist. de disfraces");
@@ -392,7 +441,7 @@ function getProducts(idNode, nodeName, info_aux) {
         var dataSend = {
             lang: language,
             origin: origin,
-            store: STORE,
+            store: STORE.id,
             //gender: info_aux.sexo,// no se utiliza filtramos nosotros
             //size: info_aux.talla,// no se utiliza filtramos nosotros
             id: idNode
@@ -407,7 +456,7 @@ function getProducts(idNode, nodeName, info_aux) {
         var dataSend = {
             lang: language,
             origin: origin,
-            store: STORE,
+            store: STORE.id,
             id: idNode
         };
         console.log("Datos para enviar");
@@ -431,8 +480,7 @@ function getProducts(idNode, nodeName, info_aux) {
             if (response.result == 1) {
 
                 //console.log(response);
-
-                restOk_products(response, "nodes", idNode, nodeName);
+                restOk_products(response, "nodes", idNode, nodeName, info_aux);
 
             } else if (response.result == 0) {
 
@@ -468,7 +516,7 @@ function getProducts(idNode, nodeName, info_aux) {
     });
 }
 
-function restOk_products(res, typ, param, param2) {
+function restOk_products(res, typ, param, param2, param3) {
     console.log("Todo bien desde " + typ);
     //console.log("La respuesta es ");
     console.log(res);
@@ -480,7 +528,8 @@ function restOk_products(res, typ, param, param2) {
         break;
 
     case "nodes":
-        displayProducts(res, param, param2);
+
+        displayProducts(res, param, param2, param3);
         break;
 
     default:
@@ -1007,5 +1056,73 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
         },
     });
 
+
+}
+
+/**************************************************************************
+  WS para enviar el correo con el listado de articulos del carrito
+***************************************************************************/
+function sendEmail() {
+
+    var dataSend = {
+        usuario: INFO_USU,
+        email: EMAIL_USER,
+        carrito: CART //JSON.stringify(CART)
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        //async: false,
+        url: urlServices + 'sendEmail.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+
+            console.log("Respuesta es:");
+            console.log(response);
+
+            if (parseInt(response.result) == parseInt(1)) {
+
+                $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
+                $('#popupAlert').popup('open');
+
+            } else if (parseInt(response.result) == parseInt(0)) {
+                
+                $("#texto_popup").text("No se ha podido enviar el correo a " + EMAIL_USER);
+                $('#popupAlert').popup('open');
+
+            }else if (parseInt(response.result) == parseInt(2)) {
+                
+                $("#texto_popup").text("Problemas al generar el correo");
+                $('#popupAlert').popup('open');
+
+            }else if (parseInt(response.result) == parseInt(0)) {
+                
+                $("#texto_popup").text("Faltan datos para poder enviar el correo");
+                $('#popupAlert').popup('open');
+
+            }
+
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
 
 }
