@@ -199,7 +199,7 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
 
     if (isAlgo != undefined) { // estamos en el asistente de disfraces o fiestas?????
         ISFIESTA = isAlgo;
-        console.log("Is algo es " + isAlgo);
+        //console.log("Is algo es " + isAlgo);
     }
 
 
@@ -213,8 +213,8 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
 
             if (response.result == 1) {
 
-                console.log("Respuesta del nodo");
-                console.log(response);
+                //console.log("Respuesta del nodo");
+                //console.log(response);
 
                 if (idNode == 0) {
                     node_cero = response;
@@ -228,8 +228,8 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
 
             } else if (response.result == 0) { //ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
-                console.log("Resultado del nodo es cero");
-                console.log(response);
+                //console.log("Resultado del nodo es cero");
+                //console.log(response);
 
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
@@ -240,7 +240,7 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
                     var info = getInfoNode(idNode);
 
                     if (info != "undefined") {
-                        console.log("DisplayPantalla intermadia");
+                        //console.log("DisplayPantalla intermadia");
                         pantallaActual = "Asistente disfraces";
                         $("#divHeader_catalogo").show();
                         displayPantallaIntermediaAsistDisfra(info);
@@ -254,18 +254,18 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
                     console.log("Asistentes de fiestas.Pedimos info del nodo");
                     var info = getInfoNode(idNode);
 
-                    console.log("Enviar info es 4");
-                    console.log(info);
+                    //console.log("Enviar info es 4");
+                    //console.log(info);
 
                     if (info != undefined) {
 
-                        console.log("DisplayPantalla intermadia");
+                        //console.log("DisplayPantalla intermadia");
                         pantallaActual = "Asistente fiestas";
                         displayPantallaIntermediaAsistFiestas(info.node);
 
                     } else {
 
-                        console.log("Dame productos de " + nodeName);
+                        //console.log("Dame productos de " + nodeName);
                         getProducts(idNode, nodeName);
 
                     }
@@ -356,8 +356,8 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
         timeout: 10000, //10 seg
         success: function (response) {
 
-            console.log("Datos ");
-            console.log(response);
+            //console.log("Datos ");
+            //console.log(response);
             PRODUCTS_ALTER = response;
 
             displayAlternativeProducts();
@@ -367,13 +367,13 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
 
             if (textStatus === "timeout") {
 
-                console.log("Timeout");
+                //console.log("Timeout");
                 alert("Error de TimeOut... compruebe su conexion de internet");
 
             } else {
 
                 restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
+                //console.log("Sin conexion");
                 $("#texto_popup").text("Sin conexion a internet");
                 $('#popupAlert').popup('open');
 
@@ -409,13 +409,13 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
 
             if (textStatus === "timeout") {
 
-                console.log("Timeout");
+                //console.log("Timeout");
                 alert("Error de TimeOut... compruebe su conexion de internet");
 
             } else {
 
                 restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
+                //console.log("Sin conexion");
                 //alert("Sin conexion a internet...");
                 $("#texto_popup").text("Sin conexion a internet");
                 $('#popupAlert').popup('open');
@@ -464,7 +464,7 @@ function getProducts(idNode, nodeName, info_aux) {
 
     }
 
-    console.log("Enviamos el ajax");
+    //console.log("Enviamos el ajax");
 
     request = $.ajax({
         data: dataSend,
@@ -500,13 +500,13 @@ function getProducts(idNode, nodeName, info_aux) {
 
             if (textStatus === "timeout") {
                 //do something on timeout
-                console.log("Timeout");
+                //console.log("Timeout");
                 alert("Error de TimeOut... compruebe su conexion de internet");
 
             } else {
 
                 restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
+                //console.log("Sin conexion");
                 //alert("Sin conexion a internet...");
                 $("#texto_popup").text("Sin conexion a internet");
                 $('#popupAlert').popup('open');
@@ -517,9 +517,9 @@ function getProducts(idNode, nodeName, info_aux) {
 }
 
 function restOk_products(res, typ, param, param2, param3) {
-    console.log("Todo bien desde " + typ);
+    //console.log("Todo bien desde " + typ);
     //console.log("La respuesta es ");
-    console.log(res);
+    //console.log(res);
 
     switch (typ) {
     case "lang":
@@ -559,7 +559,7 @@ function getTiendas() {
 
             if (textStatus === "timeout") {
                 //do something on timeout
-                console.log("Timeout");
+                //console.log("Timeout");
                 $("#texto_popup").text('Error de TimeOut... compruebe su conexion de internet');
                 $('#popupAlert').popup('open');
 
@@ -567,8 +567,8 @@ function getTiendas() {
             } else {
 
                 restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
-                console.log(response);
+                //console.log("Sin conexion");
+                //console.log(response);
                 $("#texto_popup").text("Error..." + response.result);
                 $('#popupAlert').popup('open');
 
@@ -581,9 +581,9 @@ function getTiendas() {
 
 function restOk_tiendas(res, typ, param, param2) {
 
-    console.log("Las tiendas nos han llegado, cargamos el select" + typ);
+    //console.log("Las tiendas nos han llegado, cargamos el select" + typ);
     //console.log("La respuesta es ");
-    console.log(res);
+    //console.log(res);
 
     var count = res.stores.length;
     var select = $('#select_tienda');
@@ -670,13 +670,13 @@ function sendSugerencias(info) {
 
             if (textStatus === "timeout") {
                 //do something on timeout
-                console.log("Timeout");
+                //console.log("Timeout");
                 alert("Error de TimeOut... compruebe su conexion de internet");
 
             } else {
 
                 restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
+                //console.log("Sin conexion");
                 //alert("Sin conexion a internet...");
                 $("#texto_popup").text("Sin conexion a internet");
                 $('#popupAlert').popup('open');
@@ -688,9 +688,7 @@ function sendSugerencias(info) {
 
 function sendContra(usuario) {
 
-    console.log("Funcion enviar contra");
-
-    usuario = "alberto.alarcon@esadecreapolis.com";
+    //console.log("Funcion enviar contra");
 
     var dataSend = {
         user: usuario

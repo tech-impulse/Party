@@ -22,7 +22,7 @@ $(document).ready(function () {
     //Guardamos el alto y ancho de la pantalla
     W_WIDTH = $(window).width();
     W_HEIGTH = $(window).height();
-    
+
     $("#popupCargando").popup({
         beforeposition: function () {
             $(this).css({
@@ -39,6 +39,8 @@ $(document).ready(function () {
     $(window).bind("orientationchange", function (event) {
         if (event.orientation) {
             console.log("Me han reorientado a " + event.orientation);
+            W_WIDTH = $(window).width();
+            W_HEIGTH = $(window).height();
         }
     });
 
@@ -53,7 +55,7 @@ $(document).ready(function () {
         var e = ev.originalEvent;
         clearInterval(protector);
 
-        console.log("Click");
+        //console.log("Click");
 
         $('#principal').show();
         $('#contentPopupScreenSaver').hide();
@@ -82,7 +84,7 @@ $(document).ready(function () {
     $("#btn_acceder").click(function () {
 
         var seleccion = $("#select_tienda option:selected").val();
-        console.log("Seleccion es " + seleccion);
+        //console.log("Seleccion es " + seleccion);
 
         if (seleccion != undefined) {
 
@@ -120,7 +122,7 @@ $(document).ready(function () {
     //Boton de login de la app
     $("#iniciar_session").click(function () {
 
-        console.log("Logandose");
+        //console.log("Logandose");
         var usuario = $('#usrnm').val();
         var contraseña = $('#pswd').val();
 
@@ -154,16 +156,16 @@ $(document).ready(function () {
     //Boton de registro de la app
     $("#enviar_registro").click(function () {
 
-        console.log("registrandose");
+        //console.log("registrandose");
         var usuario = $('#emailsignup').val();
         var contraseña = $('#passwordsignup').val();
         var rep_contraseña = $('#passwordsignup_confirm').val();
         var cod_pos = $('#cod_pos').val();
-        console.log("Contra " + contraseña + " dos " + rep_contraseña + " mas " + cod_pos);
+        //console.log("Contra " + contraseña + " dos " + rep_contraseña + " mas " + cod_pos);
 
         if (contraseña != rep_contraseña) { //usuario == "" || contraseña == "" || rep_contraseña == "" || cod_pos == ""
 
-            console.log("AQUI333");
+            //console.log("AQUI333");
             $('#passwordsignup').val("");
             $('#passwordsignup_confirm').val("");
             $("#passwordsignup").attr("placeholder", jsonIdiomas.popup_errores.evento_click.contra_nocoinciden);
@@ -173,7 +175,7 @@ $(document).ready(function () {
 
         } else if (usuario != "" && contraseña == rep_contraseña && cod_pos != "") {
 
-            console.log("AQUI222");
+            //console.log("AQUI222");
             $('#emailsignup').removeClass('colorText');
             $('#passwordsignup').removeClass('colorText');
             $('#passwordsignup_confirm').removeClass('colorText');
@@ -181,7 +183,7 @@ $(document).ready(function () {
             getRegistro(usuario, contraseña, cod_pos);
 
         } else {
-            console.log("AQUI");
+            //console.log("AQUI");
             $("#emailsignup").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
             $('#emailsignup').addClass('colorText');
             $("#passwordsignup").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
@@ -221,13 +223,13 @@ $(document).ready(function () {
 
     $("#cam_contraseña").click(function () { // botton de login de la app
 
-        console.log("Cambio passwrod");
+        //console.log("Cambio passwrod");
         var usuarioCambio = $('#usuarioCambio').val();
 
-        console.log("Email " + usuarioCambio);
+        //console.log("Email " + usuarioCambio);
 
         if (usuarioCambio != "") {
-            console.log("Procedemos...")
+            //console.log("Procedemos...")
             sendContra(usuarioCambio);
         } else {
             $("#texto_popup").text("Escriba un usuario");
@@ -251,14 +253,14 @@ function openMenu() {
 }
 
 // FUNCIÓN QUE EMULA EL BOTÓN DE ATRÁS DE LA APLICACIÓN
-function backPage(idNode, nodeName,linkint) {
+function backPage(idNode, nodeName, linkint) {
 
     var position = (nodeIds.length);
     if (position > 2) {
         position = nodeIds.length;
         nodeIds.splice(position - 2, position);
         nodeNames.splice(position - 2, position);
-        getNodes(idNode, nodeName,"",linkint);
+        getNodes(idNode, nodeName, "", linkint);
     } else {
         getNodes(0);
         nodeIds = [];
@@ -269,7 +271,7 @@ function backPage(idNode, nodeName,linkint) {
 
         for (var i = CART.length - 1; i >= 0; i--) {
             if (CART[i].dedonde == "Asistente fiestas") {
-                console.log("Borramos el item " + CART[i].id);
+                //console.log("Borramos el item " + CART[i].id);
 
                 CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity)
                 deleteItemCart(i);
@@ -314,7 +316,7 @@ function displayProductos(idNode, nodeName) {
                 sexo: sexo
             }
 
-            console.log("Todos los selects ok. Entramos en el asistente de disfraces.");
+            //console.log("Todos los selects ok. Entramos en el asistente de disfraces.");
             getProducts(idNode, nodeName, info_aux);
 
         }
@@ -325,7 +327,7 @@ function displayProductos(idNode, nodeName) {
 
         if (num_persosnas > 0) {
 
-            console.log("Todos los selects ok. ASIS. FIESTAS");
+            //console.log("Todos los selects ok. ASIS. FIESTAS");
             getProducts(idNode, nodeName);
 
         } else {
@@ -406,9 +408,9 @@ function formatoNumero(numero, decimales, separadorDecimal, separadorMiles, simb
 
 function carrito(id_producto, operacion, precio) {
 
-    console.log("Longitud del array " + CARRITO.length);
-    console.log(id_producto);
-    console.log(CARRITO);
+    //console.log("Longitud del array " + CARRITO.length);
+    //console.log(id_producto);
+    //console.log(CARRITO);
 
     if (CARRITO.length == 0) {
 
@@ -421,7 +423,7 @@ function carrito(id_producto, operacion, precio) {
         aux['precio'] = precio;
         CARRITO.push(aux);
 
-        console.log(CARRITO);
+        //console.log(CARRITO);
 
     } else {
 
@@ -469,7 +471,7 @@ function carrito(id_producto, operacion, precio) {
                         //displayQantidadProducto(CARRITO[i].cantidad, id_producto);
                         if (CARRITO[i].cantidad == 0) {
                             CARRITO.splice(i, 1);
-                            console.log(CARRITO);
+                            //console.log(CARRITO);
                         }
                         break;
 
@@ -501,7 +503,7 @@ function addToCart(item, param) {
     for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
         //console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS[i]['id']);
         if (PRODUCTS[i]['id'] == item) {
-            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
+            //console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
             product = PRODUCTS[i];
             i = PRODUCTS.length;
         }
@@ -510,13 +512,13 @@ function addToCart(item, param) {
     for (var j = 0; j < CART.length; j++) {
         //console.log("buscando  " + item + " en carrito " + CART[j]['id']);
         if (CART[j]['id'] == item) {
-            console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
+            //console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
             foundInCart = 1;
             CART[j].quantity = CART[j].quantity + parseInt(param);
             CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
 
             var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
-            console.log("Precio del articulo es " + precioArticulo);
+            //console.log("Precio del articulo es " + precioArticulo);
             $("#labelPrecioTotalProducto" + CART[j].id).text("Total artículo: " + formatoNumero(precioArticulo, 2, ",", ".", "€"));
 
             displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
@@ -528,7 +530,7 @@ function addToCart(item, param) {
 
     if (foundInCart == 0) {
         if (CART.ammount == undefined) {
-            console.log("EL carrito está vació, lo inicializamos");
+            //console.log("EL carrito está vació, lo inicializamos");
             CART.ammount = 0;
         }
         console.log("Producto no esta en carrito, lo añadimos");
@@ -538,11 +540,11 @@ function addToCart(item, param) {
         } else {
             product.quantity = 1;
         }
-        
-       
+
+
         CART.ammount = (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice)) + parseFloat(CART.ammount);
         product.dedonde = pantallaActual;
-        console.log("La cantidad antes de enviarla es " + product.quantity);
+        //console.log("La cantidad antes de enviarla es " + product.quantity);
 
         CART.push(product);
 
@@ -570,13 +572,13 @@ function addToCartAlter(item) {
 
     var product;
     var cantidad = $("#cantidad_prod_alter").val();
-    console.log("Numero de productos es " + cantidad);
+    //console.log("Numero de productos es " + cantidad);
 
     var foundInCart = 0;
     for (var i = 0; i < PRODUCTS_ALTER.length; i++) {
-        console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS_ALTER[i]['id']);
+        //console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS_ALTER[i]['id']);
         if (PRODUCTS_ALTER[i]['id'] == item) {
-            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS_ALTER[i]['id'] + " es igual a " + item);
+            //console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS_ALTER[i]['id'] + " es igual a " + item);
             product = PRODUCTS_ALTER[i];
             i = PRODUCTS_ALTER.length;
         }
@@ -585,7 +587,7 @@ function addToCartAlter(item) {
     for (var j = 0; j < CART.length; j++) {
         console.log("buscando  " + item + " en carrito " + CART[j]['id']);
         if (CART[j]['id'] == item) {
-            console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
+            //console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
             foundInCart = 1;
             CART[j].quantity = CART[j].quantity + cantidad;
             CART.ammount = parseFloat((product.price_x_region[0].totalPrice * cantidad)) + parseFloat(CART.ammount);
@@ -597,10 +599,10 @@ function addToCartAlter(item) {
 
     if (foundInCart == 0) {
         if (CART.ammount == undefined) {
-            console.log("EL carrito está vació, lo inicializamos");
+            //console.log("EL carrito está vació, lo inicializamos");
             CART.ammount = 0;
         }
-        console.log("Producto no esta en carrito, lo añadimos");
+        //console.log("Producto no esta en carrito, lo añadimos");
         CART.ammount = parseFloat(product.price_x_region[0].totalPrice) + parseFloat(CART.ammount);
         product.quantity = 1;
         CART.push(product);
@@ -611,9 +613,9 @@ function addToCartAlter(item) {
 }
 
 function deleteItemCart(position) {
-    console.log("Eliminar item en posicion " + position + " id: " + CART[position].id);
+    //console.log("Eliminar item en posicion " + position + " id: " + CART[position].id);
     $("#labelPrecioTotalProducto" + CART[position].id).text("");
-    console.log("Eliminamos el " + CART[position]);
+    //console.log("Eliminamos el " + CART[position]);
     displayItemOperations(CART[position].id, 0, position); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
 }
 
@@ -659,7 +661,7 @@ function enviarSugerencia() {
     var fecha_naci = $("#fecha_naci").val();
     var sugerencias = $("#sugerencias").val();
 
-    console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + correo + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + " sugerencia " + sugerencias);
+    //console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + correo + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + " sugerencia " + sugerencias);
 
     if (nombre != "") {
 
@@ -677,7 +679,7 @@ function enviarSugerencia() {
 
                                 if (sugerencias != "") {
 
-                                    console.log("Llegamos hasta el final");
+                                    //console.log("Llegamos hasta el final");
 
                                     var info = {
                                         nombre: nombre,
@@ -697,7 +699,7 @@ function enviarSugerencia() {
 
                                     $("#texto_popup").text("Escriba algo en el campo petición/sugerencia");
                                     $('#popupAlert').popup('open');
-                                    console.log("No has escrito la sugerencia1");
+                                    //console.log("No has escrito la sugerencia1");
 
                                 }
 
@@ -705,7 +707,7 @@ function enviarSugerencia() {
 
                                 $("#texto_popup").text("Escriba una sugerencia o incidencia");
                                 $('#popupAlert').popup('open');
-                                console.log("No has escrito la sugerencia2");
+                                //console.log("No has escrito la sugerencia2");
 
                             }
 
@@ -715,7 +717,7 @@ function enviarSugerencia() {
 
                             $("#texto_popup").text("Escriba un fecha de nacimiento");
                             $('#popupAlert').popup('open');
-                            console.log("No has escrito la fecha de nacimiento");
+                            //console.log("No has escrito la fecha de nacimiento");
 
                         }
 
@@ -724,7 +726,7 @@ function enviarSugerencia() {
 
                         $("#texto_popup").text("Escriba un telefono");
                         $('#popupAlert').popup('open');
-                        console.log("No has escrito el telefono");
+                        //console.log("No has escrito el telefono");
 
                     }
 
@@ -734,7 +736,7 @@ function enviarSugerencia() {
 
                     $("#texto_popup").text("Escriba una poblacion");
                     $('#popupAlert').popup('open');
-                    console.log("No has escrito el poblacion");
+                    //console.log("No has escrito el poblacion");
 
                 }
 
@@ -743,7 +745,7 @@ function enviarSugerencia() {
 
                 $("#texto_popup").text("Escriba una provincia");
                 $('#popupAlert').popup('open');
-                console.log("No has escrito el provincia");
+                //console.log("No has escrito el provincia");
 
             }
 
@@ -751,7 +753,7 @@ function enviarSugerencia() {
 
             $("#texto_popup").text("Escriba un correo electronico");
             $('#popupAlert').popup('open');
-            console.log("No has escrito el correo electronico");
+            //console.log("No has escrito el correo electronico");
 
         }
 
@@ -759,7 +761,7 @@ function enviarSugerencia() {
 
         $("#texto_popup").text("Escriba el nombre");
         $('#popupAlert').popup('open');
-        console.log("No has escrito el nombre");
+        //console.log("No has escrito el nombre");
 
 
     }
