@@ -251,7 +251,7 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
 
                 } else if (ISFIESTA == 3) {
 
-                    console.log("Asistentes de fiestas.Pedimos info del nodo");
+                    console.log("Asistentes de fiestas. Pedimos info del nodo");
                     var info = getInfoNode(idNode);
 
                     //console.log("Enviar info es 4");
@@ -605,6 +605,8 @@ function restOk_tiendas(res, typ, param, param2) {
     }
 
     select.selectmenu('refresh', true);
+    $("#divTienda").html(htmlContent);
+    $("#divTienda").trigger('create');
 
 }
 
@@ -1085,17 +1087,17 @@ function sendEmail() {
                 $('#popupAlert').popup('open');
 
             } else if (parseInt(response.result) == parseInt(0)) {
-                
+
                 $("#texto_popup").text("No se ha podido enviar el correo a " + EMAIL_USER);
                 $('#popupAlert').popup('open');
 
-            }else if (parseInt(response.result) == parseInt(2)) {
-                
+            } else if (parseInt(response.result) == parseInt(2)) {
+
                 $("#texto_popup").text("Problemas al generar el correo");
                 $('#popupAlert').popup('open');
 
-            }else if (parseInt(response.result) == parseInt(0)) {
-                
+            } else if (parseInt(response.result) == parseInt(0)) {
+
                 $("#texto_popup").text("Faltan datos para poder enviar el correo");
                 $('#popupAlert').popup('open');
 
