@@ -605,8 +605,8 @@ function restOk_tiendas(res, typ, param, param2) {
     }
 
     select.selectmenu('refresh', true);
-    $("#divTienda").html(htmlContent);
-    $("#divTienda").trigger('create');
+    $("#select_tienda").trigger("change");
+    
 
 }
 
