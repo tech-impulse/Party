@@ -2,7 +2,7 @@
     <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:cdv ="http://cordova.apache.org/ns/1.0"  id="party.fiesta" versionCode="1.1.0" version="1.0.0">
         
         <name>Party Fiesta</name>
-        <description>Aplicacion oficial para tiendas de Party fiesta</description>
+        <description>Aplicacion oficial para tiendas de Party fiestaa </description>
         <author href="" email="">Tech-impulse</author>
 
         <!--<access origin="*" launch-external="yes" />-->
