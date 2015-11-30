@@ -624,7 +624,7 @@ function displayProducts(data, originNode, originName, param) {
                                 //console.log("Producto es:");
                                 //console.log(data.products[i]);
                                 //console.log("Caracteristicas es:");
-                                c//onsole.log(data.products[i]);
+                                //onsole.log(data.products[i]);
                                 generoDisfraz = 1;
                             } else {
                                 continue;
