@@ -600,7 +600,7 @@ function restOk_tiendas(res, typ, param, param2) {
             text: text
         }));
 
-        //select.selectmenu('refresh', true);
+        select.selectmenu('refresh', true);
 
     }
 
