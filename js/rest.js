@@ -615,6 +615,9 @@ function restOk_tiendas(res, typ, param, param2) {
     
     $("#div_select_tienda").html(html);
     $("#div_select_tienda").trigger('create');
+    
+    alert("Select cargado");
+    alert(html);
 
 
 }
