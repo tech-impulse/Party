@@ -590,24 +590,31 @@ function restOk_tiendas(res, typ, param, param2) {
 
     TIENDAS = res; //array con todas las tiendas
 
+    var html = '<select id="select_tienda" data-native-menu="false">';
+
     for (var i = 0; i < count; i++) {
 
         var val = res.stores[i].id;
-        var text = res.stores[i].name;
-        
-        select.append($('<option>', {
+        var text = res.stores[i].name; 
+
+        html = html + '<option value='+val+'>'+text+'</option>';
+
+
+        /*select.append($('<option>', {
             value: val,
             text: text
         }));
 
 
         select.selectmenu('refresh', true);
-        $("#select_tienda").trigger("change");
+        $("#select_tienda").trigger("change");*/
 
     }
-
-    //$("#select_tienda").trigger('create');
-    $("#select_tienda").trigger("change");
+    
+    html = html + '</select>';
+    
+    $("#div_select_tienda").html(html);
+    $("#div_select_tienda").trigger('create');
 
 
 }
