@@ -132,6 +132,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 function getFlags() {
 
     console.log("Pedimos los idiomas");
+    
 
     var request = $.ajax({
         url: urlServices + 'getFlags.php',
@@ -159,7 +160,7 @@ function getFlags() {
             } else {
 
                 restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
+                console.log("Sin conexion.........");
                 //$("#texto_popup").text('Sin conexion a internet...');
                 //$('#popupAlert').popup('open');
 

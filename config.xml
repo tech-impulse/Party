@@ -5,7 +5,8 @@
         <description>Aplicacion oficial para tiendas de Party fiesta</description>
         <author href="" email="">Tech-impulse</author>
 
-        <access origin="*" />
+        <!--<access origin="*" launch-external="yes" />-->
+        <access origin="http://partyfiesta.youtter.com/*" launch-external="yes" />
 
         <!-- versionCode is optional and Android only -->
         <preference name="phonegap-version" value="cli-5.2.0" />

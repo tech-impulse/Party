@@ -15,6 +15,7 @@ $(document).bind("mobileinit", function () {
     });
     
     // Obtenermos el listado banderas y tiendas
+    alert("Antes de cargar");
     getFlags();
     getTiendas();
 
