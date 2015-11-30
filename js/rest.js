@@ -600,8 +600,12 @@ function restOk_tiendas(res, typ, param, param2) {
             text: text
         }));
 
-        select.selectmenu('refresh', true);
-        $("#select_tienda").trigger("change");
+        setTimeout(function () {
+            select.selectmenu('refresh', true);
+            $("#select_tienda").trigger("change");
+        }, popupTimeout);
+
+
     }
 
     $("#select_tienda").trigger('create');
