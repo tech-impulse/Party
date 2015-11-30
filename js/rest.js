@@ -591,7 +591,7 @@ function restOk_tiendas(res, typ, param, param2) {
 
     TIENDAS = res; //array con todas las tiendas
 
-    var html = '<select id="select_tienda">';
+    var html = '<select id="select_tienda" data-native-menu="false">';
 
     for (var i = 0; i < count; i++) {
 
