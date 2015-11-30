@@ -11,6 +11,13 @@ $(document).bind("mobileinit", function () {
         timeout: 10000, //Time in milliseconds
         crossDomain: true
     });
+    
+    // Obtenermos el listado banderas y tiendas
+    getFlags();
+    getTiendas();
+
+    //Cargamos el idioma por defecto de la app
+    translateButtons("ca");
 
 });
 
