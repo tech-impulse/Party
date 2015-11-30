@@ -594,17 +594,15 @@ function restOk_tiendas(res, typ, param, param2) {
 
         var val = res.stores[i].id;
         var text = res.stores[i].name;
-
+        
         select.append($('<option>', {
             value: val,
             text: text
         }));
 
-        setTimeout(function () {
-            select.selectmenu('refresh', true);
-            $("#select_tienda").trigger("change");
-        }, popupTimeout);
 
+        select.selectmenu('refresh', true);
+        $("#select_tienda").trigger("change");
 
     }
 

@@ -5,6 +5,8 @@ $(document).bind("mobileinit", function () {
 
     $.support.touchOverflow = false;
     $.mobile.touchOverflowEnabled = false;
+    
+    $.mobile.selectmenu.prototype.options.nativeMenu = false;
 
     // Configuración de Ajax
     $.ajaxSetup({
