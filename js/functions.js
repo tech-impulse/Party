@@ -14,7 +14,7 @@ function checkOut() {
                     '<center>' +
                     '<h3> ¿Que deseas hacer con el pedido?</h3>' +
                     '<br>' +
-                    '<a style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">'+jsonIdiomas.pagina_pago.envio_email+'</a>' +
+                    '<a style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                     '<br>' +
                     '<a style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="">Enviar a Casa</a>' +
                     '</center>' +
@@ -29,7 +29,7 @@ function checkOut() {
                     '<center>' +
                     '<h3> ¿Que deseas hacer con el pedido?</h3>' +
                     '<br>' +
-                    '<a style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">'+jsonIdiomas.pagina_pago.envio_email+'</a>' +
+                    '<a style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                     '<br>' +
                     '<a style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="">Enviar a Casa</a>' +
                     '<br>' +
@@ -52,9 +52,9 @@ function checkOut() {
         }, popupTimeout);
         console.log("No estás logado");
     }
-    
+
     $("#page_count").hide();
-    
+
 }
 
 /*********************************************************************
@@ -66,22 +66,30 @@ function checkOut() {
   nodeIds:lista de nodos por los que hemos pasado
   nodeNames: lista de los nombres de los nodos por los que hemos pasado
 *********************************************************************/
-function updateBackButton(originNode, originName) {
+function updateBackButton(originNode, originName, linkImg) {
+
+    console.log("Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
+
     if (nodeIds.length == 0) {
+        console.log("Iniciamos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
+        //añadimos volver al menú
         nodeIds.push(0);
         nodeNames.push(jsonIdiomas.header.menu);
+        nodeImg.push(linkImg);
+        //añadimos volver a la opcion elegida del menú 
         nodeIds.push(originNode);
         nodeNames.push(originName);
+        nodeImg.push(linkImg);
     } else {
-        nodeIds.push(originNode);
-        nodeNames.push(originName);
-    }
-    if (LINKINT == "") {
-        $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 2] + '</div>');
 
-    } else {
-        $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + LINKINT + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px">                   </span>' + nodeNames[nodeNames.length - 2] + '</div>');
+        console.log("Añadimos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
+        nodeIds.push(originNode);
+        nodeNames.push(originName);
+        nodeImg.push(linkImg);
     }
+    // ponemos menos 2 porque añadimos uno de mas al inicio
+    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
+
 
 }
 
@@ -159,6 +167,3 @@ function sleep(millisegundos) {
     var inicio = new Date().getTime();
     while ((new Date().getTime() - inicio) < millisegundos) {}
 }
-
-
-

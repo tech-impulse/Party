@@ -15,7 +15,7 @@ $(document).bind("mobileinit", function () {
     });
     
     // Obtenermos el listado banderas y tiendas
-    alert("Antes de cargar");
+    //alert("Antes de cargar");
     getFlags();
     getTiendas();
 
@@ -264,17 +264,24 @@ function openMenu() {
 
 // FUNCIÓN QUE EMULA EL BOTÓN DE ATRÁS DE LA APLICACIÓN
 function backPage(idNode, nodeName, linkint) {
+    
+    console.log("Imagen: "+linkint);
 
     var position = (nodeIds.length);
-    if (position > 2) {
+    
+    if (position > 2 && idNode != 0) {
         position = nodeIds.length;
-        nodeIds.splice(position - 2, position);
-        nodeNames.splice(position - 2, position);
-        getNodes(idNode, nodeName, "", linkint);
+        console.log("Antes de borrar "+nodeIds[position]);
+        nodeIds.splice(position - 2);
+        nodeNames.splice(position - 2);
+        nodeImg.splice(position - 2);
+        console.log(nodeIds);
+        getNodes(idNode, nodeName, 0, linkint,"back");
     } else {
         getNodes(0);
         nodeIds = [];
         nodeNames = [];
+        nodeImg = [];
     }
 
     if (pantallaActual == "Asistente fiestas") {

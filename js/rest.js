@@ -132,7 +132,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 function getFlags() {
 
     console.log("Pedimos los idiomas");
-    
+
 
     var request = $.ajax({
         url: urlServices + 'getFlags.php',
@@ -178,7 +178,7 @@ function getFlags() {
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
     -isAlgo: variable para saber si es el asis de fiestas o disfraces
     */
-function getNodes(idNode, nodeName, isAlgo, aux) {
+function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     if (idNode != 0) {
         $("#banderas").hide();
@@ -198,11 +198,10 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
         id: idNode
     };
 
-    if (isAlgo != undefined) { // estamos en el asistente de disfraces o fiestas?????
+    if (isAlgo == 3 || isAlgo == 4) { //estamos en el asistente de disfraces o fiestas?????
         ISFIESTA = isAlgo;
-        //console.log("Is algo es " + isAlgo);
+        console.log("Is algo es " + isAlgo);
     }
-
 
     var request = $.ajax({
         data: dataSend,
@@ -223,9 +222,10 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
                     pantallaActual = "menu principal";
 
                 }
-
-                restOk(response, "nodes", idNode, nodeName, aux);
+                
                 pantallaActual = "nodos";
+                restOk(response, "nodes", idNode, nodeName, aux, backPage);
+                
 
             } else if (response.result == 0) { //ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
@@ -234,6 +234,8 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
 
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
+                
+                updateBackButton(idNode, nodeName, aux);
 
                 if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hay que mostrar una pantalla intermadia
 
@@ -310,7 +312,7 @@ function getNodes(idNode, nodeName, isAlgo, aux) {
     - param: parametro extra que queramos pasar
     - param2: idem
     */
-function restOk(res, typ, param, param2, aux) {
+function restOk(res, typ, param, param2, aux, backPage) {
 
     console.log("Cargamos nuevos nodos " + typ);
     //console.log("La respuesta es ");
@@ -323,8 +325,8 @@ function restOk(res, typ, param, param2, aux) {
         break;
 
     case "nodes":
-
-        displayNode(res, param, param2, aux);
+        console.log("El aux " + aux);
+        displayNode(res, param, param2, aux, backPage);
         break;
 
     default:
@@ -596,9 +598,9 @@ function restOk_tiendas(res, typ, param, param2) {
     for (var i = 0; i < count; i++) {
 
         var val = res.stores[i].id;
-        var text = res.stores[i].name; 
+        var text = res.stores[i].name;
 
-        html = html + '<option value='+val+'>'+text+'</option>';
+        html = html + '<option value=' + val + '>' + text + '</option>';
 
 
         /*select.append($('<option>', {
@@ -611,14 +613,14 @@ function restOk_tiendas(res, typ, param, param2) {
         $("#select_tienda").trigger("change");*/
 
     }
-    
+
     html = html + '</select>';
-    
+
     $("#div_select_tienda").html(html);
     $("#div_select_tienda").trigger('create');
-    
-    alert("Select cargado");
-    alert(html);
+
+    //alert("Select cargado");
+    //alert(html);
 
 
 }

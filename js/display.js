@@ -8,7 +8,7 @@ function displayNode(data, originNode, originName, linkImg) {
 
     //console.log("DisplayNode-> Nodes es " + data.result + " link " + linkImg);
     //console.log(data);
-    
+
     //console.log("Cargamos los nodos");
 
     var len = data.nodes.length;
@@ -49,13 +49,12 @@ function displayNode(data, originNode, originName, linkImg) {
 
         if (originNode == 0) {
             loadMenu(data);
-            //var imagen_partyfiesta = "<div><img src='css/icons/logo.png'></div>";
-            var imagen_partyfiesta = "";
         } else {
-            var imagen_partyfiesta = "";
-            updateBackButton(originNode, originName);
-            //$("#divHeader").show();
+            console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg);
+            updateBackButton(originNode, originName, linkImg);
         }
+
+
         switch (parseInt(data.columns)) {
         case 1:
 
@@ -125,31 +124,31 @@ function displayNode(data, originNode, originName, linkImg) {
                         }
                         switch (valorSwitch) {
                         case 1: //catalogo
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkint + '\')';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
                             break;
                         case 2: //promos
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkint + '\')';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
                             break;
                         case 3: // asis fistas
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkint + '\')';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
                             break;
                         case 4: // asis disfra
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkint + '\')';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
                             break;
                         case 5: // sugerencias
                             extra = 'displayPantallaSugerencias()';
                             break;
                         case 6: // fuera tienda
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkint + '\')';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
                             break;
                         case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkint + '\')';
+                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
                             break;
                         }
 
                     } else { //mostramos los bloques sin ningun orden
 
-                        extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')';
+                        extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
 
                     }
 
@@ -254,10 +253,10 @@ function displayNode(data, originNode, originName, linkImg) {
 
                     }
 
-                    if (data.nodes[i].name == "") {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')" style="background-color:' + bacgroundColor + ';">' + data.nodes[i].name + '</a>';
+                    if (data.nodes[i].name == "") { // \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\'
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style="background-color:' + bacgroundColor + ';">' + data.nodes[i].name + '</a>';
                     } else {
-                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\')" style="background-color:' + bacgroundColor + ';">' + data.nodes[i].name + '</a>';
+                        var element = '<a data-role="button" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style="background-color:' + bacgroundColor + ';">' + data.nodes[i].name + '</a>';
                     }
                     htmlContent = htmlContent + element;
                 }
@@ -441,7 +440,7 @@ function displayProducts(data, originNode, originName, param) {
                 var element = block +
                     '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label></div>' +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 120px;height: 120px;">' +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 75%;height: 75%">' +
                     '<div class="ui-grid-a"><div class="ui-block-a" style="width: 100%;"><div class="contenedor">' + titulo + '</div></div></div>' +
                     '<div class="ui-grid-a"><div class="ui-block-a" style="width: 100%;"><strong>' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong></div></div>' +
                     '<div class="ui-grid-a"><div class="ui-block-a" style="width: 100%;"><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;font-size: 15px;"></label></div></div>' +
@@ -611,26 +610,41 @@ function displayProducts(data, originNode, originName, param) {
                 var heigth = (W_WIDTH * (0.96));
                 var heig_block = heigth / parseInt(data.columns);
 
-                var count = data.products[i].caracteristics.length;
+                var count_carac = data.products[i].caracteristics.length;
                 var caracteristicas = data.products[i].caracteristics;
                 var generoDisfraz = 0; //sexo del disfraz no es el seleccioando
 
-                for (var j = 0; j < count; j++) { // comprobamos que la talla y sexo sea el escogido en los selects
+                var count_uses = data.products[i].uses.length;
+                var uses = data.products[i].uses;
 
-                    if (caracteristicas[j].name == sexo) {
-                        for (var m = 0; m < count; m++) {
-                            if (caracteristicas[m].name == talla) {
-                                //console.log("Disfracaz válido " + caracteristicas[m].name);
-                                //console.log("Producto es:");
-                                //console.log(data.products[i]);
-                                //console.log("Caracteristicas es:");
-                                //onsole.log(data.products[i]);
-                                generoDisfraz = 1;
-                            } else {
-                                continue;
-                                //console.log("Disfracaz no válido " + caracteristicas[m].name);
+                for (var k = 0; k < count_uses; k++) {
+
+                    if (parseInt(uses[k].id) == parseInt(1)) { //si el articulo no es un disfraz se muesta, ya que sera un complemento
+
+                        //console.log("Articulo es un disfraz " + uses[k].id);
+
+                        for (var j = 0; j < count_carac; j++) { // comprobamos que la talla y sexo sea el escogido en los selects
+
+                            //console.log("Sexo? " + caracteristicas[j].name + " sexo cogido es " + sexo);
+
+                            if (caracteristicas[j].name == sexo) {
+
+                                for (var m = 0; m < count_carac; m++) {
+
+                                    //console.log("talla? " + caracteristicas[m].name + " talla cogido es " + talla);
+
+                                    if (caracteristicas[m].name == talla) {
+                                        generoDisfraz = 1;
+                                    } else {
+                                        continue;
+                                        //console.log("Disfracaz no válido " + caracteristicas[m].name);
+                                    }
+                                }
                             }
                         }
+                    } else {
+                        generoDisfraz = 1;
+                        //console.log("Articulo es : " + uses[k].id);
                     }
                 }
 
@@ -638,16 +652,18 @@ function displayProducts(data, originNode, originName, param) {
                     continue;
                 }
 
-                for (var j = 0; j < count; j++) {
-                    //console.log("Caracteristica " + caracteristicas[j].type);
+                for (var j = 0; j < count_carac; j++) {
+                    console.log("Caracteristica " + caracteristicas[j].type);
                     if (caracteristicas[j].type == "9") {
                         unidades = caracteristicas[j].name;
+                        break;
                     } else {
-                        //unidades = "1 unidad";
+                        unidades = "1 unidad";
                         continue;
                     }
 
                 }
+
 
                 //if (data.products[i].price_x_region[0].totalPrice != undefined) { // Controlamos que el precio exista
                 if (position < parseInt(data.columns)) {
@@ -704,7 +720,7 @@ function displayProducts(data, originNode, originName, param) {
                 var element = block +
                     '<a data-role="button" data-theme="f"><div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label></div>' +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 120px;height: 120px;">' +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 75%;height: 75%;">' +
                     '<div class="ui-grid-a"><div class="ui-block-a" style="width: 100%;"><div class="contenedor">' + titulo + '</div></div></div>' +
                     '<div class="ui-grid-a"><div class="ui-block-a" style="width: 100%;"><strong>' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong></div></div>' +
                     '<div class="ui-grid-a"><div class="ui-block-a" style="width: 100%;"><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;font-size: 15px;"></label></div></div>' +
@@ -1100,25 +1116,25 @@ function loadMenu(data) {
 
             switch (valorSwitch) {
             case 1: //catalogo
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',0,1)';
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
                 break;
             case 2: //promos
-                extra = '';
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
                 break;
             case 3: // asis fistas
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',1)';
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
                 break;
             case 4: // asis disfra
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',1)';
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
                 break;
             case 5: // sugerencias
                 extra = 'displayPantallaSugerencias()';
                 break;
             case 6: // fuera tienda
-                extra = '';
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
                 break;
             case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',1)';
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',\'' + data.nodes[i].linkext + '\')';
                 break;
             }
 
@@ -1183,6 +1199,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
         '<a style="width:150px" id="btn_continuar_dis" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" class="ui-link ui-btn ui-btn-b ui-shadow ui-corner-all" role="button">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</a>' +
         '</center>' +
         '</div>';
+
     htmlContent = htmlContent + '</div>';
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
@@ -1417,11 +1434,11 @@ function displaySummary(param) {
             var div_li_prod = "";
 
             for (var i = 0; i < CART.length; i++) {
-                
+
                 div_li_prod = div_li_prod + "<li></li>";
 
             }
-            
+
             var htmlHeader = '<div id="lista" style="witdh:90%;"><ul data-role="listview">' +
                 '<li data-role="list-divider" style="background-color:#0096D2; font-size:20px; color:white;">' +
                 '<div class="ui-grid-a">' +
