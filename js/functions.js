@@ -4,54 +4,54 @@
 **************************************************************/
 function checkOut() {
 
-    if (LOGGED == true) {
-        if (CART.length > 0) {
-            console.log("Actualizar div");
-            $('.ui-popup').popup('close');
+    //if (LOGGED == true) {
+    if (CART.length > 0) {
+        console.log("Actualizar div");
+        $('.ui-popup').popup('close');
 
-            if (SHOPDELIVERY == 0) {
-                var html = '<div>' +
-                    '<center>' +
-                    '<h3> ¿Que deseas hacer con el pedido?</h3>' +
-                    '<br>' +
-                    '<a style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
-                    '<br>' +
-                    '<a style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="">Enviar a Casa</a>' +
-                    '</center>' +
-                    '</div>';
-                $("#divContent").html(html);
-                $("#divContent").trigger('create');
-                var n = nodeIds.length + 1;
-                updateBackButton(nodeIds[n], nodeNames[n]);
+        if (SHOPDELIVERY == 0) {
+            var html = '<div>' +
+                '<center>' +
+                '<h3> ¿Que deseas hacer con el pedido?</h3>' +
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b">Enviar a Casa</a>' +
+                '</center>' +
+                '</div>';
+            $("#divContent").html(html);
+            $("#divContent").trigger('create');
+            var n = nodeIds.length + 1;
+            updateBackButton(nodeIds[n], nodeNames[n]);
 
-            } else {
-                var html = '<div>' +
-                    '<center>' +
-                    '<h3> ¿Que deseas hacer con el pedido?</h3>' +
-                    '<br>' +
-                    '<a style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" onclick="">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
-                    '<br>' +
-                    '<a style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" onclick="">Enviar a Casa</a>' +
-                    '<br>' +
-                    '<a style="width:300px" onclick="displaySummary(\'store\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" onclick="">Recoger en Mi Tienda</a>' +
-                    '</center>' +
-                    '</div>';
-                $("#divContent").html(html);
-                $("#divContent").trigger('create');
-                var n = nodeIds.length + 1;
-                updateBackButton(nodeIds[n], nodeNames[n]);
-            }
         } else {
-            alert("No hay productos");
+            var html = '<div>' +
+                '<center>' +
+                '<h3> ¿Que deseas hacer con el pedido?</h3>' +
+                '<br>' +
+                '<a data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" >' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
+                '<br>' +
+                '<a data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" >Enviar a Casa</a>' +
+                '<br>' +
+                '<a data-corners="false" style="width:300px" onclick="displaySummary(\'store\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" >Recoger en Mi Tienda</a>' +
+                '</center>' +
+                '</div>';
+            $("#divContent").html(html);
+            $("#divContent").trigger('create');
+            var n = nodeIds.length + 1;
+            updateBackButton(nodeIds[n], nodeNames[n]);
         }
     } else {
+        alert("No hay productos");
+    }
+    /*} else {
         $('.ui-popup').popup('close');
         setTimeout(function () {
             REDIRECT = true;
             $("#popupLogin").popup("open");
         }, popupTimeout);
         console.log("No estás logado");
-    }
+    }*/
 
     $("#page_count").hide();
 
@@ -68,10 +68,10 @@ function checkOut() {
 *********************************************************************/
 function updateBackButton(originNode, originName, linkImg) {
 
-    console.log("Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
+    //console.log("Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
 
     if (nodeIds.length == 0) {
-        console.log("Iniciamos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
+        //console.log("Iniciamos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
         //añadimos volver al menú
         nodeIds.push(0);
         nodeNames.push(jsonIdiomas.header.menu);
@@ -82,7 +82,7 @@ function updateBackButton(originNode, originName, linkImg) {
         nodeImg.push(linkImg);
     } else {
 
-        console.log("Añadimos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
+        //console.log("Añadimos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
         nodeIds.push(originNode);
         nodeNames.push(originName);
         nodeImg.push(linkImg);
@@ -138,7 +138,7 @@ function changeIdiom(idioma, idiomaId) {
 function addPeople(oparation) {
 
     var valor = $("#personas_fiesta").val();
-    console.log("Valor de personas es " + valor);
+    //console.log("Valor de personas es " + valor);
 
     if (valor == "") valor = 0;
 
@@ -146,13 +146,13 @@ function addPeople(oparation) {
         if (valor != 0 || valor != "") {
             valor = parseInt(valor) - 1;
             $("#personas_fiesta").val(valor);
-            console.log("Sumamos " + valor);
+            //console.log("Sumamos " + valor);
         } else {
-            console.log("No hacemos nada ya que es cero");
+            //console.log("No hacemos nada ya que es cero");
         }
     } else if (oparation == 1) {
         valor = parseInt(valor) + 1;
-        console.log("Sumamos " + valor);
+        //console.log("Sumamos " + valor);
         $("#personas_fiesta").val(valor);
     }
 
@@ -166,4 +166,14 @@ function addPeople(oparation) {
 function sleep(millisegundos) {
     var inicio = new Date().getTime();
     while ((new Date().getTime() - inicio) < millisegundos) {}
+}
+
+function volver(id_product,idnodo) {
+    
+    $("#popupListItems").popup("close");
+        /*setTimeout(function () {
+            $("#popupListItems").popup("open");
+        }, popupTimeout);*/
+    displayPopupItemDetail(idnodo, 'PRODUCTOS', id_product);
+
 }

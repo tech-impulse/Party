@@ -32,3 +32,6 @@ var pantallaActual;
 var auxTest;
 var LINKINT="";
 var EMAIL_USER ="";
+var COLUMS ="";
+var ID_NODE ="";
+var num_personas_fiesta="";

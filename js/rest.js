@@ -222,10 +222,10 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     pantallaActual = "menu principal";
 
                 }
-                
+
                 pantallaActual = "nodos";
                 restOk(response, "nodes", idNode, nodeName, aux, backPage);
-                
+
 
             } else if (response.result == 0) { //ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
@@ -234,7 +234,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
-                
+
                 updateBackButton(idNode, nodeName, aux);
 
                 if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hay que mostrar una pantalla intermadia
@@ -363,7 +363,7 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
             //console.log(response);
             PRODUCTS_ALTER = response;
 
-            displayAlternativeProducts();
+            displayAlternativeProducts(idnode, idproduct);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -593,36 +593,26 @@ function restOk_tiendas(res, typ, param, param2) {
 
     TIENDAS = res; //array con todas las tiendas
 
-    var html = '<select id="select_tienda" data-native-menu="false">';
+    var html = '<select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="f" style="color:white">';
 
     for (var i = 0; i < count; i++) {
 
         var val = res.stores[i].id;
         var text = res.stores[i].name;
 
-        html = html + '<option value=' + val + '>' + text + '</option>';
-
-
-        /*select.append($('<option>', {
-            value: val,
-            text: text
-        }));
-
-
-        select.selectmenu('refresh', true);
-        $("#select_tienda").trigger("change");*/
+        html = html + '<option value=' + val + ' style="color:white">' + text + '</option>';
 
     }
 
     html = html + '</select>';
 
+
+
     $("#div_select_tienda").html(html);
+
     $("#div_select_tienda").trigger('create');
 
-    //alert("Select cargado");
-    //alert(html);
-
-
+   
 }
 
 

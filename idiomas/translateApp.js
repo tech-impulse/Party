@@ -44,6 +44,9 @@ function translateButtons(idioma) {
                 "selectOption": "Incidence",
                 "labelSugPreg": "Do you have any suggestions?"
             },
+            "pop_checkOut":{
+                "realizar_pedido":"Checkout"
+            },
             "popup_errores": {
                 "tituloPopUp":"",
                 "campo_vacio": "Fill in this field",
@@ -138,6 +141,9 @@ function translateButtons(idioma) {
                 "select_sexo_button": "¿Para quién es el disfraz?",
                 "btn_continuar": "CONTINUAR",
                 "talla": "¿Que talla tiene?"
+            },
+            "pop_checkOut":{
+                "realizar_pedido":"Realizar pedido"
             },
             "popup_errores": {
                 "labelCargando":"Cargando...",
@@ -238,6 +244,10 @@ function translateButtons(idioma) {
                 "selectOption": "Incidència",
                 "labelSugPreg": "Té algun suggeriment?"
             },
+            
+            "pop_checkOut":{
+                "realizar_pedido":"Fer la comanda"
+            },
             "popup_errores": {
                 "labelCargando":"Carregant...",
                 "tituloPopUp":"Productes en la cistella",
@@ -327,6 +337,9 @@ function translateButtons(idioma) {
                 "enviar_sugerencia": "¡Enviar!",
                 "selectOption": "Incidència",
                 "labelSugPreg": "¿Tiene alguna sugerencia?"
+            },
+            "pop_checkOut":{
+                "realizar_pedido":"Checkout"
             },
             "popup_errores": {
                 "campo_vacio": "Rellene este campo",

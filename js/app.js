@@ -5,7 +5,7 @@ $(document).bind("mobileinit", function () {
 
     $.support.touchOverflow = false;
     $.mobile.touchOverflowEnabled = false;
-    
+
     //$.mobile.selectmenu.prototype.options.nativeMenu = false;
 
     // Configuración de Ajax
@@ -13,7 +13,7 @@ $(document).bind("mobileinit", function () {
         timeout: 10000, //Time in milliseconds
         crossDomain: true
     });
-    
+
     // Obtenermos el listado banderas y tiendas
     //alert("Antes de cargar");
     getFlags();
@@ -28,6 +28,15 @@ $(document).bind("mobileinit", function () {
 Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
+
+    $("#popupListItems").bind({
+        popupafterclose: function (event, ui) {
+
+            console.log("Hemos cerrado el popup");
+
+        }
+    });
+
 
     //Guardamos el alto y ancho de la pantalla
     W_WIDTH = $(window).width();
@@ -77,8 +86,9 @@ $(document).ready(function () {
     });
 
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">' +
-        '<img src="css/icons/barra.png" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: 3px;">' +
-        '<a onclick="changeIdiomPopUp();"><img id="img_banderas" src="css/banderas/idioma_codigo.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +
+        '<img src="css/icons/header.jpg" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: .5%;margin-right: .5%;">' +
+        /*'<a onclick="changeIdiomPopUp();"><img id="img_banderas" src="css/banderas/idioma_codigo.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +*/
+        '<a onclick="changeIdiomPopUp();"><label id="label_idioma" style="color: rgb(255, 255, 255);">CAT</label></a>' +
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -264,19 +274,19 @@ function openMenu() {
 
 // FUNCIÓN QUE EMULA EL BOTÓN DE ATRÁS DE LA APLICACIÓN
 function backPage(idNode, nodeName, linkint) {
-    
-    console.log("Imagen: "+linkint);
+
+    console.log("Imagen: " + linkint);
 
     var position = (nodeIds.length);
-    
+
     if (position > 2 && idNode != 0) {
         position = nodeIds.length;
-        console.log("Antes de borrar "+nodeIds[position]);
+        console.log("Antes de borrar " + nodeIds[position]);
         nodeIds.splice(position - 2);
         nodeNames.splice(position - 2);
         nodeImg.splice(position - 2);
         console.log(nodeIds);
-        getNodes(idNode, nodeName, 0, linkint,"back");
+        getNodes(idNode, nodeName, 0, linkint, "back");
     } else {
         getNodes(0);
         nodeIds = [];
@@ -520,7 +530,7 @@ function addToCart(item, param) {
     for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
         //console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS[i]['id']);
         if (PRODUCTS[i]['id'] == item) {
-            //console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
+            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
             product = PRODUCTS[i];
             i = PRODUCTS.length;
         }
@@ -550,7 +560,7 @@ function addToCart(item, param) {
             //console.log("EL carrito está vació, lo inicializamos");
             CART.ammount = 0;
         }
-        console.log("Producto no esta en carrito, lo añadimos");
+        //console.log("Producto no esta en carrito, lo añadimos");
 
         if (parseInt(param) > 1) {
             product.quantity = parseInt(param);
@@ -585,47 +595,114 @@ function addToCart(item, param) {
   
 *********************************************************************************************************************/
 
-function addToCartAlter(item) {
+function addToCartAlter(id_prod_alter, id_produc) {
 
-    var product;
-    var cantidad = $("#cantidad_prod_alter").val();
-    //console.log("Numero de productos es " + cantidad);
-
+    console.log("Id por alter " + id_prod_alter + " id product " + id_produc);
+    var product = {};
+    var aux_prod = {};
+    var cantidad;
     var foundInCart = 0;
-    for (var i = 0; i < PRODUCTS_ALTER.length; i++) {
-        //console.log("buscando  " + item + " en la lista total de productos" + PRODUCTS_ALTER[i]['id']);
-        if (PRODUCTS_ALTER[i]['id'] == item) {
-            //console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS_ALTER[i]['id'] + " es igual a " + item);
-            product = PRODUCTS_ALTER[i];
+    var units = units_alt = 0;
+    var j, i;
+
+    for (i = 0; i < PRODUCTS_ALTER.alternativeProducts.length; i++) { //buscamos el producto alternativo
+        
+        //console.log("");
+
+        if (PRODUCTS_ALTER.alternativeProducts[i].id == id_prod_alter) {
+
+            product = PRODUCTS_ALTER.alternativeProducts[i];
+
+            var count = PRODUCTS_ALTER.alternativeProducts[i].caracteristics.length;
+
+            for (var l = 0; l < count; l++) {
+
+                var caracteristicas = product.caracteristics[l];
+                if (caracteristicas.type == "9") {
+
+                    var unidades = caracteristicas.name;
+                    units_alt = unidades.split(' ');
+                    break;
+
+                } else {
+
+                    aux_carac = 1;
+                    continue;
+
+                }
+            }
             i = PRODUCTS_ALTER.length;
+            break;
         }
     }
 
-    for (var j = 0; j < CART.length; j++) {
-        console.log("buscando  " + item + " en carrito " + CART[j]['id']);
-        if (CART[j]['id'] == item) {
-            //console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
+    for (j = 0; j < CART.length; j++) {
+
+        console.log("buscando  " + id_produc + " en carrito " + CART[j]['id']);
+
+        if (CART[j]['id'] == id_produc) {
+
+            console.log("ENCONTRADO EN CARRITO " + j);
+            console.log(CART[j]);
+
             foundInCart = 1;
-            CART[j].quantity = CART[j].quantity + cantidad;
-            CART.ammount = parseFloat((product.price_x_region[0].totalPrice * cantidad)) + parseFloat(CART.ammount);
-            displayItemOperations(item, parseInt(CART[j].quantity), j);
-            j = PRODUCTS_ALTER.length;
+            cantidad = CART[j].quantity;
 
+            var count = CART[j].caracteristics.length;
+            for (var k = 0; k < count; k++) {
+
+                var caracteristicas = CART[j].caracteristics[k];
+                if (caracteristicas.type == "9") {
+
+                    var unidades = caracteristicas.name;
+                    units = unidades.split(' ');
+                    break;
+
+                } else {
+
+                    units = 1;
+                    continue;
+
+                }
+            }
+
+            aux_prod = product;
+            console.log(aux_prod);
+            //j = CART.length;
+            break;
         }
     }
+    console.log("Fuera");
+    console.log(aux_prod);
 
-    if (foundInCart == 0) {
-        if (CART.ammount == undefined) {
-            //console.log("EL carrito está vació, lo inicializamos");
-            CART.ammount = 0;
+    if (foundInCart == 1) {
+
+        if (parseInt(units[0]) == parseInt(units_alt[0])) {
+
+            aux_prod.quantity = cantidad; //num_personas_fiesta
+
+        } else {
+
+            if (parseInt(num_personas_fiesta) < parseInt(units_alt[0])) {
+
+                cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0]));
+                aux_prod.quantity = cantidad;
+
+            } else {
+                cantidad = 1;
+                aux_prod.quantity = cantidad;
+
+            }
         }
-        //console.log("Producto no esta en carrito, lo añadimos");
-        CART.ammount = parseFloat(product.price_x_region[0].totalPrice) + parseFloat(CART.ammount);
-        product.quantity = 1;
-        CART.push(product);
-        displayItemOperations(item, product.quantity);
+        console.log("Vamos a cambiarlo "+j);
+        console.log(aux_prod);
+        var precio_new_art = parseInt(aux_prod.quantity) * parseInt(aux_prod.price_x_region[0].totalPrice);
+        CART[j] = aux_prod;
+        //displayItemOperations(id_prod_alter, cantidad);
 
     }
+    
+    refreshDisplayProducts(CART);
 
 }
 
