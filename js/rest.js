@@ -600,12 +600,11 @@ function restOk_tiendas(res, typ, param, param2) {
         var val = res.stores[i].id;
         var text = res.stores[i].name;
 
-        html = html + '<option value=' + val + ' style="color:white">' + text + '</option>';
+        html = html + '<option value=' + val + ' style="color:white"><label style="text-transform: uppercase;font-size: 20px;">' + text + '</label></option>';
 
     }
 
     html = html + '</select>';
-
 
 
     $("#div_select_tienda").html(html);

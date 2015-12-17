@@ -1777,7 +1777,7 @@ function displayFlags(res) {
 
     }
 
-    li = '<center><a data-rel="back" data-role="button" data-theme="none"></a></center>';
+    li = '<center><img src="css/icon/cerrar.png"></center>';
 
     html += li + '</ul>';
 
