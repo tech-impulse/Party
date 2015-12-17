@@ -190,14 +190,36 @@ function displayNode(data, originNode, originName, linkImg) {
 
                     } else {
 
-                        /*var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f"><img src="' +
-                            data.nodes[i].linkext + '" style="width: ' + (heigth_img*1.8) + 'px;height: ' + heigth_img + 'px;"><br><strong><label style="font-size:15px;font-weight: bold;">' + data.nodes[i].name +
-                            '</label></strong></a></div></div>';
-                            */
-                        
-                        var element = block + '<img src="' +
-                            data.nodes[i].linkext + '" style="width: ' + heig_block + 'px;height: ' + alturaBox + 'px;"><br><strong><label style="font-size:15px;font-weight: bold;">' + data.nodes[i].name +
-                            '</label></strong></div>';
+                        if (parseInt(originNode) == 0) {
+
+                            /*var element = block + '<div class="ui-grid-a" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;">' +
+                                '<div class="ui-block-a" style=" left: 10px; top: 30px; z-index: 1;"><img src="' + data.nodes[i].linkext + '" style="width: ' + heig_block + 'px;height: ' + alturaBox + 'px;">' +
+                                '<label style="font-size:35px;color: black;">' + data.nodes[i].name + '</label></div>' +
+                                '</div></div>';*/
+
+                            var element = block + '<div style="height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\')">' +
+                                '<label style="font-size:35px;color: black;">' + data.nodes[i].name + '</label></div>' +
+                                '</div>';
+
+
+                        } else {
+
+                            var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f"><img src="' +
+                                data.nodes[i].linkext + '" style="width: ' + (heigth_img * 1.8) + 'px;height: ' + heigth_img + 'px;"><br><strong><label style="font-size:15px;font-weight: bold;">' + data.nodes[i].name +
+                                '</label></strong></a></div></div>';
+
+                        }
+
+
+
+                        /*var element =  block + '<div style="position: relative;">' +
+                            '<div style="position: absolute; left: 10px; top: 30px; z-index: 1;"><img src="' + data.nodes[i].linkext + '" style="width: ' + heig_block + 'px;height: ' + alturaBox + 'px;"></div>' +
+                            '<div style="margin: '+(alturaBox*0.65)+'px;width: 100%;position: fixed; left: 30px; top: 80px; z-index: 3;"><label style="font-size:35px;color: white;">' + data.nodes[i].name + '</label> </div>' +
+                            '</div></div>';*/
+
+
+
+
                         htmlContent = htmlContent + element;
 
                     }
@@ -1779,15 +1801,15 @@ function displayFlags(res) {
         //'<a onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');"><label style="text-transform: uppercase;text-align: center;">' + info[i].name + '</label></a>' +
         '<label style="font-size: 20px;text-transform: uppercase;text-align: center;color: rgb(255, 255, 255);">' + info[i].name + '</label>' +
             '</li>';
-        
+
     }
 
-    li = '<center><img src="css/icon/creu.png"></center>';
+    li = '<center><img src="css/icons/creu.png" style="width: 15%;"></center>';
 
     html += li + '</ul>';
 
     $("#contentPopupIdioma").html(html);
     $("#contentPopupIdioma").trigger('create');
-    $("#contentPopupIdioma").css('font-size','20px');
+    $("#contentPopupIdioma").css('font-size', '20px');
 
 }
