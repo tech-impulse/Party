@@ -182,7 +182,7 @@ function displayNode(data, originNode, originName, linkImg) {
                             '</strong></a></div><div class="ui-block-c" style="width: 25%;height:' + alturaBox + 'px"></div>';
 
                         var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f"><img src="' +
-                            data.nodes[i].linkext + '" style="width: 120px;height:' + alturaBox + 'px"><br><strong>' + data.nodes[i].name +
+                            data.nodes[i].linkext + '" style="width: 150px;height:' + alturaBox + 'px"><br><strong>' + data.nodes[i].name +
                             '</strong></a></div></div>';
 
                         count++;
@@ -190,9 +190,14 @@ function displayNode(data, originNode, originName, linkImg) {
 
                     } else {
 
-                        var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f"><img src="' +
-                            data.nodes[i].linkext + '" style="width: ' + heigth_img + 'px;height: ' + heigth_img + 'px;"><br><strong><label style="font-size:15px;font-weight: bold;">' + data.nodes[i].name +
+                        /*var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f"><img src="' +
+                            data.nodes[i].linkext + '" style="width: ' + (heigth_img*1.8) + 'px;height: ' + heigth_img + 'px;"><br><strong><label style="font-size:15px;font-weight: bold;">' + data.nodes[i].name +
                             '</label></strong></a></div></div>';
+                            */
+                        
+                        var element = block + '<img src="' +
+                            data.nodes[i].linkext + '" style="width: ' + heig_block + 'px;height: ' + alturaBox + 'px;"><br><strong><label style="font-size:15px;font-weight: bold;">' + data.nodes[i].name +
+                            '</label></strong></div>';
                         htmlContent = htmlContent + element;
 
                     }
@@ -1774,14 +1779,15 @@ function displayFlags(res) {
         //'<a onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');"><label style="text-transform: uppercase;text-align: center;">' + info[i].name + '</label></a>' +
         '<label style="font-size: 20px;text-transform: uppercase;text-align: center;color: rgb(255, 255, 255);">' + info[i].name + '</label>' +
             '</li>';
-
+        
     }
 
-    li = '<center><img src="css/icon/cerrar.png"></center>';
+    li = '<center><img src="css/icon/creu.png"></center>';
 
     html += li + '</ul>';
 
     $("#contentPopupIdioma").html(html);
     $("#contentPopupIdioma").trigger('create');
+    $("#contentPopupIdioma").css('font-size','20px');
 
 }
