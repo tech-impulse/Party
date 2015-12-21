@@ -195,7 +195,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
     var dataSend = {
         lang: parseInt(language),
         origin: origin,
-        id: idNode
+        id: idNode,
+        store:STORE.id
     };
 
     if (isAlgo == 3 || isAlgo == 4) { //estamos en el asistente de disfraces o fiestas?????
@@ -224,6 +225,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 }
 
                 pantallaActual = "nodos";
+                //console.log("Tenemos nuevos nodos");
                 restOk(response, "nodes", idNode, nodeName, aux, backPage);
 
 

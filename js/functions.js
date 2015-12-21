@@ -168,12 +168,18 @@ function sleep(millisegundos) {
     while ((new Date().getTime() - inicio) < millisegundos) {}
 }
 
-function volver(id_product,idnodo) {
-    
+function volver(id_product, idnodo) {
+
     $("#popupListItems").popup("close");
-        /*setTimeout(function () {
+    /*setTimeout(function () {
             $("#popupListItems").popup("open");
         }, popupTimeout);*/
     displayPopupItemDetail(idnodo, 'PRODUCTOS', id_product);
+
+}
+
+function cerrar_popup() {
+
+    $("#popupIdiomas").popup("close");
 
 }
