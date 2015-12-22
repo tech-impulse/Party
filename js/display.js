@@ -204,7 +204,7 @@ function displayNode(data, originNode, originName, linkImg) {
                                 '<label style="font-size:35px;color: black;">' + data.nodes[i].name + '</label></div>' +
                                 '</div></div>';*/
 
-                            var element = block + '<div style="height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\');background-position: center;">' +
+                            var element = block + '<div style="height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\');background-position: center center;">' +
                                 '<label style="font-size:35px;color: black;">' + data.nodes[i].name + '</label></div>' +
                                 '</div>';
 
