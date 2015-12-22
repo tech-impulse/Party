@@ -251,47 +251,19 @@ function displayNode(data, originNode, originName, linkImg) {
             };
         case "vertical":
             {
-                /*htmlContent = grid + " <div class='ui-block-a' style='width:66%;'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
-                block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';*/
-
-                //console.log("Link " + linkImg);
-
+              
                 LINKINT = linkImg;
 
-                htmlContent = grid + " <div class='ui-block-a' style='width:66%;'><center><img src='" + linkImg + "'></center></div>";
-                block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
+                htmlContent = grid + " <div class='ui-block-a' style='width:40%;'><center><img src='" + linkImg + "' style='max-width: "+(W_WIDTH*0.35)+"px;'></center></div>";
+                htmlContent = htmlContent + '<div class="ui-block-b" style="width:20%; margin: 2%"><div style="text-align:right">';
 
                 for (var i = 0; i < data.nodes.length; i++) {
 
-                    //console.log("Is party? " + data.nodes[i].isParty);
-
-                    /*switch (i) { //color para los botones
-                    case 0:
-                        var bacgroundColor = "mediumvioletred";
-                        break;
-
-                    case 1:
-                        var bacgroundColor = "gold";
-                        break;
-
-                    case 2:
-                        var bacgroundColor = "darkorange";
-                        break;
-
-                    case 3:
-                        var bacgroundColor = "yellowgreen";
-                        break;
-
-                    case 4:
-                        var bacgroundColor = "dodgerblue";
-                        break;
-
-                    }*/
 
                     if (data.nodes[i].name == "") { // \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\'
-                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style=""><label style="font-size:15px;font-weight: bold;">' + data.nodes[i].name + '</label></a>';
+                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style=""><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
                     } else {
-                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style=""><label style="font-size:15px;font-weight: bold;">' + data.nodes[i].name + '</label></a>';
+                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style=""><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
                     }
                     htmlContent = htmlContent + element;
                 }
