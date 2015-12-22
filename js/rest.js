@@ -591,11 +591,10 @@ function restOk_tiendas(res, typ, param, param2) {
     //console.log(res);
 
     var count = res.stores.length;
-    var select = $('#select_tienda');
-
+    
     TIENDAS = res; //array con todas las tiendas
 
-    var html = '<select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" style="font-size: 20px;">';
+    var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" >';
 
     for (var i = 0; i < count; i++) {
 
@@ -606,13 +605,18 @@ function restOk_tiendas(res, typ, param, param2) {
 
     }
 
-    html = html + '</select>';
+    html = html + '</select><div>';
 
 
     $("#div_select_tienda").html(html);
 
     $("#div_select_tienda").trigger('create');
     $("#div_select_tienda").css('font-size','20px');
+    
+    var select = $('#select_tienda');
+    
+    select.selectmenu({ icon: "ui-icon-carat-d" });
+    select.selectmenu({ iconshadow: "false" });
 
    
 }
