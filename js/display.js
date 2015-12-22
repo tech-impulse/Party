@@ -252,7 +252,7 @@ function displayNode(data, originNode, originName, linkImg) {
         case "vertical":
             {
               
-                LINKINT = linkImg;
+                LINKINT = linkImg;//f
 
                 htmlContent = grid + " <div class='ui-block-a' align='right' style='width:50%;'><img src='" + linkImg + "' style='max-width: "+(W_WIDTH*0.35)+"px;'></div>";
                 htmlContent = htmlContent + '<div class="ui-block-b" align="left" style="width:50%;">';
