@@ -261,9 +261,9 @@ function displayNode(data, originNode, originName, linkImg) {
 
 
                     if (data.nodes[i].name == "") { // \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\'
-                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style=""><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
+                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style=""><label style="font-size:20px;font-weight: bold;border: 0px;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
                     } else {
-                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style=""><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
+                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style=""><label style="font-size:20px;font-weight: bold;border: 0px;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
                     }
                     htmlContent = htmlContent + element;
                 }
