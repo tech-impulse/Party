@@ -254,21 +254,21 @@ function displayNode(data, originNode, originName, linkImg) {
               
                 LINKINT = linkImg;
 
-                htmlContent = grid + " <div class='ui-block-a' style='width:40%;'><center><img src='" + linkImg + "' style='max-width: "+(W_WIDTH*0.35)+"px;'></center></div>";
-                htmlContent = htmlContent + '<div class="ui-block-b" style="width:20%; margin: 2%"><div style="text-align:right">';
+                htmlContent = grid + " <div class='ui-block-a' align='right' style='width:50%;'><img src='" + linkImg + "' style='max-width: "+(W_WIDTH*0.35)+"px;'></div>";
+                htmlContent = htmlContent + '<div class="ui-block-b" align="left" style="width:50%;">';
 
                 for (var i = 0; i < data.nodes.length; i++) {
 
 
-                    if (data.nodes[i].name == "") { // \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\'
-                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style="border: 0px"><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
+                    if (data.nodes[i].name == "") {
+                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style="border: 0px;width: 50%;margin: 1% 1% 1% 1%;"><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
                     } else {
-                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style="border: 0px"><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
+                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + linkImg + '\')" style="border: 0px;width: 50%;margin: 1% 1% 1% 1%;"><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
                     }
                     htmlContent = htmlContent + element;
                 }
 
-                htmlContent = htmlContent + '</div></div></div>';
+                htmlContent = htmlContent + '</div></div>';
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
                 $("#divHeader_catalogo").show();
