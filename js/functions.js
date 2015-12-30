@@ -178,6 +178,75 @@ function volver(id_product, idnodo) {
 
 }
 
+
+
+function guardarInfo(accion) {
+
+    if (accion == "si") {
+
+
+
+        var position = (nodeIds.length);
+
+        if (position > 2 && idNode != 0) {
+            position = nodeIds.length;
+            console.log("Antes de borrar " + nodeIds[position]);
+            nodeIds.splice(position - 2);
+            nodeNames.splice(position - 2);
+            nodeImg.splice(position - 2);
+            console.log(nodeIds);
+            getNodes(idNode, nodeName, 0, linkint, "back");
+        } else {
+            getNodes(0);
+            nodeIds = [];
+            nodeNames = [];
+            nodeImg = [];
+        }
+
+
+    } else {
+
+        for (var i = CART.length - 1; i >= 0; i--) {
+            if (CART[i].dedonde == "Asistente fiestas") {
+                //console.log("Borramos el item " + CART[i].id);
+
+                CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity)
+                deleteItemCart(i);
+            }
+
+        }
+
+        var total = 0;
+        for (var i = 0; i < CART.length; i++) {
+            total = total + CART[i].quantity;
+        }
+        $("#spBtnPopupCartProducts").text(total);
+        $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+        $("#spPopupCartCount").text(total);
+        $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+
+        var position = (nodeIds.length);
+
+        if (position > 2 && idNode != 0) {
+            position = nodeIds.length;
+            console.log("Antes de borrar " + nodeIds[position]);
+            nodeIds.splice(position - 2);
+            nodeNames.splice(position - 2);
+            nodeImg.splice(position - 2);
+            console.log(nodeIds);
+            getNodes(idNode, nodeName, 0, linkint, "back");
+        } else {
+            getNodes(0);
+            nodeIds = [];
+            nodeNames = [];
+            nodeImg = [];
+        }
+
+    }
+
+}
+
+
 function cerrar_popup() {
 
     $("#popupIdiomas").popup("close");
