@@ -649,7 +649,7 @@ function displayProducts(data, originNode, originName, param) {
                 }
 
                 var element = block +
-                    '<a  data-corners="false" data-role="button" data-theme="f">' +
+                    '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
