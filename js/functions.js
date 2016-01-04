@@ -182,26 +182,24 @@ function volver(id_product, idnodo) {
 
 function guardarInfo(accion) {
 
+    console.log("Pop para guardar carrito o no" + accion);
+
     if (accion == "si") {
-
-
 
         var position = (nodeIds.length);
 
-        if (position > 2 && idNode != 0) {
-            position = nodeIds.length;
-            console.log("Antes de borrar " + nodeIds[position]);
-            nodeIds.splice(position - 2);
-            nodeNames.splice(position - 2);
-            nodeImg.splice(position - 2);
-            console.log(nodeIds);
-            getNodes(idNode, nodeName, 0, linkint, "back");
-        } else {
-            getNodes(0);
-            nodeIds = [];
-            nodeNames = [];
-            nodeImg = [];
-        }
+        position = nodeIds.length;
+        console.log("Antes de borrar " + nodeIds[position]);
+        nodeIds.splice(position - 2);
+        nodeNames.splice(position - 2);
+        nodeImg.splice(position - 2);
+        console.log(nodeIds);
+
+        setTimeout(function () {
+            $("#popupPregunta").popup("close");
+        }, popupTimeout);
+        //getNodes(idNode, nodeName, 0, linkint, "back");
+        getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
 
 
     } else {
@@ -227,20 +225,18 @@ function guardarInfo(accion) {
 
         var position = (nodeIds.length);
 
-        if (position > 2 && idNode != 0) {
-            position = nodeIds.length;
-            console.log("Antes de borrar " + nodeIds[position]);
-            nodeIds.splice(position - 2);
-            nodeNames.splice(position - 2);
-            nodeImg.splice(position - 2);
-            console.log(nodeIds);
-            getNodes(idNode, nodeName, 0, linkint, "back");
-        } else {
-            getNodes(0);
-            nodeIds = [];
-            nodeNames = [];
-            nodeImg = [];
-        }
+
+        position = nodeIds.length;
+        console.log("Antes de borrar " + nodeIds[position]);
+        nodeIds.splice(position - 2);
+        nodeNames.splice(position - 2);
+        nodeImg.splice(position - 2);
+        console.log(nodeIds);
+        setTimeout(function () {
+            $("#popupPregunta").popup("close");
+        }, popupTimeout);
+        getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
+
 
     }
 

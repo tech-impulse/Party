@@ -275,7 +275,7 @@ function openMenu() {
 // FUNCIÓN QUE EMULA EL BOTÓN DE ATRÁS DE LA APLICACIÓN
 function backPage(idNode, nodeName, linkint) {
 
-    console.log("Imagen: " + linkint);
+    //console.log("Imagen: " + linkint);
 
     if (pantallaActual == "Asistente fiestas" && AUX==1) {
         
