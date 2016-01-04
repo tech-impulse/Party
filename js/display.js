@@ -208,7 +208,7 @@ function displayNode(data, originNode, originName, linkImg) {
 
                         if (parseInt(originNode) == 0) {
 
-
+// Comentario de prueba
                             /*var element = block + '<div style="height:' + alturaBox + 'px;width:' + heig_block + 'px;background-size:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\') ;background-position: top center;">' +
                                 '<label style="font-size:35px;color: black;">' + data.nodes[i].name + '</label></div>' +
                                 '</div>';*/
