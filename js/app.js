@@ -277,7 +277,7 @@ function backPage(idNode, nodeName, linkint) {
 
     console.log("Imagen: " + linkint);
 
-    if (pantallaActual == "Asistente fiestas") {
+    if (pantallaActual == "Asistente fiestas" && AUX==1) {
         
         setTimeout(function () {
             $("#popupPregunta").popup("open");

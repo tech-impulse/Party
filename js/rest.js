@@ -196,13 +196,15 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         lang: parseInt(language),
         origin: origin,
         id: idNode,
-        store:STORE.id
+        store: STORE.id
     };
 
-    if (isAlgo == 3 || isAlgo == 4) { //estamos en el asistente de disfraces o fiestas?????
+    if (isAlgo != undefined && isAlgo > 0) { //estamos en el asistente de disfraces o fiestas?????
         ISFIESTA = isAlgo;
-        console.log("Is algo es " + isAlgo);
+
     }
+
+    console.log("Is algo es " + isAlgo);
 
     var request = $.ajax({
         data: dataSend,
@@ -237,7 +239,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-                updateBackButton(idNode, nodeName, aux);
+                 updateBackButton(idNode, nodeName, aux);
 
                 if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hay que mostrar una pantalla intermadia
 
@@ -254,7 +256,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         $('#popupAlert').popup('open');
                     }
 
-                } else if (ISFIESTA == 3) {
+                } else if (ISFIESTA == 3) { //3 asist. fiestas
 
                     console.log("Asistentes de fiestas. Pedimos info del nodo");
                     var info = getInfoNode(idNode);
@@ -275,9 +277,16 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                     }
 
+                } else if (ISFIESTA == 1) { //1 catalogo
+
+                
+                    getNodesProducts(idNode, nodeName);
+
+
                 } else {
 
-                    console.log("Error nodes...");
+                    console.log("Error nodes en getNodes...");
+
                 }
 
             } else if (response.result == -1) {
@@ -388,6 +397,51 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
 
 }
 
+function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+
+
+    language = 1;
+    // Datos que se van a enviar
+    var dataSend = {
+        lang: parseInt(language),
+        origin: origin,
+        id: idNode,
+        store: STORE.id
+    };
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'getNodeProducts.php',
+        dataType: 'json',
+        type: 'POST',
+        timeout: 1000, //10 seg
+        success: function (response) {
+
+            displayProducts(response, param, param2, param3);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                //console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                //console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
+
+}
+
 function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
     // Datos que se van a enviar
@@ -456,7 +510,7 @@ function getProducts(idNode, nodeName, info_aux) {
     } else {
 
         console.log("Estamos en el asist. de fiestas");
-        pantallaActual = "Asistente fiestas";
+        //pantallaActual = "Asistente fiestas";
         // Datos que se van a enviar
         var dataSend = {
             lang: language,
@@ -591,7 +645,7 @@ function restOk_tiendas(res, typ, param, param2) {
     //console.log(res);
 
     var count = res.stores.length;
-    
+
     TIENDAS = res; //array con todas las tiendas
 
     var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" style="border: 0px;">';
@@ -611,15 +665,21 @@ function restOk_tiendas(res, typ, param, param2) {
     $("#div_select_tienda").html(html);
 
     $("#div_select_tienda").trigger('create');
-    $("#div_select_tienda").css('font-size','20px');
-    
-    var select = $('#select_tienda');
-    
-    select.selectmenu({ icon: "ui-icon-carat-d" });
-    select.selectmenu({ iconshadow: "false" });
-    $('#select_tienda-button').css({ border: "0px" });
+    $("#div_select_tienda").css('font-size', '20px');
 
-   
+    var select = $('#select_tienda');
+
+    select.selectmenu({
+        icon: "ui-icon-carat-d"
+    });
+    select.selectmenu({
+        iconshadow: "false"
+    });
+    $('#select_tienda-button').css({
+        border: "0px"
+    });
+
+
 }
 
 
