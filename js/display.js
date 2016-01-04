@@ -208,7 +208,15 @@ function displayNode(data, originNode, originName, linkImg) {
 
                         if (parseInt(originNode) == 0) {
 
+<<<<<<< HEAD
                         
+=======
+// Comentario de prueba
+                            /*var element = block + '<div style="height:' + alturaBox + 'px;width:' + heig_block + 'px;background-size:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\') ;background-position: top center;">' +
+                                '<label style="font-size:35px;color: black;">' + data.nodes[i].name + '</label></div>' +
+                                '</div>';*/
+                            
+>>>>>>> origin/master
                             var element = block + '<div style="height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\');background-position: top center; background-repeat: no-repeat;">' +
                                '<label style="font-size:35px;color: black; text-align: center; margin:auto;">' + data.nodes[i].name + '</label></div>' +
                                '</div>';
