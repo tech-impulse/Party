@@ -208,8 +208,8 @@ function displayNode(data, originNode, originName, linkImg) {
 
                         if (parseInt(originNode) == 0) {
 
-                            var element = block + '<div style="height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\');background-position: top center; background-repeat: no-repeat;">' +
-                               '<label style="font-size:35px;color: black; text-align: center; margin:auto;">' + data.nodes[i].name + '</label></div>' +
+                            var element = block + '<div style="display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\');background-position: top center; background-repeat: no-repeat;">' +
+                               '<label style="font-size:35px;color: black; text-align: center; display: table-cell; vertical-align: middle;">' + data.nodes[i].name + '</label></div>' +
                                '</div>';
 
 
