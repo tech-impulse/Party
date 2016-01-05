@@ -239,7 +239,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-                 updateBackButton(idNode, nodeName, aux);
+                updateBackButton(idNode, nodeName, aux);
 
                 if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hay que mostrar una pantalla intermadia
 
@@ -279,7 +279,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                 } else if (ISFIESTA == 1) { //1 catalogo
 
-                
+
                     getNodesProducts(idNode, nodeName);
 
 
@@ -710,6 +710,10 @@ function restError(res, typ) {
 
 function sendSugerencias(info) {
 
+
+    //sugerencias@partyfiesta.com
+
+
     var request = $.ajax({
         data: info,
         url: urlServices + '.php',
@@ -1136,65 +1140,76 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
 ***************************************************************************/
 function sendEmail() {
 
-    var dataSend = {
-        usuario: INFO_USU,
-        email: EMAIL_USER,
-        carrito: CART //JSON.stringify(CART)
-    };
+    if (EMAIL_USER = "" || INFO_USU == null) {
 
-    var request = $.ajax({
-        data: dataSend,
-        //async: false,
-        url: urlServices + 'sendEmail.php',
-        dataType: 'json',
-        type: 'POST',
-        success: function (response) {
+        setTimeout(function () {
+            $("#popupEmail").popup("close");
+        }, popupTimeout);
 
-            console.log("Respuesta es:");
-            console.log(response);
+    } else {
 
-            if (parseInt(response.result) == parseInt(1)) {
+        var dataSend = {
+            usuario: INFO_USU,
+            email: EMAIL_USER,
+            carrito: CART //JSON.stringify(CART)
+        };
 
-                $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
-                $('#popupAlert').popup('open');
+        var request = $.ajax({
+            data: dataSend,
+            //async: false,
+            url: urlServices + 'sendEmail.php',
+            dataType: 'json',
+            type: 'POST',
+            success: function (response) {
 
-            } else if (parseInt(response.result) == parseInt(0)) {
+                console.log("Respuesta es:");
+                console.log(response);
 
-                $("#texto_popup").text("No se ha podido enviar el correo a " + EMAIL_USER);
-                $('#popupAlert').popup('open');
+                if (parseInt(response.result) == parseInt(1)) {
 
-            } else if (parseInt(response.result) == parseInt(2)) {
+                    $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
+                    $('#popupAlert').popup('open');
 
-                $("#texto_popup").text("Problemas al generar el correo");
-                $('#popupAlert').popup('open');
+                } else if (parseInt(response.result) == parseInt(0)) {
 
-            } else if (parseInt(response.result) == parseInt(0)) {
+                    $("#texto_popup").text("No se ha podido enviar el correo a " + EMAIL_USER);
+                    $('#popupAlert').popup('open');
 
-                $("#texto_popup").text("Faltan datos para poder enviar el correo");
-                $('#popupAlert').popup('open');
+                } else if (parseInt(response.result) == parseInt(2)) {
 
-            }
+                    $("#texto_popup").text("Problemas al generar el correo");
+                    $('#popupAlert').popup('open');
+
+                } else if (parseInt(response.result) == parseInt(0)) {
+
+                    $("#texto_popup").text("Faltan datos para poder enviar el correo");
+                    $('#popupAlert').popup('open');
+
+                }
 
 
 
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
 
-            if (textStatus === "timeout") {
+                if (textStatus === "timeout") {
 
-                console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
+                    console.log("Timeout");
+                    alert("Error de TimeOut... compruebe su conexion de internet");
 
-            } else {
+                } else {
 
-                restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
-                //alert("Sin conexion a internet...");
-                $("#texto_popup").text("Sin conexion a internet");
-                $('#popupAlert').popup('open');
+                    restError(jqXHR, "tiendas");
+                    console.log("Sin conexion");
+                    //alert("Sin conexion a internet...");
+                    $("#texto_popup").text("Sin conexion a internet");
+                    $('#popupAlert').popup('open');
 
-            }
-        },
-    });
+                }
+            },
+        });
+
+    }
+
 
 }

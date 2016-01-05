@@ -209,8 +209,8 @@ function displayNode(data, originNode, originName, linkImg) {
                         if (parseInt(originNode) == 0) {
 
                             var element = block + '<div style="display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\');background-position: top center; background-repeat: no-repeat;">' +
-                               '<label style="font-size:35px;color: white; text-align: center; display: table-cell; vertical-align: middle;">' + data.nodes[i].name + '</label></div>' +
-                               '</div>';
+                                '<label style="font-size:35px;color: white; text-align: center; display: table-cell; vertical-align: middle;">' + data.nodes[i].name + '</label></div>' +
+                                '</div>';
 
 
                         } else {
@@ -504,7 +504,7 @@ function displayProducts(data, originNode, originName, param) {
 
     if (data.result == 1 && pantallaActual == "Asistente fiestas") { // Hay resultados
 
-        AUX=1;
+        AUX = 1;
         PRODUCTS = data.products;
         COLUMS = parseInt(data.columns);
         ID_NODE = originNode;
@@ -1144,8 +1144,10 @@ function displayPopupItemList() {
     default:
         $("#popupCart").popup("close");
         setTimeout(function () {
+
             $("#popupListItems").popup("open");
         }, popupTimeout);
+        //$('#contentPopupListItems').css('overflow-y', 'scroll');
     }
 }
 
@@ -1511,7 +1513,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
 
     //console.log(data);
     console.log("Asistente de fiestas");
-    
+
     htmlContent = '<div id="page_count" style="display: block;">' +
         '<center>' +
         '<br>' +
@@ -1529,9 +1531,9 @@ function displayPantallaIntermediaAsistFiestas(data) {
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
 
-    $("#mas_fiesta").click(function() {
-        
-        
+    $("#mas_fiesta").click(function () {
+
+
         var valor = $("#personas_fiesta").val();
         var oparation = 1;
         //console.log("Valor de personas es " + valor);
