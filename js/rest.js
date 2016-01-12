@@ -190,7 +190,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         openMenu();
     }
 
-    language = 1;
+    //language = 1;
     // Datos que se van a enviar
     var dataSend = {
         lang: parseInt(language),
