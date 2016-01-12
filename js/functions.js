@@ -120,6 +120,8 @@ function changeIdiom(idioma, idiomaId) {
 
     idiomStore = idioma;
     language = idiomaId;
+    
+    $("#label_idioma").text(idioma);
 
     if (CART.length > 0) {
         getTraduccion(idioma);
