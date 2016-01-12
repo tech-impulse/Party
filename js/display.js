@@ -1786,7 +1786,7 @@ function displayFlags(res) {
 
     for (var i = 0; i < count; i++) {
 
-        html += '<li style="list-style-type: none;background-color:#1798d1;">' + //data-icon="false"
+        html += '<li style="list-style-type: none;background-color:#1798d1;" onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');">' + //data-icon="false"
         //'<a onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');"><label style="text-transform: uppercase;text-align: center;">' + info[i].name + '</label></a>' +
         '<label style="font-size: 20px;text-transform: uppercase;text-align: center;color: rgb(255, 255, 255);">' + info[i].name + '</label>' +
             '</li>';
