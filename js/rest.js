@@ -1140,16 +1140,19 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
 ***************************************************************************/
 function sendEmail() {
 
-    if (EMAIL_USER = "" || INFO_USU == null) {
+    console.log("Email es " + EMAIL_USER);
+
+    if (EMAIL_USER == "") {
 
         setTimeout(function () {
-            $("#popupEmail").popup("close");
+            $("#popupEmail").popup("open");
         }, popupTimeout);
 
     } else {
 
+        $("#popupEmail").popup("close");
+
         var dataSend = {
-            usuario: INFO_USU,
             email: EMAIL_USER,
             carrito: CART //JSON.stringify(CART)
         };
@@ -1168,7 +1171,11 @@ function sendEmail() {
                 if (parseInt(response.result) == parseInt(1)) {
 
                     $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
+                    EMAIL_USER = "";
+                    INFO_USU = "";
                     $('#popupAlert').popup('open');
+                    $('#email').val('');
+
 
                 } else if (parseInt(response.result) == parseInt(0)) {
 

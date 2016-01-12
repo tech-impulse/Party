@@ -54,7 +54,15 @@
         right: 20% !important;
         left: 20% !important;
         width: 60% !important;
-        top: 15% !important;
+        bottom: 20% !important;
+    }
+    #popupEmail-popup {
+        position: fixed;
+        top: 35% !important;
+        right: 30% !important;
+        left: 30% !important;
+        width: 40% !important;
+        bottom: 20% !important;
     }
     #popupListItems-screen {
         opacity: .7;
@@ -97,6 +105,10 @@
         background-color: rgb(0, 0, 0);
     }
     #popupAlert-screen {
+        opacity: .7;
+        background-color: rgb(0, 0, 0);
+    }
+    #popupEmail-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
@@ -383,11 +395,18 @@
                     <h1 style="color: rgb(255, 255, 255);text-transform: uppercase;">Escriba su email:</h1>
                 </div>
                 <div role="main" class="ui-content">
-                    <h3 class="ui-title">Email:</h3>
-                    <div class="ui-grid-a" style="width:100%;">
-                        <div class="ui-block-a" style="width:30%;">
-                            <a id="enviar_correo" href="#" class="ui-btn" style="text-transform:uppercase;" onclick="guardarInfo('no');">Enviar</a>
+                    <!--<h3 class="ui-title">Email:</h3>-->
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a" style="width:100%;">
+                            <input id="email" type="email" placeholder="Ej. miemail@mail.com" autofocus onclick="sendEmail();" data-clear-btn="true">
                         </div>
+                    </div>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-b"></div>
+                        <div class="ui-block-b">
+                            <a id="enviar_correo" href="#" class="ui-btn" style="text-transform:uppercase;">Enviar</a>
+                        </div>
+                        <div class="ui-block-b"></div>
                     </div>
                 </div>
             </div>

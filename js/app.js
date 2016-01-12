@@ -173,6 +173,29 @@ $(document).ready(function () {
 
     });
 
+    //Boton de login de la app
+    $("#enviar_correo").click(function () {
+
+        //console.log("Logandose");
+        var email = $('#email').val();
+        EMAIL_USER = email;
+        INFO_USU = email;
+
+        if (email == "") {
+
+            $("#email").attr("placeholder", jsonIdiomas.popup_errores.campo_vacio);
+            $('#email').addClass('colorText');
+
+        } else {
+
+            $('#email').removeClass('colorText');
+            sendEmail();
+            EMAIL_USER = "";
+         
+        }
+
+    });
+
     //Boton de registro de la app
     $("#enviar_registro").click(function () {
 
@@ -277,12 +300,12 @@ function backPage(idNode, nodeName, linkint) {
 
     //console.log("Imagen: " + linkint);
 
-    if (pantallaActual == "Asistente fiestas" && AUX==1) {
-        
+    if (pantallaActual == "Asistente fiestas" && AUX == 1) {
+
         setTimeout(function () {
             $("#popupPregunta").popup("open");
         }, popupTimeout);
-        
+
     } else {
 
         var position = (nodeIds.length);
