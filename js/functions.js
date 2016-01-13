@@ -120,16 +120,24 @@ function changeIdiom(idioma, idiomaId) {
 
     idiomStore = idioma;
     language = idiomaId;
-    
-    $("#label_idioma").text(idioma);
+
+    $("#label_idioma").text(idiomStore);
 
     if (CART.length > 0) {
         getTraduccion(idioma);
     }
 
     translateButtons(idiomStore);
+
+    if (pantallaActual == "menu principal") {
         
+        getNodes(0);
+
+    }
+
     $("#popupIdiomas").popup("close");
+
+
 
 }
 

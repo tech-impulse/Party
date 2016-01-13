@@ -1529,6 +1529,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
 
     //console.log(data);
     console.log("Asistente de fiestas");
+    console.log(data);
 
     htmlContent = '<div id="page_count" style="display: block;">' +
         '<center>' +

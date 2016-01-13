@@ -198,7 +198,9 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         id: idNode,
         store: STORE.id
     };
-
+    console.log("Info enviar ws");
+    console.log(dataSend);
+    
     if (isAlgo != undefined && isAlgo > 0) { //estamos en el asistente de disfraces o fiestas?????
         ISFIESTA = isAlgo;
 
@@ -226,7 +228,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                 }
 
-                pantallaActual = "nodos";
+                //pantallaActual = "nodos";
                 //console.log("Tenemos nuevos nodos");
                 restOk(response, "nodes", idNode, nodeName, aux, backPage);
 
@@ -266,7 +268,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                     if (info != undefined) {
 
-                        //console.log("DisplayPantalla intermadia");
+                        console.log("DisplayPantalla intermadia");
+                        console.log(info);
                         pantallaActual = "Asistente fiestas";
                         displayPantallaIntermediaAsistFiestas(info.node);
 
@@ -461,6 +464,7 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
         type: 'POST',
         timeout: 1000, //10 seg
         success: function (response) {
+        
             enviarInfo = response;
 
         },

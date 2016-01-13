@@ -28,6 +28,8 @@ $(document).bind("mobileinit", function () {
 Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
+    
+   
 
     $("#popupListItems").bind({
         popupafterclose: function (event, ui) {
@@ -88,7 +90,7 @@ $(document).ready(function () {
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">' +
         '<img src="css/icons/header.jpg" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: .5%;margin-right: .5%;">' +
         /*'<a onclick="changeIdiomPopUp();"><img id="img_banderas" src="css/banderas/idioma_codigo.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +*/
-        '<a onclick="changeIdiomPopUp();"><label id="label_idioma" style="color: rgb(255, 255, 255);text-transform:uppercase;" >CA</label></a>' +
+        '<a onclick="changeIdiomPopUp();"><label id="label_idioma" style="color: rgb(255, 255, 255);text-transform:uppercase;" >ES</label></a>' +
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -98,7 +100,7 @@ $(document).ready(function () {
     getTiendas();
 
     //Cargamos el idioma por defecto de la app
-    translateButtons("ca");
+    translateButtons("es");
 
     //Boton de acceso a la app
     $("#btn_acceder").click(function () {
@@ -119,7 +121,7 @@ $(document).ready(function () {
 
                 if (TIENDAS.stores[i].id == STORE) {
                     SHOPDELIVERY = TIENDAS.stores[i].deliveryStore; //guardamos el id de la tienda
-                    language = TIENDAS.stores[i].language;
+                    //language = TIENDAS.stores[i].language;  
                     STORE = TIENDAS.stores[i];
                     TIENDAS = "";
                     break;
@@ -691,7 +693,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
         if (parseInt(units[0]) == parseInt(units_alt[0])) {
 
-            aux_prod.quantity = cantidad; //num_personas_fiesta
+            aux_prod.quantity = cantidad; 
 
         } else {
 
@@ -701,11 +703,13 @@ function addToCartAlter(id_prod_alter, id_produc) {
                 aux_prod.quantity = cantidad;
 
             } else {
+                
                 cantidad = 1;
                 aux_prod.quantity = cantidad;
 
             }
         }
+        
         console.log("Vamos a cambiarlo " + j);
         console.log(aux_prod);
         var precio_new_art = parseInt(aux_prod.quantity) * parseInt(aux_prod.price_x_region[0].totalPrice);
