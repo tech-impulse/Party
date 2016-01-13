@@ -288,6 +288,7 @@ function displayNode(data, originNode, originName, linkImg) {
 function refreshDisplayProducts() {
 
     console.log("Refresh DisplayProducts");
+    console.log(CART);
     var aux_carac = 0;
 
 

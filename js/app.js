@@ -28,8 +28,8 @@ $(document).bind("mobileinit", function () {
 Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
-    
-   
+
+
 
     $("#popupListItems").bind({
         popupafterclose: function (event, ui) {
@@ -193,7 +193,7 @@ $(document).ready(function () {
             $('#email').removeClass('colorText');
             sendEmail();
             EMAIL_USER = "";
-         
+
         }
 
     });
@@ -301,7 +301,7 @@ function openMenu() {
 function backPage(idNode, nodeName, linkint) {
 
     //console.log("Imagen: " + linkint);
-    
+
     translateButtons(idiomStore);
 
     if (pantallaActual == "Asistente fiestas" && AUX == 1) {
@@ -660,8 +660,8 @@ function addToCartAlter(id_prod_alter, id_produc) {
             console.log(CART[j]);
 
             foundInCart = 1;
-            cantidad = CART[j].quantity;
-
+            //cantidad = CART[j].quantity;
+            CART[j].quantity = 0;
             /*var count = CART[j].caracteristics.length;
             for (var k = 0; k < count; k++) {
 
@@ -686,40 +686,51 @@ function addToCartAlter(id_prod_alter, id_produc) {
             break;
         }
     }
-    
-    //console.log("Fuera");
-    //console.log(aux_prod);
+
+    console.log("Antes de poner unidades");
+    console.log(product);
 
     if (foundInCart == 1) {
 
-        if (parseInt(units[0]) == parseInt(units_alt[0])) {
+        if (parseInt(num_personas_fiesta) < parseInt(units_alt[0])) {
 
-            product.quantity = cantidad; 
+            for (var k = 0; k < product.caracteristics.length; k++) {
+
+                var caracteristicas = product.caracteristics[k];
+                if (caracteristicas.type == "9") {
+
+                    var unidades = caracteristicas.name;
+                    units = unidades.split(' ');
+                    break;
+
+                } else {
+
+                    units = 1;
+                    continue;
+
+                }
+            }
+
+            cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units));
+            product.quantity = cantidad;
 
         } else {
 
-            if (parseInt(num_personas_fiesta) < parseInt(units_alt[0])) {
+            cantidad = 1;
+            product.quantity = cantidad;
 
-                cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0]));
-                product.quantity = cantidad;
-
-            } else {
-                
-                cantidad = 1;
-                product.quantity = cantidad;
-
-            }
         }
-        
-        console.log("Vamos a cambiarlo " + j);
-        console.log(aux_prod);
-        var precio_new_art = parseInt(aux_prod.quantity) * parseInt(aux_prod.price_x_region[0].totalPrice);
-        CART[CART.length] = aux_prod;
+
+
+        console.log("Vamos a cambiarlo ");
+        console.log(product);
+        var precio_new_art = parseInt(product.quantity) * parseInt(product.price_x_region[0].totalPrice);
+        CART[CART.length] = product;
         //displayItemOperations(id_prod_alter, cantidad);
 
     }
 
-    refreshDisplayProducts(CART);
+    refreshDisplayProducts(CART); //
 
 }
 
