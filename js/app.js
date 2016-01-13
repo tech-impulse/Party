@@ -662,7 +662,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
             foundInCart = 1;
             cantidad = CART[j].quantity;
 
-            var count = CART[j].caracteristics.length;
+            /*var count = CART[j].caracteristics.length;
             for (var k = 0; k < count; k++) {
 
                 var caracteristicas = CART[j].caracteristics[k];
@@ -681,31 +681,32 @@ function addToCartAlter(id_prod_alter, id_produc) {
             }
 
             aux_prod = product;
-            console.log(aux_prod);
+            console.log(aux_prod);*/
             //j = CART.length;
             break;
         }
     }
-    console.log("Fuera");
-    console.log(aux_prod);
+    
+    //console.log("Fuera");
+    //console.log(aux_prod);
 
     if (foundInCart == 1) {
 
         if (parseInt(units[0]) == parseInt(units_alt[0])) {
 
-            aux_prod.quantity = cantidad; 
+            product.quantity = cantidad; 
 
         } else {
 
             if (parseInt(num_personas_fiesta) < parseInt(units_alt[0])) {
 
                 cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0]));
-                aux_prod.quantity = cantidad;
+                product.quantity = cantidad;
 
             } else {
                 
                 cantidad = 1;
-                aux_prod.quantity = cantidad;
+                product.quantity = cantidad;
 
             }
         }
@@ -713,7 +714,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
         console.log("Vamos a cambiarlo " + j);
         console.log(aux_prod);
         var precio_new_art = parseInt(aux_prod.quantity) * parseInt(aux_prod.price_x_region[0].totalPrice);
-        CART[j] = aux_prod;
+        CART[CART.length] = aux_prod;
         //displayItemOperations(id_prod_alter, cantidad);
 
     }
