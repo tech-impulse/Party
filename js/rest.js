@@ -198,9 +198,10 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         id: idNode,
         store: STORE.id
     };
-    console.log("Info enviar ws");
-    console.log(dataSend);
-    
+
+    //console.log("Info enviar ws");
+    //console.log(dataSend);
+
     if (isAlgo != undefined && isAlgo > 0) { //estamos en el asistente de disfraces o fiestas?????
         ISFIESTA = isAlgo;
 
@@ -275,7 +276,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                     } else {
 
-                        //console.log("Dame productos de " + nodeName);
+                        console.log("Dame productos del catalogo" + nodeName);
                         getProducts(idNode, nodeName);
 
                     }
@@ -283,7 +284,10 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 } else if (ISFIESTA == 1) { //1 catalogo
 
 
-                    getNodesProducts(idNode, nodeName);
+                    setTimeout(function () {
+                        getNodesProducts(idNode, nodeName);
+                    }, 5000);
+
 
 
                 } else {
@@ -411,6 +415,9 @@ function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un no
         id: idNode,
         store: STORE.id
     };
+    
+    console.log("Post catalogo");
+    console.log(dataSend);
 
     request = $.ajax({
         data: dataSend,
@@ -419,6 +426,9 @@ function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un no
         type: 'POST',
         timeout: 1000, //10 seg
         success: function (response) {
+
+            console.log("Respueta");
+            console.log(response);
 
             displayProducts(response, param, param2, param3);
 
@@ -464,7 +474,7 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
         type: 'POST',
         timeout: 1000, //10 seg
         success: function (response) {
-        
+
             enviarInfo = response;
 
         },
