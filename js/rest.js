@@ -400,7 +400,7 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
 function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
 
-    language = 1;
+    //language = 1;
     // Datos que se van a enviar
     var dataSend = {
         lang: parseInt(language),
@@ -655,7 +655,7 @@ function restOk_tiendas(res, typ, param, param2) {
         var val = res.stores[i].id;
         var text = res.stores[i].name;
 
-        html = html + '<option value=' + val + ' style="font-size: 20px;"><label style="color:white;text-transform: uppercase;font-size: 20px;">' + text + '</label></option>';
+        html = html + '<option value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
 
     }
 

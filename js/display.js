@@ -221,7 +221,7 @@ function displayNode(data, originNode, originName, linkImg) {
                                 '</label></a></div></div>';*/
 
                             var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
-                                data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-size:20px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
+                                data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
 
                         }
@@ -259,9 +259,9 @@ function displayNode(data, originNode, originName, linkImg) {
 
 
                     if (data.nodes[i].name == "") {
-                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + linkImg + '\')" style="border: 0px;width: 50%;margin: 1% 1% 1% 1%;"><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
+                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + linkImg + '\')" style="border: 0px;width: 50%;margin: 1% 1% 1% 1%;"><label style="font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
                     } else {
-                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + linkImg + '\')" style="border: 0px;width: 50%;margin: 1% 1% 1% 1%;"><label style="font-size:20px;font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
+                        var element = '<a  data-corners="false" data-role="button" data-theme="b" onclick="getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + linkImg + '\')" style="border: 0px;width: 50%;margin: 1% 1% 1% 1%;"><label style="font-weight: bold;text-transform: uppercase;">' + data.nodes[i].name + '</label></a>';
                     }
                     htmlContent = htmlContent + element;
                 }
@@ -279,6 +279,8 @@ function displayNode(data, originNode, originName, linkImg) {
         console.log("Error en el envio de parametros");
 
     }
+    
+    translateButtons(idiomStore);
 
 }
 
@@ -430,7 +432,7 @@ function refreshDisplayProducts() {
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="width: 100%;">' +
-                '<strong><label id="labelPrecioTotalProducto' + data[i].id + '" style="color:green;font-size: 20px;"></label></strong>' +
+                '<strong><label id="labelPrecioTotalProducto' + data[i].id + '" style="color:green;"></label></strong>' +
                 '</div>' +
                 '</div>' +
                 '<div class="ui-grid-a">' +
@@ -492,6 +494,8 @@ function refreshDisplayProducts() {
         break;
 
     }
+    
+    translateButtons(idiomStore);
 
 }
 
@@ -667,7 +671,7 @@ function displayProducts(data, originNode, originName, param) {
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
-                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;font-size: 20px;"></label></strong>' +
+                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;"></label></strong>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
@@ -1039,6 +1043,8 @@ function displayProducts(data, originNode, originName, param) {
     }
 
     $("#popupCargando").popup("close");
+    
+    translateButtons(idiomStore);
 
 }
 
@@ -1086,6 +1092,8 @@ function displayItemOperations(id, param, position) {
     if (CART.length < 1) {
         $("#popupListItems").popup("close");
     }
+    
+    translateButtons(idiomStore);
 
 
 }
@@ -1101,6 +1109,8 @@ function openPopupAction(param) {
         }, popupTimeout);
         break;
     }
+    
+    translateButtons(idiomStore);
 }
 
 
@@ -1149,6 +1159,7 @@ function displayPopupItemList() {
         }, popupTimeout);
         //$('#contentPopupListItems').css('overflow-y', 'scroll');
     }
+    translateButtons(idiomStore);
 }
 
 function displayItemAlter(id_prod_alter, id_product, idnode) {
@@ -1352,6 +1363,8 @@ function displayPopupItemDetail(id, param, idproduct) {
         }, 250);
 
     }
+    
+    translateButtons(idiomStore);
 
 }
 
@@ -1450,6 +1463,8 @@ function loadMenu(data) {
     $("#divHeader_catalogo").addClass("border-header");
     $("#divHeader_catalogo").hide();
     $("#lateralMenu").panel("close");
+    
+    translateButtons(idiomStore);
 
 
 }
@@ -1504,6 +1519,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
         }
     });
 
+    translateButtons(idiomStore);
 
 
 }
@@ -1554,6 +1570,8 @@ function displayPantallaIntermediaAsistFiestas(data) {
             $("#personas_fiesta").val(valor);
         }
     });
+    
+    translateButtons(idiomStore);
 
 }
 
@@ -1564,6 +1582,8 @@ function displayRegistro() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupRegistro").popup("open");
     }, popupTimeout);
+    
+    translateButtons(idiomStore);
 
 }
 
@@ -1573,6 +1593,8 @@ function displayCambioContra() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupCambioContra").popup("open");
     }, popupTimeout);
+    
+    translateButtons(idiomStore);
 
 }
 
@@ -1582,6 +1604,8 @@ function displaySugerencias() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupRegistro").popup("open");
     }, popupTimeout);
+    
+    translateButtons(idiomStore);
 
 }
 
@@ -1593,17 +1617,7 @@ function displayLogin() { //muestra el pop up de inicio de session
         $("#popupLogin").popup("open");
     }, popupTimeout);
 
-
-}
-
-function displayCar() { //muestra el pop up de inicio de session
-
-
-    /*$('.ui-popup').popup('close'); //forma antigua de 
-    setTimeout(function () {
-        $("#popupCart").popup("open");
-    }, popupTimeout);*/
-
+    translateButtons(idiomStore);
 
 }
 
@@ -1615,6 +1629,8 @@ function displayLogin2() { //muestra el pop up de inicio de session
     setTimeout(function () {
         $("#popupLogin").popup("open");
     }, 50);
+    
+    translateButtons(idiomStore);
 
 
 }
@@ -1625,7 +1641,8 @@ function displayMenu() { //muestra el pop up de inicio de session
 
     //console.log("Volver al menu");
     getNodes(0);
-
+    
+    translateButtons(idiomStore);
 }
 
 
@@ -1640,6 +1657,8 @@ function logout() { //muestra el pop up de inicio de session
     LOGGED = false;
     $('#usrnm').val("");
     $('#pswd').val("");
+    
+    translateButtons(idiomStore);
 
 
 }
@@ -1666,6 +1685,8 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
     $('#contentPopupScreenSaver').show();
 
     //}
+    
+    translateButtons(idiomStore);
 
 
 }
@@ -1715,10 +1736,14 @@ function displayPantallaSugerencias() {
 
     $("#divContent").html(html_sug);
     $("#divContent").trigger('create');
+    
+    translateButtons(idiomStore);
 
 }
 
 function displaySummary(param) {
+    
+ 
 
     $("#page_count").hide();
 
@@ -1770,11 +1795,13 @@ function displaySummary(param) {
 
         console.log("No estás logado");
     }
+    
+       translateButtons(idiomStore);
 }
 
 
 function displayFlags(res) {
-
+    
     console.log("Cargamos el popUp de idiomas");
 
     var html = '<ul data-role="listview">'; // data-role="listview" 
@@ -1788,7 +1815,7 @@ function displayFlags(res) {
 
         html += '<li style="list-style-type: none;background-color:#1798d1;" onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');">' + //data-icon="false"
         //'<a onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');"><label style="text-transform: uppercase;text-align: center;">' + info[i].name + '</label></a>' +
-        '<label style="font-size: 20px;text-transform: uppercase;text-align: center;color: rgb(255, 255, 255);">' + info[i].name + '</label>' +
+        '<label style="text-transform: uppercase;text-align: center;color: rgb(255, 255, 255);">' + info[i].name + '</label>' +
             '</li>';
 
     }
@@ -1800,5 +1827,7 @@ function displayFlags(res) {
     $("#contentPopupIdioma").html(html);
     $("#contentPopupIdioma").trigger('create');
     $("#contentPopupIdioma").css('font-size', '20px');
+    
+    translateButtons(idiomStore);
 
 }

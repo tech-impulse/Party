@@ -128,7 +128,7 @@ function changeIdiom(idioma, idiomaId) {
     }
 
     translateButtons(idiomStore);
-    
+        
     $("#popupIdiomas").popup("close");
 
 }

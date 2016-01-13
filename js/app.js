@@ -88,7 +88,7 @@ $(document).ready(function () {
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative">' +
         '<img src="css/icons/header.jpg" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: .5%;margin-right: .5%;">' +
         /*'<a onclick="changeIdiomPopUp();"><img id="img_banderas" src="css/banderas/idioma_codigo.png"  style="width: 30px;margin-right: 5px;height: 20px;margin-top: 5px;"></a>' +*/
-        '<a onclick="changeIdiomPopUp();"><label id="label_idioma" style="color: rgb(255, 255, 255);text-transform:uppercase;" >CAT</label></a>' +
+        '<a onclick="changeIdiomPopUp();"><label id="label_idioma" style="color: rgb(255, 255, 255);text-transform:uppercase;" >CA</label></a>' +
         '</div>';
     $("#divHeader_menu").html(htmlHeader_menu);
     $("#divHeader_menu").trigger('create');
@@ -299,6 +299,8 @@ function openMenu() {
 function backPage(idNode, nodeName, linkint) {
 
     //console.log("Imagen: " + linkint);
+    
+    translateButtons(idiomStore);
 
     if (pantallaActual == "Asistente fiestas" && AUX == 1) {
 
