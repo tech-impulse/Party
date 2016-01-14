@@ -1346,7 +1346,10 @@ function displayPopupItemList() {
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
 
 
-    $("#contentPopupListItems").html(tituloPopUp + html);
+    //$("#contentPopupListItems").html(tituloPopUp + html);
+    
+    $("#contentPopupListItems").html(tituloPopUp + '<div style="width: 600px; height:400px; overflow: scroll;">' + html + '</div>');
+    
     $("#contentPopupListItems").trigger("create");
 
     switch (CART.length) {
