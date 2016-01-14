@@ -16,7 +16,7 @@ function checkOut() {
                 '<br>' +
                 '<a  data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                 '<br>' +
-                '<a  data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b">Enviar a Casa</a>' +
+                //'<a  data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b">Enviar a Casa</a>' +
                 '</center>' +
                 '</div>';
             $("#divContent").html(html);
@@ -31,9 +31,9 @@ function checkOut() {
                 '<br>' +
                 '<a data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" >' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                 '<br>' +
-                '<a data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" >Enviar a Casa</a>' +
-                '<br>' +
-                '<a data-corners="false" style="width:300px" onclick="displaySummary(\'store\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" >Recoger en Mi Tienda</a>' +
+                //'<a data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" >Enviar a Casa</a>' +
+                //'<br>' +
+                //'<a data-corners="false" style="width:300px" onclick="displaySummary(\'store\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" >Recoger en Mi Tienda</a>' +
                 '</center>' +
                 '</div>';
             $("#divContent").html(html);
