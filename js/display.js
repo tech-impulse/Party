@@ -414,12 +414,15 @@ function refreshDisplayProducts() {
             } else {
                 var titulo = data[i].name;
             }
-
+// TEMP !!
             var element = block +
                 '<a  data-corners="false" data-role="button" data-theme="f">' +
                 '<div id="circulo' + data[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                 '<label id="quantity' + data[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label>' +
                 '</div>' +
+                //'<div id="warning' + data.products[i].id + '" class="circulo" style="width: 40px; height: 40px; position: absolute;">' +
+                //'<img src="/img/warning.png" style="width: 40px; height: 40px; float: right;" />' +
+                //'</div>' +
                 '<img src="' + data[i].linkext + '" onclick="displayPopupItemDetail(' + ID_NODE + ',\'PRODUCTOS\',' + data[i].id + ')" style="width: 200px;height: 200px;">' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="width: 100%;font-size:12px">' +
@@ -653,13 +656,20 @@ function displayProducts(data, originNode, originName, param) {
                 } else {
                     var titulo = data.products[i].name;
                 }
+                
+                if ( data.products[i].stock_x_store == 0 )  {
+                    var displayWarning = '<div id="warning' + data.products[i].id + '" style="width: 40px; height: 40px; z-index: 6; position: inherit; float: right;">' +
+                    '<img src="img/warning.png" style="width: 40px; height: 40px;" />' +
+                    '</div>';
+                }
 
                 var element = block +
                     '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px;">' +
+                    displayWarning +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px">' +
                     '<div class="contenedor">' + titulo + '</div>' +
