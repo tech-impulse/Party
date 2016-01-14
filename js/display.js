@@ -216,13 +216,12 @@ function displayNode(data, originNode, originName, linkImg) {
 
                         } else {
 
-                            //console.log("Añadimos el bloque");
-                            /*var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
-                                data.nodes[i].linkext + '" style="width: 100%;height: ' + heigth_img + 'px;"><br><label style="width: 100%;text-align:center;line-height: '+(heig_block*0.15)+'px;height: '+(heig_block*0.15)+'px;margin-top: 5px;font-size:20px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
-                                '</label></a></div></div>';*/
-
-                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
+                            /*var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
+                                '</label></a></div>';*/
+                            
+                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +                                                      //white-space: pre-wrap;height: 100%;
+                                data.nodes[i].linkext + '" style="width: 100%;;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
 
                         }
@@ -280,7 +279,7 @@ function displayNode(data, originNode, originName, linkImg) {
         console.log("Error en el envio de parametros");
 
     }
-    
+
     translateButtons(idiomStore);
 
 }
@@ -288,6 +287,7 @@ function displayNode(data, originNode, originName, linkImg) {
 function refreshDisplayProducts() {
 
     console.log("Refresh DisplayProducts");
+    console.log(CART);
     var aux_carac = 0;
 
 
@@ -498,7 +498,7 @@ function refreshDisplayProducts() {
         break;
 
     }
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1047,14 +1047,203 @@ function displayProducts(data, originNode, originName, param) {
         }
 
 
+    } else if (data.result == 1 && pantallaActual == "catalogo") {
+
+        AUX = 1;
+        PRODUCTS = data.products;
+        COLUMS = parseInt(data.columns);
+        ID_NODE = originNode;
+        var htmlContent = '';
+        var grid = '';
+        var block = '';
+        var position = 0;
+        var type;
+
+
+        //updateBackButton(originNode, originName);
+
+
+        if (pantallaActual == "Asistente disfraces") {
+            console.log("Estamos en la pantalla ".pantallaActual);
+        } else if (pantallaActual == "Asistente fiestas") {
+            console.log("Estamos en la pantalla ".pantallaActual);
+            num_personas_fiesta = $("#personas_fiesta").val();
+        }
+
+        switch (parseInt(data.columns)) {
+        case 1:
+
+            grid = "<div class='ui-grid-a'>";
+            type = "vertical";
+            break;
+
+        case 2:
+
+            grid = "<div class='ui-grid-a'>";
+            type = "horizontal";
+            break;
+
+        case 3:
+
+            grid = "<div class='ui-grid-b'>";
+            type = "horizontal";
+            break;
+
+        case 4:
+
+            grid = "<div class='ui-grid-c'>";
+            type = "horizontal";
+            break;
+
+        case 5:
+
+            grid = "<div class='ui-grid-d'>";
+            type = "horizontal";
+            break;
+
+        }
+
+        switch (type) {
+        case "horizontal":
+
+            htmlContent = grid;
+            position = "a";
+            var precio;
+            var unidades;
+
+            console.log("Productos que tenemos");
+            console.log(data.products);
+
+            for (var i = 0; i < data.products.length; i++) {
+
+                //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
+
+                var heigth = (W_WIDTH * (0.96));
+                var heig_block = heigth / parseInt(data.columns);
+
+                if (position < parseInt(data.columns)) {
+
+                    switch (position) {
+                    case 0:
+
+                        block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                        break;
+
+                    case 1:
+
+                        block = '<div class="ui-block-b" style="width:' + heig_block + 'px;">';
+                        break;
+
+                    case 2:
+
+                        block = '<div class="ui-block-c" style="width:' + heig_block + 'px;">';
+                        break;
+
+                    case 3:
+
+                        block = '<div class="ui-block-d" style="width:' + heig_block + 'px;">';
+                        break;
+
+                    case 4:
+
+                        block = '<div class="ui-block-e" style="width:' + heig_block + 'px;">';
+                        break;
+                    }
+                } else {
+                    position = 0;
+                    block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                }
+
+
+                if (data.products[i].price_x_region.length == 0) { // si no tiene precio continuamos
+                    //console.log("Producto " + data.products[i].id + " no tiene precio, no lo mostramos");
+                    continue;
+                } else {
+                    precio = data.products[i].price_x_region[0].totalPrice;
+                }
+
+               if (data.products[i].name == "") {
+                    continue;
+                } else {
+                    var titulo = data.products[i].name;
+                }
+
+                var element = block +
+                    '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                    '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                    '<label id="quantity' + data.products[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label>' +
+                    '</div>' +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px;">' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;font-size:12px">' +
+                    '<div class="contenedor">' + titulo + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;">' +
+                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;"></label></strong>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;">' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
+                    '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                    '<div class="ui-block-b" style="width:10%;"></div>' +
+                    '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                    '</div></a></div>';
+
+
+                htmlContent = htmlContent + element;
+                if (position == "c") {
+                    htmlContent = htmlContent + grid;
+                }
+                position++;
+
+            }
+
+            htmlContent = htmlContent + '</div>';
+
+            $("#divContent").html(htmlContent);
+            $("#divContent").trigger('create');
+
+            
+            break;
+
+
+        case "vertical":
+
+            htmlContent = grid + " <div class='ui-block-a' style='width:66%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
+            block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
+            for (var i = 0; i < data.products.length; i++) {
+
+                if (data.products[i].name == "") {
+                    var element = '<a  data-corners="false" data-role="button" onclick="">' + data.products[i].name + '</a>';
+                } else {
+                    var element = '<a  data-corners="false" data-role="button" onclick="">' + data.products[i].name + '</a>';
+                }
+
+                htmlContent = htmlContent + element;
+
+            }
+            htmlContent = htmlContent + '</div></div></div>';
+            $("#divContent").html(htmlContent);
+            $("#divContent").trigger('create');
+            $("#divHeader_catalogo").show();
+            break;
+
+        }
+
     } else {
 
-        console.log("Error ....");
+        console.log("Error...");
 
     }
 
     $("#popupCargando").popup("close");
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1103,7 +1292,7 @@ function displayItemOperations(id, param, position) {
     if (CART.length < 1) {
         $("#popupListItems").popup("close");
     }
-    
+
     translateButtons(idiomStore);
 
 
@@ -1120,7 +1309,7 @@ function openPopupAction(param) {
         }, popupTimeout);
         break;
     }
-    
+
     translateButtons(idiomStore);
 }
 
@@ -1374,7 +1563,7 @@ function displayPopupItemDetail(id, param, idproduct) {
         }, 250);
 
     }
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1474,7 +1663,7 @@ function loadMenu(data) {
     $("#divHeader_catalogo").addClass("border-header");
     $("#divHeader_catalogo").hide();
     $("#lateralMenu").panel("close");
-    
+
     translateButtons(idiomStore);
 
 
@@ -1582,7 +1771,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
             $("#personas_fiesta").val(valor);
         }
     });
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1594,7 +1783,7 @@ function displayRegistro() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupRegistro").popup("open");
     }, popupTimeout);
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1605,7 +1794,7 @@ function displayCambioContra() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupCambioContra").popup("open");
     }, popupTimeout);
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1616,7 +1805,7 @@ function displaySugerencias() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupRegistro").popup("open");
     }, popupTimeout);
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1641,7 +1830,7 @@ function displayLogin2() { //muestra el pop up de inicio de session
     setTimeout(function () {
         $("#popupLogin").popup("open");
     }, 50);
-    
+
     translateButtons(idiomStore);
 
 
@@ -1653,7 +1842,7 @@ function displayMenu() { //muestra el pop up de inicio de session
 
     //console.log("Volver al menu");
     getNodes(0);
-    
+
     translateButtons(idiomStore);
 }
 
@@ -1669,7 +1858,7 @@ function logout() { //muestra el pop up de inicio de session
     LOGGED = false;
     $('#usrnm').val("");
     $('#pswd').val("");
-    
+
     translateButtons(idiomStore);
 
 
@@ -1697,7 +1886,7 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
     $('#contentPopupScreenSaver').show();
 
     //}
-    
+
     translateButtons(idiomStore);
 
 
@@ -1748,14 +1937,14 @@ function displayPantallaSugerencias() {
 
     $("#divContent").html(html_sug);
     $("#divContent").trigger('create');
-    
+
     translateButtons(idiomStore);
 
 }
 
 function displaySummary(param) {
-    
- 
+
+
 
     $("#page_count").hide();
 
@@ -1807,13 +1996,13 @@ function displaySummary(param) {
 
         console.log("No estás logado");
     }
-    
-       translateButtons(idiomStore);
+
+    translateButtons(idiomStore);
 }
 
 
 function displayFlags(res) {
-    
+
     console.log("Cargamos el popUp de idiomas");
 
     var html = '<ul data-role="listview">'; // data-role="listview" 
@@ -1839,7 +2028,7 @@ function displayFlags(res) {
     $("#contentPopupIdioma").html(html);
     $("#contentPopupIdioma").trigger('create');
     $("#contentPopupIdioma").css('font-size', '20px');
-    
+
     translateButtons(idiomStore);
 
 }

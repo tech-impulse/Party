@@ -198,9 +198,10 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         id: idNode,
         store: STORE.id
     };
-    console.log("Info enviar ws");
-    console.log(dataSend);
-    
+
+    //console.log("Info enviar ws");
+    //console.log(dataSend);
+
     if (isAlgo != undefined && isAlgo > 0) { //estamos en el asistente de disfraces o fiestas?????
         ISFIESTA = isAlgo;
 
@@ -275,15 +276,18 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                     } else {
 
-                        //console.log("Dame productos de " + nodeName);
+                        console.log("Dame productos del catalogo" + nodeName);
                         getProducts(idNode, nodeName);
 
                     }
 
                 } else if (ISFIESTA == 1) { //1 catalogo
 
+                    $('#popupCargando').popup('open');
 
                     getNodesProducts(idNode, nodeName);
+
+
 
 
                 } else {
@@ -400,7 +404,7 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
 
 }
 
-function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+function getNodesProducts(idNode,nodeName) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
 
     //language = 1;
@@ -412,15 +416,29 @@ function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un no
         store: STORE.id
     };
 
+    console.log("Post catalogo");
+    console.log(dataSend);
+
     request = $.ajax({
         data: dataSend,
         url: urlServices + 'getNodeProducts.php',
         dataType: 'json',
         type: 'POST',
-        timeout: 1000, //10 seg
+        timeout: 10000, //10 seg
         success: function (response) {
 
-            displayProducts(response, param, param2, param3);
+            console.log("Respueta");
+            console.log(response);
+
+            if (response.products != "" && response.products.length > 0) {
+                pantallaActual = "catalogo";
+                displayProducts(response,idNode,nodeName);
+            } else {
+
+                $("#texto_popup").text("Esta categoría no tiene artículos");
+                $('#popupCargando').popup('close');
+                $('#popupAlert').popup('open');
+            }
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -464,7 +482,7 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
         type: 'POST',
         timeout: 1000, //10 seg
         success: function (response) {
-        
+
             enviarInfo = response;
 
         },
