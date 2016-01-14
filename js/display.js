@@ -219,8 +219,8 @@ function displayNode(data, originNode, originName, linkImg) {
                             /*var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';*/
-                            
-                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +                                                      //white-space: pre-wrap;height: 100%;
+
+                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' + //white-space: pre-wrap;height: 100%;
                                 data.nodes[i].linkext + '" style="width: 100%;;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
 
@@ -414,7 +414,7 @@ function refreshDisplayProducts() {
             } else {
                 var titulo = data[i].name;
             }
-// TEMP !!
+            // TEMP !!
             var element = block +
                 '<a  data-corners="false" data-role="button" data-theme="f">' +
                 '<div id="circulo' + data[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
@@ -656,11 +656,13 @@ function displayProducts(data, originNode, originName, param) {
                 } else {
                     var titulo = data.products[i].name;
                 }
-                
-                if ( data.products[i].stock_x_store == 0 )  {
+
+                if (data.products[i].stock_x_store == 0) {
                     var displayWarning = '<div id="warning' + data.products[i].id + '" style="width: 40px; height: 40px; z-index: 6; position: inherit; float: right;">' +
-                    '<img src="img/warning.png" style="width: 40px; height: 40px;" />' +
-                    '</div>';
+                        '<img src="img/warning.png" style="width: 40px; height: 40px;" />' +
+                        '</div>';
+                } else {
+                    var displayWarning = "";
                 }
 
                 var element = block +
@@ -1162,7 +1164,7 @@ function displayProducts(data, originNode, originName, param) {
                     precio = data.products[i].price_x_region[0].totalPrice;
                 }
 
-               if (data.products[i].name == "") {
+                if (data.products[i].name == "") {
                     continue;
                 } else {
                     var titulo = data.products[i].name;
@@ -1209,7 +1211,7 @@ function displayProducts(data, originNode, originName, param) {
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
 
-            
+
             break;
 
 
