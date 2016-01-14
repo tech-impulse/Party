@@ -523,7 +523,7 @@ function displayProducts(data, originNode, originName, param) {
         var type;
 
 
-        updateBackButton(originNode, originName);
+        //updateBackButton(originNode, originName);
 
 
         if (pantallaActual == "Asistente disfraces") {

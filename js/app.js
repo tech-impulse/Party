@@ -305,10 +305,12 @@ function backPage(idNode, nodeName, linkint) {
     translateButtons(idiomStore);
 
     if (pantallaActual == "Asistente fiestas" && AUX == 1) {
-
+        
         setTimeout(function () {
             $("#popupPregunta").popup("open");
         }, popupTimeout);
+        
+        AUX = 0;
 
     } else {
 
