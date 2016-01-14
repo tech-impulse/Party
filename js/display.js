@@ -1340,7 +1340,7 @@ function displayPopupItemList() {
             '</li>';
     }
 
-    html = html + '<li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
+    html = '<div style="width: 600px; height:400px; overflow: scroll;">' + html + '</div><li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
@@ -1348,7 +1348,8 @@ function displayPopupItemList() {
 
     //$("#contentPopupListItems").html(tituloPopUp + html);
     
-    $("#contentPopupListItems").html(tituloPopUp + '<div style="width: 600px; height:400px; overflow: scroll;">' + html + '</div>');
+    //$("#contentPopupListItems").html(tituloPopUp + '<div style="width: 600px; height:400px; overflow: scroll;">' + html + '</div>');
+    $("#contentPopupListItems").html(tituloPopUp + html);
     
     $("#contentPopupListItems").trigger("create");
 
