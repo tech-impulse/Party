@@ -280,7 +280,7 @@ function displayNode(data, originNode, originName, linkImg) {
         console.log("Error en el envio de parametros");
 
     }
-    
+
     translateButtons(idiomStore);
 
 }
@@ -496,7 +496,7 @@ function refreshDisplayProducts() {
         break;
 
     }
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1038,6 +1038,277 @@ function displayProducts(data, originNode, originName, param) {
         }
 
 
+    } else if (data.result == 1 && pantallaActual == "catalogo") {
+
+        AUX = 1;
+        PRODUCTS = data.products;
+        COLUMS = parseInt(data.columns);
+        ID_NODE = originNode;
+        var htmlContent = '';
+        var grid = '';
+        var block = '';
+        var position = 0;
+        var type;
+
+
+        updateBackButton(originNode, originName);
+
+
+        if (pantallaActual == "Asistente disfraces") {
+            console.log("Estamos en la pantalla ".pantallaActual);
+        } else if (pantallaActual == "Asistente fiestas") {
+            console.log("Estamos en la pantalla ".pantallaActual);
+            num_personas_fiesta = $("#personas_fiesta").val();
+        }
+
+        switch (parseInt(data.columns)) {
+        case 1:
+
+            grid = "<div class='ui-grid-a'>";
+            type = "vertical";
+            break;
+
+        case 2:
+
+            grid = "<div class='ui-grid-a'>";
+            type = "horizontal";
+            break;
+
+        case 3:
+
+            grid = "<div class='ui-grid-b'>";
+            type = "horizontal";
+            break;
+
+        case 4:
+
+            grid = "<div class='ui-grid-c'>";
+            type = "horizontal";
+            break;
+
+        case 5:
+
+            grid = "<div class='ui-grid-d'>";
+            type = "horizontal";
+            break;
+
+        }
+
+        switch (type) {
+        case "horizontal":
+
+            htmlContent = grid;
+            position = "a";
+            var precio;
+            var unidades;
+            //auxTest = data;
+
+            console.log("Productos que tenemos");
+            console.log(data.products);
+
+            for (var i = 0; i < data.products.length; i++) {
+
+                //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
+
+                var heigth = (W_WIDTH * (0.96));
+                var heig_block = heigth / parseInt(data.columns);
+
+                if (position < parseInt(data.columns)) {
+
+                    switch (position) {
+                    case 0:
+
+                        block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                        break;
+
+                    case 1:
+
+                        block = '<div class="ui-block-b" style="width:' + heig_block + 'px;">';
+                        break;
+
+                    case 2:
+
+                        block = '<div class="ui-block-c" style="width:' + heig_block + 'px;">';
+                        break;
+
+                    case 3:
+
+                        block = '<div class="ui-block-d" style="width:' + heig_block + 'px;">';
+                        break;
+
+                    case 4:
+
+                        block = '<div class="ui-block-e" style="width:' + heig_block + 'px;">';
+                        break;
+                    }
+                } else {
+                    position = 0;
+                    block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                }
+
+
+                if (data.products[i].price_x_region.length == 0) { // si no tiene precio continuamos
+                    //console.log("Producto " + data.products[i].id + " no tiene precio, no lo mostramos");
+                    continue;
+                } else {
+                    precio = data.products[i].price_x_region[0].totalPrice;
+                }
+
+                /*var count = data.products[i].caracteristics.length;
+                var caracteristicas = data.products[i].caracteristics;
+
+                for (var j = 0; j < count; j++) {
+
+                    //console.log("Caracteristica " + caracteristicas[j].type);
+                    if (caracteristicas[j].type == "9") {
+                        unidades = caracteristicas[j].name;
+                        //console.log("Caracteristica encontrada");
+                        aux_carac = 0;
+                        break;
+                    } else {
+                        //console.log("Esta no es la carac buena, pasamos a la siguiente carac");
+                        aux_carac = 1;
+                        continue;
+
+                    }
+
+                }
+
+                if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
+                    //console.log("No tiene unidades saltamos el producto")
+                    unidades = "1 unidad";
+                }*/
+
+                if (data.products[i].name == "") {
+                    continue;
+                } else {
+                    var titulo = data.products[i].name;
+                }
+
+                var element = block +
+                    '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                    '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                    '<label id="quantity' + data.products[i].id + '" style="display:block;padding-top: 5px;font-size: 22px;color: white;">10</label>' +
+                    '</div>' +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px;">' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;font-size:12px">' +
+                    '<div class="contenedor">' + titulo + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    //'<div class="ui-grid-a">' +
+                    //'<div class="ui-block-a" style="width: 100%;font-size:20px">' +
+                    //'<strong>' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                    //'</div>' +
+                    //'</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;">' +
+                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;"></label></strong>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;">' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
+                    '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                    '<div class="ui-block-b" style="width:10%;"></div>' +
+                    '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                    '</div></a></div>';
+
+
+                htmlContent = htmlContent + element;
+                if (position == "c") {
+                    htmlContent = htmlContent + grid;
+                }
+                position++;
+
+            }
+
+            htmlContent = htmlContent + '</div>';
+
+            $("#divContent").html(htmlContent);
+            $("#divContent").trigger('create');
+
+            /*var aux = 0;
+            // calculo del numero de articulos por producto
+            for (var k = 0; k < data.products.length; k++) {
+
+                console.log("Calculamos los articulos para el carrito------------------------------------------------");
+                aux = 0;
+                var count = data.products[k].caracteristics.length;
+                var caracteristicas = data.products[k].caracteristics;
+
+                for (var j = 0; j < count; j++) {
+
+                    if (caracteristicas[j].type == "9" && data.products[k].name != "" && data.products[k].price_x_region.length > 0) {
+
+                        var num_uni = caracteristicas[j].name;
+                        var units = num_uni.split(' ');
+
+                        console.log("Encontrada car. Unidades es " + units[0]);
+
+                        if (parseInt(units[0]) >= parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) { //el articulo tiene suficientes para el grupo
+
+                            console.log("Unidades es1 " + units[0] + " se añade 1");
+                            addToCart(data.products[k].id, 1);
+                            aux = 1;
+
+                        } else if (parseInt(units[0]) < parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) {
+
+                            addToCart(data.products[k].id, Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
+                            console.log("Math " + Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
+                            aux = 1;
+
+                        } else { //mas personas que unidades del articulo
+                            addToCart(data.products[k].id, 1);
+                            aux = 1;
+                        }
+
+                        break;
+
+                    }
+
+                }
+
+                console.log("Aux es " + aux); // si es cerno no tiene unidades pondremos que es uno
+
+                if (aux == 0 && data.products[k].name != "" && data.products[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
+                    addToCart(data.products[k].id, 1);
+
+                }
+
+
+
+                }*/
+
+            break;
+
+
+        case "vertical":
+
+            htmlContent = grid + " <div class='ui-block-a' style='width:66%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
+            block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
+            for (var i = 0; i < data.products.length; i++) {
+
+                if (data.products[i].name == "") {
+                    var element = '<a  data-corners="false" data-role="button" onclick="">' + data.products[i].name + '</a>';
+                } else {
+                    var element = '<a  data-corners="false" data-role="button" onclick="">' + data.products[i].name + '</a>';
+                }
+
+                htmlContent = htmlContent + element;
+
+            }
+            htmlContent = htmlContent + '</div></div></div>';
+            $("#divContent").html(htmlContent);
+            $("#divContent").trigger('create');
+            $("#divHeader_catalogo").show();
+            break;
+
+        }
+
     } else {
 
         console.log("Error ....");
@@ -1045,7 +1316,7 @@ function displayProducts(data, originNode, originName, param) {
     }
 
     $("#popupCargando").popup("close");
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1094,7 +1365,7 @@ function displayItemOperations(id, param, position) {
     if (CART.length < 1) {
         $("#popupListItems").popup("close");
     }
-    
+
     translateButtons(idiomStore);
 
 
@@ -1111,7 +1382,7 @@ function openPopupAction(param) {
         }, popupTimeout);
         break;
     }
-    
+
     translateButtons(idiomStore);
 }
 
@@ -1365,7 +1636,7 @@ function displayPopupItemDetail(id, param, idproduct) {
         }, 250);
 
     }
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1465,7 +1736,7 @@ function loadMenu(data) {
     $("#divHeader_catalogo").addClass("border-header");
     $("#divHeader_catalogo").hide();
     $("#lateralMenu").panel("close");
-    
+
     translateButtons(idiomStore);
 
 
@@ -1573,7 +1844,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
             $("#personas_fiesta").val(valor);
         }
     });
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1585,7 +1856,7 @@ function displayRegistro() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupRegistro").popup("open");
     }, popupTimeout);
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1596,7 +1867,7 @@ function displayCambioContra() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupCambioContra").popup("open");
     }, popupTimeout);
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1607,7 +1878,7 @@ function displaySugerencias() { //muestra el pop up de registro
     setTimeout(function () {
         $("#popupRegistro").popup("open");
     }, popupTimeout);
-    
+
     translateButtons(idiomStore);
 
 }
@@ -1632,7 +1903,7 @@ function displayLogin2() { //muestra el pop up de inicio de session
     setTimeout(function () {
         $("#popupLogin").popup("open");
     }, 50);
-    
+
     translateButtons(idiomStore);
 
 
@@ -1644,7 +1915,7 @@ function displayMenu() { //muestra el pop up de inicio de session
 
     //console.log("Volver al menu");
     getNodes(0);
-    
+
     translateButtons(idiomStore);
 }
 
@@ -1660,7 +1931,7 @@ function logout() { //muestra el pop up de inicio de session
     LOGGED = false;
     $('#usrnm').val("");
     $('#pswd').val("");
-    
+
     translateButtons(idiomStore);
 
 
@@ -1688,7 +1959,7 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
     $('#contentPopupScreenSaver').show();
 
     //}
-    
+
     translateButtons(idiomStore);
 
 
@@ -1739,14 +2010,14 @@ function displayPantallaSugerencias() {
 
     $("#divContent").html(html_sug);
     $("#divContent").trigger('create');
-    
+
     translateButtons(idiomStore);
 
 }
 
 function displaySummary(param) {
-    
- 
+
+
 
     $("#page_count").hide();
 
@@ -1798,13 +2069,13 @@ function displaySummary(param) {
 
         console.log("No estás logado");
     }
-    
-       translateButtons(idiomStore);
+
+    translateButtons(idiomStore);
 }
 
 
 function displayFlags(res) {
-    
+
     console.log("Cargamos el popUp de idiomas");
 
     var html = '<ul data-role="listview">'; // data-role="listview" 
@@ -1830,7 +2101,7 @@ function displayFlags(res) {
     $("#contentPopupIdioma").html(html);
     $("#contentPopupIdioma").trigger('create');
     $("#contentPopupIdioma").css('font-size', '20px');
-    
+
     translateButtons(idiomStore);
 
 }

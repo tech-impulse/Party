@@ -283,10 +283,10 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                 } else if (ISFIESTA == 1) { //1 catalogo
 
+                    $('#popupCargando').popup('open');
 
-                    setTimeout(function () {
-                        getNodesProducts(idNode, nodeName);
-                    }, 5000);
+                    getNodesProducts(idNode, nodeName);
+
 
 
 
@@ -404,7 +404,7 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
 
 }
 
-function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+function getNodesProducts(idNode,nodeName) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
 
     //language = 1;
@@ -415,7 +415,7 @@ function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un no
         id: idNode,
         store: STORE.id
     };
-    
+
     console.log("Post catalogo");
     console.log(dataSend);
 
@@ -424,13 +424,21 @@ function getNodesProducts(idNode) { //esta funcion nos devuelve la info de un no
         url: urlServices + 'getNodeProducts.php',
         dataType: 'json',
         type: 'POST',
-        timeout: 1000, //10 seg
+        timeout: 10000, //10 seg
         success: function (response) {
 
             console.log("Respueta");
             console.log(response);
 
-            displayProducts(response, param, param2, param3);
+            if (response.products != "" && response.products.length > 0) {
+                pantallaActual = "catalogo";
+                displayProducts(response,idNode,nodeName);
+            } else {
+
+                $("#texto_popup").text("Esta categoría no tiene artículos");
+                $('#popupCargando').popup('close');
+                $('#popupAlert').popup('open');
+            }
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
