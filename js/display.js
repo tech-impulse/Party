@@ -216,13 +216,12 @@ function displayNode(data, originNode, originName, linkImg) {
 
                         } else {
 
-                            //console.log("Añadimos el bloque");
-                            /*var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
-                                data.nodes[i].linkext + '" style="width: 100%;height: ' + heigth_img + 'px;"><br><label style="width: 100%;text-align:center;line-height: '+(heig_block*0.15)+'px;height: '+(heig_block*0.15)+'px;margin-top: 5px;font-size:20px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
-                                '</label></a></div></div>';*/
-
-                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
+                            /*var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
+                                '</label></a></div>';*/
+                            
+                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +                                                      //white-space: pre-wrap;height: 100%;
+                                data.nodes[i].linkext + '" style="width: 100%;;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
 
                         }
@@ -1051,7 +1050,7 @@ function displayProducts(data, originNode, originName, param) {
         var type;
 
 
-        updateBackButton(originNode, originName);
+        //updateBackButton(originNode, originName);
 
 
         if (pantallaActual == "Asistente disfraces") {
@@ -1101,7 +1100,6 @@ function displayProducts(data, originNode, originName, param) {
             position = "a";
             var precio;
             var unidades;
-            //auxTest = data;
 
             console.log("Productos que tenemos");
             console.log(data.products);
@@ -1154,32 +1152,7 @@ function displayProducts(data, originNode, originName, param) {
                     precio = data.products[i].price_x_region[0].totalPrice;
                 }
 
-                /*var count = data.products[i].caracteristics.length;
-                var caracteristicas = data.products[i].caracteristics;
-
-                for (var j = 0; j < count; j++) {
-
-                    //console.log("Caracteristica " + caracteristicas[j].type);
-                    if (caracteristicas[j].type == "9") {
-                        unidades = caracteristicas[j].name;
-                        //console.log("Caracteristica encontrada");
-                        aux_carac = 0;
-                        break;
-                    } else {
-                        //console.log("Esta no es la carac buena, pasamos a la siguiente carac");
-                        aux_carac = 1;
-                        continue;
-
-                    }
-
-                }
-
-                if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
-                    //console.log("No tiene unidades saltamos el producto")
-                    unidades = "1 unidad";
-                }*/
-
-                if (data.products[i].name == "") {
+               if (data.products[i].name == "") {
                     continue;
                 } else {
                     var titulo = data.products[i].name;
@@ -1196,11 +1169,6 @@ function displayProducts(data, originNode, originName, param) {
                     '<div class="contenedor">' + titulo + '</div>' +
                     '</div>' +
                     '</div>' +
-                    //'<div class="ui-grid-a">' +
-                    //'<div class="ui-block-a" style="width: 100%;font-size:20px">' +
-                    //'<strong>' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
-                    //'</div>' +
-                    //'</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
                     '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;"></label></strong>' +
@@ -1231,58 +1199,7 @@ function displayProducts(data, originNode, originName, param) {
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
 
-            /*var aux = 0;
-            // calculo del numero de articulos por producto
-            for (var k = 0; k < data.products.length; k++) {
-
-                console.log("Calculamos los articulos para el carrito------------------------------------------------");
-                aux = 0;
-                var count = data.products[k].caracteristics.length;
-                var caracteristicas = data.products[k].caracteristics;
-
-                for (var j = 0; j < count; j++) {
-
-                    if (caracteristicas[j].type == "9" && data.products[k].name != "" && data.products[k].price_x_region.length > 0) {
-
-                        var num_uni = caracteristicas[j].name;
-                        var units = num_uni.split(' ');
-
-                        console.log("Encontrada car. Unidades es " + units[0]);
-
-                        if (parseInt(units[0]) >= parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) { //el articulo tiene suficientes para el grupo
-
-                            console.log("Unidades es1 " + units[0] + " se añade 1");
-                            addToCart(data.products[k].id, 1);
-                            aux = 1;
-
-                        } else if (parseInt(units[0]) < parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) {
-
-                            addToCart(data.products[k].id, Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
-                            console.log("Math " + Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
-                            aux = 1;
-
-                        } else { //mas personas que unidades del articulo
-                            addToCart(data.products[k].id, 1);
-                            aux = 1;
-                        }
-
-                        break;
-
-                    }
-
-                }
-
-                console.log("Aux es " + aux); // si es cerno no tiene unidades pondremos que es uno
-
-                if (aux == 0 && data.products[k].name != "" && data.products[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
-                    addToCart(data.products[k].id, 1);
-
-                }
-
-
-
-                }*/
-
+            
             break;
 
 
@@ -1311,7 +1228,7 @@ function displayProducts(data, originNode, originName, param) {
 
     } else {
 
-        console.log("Error ....");
+        console.log("Error...");
 
     }
 

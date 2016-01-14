@@ -57,7 +57,7 @@ function checkOut() {
 
 }
 
-/*********************************************************************
+/***********************************************************************
   Esta funcion sirve para actualizar el boton de atras de la pantalla
   Parametros:
   originNode: el node de donde venimos
@@ -65,7 +65,7 @@ function checkOut() {
   Variables:
   nodeIds:lista de nodos por los que hemos pasado
   nodeNames: lista de los nombres de los nodos por los que hemos pasado
-*********************************************************************/
+***********************************************************************/
 function updateBackButton(originNode, originName, linkImg) {
 
     //console.log("Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
