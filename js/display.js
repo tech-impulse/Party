@@ -1390,7 +1390,8 @@ function displayPopupItemList() {//cambios jordi
            '<div class="ui-block-b" style="width:16%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 35%;">' + parseInt(CART[i].quantity) + '</label></div>' +
            '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
            '<div class="ui-block-d" style="width:32%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
-           '<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+           //'<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+           '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
            '</div>' +
            '</div>' +
            '</li>';
