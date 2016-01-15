@@ -33,7 +33,11 @@ function checkOut() {
                 '<br>' +
                 //'<a data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" >Enviar a Casa</a>' +
                 //'<br>' +
+<<<<<<< HEAD
                 '<a data-corners="false" style="width:300px" onclick="displaySummary(\'store\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" >Recoger en Mi Tienda</a>' +
+=======
+                //'<a data-corners="false" style="width:300px" onclick="displaySummary(\'store\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" >Recoger en Mi Tienda</a>' +
+>>>>>>> origin/master
                 '</center>' +
                 '</div>';
             $("#divContent").html(html);
