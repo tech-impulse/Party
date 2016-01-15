@@ -1589,19 +1589,19 @@ function displayPopupItemDetail(id, param, idproduct) {
 
                 html = html +
                     '<ul data-role="listview" data-inset="true">' +
-                    '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
+                    '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - '+CART[i].sku+'</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
                     '<li>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 200px;width: 100%;"></div>' +
                     '<div class="ui-block-b">' +
                     '<br><h1>Precio Total: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1>' +
-                    '<p><strong> Ubicación: </strong></p>' +
-                    '<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
-                    '<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
-                    '<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                    '<p><strong> Ubicación: '+CART[i].position_x_store.section+' '+CART[i].position_x_store.position +' '+CART[i].position_x_store.module+' </strong></p>' +
+                    //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                    //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                    //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
                     '<br>'+
                     '<p><strong> Descripción: </strong></p>' +
-                    '<p><strong>' + CART[i].definition + '</strong></p>' +
+                    '<strong><p style="white-space: initial;">' + CART[i].definition + '</p></strong>' +
                     '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                     '</div>' +
                     '</li>' + div_carrusel +
