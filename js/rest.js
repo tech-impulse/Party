@@ -734,11 +734,12 @@ function sendSugerencias(info) {
 
 
     //sugerencias@partyfiesta.com
-
+    console.log("WS");
+    console.log(info);
 
     var request = $.ajax({
         data: info,
-        url: urlServices + '.php',
+        url: urlServices + 'sendSuggestion.php',
         dataType: 'json',
         type: 'POST',
         timeout: 10000, //10 seg
@@ -748,7 +749,7 @@ function sendSugerencias(info) {
 
             if (response.result == 1) {
 
-                //console.log(response);
+                console.log(response);
                 getNodes(0);
 
 

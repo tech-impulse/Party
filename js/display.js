@@ -1315,8 +1315,7 @@ function openPopupAction(param) {
     translateButtons(idiomStore);
 }
 
-
-function displayPopupItemList() {
+/*function displayPopupItemList() {
 
     var html = '';
 
@@ -1334,21 +1333,28 @@ function displayPopupItemList() {
             '<div class="ui-block-b" style="width:16%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 35%;">' + parseInt(CART[i].quantity) + '</label></div>' +
             '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
             '<div class="ui-block-d" style="width:32%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
-            '<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+            '<div class="ui-block-e" style="width:16%"><a data-icon="delete" data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
             '</div>' +
             '</div>' +
             '</li>';
     }
 
+<<<<<<< HEAD
     //html = html + '<li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
     
+=======
+>>>>>>> 196203660f9b7c07fac1c1a36bf10956fd7b9de9
     html = '<div style="width: 600px; height:400px; overflow: scroll;">' + html + '</div><li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
 
 
+    //$("#contentPopupListItems").html(tituloPopUp + html);
+    
+    //$("#contentPopupListItems").html(tituloPopUp + '<div style="width: 600px; height:400px; overflow: scroll;">' + html + '</div>');
     $("#contentPopupListItems").html(tituloPopUp + html);
+    
     $("#contentPopupListItems").trigger("create");
 
     switch (CART.length) {
@@ -1364,6 +1370,56 @@ function displayPopupItemList() {
         //$('#contentPopupListItems').css('overflow-y', 'scroll');
     }
     translateButtons(idiomStore);
+}*/
+
+function displayPopupItemList() {//cambios jordi
+
+   var html = '';
+
+   var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
+
+   for (var i = 0; i < CART.length; i++) {
+       html = html +
+           '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
+       '<div class="ui-grid-b">' +
+           '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + CART[i].linkext + '"></div>' +
+           '<div class="ui-block-b" style="width:45%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;padding-top: 5%;">' + CART[i].name + '</label></div>' +
+           '<div class="ui-block-c" style="width:40%;">' +
+           '<div class="ui-grid-d">' +
+           '<div class="ui-block-a" style="width:16%;"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+           '<div class="ui-block-b" style="width:16%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 35%;">' + parseInt(CART[i].quantity) + '</label></div>' +
+           '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+           '<div class="ui-block-d" style="width:32%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
+           '<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+           '</div>' +
+           '</div>' +
+           '</li>';
+   }
+
+   //html = html + '<li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
+   
+   html = '<div style="width: 600px; height:400px; overflow: scroll;">' + html + '</div><li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
+
+
+   $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
+
+
+   $("#contentPopupListItems").html(tituloPopUp + html);
+   $("#contentPopupListItems").trigger("create");
+
+   switch (CART.length) {
+   case 0:
+       console.log("No hay items");
+       break;
+   default:
+       $("#popupCart").popup("close");
+       setTimeout(function () {
+
+           $("#popupListItems").popup("open");
+       }, popupTimeout);
+       //$('#contentPopupListItems').css('overflow-y', 'scroll');
+   }
+   translateButtons(idiomStore);
 }
 
 function displayItemAlter(id_prod_alter, id_product, idnode) {
@@ -1538,7 +1594,12 @@ function displayPopupItemDetail(id, param, idproduct) {
                     '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 200px;width: 100%;"></div>' +
                     '<div class="ui-block-b">' +
                     '<br><h1>Precio Total: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1>' +
-                    '<p><strong> Ubicación: ' + CART[i].definition + '</strong></p>' +
+                    '<p><strong> Ubicación: </strong></p>' +
+                    '<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                    '<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                    '<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                    '<br>'+
+                    '<p><strong> Descripción: </strong></p>' +
                     '<p><strong>' + CART[i].definition + '</strong></p>' +
                     '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                     '</div>' +
@@ -1564,7 +1625,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
         setTimeout(function () {
             getAlternativeProducts(id, idproduct);
-        }, 250);
+        }, 200);
 
     }
 
@@ -1921,10 +1982,10 @@ function displayPantallaSugerencias() {
         '<div class="ui-grid-b">' +
         '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label id="labelSugNPob">' + jsonIdiomas.form_sugerencias.labelSugNPob + '</label ><input type="text" id="poblacion" size="25" maxlength="50" data-clear-btn="true"></div>' +
         '<div class="ui-block-b" style="width: 31%;margin-right: 1%;"><label id="labelSugProv">' + jsonIdiomas.form_sugerencias.labelSugProv + '</label><input type="text" value="" id="provincia" size="40" maxlength="100" data-clear-btn="true"></div>' +
-        '<div class="ui-block-c" style=""><label id="labelSugTelf">' + jsonIdiomas.form_sugerencias.labelSugTelf + '</label><input type="number" value="" id="correo" size="40" maxlength="100" data-clear-btn="true"></div>' +
+        '<div class="ui-block-c" style=""><label id="labelSugTelf">' + jsonIdiomas.form_sugerencias.labelSugTelf + '</label><input type="number" value="" id="telf" size="40" maxlength="100" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label id="labelSugTipo">' + jsonIdiomas.form_sugerencias.labelSugTipo + '</label><select name="suge_inci" data-native-menu="false"><option value="1">' + jsonIdiomas.form_sugerencias.selectOption + '<option value="2">Petición</select></div>' +
+        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label id="labelSugTipo">' + jsonIdiomas.form_sugerencias.labelSugTipo + '</label><select name="suge_inci" data-native-menu="false"  data-corners="false"><option value="1">' + jsonIdiomas.form_sugerencias.selectOption + '<option value="2">Petición</select></div>' +
         '<div class="ui-block-b" style="width: 65%;"><label id="labelSugNSugPreg">' + jsonIdiomas.form_sugerencias.labelSugNSugPreg + '</label><input type="text" value="" id="tipo_sugenrencia" size="40" maxlength="100" data-clear-btn="true"></div>' +
         '</div>' +
         '<label id="labelSugPreg">' + jsonIdiomas.form_sugerencias.labelSugPreg +
@@ -1933,7 +1994,7 @@ function displayPantallaSugerencias() {
         '<tr>' +
         '<td>' +
         '<div align="center">' +
-        '<button type="button" onclick="enviarSugerencia();" id="enviar_sugerencia">' + jsonIdiomas.form_sugerencias.enviar_sugerencia + '</button>' +
+        '<button type="button" onclick="enviarSugerencia();"  data-corners="false" id="enviar_sugerencia">' + jsonIdiomas.form_sugerencias.enviar_sugerencia + '</button>' +
         '</div>' +
         '</form>' +
         '</div>';
