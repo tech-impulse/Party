@@ -44,11 +44,11 @@ function translateButtons(idioma) {
                 "selectOption": "Incidence",
                 "labelSugPreg": "Do you have any suggestions?"
             },
-            "pop_checkOut":{
-                "realizar_pedido":"Checkout"
+            "pop_checkOut": {
+                "realizar_pedido": "Checkout"
             },
             "popup_errores": {
-                "tituloPopUp":"",
+                "tituloPopUp": "",
                 "campo_vacio": "Fill in this field",
                 "displayProductos": {
                     "isfiesta_3": "All selects ok",
@@ -59,7 +59,17 @@ function translateButtons(idioma) {
                     "enviar_registro": "Fill in all fields . Thank you",
                     "contra_nocoinciden": "Do not match"
                 },
+                "opcion_no_valida": "Seleccione una opcion válida"
             },
+            "popup_info_item": {
+                "alternativos": "Productos alternativos",
+                "campo_vacio": "Fill in this field"
+            },
+            "cajas": {
+                "precio_total_label": "Item price: ",
+                "unidades": "units"
+            }
+
         }
 
         //pagina de inicio  
@@ -142,12 +152,12 @@ function translateButtons(idioma) {
                 "btn_continuar": "CONTINUAR",
                 "talla": "¿Que talla tiene?"
             },
-            "pop_checkOut":{
-                "realizar_pedido":"Realizar pedido"
+            "pop_checkOut": {
+                "realizar_pedido": "Realizar pedido"
             },
             "popup_errores": {
-                "labelCargando":"Cargando...",
-                "tituloPopUp":"Productos en la cesta",
+                "labelCargando": "Cargando...",
+                "tituloPopUp": "Productos en la cesta",
                 "campo_vacio": "Rellene este campo",
                 "displayProductos": {
                     "isfiesta_3": "Todos los selects ok",
@@ -159,6 +169,14 @@ function translateButtons(idioma) {
                     "contra_nocoinciden": "No coinciden",
                 },
                 "opcion_no_valida": "Seleccione una opcion válida"
+            },
+            "popup_info_item": {
+                "alternativos": "Productos alternativos",
+                "campo_vacio": "Fill in this field"
+            },
+            "cajas": {
+                "precio_total_label": "Total artículo: ",
+                "unidades": "unidad"
             }
         }
 
@@ -244,13 +262,13 @@ function translateButtons(idioma) {
                 "selectOption": "Incidència",
                 "labelSugPreg": "Té algun suggeriment?"
             },
-            
-            "pop_checkOut":{
-                "realizar_pedido":"Fer la comanda"
+
+            "pop_checkOut": {
+                "realizar_pedido": "Fer la comanda"
             },
             "popup_errores": {
-                "labelCargando":"Carregant...",
-                "tituloPopUp":"Productes en la cistella",
+                "labelCargando": "Carregant...",
+                "tituloPopUp": "Productes en la cistella",
                 "campo_vacio": "Ompli aquest camp",
                 "displayProductos": {
                     "isfiesta_3": "Tots els selects ok",
@@ -262,6 +280,14 @@ function translateButtons(idioma) {
                     "contra_nocoinciden": "No coincideixen",
                 },
                 "opcion_no_valida": "Seleccioneu una opció vàlida"
+            },
+            "popup_info_item": {
+                "alternativos": "Productes alternatius",
+                "campo_vacio": "Fill in this field"
+            },
+            "cajas": {
+                "precio_total_label": "Total article: ",
+                "unidades": "unitats"
             }
         }
 
@@ -338,8 +364,8 @@ function translateButtons(idioma) {
                 "selectOption": "Incidència",
                 "labelSugPreg": "¿Tiene alguna sugerencia?"
             },
-            "pop_checkOut":{
-                "realizar_pedido":"Checkout"
+            "pop_checkOut": {
+                "realizar_pedido": "Checkout"
             },
             "popup_errores": {
                 "campo_vacio": "Rellene este campo",
@@ -353,6 +379,14 @@ function translateButtons(idioma) {
                     "contra_nocoinciden": "No coinciden",
                 },
                 "opcion_no_valida": "Seleccione una opcion válida"
+            },
+            "popup_info_item": {
+                "alternativos": "Productos alternativos",
+                "campo_vacio": "Fill in this field"
+            },
+            "cajas": {
+                "precio_total_label": "Total artículo: ",
+                "unidades": "unidad"
             }
         }
 
@@ -439,6 +473,14 @@ function translateButtons(idioma) {
                     "contra_nocoinciden": "No coinciden",
                 },
                 "opcion_no_valida": "Seleccione una opcion válida"
+            },
+            "popup_info_item": {
+                "alternativos": "Productos alternativos",
+                "campo_vacio": "Fill in this field"
+            },
+            "cajas": {
+                "precio_total_label": "Total artículo: ",
+                "unidades": "unidad"
             }
         }
 

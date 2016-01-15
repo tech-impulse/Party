@@ -406,7 +406,7 @@ function refreshDisplayProducts() {
             }
 
             if (aux_carac == 1) { //no tiene unidades pasamos al siguiente product
-                unidades = "1 unidad";
+                unidades = "1 "+jsonIdiomas.cajas.unidades;
             }
 
             if (data[i].name == "") {
@@ -648,7 +648,7 @@ function displayProducts(data, originNode, originName, param) {
 
                 if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
                     //console.log("No tiene unidades saltamos el producto")
-                    unidades = "1 unidad";
+                    unidades = "1 "+jsonIdiomas.cajas.unidades;
                 }
 
                 if (data.products[i].name == "") {
@@ -910,7 +910,7 @@ function displayProducts(data, originNode, originName, param) {
                         unidades = caracteristicas[j].name;
                         break;
                     } else {
-                        unidades = "1 unidad";
+                        unidades = "1 "+jsonIdiomas.cajas.unidades;
                         continue;
                     }
 
@@ -1521,7 +1521,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
                 var html = '';
 
-                div_carrusel = '<li data-role="list-divider" data-theme="c"><span>Productos alternativos</span></li>' +
+                div_carrusel = '<li data-role="list-divider" data-theme="c"><span>'+jsonIdiomas.popup_info_item.alternativos+'</span></li>' +
                     '<li style="height: 175px;" id="img_prod_alter"><div class="ui-grid-a" style="height: 175px;">' +
                     '<div id="imgBarraCarga"><center><label>' + jsonIdiomas.popup_errores.labelCargando + '</label></center></div>' +
                     '<div id="swiper" style="height: 175px;"></div>' +

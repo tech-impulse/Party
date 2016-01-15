@@ -591,13 +591,14 @@ function addToCart(item, param) {
 
             var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
             //console.log("Precio del articulo es " + precioArticulo);
-            $("#labelPrecioTotalProducto" + CART[j].id).text("Total artículo: " + formatoNumero(precioArticulo, 2, ",", ".", "€"));
+            $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
 
             displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
             j = PRODUCTS.length;
             //console.log("Añadimos mas "+CART[j].quantity);
 
         }
+
     }
 
     if (foundInCart == 0) {
@@ -623,7 +624,7 @@ function addToCart(item, param) {
         var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
         //console.log($("#labelPrecioTotalProducto" + product.id));
-        $("#labelPrecioTotalProducto" + product.id).text("Total artículo: " + formatoNumero(precioArticulo, 2, ",", ".", "€"));
+        $("#labelPrecioTotalProducto" + product.id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
         $("#labelPrecioTotalProducto" + product.id).show();
 
         displayItemOperations(item, product.quantity);
