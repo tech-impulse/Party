@@ -750,7 +750,7 @@ function sendSugerencias(info) {
             if (response.result == 1) {
 
                 console.log(response);
-                //getNodes(0);
+                getNodes(0);
 
 
             } else if (response.result == 0) {
