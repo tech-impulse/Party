@@ -806,6 +806,9 @@ function stopYoutubeVideo(idOfIframe) {
 function enviarSugerencia() {
 
     var sug_inci = $("select#suge_inci option").filter(":selected").val();
+    if(sug_inci== undefined){
+        sug_inci="incidencia";
+    }
     var nombre = $("#nombre").val();
     var correo = $("#correo").val();
     var provincia = $("#provincia").val();
@@ -815,7 +818,7 @@ function enviarSugerencia() {
     var fecha_naci = $("#fecha_naci").val();
     var sugerencias = $("#sugerencias").val();
 
-    //console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + correo + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + " sugerencia " + sugerencias);
+    console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + provincia + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + " sugerencia " + sugerencias);
 
     if (nombre != "") {
 
@@ -833,7 +836,7 @@ function enviarSugerencia() {
 
                                 if (sugerencias != "") {
 
-                                    //console.log("Llegamos hasta el final");
+                                    console.log("Llegamos hasta el final");
 
                                     var info = {
                                         name: nombre,
@@ -842,9 +845,9 @@ function enviarSugerencia() {
                                         city: poblacion,
                                         phone: telefono,
                                         birthday: fecha_naci,
-                                        about_sugg: sug_inci,
-                                        type_sugg: t_sugere,
-                                        suggestion: sugerencia
+                                        about_sugg: t_sugere,
+                                        type_sugg: sug_inci,
+                                        suggestion: sugerencias
                                     };
 
                                     sendSugerencias(info);
