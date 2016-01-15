@@ -339,7 +339,7 @@ function backPage(idNode, nodeName, linkint) {
         var position = (nodeIds.length);
         console.log("Posicion "+position);
 
-        if (position > 1 && idNode != 0) {
+        if (position > 2 && idNode != 0) {
 
             console.log("Tenemos cola");
             console.log(nodeIds);
