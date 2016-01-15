@@ -16,13 +16,13 @@ function checkOut() {
                 '<br>' +
                 '<a  data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                 '<br>' +
-                '<a  data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b">Enviar a Casa</a>' +
+                //'<a  data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b">Enviar a Casa</a>' +
                 '</center>' +
                 '</div>';
             $("#divContent").html(html);
             $("#divContent").trigger('create');
-            var n = nodeIds.length + 1;
-            updateBackButton(nodeIds[n], nodeNames[n]);
+            //var n = nodeIds.length + 1;
+            //updateBackButton(nodeIds[n], nodeNames[n]);
 
         } else {
             var html = '<div>' +
@@ -31,8 +31,8 @@ function checkOut() {
                 '<br>' +
                 '<a data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" >' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                 '<br>' +
-                '<a data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" >Enviar a Casa</a>' +
-                '<br>' +
+                //'<a data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" >Enviar a Casa</a>' +
+                //'<br>' +
                 '<a data-corners="false" style="width:300px" onclick="displaySummary(\'store\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" >Recoger en Mi Tienda</a>' +
                 '</center>' +
                 '</div>';
@@ -80,6 +80,7 @@ function updateBackButton(originNode, originName, linkImg) {
         nodeIds.push(originNode);
         nodeNames.push(originName);
         nodeImg.push(linkImg);
+        
     } else {
 
         //console.log("Añadimos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
@@ -87,8 +88,9 @@ function updateBackButton(originNode, originName, linkImg) {
         nodeNames.push(originName);
         nodeImg.push(linkImg);
     }
-    // ponemos menos 2 porque añadimos uno de mas al inicio
+    
     $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
+    //$("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 1] + ', \'' + nodeNames[nodeNames.length - 1] + '\', \'' + nodeImg[nodeImg.length - 1] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
 
 
 }

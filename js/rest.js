@@ -424,7 +424,7 @@ function getNodesProducts(idNode,nodeName) { //esta funcion nos devuelve la info
         url: urlServices + 'getNodeProducts.php',
         dataType: 'json',
         type: 'POST',
-        timeout: 10000, //10 seg
+        timeout: 25000, //10 seg
         success: function (response) {
 
             console.log("Respueta");

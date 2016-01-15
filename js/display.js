@@ -4,7 +4,7 @@
     - originName: nombre del nodo Anterior (Del que venimos)
     */
 
-function displayNode(data, originNode, originName, linkImg) {
+function displayNode(data, originNode, originName, linkImg,isback) {
 
     //console.log("DisplayNode-> Nodes es " + data.result + " link " + linkImg);
 
@@ -50,8 +50,8 @@ function displayNode(data, originNode, originName, linkImg) {
 
         if (originNode == 0) {
             loadMenu(data);
-        } else {
-            //console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg);
+        } else {  //if (isback == "back")
+            console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg+"--------------------------------------------");
             updateBackButton(originNode, originName, linkImg);
         }
 
@@ -523,7 +523,7 @@ function displayProducts(data, originNode, originName, param) {
         var type;
 
 
-        //updateBackButton(originNode, originName);
+        updateBackButton(originNode, originName);
 
 
         if (pantallaActual == "Asistente disfraces") {
@@ -1287,7 +1287,7 @@ function displayItemOperations(id, param, position) {
     $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
     $("#spPopupCartCount").text(total);
     $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
-    $("#spBtnAmountPerson").text(precio_persona + " x persona");
+    $("#spBtnAmountPerson").text(precio_persona + " x per");
 
 
 
@@ -1334,7 +1334,7 @@ function displayPopupItemList() {
             '<div class="ui-block-b" style="width:16%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 35%;">' + parseInt(CART[i].quantity) + '</label></div>' +
             '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
             '<div class="ui-block-d" style="width:32%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
-            '<div class="ui-block-e" style="width:16%"><a data-icon="delete" data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+            '<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
             '</div>' +
             '</div>' +
             '</li>';
@@ -1639,7 +1639,7 @@ function loadMenu(data) {
 
     var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-left: 20%"></div>' +
+        '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
         '<div class="ui-block-b" style="width: 70%;"><span style="margin-left:15px;" id="spBtnPopupCartProducts">0</span><span id="labelProductos" style="text-transform: uppercase;">' + jsonIdiomas.header.labelProductos + '</span><br><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span></div>' +
         '</div></a>';
 
@@ -1647,12 +1647,12 @@ function loadMenu(data) {
     /*HEADER  de la pantalla*/
 
     htmlHeader = '<div class="ui-grid-d">' +
-        '<div class="ui-block-a" style="margin-top:10px; width:30%;color: rgb(70, 130, 180);" id="divBack"></div>' +
-        '<div class="ui-block-b" style="margin-top:10px; width:27%;"><img src="css/icons/logo.png" width="75%" style="margin-left: 20%"> </div>' +
+        '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);" id="divBack"></div>' +
+        '<div class="ui-block-b" style="margin-top:10px; width:22%;"><img src="css/icons/logo.png" width="75%" style="float: right;"> </div>' +
         '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;"><span>' + jsonIdiomas.header.login + '</span></a>' +
         '</div>' +
-        '<div class="ui-block-d" style="margin-top:10px; width:16%" id="car_compra">' + cart +
+        '<div class="ui-block-d" style="width:18%" id="car_compra">' + cart +
         '</div>' +
         '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +

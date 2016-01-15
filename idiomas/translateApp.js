@@ -11,7 +11,7 @@ function translateButtons(idioma) {
             "header": {
                 "menu": "Menu",
                 "login": "login!",
-                "labelProductos": " Products"
+                "labelProductos": " Prod"
             },
             "menu_lateral": {
                 "menu": "Go to menu"
@@ -110,7 +110,7 @@ function translateButtons(idioma) {
             "header": {
                 "menu": "Menú",
                 "login": "identificarse!",
-                "labelProductos": " Productos"
+                "labelProductos": " Prod"
             },
             "menu_lateral": {
                 "menu": "Ir al Menú"
@@ -212,7 +212,7 @@ function translateButtons(idioma) {
             "header": {
                 "menu": "Menú",
                 "login": "identificar-se!",
-                "labelProductos": " Productes",
+                "labelProductos": " Prod",
             },
             "menu_lateral": {
                 "menu": "Tornar al Menú"
@@ -447,7 +447,7 @@ function translateButtons(idioma) {
 
         //header 
         $('#login').text('identificarse!');
-        $('#labelProductos').text(' Productos');
+        $('#labelProductos').text(' Prod');
 
         //popup login    
         $('#labelIniciarSession').text('Iniciar sessión');

@@ -29,6 +29,28 @@ Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
 
+    // jQuery no-double-tap-zoom plugin
+    // Triple-licensed: Public Domain, MIT and WTFPL license - share and enjoy!
+
+    (function ($) {
+        var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
+        $.fn.nodoubletapzoom = function () {
+            if (IS_IOS)
+                $(this).bind('touchstart', function preventZoom(e) {
+                    var t2 = e.timeStamp,
+                        t1 = $(this).data('lastTouch') || t2,
+                        dt = t2 - t1,
+                        fingers = e.originalEvent.touches.length;
+                    $(this).data('lastTouch', t2);
+                    if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+
+                    e.preventDefault(); // double tap - prevent the zoom
+                    // also synthesize click events we just swallowed up
+                    $(this).trigger('click').trigger('click');
+                });
+        };
+    })(jQuery);
+
 
 
     $("#popupListItems").bind({
@@ -305,25 +327,32 @@ function backPage(idNode, nodeName, linkint) {
     translateButtons(idiomStore);
 
     if (pantallaActual == "Asistente fiestas" && AUX == 1) {
-        
+
         setTimeout(function () {
             $("#popupPregunta").popup("open");
         }, popupTimeout);
-        
+
         AUX = 0;
 
     } else {
 
         var position = (nodeIds.length);
+        console.log("Posicion "+position);
 
-        if (position > 2 && idNode != 0) {
-            position = nodeIds.length;
-            console.log("Antes de borrar " + nodeIds[position]);
+        if (position > 1 && idNode != 0) {
+
+            console.log("Tenemos cola");
+            console.log(nodeIds);
+            console.log("Antes de borrar " + position);
             nodeIds.splice(position - 2);
             nodeNames.splice(position - 2);
             nodeImg.splice(position - 2);
             console.log(nodeIds);
+            position = nodeIds.length; //despues de borrar
+            console.log("Antes de borrar " + position);
             getNodes(idNode, nodeName, 0, linkint, "back");
+            //getNodes(nodeIds[position - 2], nodeNames[position - 2], 0, nodeImg[position - 2], "back");
+
         } else {
             getNodes(0);
             nodeIds = [];
