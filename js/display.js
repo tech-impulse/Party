@@ -1536,7 +1536,12 @@ function displayPopupItemDetail(id, param, idproduct) {
                     '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 200px;width: 100%;"></div>' +
                     '<div class="ui-block-b">' +
                     '<br><h1>Precio Total: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1>' +
-                    '<p><strong> Ubicación: ' + CART[i].definition + '</strong></p>' +
+                    '<p><strong> Ubicación: </strong></p>' +
+                    '<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                    '<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                    '<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                    '<br>'+
+                    '<p><strong> Descripción: </strong></p>' +
                     '<p><strong>' + CART[i].definition + '</strong></p>' +
                     '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                     '</div>' +
@@ -1562,7 +1567,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
         setTimeout(function () {
             getAlternativeProducts(id, idproduct);
-        }, 250);
+        }, 200);
 
     }
 
@@ -1922,7 +1927,7 @@ function displayPantallaSugerencias() {
         '<div class="ui-block-c" style=""><label id="labelSugTelf">' + jsonIdiomas.form_sugerencias.labelSugTelf + '</label><input type="number" value="" id="correo" size="40" maxlength="100" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label id="labelSugTipo">' + jsonIdiomas.form_sugerencias.labelSugTipo + '</label><select name="suge_inci" data-native-menu="false"><option value="1">' + jsonIdiomas.form_sugerencias.selectOption + '<option value="2">Petición</select></div>' +
+        '<div class="ui-block-a" style="width: 31%;margin-right: 1%;"><label id="labelSugTipo">' + jsonIdiomas.form_sugerencias.labelSugTipo + '</label><select name="suge_inci" data-native-menu="false"><option value="1"  data-corners="false">' + jsonIdiomas.form_sugerencias.selectOption + '<option value="2">Petición</select></div>' +
         '<div class="ui-block-b" style="width: 65%;"><label id="labelSugNSugPreg">' + jsonIdiomas.form_sugerencias.labelSugNSugPreg + '</label><input type="text" value="" id="tipo_sugenrencia" size="40" maxlength="100" data-clear-btn="true"></div>' +
         '</div>' +
         '<label id="labelSugPreg">' + jsonIdiomas.form_sugerencias.labelSugPreg +
@@ -1931,7 +1936,7 @@ function displayPantallaSugerencias() {
         '<tr>' +
         '<td>' +
         '<div align="center">' +
-        '<button type="button" onclick="enviarSugerencia();" id="enviar_sugerencia">' + jsonIdiomas.form_sugerencias.enviar_sugerencia + '</button>' +
+        '<button type="button" onclick="enviarSugerencia();"  data-corners="false" id="enviar_sugerencia">' + jsonIdiomas.form_sugerencias.enviar_sugerencia + '</button>' +
         '</div>' +
         '</form>' +
         '</div>';

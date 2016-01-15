@@ -1,5 +1,5 @@
 /******************************************
-Esto se ejecuta antes que la app se inicie
+Esto se ejecuta antes que la app se inicie  
 ******************************************/
 $(document).bind("mobileinit", function () {
 
@@ -836,15 +836,15 @@ function enviarSugerencia() {
                                     //console.log("Llegamos hasta el final");
 
                                     var info = {
-                                        nombre: nombre,
-                                        correo: correo,
-                                        provincia: provincia,
-                                        poblacion: poblacion,
-                                        telefono: telefono,
-                                        fecha_naci: fecha_naci,
-                                        suge_inci: sug_inci,
-                                        sugerencia_tipo: t_sugere,
-                                        sugerencia: sugerencia
+                                        name: nombre,
+                                        email: correo,
+                                        province: provincia,
+                                        city: poblacion,
+                                        phone: telefono,
+                                        birthday: fecha_naci,
+                                        about_sugg: sug_inci,
+                                        type_sugg: t_sugere,
+                                        suggestion: sugerencia
                                     };
 
                                     sendSugerencias(info);
