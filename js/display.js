@@ -1588,7 +1588,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
                 html = html +
                     '<ul data-role="listview" data-inset="true">' +
-                    '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
+                    '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - '+CART[i].sku+'</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
                     '<li>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 200px;width: 100%;"></div>' +
