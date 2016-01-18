@@ -573,7 +573,7 @@ function getProducts(idNode, nodeName, info_aux) {
 
                 $("#texto_popup").text("Error...");
                 $('#popupAlert').popup('open');
-
+                
             }
 
         },
