@@ -1287,9 +1287,10 @@ function displayItemOperations(id, param, position) {
     $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
     $("#spPopupCartCount").text(total);
     $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
-    $("#spBtnAmountPerson").text(precio_persona + " x per");
+    //$("#spBtnAmountPerson").text(precio_persona + " x per");
+    $("#spBtnAmountPerson").text(precio_persona + " x");
 
-
+    $("#userIcoCarrito").show();
 
     if (CART.length < 1) {
         $("#popupListItems").popup("close");
@@ -1693,7 +1694,8 @@ function loadMenu(data) {
         '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
         '<div class="ui-block-b" style="width: 70%;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5;">' + 
         '<label id="spBtnPopupCartProducts" style="display:block;padding-top: 0px;font-size: 18px;color: white;">0</label>' + 
-        '</div><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span></div>' +
+        '</div><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + 
+        '<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;"></div>' +
         '</div></a>';
     
     /* var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
