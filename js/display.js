@@ -1290,6 +1290,9 @@ function displayItemOperations(id, param, position) {
     //$("#spBtnAmountPerson").text(precio_persona + " x per");
     $("#spBtnAmountPerson").text(precio_persona + " x");
 
+    
+    $("#circuloCantidad").show();
+    $("#spBtnPopupCartAmmount").show();
     $("#userIcoCarrito").show();
 
     if (CART.length < 1) {
@@ -1692,9 +1695,11 @@ function loadMenu(data) {
     var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
-        '<div class="ui-block-b" style="width: 70%;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5;">' + 
-        '<label id="spBtnPopupCartProducts" style="display:block;padding-top: 0px;font-size: 18px;color: white;">0</label>' + 
-        '</div><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + 
+        '<div class="ui-block-b" style="width: 70%;margin-top:5px;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5; display:none">' + 
+        
+        '<label id="spBtnPopupCartProducts" style="display:block;margin-top:5px;font-size: 18px;color: white;">0</label>' + 
+        
+        '</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + 
         '<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;"></div>' +
         '</div></a>';
     
@@ -1722,7 +1727,7 @@ function loadMenu(data) {
         '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;"><span>' + jsonIdiomas.header.login + '</span></a>' +
         '</div>' +
-        '<div class="ui-block-d" style="width:18%" id="car_compra">' + cart +
+        '<div class="ui-block-d" style="width:18%; margin-top:3px;" id="car_compra">' + cart +
         '</div>' +
         '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
