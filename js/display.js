@@ -1288,15 +1288,24 @@ function displayItemOperations(id, param, position) {
     $("#spPopupCartCount").text(total);
     $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
     //$("#spBtnAmountPerson").text(precio_persona + " x per");
-    $("#spBtnAmountPerson").text(precio_persona + " x");
+    //$("#spBtnAmountPerson").text(precio_persona + " x");
 
     
-    $("#circuloCantidad").show();
-    $("#spBtnPopupCartAmmount").show();
-    $("#userIcoCarrito").show();
-
     if (CART.length < 1) {
         $("#popupListItems").popup("close");
+        
+        $("#spBtnAmountPerson").text('');
+        
+        $("#circuloCantidad").hide();
+        $("#spBtnPopupCartAmmount").hide();
+        $("#userIcoCarrito").hide();
+    }
+    else    {
+        $("#spBtnAmountPerson").text(precio_persona + " x");
+        
+        $("#circuloCantidad").show();
+        $("#spBtnPopupCartAmmount").show();
+        $("#userIcoCarrito").show();
     }
 
     translateButtons(idiomStore);
