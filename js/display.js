@@ -1438,12 +1438,12 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><img src="' + aux_prod.linkext + '" style="max-width: 200px;width: 100%;"></div>' +
+        '<div class="ui-block-a"><img src="' + aux_prod.linkext + '" style="max-width: 290px;;width: 100%;"></div>' +
         '<div class="ui-block-b">' +
         '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-        '<p><strong> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.position + ' ' + aux_prod.position_x_store.module + ' </strong></p>' +
-        '<p><strong> Descripción: </strong></p>' +
-        '<strong><p style="white-space: initial;">' + definition + '</p></strong>' +
+        '<p><strong style="font-size: 15px;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.position + ' ' + aux_prod.position_x_store.module + ' </strong></p>' +
+        '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
+        '<strong style=""><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
         '</div></div>' +
         '</ul>'+
@@ -1583,16 +1583,16 @@ function displayPopupItemDetail(id, param, idproduct) {
                     '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
                     '<li>' +
                     '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 200px;width: 100%;"></div>' +
+                    '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
                     '<div class="ui-block-b">' +
                     '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                    '<p><strong> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
-                //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
-                //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
-                //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
-                //'<br>'+
-                '<p><strong> Descripción: </strong></p>' +
-                    '<strong><p style="white-space: initial;">' + definition + '</p></strong>' +
+                    '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
+                    //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                    //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                    //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                    //'<br>'+
+                    '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
+                    '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                     '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                     '</div>' +
                     '</li>' + div_carrusel +

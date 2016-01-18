@@ -242,9 +242,11 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-                updateBackButton(idNode, nodeName, aux);
+
 
                 if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hay que mostrar una pantalla intermadia
+
+                    updateBackButton(idNode, nodeName, aux);
 
                     console.log("Asistentes de disfraces");
                     var info = getInfoNode(idNode);
@@ -272,11 +274,14 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         console.log("DisplayPantalla intermadia");
                         console.log(info);
                         pantallaActual = "Asistente fiestas";
+                        updateBackButton(idNode, nodeName, aux);
+
                         displayPantallaIntermediaAsistFiestas(info.node);
 
                     } else {
 
                         console.log("Dame productos del catalogo" + nodeName);
+                        updateBackButton(idNode, nodeName, aux);
                         getProducts(idNode, nodeName);
 
                     }
@@ -286,9 +291,6 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     $('#popupCargando').popup('open');
 
                     getNodesProducts(idNode, nodeName);
-
-
-
 
                 } else {
 
@@ -404,7 +406,7 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
 
 }
 
-function getNodesProducts(idNode,nodeName) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
 
     //language = 1;
@@ -430,14 +432,21 @@ function getNodesProducts(idNode,nodeName) { //esta funcion nos devuelve la info
             console.log("Respueta");
             console.log(response);
 
-            if (response.products != "" && response.products.length > 0) {
+            if (response.result == 1) {
+
                 pantallaActual = "catalogo";
-                displayProducts(response,idNode,nodeName);
+                displayProducts(response, idNode, nodeName);
+
             } else {
+                setTimeout(function () {
+                    $('#popupCargando').popup('close');
+                }, 500);
 
                 $("#texto_popup").text("Esta categoría no tiene artículos");
-                $('#popupCargando').popup('close');
-                $('#popupAlert').popup('open');
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 750);
+
             }
 
         },
@@ -448,6 +457,10 @@ function getNodesProducts(idNode,nodeName) { //esta funcion nos devuelve la info
                 //console.log("Timeout");
                 alert("Error de TimeOut... compruebe su conexion de internet");
 
+                setTimeout(function () {
+                    $("#popupCargando").popup("close");
+                }, 5000);
+
             } else {
 
                 restError(jqXHR, "tiendas");
@@ -455,6 +468,10 @@ function getNodesProducts(idNode,nodeName) { //esta funcion nos devuelve la info
                 //alert("Sin conexion a internet...");
                 $("#texto_popup").text("Sin conexion a internet");
                 $('#popupAlert').popup('open');
+
+                setTimeout(function () {
+                    $("#popupCargando").popup("close");
+                }, 5000);
 
             }
         },
@@ -584,6 +601,10 @@ function getProducts(idNode, nodeName, info_aux) {
                 //console.log("Timeout");
                 alert("Error de TimeOut... compruebe su conexion de internet");
 
+                setTimeout(function () {
+                    $("#popupCargando").popup("close");
+                }, 5000);
+
             } else {
 
                 restError(jqXHR, "tiendas");
@@ -591,6 +612,10 @@ function getProducts(idNode, nodeName, info_aux) {
                 //alert("Sin conexion a internet...");
                 $("#texto_popup").text("Sin conexion a internet");
                 $('#popupAlert').popup('open');
+
+                setTimeout(function () {
+                    $("#popupCargando").popup("close");
+                }, 5000);
 
             }
         },
