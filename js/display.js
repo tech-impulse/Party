@@ -1704,8 +1704,25 @@ function loadMenu(data) {
     var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
-        '<div class="ui-block-b" style="width: 70%;"><span style="margin-left:15px;" id="spBtnPopupCartProducts">0</span><span id="labelProductos" style="text-transform: uppercase;">' + jsonIdiomas.header.labelProductos + '</span><br><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span></div>' +
+        '<div class="ui-block-b" style="width: 70%;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5;">' + 
+        '<label id="spBtnPopupCartProducts" style="display:block;padding-top: 0px;font-size: 18px;color: white;">0</label>' + 
+        '</div><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span></div>' +
         '</div></a>';
+    
+    /* var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
+        '<div class="ui-block-b" style="width: 70%;"><span style="margin-left:15px;" id="spBtnPopupCartProducts">0</span><span id="labelProductos" style="text-transform: uppercase;">' + jsonIdiomas.header.labelProductos + '</span><br><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span></div>' +
+        '</div></a>';*/
+    
+    
+    /*var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a" style="width:30%; z-index:0;"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
+        '<div id="circulo38554" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:35px;z-index:5;">' +
+        '<label id="spBtnPopupCartProducts" style="display:block;padding-top: 0px;font-size: 18px;color: white;">0</label></div>' +
+        '<span id="labelProductos" style="text-transform: uppercase;">' + jsonIdiomas.header.labelProductos + '</span><br><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span></div>' +
+        '</div></a>';*/
 
 
     /*HEADER  de la pantalla*/
