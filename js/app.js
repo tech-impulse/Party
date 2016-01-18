@@ -334,7 +334,7 @@ function backPage(idNode, nodeName, linkint) {
 
     translateButtons(idiomStore);
 
-    if (pantallaActual == "Asistente fiestas" && AUX == 1) {
+    if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
 
         setTimeout(function () {
             $("#popupPregunta").popup("open");
