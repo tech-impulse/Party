@@ -1437,7 +1437,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<div class="ui-block-a"><img src="' + aux_prod.linkext + '" style="max-width: 200px;width: 100%;"></div>' +
         '<div class="ui-block-b">' +
         '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-        //'<p><strong> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.position + ' ' + aux_prod.position_x_store.module + ' </strong></p>' +
+        '<p><strong> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.position + ' ' + aux_prod.position_x_store.module + ' </strong></p>' +
         '<p><strong> Descripción: </strong></p>' +
         '<strong><p style="white-space: initial;">' + definition + '</p></strong>' +
         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
@@ -1699,7 +1699,7 @@ function loadMenu(data) {
 
     htmlHeader = '<div class="ui-grid-d">' +
         '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);" id="divBack"></div>' +
-        '<div class="ui-block-b" style="margin-top:10px; width:22%;"><img src="css/icons/logo.png" width="75%" style="float: right;"> </div>' +
+        '<div class="ui-block-b" style="margin-top:10px; width:22%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: right;"> </div>' +
         '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;"><span>' + jsonIdiomas.header.login + '</span></a>' +
         '</div>' +
