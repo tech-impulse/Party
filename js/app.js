@@ -30,7 +30,15 @@ Esto se ejecuta antes que la app se inicie
 $(document).ready(function () {
 
     // jQuery no-double-tap-zoom plugin
-    // Triple-licensed: Public Domain, MIT and WTFPL license - share and enjoy!
+
+    var elm = document.body; // or some selection of the element you want to disable
+
+    var catcher = function (evt) {
+        if (evt.touches.length > 2)
+            evt.preventDefault();
+    };
+
+    elm.addEventListener('touchstart', catcher, true);
 
     (function ($) {
         var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
@@ -337,7 +345,7 @@ function backPage(idNode, nodeName, linkint) {
     } else {
 
         var position = (nodeIds.length);
-        console.log("Posicion "+position);
+        console.log("Posicion " + position);
 
         if (position > 2 && idNode != 0) {
 
@@ -806,8 +814,8 @@ function stopYoutubeVideo(idOfIframe) {
 function enviarSugerencia() {
 
     var sug_inci = $("select#suge_inci option").filter(":selected").val();
-    if(sug_inci== undefined){
-        sug_inci="incidencia";
+    if (sug_inci == undefined) {
+        sug_inci = "incidencia";
     }
     var nombre = $("#nombre").val();
     var correo = $("#correo").val();

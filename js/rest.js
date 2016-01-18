@@ -435,7 +435,7 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
             if (response.result == 1) {
 
                 pantallaActual = "catalogo";
-                displayProducts(response, idNode, nodeName);
+                displayProducts(response, idNode, nodeName);//dsfsjndfjsdnfoj
 
             } else {
                 setTimeout(function () {
