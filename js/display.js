@@ -159,35 +159,41 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
                     }
 
+                    if (parseInt(originNode) == 0) {
+                        var altura_menu = "height:" + (heig_block * 0.8) + "px;";
+                    } else {
+                        var altura_menu = "";
+                    }
+
 
                     if (position < parseInt(data.columns)) { //columnas que tendra la pantalla
                         switch (position) {
                         case 0:
                             //block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
                             break;
                         case 1:
                             //block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
-                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
+                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'height:' + (heig_block * 0.8) + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
                             break;
                         case 2:
                             //block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'height:' + (heig_block * 0.8) + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
                             break;
                         case 3:
                             //block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'height:' + (heig_block * 0.8) + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
                             break;
                         case 4:
                             //block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'height:' + (heig_block * 0.8) + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
                             break;
                         }
 
                     } else {
 
                         position = 0;
-                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
 
 
                     }
@@ -206,13 +212,22 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
                     } else {
 
-                        if (parseInt(originNode) == 0) {
+                        if (parseInt(originNode) == 0) { //se carga el menu cuando se hace un getNodes(0)
 
                             // Adaptado para el iPad - 20150113
-                            var element = block + '<div style="display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\');background-position: top center; background-repeat: no-repeat;">' +
+                            /*var element = block + '<div style="display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\');background-size:cover;background-position: top center; background-repeat: no-repeat;">' +
                                 '<label style="font-size:35px;color: white; text-align: center; display: block; margin-top:84%;">' + data.nodes[i].name + '</label></div>' +
+                                '</div>';*/
+
+                            /*var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
+                                '<label style="position:absolute; bottom:0; font-size:35px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</label></div>' +
+                                '</div>';*/
+
+                            var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
+                                '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:35px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</div></div>' +
                                 '</div>';
 
+                            //<div class="ui-block-a" data-corners="false" onclick="getNodes(1, 'CATÁLOGO',1,'http://partyfiesta.youtter.com/webservices/img/nodos/catalogo.jpg')" style="width:307px;margin-right: 30px;margin-bottom:1%"><div style="display: table; height:211px;width:307px;background-image:url('http://partyfiesta.youtter.com/webservices/img/nodos/catalogo.jpg');  background-position: top center; background-repeat: no-repeat;"><label style="font-size:35px;color: white; text-align: center; display: block; margin-top:84%;">CATÁLOGO</label></div></div>
 
                         } else {
 
@@ -239,6 +254,8 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                 }
 
                 htmlContent = htmlContent + '</div>';
+                console.log("Pintamos la cagita-----------------------------------------------");
+                console.log(htmlContent);
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
                 if (originNode != 0) {
@@ -658,8 +675,8 @@ function displayProducts(data, originNode, originName, param) {
                 }
 
                 if (data.products[i].stock_x_store == 0) {
-                    var displayWarning = '<div id="warning' + data.products[i].id + '" style="width: 40px; height: 40px; z-index: 6; position: inherit; float: right;">' +
-                        '<img src="img/warning.png" style="width: 40px; height: 40px;" />' +
+                    var displayWarning = '<div style="z-index: 6; position: absolute;">' +
+                        '<img src="css/exclusivoweb.png" style="width: 200px;height: 20px;" />' +
                         '</div>';
                 } else {
                     var displayWarning = "";
@@ -667,11 +684,11 @@ function displayProducts(data, originNode, originName, param) {
 
                 var element = block +
                     '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
-                    '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                    '<div><div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
                     displayWarning +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;"></div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
                     '<div class="contenedor">' + titulo + '</div>' +
@@ -1290,19 +1307,18 @@ function displayItemOperations(id, param, position) {
     //$("#spBtnAmountPerson").text(precio_persona + " x per");
     //$("#spBtnAmountPerson").text(precio_persona + " x");
 
-    
+
     if (CART.length < 1) {
         $("#popupListItems").popup("close");
-        
+
         $("#spBtnAmountPerson").text('');
-        
+
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
         $("#userIcoCarrito").hide();
-    }
-    else    {
+    } else {
         $("#spBtnAmountPerson").text(precio_persona + " x");
-        
+
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
         $("#userIcoCarrito").show();
@@ -1348,8 +1364,8 @@ function displayPopupItemList() { //cambios jordi
             '<div class="ui-block-b" style="width:16%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 35%;">' + parseInt(CART[i].quantity) + '</label></div>' +
             '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
             '<div class="ui-block-d" style="width:32%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
-            //'<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
-            '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+        //'<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+        '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
             '</div>' +
             '</div>' +
             '</li>';
@@ -1401,41 +1417,24 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         }
     }
 
-    var imgAvailability;
+    var imgAvailability = "";
+    var stock = aux_prod.stock_x_store;
 
-    switch (aux_prod.state) {
-    case 1:
+    if (stock == 0) {
+        stock = aux_prod.stock_x_central_store;
+    }
+
+    if (stock > aux_prod.stock_min) {
         imgAvailability = "css/maqueta/barraVerde.gif";
-        break;
-    case 2:
+    } else if (stock <= aux_prod.stock_min) {
         imgAvailability = "css/maqueta/barraAmarilla.gif";
-        break;
-    default:
-        imgAvailability = "css/maqueta/barraVerde.gif";
-        break;
+    } else if (stock == 0) {
+        imgAvailability = "css/maqueta/barraRojo.gif";
     }
 
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: blue"><h1>' + aux_prod.name + ' - ' + aux_prod.sku + '</h1></div>';
 
     var html = '';
-
-    /*html = tituloPopUp + html +
-        '<div class="ui-grid-a" >' +
-        '<div class="ui-block-a" style="width:40%;"><img src="' + aux_prod.linkext + '" style="width: 100%;max-width: 200px;"></div>' +
-        '<div class="ui-block-b" style="width:60%;">' +
-        '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width:90%;"></div>' +
-        '<div class="ui-block-b"></div>' +
-        '</div>' +
-        '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width:50%;"><label id="price_alter">' + formatoNumero(aux_prod.price_x_region[0].totalPrice, 2, ",", ".", "€") + '</label></div>' +
-        '<div class="ui-block-b" style="width:50%;"></div>' +
-        '</div>' +
-        '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width:50%;"><a data-corners="false" data-role="button" data-theme="b" data-iconpos="notext" onclick="volver(' + id_product + ',' + idnode + ');">VOLVER</a></div>' +
-        '<div class="ui-block-b" style="width:50%;"><a data-corners="false" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCartAlter(' + aux_prod.id + ',' + id_product + ');">Añadir</a></div>' +
-        '</div></div>' +
-        '</div>';*/
 
     if (aux_prod.definition == "NULL") {
         var definition = aux_prod.short_name;
@@ -1455,7 +1454,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<strong style=""><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
         '</div></div>' +
-        '</ul>'+
+        '</ul>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:50%;"><a data-corners="false" data-role="button" data-theme="b" data-iconpos="notext" onclick="volver(' + id_product + ',' + idnode + ');">VOLVER</a></div>' +
         '<div class="ui-block-b" style="width:50%;"><a data-corners="false" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCartAlter(' + aux_prod.id + ',' + id_product + ');">Añadir</a></div>' +
@@ -1558,19 +1557,21 @@ function displayPopupItemDetail(id, param, idproduct) {
 
             if (CART[i].id == idproduct) {
 
-                var imgAvailability;
+                var imgAvailability = "";
+                var stock = CART[i].stock_x_store;
 
-                switch (CART[i].state) {
-                case 1:
-                    imgAvailability = "css/maqueta/barraVerde.gif";
-                    break;
-                case 2:
-                    imgAvailability = "css/maqueta/barraAmarilla.gif";
-                    break;
-                default:
-                    imgAvailability = "css/maqueta/barraVerde.gif";
-                    break;
+                if (stock == 0) {
+                    stock = CART[i].stock_x_central_store;
                 }
+
+                if (stock > CART[i].stock_min) {
+                    imgAvailability = "css/maqueta/barraVerde.gif";
+                } else if (stock <= CART[i].stock_min) {
+                    imgAvailability = "css/maqueta/barraAmarilla.gif";
+                } else if (stock == 0) {
+                    imgAvailability = "css/maqueta/barraRojo.gif";
+                }
+
 
                 var html = '';
 
@@ -1596,11 +1597,11 @@ function displayPopupItemDetail(id, param, idproduct) {
                     '<div class="ui-block-b">' +
                     '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                     '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
-                    //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
-                    //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
-                    //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
-                    //'<br>'+
-                    '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
+                //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                //'<br>'+
+                '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
                     '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                     '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                     '</div>' +
@@ -1704,21 +1705,21 @@ function loadMenu(data) {
     var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
-        '<div class="ui-block-b" style="width: 70%;margin-top:5px;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5; display:none">' + 
-        
-        '<label id="spBtnPopupCartProducts" style="display:block;margin-top:5px;font-size: 18px;color: white;">0</label>' + 
-        
-        '</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + 
+        '<div class="ui-block-b" style="width: 70%;margin-top:5px;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5; display:none">' +
+
+        '<label id="spBtnPopupCartProducts" style="display:block;margin-top:5px;font-size: 18px;color: white;">0</label>' +
+
+        '</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' +
         '<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;"></div>' +
         '</div></a>';
-    
+
     /* var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
         '<div class="ui-block-b" style="width: 70%;"><span style="margin-left:15px;" id="spBtnPopupCartProducts">0</span><span id="labelProductos" style="text-transform: uppercase;">' + jsonIdiomas.header.labelProductos + '</span><br><span style="margin:15px" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span></div>' +
         '</div></a>';*/
-    
-    
+
+
     /*var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:30%; z-index:0;"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
