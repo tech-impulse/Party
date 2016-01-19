@@ -425,18 +425,18 @@ function refreshDisplayProducts() {
                 //'</div>' +
                 '<img src="' + data[i].linkext + '" onclick="displayPopupItemDetail(' + ID_NODE + ',\'PRODUCTOS\',' + data[i].id + ')" style="width: 200px;height: 200px;">' +
                 '<div class="ui-grid-a">' +
-                '<div class="ui-block-a" style="width: 100%;font-size:12px">' +
+                '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
                 '<div class="contenedor">' + titulo + '</div>' +
                 '</div>' +
                 '</div>' +
                 '<div class="ui-grid-a">' +
-                '<div class="ui-block-a" style="width: 100%;font-size:20px">' +
-                '<strong>' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
+                '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
                 '</div>' +
                 '</div>' +
                 '<div class="ui-grid-a">' +
-                '<div class="ui-block-a" style="width: 100%;">' +
-                '<strong><label id="labelPrecioTotalProducto' + data[i].id + '" style="color:green;"></label></strong>' +
+                '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
+                '<strong><label id="labelPrecioTotalProducto' + data[i].id + '" style="color:green;margin-top:5px;"></label></strong>' +
                 '</div>' +
                 '</div>' +
                 '<div class="ui-grid-a">' +
@@ -673,18 +673,18 @@ function displayProducts(data, originNode, originName, param) {
                     displayWarning +
                     '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;font-size:12px">' +
+                    '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
                     '<div class="contenedor">' + titulo + '</div>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;font-size:20px">' +
-                    '<strong>' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                    '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
+                    '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;">' +
-                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;"></label></strong>' +
+                    '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
+                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;margin-top:5px;"></label></strong>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
@@ -976,18 +976,18 @@ function displayProducts(data, originNode, originName, param) {
                     '</div>' +
                     '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px;">' +
                     '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;">' +
+                    '<div class="ui-block-a" style="width: 100%;z-index:5;">' +
                     '<div class="contenedor">' + titulo + '</div>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;">' +
-                    '<strong>' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                    '<div class="ui-block-a" style="width: 100%;z-index:6;">' +
+                    '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;">' +
-                    '<label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;font-size: 15px;"></label>' +
+                    '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
+                    '<label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;font-size: 15px;margin-top:5px;"></label>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
@@ -1183,7 +1183,7 @@ function displayProducts(data, originNode, originName, param) {
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
-                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;"></label></strong>' +
+                    '<label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;"><strong style="vertical-align:sub;"></strong></label>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
