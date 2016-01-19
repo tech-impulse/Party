@@ -1367,7 +1367,8 @@ function displayPopupItemList() { //cambios jordi
 
     var html = '';
 
-    var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
+    //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
+    var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
 
         
     for (var i = 0; i < CART.length; i++) {
@@ -1392,7 +1393,8 @@ function displayPopupItemList() { //cambios jordi
             '</li>';
     }
 
-    html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
+    //html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:100%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
+    html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="checkOut();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
@@ -1628,8 +1630,8 @@ function displayPopupItemDetail(id, param, idproduct) {
                     //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
                     //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
                     //'<br>'+
-                    '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
-                        '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
+                    '<p><strong style="font-size: 15px;vertical-align:sub;"> Descripción: </strong></p>' +
+                        '<strong style="font-size: 15px;vertical-align:sub;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                         '</div>' +
                         '</li>' + div_carrusel +
