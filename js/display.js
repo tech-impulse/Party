@@ -1538,100 +1538,209 @@ function displayAlternativeProducts(idnode, idproduct) {
 
 function displayPopupItemDetail(id, param, idproduct) {
 
-    console.log("Mostramos el pop de detalle del producto");
-    switch (param) {
-    case "CART":
-        var productList = CART;
-        var quantity = productList[id].quantity;
-        var buttonBack = '<center><br><a data-icon="back" data-role="button" data-theme="b" style="width:120px" onclick="displayPopupItemList();">Atrás</a></center>';
-        break;
+    if (pantallaActual == "catalogo") {
 
-    case "PRODUCTOS":
-        var quantity = 0;
-        var buttonBack = "";
-        var carrusel = "";
+        console.log("Mostramos el pop de detalle del producto");
+        switch (param) {
+        case "CART":
 
-        var div_carrusel = "";
+            break;
 
-        for (var i = 0; i < CART.length; i++) {
+        case "PRODUCTOS":
+            var quantity = 0;
+            var buttonBack = "";
+            var carrusel = "";
 
-            if (CART[i].id == idproduct) {
+            var div_carrusel = "";
 
-                var imgAvailability = "";
-                var stock = CART[i].stock_x_store;
+            for (var i = 0; i < PRODUCTS.length; i++) {
 
-                if (stock == 0) {
-                    stock = CART[i].stock_x_central_store;
-                }
+                if (PRODUCTS[i].id == idproduct) {
 
-                if (stock > CART[i].stock_min) {
-                    imgAvailability = "css/maqueta/barraVerde.gif";
-                } else if (stock <= CART[i].stock_min) {
-                    imgAvailability = "css/maqueta/barraAmarilla.gif";
-                } else if (stock == 0) {
-                    imgAvailability = "css/maqueta/barraRojo.gif";
-                }
+                    var imgAvailability = "";
+                    var stock = PRODUCTS[i].stock_x_store;
+
+                    if (stock == 0) {
+                        stock = PRODUCTS[i].stock_x_central_store;
+                    }
+
+                    if (stock > PRODUCTS[i].stock_min) {
+                        imgAvailability = "css/maqueta/barraVerde.gif";
+                    } else if (stock <= PRODUCTS[i].stock_min) {
+                        imgAvailability = "css/maqueta/barraAmarilla.gif";
+                    } else if (stock == 0) {
+                        imgAvailability = "css/maqueta/barraRojo.gif";
+                    }
 
 
-                var html = '';
+                    var html = '';
 
-                if (CART[i].definition == "NULL") {
-                    var definition = CART[i].short_name;
-                } else {
-                    var definition = CART[i].definition;
-                }
+                    if (PRODUCTS[i].definition == "NULL") {
+                        var definition = PRODUCTS[i].short_name;
+                    } else {
+                        var definition = PRODUCTS[i].definition;
+                    }
 
-                div_carrusel = '<li data-role="list-divider" data-theme="c"><span>' + jsonIdiomas.popup_info_item.alternativos + '</span></li>' +
-                    '<li style="height: 175px;" id="img_prod_alter"><div class="ui-grid-a" style="height: 175px;">' +
-                    '<div id="imgBarraCarga"><center><label>' + jsonIdiomas.popup_errores.labelCargando + '</label></center></div>' +
-                    '<div id="swiper" style="height: 175px;"></div>' +
-                    '</div>' +
-                    '</li>';
+                    if (CART.length > 0) {
+                        var cantidad = PRODUCTS[i].quantity;
+                    } else {
+                        var cantidad = 0;
+                    }
 
-                html = html +
-                    '<ul data-role="listview" data-inset="true">' +
-                    '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
-                    '<li>' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
-                    '<div class="ui-block-b">' +
-                    '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                    '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
+                    div_carrusel = '<li data-role="list-divider" data-theme="c"><span>' + jsonIdiomas.popup_info_item.alternativos + '</span></li>' +
+                        '<li style="height: 175px;" id="img_prod_alter"><div class="ui-grid-a" style="height: 175px;">' +
+                        '<div id="imgBarraCarga"><center><label>' + jsonIdiomas.popup_errores.labelCargando + '</label></center></div>' +
+                        '<div id="swiper" style="height: 175px;"></div>' +
+                        '</div>' +
+                        '</li>';
+
+                    html = html +
+                        '<ul data-role="listview" data-inset="true">' +
+                        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad +'</span></li>' +
+                        '<li>' +
+                        '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
+                        '<div class="ui-block-b">' +
+                        '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.position + ' ' + PRODUCTS[i].position_x_store.module + ' </strong></p>' +
                     //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
                     //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
                     //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
                     //'<br>'+
                     '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
-                    '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
-                    '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
-                    '</div>' +
-                    '</li>' + div_carrusel +
-                    '</ul>';
+                        '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
+                        '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
+                        '</div>' +
+                        '</li>' + div_carrusel +
+                        '</ul>';
 
-                if (buttonBack != "") {
-                    html = html + buttonBack;
+                    if (buttonBack != "") {
+                        html = html + buttonBack;
+                    }
                 }
+
+
             }
 
+            $("#contentPopupListItems").html(html);
+            $("#contentPopupListItems").trigger("create");
+
+            $("#swiper").hide();
+
+            setTimeout(function () {
+                $("#popupListItems").popup("open");
+            }, popupTimeout);
+
+            setTimeout(function () {
+                getAlternativeProducts(id, idproduct);
+            }, 200);
 
         }
 
-        $("#contentPopupListItems").html(html);
-        $("#contentPopupListItems").trigger("create");
+        translateButtons(idiomStore);
 
-        $("#swiper").hide();
 
-        setTimeout(function () {
-            $("#popupListItems").popup("open");
-        }, popupTimeout);
+    } else {
 
-        setTimeout(function () {
-            getAlternativeProducts(id, idproduct);
-        }, 200);
+        console.log("Mostramos el pop de detalle del producto");
+        switch (param) {
+        case "CART":
+            var productList = CART;
+            var quantity = productList[id].quantity;
+            var buttonBack = '<center><br><a data-icon="back" data-role="button" data-theme="b" style="width:120px" onclick="displayPopupItemList();">Atrás</a></center>';
+            break;
+
+        case "PRODUCTOS":
+            var quantity = 0;
+            var buttonBack = "";
+            var carrusel = "";
+
+            var div_carrusel = "";
+
+            for (var i = 0; i < CART.length; i++) {
+
+                if (CART[i].id == idproduct) {
+
+                    var imgAvailability = "";
+                    var stock = CART[i].stock_x_store;
+
+                    if (stock == 0) {
+                        stock = CART[i].stock_x_central_store;
+                    }
+
+                    if (stock > CART[i].stock_min) {
+                        imgAvailability = "css/maqueta/barraVerde.gif";
+                    } else if (stock <= CART[i].stock_min) {
+                        imgAvailability = "css/maqueta/barraAmarilla.gif";
+                    } else if (stock == 0) {
+                        imgAvailability = "css/maqueta/barraRojo.gif";
+                    }
+
+
+                    var html = '';
+
+                    if (CART[i].definition == "NULL") {
+                        var definition = CART[i].short_name;
+                    } else {
+                        var definition = CART[i].definition;
+                    }
+
+                    div_carrusel = '<li data-role="list-divider" data-theme="c"><span>' + jsonIdiomas.popup_info_item.alternativos + '</span></li>' +
+                        '<li style="height: 175px;" id="img_prod_alter"><div class="ui-grid-a" style="height: 175px;">' +
+                        '<div id="imgBarraCarga"><center><label>' + jsonIdiomas.popup_errores.labelCargando + '</label></center></div>' +
+                        '<div id="swiper" style="height: 175px;"></div>' +
+                        '</div>' +
+                        '</li>';
+
+                    html = html +
+                        '<ul data-role="listview" data-inset="true">' +
+                        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
+                        '<li>' +
+                        '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
+                        '<div class="ui-block-b">' +
+                        '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
+                    //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                    //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                    //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                    //'<br>'+
+                    '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
+                        '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
+                        '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
+                        '</div>' +
+                        '</li>' + div_carrusel +
+                        '</ul>';
+
+                    if (buttonBack != "") {
+                        html = html + buttonBack;
+                    }
+                }
+
+
+            }
+
+            $("#contentPopupListItems").html(html);
+            $("#contentPopupListItems").trigger("create");
+
+            $("#swiper").hide();
+
+            setTimeout(function () {
+                $("#popupListItems").popup("open");
+            }, popupTimeout);
+
+            setTimeout(function () {
+                getAlternativeProducts(id, idproduct);
+            }, 200);
+
+        }
+
+        translateButtons(idiomStore);
+
 
     }
 
-    translateButtons(idiomStore);
+
 
 }
 

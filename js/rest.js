@@ -242,8 +242,6 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-
-
                 if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hay que mostrar una pantalla intermadia
 
                     updateBackButton(idNode, nodeName, aux);
