@@ -27,7 +27,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
     var alturaBox2 = (aux_altura / W_HEIGTH) * 100; //obtenemos el valor en % 
 
 
-    var heigth = (W_WIDTH * (0.90));
+    var heigth = (W_WIDTH * (0.905));
     var heigth2 = (W_WIDTH * (0.06)); //se utiliza para el margen de separacion de las cajas
 
     var heig_block = parseInt(heigth / data.columns); // valor de cada caja
@@ -235,8 +235,10 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';*/
 
-                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' + //white-space: pre-wrap;height: 100%;
-                                data.nodes[i].linkext + '" style="width: 100%;;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
+                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);">'+
+                                '<center><div style="height:' + (heig_block * 0.7) + 'px;max-width: '+(heig_block * 0.8)+'px;display: table-cell;vertical-align: middle;"><img src="' + data.nodes[i].linkext + '" style="width: 100%;"></div></center>'+
+                                '<br>'+
+                                '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
 
                         }
@@ -254,8 +256,6 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                 }
 
                 htmlContent = htmlContent + '</div>';
-                console.log("Pintamos la cagita-----------------------------------------------");
-                console.log(htmlContent);
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
                 if (originNode != 0) {
@@ -675,16 +675,19 @@ function displayProducts(data, originNode, originName, param) {
                 }
 
                 if (data.products[i].stock_x_store == 0) {
-                    var displayWarning = '<div style="z-index: 6; position: absolute;">' +
-                        '<img src="css/exclusivoweb.png" style="width: 200px;height: 20px;" />' +
+                    var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
+                        '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
+                        '<div style="text-transform: uppercase;z-index: 3; width:200px; height:20px; position: absolute; bottom: 0px; font-size:15px; padding-bottom:5px; color: #fff; text-align:center; font-weight:bold;">' + jsonIdiomas.exclusivoWeb + '</div>' +
                         '</div>';
                 } else {
                     var displayWarning = "";
                 }
 
+
                 var element = block +
                     '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
-                    '<div><div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                    '<div style="position: relative;">' +
+                    '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
                     displayWarning +
@@ -890,30 +893,22 @@ function displayProducts(data, originNode, originName, param) {
 
                     if (parseInt(uses[k].id) == parseInt(1)) { //si el articulo no es un disfraz se muesta, ya que sera un complemento
 
-                        //console.log("Articulo es un disfraz " + uses[k].id);
-
                         for (var j = 0; j < count_carac; j++) { // comprobamos que la talla y sexo sea el escogido en los selects
-
-                            //console.log("Sexo? " + caracteristicas[j].name + " sexo cogido es " + sexo);
 
                             if (caracteristicas[j].name == sexo) {
 
                                 for (var m = 0; m < count_carac; m++) {
 
-                                    //console.log("talla? " + caracteristicas[m].name + " talla cogido es " + talla);
-
                                     if (caracteristicas[m].name == talla) {
                                         generoDisfraz = 1;
                                     } else {
                                         continue;
-                                        //console.log("Disfracaz no válido " + caracteristicas[m].name);
                                     }
                                 }
                             }
                         }
                     } else {
                         generoDisfraz = 1;
-                        //console.log("Articulo es : " + uses[k].id);
                     }
                 }
 
@@ -934,7 +929,6 @@ function displayProducts(data, originNode, originName, param) {
                 }
 
 
-                //if (data.products[i].price_x_region[0].totalPrice != undefined) { // Controlamos que el precio exista
                 if (position < parseInt(data.columns)) {
 
                     switch (position) {
@@ -942,6 +936,7 @@ function displayProducts(data, originNode, originName, param) {
 
                         block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
                         break;
+
 
                     case 1:
 
@@ -975,18 +970,13 @@ function displayProducts(data, originNode, originName, param) {
                     precio = data.products[i].price_x_region[0].totalPrice;
                 }
 
-
-                //console.log("Caracteristicas");
-                //console.log(caracteristicas);
-
                 if (data.products[i].name == "" || data.products[i].linkext == "") {
-                    //var titulo = "Falta descripción del producto";
                     continue;
                 } else {
                     var titulo = data.products[i].name;
                 }
 
-                var element = block +
+                /*var element = block +
                     '<a  data-corners="false" data-role="button" data-theme="f">' +
                     '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
@@ -1016,7 +1006,52 @@ function displayProducts(data, originNode, originName, param) {
                     '<div class="ui-block-a" onclick="" style="width: 45%;"><button data-theme="b"  data-corners="false" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
                     '<div class="ui-block-b" style="width:10%;"></div>' +
                     '<div class="ui-block-c" onclick="" style="width: 45%;"><button data-theme="b" data-corners="false" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                    '</div></a></div>';*/
+
+                if (data.products[i].stock_x_store == 0) {
+                    var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
+                        '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
+                        '<div style="text-transform: uppercase;z-index: 3; width:200px; height:20px; position: absolute; bottom: 0px; font-size:15px; padding-bottom:5px; color: #fff; text-align:center; font-weight:bold;">' + jsonIdiomas.exclusivoWeb + '</div>' +
+                        '</div>';
+                } else {
+                    var displayWarning = "";
+                }
+
+
+                var element = block +
+                    '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                    '<div style="position: relative;">' +
+                    '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                    '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
+                    '</div>' +
+                    displayWarning +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;"></div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
+                    '<div class="contenedor">' + titulo + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
+                    '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
+                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;margin-top:5px;"></label></strong>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;">' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
+                    '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                    '<div class="ui-block-b" style="width:10%;"></div>' +
+                    '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                     '</div></a></div>';
+
 
 
                 htmlContent = htmlContent + element;
@@ -1359,7 +1394,7 @@ function getImgDisponibilidad(product) {
     } else if (stock == 0) {
         imgAvailability = "css/maqueta/barraRojo.gif";
     }
-    
+
     return imgAvailability;
 }
 
@@ -1370,10 +1405,10 @@ function displayPopupItemList() { //cambios jordi
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
     var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
 
-        
+
     for (var i = 0; i < CART.length; i++) {
         var src = getImgDisponibilidad(i);
-        
+
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
         '<div class="ui-grid-b">' +
@@ -1386,7 +1421,7 @@ function displayPopupItemList() { //cambios jordi
             '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
             '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
         //'<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
-            '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+        '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
             '<div class="ui-block-e" style="width:15%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + src + '" /></div>' +
             '</div>' +
             '</div>' +
@@ -1625,7 +1660,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.position + ' ' + PRODUCTS[i].position_x_store.module + ' </strong></p>' +
+                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' +  PRODUCTS[i].position_x_store.position + ' </strong></p>' +
                     //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
                     //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
                     //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
@@ -1723,7 +1758,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
+                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.module + ' ' + CART[i].position_x_store.position + ' </strong></p>' +
                     //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
                     //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
                     //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
@@ -1866,7 +1901,7 @@ function loadMenu(data) {
     htmlHeader = '<div class="ui-grid-d">' +
         '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);" id="divBack"></div>' +
         '<div class="ui-block-b" style="margin-top:10px; width:22%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: right;"> </div>' +
-        '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session">' +
+        '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session" onclick="displayLogin();">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;"><span>' + jsonIdiomas.header.login + '</span></a>' +
         '</div>' +
         '<div class="ui-block-d" style="width:18%; margin-top:3px;" id="car_compra">' + cart +
@@ -1903,7 +1938,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
         '<div id="div_selectTalla" style="width: 30%;display:none"><select id="select_talla" data-theme="f" data-native-menu="false" data-corners="false">' +
         '</select></div>' +
         '<br>' +
-        '<a style="width:150px" id="btn_continuar_dis" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</a>' +
+        '<a style="width:30%" id="btn_continuar_dis" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</a>' +
         '</center>' +
         '</div>';
 

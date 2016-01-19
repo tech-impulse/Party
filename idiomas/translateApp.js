@@ -68,7 +68,8 @@ function translateButtons(idioma) {
             "cajas": {
                 "precio_total_label": "Item price: ",
                 "unidades": "units"
-            }
+            },
+            "exclusivoWeb":"EXCLUSIVE WEB!"
 
         }
 
@@ -177,7 +178,8 @@ function translateButtons(idioma) {
             "cajas": {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
-            }
+            },
+            "exclusivoWeb":"EXCLUSIVO WEB!"
         }
 
         //pagina de inicio    
@@ -288,7 +290,9 @@ function translateButtons(idioma) {
             "cajas": {
                 "precio_total_label": "Total article: ",
                 "unidades": "unitats"
-            }
+            },
+            "exclusivoWeb":"EXCLUSIU WEB!"
+            
         }
 
         //pagina de inicio    
@@ -387,7 +391,8 @@ function translateButtons(idioma) {
             "cajas": {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
-            }
+            },
+            "exclusivoWeb":" EXCLUSIVO WEB!"
         }
 
         //pagina de inicio    
@@ -481,7 +486,8 @@ function translateButtons(idioma) {
             "cajas": {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
-            }
+            },
+            "exclusivoWeb":"EXCLUSIF WEB!"
         }
 
         //pagina de inicio    
