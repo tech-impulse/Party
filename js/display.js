@@ -1344,7 +1344,24 @@ function openPopupAction(param) {
     translateButtons(idiomStore);
 }
 
+function getImgDisponibilidad(product) {
+    var imgAvailability = "";
+    var stock = CART[product].stock_x_store;
 
+    if (stock == 0) {
+        stock = CART[product].stock_x_central_store;
+    }
+
+    if (stock > CART[product].stock_min) {
+        imgAvailability = "css/maqueta/barraVerde.gif";
+    } else if (stock <= CART[product].stock_min) {
+        imgAvailability = "css/maqueta/barraAmarilla.gif";
+    } else if (stock == 0) {
+        imgAvailability = "css/maqueta/barraRojo.gif";
+    }
+    
+    return imgAvailability;
+}
 
 function displayPopupItemList() { //cambios jordi
 
@@ -1352,7 +1369,10 @@ function displayPopupItemList() { //cambios jordi
 
     var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
 
+        
     for (var i = 0; i < CART.length; i++) {
+        var src = getImgDisponibilidad(i);
+        
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
         '<div class="ui-grid-b">' +
@@ -1363,15 +1383,16 @@ function displayPopupItemList() { //cambios jordi
             '<div class="ui-block-a" style="width:16%;"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
             '<div class="ui-block-b" style="width:16%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 35%;">' + parseInt(CART[i].quantity) + '</label></div>' +
             '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
-            '<div class="ui-block-d" style="width:32%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
+            '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
         //'<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
-        '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+            '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+            '<div class="ui-block-e" style="width:15%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + src + '" /></div>' +
             '</div>' +
             '</div>' +
             '</li>';
     }
 
-    html = '<div style="width: 600px; height:400px; overflow: scroll;">' + html + '</div><li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
+    html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:38%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
