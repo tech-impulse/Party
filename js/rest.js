@@ -435,7 +435,7 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
             if (response.result == 1) {
 
                 pantallaActual = "catalogo";
-                displayProducts(response, idNode, nodeName);//dsfsjndfjsdnfoj
+                displayProducts(response, idNode, nodeName); //dsfsjndfjsdnfoj
 
             } else {
                 setTimeout(function () {
@@ -1223,6 +1223,19 @@ function sendEmail() {
                     INFO_USU = "";
                     $('#popupAlert').popup('open');
                     $('#email').val('');
+                    $("#spBtnAmountPerson").text('');
+                    $("#circuloCantidad").hide();
+                    $("#spBtnPopupCartAmmount").hide();
+                    $("#userIcoCarrito").hide();
+                    CART = "";
+                    /*nodeIds = "";
+                    nodeImg = "";
+                    nodeNames = "";
+                    getNodes(0);
+
+                    setTimeout(function () {
+                        getNodes(0);
+                    }, 1500);*/
 
 
                 } else if (parseInt(response.result) == parseInt(0)) {

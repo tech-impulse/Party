@@ -222,7 +222,7 @@ $(document).ready(function () {
 
             $('#email').removeClass('colorText');
             sendEmail();
-            //EMAIL_USER = "";
+           
 
         }
 

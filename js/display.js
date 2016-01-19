@@ -1597,11 +1597,11 @@ function displayPopupItemDetail(id, param, idproduct) {
                     '<div class="ui-block-b">' +
                     '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                     '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
-                //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
-                //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
-                //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
-                //'<br>'+
-                '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
+                    //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                    //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                    //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                    //'<br>'+
+                    '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
                     '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                     '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                     '</div>' +

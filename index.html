@@ -223,7 +223,7 @@
 
             <!--POPUP DE LOGIN -->
             <div data-role="popup" data-corners="false" id="popupCart" data-overlay-theme="a" class="" style="min-width:15%;right:2px;top:6%;position:fixed;">
-                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5)"></a>
+                <a href="#" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" onclick="$('.ui-popup').popup('close');" class="ui-btn-right" style="transform: scale(1.5)"></a>
                 <ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
                     <li data-role="list-divider" style="text-align:left">
                         <div class="ui-grid-a">
@@ -267,7 +267,7 @@
 
             <!--POPUP DE Preview items -->
             <div data-role="popup" data-corners="false" data-overlay-theme="d" id="popupListItems">
-                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5)"></a>
+                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5)"></a>
                 <div id="contentPopupListItems"></div>
             </div>
 
@@ -302,7 +302,7 @@
 
             <!-- POPUP DE LOGIN -->
             <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupLogin" class="ui-content" style="min-width:250px;">
-                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
                 <form autocomplete="on">
                     <div id="div_session">
                         <label id="labelIniciarSession">Iniciar sessión</label>
@@ -326,7 +326,7 @@
 
             <!-- POPUP DE REGISTRO -->
             <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupRegistro" class="ui-content" style="min-width:250px;">
-                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
                 <div id="div_registrarse">
                     <form autocomplete="on">
                         <label id="labelRegistrarse"><strong>
@@ -362,7 +362,7 @@
 
             <!-- POPUP DE CAMBIO PASSWORD -->
             <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupCambioContra" class="ui-content" style="min-width:250px;">
-                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
                 <div id="div_cambioContra">
                     <form>
                         <label id="tituloCamContra">
@@ -385,13 +385,13 @@
 
             <!-- POPUP PARA ALERTAS-ERRORES WS -->
             <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupAlert" class="ui-content" style="max-width:280px">
-                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
                 <label id="texto_popup"></label>
             </div>
 
             <!-- POPUP PREGUNTAS -->
             <div data-role="popup" data-corners="false" data-theme="b" id="popupEmail" style="">
-                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
                 <div data-role="header" role="banner" class="ui-header ui-bar-a" style="background:#1798d1;">
                     <h1 style="color: rgb(255, 255, 255);text-transform: uppercase;">Escriba su email:</h1>
                 </div>
@@ -414,7 +414,7 @@
 
             <!-- POPUP PREGUNTAS -->
             <div data-role="popup" data-corners="false" data-theme="b" id="popupPregunta" style="">
-                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
                 <div data-role="header" role="banner" class="ui-header ui-bar-a" style="background:#1798d1;">
                     <h1 style="color: rgb(255, 255, 255);text-transform: uppercase;">Asistente de fiestas</h1>
                 </div>
