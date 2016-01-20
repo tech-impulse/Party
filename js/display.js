@@ -27,7 +27,13 @@ function displayNode(data, originNode, originName, linkImg, isback) {
     var alturaBox2 = (aux_altura / W_HEIGTH) * 100; //obtenemos el valor en % 
 
 
-    var heigth = (W_WIDTH * (0.95));    
+    if (parseInt(originNode) == 0) {
+        //var altura_menu = "height:" + (heig_block * 0.8) + "px;";
+        var heigth = (W_WIDTH * (0.93));
+    } else {
+        var heigth = (W_WIDTH * (0.915));
+    }
+    //var heigth = (W_WIDTH * (0.93));
     var heigth2 = (W_WIDTH * (0.04)); //se utiliza para el margen de separacion de las cajas
 
     var heig_block = parseInt(heigth / data.columns); // valor de cada caja
@@ -161,7 +167,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
                     if (parseInt(originNode) == 0) {
                         //var altura_menu = "height:" + (heig_block * 0.8) + "px;";
-                        var altura_menu = "height:" +alturaBox+ "px;";
+                        var altura_menu = "height:" + alturaBox + "px;";
                     } else {
                         var altura_menu = "";
                     }
@@ -171,8 +177,8 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                         switch (position) {
                         case 0:
                             //block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                           /* block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';*/
-                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%">';
+                            /* block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';*/
+                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%;margin-left: 1%;">';
                             break;
                         case 1:
                             //block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
@@ -195,7 +201,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                     } else {
 
                         position = 0;
-                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
+                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%;margin-left: 1%;">';
 
 
                     }
@@ -237,9 +243,9 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';*/
 
-                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);">'+
-                                '<center><div style="height:' + (heig_block * 0.7) + 'px;max-width: '+(heig_block * 0.8)+'px;display: table-cell;vertical-align: middle;"><img src="' + data.nodes[i].linkext + '" style="width: 100%;"></div></center>'+
-                                '<br>'+
+                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);">' +
+                                '<center><div style="height:' + (heig_block * 0.7) + 'px;max-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + data.nodes[i].linkext + '" style="width: 100%;"></div></center>' +
+                                '<br>' +
                                 '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
 
@@ -1413,7 +1419,7 @@ function displayPopupItemList() { //cambios jordi
 
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
-        '<div class="ui-grid-b">' +
+            '<div class="ui-grid-b">' +
             '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + CART[i].linkext + '"></div>' +
             '<div class="ui-block-b" style="width:45%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;padding-top: 5%;">' + CART[i].name + '</label></div>' +
             '<div class="ui-block-c" style="width:40%;">' +
@@ -1422,8 +1428,8 @@ function displayPopupItemList() { //cambios jordi
             '<div class="ui-block-b" style="width:16%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 35%;">' + parseInt(CART[i].quantity) + '</label></div>' +
             '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
             '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
-        //'<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
-        '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+            //'<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
+            '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
             '<div class="ui-block-e" style="width:15%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + src + '" /></div>' +
             '</div>' +
             '</div>' +
@@ -1662,12 +1668,12 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' +  PRODUCTS[i].position_x_store.position + ' </strong></p>' +
-                    //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
-                    //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
-                    //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
-                    //'<br>'+
-                    '<p><strong style="font-size: 15px;vertical-align:sub;"> Descripción: </strong></p>' +
+                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
+                        //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                        //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                        //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                        //'<br>'+
+                        '<p><strong style="font-size: 15px;vertical-align:sub;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;vertical-align:sub;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                         '</div>' +
@@ -1761,11 +1767,11 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.module + ' ' + CART[i].position_x_store.position + ' </strong></p>' +
-                    //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
-                    //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
-                    //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
-                    //'<br>'+
-                    '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
+                        //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
+                        //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
+                        //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
+                        //'<br>'+
+                        '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                         '</div>' +
@@ -2271,8 +2277,8 @@ function displayFlags(res) {
     for (var i = 0; i < count; i++) {
 
         html += '<li style="list-style-type: none;background-color:#1798d1;" onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');">' + //data-icon="false"
-        //'<a onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');"><label style="text-transform: uppercase;text-align: center;">' + info[i].name + '</label></a>' +
-        '<label style="text-transform: uppercase;text-align: center;color: rgb(255, 255, 255);">' + info[i].name + '</label>' +
+            //'<a onclick="changeIdiom(\'' + info[i].shortname + '\',' + info[i].id + ');"><label style="text-transform: uppercase;text-align: center;">' + info[i].name + '</label></a>' +
+            '<label style="text-transform: uppercase;text-align: center;color: rgb(255, 255, 255);">' + info[i].name + '</label>' +
             '</li>';
 
     }
