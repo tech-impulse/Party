@@ -17,7 +17,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
         console.log("Length " + len);
         len = data.columns;
     }
-    var alturaMin = W_HEIGTH * 0.7;
+    var alturaMin = W_HEIGTH * 0.6;
     var filas = Math.ceil(len / data.columns);
     var count = 1;
 
@@ -27,8 +27,8 @@ function displayNode(data, originNode, originName, linkImg, isback) {
     var alturaBox2 = (aux_altura / W_HEIGTH) * 100; //obtenemos el valor en % 
 
 
-    var heigth = (W_WIDTH * (0.905));    
-    var heigth2 = (W_WIDTH * (0.06)); //se utiliza para el margen de separacion de las cajas
+    var heigth = (W_WIDTH * (0.95));    
+    var heigth2 = (W_WIDTH * (0.04)); //se utiliza para el margen de separacion de las cajas
 
     var heig_block = parseInt(heigth / data.columns); // valor de cada caja
     var he_b_margin = parseInt(heigth2 / (data.columns - 1)); // valor de cada caja
@@ -171,30 +171,31 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                         switch (position) {
                         case 0:
                             //block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                           /* block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';*/
+                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%">';
                             break;
                         case 1:
                             //block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
-                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
+                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
                             break;
                         case 2:
                             //block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%">';
                             break;
                         case 3:
                             //block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         case 4:
                             //block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         }
 
                     } else {
 
                         position = 0;
-                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
 
 
                     }
@@ -225,7 +226,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                                 '</div>';*/
 
                             var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
-                                '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:35px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</div></div>' +
+                                '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:30px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</div></div>' +
                                 '</div>';
 
                             //<div class="ui-block-a" data-corners="false" onclick="getNodes(1, 'CATÁLOGO',1,'http://partyfiesta.youtter.com/webservices/img/nodos/catalogo.jpg')" style="width:307px;margin-right: 30px;margin-bottom:1%"><div style="display: table; height:211px;width:307px;background-image:url('http://partyfiesta.youtter.com/webservices/img/nodos/catalogo.jpg');  background-position: top center; background-repeat: no-repeat;"><label style="font-size:35px;color: white; text-align: center; display: block; margin-top:84%;">CATÁLOGO</label></div></div>
