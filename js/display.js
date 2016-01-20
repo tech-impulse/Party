@@ -671,6 +671,22 @@ function displayProducts(data, originNode, originName, param) {
 
                 }
 
+
+                var imgStock = "";
+                var stock = data.products[i].stock_x_store;
+
+                if (stock == 0) {
+                    stock = data.products[i].stock_x_central_store;
+                }
+
+                if (stock > data.products[i].stock_min) {
+                    imgStock = "css/maqueta/barraVerde.gif";
+                } else if (stock <= data.products[i].stock_min) {
+                    imgStock = "css/maqueta/barraAmarilla.gif";
+                } else if (stock == 0) {
+                    imgStock = "css/maqueta/barraRojo.gif";
+                }
+
                 if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
                     //console.log("No tiene unidades saltamos el producto")
                     unidades = "1 " + jsonIdiomas.cajas.unidades;
@@ -693,13 +709,16 @@ function displayProducts(data, originNode, originName, param) {
 
 
                 var element = block +
-                    '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                    '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div style="position: relative;">' +
-                    '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                    '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">'+
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
-                    displayWarning +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;"></div>' +
+                    '<div style="float:right;width: 50px;padding-right: 10px;"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
+                    //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
+                    +displayWarning +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">'+
+                    '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
                     '<div class="contenedor">' + titulo + '</div>' +
@@ -726,6 +745,7 @@ function displayProducts(data, originNode, originName, param) {
                     '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                     '</div></a></div>';
 
+                console.log(element);
 
                 htmlContent = htmlContent + element;
                 if (position == "c") {
@@ -736,7 +756,7 @@ function displayProducts(data, originNode, originName, param) {
             }
 
             htmlContent = htmlContent + '</div>';
-
+            
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
 
@@ -1512,18 +1532,18 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><img src="' + aux_prod.linkext + '" style="max-width: 290px;;width: 100%;"></div>' +
+        '<div class="ui-block-a"><img src="' + aux_prod.linkext + '" style="max-width: 325px;;width: 100%;"></div>' +
         '<div class="ui-block-b">' +
-        '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-        '<p><strong style="font-size: 15px;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.position + ' ' + aux_prod.position_x_store.module + ' </strong></p>' +
-        '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
-        '<strong style=""><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
+        '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+        '<p><strong style="font-size: 15px;margin-top:5px;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
+        '<p><strong style="font-size: 15px;margin-top:5px;"> Descripción: </strong></p>' +
+        '<strong style=""><p style="white-space: initial;font-size: 15px;margin-top:5px;">' + definition + '</p></strong>' +
         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
         '</div></div>' +
         '</ul>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:50%;"><a data-corners="false" data-role="button" data-theme="b" data-iconpos="notext" onclick="volver(' + id_product + ',' + idnode + ');">VOLVER</a></div>' +
-        '<div class="ui-block-b" style="width:50%;"><a data-corners="false" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCartAlter(' + aux_prod.id + ',' + id_product + ');">Añadir</a></div>' +
+        '<div class="ui-block-b" style="width:50%;"><a data-corners="false" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCartAlter(' + aux_prod.id + ',' + id_product + ');">Sustituir</a></div>' +
         '</div>';
 
     $("#contentPopupListItems").html(html);
@@ -1665,16 +1685,16 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
-                        '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
+                        '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
                         //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
                         //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
                         //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
                         //'<br>'+
-                        '<p><strong style="font-size: 15px;vertical-align:sub;"> Descripción: </strong></p>' +
-                        '<strong style="font-size: 15px;vertical-align:sub;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
+                        '<p><strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"> Descripción: </strong></p>' +
+                        '<strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                         '</div>' +
                         '</li>' + div_carrusel +
@@ -1763,16 +1783,16 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 290px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
-                        '<br><label style="font-size: 20px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.module + ' ' + CART[i].position_x_store.position + ' </strong></p>' +
+                        '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
                         //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
                         //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
                         //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
                         //'<br>'+
-                        '<p><strong style="font-size: 15px;"> Descripción: </strong></p>' +
-                        '<strong style="font-size: 15px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
+                        '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
+                        '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                         '</div>' +
                         '</li>' + div_carrusel +
