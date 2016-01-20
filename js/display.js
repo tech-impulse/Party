@@ -17,17 +17,17 @@ function displayNode(data, originNode, originName, linkImg, isback) {
         console.log("Length " + len);
         len = data.columns;
     }
-    var alturaMin = W_HEIGTH * 0.55;
+    var alturaMin = W_HEIGTH * 0.7;
     var filas = Math.ceil(len / data.columns);
     var count = 1;
 
     var aux_altura = parseInt(alturaMin / filas); //altura de la patanlla por el % del div partido por el numero de filas
 
-    var alturaBox = aux_altura; // //obtenemos el valor en px 
+    var alturaBox = parseInt(alturaMin / data.columns); // //obtenemos el valor en px 
     var alturaBox2 = (aux_altura / W_HEIGTH) * 100; //obtenemos el valor en % 
 
 
-    var heigth = (W_WIDTH * (0.905));
+    var heigth = (W_WIDTH * (0.905));    
     var heigth2 = (W_WIDTH * (0.06)); //se utiliza para el margen de separacion de las cajas
 
     var heig_block = parseInt(heigth / data.columns); // valor de cada caja
@@ -160,7 +160,8 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                     }
 
                     if (parseInt(originNode) == 0) {
-                        var altura_menu = "height:" + (heig_block * 0.8) + "px;";
+                        //var altura_menu = "height:" + (heig_block * 0.8) + "px;";
+                        var altura_menu = "height:" +alturaBox+ "px;";
                     } else {
                         var altura_menu = "";
                     }
@@ -174,19 +175,19 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                             break;
                         case 1:
                             //block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
-                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'height:' + (heig_block * 0.8) + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
+                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">'; //style="height:' + alturaBox + '%"
                             break;
                         case 2:
                             //block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'height:' + (heig_block * 0.8) + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
                             break;
                         case 3:
                             //block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'height:' + (heig_block * 0.8) + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
                             break;
                         case 4:
                             //block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="height:' + alturaBox + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
-                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'height:' + (heig_block * 0.8) + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
+                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: ' + he_b_margin + 'px;margin-bottom:1%">';
                             break;
                         }
 
