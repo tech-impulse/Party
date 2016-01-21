@@ -693,7 +693,8 @@ function restOk_tiendas(res, typ, param, param2) {
 
     TIENDAS = res; //array con todas las tiendas
 
-    var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" style="border: 0px;">';
+    //var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" style="border: 0px;padding: 0 0 0 20px;">';
+    var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" style="">';
 
     for (var i = 0; i < count; i++) {
 
@@ -704,7 +705,7 @@ function restOk_tiendas(res, typ, param, param2) {
 
     }
 
-    html = html + '</select><div>';
+    html = html + '</select></div>';
 
 
     $("#div_select_tienda").html(html);
@@ -712,17 +713,19 @@ function restOk_tiendas(res, typ, param, param2) {
     $("#div_select_tienda").trigger('create');
     $("#div_select_tienda").css('font-size', '20px');
 
-    var select = $('#select_tienda');
+    /*var select = $('#select_tienda');
 
     select.selectmenu({
         icon: "ui-icon-carat-d"
     });
     select.selectmenu({
         iconshadow: "false"
-    });
+    });*/
     $('#select_tienda-button').css({
         border: "0px"
     });
+    
+    console.log(html);
 
 
 }

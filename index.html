@@ -35,19 +35,24 @@
         font-weight: normal;
         font-style: normal;
     }
+    
     * {
         font-family: "font";
     }
+    
     body {
         font-family: "font";
     }
+    
     .ui-select > .ui-btn {
         background: #29C0FF !important;
     }
+    
     ui-select-active {
         color: #ffffff !important;
         text-shadow: 0 -1px 1px #ffffff;
     }
+    
     #popupListItems-popup {
         position: fixed;
         top: 10% !important;
@@ -57,6 +62,7 @@
         height: 80% !important;
         bottom: 10% !important;
     }
+    
     #popupEmail-popup {
         position: fixed;
         top: 35% !important;
@@ -65,54 +71,67 @@
         width: 40% !important;
         bottom: 20% !important;
     }
+    
     #popupListItems-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupPregunta-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupCart-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupListItems-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupShowItem-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupIdiomas-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupAction-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupLogin-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupRegistro-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupCambioContra-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupAlert-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupEmail-screen {
         opacity: .7;
         background-color: rgb(0, 0, 0);
     }
+    
     #popupCargando-popup {
         position: fixed;
         right: 0% !important;
@@ -122,16 +141,19 @@
         max-width: none !important;
         max-height: none !important;
     }
+    
     .colorText::-webkit-input-placeholder {
         color: red;
     }
     /*::-webkit-input-placeholder {
         color: red;
     }*/
+    
     .thumb {
         max-width: 50px;
         max-height: 50px;
     }
+    
     .imgMedium {
         max-width: 300px;
         max-height: 300px;
@@ -145,6 +167,7 @@
         height: 100px;
         margin: 10px auto;
     }
+    
     .swiper-slide {
         text-align: center;
         font-size: 18px;
@@ -164,12 +187,15 @@
         -webkit-align-items: center;
         align-items: center;
     }
+    
     .swiper-slide:nth-child(2n) {
         width: 40%;
     }
+    
     .swiper-slide:nth-child(3n) {
         width: 20%;
     }
+    
     .border-header {
         border-bottom: solid 1px rgb(52, 127, 188);
     }
@@ -204,6 +230,12 @@
                     <label id="labelInicio">Seleccione una tienda:</label>
                 </div>
                 <div id="div_select_tienda" data-theme="f" style="width: 25%;color: white">
+                </div>
+                <div class="ui-nodisc-icon">
+                    <select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" style="">
+                        <option value=10>C.C. GRAN VÍA 2</option>
+                        <option value=96>SANT CUGAT</option>
+                    </select>
                 </div>
                 <div class="ui-grid-c" style="width: 25%">
                     <button data-theme="b" id="btn_acceder" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;">Acceder</button>
@@ -295,8 +327,8 @@
                     <center>
                         <h3>¿Desea eliminar el articulo?</h3>
                     </center>
-                    <button id="btnPopupActionLeft" onclick='$("#popupAction").popup("close");' data-theme="c"  data-iconpos="right" style="width:13em; float:left; margin:10px">No</button>
-                    <button id="btnPopupActionRight" onclick='$("#popupAction").popup("close");' data-theme="d"  data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
+                    <button id="btnPopupActionLeft" onclick='$("#popupAction").popup("close");' data-theme="c" data-iconpos="right" style="width:13em; float:left; margin:10px">No</button>
+                    <button id="btnPopupActionRight" onclick='$("#popupAction").popup("close");' data-theme="d" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
                 </div>
             </div>
 
@@ -315,129 +347,132 @@
                             -->
                         <button type="button" id="iniciar_session">Iniciar sessión</button>
                         <center>
-                            <br><div onclick="displayRegistro();" style="height: 35px;"><a id="registrarse" onclick="displayRegistro();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>
+                            <br>
+                            <div onclick="displayRegistro();" style="height: 35px;"><a id="registrarse" onclick="displayRegistro();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>
                         </center>
                         <center>
-                            <br><div id="hola" onclick="displayCambioContra();" style="height: 35px;"><a id="olviContra" onclick="displayCambioContra();" style="margin:10px;color: #FF4700;" class="ui-link">¿Has olvidado la contraseña?</a><div>
+                            <br>
+                            <div id="hola" onclick="displayCambioContra();" style="height: 35px;"><a id="olviContra" onclick="displayCambioContra();" style="margin:10px;color: #FF4700;" class="ui-link">¿Has olvidado la contraseña?</a>
+                                <div>
                         </center>
-                    </div>
+                        </div>
                 </form>
-            </div>
+                </div>
 
-            <!-- POPUP DE REGISTRO -->
-            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupRegistro" class="ui-content" style="min-width:250px;">
-                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
-                <div id="div_registrarse">
-                    <form autocomplete="on">
-                        <label id="labelRegistrarse"><strong>
+                <!-- POPUP DE REGISTRO -->
+                <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupRegistro" class="ui-content" style="min-width:250px;">
+                    <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                    <div id="div_registrarse">
+                        <form autocomplete="on">
+                            <label id="labelRegistrarse"><strong>
                              Registrarse </strong>
-                        </label>
-                        <p>
-                            <label id="usernamesignup" class="uname" data-icon="u">Usuario</label>
-                            <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
-                        </p>
-                        <p>
-                            <label id="labelpasswordsignup" class="youpasswd" data-icon="p">Contraseña</label>
-                            <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
-                        </p>
-                        <p>
-                            <label id="labelpasswordsignup_confirm" class="youpasswd" data-icon="p">Confirmar contraseña</label>
-                            <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
-                        </p>
-                        <p>
-                            <label id="labelcodpos" class="youpasswd" data-icon="p">Código postal</label>
-                            <input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true">
-                        </p>
-                        <p>
-                            <button type="button" id="enviar_registro">Crear cuenta</button>
-                        </p>
-                        <p class="change_link">
-                            <label id="labelYAesClient" class="youpasswd" data-icon="p">¿Ya es cliente?</label>
-                            <a id="linkIniSes" onclick="displayLogin();">Iniciar sessión</a>
-                        </p>
+                            </label>
+                            <p>
+                                <label id="usernamesignup" class="uname" data-icon="u">Usuario</label>
+                                <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
+                            </p>
+                            <p>
+                                <label id="labelpasswordsignup" class="youpasswd" data-icon="p">Contraseña</label>
+                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
+                            </p>
+                            <p>
+                                <label id="labelpasswordsignup_confirm" class="youpasswd" data-icon="p">Confirmar contraseña</label>
+                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
+                            </p>
+                            <p>
+                                <label id="labelcodpos" class="youpasswd" data-icon="p">Código postal</label>
+                                <input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true">
+                            </p>
+                            <p>
+                                <button type="button" id="enviar_registro">Crear cuenta</button>
+                            </p>
+                            <p class="change_link">
+                                <label id="labelYAesClient" class="youpasswd" data-icon="p">¿Ya es cliente?</label>
+                                <a id="linkIniSes" onclick="displayLogin();">Iniciar sessión</a>
+                            </p>
+                        </form>
+                    </div>
                     </form>
                 </div>
-                </form>
-            </div>
 
-            <!-- POPUP DE CAMBIO PASSWORD -->
-            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupCambioContra" class="ui-content" style="min-width:250px;">
-                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
-                <div id="div_cambioContra">
-                    <form>
-                        <label id="tituloCamContra">
-                            <h3>Cambio de contraseña</h3>
-                        </label>
-                        <p>
-                            <label id="labelSuUsuario" class="youpasswd" data-icon="u">Su usuario:</label>
-                            <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
-                        </p>
-                        <p>
-                            <button type="button" id="cam_contraseña">¡Pedir una nueva contraseña!</button>
-                        </p>
-                        <p>
-                            <button type="button" onclick="displayLogin2();" id="volver">Volver</button>
-                        </p>
+                <!-- POPUP DE CAMBIO PASSWORD -->
+                <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupCambioContra" class="ui-content" style="min-width:250px;">
+                    <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                    <div id="div_cambioContra">
+                        <form>
+                            <label id="tituloCamContra">
+                                <h3>Cambio de contraseña</h3>
+                            </label>
+                            <p>
+                                <label id="labelSuUsuario" class="youpasswd" data-icon="u">Su usuario:</label>
+                                <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
+                            </p>
+                            <p>
+                                <button type="button" id="cam_contraseña">¡Pedir una nueva contraseña!</button>
+                            </p>
+                            <p>
+                                <button type="button" onclick="displayLogin2();" id="volver">Volver</button>
+                            </p>
+                        </form>
+                    </div>
                     </form>
                 </div>
-                </form>
-            </div>
 
-            <!-- POPUP PARA ALERTAS-ERRORES WS -->
-            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupAlert" class="ui-content" style="max-width:280px">
-                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
-                <label id="texto_popup"></label>
-            </div>
-
-            <!-- POPUP PREGUNTAS -->
-            <div data-role="popup" data-corners="false" data-theme="b" id="popupEmail" style="">
-                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
-                <div data-role="header" role="banner" class="ui-header ui-bar-a" style="background:#1798d1;">
-                    <h1 style="color: rgb(255, 255, 255);text-transform: uppercase;">Escriba su email:</h1>
+                <!-- POPUP PARA ALERTAS-ERRORES WS -->
+                <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupAlert" class="ui-content" style="max-width:280px">
+                    <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                    <label id="texto_popup"></label>
                 </div>
-                <div role="main" class="ui-content">
-                    <!--<h3 class="ui-title">Email:</h3>-->
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a" style="width:100%;">
-                            <input id="email" type="email" placeholder="Ej. miemail@mail.com" autofocus onclick="sendEmail();" data-clear-btn="true">
-                        </div>
+
+                <!-- POPUP PREGUNTAS -->
+                <div data-role="popup" data-corners="false" data-theme="b" id="popupEmail" style="">
+                    <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                    <div data-role="header" role="banner" class="ui-header ui-bar-a" style="background:#1798d1;">
+                        <h1 style="color: rgb(255, 255, 255);text-transform: uppercase;">Escriba su email:</h1>
                     </div>
-                    <div class="ui-grid-b">
-                        <div class="ui-block-b"></div>
-                        <div class="ui-block-b">
-                            <a id="enviar_correo" href="#" class="ui-btn" style="text-transform:uppercase;">Enviar</a>
+                    <div role="main" class="ui-content">
+                        <!--<h3 class="ui-title">Email:</h3>-->
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a" style="width:100%;">
+                                <input id="email" type="email" placeholder="Ej. miemail@mail.com" autofocus onclick="sendEmail();" data-clear-btn="true">
+                            </div>
                         </div>
-                        <div class="ui-block-b"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- POPUP PREGUNTAS -->
-            <div data-role="popup" data-corners="false" data-theme="b" id="popupPregunta" style="">
-                <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
-                <div data-role="header" role="banner" class="ui-header ui-bar-a" style="background:#1798d1;">
-                    <h1 style="color: rgb(255, 255, 255);text-transform: uppercase;">Asistente de fiestas</h1>
-                </div>
-                <div role="main" class="ui-content">
-                    <h3 class="ui-title">Antes de salir del asistente de fiestas. ¿Quiere seguir guardando los artículos en el carrito?</h3>
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a">
-                            <a href="#" class="ui-btn" style="text-transform:uppercase;" onclick="guardarInfo('no');">No</a>
-                        </div>
-                        <div class="ui-block-b">
-                            <a href="#" class="ui-btn" style="text-transform:uppercase;" onclick="guardarInfo('si');">Si</a>
+                        <div class="ui-grid-b">
+                            <div class="ui-block-b"></div>
+                            <div class="ui-block-b">
+                                <a id="enviar_correo" href="#" class="ui-btn" style="text-transform:uppercase;">Enviar</a>
+                            </div>
+                            <div class="ui-block-b"></div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!--     FOOTER    -->
-            <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style:none;height: 38px;">
-                <!--<img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">-->
-                <div style="background: url(css/icons/footer.jpg);background-size: 100% 100% !important;">
-                    <img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">
+                <!-- POPUP PREGUNTAS -->
+                <div data-role="popup" data-corners="false" data-theme="b" id="popupPregunta" style="">
+                    <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
+                    <div data-role="header" role="banner" class="ui-header ui-bar-a" style="background:#1798d1;">
+                        <h1 style="color: rgb(255, 255, 255);text-transform: uppercase;">Asistente de fiestas</h1>
+                    </div>
+                    <div role="main" class="ui-content">
+                        <h3 class="ui-title">Antes de salir del asistente de fiestas. ¿Quiere seguir guardando los artículos en el carrito?</h3>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <a href="#" class="ui-btn" style="text-transform:uppercase;" onclick="guardarInfo('no');">No</a>
+                            </div>
+                            <div class="ui-block-b">
+                                <a href="#" class="ui-btn" style="text-transform:uppercase;" onclick="guardarInfo('si');">Si</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <!--     FOOTER    -->
+                <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style:none;height: 38px;">
+                    <!--<img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">-->
+                    <div style="background: url(css/icons/footer.jpg);background-size: 100% 100% !important;">
+                        <img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">
+                    </div>
+                </div>
 
 </body>
 
