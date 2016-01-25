@@ -71,9 +71,9 @@ function updateBackButton(originNode, originName, linkImg) {
     //console.log("Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
 
     if (nodeIds.length == 0) {
-        //console.log("Iniciamos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
+        console.log("Iniciamos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
         //añadimos volver al menú
-        nodeIds.push(0);
+        nodeIds.push("0");
         nodeNames.push(jsonIdiomas.header.menu);
         nodeImg.push(linkImg);
         //añadimos volver a la opcion elegida del menú 

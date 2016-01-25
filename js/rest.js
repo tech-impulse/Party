@@ -1243,10 +1243,10 @@ function sendEmail() {
                     $("#circuloCantidad").hide();
                     $("#spBtnPopupCartAmmount").hide();
                     $("#userIcoCarrito").hide();
-                    CART = "";
-                    nodeIds = "";
-                    nodeImg = "";
-                    nodeNames = "";
+                    CART = [];
+                    nodeNames = [];
+                    nodeIds = [];
+                    nodeImg = [];
                     EMAIL_USER = "";
                     logout();
                     console.log("Enviamos email");

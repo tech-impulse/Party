@@ -56,10 +56,10 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
         if (originNode == 0) {
             loadMenu(data);
-            CART = "";
-            nodeIds = "";
-            nodeImg = "";
-            nodeNames = "";
+            CART = [];
+            nodeNames = [];
+            nodeIds = [];
+            nodeImg = [];
         } else { //if (isback == "back")
             console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg + "--------------------------------------------");
             updateBackButton(originNode, originName, linkImg);
