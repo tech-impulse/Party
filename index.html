@@ -30,6 +30,27 @@
 </head>
 
 <style>
+    .btn_finalizarpedido {
+        
+        width: 25%;
+        height: 28px;
+        /*margin: 10px 0 10px 0;*/
+        /*border: 2px solid #FFF;*/
+        /*border-radius: 5px;*/
+        background-color: #0CF;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 1.8em;
+        /* Si cambiais tamaño de letra, ajustar el centrado vertical aqui :)*/
+        color: #fff;
+        text-align: center;
+        letter-spacing: 0.05em;
+        text-shadow: 0px 1px 1px rgba(78, 78, 78, 1);
+        text-transform: uppercase;
+        
+    }
+    
     @font-face {
         /*font-family: "font";
         src: url("http://partyfiesta.youtter.com/app/alb/css/fonts/font.ttf");*/
@@ -37,15 +58,14 @@
         font-weight: normal;
         font-style: normal;
         line-height: normal;
-       
     }
     
     body {
         font-family: Arial, sans-serif !important;
         line-height: 2em;
-        color:#ff0000;
+        color: #ff0000;
     }
-
+    
     .ui-select > .ui-btn {
         background: #29C0FF !important;
     }
@@ -284,9 +304,10 @@
             </div>
 
             <!--POPUP DE Carga -->
-            <div data-role="popup" data-corners="false" id="popupCargando" data-overlay-theme="a" data-theme="none" onclick ="$('#popupCargando').popup('close');" style="background-color: rgb(0, 0, 0);opacity: 0.8;max-width: none;height: 100%;">
+            <div data-role="popup" data-corners="false" id="popupCargando" data-overlay-theme="a" data-theme="none" onclick="$('#popupCargando').popup('close');" style="background-color: rgb(0, 0, 0);opacity: 0.8;max-width: none;height: 100%;">
                 <center>
-                    <br><br>
+                    <br>
+                    <br>
                     <div>
                         <img src="css/icons/cargando.gif">
                     </div>
@@ -465,10 +486,11 @@
 
                 <!--     FOOTER    -->
                 <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style:none;height: 38px;">
-                    <!--<img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">-->
-                    <div style="background: url(css/icons/footer.jpg);background-size: 100% 100% !important;">
-                        <img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">
-                    </div>
+                    <!--<img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">style="background: url(css/icons/footer.jpg);background-size: 100% 100% !important;"-->
+                    
+                    <div onclick="checkOut();" id="btn_finalizarpedido" class="btn_finalizarpedido" style="position: absolute;right: 3%;margin-top: 6px;display:none;">Finalizar pedido</div>
+                    <img src="css/icons/footer.jpg" style="position: relative;width: 100vw;height: 38px;z-index: -3;">
+                  
                 </div>
 
 </body>

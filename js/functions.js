@@ -6,8 +6,11 @@ function checkOut() {
 
     //if (LOGGED == true) {
     if (CART.length > 0) {
+        
         console.log("Actualizar div");
         $('.ui-popup').popup('close');
+        
+        $("#btn_finalizarpedido").hide();
 
         if (SHOPDELIVERY == 0) {
             var html = '<div>' +
@@ -16,7 +19,7 @@ function checkOut() {
                 '<br>' +
                 '<a  data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                 '<br>' +
-                '<a  data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b"> Imprimir en tienda </a>' +
+                '<a  data-corners="false" style="width:300px" onclick="imprimirPedido();" data-role="button" data-icon="home" data-iconpos="right" data-theme="b"> Imprimir en tienda </a>' +
                 '</center>' +
                 '</div>';
             $("#divContent").html(html);
@@ -33,7 +36,7 @@ function checkOut() {
                 '<br>' +
                 //'<a data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" >Enviar a Casa</a>' +
                 //'<br>' +
-                '<a data-corners="false" style="width:300px" onclick="displaySummary(\'store\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" > Imprimir en tienda </a>' +
+                '<a data-corners="false" style="width:300px" onclick="imprimirPedido();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" > Imprimir en tienda </a>' +
                 '</center>' +
                 '</div>';
             $("#divContent").html(html);

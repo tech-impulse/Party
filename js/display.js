@@ -766,6 +766,7 @@ function displayProducts(data, originNode, originName, param) {
 
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
+            $("#btn_finalizarpedido").show();
 
             var aux = 0;
             // calculo del numero de articulos por producto
