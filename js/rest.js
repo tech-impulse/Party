@@ -436,6 +436,7 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
                 displayProducts(response, idNode, nodeName); //dsfsjndfjsdnfoj
 
             } else {
+
                 setTimeout(function () {
                     $('#popupCargando').popup('close');
                 }, 500);
@@ -452,24 +453,27 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
 
             if (textStatus === "timeout") {
 
-                //console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
+                console.log("Timeout");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("La red esta satura vuelva a intentarlo");
+                $('#popupAlert').popup('open');
 
                 setTimeout(function () {
-                    $("#popupCargando").popup("close");
-                }, 5000);
+                    $("#popupAlert").popup("open");
+                }, 500);
 
             } else {
 
                 restError(jqXHR, "tiendas");
                 //console.log("Sin conexion");
                 //alert("Sin conexion a internet...");
-                $("#texto_popup").text("Sin conexion a internet");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("La red esta satura vuelva a intentarlo");
                 $('#popupAlert').popup('open');
 
                 setTimeout(function () {
-                    $("#popupCargando").popup("close");
-                }, 5000);
+                    $("#popupAlert").popup("open");
+                }, 500);
 
             }
         },
@@ -581,13 +585,23 @@ function getProducts(idNode, nodeName, info_aux) {
             } else if (response.result == 0) {
 
                 //console.log("No hay productos para este nodo");
+                $("#popupCargando").popup("close");
                 $("#texto_popup").text("No hay productos...");
-                $('#popupAlert').popup('open');
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
 
             } else if (response.result == -1) {
 
-                $("#texto_popup").text("Error...");
-                $('#popupAlert').popup('open');
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Error... Resultado -1");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
 
             }
 
@@ -597,23 +611,24 @@ function getProducts(idNode, nodeName, info_aux) {
             if (textStatus === "timeout") {
                 //do something on timeout
                 //console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Error de TimeOut...");
 
                 setTimeout(function () {
-                    $("#popupCargando").popup("close");
-                }, 5000);
+                    $('#popupAlert').popup('open');
+                }, 250);
 
             } else {
 
                 restError(jqXHR, "tiendas");
                 //console.log("Sin conexion");
                 //alert("Sin conexion a internet...");
+                $("#popupCargando").popup("close");
                 $("#texto_popup").text("Sin conexion a internet");
-                $('#popupAlert').popup('open');
 
                 setTimeout(function () {
-                    $("#popupCargando").popup("close");
-                }, 5000);
+                    $('#popupAlert').popup('open');
+                }, 250);
 
             }
         },
@@ -673,7 +688,7 @@ function getTiendas() {
                 restError(jqXHR, "tiendas");
                 //console.log("Sin conexion");
                 //console.log(response);
-                $("#texto_popup").text("Error..." + response.result);
+                $("#texto_popup").text("Error de conexión...");
                 $('#popupAlert').popup('open');
 
             }
@@ -724,8 +739,8 @@ function restOk_tiendas(res, typ, param, param2) {
     $('#select_tienda-button').css({
         border: "0px"
     });
-    
-    console.log(html);
+
+    //console.log(html);
 
 
 }
@@ -1229,14 +1244,17 @@ function sendEmail() {
                     $("#spBtnPopupCartAmmount").hide();
                     $("#userIcoCarrito").hide();
                     CART = "";
-                    /*nodeIds = "";
+                    nodeIds = "";
                     nodeImg = "";
                     nodeNames = "";
-                    getNodes(0);
+                    EMAIL_USER = "";
+                    logout();
+                    console.log("Enviamos email");
 
                     setTimeout(function () {
+                        $('#popupAlert').popup('close');
                         getNodes(0);
-                    }, 1500);*/
+                    }, 1500);
 
 
                 } else if (parseInt(response.result) == parseInt(0)) {

@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="css/themes/PartyFiesta.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="css/flaticon/flaticon.css" />
-    <link rel="stylesheet" href="css/estilos.css" />
+
     <link rel="stylesheet" href="lib/all-animation.min.css" />
     <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/estilos.css" />
 
     <!-- SCRIPTS NUESTROS -->
     <script src="js/app.js"></script>
@@ -30,20 +31,21 @@
 
 <style>
     @font-face {
-        font-family: "font";
-        src: url("http://partyfiesta.youtter.com/app/alb/css/fonts/font.ttf");
+        /*font-family: "font";
+        src: url("http://partyfiesta.youtter.com/app/alb/css/fonts/font.ttf");*/
+        font-family: Arial, sans-serif !important;
         font-weight: normal;
         font-style: normal;
-    }
-    
-    * {
-        font-family: "font";
+        line-height: normal;
+       
     }
     
     body {
-        font-family: "font";
+        font-family: Arial, sans-serif !important;
+        line-height: 2em;
+        color:#ff0000;
     }
-    
+
     .ui-select > .ui-btn {
         background: #29C0FF !important;
     }
@@ -281,9 +283,9 @@
             </div>
 
             <!--POPUP DE Carga -->
-            <div data-role="popup" data-corners="false" id="popupCargando" data-overlay-theme="a" data-theme="none" style="background-color: rgb(0, 0, 0);opacity: 0.8;max-width: none;height: 100%;">
+            <div data-role="popup" data-corners="false" id="popupCargando" data-overlay-theme="a" data-theme="none" onclick ="$('#popupCargando').popup('close');" style="background-color: rgb(0, 0, 0);opacity: 0.8;max-width: none;height: 100%;">
                 <center>
-                    <br>
+                    <br><br>
                     <div>
                         <img src="css/icons/cargando.gif">
                     </div>

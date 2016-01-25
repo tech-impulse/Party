@@ -1294,13 +1294,13 @@ function displayPopupItemDetail(id, param, idproduct) {
 
                 switch (CART[i].state) {
                 case 1:
-                    imgAvailability = "css/maqueta/barraVerde.gif";
+                    imgAvailability = "css/maqueta/barraVerde.png";
                     break;
                 case 2:
-                    imgAvailability = "css/maqueta/barraAmarilla.gif";
+                    imgAvailability = "css/maqueta/barraAmarilla.png";
                     break;
                 default:
-                    imgAvailability = "css/maqueta/barraVerde.gif";
+                    imgAvailability = "css/maqueta/barraVerde.png";
                     break;
                 }
 

@@ -56,6 +56,10 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
         if (originNode == 0) {
             loadMenu(data);
+            CART = "";
+            nodeIds = "";
+            nodeImg = "";
+            nodeNames = "";
         } else { //if (isback == "back")
             console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg + "--------------------------------------------");
             updateBackButton(originNode, originName, linkImg);
@@ -249,7 +253,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                                 '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
 
-                        }//max-width: ' + (heig_block * 0.8) + 'px;
+                        } //max-width: ' + (heig_block * 0.8) + 'px;
 
                         htmlContent = htmlContent + element;
 
@@ -680,11 +684,11 @@ function displayProducts(data, originNode, originName, param) {
                 }
 
                 if (stock > data.products[i].stock_min) {
-                    imgStock = "css/maqueta/barraVerde.gif";
+                    imgStock = "css/maqueta/barraVerde.png";
                 } else if (stock <= data.products[i].stock_min) {
-                    imgStock = "css/maqueta/barraAmarilla.gif";
+                    imgStock = "css/maqueta/barraAmarilla.png";
                 } else if (stock == 0) {
-                    imgStock = "css/maqueta/barraRojo.gif";
+                    imgStock = "css/maqueta/barraRojo.png";
                 }
 
                 if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
@@ -710,14 +714,14 @@ function displayProducts(data, originNode, originName, param) {
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
-                    '<div style="position: relative;">' +
-                    '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">'+
+                    '<div style="position: relative;overflow:hidden">' +
+                    '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
-                    '<div style="float:right;width: 50px;padding-right: 10px;"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
+                    '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
                     //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
-                    +displayWarning +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">'+
+                    + displayWarning +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
@@ -745,7 +749,7 @@ function displayProducts(data, originNode, originName, param) {
                     '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                     '</div></a></div>';
 
-                console.log(element);
+                //console.log(element);
 
                 htmlContent = htmlContent + element;
                 if (position == "c") {
@@ -756,7 +760,7 @@ function displayProducts(data, originNode, originName, param) {
             }
 
             htmlContent = htmlContent + '</div>';
-            
+
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
 
@@ -1004,37 +1008,6 @@ function displayProducts(data, originNode, originName, param) {
                     var titulo = data.products[i].name;
                 }
 
-                /*var element = block +
-                    '<a  data-corners="false" data-role="button" data-theme="f">' +
-                    '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
-                    '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
-                    '</div>' +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px;">' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;z-index:5;">' +
-                    '<div class="contenedor">' + titulo + '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;z-index:6;">' +
-                    '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
-                    '<label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;font-size: 15px;margin-top:5px;"></label>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;">' +
-                    '<button data-theme="b" data-corners="false" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
-                    '<div class="ui-block-a" onclick="" style="width: 45%;"><button data-theme="b"  data-corners="false" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
-                    '<div class="ui-block-b" style="width:10%;"></div>' +
-                    '<div class="ui-block-c" onclick="" style="width: 45%;"><button data-theme="b" data-corners="false" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
-                    '</div></a></div>';*/
 
                 if (data.products[i].stock_x_store == 0) {
                     var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
@@ -1250,7 +1223,7 @@ function displayProducts(data, originNode, originName, param) {
                     var titulo = data.products[i].name;
                 }
 
-                var element = block +
+                /*var element = block +
                     '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div id="circulo' + data.products[i].id + '"  class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
@@ -1276,6 +1249,90 @@ function displayProducts(data, originNode, originName, param) {
                     '<div class="ui-block-b" style="width:10%;"></div>' +
                     '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                     '</div></a></div>';
+                */
+
+                var count = data.products[i].caracteristics.length;
+                var caracteristicas = data.products[i].caracteristics;
+
+                for (var j = 0; j < count; j++) {
+
+                    //console.log("Caracteristica " + caracteristicas[j].type);
+                    if (caracteristicas[j].type == "9") {
+                        unidades = caracteristicas[j].name;
+                        //console.log("Caracteristica encontrada");
+                        aux_carac = 0;
+                        break;
+                    } else {
+                        //console.log("Esta no es la carac buena, pasamos a la siguiente carac");
+                        aux_carac = 1;
+                        continue;
+
+                    }
+
+                }
+
+                var imgStock = "";
+                var stock = data.products[i].stock_x_store;
+
+                if (stock == 0) {
+                    stock = data.products[i].stock_x_central_store;
+                }
+
+                if (stock > data.products[i].stock_min) {
+                    imgStock = "css/maqueta/barraVerde.png";
+                } else if (stock <= data.products[i].stock_min) {
+                    imgStock = "css/maqueta/barraAmarilla.png";
+                } else if (stock == 0) {
+                    imgStock = "css/maqueta/barraRojo.png";
+                }
+
+                if (data.products[i].stock_x_store == 0) {
+                    var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
+                        '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
+                        '<div style="text-transform: uppercase;z-index: 3; width:200px; height:20px; position: absolute; bottom: 0px; font-size:15px; padding-bottom:5px; color: #fff; text-align:center; font-weight:bold;">' + jsonIdiomas.exclusivoWeb + '</div>' +
+                        '</div>';
+                } else {
+                    var displayWarning = "";
+                }
+
+
+                var element = block +
+                    '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                    '<div style="position: relative;overflow:hidden">' +
+                    '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                    '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 15px;font-size: 22px;color: white;">10</label>' +
+                    '</div>' +
+                    '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
+                    //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
+                    + displayWarning +
+                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
+                    '<div class="contenedor">' + titulo + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
+                    '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
+                    '<strong><label id="labelPrecioTotalProducto' + data.products[i].id + '" style="color:green;margin-top:5px;"></label></strong>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-a">' +
+                    '<div class="ui-block-a" style="width: 100%;">' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
+                    '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                    '<div class="ui-block-b" style="width:10%;"></div>' +
+                    '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                    '</div></a></div>';
+
 
 
                 htmlContent = htmlContent + element;
@@ -1324,7 +1381,10 @@ function displayProducts(data, originNode, originName, param) {
 
     }
 
+
     $("#popupCargando").popup("close");
+
+
 
     translateButtons(idiomStore);
 
@@ -1416,11 +1476,11 @@ function getImgDisponibilidad(product) {
     }
 
     if (stock > CART[product].stock_min) {
-        imgAvailability = "css/maqueta/barraVerde.gif";
+        imgAvailability = "css/maqueta/barraVerde.png";
     } else if (stock <= CART[product].stock_min) {
-        imgAvailability = "css/maqueta/barraAmarilla.gif";
+        imgAvailability = "css/maqueta/barraAmarilla.png";
     } else if (stock == 0) {
-        imgAvailability = "css/maqueta/barraRojo.gif";
+        imgAvailability = "css/maqueta/barraRojo.png";
     }
 
     return imgAvailability;
@@ -1511,11 +1571,11 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
     }
 
     if (stock > aux_prod.stock_min) {
-        imgAvailability = "css/maqueta/barraVerde.gif";
+        imgAvailability = "css/maqueta/barraVerde.png";
     } else if (stock <= aux_prod.stock_min) {
-        imgAvailability = "css/maqueta/barraAmarilla.gif";
+        imgAvailability = "css/maqueta/barraAmarilla.png";
     } else if (stock == 0) {
-        imgAvailability = "css/maqueta/barraRojo.gif";
+        imgAvailability = "css/maqueta/barraRojo.png";
     }
 
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: blue"><h1>' + aux_prod.name + ' - ' + aux_prod.sku + '</h1></div>';
@@ -1534,10 +1594,10 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a"><img src="' + aux_prod.linkext + '" style="max-width: 325px;;width: 100%;"></div>' +
         '<div class="ui-block-b">' +
-        '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-        '<p><strong style="font-size: 15px;margin-top:5px;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
-        '<p><strong style="font-size: 15px;margin-top:5px;"> Descripción: </strong></p>' +
-        '<strong style=""><p style="white-space: initial;font-size: 15px;margin-top:5px;">' + definition + '</p></strong>' +
+        '<br><label style="font-size: 20px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+        '<p><strong style="font-size: 15px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
+        '<p><strong style="font-size: 15px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"> Descripción: </strong></p>' +
+        '<strong style=""><p style="white-space: initial;font-size: 15px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;">' + definition + '</p></strong>' +
         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
         '</div></div>' +
         '</ul>' +
@@ -1651,11 +1711,11 @@ function displayPopupItemDetail(id, param, idproduct) {
                     }
 
                     if (stock > PRODUCTS[i].stock_min) {
-                        imgAvailability = "css/maqueta/barraVerde.gif";
+                        imgAvailability = "css/maqueta/barraVerde.png";
                     } else if (stock <= PRODUCTS[i].stock_min) {
-                        imgAvailability = "css/maqueta/barraAmarilla.gif";
+                        imgAvailability = "css/maqueta/barraAmarilla.png";
                     } else if (stock == 0) {
-                        imgAvailability = "css/maqueta/barraRojo.gif";
+                        imgAvailability = "css/maqueta/barraRojo.png";
                     }
 
 
@@ -1755,11 +1815,11 @@ function displayPopupItemDetail(id, param, idproduct) {
                     }
 
                     if (stock > CART[i].stock_min) {
-                        imgAvailability = "css/maqueta/barraVerde.gif";
+                        imgAvailability = "css/maqueta/barraVerde.png";
                     } else if (stock <= CART[i].stock_min) {
-                        imgAvailability = "css/maqueta/barraAmarilla.gif";
+                        imgAvailability = "css/maqueta/barraAmarilla.png";
                     } else if (stock == 0) {
-                        imgAvailability = "css/maqueta/barraRojo.gif";
+                        imgAvailability = "css/maqueta/barraRojo.png";
                     }
 
 
@@ -1785,13 +1845,13 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-grid-a">' +
                         '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
-                        '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
+                        '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
                         //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
                         //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
                         //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
                         //'<br>'+
-                        '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
+                        '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                         '</div>' +
@@ -1960,17 +2020,16 @@ function displayPantallaIntermediaAsistDisfra(data) {
 
     htmlContent = '<div id="page_count" style="display: block;padding-top: 1%;">' +
         '<center>' +
-        '<img src="' + info.linkint + '" alt="">' +
+        '<img src="' + info.linkint + '" style="max-width: 30%;">' +
         '<div style="width: 30%"><select id="select_sexo" data-theme="f" data-native-menu="false" style="background-color:green;" data-corners="false">' +
         '</select></div>' +
         '<div id="div_selectTalla" style="width: 30%;display:none"><select id="select_talla" data-theme="f" data-native-menu="false" data-corners="false">' +
         '</select></div>' +
-        '<br>' +
-        '<a style="width:30%" id="btn_continuar_dis" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</a>' +
+        '<button style="width: 30%;" id="btn_continuar_dis" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</button>' +
         '</center>' +
         '</div>';
 
-    htmlContent = htmlContent + '</div>';
+    htmlContent = htmlContent;
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
 

@@ -59,6 +59,18 @@ $(document).ready(function () {
         };
     })(jQuery);
 
+    $('#popupCargando').on('popupafteropen', function () {
+        
+        console.log("Abrimos el popup de cargando");
+
+        setTimeout(function () {
+            $('#popupCargando').popup('close');
+        }, 31000);
+
+    }).on('popupafterclose', function () {
+
+    });
+
 
 
     $("#popupListItems").bind({
@@ -222,7 +234,7 @@ $(document).ready(function () {
 
             $('#email').removeClass('colorText');
             sendEmail();
-           
+
 
         }
 
@@ -405,7 +417,7 @@ function displayProductos(idNode, nodeName) {
 
         var num_persosnas = $('#personas_fiesta').val();
 
-        if (num_persosnas > 0) {
+        if (num_persosnas >= 2) {
 
             //console.log("Todos los selects ok. ASIS. FIESTAS");
             getProducts(idNode, nodeName);
