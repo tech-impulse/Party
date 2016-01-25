@@ -2141,6 +2141,10 @@ function loadMenu(data) {
 
 
     /*HEADER  de la pantalla*/
+    
+    htmlHeaderMenuInicial = '<div class="ui-grid-d">' +
+       '<div class="ui-block-b" style="margin-top:10px;margin-left: 41%; width:22%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%"></div>' +
+       '</div>';
 
     htmlHeader = '<div class="ui-grid-d">' +
         '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);" id="divBack"></div>' +
@@ -2156,8 +2160,12 @@ function loadMenu(data) {
         '</div>';
 
 
+    $("#divHeader_menuInicial").html(htmlHeaderMenuInicial);
+    $("#divHeader_menuInicial").show();
+    
     $("#divHeader_catalogo").html(htmlHeader);
     $("#divHeader_catalogo").trigger('create');
+    
     $("#divHeader_catalogo").addClass("border-header");
     $("#divHeader_catalogo").hide();
     $("#lateralMenu").panel("close");
