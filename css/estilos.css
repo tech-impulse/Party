@@ -64,6 +64,10 @@ footer {
     bottom: 0;
 }
 
+#div_select_tienda div.ui-nodisc-icon div.ui-select a span   {
+    padding-top: 5px;
+}
+
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     
 }
