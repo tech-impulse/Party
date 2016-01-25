@@ -272,6 +272,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                 $("#divContent").trigger('create');
                 if (originNode != 0) {
                     $("#divHeader_catalogo").show();
+                    $("#divHeader_menuInicial").hide();
                 }
 
                 break;
@@ -299,6 +300,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                 $("#divContent").html(htmlContent);
                 $("#divContent").trigger('create');
                 $("#divHeader_catalogo").show();
+                $("#divHeader_menuInicial").hide();
                 break;
             };
         }
@@ -524,6 +526,7 @@ function refreshDisplayProducts() {
         $("#divContent").html(htmlContent);
         $("#divContent").trigger('create');
         $("#divHeader_catalogo").show();
+        $("#divHeader_menuInicial").hide();
         break;
 
     }
@@ -837,6 +840,7 @@ function displayProducts(data, originNode, originName, param) {
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
             $("#divHeader_catalogo").show();
+            $("#divHeader_menuInicial").hide();
             break;
 
         }
@@ -1155,6 +1159,7 @@ function displayProducts(data, originNode, originName, param) {
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
             $("#divHeader_catalogo").show();
+            $("#divHeader_menuInicial").hide();
 
             break;
 
@@ -1430,6 +1435,7 @@ function displayProducts(data, originNode, originName, param) {
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
             $("#divHeader_catalogo").show();
+            $("#divHeader_menuInicial").hide();
             break;
 
         }
@@ -2164,6 +2170,7 @@ function loadMenu(data) {
 function displayPantallaIntermediaAsistDisfra(data) {
 
     $("#divHeader_catalogo").show();
+    $("#divHeader_menuInicial").hide();
     //console.log(data);
     var info = data.node;
 
@@ -2395,6 +2402,7 @@ function displayPantallaSugerencias() {
     updateBackButton(0, jsonIdiomas.header.menu);
 
     $("#divHeader_catalogo").show();
+    $("#divHeader_menuInicial").hide();
     //$("#divHeader").show();
 
     html_sug = '<div id="form_sugerencias" style="margin-top:2%;">' +

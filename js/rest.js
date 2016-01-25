@@ -253,6 +253,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         //console.log("DisplayPantalla intermadia");
                         pantallaActual = "Asistente disfraces";
                         $("#divHeader_catalogo").show();
+                        $("#divHeader_menuInicial").hide(); // TEMP !!
                         displayPantallaIntermediaAsistDisfra(info);
                     } else {
                         $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
