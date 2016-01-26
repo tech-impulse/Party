@@ -48,7 +48,8 @@ function translateButtons(idioma) {
                 "realizar_pedido": "Checkout"
             },
             "popup_errores": {
-                "tituloPopUp": "",
+                "tituloPopUp": "Products in the cart",
+                "tituloBoton": "Empty cart",
                 "campo_vacio": "Fill in this field",
                 "displayProductos": {
                     "isfiesta_3": "All selects ok",
@@ -159,6 +160,7 @@ function translateButtons(idioma) {
             "popup_errores": {
                 "labelCargando": "Cargando...",
                 "tituloPopUp": "Productos en la cesta",
+                "tituloBoton": "Vaciar carro",
                 "campo_vacio": "Rellene este campo",
                 "displayProductos": {
                     "isfiesta_3": "Todos los selects ok",
@@ -271,6 +273,7 @@ function translateButtons(idioma) {
             "popup_errores": {
                 "labelCargando": "Carregant...",
                 "tituloPopUp": "Productes en la cistella",
+                "tituloBoton": "Buidar carro",
                 "campo_vacio": "Ompli aquest camp",
                 "displayProductos": {
                     "isfiesta_3": "Tots els selects ok",

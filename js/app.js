@@ -793,6 +793,18 @@ function deleteItemCart(position) {
     displayItemOperations(CART[position].id, 0, position); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
 }
 
+/**
+*   Vacia el carrito de la compra y esconde los indicadores de cantidad.
+*/
+function vaciaCarrito() {
+    CART = {};
+    
+    $("#spBtnAmountPerson").text('');
+    $("#circuloCantidad").hide();
+    $("#spBtnPopupCartAmmount").hide();
+    $("#userIcoCarrito").hide();
+}
+
 function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos) {
     //$("#masinfo").popup("close");
     $(popupNAme).popup("close");

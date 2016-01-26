@@ -1537,6 +1537,14 @@ function openPopupAction(param) {
     translateButtons(idiomStore);
 }
 
+function openPopUpConfirmacionVaciarCarrito()   {
+    $("#popupListItems").popup("close");
+    
+    setTimeout(function () {
+        $("#popupConfirmacionVaciarCarrito").popup("open");
+    }, popupTimeout);
+}
+
 function getImgDisponibilidad(product) {
     var imgAvailability = "";
     var stock = CART[product].stock_x_store;
@@ -1561,7 +1569,7 @@ function displayPopupItemList() { //cambios jordi
     var html = '';
 
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
-    var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
+    var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/empty_cart.png" style="width:32px; heigth:30px;" /></div></div>';
 
 
     for (var i = 0; i < CART.length; i++) {
