@@ -1506,11 +1506,15 @@ function displayItemOperations(id, param, position) {
         $("#spBtnPopupCartAmmount").hide();
         $("#userIcoCarrito").hide();
     } else {
-        $("#spBtnAmountPerson").text(precio_persona + " x");
-
+        
+        if ( pantallaActual == 'Asistente fiestas' )   {
+            $("#spBtnAmountPerson").text(precio_persona + " x");
+            $("#userIcoCarrito").show();    
+        }
+        
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
-        $("#userIcoCarrito").show();
+        
     }
 
     translateButtons(idiomStore);
