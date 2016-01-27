@@ -1051,7 +1051,7 @@ function displayProducts(data, originNode, originName, param) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext.replace("wide", "normalPreview");
+                var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1323,7 +1323,7 @@ function displayProducts(data, originNode, originName, param) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext.replace("wide", "normalPreview");
+                var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1901,7 +1901,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         var definition = aux_prod.definition;
     }
 
-    var imgLinkExt = aux_prod.linkext.replace("wide", "normalPreview");
+    var imgLinkExt = aux_prod.linkext.replace("wide", "bigPreview");
     
     html = '<ul data-role="listview" data-inset="true">' +
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
@@ -1960,7 +1960,7 @@ function displayAlternativeProducts(idnode, idproduct) {
 
                 if (prod_alt.price_x_region.length > 0) {
                     
-                    var imgLinkExt = prod_alt.linkext.replace("wide", "normalPreview");
+                    var imgLinkExt = prod_alt.linkext.replace("wide", "bigPreview");
 
                     carrusel = carrusel + '<div class="swiper-slide" style="height: 175px;"><ul>' +
                         '<li style="list-style-type: none;">' +
@@ -2050,7 +2050,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "normalPreview");
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview");
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
@@ -2147,7 +2147,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "normalPreview");
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview");
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
@@ -2247,7 +2247,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '</div>' +
                         '</li>';
 
-                    var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
+                    var imgLinkExt = CART[i].linkext.replace("wide", "bigPreview");
                     
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
@@ -2326,7 +2326,7 @@ function loadMenu(data) {
     if (len > 0) {
         for (var i = 0; i < len; i++) {
             
-            var imgLinkExt = node[i].linkext.replace("wide", "normalPreview");
+            var imgLinkExt = node[i].linkext.replace("wide", "bigPreview");
 
             if (parseInt(data.nodes[i].isMain) == 1) {
                 //console.log("este es el principal " + node[i].isMain);
