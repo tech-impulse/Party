@@ -1799,12 +1799,11 @@ function displayPopupItemList() { //cambios jordi
         
         var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
 
-
-
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
             '<div class="ui-grid-b">' +
-            '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + CART[i].linkext + '"></div>' +
+            //'<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + CART[i].linkext + '"></div>' +
+            '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
             '<div class="ui-block-b" style="width:45%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;padding-top: 5%;">' + CART[i].name + '</label></div>' +
             '<div class="ui-block-c" style="width:40%;">' +
             '<div class="ui-grid-d">' +
