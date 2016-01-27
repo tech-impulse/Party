@@ -210,7 +210,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
                     }
                     
-                    var imgLinkExt = data.nodes[i].linkext.replace("wide", "normalPreview");
+                    var imgLinkExt = data.nodes[i].linkext.replace("wide", "bigPreview");
 
                     if (valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal
 
@@ -448,7 +448,7 @@ function refreshDisplayProducts() {
                 var titulo = data[i].name;
             }
             
-            var imgLinkExt = data[i].linkext.replace("wide", "normalPreview");
+            var imgLinkExt = data[i].linkext.replace("wide", "bigPreview");
             
             // TEMP !!
             var element = block +
@@ -719,7 +719,7 @@ function displayProducts(data, originNode, originName, param) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext.replace("wide", "normalPreview");
+                var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
                 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1769,6 +1769,8 @@ function openPopupAction(param) {
 }
 
 function openPopUpConfirmacionVaciarCarrito()   {
+    
+    //console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     $("#popupListItems").popup("close");
     
     setTimeout(function () {
@@ -1806,7 +1808,7 @@ function displayPopupItemList() { //cambios jordi
     for (var i = 0; i < CART.length; i++) {
         var src = getImgDisponibilidad(i);
         
-        var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
+        var imgLinkExt = CART[i].linkext.replace("wide", "bigPreview");
 
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
