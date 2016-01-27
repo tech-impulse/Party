@@ -31,6 +31,21 @@ $(document).ready(function () {
 
     // jQuery no-double-tap-zoom plugin
 
+    $(window).scroll(function () {
+
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+
+            if (pantallaActual == "catalogo") {
+                
+                console.log("Mas scroll");
+                getNodesProducts(nodeIds[nodeIds.length-1],nodeNames[nodeNames.length-1]);
+
+            }
+
+
+        }
+    });
+
     var elm = document.body; // or some selection of the element you want to disable
 
     var catcher = function (evt) {
@@ -60,7 +75,7 @@ $(document).ready(function () {
     })(jQuery);
 
     $('#popupCargando').on('popupafteropen', function () {
-        
+
         console.log("Abrimos el popup de cargando");
 
         setTimeout(function () {
