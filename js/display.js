@@ -209,14 +209,16 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
 
                     }
+                    
+                    var imgLinkExt = data.nodes[i].linkext.replace("wide", "bigPreview");
 
                     if (valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal
 
-                        var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + 'px"></div><div class="ui-block-b" style="width: ' + heig_block + 'px;height:' + alturaBox + 'px"><a  data-corners="false" data-role="button" data-theme="f" style="background-color: lightgray;"><img src="' + data.nodes[i].linkext + '" style="width: 100px;height: 100px;" ><br><strong>' + data.nodes[i].name +
+                        var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + 'px"></div><div class="ui-block-b" style="width: ' + heig_block + 'px;height:' + alturaBox + 'px"><a  data-corners="false" data-role="button" data-theme="f" style="background-color: lightgray;"><img src="' + imgLinkExt + '" style="width: 100px;height: 100px;" ><br><strong>' + data.nodes[i].name +
                             '</strong></a></div><div class="ui-block-c" style="width: 25%;height:' + alturaBox + 'px"></div>';
 
                         var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f"><img src="' +
-                            data.nodes[i].linkext + '" style="width: 150px;height:' + alturaBox + 'px"><br><strong>' + data.nodes[i].name +
+                            imgLinkExt + '" style="width: 150px;height:' + alturaBox + 'px"><br><strong>' + data.nodes[i].name +
                             '</strong></a></div></div>';
 
                         count++;
@@ -234,8 +236,8 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                             /*var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
                                 '<label style="position:absolute; bottom:0; font-size:35px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</label></div>' +
                                 '</div>';*/
-
-                            var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
+                            
+                            var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + imgLinkExt + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
                                 '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:30px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</div></div>' +
                                 '</div>';
 
@@ -246,9 +248,9 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                             /*var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';*/
-
+                            
                             var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);">' +
-                                '<center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + data.nodes[i].linkext + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
+                                '<center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
                                 '<br>' +
                                 '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
@@ -445,6 +447,9 @@ function refreshDisplayProducts() {
             } else {
                 var titulo = data[i].name;
             }
+            
+            var imgLinkExt = data[i].linkext.replace("wide", "bigPreview");
+            
             // TEMP !!
             var element = block +
                 '<a  data-corners="false" data-role="button" data-theme="f">' +
@@ -454,7 +459,7 @@ function refreshDisplayProducts() {
                 //'<div id="warning' + data.products[i].id + '" class="circulo" style="width: 40px; height: 40px; position: absolute;">' +
                 //'<img src="/img/warning.png" style="width: 40px; height: 40px; float: right;" />' +
                 //'</div>' +
-                '<img src="' + data[i].linkext + '" onclick="displayPopupItemDetail(' + ID_NODE + ',\'PRODUCTOS\',' + data[i].id + ')" style="width: 200px;height: 200px;">' +
+                '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + ID_NODE + ',\'PRODUCTOS\',' + data[i].id + ')" style="width: 200px;height: 200px;">' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
                 '<div class="contenedor">' + titulo + '</div>' +
@@ -714,7 +719,8 @@ function displayProducts(data, originNode, originName, param) {
                     var displayWarning = "";
                 }
 
-
+                var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
+                
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div style="position: relative;overflow:hidden">' +
@@ -724,7 +730,7 @@ function displayProducts(data, originNode, originName, param) {
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
                     //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
                     + displayWarning +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
@@ -1045,9 +1051,7 @@ function displayProducts(data, originNode, originName, param) {
                     var displayWarning = "";
                 }
 
-
                 var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
-
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1058,7 +1062,7 @@ function displayProducts(data, originNode, originName, param) {
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
                     //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
                     + displayWarning +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
@@ -1147,44 +1151,37 @@ function displayProducts(data, originNode, originName, param) {
         var block = '';
         var position = 0;
         var type;
-
+        
         updateBackButton(originNode, originName);
-
-        if (pantallaActual == "Asistente disfraces") {
-            console.log("Estamos en la pantalla ".pantallaActual);
-        } else if (pantallaActual == "Asistente fiestas") {
-            console.log("Estamos en la pantalla ".pantallaActual);
-            num_personas_fiesta = $("#personas_fiesta").val();
-        }
 
         switch (parseInt(data.columns)) {
         case 1:
 
-            grid = "<div id='gridCatalogo' class='ui-grid-a'>";
+            grid = "<div class='ui-grid-a'>";
             type = "vertical";
             break;
 
         case 2:
 
-            grid = "<div id='gridCatalogo' class='ui-grid-a'>";
+            grid = "<div class='ui-grid-a'>";
             type = "horizontal";
             break;
 
         case 3:
 
-            grid = "<div id='gridCatalogo' class='ui-grid-b'>";
+            grid = "<div class='ui-grid-b'>";
             type = "horizontal";
             break;
 
         case 4:
 
-            grid = "<div id='gridCatalogo' class='ui-grid-c'>";
+            grid = "<div class='ui-grid-c'>";
             type = "horizontal";
             break;
 
         case 5:
 
-            grid = "<div id='gridCatalogo' class='ui-grid-d'>";
+            grid = "<div class='ui-grid-d'>";
             type = "horizontal";
             break;
 
@@ -1291,7 +1288,7 @@ function displayProducts(data, originNode, originName, param) {
                 }
 
                 for (var j = 0; j < count_carac; j++) {
-                    //console.log("Caracteristica " + caracteristicas[j].type);
+                    console.log("Caracteristica " + caracteristicas[j].type);
                     if (caracteristicas[j].type == "9") {
                         unidades = caracteristicas[j].name;
                         break;
@@ -1328,13 +1325,16 @@ function displayProducts(data, originNode, originName, param) {
 
                 var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
 
-
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div style="position: relative;overflow:hidden">' +
                     '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
+                    '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
+                    //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
+                    + displayWarning +
+                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
                     '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
@@ -1433,26 +1433,36 @@ function añadirMasProductos(data, originNode, originName, param) {
     var block = '';
     var position = 0;
     var type;
-    var continuar = 0;
 
-    switch (parseInt(COLUMS)) {
+
+    switch (parseInt(data.columns)) {
     case 1:
+
+        grid = "<div class='ui-grid-a'>";
         type = "vertical";
         break;
 
     case 2:
+
+        grid = "<div class='ui-grid-a'>";
         type = "horizontal";
         break;
 
     case 3:
+
+        grid = "<div class='ui-grid-b'>";
         type = "horizontal";
         break;
 
     case 4:
+
+        grid = "<div class='ui-grid-c'>";
         type = "horizontal";
         break;
 
     case 5:
+
+        grid = "<div class='ui-grid-d'>";
         type = "horizontal";
         break;
 
@@ -1461,12 +1471,12 @@ function añadirMasProductos(data, originNode, originName, param) {
     switch (type) {
     case "horizontal":
 
-        htmlContent = "";
-        position = 0;
+        htmlContent = grid;
+        position = "a";
         var precio;
         var unidades;
 
-        console.log("Cargamos mas productos en el catalogo");
+        console.log("Productos que tenemos");
         console.log(data.products);
 
         for (var i = 0; i < data.products.length; i++) {
@@ -1475,23 +1485,6 @@ function añadirMasProductos(data, originNode, originName, param) {
 
             var heigth = (W_WIDTH * (0.96));
             var heig_block = heigth / parseInt(data.columns);
-
-            if (POS_GRID == "A" && continuar == 0) { //continuamos por la ultima caja que tenemos
-                position = 1;
-                continuar = 1;
-            } else if (POS_GRID == "B" && continuar == 0) {
-                position = 2;
-                continuar = 1;
-            } else if (POS_GRID == "C" && continuar == 01) {
-                position = 3;
-                continuar = 1;
-            } else if (POS_GRID == "D" && continuar == 0) {
-                position = 4;
-                continuar = 1;
-            } else if (POS_GRID == "E" && continuar == 0) {
-                position = 0;
-                continuar = 1;
-            }
 
             if (position < parseInt(data.columns)) {
 
@@ -1526,12 +1519,12 @@ function añadirMasProductos(data, originNode, originName, param) {
                     POS_GRID = "E";
                     break;
                 }
-
             } else {
                 position = 0;
                 block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
                 POS_GRID = "A";
             }
+
 
             if (data.products[i].price_x_region.length == 0) { // si no tiene precio continuamos
                 //console.log("Producto " + data.products[i].id + " no tiene precio, no lo mostramos");
@@ -1571,8 +1564,12 @@ function añadirMasProductos(data, originNode, originName, param) {
             var caracteristicas = data.products[i].caracteristics;
 
 
+            if (generoDisfraz == 0) { //sexo no valido lo saltamos
+                continue;
+            }
+
             for (var j = 0; j < count_carac; j++) {
-                //console.log("Caracteristica " + caracteristicas[j].type);
+                console.log("Caracteristica " + caracteristicas[j].type);
                 if (caracteristicas[j].type == "9") {
                     unidades = caracteristicas[j].name;
                     break;
@@ -1609,7 +1606,7 @@ function añadirMasProductos(data, originNode, originName, param) {
 
 
             var element = block +
-                '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);" class="ui-link ui-btn ui-btn-f ui-shadow" role="button">' +
+                '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                 '<div style="position: relative;overflow:hidden">' +
                 '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                 '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
@@ -1634,29 +1631,30 @@ function añadirMasProductos(data, originNode, originName, param) {
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="width: 100%;">' +
-                '<button  data-corners="false" data-theme="b" class=" ui-btn ui-btn-b ui-shadow" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
                 '</div>' +
                 '</div>' +
                 '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
-                '<div class="ui-block-a" class=" ui-btn ui-btn-b ui-shadow" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
                 '<div class="ui-block-b" style="width:10%;"></div>' +
-                '<div class="ui-block-c" class=" ui-btn ui-btn-b ui-shadow" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                 '</div></a></div>';
 
 
 
             htmlContent = htmlContent + element;
             if (position == "c") {
-                htmlContent = htmlContent;
+                htmlContent = htmlContent + grid;
             }
             position++;
 
         }
 
-        //htmlContent = htmlContent + '</div>';
+        htmlContent = htmlContent + '</div>';
 
-        //console.log(htmlContent);
-        $("#gridCatalogo").append(htmlContent);
+        $("#divContent").html(htmlContent);
+        $("#divContent").trigger('create');
+
 
         break;
 
@@ -1677,10 +1675,10 @@ function añadirMasProductos(data, originNode, originName, param) {
 
         }
         htmlContent = htmlContent + '</div></div></div>';
-        $("#divContent").append(htmlContent);
-        //$("#divContent").trigger('create');
-        //$("#divHeader_catalogo").show();
-        //$("#divHeader_menuInicial").hide();
+        $("#divContent").html(htmlContent);
+        $("#divContent").trigger('create');
+        $("#divHeader_catalogo").show();
+        $("#divHeader_menuInicial").hide();
         break;
 
     }
@@ -1739,11 +1737,15 @@ function displayItemOperations(id, param, position) {
         $("#spBtnPopupCartAmmount").hide();
         $("#userIcoCarrito").hide();
     } else {
-        $("#spBtnAmountPerson").text(precio_persona + " x");
-
+        
+        if ( pantallaActual == 'Asistente fiestas' )   {
+            $("#spBtnAmountPerson").text(precio_persona + " x");
+            $("#userIcoCarrito").show();    
+        }
+        
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
-        $("#userIcoCarrito").show();
+        
     }
 
     translateButtons(idiomStore);
@@ -1764,6 +1766,16 @@ function openPopupAction(param) {
     }
 
     translateButtons(idiomStore);
+}
+
+function openPopUpConfirmacionVaciarCarrito()   {
+    
+    //console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    $("#popupListItems").popup("close");
+    
+    setTimeout(function () {
+        $("#popupConfirmacionVaciarCarrito").popup("open");
+    }, popupTimeout);
 }
 
 function getImgDisponibilidad(product) {
@@ -1790,19 +1802,17 @@ function displayPopupItemList() { //cambios jordi
     var html = '';
 
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
-    var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
+    var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/empty_cart.png" style="width:32px; heigth:30px;" /></div></div>';
 
 
     for (var i = 0; i < CART.length; i++) {
         var src = getImgDisponibilidad(i);
-
         
         var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
 
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
             '<div class="ui-grid-b">' +
-            //'<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + CART[i].linkext + '"></div>' +
             '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
             '<div class="ui-block-b" style="width:45%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;padding-top: 5%;">' + CART[i].name + '</label></div>' +
             '<div class="ui-block-c" style="width:40%;">' +
@@ -1891,15 +1901,13 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         var definition = aux_prod.definition;
     }
 
-
     var imgLinkExt = aux_prod.linkext.replace("wide", "bigPreview");
     
-
     html = '<ul data-role="listview" data-inset="true">' +
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><img src="' + aux_prod.linkext + '" style="max-width: 325px;;width: 100%;"></div>' +
+        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;;width: 100%;"></div>' +
         '<div class="ui-block-b">' +
         '<br><label style="font-size: 20px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
         '<p><strong style="font-size: 15px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
@@ -1951,14 +1959,12 @@ function displayAlternativeProducts(idnode, idproduct) {
             if (aux == false && prod_alt.price_x_region[0] != "undefined") {
 
                 if (prod_alt.price_x_region.length > 0) {
-
                     
                     var imgLinkExt = prod_alt.linkext.replace("wide", "bigPreview");
 
-
                     carrusel = carrusel + '<div class="swiper-slide" style="height: 175px;"><ul>' +
                         '<li style="list-style-type: none;">' +
-                        '<img onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');" src="' + prod_alt.linkext + '" style="max-width: 75px;max-height: 75px;">' +
+                        '<img onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');" src="' + imgLinkExt + '" style="max-width: 75px;max-height: 75px;">' +
                         '</li>' +
                         '<li style="list-style-type: none;" >' +
                         '<label onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');" style="color:rgb(0, 128, 0);">' + formatoNumero(prod_alt.price_x_region[0].totalPrice, 2, ",", ".", "€") + '</label>' +
@@ -2044,23 +2050,14 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-
                     //var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview"); // TEMP !!
-
-
-                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview");
-
-
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-
                         //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
-
-
                         '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
@@ -2151,24 +2148,15 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-
                     //var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview"); // TEMP !!
-
-
-                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview");
-
-
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
-
                         //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
-
-
+                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.position + ' ' + PRODUCTS[i].position_x_store.module + ' </strong></p>' +
@@ -2261,23 +2249,14 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '</div>' +
                         '</li>';
 
-
                     //var imgLinkExt = CART[i].linkext.replace("wide", "bigPreview"); // TEMP !!
                     
-
-
-                    var imgLinkExt = CART[i].linkext.replace("wide", "bigPreview");
-
-
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-
                         //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
-
-
                         '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
@@ -2349,10 +2328,8 @@ function loadMenu(data) {
 
     if (len > 0) {
         for (var i = 0; i < len; i++) {
-
             
             var imgLinkExt = node[i].linkext.replace("wide", "bigPreview");
-
 
             if (parseInt(data.nodes[i].isMain) == 1) {
                 //console.log("este es el principal " + node[i].isMain);
@@ -2362,30 +2339,30 @@ function loadMenu(data) {
             }
 
             switch (valorSwitch) {
-            case 1: //catalogo
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 2: //promos
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 3: // asis fistas
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 4: // asis disfra
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 5: // sugerencias
-                extra = 'displayPantallaSugerencias()';
-                break;
-            case 6: // fuera tienda
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                break;
+                case 1: //catalogo
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 2: //promos
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 3: // asis fistas
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 4: // asis disfra
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 5: // sugerencias
+                    extra = 'displayPantallaSugerencias()';
+                    break;
+                case 6: // fuera tienda
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
+                    extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                    break;
             }
 
-            options = options + '<li onclick="' + extra + ';"; openMenu()"><img src="' + node[i].linkext + '" style="width:12em">' + node[i].name + '</li>';
+            options = options + '<li onclick="' + extra + ';"; openMenu()"><img src="' + imgLinkExt + '" style="width:12em">' + node[i].name + '</li>';
         }
 
     }
