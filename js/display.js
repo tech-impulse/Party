@@ -1808,7 +1808,7 @@ function displayPopupItemList() { //cambios jordi
     for (var i = 0; i < CART.length; i++) {
         var src = getImgDisponibilidad(i);
         
-        var imgLinkExt = CART[i].linkext.replace("wide", "bigPreview");
+        var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
 
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
@@ -2050,14 +2050,15 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview");
+                    //var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview"); // TEMP !!
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
+                        //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
@@ -2147,14 +2148,15 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview");
+                    //var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview"); // TEMP !!
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
+                        //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.position + ' ' + PRODUCTS[i].position_x_store.module + ' </strong></p>' +
@@ -2247,14 +2249,15 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '</div>' +
                         '</li>';
 
-                    var imgLinkExt = CART[i].linkext.replace("wide", "bigPreview");
+                    //var imgLinkExt = CART[i].linkext.replace("wide", "bigPreview"); // TEMP !!
                     
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
+                        //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
