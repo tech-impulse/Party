@@ -417,7 +417,7 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
         page: parseInt(PAGINA)
     };
 
-    console.log("Post catalogo");
+    console.log("Articlios del catalogo");
     console.log(dataSend);
 
     request = $.ajax({

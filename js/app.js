@@ -38,7 +38,8 @@ $(document).ready(function () {
             if (pantallaActual == "catalogo") {
                 
                 console.log("Mas scroll");
-                getNodesProducts(nodeIds[nodeIds.length-1],nodeNames[nodeNames.length-1]);
+                PAGINA++;
+                getNodesProducts(nodeIds[nodeIds.length-1], nodeNames[nodeNames.length-1]);
 
             }
 
@@ -806,18 +807,6 @@ function deleteItemCart(position) {
     $("#labelPrecioTotalProducto" + CART[position].id).text("");
     //console.log("Eliminamos el " + CART[position]);
     displayItemOperations(CART[position].id, 0, position); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
-}
-
-/**
-*   Vacia el carrito de la compra y esconde los indicadores de cantidad.
-*/
-function vaciaCarrito() {
-    CART = {};
-    
-    $("#spBtnAmountPerson").text('');
-    $("#circuloCantidad").hide();
-    $("#spBtnPopupCartAmmount").hide();
-    $("#userIcoCarrito").hide();
 }
 
 function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos) {
