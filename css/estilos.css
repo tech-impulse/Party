@@ -71,7 +71,7 @@ footer {
 .btnPopUp {
   float: right;
   margin-top: -60px;
-  margin-right: 100px;
+  margin-right: 68px; /*   Ajustado al ipad */
   background: #3498db;
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
   background-image: -moz-linear-gradient(top, #3498db, #2980b9);

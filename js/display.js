@@ -209,14 +209,16 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
 
                     }
+                    
+                    var imgLinkExt = data.nodes[i].linkext.replace("wide", "normalPreview");
 
                     if (valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal
 
-                        var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + 'px"></div><div class="ui-block-b" style="width: ' + heig_block + 'px;height:' + alturaBox + 'px"><a  data-corners="false" data-role="button" data-theme="f" style="background-color: lightgray;"><img src="' + data.nodes[i].linkext + '" style="width: 100px;height: 100px;" ><br><strong>' + data.nodes[i].name +
+                        var element2 = '<div class="ui-block-a" style="width: 25%;height:' + alturaBox + 'px"></div><div class="ui-block-b" style="width: ' + heig_block + 'px;height:' + alturaBox + 'px"><a  data-corners="false" data-role="button" data-theme="f" style="background-color: lightgray;"><img src="' + imgLinkExt + '" style="width: 100px;height: 100px;" ><br><strong>' + data.nodes[i].name +
                             '</strong></a></div><div class="ui-block-c" style="width: 25%;height:' + alturaBox + 'px"></div>';
 
                         var element = block + '<div><a  data-corners="false" data-role="button" data-theme="f"><img src="' +
-                            data.nodes[i].linkext + '" style="width: 150px;height:' + alturaBox + 'px"><br><strong>' + data.nodes[i].name +
+                            imgLinkExt + '" style="width: 150px;height:' + alturaBox + 'px"><br><strong>' + data.nodes[i].name +
                             '</strong></a></div></div>';
 
                         count++;
@@ -234,8 +236,8 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                             /*var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
                                 '<label style="position:absolute; bottom:0; font-size:35px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</label></div>' +
                                 '</div>';*/
-
-                            var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
+                            
+                            var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + imgLinkExt + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
                                 '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:30px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</div></div>' +
                                 '</div>';
 
@@ -246,9 +248,9 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                             /*var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';*/
-
+                            
                             var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);">' +
-                                '<center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + data.nodes[i].linkext + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
+                                '<center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
                                 '<br>' +
                                 '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';
@@ -445,6 +447,9 @@ function refreshDisplayProducts() {
             } else {
                 var titulo = data[i].name;
             }
+            
+            var imgLinkExt = data[i].linkext.replace("wide", "normalPreview");
+            
             // TEMP !!
             var element = block +
                 '<a  data-corners="false" data-role="button" data-theme="f">' +
@@ -454,7 +459,7 @@ function refreshDisplayProducts() {
                 //'<div id="warning' + data.products[i].id + '" class="circulo" style="width: 40px; height: 40px; position: absolute;">' +
                 //'<img src="/img/warning.png" style="width: 40px; height: 40px; float: right;" />' +
                 //'</div>' +
-                '<img src="' + data[i].linkext + '" onclick="displayPopupItemDetail(' + ID_NODE + ',\'PRODUCTOS\',' + data[i].id + ')" style="width: 200px;height: 200px;">' +
+                '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + ID_NODE + ',\'PRODUCTOS\',' + data[i].id + ')" style="width: 200px;height: 200px;">' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
                 '<div class="contenedor">' + titulo + '</div>' +
@@ -714,7 +719,8 @@ function displayProducts(data, originNode, originName, param) {
                     var displayWarning = "";
                 }
 
-
+                var imgLinkExt = data.products[i].linkext.replace("wide", "normalPreview");
+                
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div style="position: relative;overflow:hidden">' +
@@ -724,7 +730,7 @@ function displayProducts(data, originNode, originName, param) {
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
                     //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
                     + displayWarning +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
@@ -1079,6 +1085,7 @@ function displayProducts(data, originNode, originName, param) {
                     var displayWarning = "";
                 }
 
+                var imgLinkExt = data.products[i].linkext.replace("wide", "normalPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1089,7 +1096,7 @@ function displayProducts(data, originNode, originName, param) {
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
                     //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
                     + displayWarning +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
@@ -1360,6 +1367,7 @@ function displayProducts(data, originNode, originName, param) {
                     var displayWarning = "";
                 }
 
+                var imgLinkExt = data.products[i].linkext.replace("wide", "normalPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1370,7 +1378,7 @@ function displayProducts(data, originNode, originName, param) {
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
                     //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
                     + displayWarning +
-                    '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
@@ -1574,11 +1582,13 @@ function displayPopupItemList() { //cambios jordi
 
     for (var i = 0; i < CART.length; i++) {
         var src = getImgDisponibilidad(i);
+        
+        var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
 
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
             '<div class="ui-grid-b">' +
-            '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + CART[i].linkext + '"></div>' +
+            '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
             '<div class="ui-block-b" style="width:45%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;padding-top: 5%;">' + CART[i].name + '</label></div>' +
             '<div class="ui-block-c" style="width:40%;">' +
             '<div class="ui-grid-d">' +
@@ -1666,11 +1676,13 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         var definition = aux_prod.definition;
     }
 
+    var imgLinkExt = aux_prod.linkext.replace("wide", "normalPreview");
+    
     html = '<ul data-role="listview" data-inset="true">' +
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><img src="' + aux_prod.linkext + '" style="max-width: 325px;;width: 100%;"></div>' +
+        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;;width: 100%;"></div>' +
         '<div class="ui-block-b">' +
         '<br><label style="font-size: 20px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
         '<p><strong style="font-size: 15px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
@@ -1722,10 +1734,12 @@ function displayAlternativeProducts(idnode, idproduct) {
             if (aux == false && prod_alt.price_x_region[0] != "undefined") {
 
                 if (prod_alt.price_x_region.length > 0) {
+                    
+                    var imgLinkExt = prod_alt.linkext.replace("wide", "normalPreview");
 
                     carrusel = carrusel + '<div class="swiper-slide" style="height: 175px;"><ul>' +
                         '<li style="list-style-type: none;">' +
-                        '<img onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');" src="' + prod_alt.linkext + '" style="max-width: 75px;max-height: 75px;">' +
+                        '<img onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');" src="' + imgLinkExt + '" style="max-width: 75px;max-height: 75px;">' +
                         '</li>' +
                         '<li style="list-style-type: none;" >' +
                         '<label onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');" style="color:rgb(0, 128, 0);">' + formatoNumero(prod_alt.price_x_region[0].totalPrice, 2, ",", ".", "€") + '</label>' +
@@ -1811,13 +1825,14 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "normalPreview");
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
@@ -1907,13 +1922,14 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "normalPreview");
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.position + ' ' + PRODUCTS[i].position_x_store.module + ' </strong></p>' +
@@ -2006,12 +2022,14 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '</div>' +
                         '</li>';
 
+                    var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
+                    
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
@@ -2082,6 +2100,8 @@ function loadMenu(data) {
 
     if (len > 0) {
         for (var i = 0; i < len; i++) {
+            
+            var imgLinkExt = node[i].linkext.replace("wide", "normalPreview");
 
             if (parseInt(data.nodes[i].isMain) == 1) {
                 //console.log("este es el principal " + node[i].isMain);
@@ -2091,30 +2111,30 @@ function loadMenu(data) {
             }
 
             switch (valorSwitch) {
-            case 1: //catalogo
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 2: //promos
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 3: // asis fistas
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 4: // asis disfra
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 5: // sugerencias
-                extra = 'displayPantallaSugerencias()';
-                break;
-            case 6: // fuera tienda
-                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                break;
-            case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
-                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                break;
+                case 1: //catalogo
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 2: //promos
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 3: // asis fistas
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 4: // asis disfra
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 5: // sugerencias
+                    extra = 'displayPantallaSugerencias()';
+                    break;
+                case 6: // fuera tienda
+                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
+                    break;
+                case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
+                    extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                    break;
             }
 
-            options = options + '<li onclick="' + extra + ';"; openMenu()"><img src="' + node[i].linkext + '" style="width:12em">' + node[i].name + '</li>';
+            options = options + '<li onclick="' + extra + ';"; openMenu()"><img src="' + imgLinkExt + '" style="width:12em">' + node[i].name + '</li>';
         }
 
     }
