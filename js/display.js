@@ -1331,15 +1331,12 @@ function displayProducts(data, originNode, originName, param) {
                     '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
-<<<<<<< HEAD
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
                     //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
                     + displayWarning +
                     '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
-=======
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
                     '<img src="' + data.products[i].linkext + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
->>>>>>> origin/master
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
