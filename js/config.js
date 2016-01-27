@@ -3,7 +3,7 @@
 var urlServices = "http://partyfiesta.youtter.com/webservices/"; // URL del servidor de Webservices fuera de creapolis
 //var urlServices = "http://partyfiesta-prod.youtter.com/webservices/"; // URL del servidor de Webservices
 var request;
-var language = 2; // El idioma de la aplicación por defecto de momento CATALAN
+var language = 2; // El idioma de la aplicación por defecto demomento CATALAN
 var origin = 2; // Dispositivo desde el que se solicita la información al service: 1 Web, 2 App
 var nodeNames = [];
 var nodeIds = [];
@@ -35,3 +35,5 @@ var EMAIL_USER = "";
 var COLUMS = "";
 var ID_NODE = "";
 var num_personas_fiesta = "";
+var PAGINA = 0; //pagina donde nos quedamos en la paginacion del catalogo
+var POS_GRID = ""; //guardamos la posicion donde nos quedamos en la recarga de articulos del catalogo para poder la paginacion 

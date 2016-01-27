@@ -183,6 +183,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
     if (idNode != 0) {
         $("#banderas").hide();
     }
+    
+    PAGINA = 0; //se reinicia la pagina del catalogo
 
     if (aux == 1) {
         nodeIds = [];
@@ -204,7 +206,6 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     if (isAlgo != undefined && isAlgo > 0) { //estamos en el asistente de disfraces o fiestas?????
         ISFIESTA = isAlgo;
-
     }
 
     console.log("Is algo es " + isAlgo);
@@ -407,14 +408,13 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
 
 function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
-
-    //language = 1;
     // Datos que se van a enviar
     var dataSend = {
         lang: parseInt(language),
         origin: origin,
         id: idNode,
-        store: STORE.id
+        store: STORE.id,
+        page: parseInt(PAGINA)
     };
 
     console.log("Post catalogo");
@@ -431,10 +431,15 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
             console.log("Respueta");
             console.log(response);
 
-            if (response.result == 1) {
+            if (response.result == 1) {//todo bien cargamos productos
 
                 pantallaActual = "catalogo";
-                displayProducts(response, idNode, nodeName); //dsfsjndfjsdnfoj
+                if(PAGINA == 0){
+                    displayProducts(response, idNode, nodeName); 
+                }else{
+                    añadirMasProductos(response, idNode, nodeName);
+                }
+                
 
             } else {
 
@@ -1320,24 +1325,23 @@ function imprimirPedido() {
 
         var dataSend = {
             carrito: CART, 
-            email: EMAIL_USER
+            tienda: STORE.code
         };
 
         var request = $.ajax({
             data: dataSend,
             //async: false,
-            //url: urlServices + 'guardarPDF.php',
-            url: 'http://partyfiesta.youtter.com/webservices/guardarPDF.php',
-            dataType: 'json',
+            url: urlServices + 'guardarPDF.php',
+            //dataType: 'json',
             type: 'POST',
             success: function (response){
 
                 console.log("Respuesta es:");
                 console.log(response);
 
-                /*if (parseInt(response.result) == parseInt(1)) {
+                if (response.result == 1) {
 
-                    $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
+                    $("#texto_popup").text("Pedido enviado para imprimir");
                     EMAIL_USER = "";
                     INFO_USU = "";
                     $('#popupAlert').popup('open');
@@ -1375,7 +1379,7 @@ function imprimirPedido() {
                     $("#texto_popup").text("Faltan datos para poder enviar el correo");
                     $('#popupAlert').popup('open');
 
-                }*/
+                }
 
 
 
