@@ -2394,16 +2394,32 @@ function loadMenu(data) {
     /*HEADER  de la pantalla*/
 
     htmlHeaderMenuInicial = '<div class="ui-grid-d">' +
-        '<div class="ui-block-b" style="margin-top:10px;margin-left: 41%; width:22%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%"></div>' +
+        '<div class="ui-block-b" style="margin-top:10px;margin-left: 38%; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%"></div>' +
         '</div>';
 
-    htmlHeader = '<div class="ui-grid-d">' +
+    /*htmlHeader = '<div class="ui-grid-d">' +
         '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);" id="divBack"></div>' +
         '<div class="ui-block-b" style="margin-top:10px; width:22%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: right;"> </div>' +
         '<div class="ui-block-c" style="margin-top:15px;width:21%" id="session" onclick="displayLogin();">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;"><span>' + jsonIdiomas.header.login + '</span></a>' +
         '</div>' +
         '<div class="ui-block-d" style="width:18%; margin-top:3px;" id="car_compra">' + cart +
+        '</div>' +
+        '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
+        '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
+        '</div>' +
+        '</div>';*/
+    
+    htmlHeader = '<div class="ui-grid-d">' +
+        '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);" id="divBack"></div>' +
+        
+        '<div class="ui-block-c" style="margin-top:15px;width:11%;margin-left:-130px;" id="session" onclick="displayLogin();">' +
+        '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;float:left;"><span>' + jsonIdiomas.header.login + '</span></a>' +
+        '</div>' +
+        
+        '<div class="ui-block-b" style="margin-top:10px; margin-left:50px; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: left;"> </div>' +
+        
+        '<div class="ui-block-d" style="width:18%; margin-top:3px;margin-left:80px;" id="car_compra">' + cart +
         '</div>' +
         '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
