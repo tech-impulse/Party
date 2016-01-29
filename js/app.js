@@ -819,6 +819,8 @@ function vaciaCarrito() {
     $("#circuloCantidad").hide();
     $("#spBtnPopupCartAmmount").hide();
     $("#userIcoCarrito").hide();
+    
+    $("#img_cesta").attr("src","css/icons/cesta.png");
 }
 
 function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos) {

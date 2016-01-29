@@ -1736,6 +1736,8 @@ function displayItemOperations(id, param, position) {
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
         $("#userIcoCarrito").hide();
+        
+        $("#img_cesta").attr("src","css/icons/cesta.png");
     } else {
         
         if ( pantallaActual == 'Asistente fiestas' )   {
@@ -1746,6 +1748,8 @@ function displayItemOperations(id, param, position) {
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
         
+        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        $("#img_cesta").attr("src","img/cesta_parpadea.gif");
     }
 
     translateButtons(idiomStore);
@@ -1802,7 +1806,7 @@ function displayPopupItemList() { //cambios jordi
     var html = '';
 
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
-    var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/empty_cart.png" style="width:32px; heigth:30px;" /></div></div>';
+    var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div></div>';
 
 
     for (var i = 0; i < CART.length; i++) {
@@ -2375,7 +2379,7 @@ function loadMenu(data) {
 
     var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width:30%"><img src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
+        '<div class="ui-block-a" style="width:30%"><img id="img_cesta" src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
         '<div class="ui-block-b" style="width: 70%;margin-top:5px;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5; display:none">' +
         '<label id="spBtnPopupCartProducts" style="display:block;margin-top:1px;font-size: 18px;color: white;">0</label>' +
         '</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' +
