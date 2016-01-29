@@ -1737,12 +1737,16 @@ function displayItemOperations(id, param, position) {
         $("#spBtnPopupCartAmmount").hide();
         $("#userIcoCarrito").hide();
         
+        $("#btn_finalizarpedido").hide();
+        
         $("#img_cesta").attr("src","css/icons/cesta.png");
     } else {
         
         if ( pantallaActual == 'Asistente fiestas' )   {
             $("#spBtnAmountPerson").text(precio_persona + " x");
-            $("#userIcoCarrito").show();    
+            $("#userIcoCarrito").show();   
+            
+            $("#btn_finalizarpedido").show();
         }
         
         $("#circuloCantidad").show();

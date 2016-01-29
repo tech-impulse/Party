@@ -820,6 +820,8 @@ function vaciaCarrito() {
     $("#spBtnPopupCartAmmount").hide();
     $("#userIcoCarrito").hide();
     
+    $("#btn_finalizarpedido").hide();
+    
     $("#img_cesta").attr("src","css/icons/cesta.png");
 }
 
