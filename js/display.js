@@ -2394,7 +2394,7 @@ function loadMenu(data) {
     /*HEADER  de la pantalla*/
 
     htmlHeaderMenuInicial = '<div class="ui-grid-d">' +
-        '<div class="ui-block-b" style="margin-top:10px;margin-left: 36%; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%"></div>' +
+        '<div class="ui-block-b" style="margin-top:10px;margin-left: 37%; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%"></div>' +
         '</div>';
 
     /*htmlHeader = '<div class="ui-grid-d">' +
