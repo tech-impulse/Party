@@ -1424,7 +1424,7 @@ function displayProducts(data, originNode, originName, param) {
 
 function añadirMasProductos(data, originNode, originName, param) {
 
-    AUX = 1;
+     AUX = 1;
     PRODUCTS = data.products;
     COLUMS = parseInt(data.columns);
     ID_NODE = originNode;
@@ -1433,36 +1433,26 @@ function añadirMasProductos(data, originNode, originName, param) {
     var block = '';
     var position = 0;
     var type;
+    var continuar = 0;
 
-
-    switch (parseInt(data.columns)) {
+    switch (parseInt(COLUMS)) {
     case 1:
-
-        grid = "<div class='ui-grid-a'>";
         type = "vertical";
         break;
 
     case 2:
-
-        grid = "<div class='ui-grid-a'>";
         type = "horizontal";
         break;
 
     case 3:
-
-        grid = "<div class='ui-grid-b'>";
         type = "horizontal";
         break;
 
     case 4:
-
-        grid = "<div class='ui-grid-c'>";
         type = "horizontal";
         break;
 
     case 5:
-
-        grid = "<div class='ui-grid-d'>";
         type = "horizontal";
         break;
 
@@ -1471,12 +1461,12 @@ function añadirMasProductos(data, originNode, originName, param) {
     switch (type) {
     case "horizontal":
 
-        htmlContent = grid;
-        position = "a";
+        htmlContent = "";
+        position = 0;
         var precio;
         var unidades;
 
-        console.log("Productos que tenemos");
+        console.log("Cargamos mas productos en el catalogo");
         console.log(data.products);
 
         for (var i = 0; i < data.products.length; i++) {
@@ -1485,6 +1475,23 @@ function añadirMasProductos(data, originNode, originName, param) {
 
             var heigth = (W_WIDTH * (0.96));
             var heig_block = heigth / parseInt(data.columns);
+
+            if (POS_GRID == "A" && continuar == 0) { //continuamos por la ultima caja que tenemos
+                position = 1;
+                continuar = 1;
+            } else if (POS_GRID == "B" && continuar == 0) {
+                position = 2;
+                continuar = 1;
+            } else if (POS_GRID == "C" && continuar == 01) {
+                position = 3;
+                continuar = 1;
+            } else if (POS_GRID == "D" && continuar == 0) {
+                position = 4;
+                continuar = 1;
+            } else if (POS_GRID == "E" && continuar == 0) {
+                position = 0;
+                continuar = 1;
+            }
 
             if (position < parseInt(data.columns)) {
 
@@ -1519,12 +1526,12 @@ function añadirMasProductos(data, originNode, originName, param) {
                     POS_GRID = "E";
                     break;
                 }
+
             } else {
                 position = 0;
                 block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
                 POS_GRID = "A";
             }
-
 
             if (data.products[i].price_x_region.length == 0) { // si no tiene precio continuamos
                 //console.log("Producto " + data.products[i].id + " no tiene precio, no lo mostramos");
@@ -1564,12 +1571,8 @@ function añadirMasProductos(data, originNode, originName, param) {
             var caracteristicas = data.products[i].caracteristics;
 
 
-            if (generoDisfraz == 0) { //sexo no valido lo saltamos
-                continue;
-            }
-
             for (var j = 0; j < count_carac; j++) {
-                console.log("Caracteristica " + caracteristicas[j].type);
+                //console.log("Caracteristica " + caracteristicas[j].type);
                 if (caracteristicas[j].type == "9") {
                     unidades = caracteristicas[j].name;
                     break;
@@ -1606,7 +1609,7 @@ function añadirMasProductos(data, originNode, originName, param) {
 
 
             var element = block +
-                '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);" class="ui-link ui-btn ui-btn-f ui-shadow" role="button">' +
                 '<div style="position: relative;overflow:hidden">' +
                 '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                 '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
@@ -1631,30 +1634,29 @@ function añadirMasProductos(data, originNode, originName, param) {
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="width: 100%;">' +
-                '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                '<button  data-corners="false" data-theme="b" class=" ui-btn ui-btn-b ui-shadow" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
                 '</div>' +
                 '</div>' +
                 '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
-                '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                '<div class="ui-block-a" class=" ui-btn ui-btn-b ui-shadow" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
                 '<div class="ui-block-b" style="width:10%;"></div>' +
-                '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                '<div class="ui-block-c" class=" ui-btn ui-btn-b ui-shadow" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                 '</div></a></div>';
 
 
 
             htmlContent = htmlContent + element;
             if (position == "c") {
-                htmlContent = htmlContent + grid;
+                htmlContent = htmlContent;
             }
             position++;
 
         }
 
-        htmlContent = htmlContent + '</div>';
+        //htmlContent = htmlContent + '</div>';
 
-        $("#divContent").html(htmlContent);
-        $("#divContent").trigger('create');
-
+        //console.log(htmlContent);
+        $("#gridCatalogo").append(htmlContent);
 
         break;
 
@@ -1675,10 +1677,10 @@ function añadirMasProductos(data, originNode, originName, param) {
 
         }
         htmlContent = htmlContent + '</div></div></div>';
-        $("#divContent").html(htmlContent);
-        $("#divContent").trigger('create');
-        $("#divHeader_catalogo").show();
-        $("#divHeader_menuInicial").hide();
+        $("#divContent").append(htmlContent);
+        //$("#divContent").trigger('create');
+        //$("#divHeader_catalogo").show();
+        //$("#divHeader_menuInicial").hide();
         break;
 
     }
