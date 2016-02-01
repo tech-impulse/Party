@@ -813,7 +813,16 @@ function deleteItemCart(position) {
 *   Vacia el carrito de la compra y esconde los indicadores de cantidad.
 */
 function vaciaCarrito() {
-    CART = {};
+    
+    for (var i = CART.length - 1; i >= 0; i--) {        // TEMP !!
+            //if (CART[i].dedonde == "Asistente fiestas") {
+                //console.log("Borramos el item " + CART[i].id);
+
+                //CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity)
+        deleteItemCart(i);
+    }
+    
+    CART = [];
     
     $("#spBtnAmountPerson").text('');
     $("#circuloCantidad").hide();
