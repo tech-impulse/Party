@@ -62,7 +62,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
         if (originNode == 0) {
             loadMenu(data);
-            CART = [];
+            //CART = [];
             nodeNames = [];
             nodeIds = [];
             nodeImg = [];
