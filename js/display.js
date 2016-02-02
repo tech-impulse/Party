@@ -54,7 +54,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         var type;
 
         if (aux) {
-            console.log("Eliminamos la pantalla -------------------------------------------------------");
+            //console.log("Eliminamos la pantalla -------------------------------------------------------");
             pantallaActual = "";
             ISFIESTA = aux;
         }
@@ -67,11 +67,11 @@ function displayNode(data, originNode, originName, linkImg, aux) {
             nodeIds = [];
             nodeImg = [];
         } else {
-            console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg + "--------------------------------------------");
+            //console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg + "--------------------------------------------");
             updateBackButton(originNode, originName, linkImg);
         }
 
-        console.log("Seguimos despus de guardar la pantalla  " + data.columns);
+        //console.log("Seguimos despus de guardar la pantalla  " + data.columns);
 
         switch (parseInt(data.columns)) {
         case 1:
@@ -2536,6 +2536,20 @@ function displayPantallaIntermediaAsistFiestas(data) {
         '<div class="ui-block-b" style="width:30%;margin-right:3%;margin-top: 4px;"><input data-corners="false" type="number" id="personas_fiesta" value="2" min="2" max="200" data-clear-btn="true"></div>' +
         '<div class="ui-block-c" style="width:30%;"><a data-corners="false" id="mas_fiesta" data-role="button" data-theme="b">+</a></div>' +
         '</div>' +
+        '<div class="ui-grid-c" style="width: 50%;">'+
+        '<div class="ui-block-a"><div id="circulo5" onclick=\'$("#personas_fiesta").val("5");\' class="circulo" style="width: 40px;height: 40px;">' +
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">5</label>' + 
+        '</div></div>'+
+        '<div class="ui-block-b"><div id="circulo10" onclick=\'$("#personas_fiesta").val("10");\' class="circulo" style="width: 40px;height: 40px;">' +
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">10</label>' + 
+        '</div></div>'+
+        '<div class="ui-block-c"><div id="circulo15" onclick=\'$("#personas_fiesta").val("15");\' class="circulo" style="width: 40px;height: 40px;">' +
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">15</label>' + 
+        '</div></div>'+
+        '<div class="ui-block-d"><div id="circulo20" onclick=\'$("#personas_fiesta").val("20");\' class="circulo" style="width: 40px;height: 40px;">' +
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">20</label>' + 
+        '</div></div>'+
+        '</div>'+
         '<a data-corners="false" style="max-width:15%;" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\');" data-role="button" data-theme="b">' + jsonIdiomas.asistente_fiestas.btn_continuar + '</a>' +
         '</center>' +
         '</div>';

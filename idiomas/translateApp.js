@@ -70,13 +70,14 @@ function translateButtons(idioma) {
                 "precio_total_label": "Item price: ",
                 "unidades": "units"
             },
-            "exclusivoWeb":"EXCLUSIVE WEB!"
+            "exclusivoWeb": "EXCLUSIVE WEB!"
 
         }
 
         //pagina de inicio  
         $('#btn_acceder').text('Access');
         $('#labelInicio').text('Select a store:');
+        $('#labelCargando').text('Loading...');
 
         //header    
         $('#labelCarrito').text('Tú carrito');
@@ -181,12 +182,13 @@ function translateButtons(idioma) {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
             },
-            "exclusivoWeb":"EXCLUSIVO WEB!"
+            "exclusivoWeb": "EXCLUSIVO WEB!"
         }
 
         //pagina de inicio    
         $('#btn_acceder').text('Acceder');
         $('#labelInicio').text('Seleccione una tienda:');
+        $('#labelCargando').text('Cargando...');
 
         //header 
         $('#labelCarrito').text('Your cart');
@@ -294,13 +296,14 @@ function translateButtons(idioma) {
                 "precio_total_label": "Total article: ",
                 "unidades": "unitats"
             },
-            "exclusivoWeb":"EXCLUSIU WEB!"
-            
+            "exclusivoWeb": "EXCLUSIU WEB!"
+
         }
 
         //pagina de inicio    
         $('#btn_acceder').text('Accedir');
         $('#labelInicio').text('Seleccioneu una botiga:');
+        $('#labelCargando').text('Carregant...');
 
         //header 
         $('#labelCarrito').text('La cistella');
@@ -395,11 +398,12 @@ function translateButtons(idioma) {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
             },
-            "exclusivoWeb":" EXCLUSIVO WEB!"
+            "exclusivoWeb": " EXCLUSIVO WEB!"
         }
 
         //pagina de inicio    
         $('#btn_acceder').text('Acceder');
+        $('#labelCargando').text('Cargando...');
 
         //header 
         $('#labelCarrito').text('Tú carrito');
@@ -490,7 +494,7 @@ function translateButtons(idioma) {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
             },
-            "exclusivoWeb":"EXCLUSIF WEB!"
+            "exclusivoWeb": "EXCLUSIF WEB!"
         }
 
         //pagina de inicio    
@@ -499,6 +503,7 @@ function translateButtons(idioma) {
         //header 
         $('#login').text('identificarse!');
         $('#labelProductos').text(' Prod');
+        $('#labelCargando').text('Chargement...');
 
         //popup login    
         $('#labelIniciarSession').text('Iniciar sessión');
