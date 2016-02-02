@@ -92,7 +92,7 @@ function updateBackButton(originNode, originName, linkImg) {
         nodeImg.push(linkImg);
     }
     
-    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
+    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
     //$("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 1] + ', \'' + nodeNames[nodeNames.length - 1] + '\', \'' + nodeImg[nodeImg.length - 1] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
 
 

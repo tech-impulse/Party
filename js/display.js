@@ -556,7 +556,10 @@ function displayProducts(data, originNode, originName, param) {
     if (data.result == 1 && pantallaActual == "Asistente fiestas") { // Hay resultados
 
         AUX = 1;
-        PRODUCTS = data.products;
+        
+        //PRODUCTS.push(data.products);
+        PRODUCTS = PRODUCTS.concat(data.products);
+        
         COLUMS = parseInt(data.columns);
         ID_NODE = originNode;
         var htmlContent = '';
@@ -864,7 +867,8 @@ function displayProducts(data, originNode, originName, param) {
 
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces") {
 
-        PRODUCTS = data.products;
+        //PRODUCTS = data.products;
+        PRODUCTS = PRODUCTS.concat(data.products);
         var htmlContent = '';
         var grid = '';
         var block = '';
@@ -1157,7 +1161,8 @@ function displayProducts(data, originNode, originName, param) {
     } else if (data.result == 1 && pantallaActual == "catalogo") {
 
         AUX = 1;
-        PRODUCTS = data.products;
+        //PRODUCTS = data.products;
+        PRODUCTS = PRODUCTS.concat(data.products);
         COLUMS = parseInt(data.columns);
         ID_NODE = originNode;
         var htmlContent = '';
@@ -2385,12 +2390,14 @@ function loadMenu(data) {
                 break;
             }
 
-            options = options + '<li onclick="' + extra + '; openMenu();"><img src="' + imgLinkExt + '" style="width:12em">' + node[i].name + '</li>';
+            //options = options + '<li onclick="' + extra + '; openMenu();"><img src="' + imgLinkExt + '" style="width:12em">' + node[i].name + '</li>';
+            options = options + '<li style="text-align: center;color: rgb(23, 152, 209);font-weight: bold;" onclick="' + extra + '; openMenu();">' + node[i].name + '</li>';
         }
 
     }
 
-    options = options + '<li onclick="getNodes(0);"><center><a data-role="button" data-icon="home" data-theme="e">' + jsonIdiomas.menu_lateral.menu + '</a></center></li>';
+    //options = options + '<li onclick="getNodes(0);"><center><a data-role="button" data-icon="home" data-theme="e">' + jsonIdiomas.menu_lateral.menu + '</a></center></li>';
+    options = options + '<div onclick="getNodes(0);" style="text-align: center;color: white;text-transform: uppercase;">' + jsonIdiomas.menu_lateral.menu + '</div>';
     $("#options").html(options);
     $("#options").listview('refresh');
     $("#lateralMenu").trigger('create');
@@ -2426,7 +2433,7 @@ function loadMenu(data) {
         '</div>';*/
 
     htmlHeader = '<div class="ui-grid-d">' +
-        '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);" id="divBack"></div>' +
+        '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);text-transform:uppercase;" id="divBack"></div>' +
 
         '<div class="ui-block-c" style="margin-top:15px;width:11%;margin-left:-130px;" id="session" onclick="displayLogin();">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;float:left;"><span>' + jsonIdiomas.header.login + '</span></a>' +

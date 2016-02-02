@@ -644,6 +644,7 @@ function addToCart(item, param) {
     }
 
     if (foundInCart == 0) {
+
         if (CART.ammount == undefined) {
             //console.log("EL carrito está vació, lo inicializamos");
             CART.ammount = 0;
@@ -671,8 +672,6 @@ function addToCart(item, param) {
 
         displayItemOperations(item, product.quantity);
     }
-
-
 
 }
 
