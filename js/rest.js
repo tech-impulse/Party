@@ -616,7 +616,7 @@ function getProducts(idNode, nodeName, info_aux) {
 
             if (textStatus === "timeout") {
                 //do something on timeout
-                //console.log("Timeout");
+                console.log("Timeout");
                 $("#popupCargando").popup("close");
                 $("#texto_popup").text("Error de TimeOut...");
 
@@ -627,7 +627,7 @@ function getProducts(idNode, nodeName, info_aux) {
             } else {
 
                 restError(jqXHR, "tiendas");
-                //console.log("Sin conexion");
+                console.log("Sin conexion");
                 //alert("Sin conexion a internet...");
                 $("#popupCargando").popup("close");
                 $("#texto_popup").text("Sin conexion a internet");

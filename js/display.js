@@ -4,7 +4,7 @@
     - originName: nombre del nodo Anterior (Del que venimos)
     */
 
-function displayNode(data, originNode, originName, linkImg, isback) {
+function displayNode(data, originNode, originName, linkImg, aux) {
 
     //console.log("DisplayNode-> Nodes es " + data.result + " link " + linkImg);
 
@@ -44,7 +44,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
     //console.log("Comprobamos las alturas");
     //console.log("alturaMin " + alturaMin + " filas " + filas + " heig_block " + heig_block + " alturaBox " + alturaBox + "");
 
-    console.log("*Filas " + filas + " Altura min " + alturaMin + "  Altura es : " + alturaBox + " aux_altura " + aux_altura);
+    //console.log("*Filas " + filas + " Altura min " + alturaMin + "  Altura es : " + alturaBox + " aux_altura " + aux_altura);
 
     if (data.result == 1) { // Hay resultados
         var htmlContent = '';
@@ -53,6 +53,12 @@ function displayNode(data, originNode, originName, linkImg, isback) {
         var position = 0;
         var type;
 
+        if (aux) {
+            console.log("Eliminamos la pantalla -------------------------------------------------------");
+            pantallaActual = "";
+            ISFIESTA = aux;
+        }
+
 
         if (originNode == 0) {
             loadMenu(data);
@@ -60,7 +66,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
             nodeNames = [];
             nodeIds = [];
             nodeImg = [];
-        } else { //if (isback == "back")
+        } else {
             console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg + "--------------------------------------------");
             updateBackButton(originNode, originName, linkImg);
         }
@@ -209,7 +215,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
 
 
                     }
-                    
+
                     var imgLinkExt = data.nodes[i].linkext.replace("wide", "bigPreview");
 
                     if (valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal
@@ -236,7 +242,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                             /*var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + data.nodes[i].linkext + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
                                 '<label style="position:absolute; bottom:0; font-size:35px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</label></div>' +
                                 '</div>';*/
-                            
+
                             var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + imgLinkExt + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
                                 '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:30px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</div></div>' +
                                 '</div>';
@@ -248,7 +254,7 @@ function displayNode(data, originNode, originName, linkImg, isback) {
                             /*var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);"><img src="' +
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';*/
-                            
+
                             var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);">' +
                                 '<center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
                                 '<br>' +
@@ -447,9 +453,9 @@ function refreshDisplayProducts() {
             } else {
                 var titulo = data[i].name;
             }
-            
+
             var imgLinkExt = data[i].linkext.replace("wide", "bigPreview");
-            
+
             // TEMP !!
             var element = block +
                 '<a  data-corners="false" data-role="button" data-theme="f">' +
@@ -612,7 +618,7 @@ function displayProducts(data, originNode, originName, param) {
             var unidades;
             //auxTest = data;
 
-            console.log("Productos que tenemos");
+            console.log("Productos que tenemos asistente fiestas");
             console.log(data.products);
 
             for (var i = 0; i < data.products.length; i++) {
@@ -720,7 +726,7 @@ function displayProducts(data, originNode, originName, param) {
                 }
 
                 var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
-                
+
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div style="position: relative;overflow:hidden">' +
@@ -825,6 +831,8 @@ function displayProducts(data, originNode, originName, param) {
 
             }
 
+            $("#popupCargando").popup("close");
+
             break;
 
 
@@ -848,6 +856,8 @@ function displayProducts(data, originNode, originName, param) {
             $("#divContent").trigger('create');
             $("#divHeader_catalogo").show();
             $("#divHeader_menuInicial").hide();
+
+            $("#popupCargando").popup("close");
             break;
 
         }
@@ -1111,6 +1121,8 @@ function displayProducts(data, originNode, originName, param) {
             }, 50);
 
 
+            $("#popupCargando").popup("close");
+
             break;
 
 
@@ -1135,6 +1147,8 @@ function displayProducts(data, originNode, originName, param) {
             $("#divHeader_catalogo").show();
             $("#divHeader_menuInicial").hide();
 
+            $("#popupCargando").popup("close");
+
             break;
 
         }
@@ -1151,7 +1165,7 @@ function displayProducts(data, originNode, originName, param) {
         var block = '';
         var position = 0;
         var type;
-        
+
         updateBackButton(originNode, originName);
 
         switch (parseInt(data.columns)) {
@@ -1195,7 +1209,7 @@ function displayProducts(data, originNode, originName, param) {
             var precio;
             var unidades;
 
-            console.log("Productos que tenemos");
+            console.log("Productos que tenemos catalogo");
             console.log(data.products);
 
             for (var i = 0; i < data.products.length; i++) {
@@ -1279,16 +1293,9 @@ function displayProducts(data, originNode, originName, param) {
 
                 }
 
-                var count_carac = data.products[i].caracteristics.length;
-                var caracteristicas = data.products[i].caracteristics;
-
-
-                if (generoDisfraz == 0) { //sexo no valido lo saltamos
-                    continue;
-                }
 
                 for (var j = 0; j < count_carac; j++) {
-                    console.log("Caracteristica " + caracteristicas[j].type);
+                    //console.log("Caracteristica " + caracteristicas[j].type);
                     if (caracteristicas[j].type == "9") {
                         unidades = caracteristicas[j].name;
                         break;
@@ -1379,6 +1386,8 @@ function displayProducts(data, originNode, originName, param) {
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
 
+            $("#popupCargando").popup("close");
+
 
             break;
 
@@ -1405,6 +1414,8 @@ function displayProducts(data, originNode, originName, param) {
             $("#divHeader_menuInicial").hide();
             break;
 
+            $("#popupCargando").popup("close");
+
         }
 
     } else {
@@ -1414,17 +1425,19 @@ function displayProducts(data, originNode, originName, param) {
     }
 
 
-    $("#popupCargando").popup("close");
-
-
-
     translateButtons(idiomStore);
+
+
+
+
+
+
 
 }
 
 function añadirMasProductos(data, originNode, originName, param) {
 
-     AUX = 1;
+    AUX = 1;
     PRODUCTS = data.products;
     COLUMS = parseInt(data.columns);
     ID_NODE = originNode;
@@ -1738,24 +1751,24 @@ function displayItemOperations(id, param, position) {
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
         $("#userIcoCarrito").hide();
-        
+
         $("#btn_finalizarpedido").hide();
-        
-        $("#img_cesta").attr("src","css/icons/cesta.png");
+
+        $("#img_cesta").attr("src", "css/icons/cesta.png");
     } else {
-        
-        if ( pantallaActual == 'Asistente fiestas' )   {
+
+        if (pantallaActual == 'Asistente fiestas') {
             $("#spBtnAmountPerson").text(precio_persona + " x");
-            $("#userIcoCarrito").show();   
-            
+            $("#userIcoCarrito").show();
+
             $("#btn_finalizarpedido").show();
         }
-        
+
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
-        
+
         console.log("--> CAMBIO de imagen!!"); // TEMP !! log
-        $("#img_cesta").attr("src","img/cesta_parpadea.gif");
+        $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
     }
 
     translateButtons(idiomStore);
@@ -1778,11 +1791,11 @@ function openPopupAction(param) {
     translateButtons(idiomStore);
 }
 
-function openPopUpConfirmacionVaciarCarrito()   {
-    
+function openPopUpConfirmacionVaciarCarrito() {
+
     //console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     $("#popupListItems").popup("close");
-    
+
     setTimeout(function () {
         $("#popupConfirmacionVaciarCarrito").popup("open");
     }, popupTimeout);
@@ -1817,7 +1830,7 @@ function displayPopupItemList() { //cambios jordi
 
     for (var i = 0; i < CART.length; i++) {
         var src = getImgDisponibilidad(i);
-        
+
         var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
 
         html = html +
@@ -1912,7 +1925,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
     }
 
     var imgLinkExt = aux_prod.linkext.replace("wide", "bigPreview");
-    
+
     html = '<ul data-role="listview" data-inset="true">' +
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
         '<li>' +
@@ -1969,7 +1982,7 @@ function displayAlternativeProducts(idnode, idproduct) {
             if (aux == false && prod_alt.price_x_region[0] != "undefined") {
 
                 if (prod_alt.price_x_region.length > 0) {
-                    
+
                     var imgLinkExt = prod_alt.linkext.replace("wide", "bigPreview");
 
                     carrusel = carrusel + '<div class="swiper-slide" style="height: 175px;"><ul>' +
@@ -2260,7 +2273,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '</li>';
 
                     //var imgLinkExt = CART[i].linkext.replace("wide", "bigPreview"); // TEMP !!
-                    
+
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
@@ -2338,7 +2351,7 @@ function loadMenu(data) {
 
     if (len > 0) {
         for (var i = 0; i < len; i++) {
-            
+
             var imgLinkExt = node[i].linkext.replace("wide", "bigPreview");
 
             if (parseInt(data.nodes[i].isMain) == 1) {
@@ -2349,30 +2362,30 @@ function loadMenu(data) {
             }
 
             switch (valorSwitch) {
-                case 1: //catalogo
-                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                    break;
-                case 2: //promos
-                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                    break;
-                case 3: // asis fistas
-                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                    break;
-                case 4: // asis disfra
-                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                    break;
-                case 5: // sugerencias
-                    extra = 'displayPantallaSugerencias()';
-                    break;
-                case 6: // fuera tienda
-                    extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\')';
-                    break;
-                case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
-                    extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                    break;
+            case 1: //catalogo
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\',\'1\')';
+                break;
+            case 2: //promos
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\',\'2\')';
+                break;
+            case 3: // asis fistas
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\',\'3\')';
+                break;
+            case 4: // asis disfra
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\',\'4\')';
+                break;
+            case 5: // sugerencias
+                extra = 'displayPantallaSugerencias()';
+                break;
+            case 6: // fuera tienda
+                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\',\'menu_lateral\')';
+                break;
+            case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
+                extra = 'getNodes(' + node[i].id + ', \'' + node[i].name + '\',' + node[i].type + ',\'' + data.nodes[i].linkext + '\',\'menu_lateral\')';
+                break;
             }
 
-            options = options + '<li onclick="' + extra + ';"; openMenu()"><img src="' + imgLinkExt + '" style="width:12em">' + node[i].name + '</li>';
+            options = options + '<li onclick="' + extra + '; openMenu();"><img src="' + imgLinkExt + '" style="width:12em">' + node[i].name + '</li>';
         }
 
     }
@@ -2411,16 +2424,16 @@ function loadMenu(data) {
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
         '</div>' +
         '</div>';*/
-    
+
     htmlHeader = '<div class="ui-grid-d">' +
         '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);" id="divBack"></div>' +
-        
+
         '<div class="ui-block-c" style="margin-top:15px;width:11%;margin-left:-130px;" id="session" onclick="displayLogin();">' +
         '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;float:left;"><span>' + jsonIdiomas.header.login + '</span></a>' +
         '</div>' +
-        
+
         '<div class="ui-block-b" style="margin-top:10px; margin-left:50px; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: left;"> </div>' +
-        
+
         '<div class="ui-block-d" style="width:18%; margin-top:3px;margin-left:80px;" id="car_compra">' + cart +
         '</div>' +
         '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
@@ -2524,7 +2537,6 @@ function displayPantallaIntermediaAsistFiestas(data) {
     $("#divContent").trigger('create');
 
     $("#mas_fiesta").click(function () {
-
 
         var valor = $("#personas_fiesta").val();
         var oparation = 1;

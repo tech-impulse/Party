@@ -22,7 +22,13 @@ $(document).bind("mobileinit", function () {
     //Cargamos el idioma por defecto de la app
     translateButtons("ca");
 
+
 });
+
+function onDeviceReady() {
+    navigator.splashscreen.show();
+}
+
 
 /******************************************
 Esto se ejecuta antes que la app se inicie
@@ -36,10 +42,10 @@ $(document).ready(function () {
         if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 
             if (pantallaActual == "catalogo") {
-                
+
                 console.log("Mas scroll");
                 PAGINA++;
-                getNodesProducts(nodeIds[nodeIds.length-1], nodeNames[nodeNames.length-1]);
+                getNodesProducts(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1]);
 
             }
 
@@ -81,7 +87,7 @@ $(document).ready(function () {
 
         setTimeout(function () {
             $('#popupCargando').popup('close');
-        }, 31000);
+        }, 65000);
 
     }).on('popupafterclose', function () {
 
@@ -810,28 +816,28 @@ function deleteItemCart(position) {
 }
 
 /**
-*   Vacia el carrito de la compra y esconde los indicadores de cantidad.
-*/
+ *   Vacia el carrito de la compra y esconde los indicadores de cantidad.
+ */
 function vaciaCarrito() {
-    
-    for (var i = CART.length - 1; i >= 0; i--) {        // TEMP !!
-            //if (CART[i].dedonde == "Asistente fiestas") {
-                //console.log("Borramos el item " + CART[i].id);
 
-                //CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity)
+    for (var i = CART.length - 1; i >= 0; i--) { // TEMP !!
+        //if (CART[i].dedonde == "Asistente fiestas") {
+        //console.log("Borramos el item " + CART[i].id);
+
+        //CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity)
         deleteItemCart(i);
     }
-    
+
     CART = [];
-    
+
     $("#spBtnAmountPerson").text('');
     $("#circuloCantidad").hide();
     $("#spBtnPopupCartAmmount").hide();
     $("#userIcoCarrito").hide();
-    
+
     $("#btn_finalizarpedido").hide();
-    
-    $("#img_cesta").attr("src","css/icons/cesta.png");
+
+    $("#img_cesta").attr("src", "css/icons/cesta.png");
 }
 
 function closingPopUpWithVideos(tableName, popupNAme, vecIdsVideos) {
