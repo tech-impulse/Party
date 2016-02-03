@@ -53,7 +53,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         var position = 0;
         var type;
 
-        if (aux && aux!="back") {
+        if (aux && aux != "back") {
             //console.log("Eliminamos la pantalla -------------------------------------------------------");
             pantallaActual = "";
             ISFIESTA = aux;
@@ -62,8 +62,8 @@ function displayNode(data, originNode, originName, linkImg, aux) {
             nodeImg = [];
         }
 
-        if(CART.length > 0){
-         $("#btn_finalizarpedido").show();        
+        if (CART.length > 0) {
+            $("#btn_finalizarpedido").show();
         }
 
         if (originNode == 0) {
@@ -514,7 +514,7 @@ function refreshDisplayProducts() {
         // calculo del numero de articulos por producto
         for (var k = 0; k < data.length; k++) {
 
-            displayItemOperations(data[k].id, data[k].quantity,k);
+            displayItemOperations(data[k].id, data[k].quantity, k);
 
         }
 
@@ -562,10 +562,10 @@ function displayProducts(data, originNode, originName, param) {
     if (data.result == 1 && pantallaActual == "Asistente fiestas") { // Hay resultados
 
         AUX = 1;
-        
+
         //PRODUCTS.push(data.products);
         PRODUCTS = PRODUCTS.concat(data.products);
-        
+
         COLUMS = parseInt(data.columns);
         ID_NODE = originNode;
         var htmlContent = '';
@@ -1734,11 +1734,11 @@ function displayItemOperations(id, param, position) {
         $("#circulo" + id).hide();
         $("#labelPrecioTotalProducto" + id).hide();
         CART.splice(position, 1);
-        console.log("BORRAMOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"+position);
+        console.log("BORRAMOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" + position);
         console.log(CART);
-        
-        
-        
+
+
+
         //deleteItemCart(position);        
     }
 
@@ -1989,10 +1989,10 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;;width: 100%;"></div>' +
         '<div class="ui-block-b">' +
-        '<br><label style="font-size: 20px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-        '<p><strong style="font-size: 15px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
-        '<p><strong style="font-size: 15px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;"> Descripción: </strong></p>' +
-        '<strong style=""><p style="white-space: initial;font-size: 15px;margin-top:5px;font-family: Arial, sans-serif !important;color:red;">' + definition + '</p></strong>' +
+        '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+        '<p><strong style="font-size: 15px;margin-top:5px;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
+        '<p><strong style="font-size: 15px;margin-top:5px;"> Descripción: </strong></p>' +
+        '<strong style=""><p style="white-space: initial;font-size: 15px;margin-top:5px;">' + definition + '</p></strong>' +
         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
         '</div></div>' +
         '</ul>' +
@@ -2238,9 +2238,9 @@ function displayPopupItemDetail(id, param, idproduct) {
                         //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
-                        '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.position + ' ' + PRODUCTS[i].position_x_store.module + ' </strong></p>' +
-                        '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Descripción: </strong></p>' +
+                        '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.position + ' ' + PRODUCTS[i].position_x_store.module + ' </strong></p>' +
+                        '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                         '</div>' +
@@ -2273,6 +2273,7 @@ function displayPopupItemDetail(id, param, idproduct) {
     } else {
 
         console.log("Mostramos el pop de detalle del producto assit fiestas");
+        var aux_original;
         switch (param) {
         case "CART":
             var productList = CART;
@@ -2289,8 +2290,9 @@ function displayPopupItemDetail(id, param, idproduct) {
 
             for (var i = 0; i < CART.length; i++) {
 
-                if (CART[i].id == idproduct) {
+                if (CART[i].id == idproduct && CART[i].original == true) {
 
+                    console.log("Entramos para mostrar las info del producto");
                     var imgAvailability = "";
                     var stock = CART[i].stock_x_store;
 
@@ -2316,11 +2318,13 @@ function displayPopupItemDetail(id, param, idproduct) {
                     }
 
                     if (CART[i].quantity > 0) {
-                        var cantidad = PRODUCTS[i].quantity;
+                        var cantidad = CART[i].quantity;
 
                     } else {
                         var cantidad = 0;
                     }
+
+                    aux_original = CART[i].original;
 
                     div_carrusel = '<li data-role="list-divider" data-theme="c"><span>' + jsonIdiomas.popup_info_item.alternativos + '</span></li>' +
                         '<li style="height: 175px;" id="img_prod_alter"><div class="ui-grid-a" style="height: 175px;">' +
@@ -2336,16 +2340,11 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
-                        '<br><label style="font-size: 20px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
-                        //'<p><strong>    Modulo: ' + CART[i].position_x_store.module + '</strong></p>' +
-                        //'<p><strong>    Posición: ' + CART[i].position_x_store.position + '</strong></p>' +
-                        //'<p><strong>    Sección: ' + CART[i].position_x_store.section + '</strong></p>' +
-                        //'<br>'+
-                        '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;font-family: Arial, sans-serif !important;color:red;"> Descripción: </strong></p>' +
+                        '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
+                        '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
                         '</div>' +
@@ -2355,10 +2354,69 @@ function displayPopupItemDetail(id, param, idproduct) {
                     if (buttonBack != "") {
                         html = html + buttonBack;
                     }
+                    
+                    break;
+
+
+                } else {
+                    
+                    var imgAvailability = "";
+                    var stock = CART[i].stock_x_store;
+
+                    if (stock == 0) {
+                        stock = CART[i].stock_x_central_store;
+                    }
+
+                    if (stock > CART[i].stock_min) {
+                        imgAvailability = "css/maqueta/barraVerde.png";
+                    } else if (stock <= CART[i].stock_min) {
+                        imgAvailability = "css/maqueta/barraAmarilla.png";
+                    } else if (stock == 0) {
+                        imgAvailability = "css/maqueta/barraRojo.png";
+                    }
+
+
+                    var html = '';
+
+                    if (CART[i].definition == "NULL") {
+                        var definition = CART[i].short_name;
+                    } else {
+                        var definition = CART[i].definition;
+                    }
+
+                    if (CART[i].quantity > 0) {
+                        var cantidad = CART[i].quantity;
+
+                    } else {
+                        var cantidad = 0;
+                    }
+
+                    aux_original = CART[i].original;
+
+                    html = html +
+                        '<ul data-role="listview" data-inset="true">' +
+                        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + CART[i].name + ' - ' + CART[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
+                        '<li>' +
+                        '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a"><img src="' + CART[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-b">' +
+                        '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(CART[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + CART[i].position_x_store.section + ' ' + CART[i].position_x_store.position + ' ' + CART[i].position_x_store.module + ' </strong></p>' +
+                        '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
+                        '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
+                        '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
+                        '</div>' +
+                        '</li>' + 
+                        '</ul>';
+
+                    if (buttonBack != "") {
+                        html = html + buttonBack;
+                    }
+
+
                 }
 
-
-            }
+            } //for
 
             $("#contentPopupListItems").html(html);
             $("#contentPopupListItems").trigger("create");
@@ -2367,18 +2425,20 @@ function displayPopupItemDetail(id, param, idproduct) {
 
             setTimeout(function () {
                 $("#popupListItems").popup("open");
-            }, popupTimeout);
-
-            setTimeout(function () {
-                getAlternativeProducts(id, idproduct);
             }, 200);
 
-        }
+            if (aux_original == true) {
+                setTimeout(function () {
+                    getAlternativeProducts(id, idproduct);
+                }, 200);
+            }
+
+        } //switch
 
         translateButtons(idiomStore);
 
 
-    }
+    } //else
 
 
 
@@ -2588,20 +2648,20 @@ function displayPantallaIntermediaAsistFiestas(data) {
         '<div class="ui-block-b" style="width:30%;margin-right:3%;margin-top: 4px;"><input data-corners="false" type="number" id="personas_fiesta" value="2" min="2" max="200" data-clear-btn="true"></div>' +
         '<div class="ui-block-c" style="width:30%;"><a data-corners="false" id="mas_fiesta" data-role="button" data-theme="b">+</a></div>' +
         '</div>' +
-        '<div class="ui-grid-c" style="width: 50%;">'+
+        '<div class="ui-grid-c" style="width: 50%;">' +
         '<div class="ui-block-a"><div id="circulo5" onclick=\'$("#personas_fiesta").val("5");\' class="circulo" style="width: 40px;height: 40px;">' +
-        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">5</label>' + 
-        '</div></div>'+
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">5</label>' +
+        '</div></div>' +
         '<div class="ui-block-b"><div id="circulo10" onclick=\'$("#personas_fiesta").val("10");\' class="circulo" style="width: 40px;height: 40px;">' +
-        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">10</label>' + 
-        '</div></div>'+
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">10</label>' +
+        '</div></div>' +
         '<div class="ui-block-c"><div id="circulo15" onclick=\'$("#personas_fiesta").val("15");\' class="circulo" style="width: 40px;height: 40px;">' +
-        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">15</label>' + 
-        '</div></div>'+
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">15</label>' +
+        '</div></div>' +
         '<div class="ui-block-d"><div id="circulo20" onclick=\'$("#personas_fiesta").val("20");\' class="circulo" style="width: 40px;height: 40px;">' +
-        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">20</label>' + 
-        '</div></div>'+
-        '</div>'+
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">20</label>' +
+        '</div></div>' +
+        '</div>' +
         '<a data-corners="false" style="max-width:15%;" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\');" data-role="button" data-theme="b">' + jsonIdiomas.asistente_fiestas.btn_continuar + '</a>' +
         '</center>' +
         '</div>';

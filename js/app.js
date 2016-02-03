@@ -662,6 +662,7 @@ function addToCart(item, param) {
 
         CART.ammount = (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice)) + parseFloat(CART.ammount);
         product.dedonde = pantallaActual;
+        product.original = true; //este campo indica si el articulo ha sido sustituido o no
         //console.log("La cantidad antes de enviarla es " + product.quantity);
 
         CART.push(product);
@@ -769,6 +770,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
             cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units));
             product.quantity = cantidad;
+            product.original = false; //este campo indica si el articulo ha sido sustituido o no
 
         } else {
 
