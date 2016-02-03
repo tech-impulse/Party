@@ -44,8 +44,8 @@ $(document).ready(function () {
             if (pantallaActual == "catalogo") {
 
                 console.log("Mas scroll");
-                PAGINA++;
-                getNodesProducts(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1]);
+                //PAGINA++;
+                //getNodesProducts(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1]);
 
             }
 

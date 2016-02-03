@@ -1391,7 +1391,7 @@ function imprimirPedido() {
 
             if (response.result == 1) {
 
-                $("#texto_popup").text("Pedido enviado para imprimir");
+                /*$("#texto_popup").text("Pedido enviado para imprimir");
                 EMAIL_USER = "";
                 INFO_USU = "";
                 $('#popupAlert').popup('open');
@@ -1406,7 +1406,7 @@ function imprimirPedido() {
                 nodeImg = [];
                 EMAIL_USER = "";
                 logout();
-                console.log("Enviamos email");
+                console.log("Enviamos email");*/
 
                 $("#texto_popup").text("Pedido enviado para imprimir");
                 EMAIL_USER = "";
