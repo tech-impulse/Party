@@ -52,17 +52,17 @@
     
     @font-face {
         font-family: "font";
-        src: url("http://partyfiesta.youtter.com/app/alb/css/fonts/font.ttf");
-        font-family: Arial, sans-serif !important;
+        src: url("http://partyfiesta.youtter.com/app/alb/css/fonts/DINRegular.ttf");
         font-weight: normal;
         font-style: normal;
-        
     }
     
     body {
-        font-family: Arial, sans-serif !important;
-        line-height: 2em;
-        color: #ff0000;
+        font-family: "font" !important;
+    }
+    
+    * {
+        font-family: "font" !important;
     }
     
     .ui-select > .ui-btn {
@@ -161,7 +161,7 @@
         height: 100vh !important;
         max-width: none !important;
         max-height: none !important;
-        top:0px !important;
+        top: 0px !important;
     }
     
     .colorText::-webkit-input-placeholder {
@@ -237,7 +237,7 @@
             <div id="divHeader_menu"></div>
             <div id="divHeader_catalogo"></div>
             <div id="divHeader_menuInicial"></div>
-            
+
             <!--POPUP DE Carga -->
             <div data-role="popup" data-corners="false" id="popupCargando" data-overlay-theme="a" data-theme="none" onclick="$('#popupCargando').popup('close');" style="background-color: rgb(0, 0, 0);opacity: 0.8;max-width: none;height: 100%;">
                 <center>
@@ -249,7 +249,7 @@
                     <label id="labelCargando" style="font-size: 30px; color:white;">Cargando...</label>
                 </center>
             </div>
-            
+
         </div>
 
         <!--     CONTENT    -->

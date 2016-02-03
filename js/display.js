@@ -250,7 +250,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                                 '</div>';*/
 
                             var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + imgLinkExt + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
-                                '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:30px;color: white; text-align: center; display: block;">' + data.nodes[i].name + '</div></div>' +
+                                '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:30px;color: white; text-align: center; display: block;text-transform: uppercase;">' + data.nodes[i].name + '</div></div>' +
                                 '</div>';
 
                             //<div class="ui-block-a" data-corners="false" onclick="getNodes(1, 'CATÁLOGO',1,'http://partyfiesta.youtter.com/webservices/img/nodos/catalogo.jpg')" style="width:307px;margin-right: 30px;margin-bottom:1%"><div style="display: table; height:211px;width:307px;background-image:url('http://partyfiesta.youtter.com/webservices/img/nodos/catalogo.jpg');  background-position: top center; background-repeat: no-repeat;"><label style="font-size:35px;color: white; text-align: center; display: block; margin-top:84%;">CATÁLOGO</label></div></div>
@@ -261,10 +261,10 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                                 data.nodes[i].linkext + '" style="width: ' + (heig_block * 0.85) + 'px;height:' + (heig_block * 0.85) + 'px"><br><label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;font-weight: bold;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
                                 '</label></a></div>';*/
 
-                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);">' +
+                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;">' +
                                 '<center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
                                 '<br>' +
-                                '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);">' + data.nodes[i].name +
+                                '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);text-transform: uppercase;">' + data.nodes[i].name +
                                 '</label></a></div>';
 
                         } //max-width: ' + (heig_block * 0.8) + 'px;
