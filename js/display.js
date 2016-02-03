@@ -1817,13 +1817,43 @@ function openPopUpConfirmacionVaciarCarrito() {
     }, popupTimeout);
 }
 
-function getImgDisponibilidad(product) {
+/*function getImgDisponibilidad(product) {
     var imgAvailability = "";
     var stock = CART[product].stock_x_store;
 
     if (stock == 0) {
         stock = CART[product].stock_x_central_store;
     }
+
+    if (stock > CART[product].stock_min) {
+        imgAvailability = "css/maqueta/barraVerde.png";
+    } else if (stock <= CART[product].stock_min) {
+        imgAvailability = "css/maqueta/barraAmarilla.png";
+    } else if (stock == 0) {
+        imgAvailability = "css/maqueta/barraRojo.png";
+    }
+
+    return imgAvailability;
+}*/
+
+function getImgDisponibilidadStore(product) {
+    var imgAvailability = "";
+    var stock = CART[product].stock_x_store;
+
+    if (stock > CART[product].stock_min) {
+        imgAvailability = "css/maqueta/barraVerde.png";
+    } else if (stock <= CART[product].stock_min) {
+        imgAvailability = "css/maqueta/barraAmarilla.png";
+    } else if (stock == 0) {
+        imgAvailability = "css/maqueta/barraRojo.png";
+    }
+
+    return imgAvailability;
+}
+
+function getImgDisponibilidadCentral(product) {
+    var imgAvailability = "";
+    var stock = CART[product].stock_x_central_store;
 
     if (stock > CART[product].stock_min) {
         imgAvailability = "css/maqueta/barraVerde.png";
@@ -1843,29 +1873,40 @@ function displayPopupItemList() { //cambios jordi
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
     var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div></div>';
 
+    
+    var labelStocTienda = '<label id="labelPopUpItemListPrice" style="text-align: center;">Tienda</label>';
+    var labelStocCentral = '<label id="labelPopUpItemListPrice" style="text-align: center;">Central</label>';
+    
+    var primeraVez = true;
 
     for (var i = 0; i < CART.length; i++) {
-        var src = getImgDisponibilidad(i);
+        //var src = getImgDisponibilidad(i);
+        var srcTienda = getImgDisponibilidadStore(i);
+        var srcCentral = getImgDisponibilidadCentral(i);
 
         var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
-
+        
         html = html +
             '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
             '<div class="ui-grid-b">' +
             '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
-            '<div class="ui-block-b" style="width:45%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;padding-top: 5%;">' + CART[i].name + '</label></div>' +
-            '<div class="ui-block-c" style="width:40%;">' +
+            '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
+            '<div class="ui-block-c" style="width:52%;">' +
             '<div class="ui-grid-d">' +
-            '<div class="ui-block-a" style="width:16%;"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
-            '<div class="ui-block-b" style="width:16%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 35%;">' + parseInt(CART[i].quantity) + '</label></div>' +
+            '<div class="ui-block-a" style="width:10%;"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+            '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;">' + parseInt(CART[i].quantity) + '</label></div>' +
             '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
-            '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 19%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
+            '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;">' + parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2) + ' €</label></div>' +
             //'<div class="ui-block-e" style="width:16%"><a data-role="button" data-theme="f" style="background-color: red;" data-iconpos="notext" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"></a></div>' +
-            '<div class="ui-block-e" style="width:40px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
-            '<div class="ui-block-e" style="width:15%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + src + '" /></div>' +
+            '<div class="ui-block-e" style="width:70px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+            '<div class="ui-block-e" style="width:12%;">'+ (primeraVez == true ? labelStocTienda : '') +'<img style="display:block;width:40px;margin-top:'+ (primeraVez == true ? '5' : '15') +'px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
+            '<div class="ui-block-e" style="width:12%;">'+ (primeraVez == true ? labelStocCentral : '') +'<img style="display:block;width:40px;margin-top:'+ (primeraVez == true ? '5' : '15') +'px;margin-left:10px;" src="' + srcCentral + '" /></div>' +
             '</div>' +
             '</div>' +
             '</li>';
+        
+        if ( primeraVez == true )
+            primeraVez = false;
     }
 
     //html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><li style="list-style-type: none;"><center><a data-corners="false" data-role="button" data-theme="b" onclick="checkOut();" style="width:100%;"><label id="label_checkOut" style="font-size:20px;">' + jsonIdiomas.pop_checkOut.realizar_pedido + '</label></a><center></li>';
