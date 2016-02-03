@@ -183,12 +183,13 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
     if (idNode != 0) {
         $("#banderas").hide();
     }
-    
+
     PAGINA = 0; //se reinicia la pagina del catalogo
 
     if (aux == 1) {
         nodeIds = [];
         nodeNames = [];
+        nodeImg = [];
         openMenu();
     }
 
@@ -208,7 +209,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         ISFIESTA = isAlgo;
     }
 
-    console.log("Is algo es " + isAlgo);
+    //console.log("Is algo es " + isAlgo);
 
     var request = $.ajax({
         data: dataSend,
@@ -334,7 +335,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
     */
 function restOk(res, typ, param, param2, aux, backPage) {
 
-    console.log("Cargamos nuevos nodos " + typ);
+    //console.log("Cargamos nuevos nodos " + typ);
     //console.log("La respuesta es ");
     //console.log(res);
 
@@ -345,7 +346,7 @@ function restOk(res, typ, param, param2, aux, backPage) {
         break;
 
     case "nodes":
-        console.log("El aux " + aux);
+        //console.log("El aux " + aux);
         displayNode(res, param, param2, aux, backPage);
         break;
 
@@ -431,15 +432,15 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
             console.log("Respueta");
             console.log(response);
 
-            if (response.result == 1) {//todo bien cargamos productos
+            if (response.result == 1) { //todo bien cargamos productos
 
                 pantallaActual = "catalogo";
-                if(PAGINA == 0){
-                    displayProducts(response, idNode, nodeName); 
-                }else{
+                if (PAGINA == 0) {
+                    displayProducts(response, idNode, nodeName);
+                } else {
                     añadirMasProductos(response, idNode, nodeName);
                 }
-                
+
 
             } else {
 
@@ -1313,96 +1314,96 @@ function sendEmail() {
 ***************************************************************************/
 function imprimirPedido() {
 
-   /* console.log("Email es " + EMAIL_USER);
+    /* console.log("Email es " + EMAIL_USER);
 
-    if (EMAIL_USER == "") {
+     if (EMAIL_USER == "") {
 
-        setTimeout(function () {
-            $("#popupEmail").popup("open");
-        }, popupTimeout);
+         setTimeout(function () {
+             $("#popupEmail").popup("open");
+         }, popupTimeout);
 
-    } else {*/
+     } else {*/
 
-        var dataSend = {
-            carrito: CART, 
-            tienda: STORE.code
-        };
+    var dataSend = {
+        carrito: CART,
+        tienda: STORE.code
+    };
 
-        var request = $.ajax({
-            data: dataSend,
-            //async: false,
-            url: urlServices + 'guardarPDF.php',
-            //dataType: 'json',
-            type: 'POST',
-            success: function (response){
+    var request = $.ajax({
+        data: dataSend,
+        //async: false,
+        url: urlServices + 'guardarPDF.php',
+        //dataType: 'json',
+        type: 'POST',
+        success: function (response) {
 
-                console.log("Respuesta es:");
-                console.log(response);
+            console.log("Respuesta es:");
+            console.log(response);
 
-                if (response.result == 1) {
+            if (response.result == 1) {
 
-                    $("#texto_popup").text("Pedido enviado para imprimir");
-                    EMAIL_USER = "";
-                    INFO_USU = "";
-                    $('#popupAlert').popup('open');
-                    $('#email').val('');
-                    $("#spBtnAmountPerson").text('');
-                    $("#circuloCantidad").hide();
-                    $("#spBtnPopupCartAmmount").hide();
-                    $("#userIcoCarrito").hide();
-                    CART = [];
-                    nodeNames = [];
-                    nodeIds = [];
-                    nodeImg = [];
-                    EMAIL_USER = "";
-                    logout();
-                    console.log("Enviamos email");
+                $("#texto_popup").text("Pedido enviado para imprimir");
+                EMAIL_USER = "";
+                INFO_USU = "";
+                $('#popupAlert').popup('open');
+                $('#email').val('');
+                $("#spBtnAmountPerson").text('');
+                $("#circuloCantidad").hide();
+                $("#spBtnPopupCartAmmount").hide();
+                $("#userIcoCarrito").hide();
+                CART = [];
+                nodeNames = [];
+                nodeIds = [];
+                nodeImg = [];
+                EMAIL_USER = "";
+                logout();
+                console.log("Enviamos email");
 
-                    setTimeout(function () {
-                        $('#popupAlert').popup('close');
-                        getNodes(0);
-                    }, 1500);
-
-
-                } else if (parseInt(response.result) == parseInt(0)) {
-
-                    $("#texto_popup").text("No se ha podido enviar el correo a " + EMAIL_USER);
-                    $('#popupAlert').popup('open');
-
-                } else if (parseInt(response.result) == parseInt(2)) {
-
-                    $("#texto_popup").text("Problemas al generar el correo");
-                    $('#popupAlert').popup('open');
-
-                } else if (parseInt(response.result) == parseInt(0)) {
-
-                    $("#texto_popup").text("Faltan datos para poder enviar el correo");
-                    $('#popupAlert').popup('open');
-
-                }
+                setTimeout(function () {
+                    $('#popupAlert').popup('close');
+                    getNodes(0);
+                }, 1500);
 
 
+            } else if (parseInt(response.result) == parseInt(0)) {
 
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
+                $("#texto_popup").text("No se ha podido enviar el correo a " + EMAIL_USER);
+                $('#popupAlert').popup('open');
 
-                if (textStatus === "timeout") {
+            } else if (parseInt(response.result) == parseInt(2)) {
 
-                    console.log("Timeout");
-                    alert("Error de TimeOut... compruebe su conexion de internet");
+                $("#texto_popup").text("Problemas al generar el correo");
+                $('#popupAlert').popup('open');
 
-                } else {
+            } else if (parseInt(response.result) == parseInt(0)) {
 
-                    //restError(jqXHR, "tiendas");
-                    console.log("Sin conexion");
-                    //alert("Sin conexion a internet...");
-                    $("#texto_popup").text("Sin conexion a internet");
-                    $('#popupAlert').popup('open');
+                $("#texto_popup").text("Faltan datos para poder enviar el correo");
+                $('#popupAlert').popup('open');
 
-                }
-                
             }
-        });
+
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                //restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+
+        }
+    });
 
     //}
 

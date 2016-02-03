@@ -368,7 +368,7 @@ function backPage(idNode, nodeName, linkint) {
 
     translateButtons(idiomStore);
 
-    if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
+    if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {//mostramos el popup para poder vaciar el cart
 
         setTimeout(function () {
             $("#popupPregunta").popup("open");
@@ -383,15 +383,15 @@ function backPage(idNode, nodeName, linkint) {
 
         if (position > 2 && idNode != 0) {
 
-            console.log("Tenemos cola");
-            console.log(nodeIds);
+            //console.log("Tenemos cola");
+            //console.log(nodeIds);
             console.log("Antes de borrar " + position);
-            nodeIds.splice(position - 2);
+            nodeIds.splice(position - 2);//borramos el ultimo nodo
             nodeNames.splice(position - 2);
             nodeImg.splice(position - 2);
             console.log(nodeIds);
             position = nodeIds.length; //despues de borrar
-            console.log("Antes de borrar " + position);
+            console.log("Despues de borrar " + position);
             getNodes(idNode, nodeName, 0, linkint, "back");
             //getNodes(nodeIds[position - 2], nodeNames[position - 2], 0, nodeImg[position - 2], "back");
 
@@ -694,8 +694,6 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
     for (i = 0; i < PRODUCTS_ALTER.alternativeProducts.length; i++) { //buscamos el producto alternativo
 
-        //console.log("");
-
         if (PRODUCTS_ALTER.alternativeProducts[i].id == id_prod_alter) {
 
             product = PRODUCTS_ALTER.alternativeProducts[i];
@@ -733,29 +731,8 @@ function addToCartAlter(id_prod_alter, id_produc) {
             console.log(CART[j]);
 
             foundInCart = 1;
-            //cantidad = CART[j].quantity;
             CART[j].quantity = 0;
-            /*var count = CART[j].caracteristics.length;
-            for (var k = 0; k < count; k++) {
-
-                var caracteristicas = CART[j].caracteristics[k];
-                if (caracteristicas.type == "9") {
-
-                    var unidades = caracteristicas.name;
-                    units = unidades.split(' ');
-                    break;
-
-                } else {
-
-                    units = 1;
-                    continue;
-
-                }
-            }
-
-            aux_prod = product;
-            console.log(aux_prod);*/
-            //j = CART.length;
+            
             break;
         }
     }
@@ -803,7 +780,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
     }
 
-    refreshDisplayProducts(CART); //
+    refreshDisplayProducts(CART); 
 
 }
 

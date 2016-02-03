@@ -6,10 +6,10 @@ function checkOut() {
 
     //if (LOGGED == true) {
     if (CART.length > 0) {
-        
+
         console.log("Actualizar div");
         $('.ui-popup').popup('close');
-        
+
         $("#btn_finalizarpedido").hide();
 
         if (SHOPDELIVERY == 0) {
@@ -72,9 +72,11 @@ function checkOut() {
 function updateBackButton(originNode, originName, linkImg) {
 
     //console.log("Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
-
+    var encontrado = 0;
     if (nodeIds.length == 0) {
-        console.log("Iniciamos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
+        
+        console.log("No tenemos paginacion, la iniciamos " + nodeIds.length);
+
         //añadimos volver al menú
         nodeIds.push("0");
         nodeNames.push(jsonIdiomas.header.menu);
@@ -84,15 +86,39 @@ function updateBackButton(originNode, originName, linkImg) {
         nodeNames.push(originName);
         nodeImg.push(linkImg);
         
+        //console.log("Añadir nueva pagina     -------------------------------------------------------------");
+        //console.log(nodeIds);
+        //console.log(nodeNames);
+        //console.log(nodeImg);
+        //console.log("Añadida                 -------------------------------------------------------------");
+        
+        $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
+
     } else {
 
-        //console.log("Añadimos Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
-        nodeIds.push(originNode);
-        nodeNames.push(originName);
-        nodeImg.push(linkImg);
+        console.log("Añadimos un nuevo elemento a la paginacion nuevo pagina " + originNode + " ultimo del array " + nodeIds[nodeIds.length - 1]);
+
+        if (nodeIds[nodeIds.length - 1] != originNode) {//si no es el mismo lo añadimos
+
+            nodeIds.push(originNode);
+            nodeNames.push(originName);
+            nodeImg.push(linkImg);
+            console.log("Añadimos " + originName + " lonjutud es " + nodeIds.length);
+
+            $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
+
+
+        } else {
+            
+            console.log("Ya lo tenemos guardado -------------------------------------------------------");
+            $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
+
+        }
+
     }
     
-    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
+    
+    //$("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
     //$("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 1] + ', \'' + nodeNames[nodeNames.length - 1] + '\', \'' + nodeImg[nodeImg.length - 1] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
 
 
@@ -135,7 +161,7 @@ function changeIdiom(idioma, idiomaId) {
     translateButtons(idiomStore);
 
     if (pantallaActual == "menu principal") {
-        
+
         getNodes(0);
 
     }
@@ -207,9 +233,9 @@ function guardarInfo(accion) {
 
         position = nodeIds.length;
         console.log("Antes de borrar " + nodeIds[position]);
-        nodeIds.splice(position - 2);
-        nodeNames.splice(position - 2);
-        nodeImg.splice(position - 2);
+        nodeIds.splice(position - 1);
+        nodeNames.splice(position - 1);
+        nodeImg.splice(position - 1);
         console.log(nodeIds);
 
         setTimeout(function () {
@@ -245,9 +271,9 @@ function guardarInfo(accion) {
 
         position = nodeIds.length;
         console.log("Antes de borrar " + nodeIds[position]);
-        nodeIds.splice(position - 2);
-        nodeNames.splice(position - 2);
-        nodeImg.splice(position - 2);
+        nodeIds.splice(position - 1);
+        nodeNames.splice(position - 1);
+        nodeImg.splice(position - 1);
         console.log(nodeIds);
         setTimeout(function () {
             $("#popupPregunta").popup("close");

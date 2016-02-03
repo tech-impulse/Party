@@ -53,10 +53,13 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         var position = 0;
         var type;
 
-        if (aux) {
+        if (aux && aux!="back") {
             //console.log("Eliminamos la pantalla -------------------------------------------------------");
             pantallaActual = "";
             ISFIESTA = aux;
+            nodeNames = [];
+            nodeIds = [];
+            nodeImg = [];
         }
 
 
@@ -67,7 +70,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
             nodeIds = [];
             nodeImg = [];
         } else {
-            //console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg + "--------------------------------------------");
+            console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg + "--------------------------------------------");
             updateBackButton(originNode, originName, linkImg);
         }
 
