@@ -179,6 +179,54 @@ function getFlags() {
     -isAlgo: variable para saber si es el asis de fiestas o disfraces
     */
 function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
+    
+    console.log('-> getNodes | pantalla actual: ' + pantallaActual + ' AUX: ' + AUX + ' CANRT length ' + CART.length);
+    
+    if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
+
+        setTimeout(function () {
+            $("#popupPregunta").popup("open");
+        }, popupTimeout);
+
+        AUX = 0;
+
+    }
+    
+    if (CART.length < 1) {                      // TEMP !!!
+        $("#popupListItems").popup("close");
+
+        $("#spBtnAmountPerson").text('');
+
+        $("#circuloCantidad").hide();
+        $("#spBtnPopupCartAmmount").hide();
+        $("#userIcoCarrito").hide();
+
+        $("#btn_finalizarpedido").hide();
+
+        $("#img_cesta").attr("src", "css/icons/cesta.png");
+    } else {
+
+        if (pantallaActual == 'Asistente fiestas') {
+            //$("#spBtnAmountPerson").text(precio_persona + " x");
+            $("#userIcoCarrito").show();
+
+            $("#btn_finalizarpedido").show();
+        }
+        
+        var totalRefresh = 0;
+        
+        for (var i = 0; i < CART.length; i++) {
+            totalRefresh = totalRefresh + CART[i].quantity;
+        }
+        $("#spBtnPopupCartProducts").text(totalRefresh);
+        $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+        
+        $("#circuloCantidad").show();
+        $("#spBtnPopupCartAmmount").show();
+
+        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
+    }
 
     if (idNode != 0) {
         $("#banderas").hide();
@@ -1249,6 +1297,7 @@ function sendEmail() {
                     $("#circuloCantidad").hide();
                     $("#spBtnPopupCartAmmount").hide();
                     $("#userIcoCarrito").hide();
+                    $("#btn_finalizarpedido").hide();
                     CART = [];
                     nodeNames = [];
                     nodeIds = [];
@@ -1350,6 +1399,7 @@ function imprimirPedido() {
                     $("#circuloCantidad").hide();
                     $("#spBtnPopupCartAmmount").hide();
                     $("#userIcoCarrito").hide();
+                    $("#btn_finalizarpedido").hide();
                     CART = [];
                     nodeNames = [];
                     nodeIds = [];
