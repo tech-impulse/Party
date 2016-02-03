@@ -775,10 +775,13 @@ function addToCartAlter(id_prod_alter, id_produc) {
         console.log("Vamos a cambiarlo ");
         console.log(product);
         var precio_new_art = parseInt(product.quantity) * parseInt(product.price_x_region[0].totalPrice);
-        CART[CART.length] = product;
+        //CART[CART.length] = product;
+        CART.push(product);
         //displayItemOperations(id_prod_alter, cantidad);
 
     }
+    
+    
 
     refreshDisplayProducts(CART); 
 

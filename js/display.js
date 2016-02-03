@@ -511,7 +511,7 @@ function refreshDisplayProducts() {
         // calculo del numero de articulos por producto
         for (var k = 0; k < data.length; k++) {
 
-            displayItemOperations(data[k].id, data[k].quantity);
+            displayItemOperations(data[k].id, data[k].quantity,k);
 
         }
 
@@ -1731,6 +1731,11 @@ function displayItemOperations(id, param, position) {
         $("#circulo" + id).hide();
         $("#labelPrecioTotalProducto" + id).hide();
         CART.splice(position, 1);
+        console.log("BORRAMOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"+position);
+        console.log(CART);
+        
+        
+        
         //deleteItemCart(position);        
     }
 
