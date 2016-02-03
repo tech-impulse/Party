@@ -179,9 +179,9 @@ function getFlags() {
     -isAlgo: variable para saber si es el asis de fiestas o disfraces
     */
 function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
-    
+
     console.log('-> getNodes | pantalla actual: ' + pantallaActual + ' AUX: ' + AUX + ' CANRT length ' + CART.length);
-    
+
     if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
 
         setTimeout(function () {
@@ -191,8 +191,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         AUX = 0;
 
     }
-    
-    if (CART.length < 1) {                      // TEMP !!!
+
+    if (CART.length < 1) { // TEMP !!!
         $("#popupListItems").popup("close");
 
         $("#spBtnAmountPerson").text('');
@@ -212,15 +212,15 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
             $("#btn_finalizarpedido").show();
         }
-        
+
         var totalRefresh = 0;
-        
+
         for (var i = 0; i < CART.length; i++) {
             totalRefresh = totalRefresh + CART[i].quantity;
         }
         $("#spBtnPopupCartProducts").text(totalRefresh);
         $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
-        
+
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
 
@@ -1391,7 +1391,6 @@ function imprimirPedido() {
 
             if (response.result == 1) {
 
-<<<<<<< HEAD
                 $("#texto_popup").text("Pedido enviado para imprimir");
                 EMAIL_USER = "";
                 INFO_USU = "";
@@ -1408,25 +1407,25 @@ function imprimirPedido() {
                 EMAIL_USER = "";
                 logout();
                 console.log("Enviamos email");
-=======
-                    $("#texto_popup").text("Pedido enviado para imprimir");
-                    EMAIL_USER = "";
-                    INFO_USU = "";
-                    $('#popupAlert').popup('open');
-                    $('#email').val('');
-                    $("#spBtnAmountPerson").text('');
-                    $("#circuloCantidad").hide();
-                    $("#spBtnPopupCartAmmount").hide();
-                    $("#userIcoCarrito").hide();
-                    $("#btn_finalizarpedido").hide();
-                    CART = [];
-                    nodeNames = [];
-                    nodeIds = [];
-                    nodeImg = [];
-                    EMAIL_USER = "";
-                    logout();
-                    console.log("Enviamos email");
->>>>>>> origin/master
+
+                $("#texto_popup").text("Pedido enviado para imprimir");
+                EMAIL_USER = "";
+                INFO_USU = "";
+                $('#popupAlert').popup('open');
+                $('#email').val('');
+                $("#spBtnAmountPerson").text('');
+                $("#circuloCantidad").hide();
+                $("#spBtnPopupCartAmmount").hide();
+                $("#userIcoCarrito").hide();
+                $("#btn_finalizarpedido").hide();
+                CART = [];
+                nodeNames = [];
+                nodeIds = [];
+                nodeImg = [];
+                EMAIL_USER = "";
+                logout();
+                console.log("Enviamos email");
+
 
                 setTimeout(function () {
                     $('#popupAlert').popup('close');
