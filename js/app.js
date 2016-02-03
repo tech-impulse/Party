@@ -354,11 +354,13 @@ $(document).ready(function () {
 
 // FUNCIÓN QUE ABRE/CIERRA EL MENÚ LATERAL
 function openMenu() {
+
     if ($("#lateralMenu").hasClass("ui-panel-open") == true) {
         $("#lateralMenu").panel("close");
     } else {
         $("#lateralMenu").panel("open");
     }
+
 }
 
 // FUNCIÓN QUE EMULA EL BOTÓN DE ATRÁS DE LA APLICACIÓN
@@ -368,7 +370,7 @@ function backPage(idNode, nodeName, linkint) {
 
     translateButtons(idiomStore);
 
-    if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {//mostramos el popup para poder vaciar el cart
+    if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) { //mostramos el popup para poder vaciar el cart
 
         setTimeout(function () {
             $("#popupPregunta").popup("open");
@@ -386,7 +388,7 @@ function backPage(idNode, nodeName, linkint) {
             //console.log("Tenemos cola");
             //console.log(nodeIds);
             console.log("Antes de borrar " + position);
-            nodeIds.splice(position - 2);//borramos el ultimo nodo
+            nodeIds.splice(position - 2); //borramos el ultimo nodo
             nodeNames.splice(position - 2);
             nodeImg.splice(position - 2);
             console.log(nodeIds);
@@ -673,6 +675,10 @@ function addToCart(item, param) {
         displayItemOperations(item, product.quantity);
     }
 
+    if (CART.length > 0) {
+        $("#btn_finalizarpedido").show();
+    }
+
 }
 
 /********************************************************************************************************************
@@ -732,7 +738,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
             foundInCart = 1;
             CART[j].quantity = 0;
-            
+
             break;
         }
     }
@@ -783,7 +789,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
     
     
 
-    refreshDisplayProducts(CART); 
+    refreshDisplayProducts(CART);
 
 }
 

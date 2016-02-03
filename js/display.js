@@ -62,6 +62,9 @@ function displayNode(data, originNode, originName, linkImg, aux) {
             nodeImg = [];
         }
 
+        if(CART.length > 0){
+         $("#btn_finalizarpedido").show();        
+        }
 
         if (originNode == 0) {
             loadMenu(data);
