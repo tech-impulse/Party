@@ -29,7 +29,7 @@ var idiomStore;
 var protector;
 var jsonIdiomas;
 var pantallaActual;
-var AUX = "";
+var AUX = ""; //
 var LINKINT = "";
 var EMAIL_USER = "";
 var COLUMS = "";
