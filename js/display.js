@@ -2541,7 +2541,7 @@ function loadMenu(data) {
         '</div>' +
         '</div>';*/
 
-    htmlHeader = '<div class="ui-grid-d">' +
+    /*htmlHeader = '<div class="ui-grid-d">' +
         '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);text-transform:uppercase;" id="divBack"></div>' +
 
         '<div class="ui-block-c" style="margin-top:22px;width:11%;margin-left:-90px;" id="session" onclick="displayLogin();">' +
@@ -2562,6 +2562,23 @@ function loadMenu(data) {
         '</div>' +
         '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
 
+        '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
+        '</div>' +
+        '</div>';*/
+    htmlHeader = '<div class="ui-grid-d">' +
+        '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);text-transform:uppercase;" id="divBack"></div>' +
+
+        '<div class="ui-block-c" style="margin-top:22px;width:11%;margin-left:-90px;" id="session" onclick="displayLogin();">' +
+        '<center><a id="login" onclick="displayLogin();" style="text-transform: uppercase;float:left;font-size: 12pt;"><span>' + jsonIdiomas.header.login + '</span></a>' +
+        '</div>' +
+        
+        '<div class="ui-block-b" style="margin-top:10px; margin-left:29px; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: left;"> </div>' +
+
+        '<div onclick="checkOut();" id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 16%; position: absolute; margin-left: 640px; margin-top: 20px; display: block;">Finalizar pedido</div>' +
+        
+        '<div class="ui-block-d" style="width:22%; margin-top:3px;margin-left:90px;" id="car_compra">' + cart + '</div>' +
+        
+        '<div class="ui-block-e" style="margin-top:10px; margin-left:-40px; width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
         '</div>' +
         '</div>';
