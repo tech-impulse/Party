@@ -182,7 +182,10 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     console.log('-> getNodes | pantalla actual: ' + pantallaActual + ' AUX: ' + AUX + ' CANRT length ' + CART.length);
 
-    if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
+    $("#spBtnAmountPerson").text('');   // TEMP !!
+    $("#userIcoCarrito").hide();        // TEMP !!
+    
+    /*if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
 
         setTimeout(function () {
             $("#popupPregunta").popup("open");
@@ -190,8 +193,15 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
         AUX = 0;
 
-    }
+    }*/
+    
+    console.log('-> Llamamos a guardarInfo'); // TEMP !!
+    
+    
+    guardarInfo('si');  // TEMP !!
 
+    console.log('-> miramos carrito'); // TEMP !!
+    
     if (CART.length < 1) { // TEMP !!!
         $("#popupListItems").popup("close");
 
@@ -206,12 +216,12 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         $("#img_cesta").attr("src", "css/icons/cesta.png");
     } else {
 
-        if (pantallaActual == 'Asistente fiestas') {
+        /*if (pantallaActual == 'Asistente fiestas') {
             //$("#spBtnAmountPerson").text(precio_persona + " x");
             $("#userIcoCarrito").show();
 
             $("#btn_finalizarpedido").show();
-        }
+        }*/
 
         var totalRefresh = 0;
 
@@ -317,12 +327,16 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                     //console.log("Enviar info es 4");
                     //console.log(info);
+                    pantallaActual = "Asistente fiestas";
+                    
+                    $("#userIcoCarrito").show();
+                    //$("#btn_finalizarpedido").show();
 
                     if (info != undefined) {
 
                         console.log("DisplayPantalla intermadia");
                         console.log(info);
-                        pantallaActual = "Asistente fiestas";
+                        //pantallaActual = "Asistente fiestas";
                         updateBackButton(idNode, nodeName, aux);
 
                         displayPantallaIntermediaAsistFiestas(info.node);

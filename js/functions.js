@@ -225,7 +225,7 @@ function volver(id_product, idnodo) {
 
 function guardarInfo(accion) {
 
-    console.log("Pop para guardar carrito o no" + accion);
+    console.log("--> Guardar Info - action: " + accion);
 
     if (accion == "si") {
 
@@ -238,13 +238,13 @@ function guardarInfo(accion) {
         nodeImg.splice(position - 1);
         console.log(nodeIds);
 
-        setTimeout(function () {
+        /*setTimeout(function () {
             $("#popupPregunta").popup("close");
-        }, popupTimeout);
+        }, popupTimeout);*/
         //getNodes(idNode, nodeName, 0, linkint, "back");
-        getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
+        //getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
 
-
+        console.log("--> Dins IF si"); // TEMP !!
     } else {
 
         for (var i = CART.length - 1; i >= 0; i--) {
@@ -278,7 +278,7 @@ function guardarInfo(accion) {
         setTimeout(function () {
             $("#popupPregunta").popup("close");
         }, popupTimeout);
-        getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
+        //getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
 
 
     }

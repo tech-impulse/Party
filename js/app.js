@@ -370,7 +370,7 @@ function backPage(idNode, nodeName, linkint) {
 
     translateButtons(idiomStore);
 
-    if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) { //mostramos el popup para poder vaciar el cart
+    /*if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) { //mostramos el popup para poder vaciar el cart
 
         setTimeout(function () {
             $("#popupPregunta").popup("open");
@@ -378,7 +378,7 @@ function backPage(idNode, nodeName, linkint) {
 
         AUX = 0;
 
-    } else {
+    } else {*/
 
         var position = (nodeIds.length);
         console.log("Posicion " + position);
@@ -404,12 +404,8 @@ function backPage(idNode, nodeName, linkint) {
             nodeImg = [];
         }
 
-    }
-
-
-
+    //}
 }
-
 
 /*********************************************************************************************
   Esta funcion carga la lista de productos una vez que no hay mas nodos que mostrar. Segun en 

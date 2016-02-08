@@ -2616,7 +2616,7 @@ function loadMenu(data) {
     var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:30%"><img id="img_cesta" src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
-        '<div class="ui-block-b" style="width: 70%;margin-top:5px;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5; display:none">' +
+        '<div class="ui-block-b" style="margin-top:5px;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5; display:none">' +
         '<label id="spBtnPopupCartProducts" style="display:block;margin-top:1px;font-size: 18px;color: white;">0</label>' +
         '</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' +
         '<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;"></div>' +
@@ -2661,15 +2661,17 @@ function loadMenu(data) {
     htmlHeader = '<div class="ui-grid-d">' +
         '<div class="ui-block-a" style="margin-top:10px; width:32%;color: rgb(70, 130, 180);text-transform:uppercase;" id="divBack"></div>' +
 
-        '<div class="ui-block-b" style="margin-top:10px; margin-left:10px; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: left;"> </div>' +
-
-        '<div class="ui-block-c" style="margin-top:22px;width:11%;margin-left:-50px;" id="session" onclick="displayLogin();">' +
-        '<center><a id="login" onclick="displayLogin();" style="width:10%;text-transform: uppercase;float:left;font-size: 12pt;"><span>' + jsonIdiomas.header.login + '</span></a>' +
+        '<div class="ui-block-c" style="margin-top:22px;width:11%;margin-left:-90px;" id="session" onclick="displayLogin();">' +
+        '<center><a id="login" onclick="displayLogin();" style="text-transform: uppercase;float:left;font-size: 12pt;"><span>' + jsonIdiomas.header.login + '</span></a>' +
         '</div>' +
         
-        '<div class="ui-block-d" style="width:18%; margin-top:3px;margin-left:40px;" id="car_compra">' + cart +
-        '</div>' +
-        '<div class="ui-block-e" style="margin-top:10px; width:4%">' +
+        '<div class="ui-block-b" style="margin-top:10px; margin-left:29px; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: left;"> </div>' +
+
+        '<div onclick="checkOut();" id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 15%; position: absolute; margin-left: 640px; margin-top: 20px; display: block;">Finalizar pedido</div>' +
+        
+        '<div class="ui-block-d" style="width:22%; margin-top:3px;margin-left:90px;" id="car_compra">' + cart + '</div>' +
+        
+        '<div class="ui-block-e" style="margin-top:10px; margin-left:-40px; width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
         '</div>' +
         '</div>';
@@ -2930,7 +2932,12 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
 
 function displayPantallaSugerencias() {
 
+    console.log("Guardamos carrito antes de sugerencias");
+    
+    guardarInfo('si');  // TEMP !!
+    
     console.log("Entramos en la pantalla de sugerencias");
+    
     $("#banderas").hide();
     nodeIds = [];
     nodeNames = [];
@@ -2974,6 +2981,50 @@ function displayPantallaSugerencias() {
     $("#divContent").trigger('create');
 
     translateButtons(idiomStore);
+    
+    console.log("--> Arribo al if amb length: " + CART.length);
+    
+    pantallaActual = 'sugerencias'; // TEMP !!
+    
+    if (CART.length < 1) { // TEMP !!!
+        console.log("--> IF si: " + CART.length); // TEMP !! log
+        
+        $("#popupListItems").popup("close");
+
+        $("#spBtnAmountPerson").text('');
+
+        $("#circuloCantidad").hide();
+        $("#spBtnPopupCartAmmount").hide();
+        $("#userIcoCarrito").hide();
+
+        $("#btn_finalizarpedido").hide();
+
+        $("#img_cesta").attr("src", "css/icons/cesta.png");
+    } else {
+        
+        console.log("--> ELSE no: " + CART.length); // TEMP !! log
+
+        if (pantallaActual == 'Asistente fiestas') {
+            //$("#spBtnAmountPerson").text(precio_persona + " x");
+            $("#userIcoCarrito").show();
+        }
+        
+        $("#btn_finalizarpedido").show();
+
+        var totalRefresh = 0;
+
+        for (var i = 0; i < CART.length; i++) {
+            totalRefresh = totalRefresh + CART[i].quantity;
+        }
+        $("#spBtnPopupCartProducts").text(totalRefresh);
+        $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+
+        $("#circuloCantidad").show();
+        $("#spBtnPopupCartAmmount").show();
+
+        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
+    }
 
 }
 
