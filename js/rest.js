@@ -329,8 +329,14 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     //console.log(info);
                     pantallaActual = "Asistente fiestas";
                     
-                    $("#userIcoCarrito").show();
-                    //$("#btn_finalizarpedido").show();
+                    if (CART.length > 0) {
+                        var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
+                        
+                        $("#spBtnAmountPerson").text(precio_persona + " x");
+                        $("#userIcoCarrito").show();
+                        
+                        //$("#btn_finalizarpedido").show();
+                    }
 
                     if (info != undefined) {
 
