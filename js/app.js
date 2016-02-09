@@ -354,11 +354,15 @@ $(document).ready(function () {
 
 // FUNCIÓN QUE ABRE/CIERRA EL MENÚ LATERAL
 function openMenu() {
+    
+    console.log('--> openMenu'); // TEMP !!
 
     if ($("#lateralMenu").hasClass("ui-panel-open") == true) {
         $("#lateralMenu").panel("close");
+        console.log('-> close'); // TEMP !!
     } else {
         $("#lateralMenu").panel("open");
+        console.log('-> opem'); // TEMP !!
     }
 
 }
