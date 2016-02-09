@@ -49,7 +49,7 @@ $(document).ready(function () {
 
     // jQuery no-double-tap-zoom plugin
     
-    cordova.exec(null, null, "SplashScreen", "hide", []);
+    //cordova.exec(null, null, "SplashScreen", "hide", []);
     navigator.splashscreen.hide();
 
     $(window).scroll(function () {
