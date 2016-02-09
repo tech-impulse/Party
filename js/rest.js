@@ -333,6 +333,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
                         
                         $("#spBtnAmountPerson").text(precio_persona + " x");
+                        $("#spBtnAmountPerson").show();
                         $("#userIcoCarrito").show();
                         
                         //$("#btn_finalizarpedido").show();
