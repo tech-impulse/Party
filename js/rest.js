@@ -329,7 +329,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     //console.log(info);
                     pantallaActual = "Asistente fiestas";
                     
-                    if (CART.length > 0) {
+                    if (CART.length > 0 && num_personas_fiesta > 0) {
                         var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
                         
                         $("#spBtnAmountPerson").text(precio_persona + " x");
