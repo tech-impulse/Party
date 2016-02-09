@@ -39,16 +39,22 @@ $(document).ready(function () {
 
     $(window).scroll(function () {
 
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+        //console.log("Mas scroll y reinicar tiempo salvapantallas");
+        clearInterval(protector);
 
-            if (pantallaActual == "catalogo") {
+        //console.log("Click");
 
-                console.log("Mas scroll");
-                //PAGINA++;
-                //getNodesProducts(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1]);
+        $('#principal').show();
+        $('#contentPopupScreenSaver').hide();
 
-            }
+        protector = setInterval(function () {
+            displayScreenSaver();
+        }, idleTime);
 
+        if ($(window).scrollTop() == $(document).height() - $(window).height() && pantallaActual == "catalogo") { //carga mas productos en el catalogo cuando se acabe la pagina
+
+            //PAGINA++;
+            //getNodesProducts(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1]);
 
         }
     });
@@ -354,15 +360,11 @@ $(document).ready(function () {
 
 // FUNCIÓN QUE ABRE/CIERRA EL MENÚ LATERAL
 function openMenu() {
-    
-    console.log('--> openMenu'); // TEMP !!
 
     if ($("#lateralMenu").hasClass("ui-panel-open") == true) {
         $("#lateralMenu").panel("close");
-        console.log('-> close'); // TEMP !!
     } else {
         $("#lateralMenu").panel("open");
-        console.log('-> opem'); // TEMP !!
     }
 
 }
@@ -384,29 +386,29 @@ function backPage(idNode, nodeName, linkint) {
 
     } else {*/
 
-        var position = (nodeIds.length);
-        console.log("Posicion " + position);
+    var position = (nodeIds.length);
+    console.log("Posicion " + position);
 
-        if (position > 2 && idNode != 0) {
+    if (position > 2 && idNode != 0) {
 
-            //console.log("Tenemos cola");
-            //console.log(nodeIds);
-            console.log("Antes de borrar " + position);
-            nodeIds.splice(position - 2); //borramos el ultimo nodo
-            nodeNames.splice(position - 2);
-            nodeImg.splice(position - 2);
-            console.log(nodeIds);
-            position = nodeIds.length; //despues de borrar
-            console.log("Despues de borrar " + position);
-            getNodes(idNode, nodeName, 0, linkint, "back");
-            //getNodes(nodeIds[position - 2], nodeNames[position - 2], 0, nodeImg[position - 2], "back");
+        //console.log("Tenemos cola");
+        //console.log(nodeIds);
+        console.log("Antes de borrar " + position);
+        nodeIds.splice(position - 2); //borramos el ultimo nodo
+        nodeNames.splice(position - 2);
+        nodeImg.splice(position - 2);
+        console.log(nodeIds);
+        position = nodeIds.length; //despues de borrar
+        console.log("Despues de borrar " + position);
+        getNodes(idNode, nodeName, 0, linkint, "back");
+        //getNodes(nodeIds[position - 2], nodeNames[position - 2], 0, nodeImg[position - 2], "back");
 
-        } else {
-            getNodes(0);
-            nodeIds = [];
-            nodeNames = [];
-            nodeImg = [];
-        }
+    } else {
+        getNodes(0);
+        nodeIds = [];
+        nodeNames = [];
+        nodeImg = [];
+    }
 
     //}
 }
@@ -697,7 +699,7 @@ function addToCart(item, param) {
         //product.dedonde = pantallaActual;
         product.dedonde = nodeIds[nodeIds.length - 1];
         product.original = true; //este campo indica si el articulo ha sido sustituido o no
-              
+
         CART.push(product);
 
         var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
@@ -725,7 +727,7 @@ function addToCart(item, param) {
 function addToCartAlter(id_prod_alter, id_produc) {
 
     console.log("Id por alter " + id_prod_alter + " id product " + id_produc);
-    var product={};
+    var product = {};
     var aux_prod;
     var cantidad;
     var foundInCart = 0;
