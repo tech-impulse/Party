@@ -39,12 +39,18 @@
     <preference name="auto-hide-splash-screen"    value="true" />           <!-- ios: if set to false, the splash screen must be hidden using a JavaScript API -->
     <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
-    <preference name="AutoHideSplashScreen"       value="true" />
+    <preference name="AutoHideSplashScreen"       value="false" />
     <preference name="SplashScreenDelay"          value="0" />
     <!-- Quitar barra de stattus ios-->
     <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance" overwrite="true"><false/></gap:config-file>
     
-    
+    <platform name="browser">
+        <preference name="SplashScreenDelay" value="10000" /> <!-- defaults to "3000" -->
+        <preference name="SplashScreenBackgroundColor" value="green" /> <!-- defaults to "#464646" -->
+        <preference name="ShowSplashScreen" value="false" /> <!-- defaults to "true" -->
+        <preference name="SplashScreenWidth" value="600" /> <!-- defaults to "170" -->
+        <preference name="SplashScreenHeight" value="300" /> <!-- defaults to "200" -->
+    </platform>
     <!--
         Define a specific version of PhoneGap to build into your app.
         <preference name="phonegap-version"       value="3.5.0" />
@@ -69,7 +75,7 @@
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.media" />
     <gap:plugin name="org.apache.cordova.network-information" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
+    <plugin name="org.apache.cordova.splashscreen" spec="0.2.7" source="pgb" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="com.phonegap.plugin.statusbar" />
 

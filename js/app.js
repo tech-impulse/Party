@@ -21,6 +21,8 @@ $(document).bind("mobileinit", function () {
 
     //Cargamos el idioma por defecto de la app
     translateButtons("ca");
+    
+    navigator.splashscreen.hide();
 
 });
 
