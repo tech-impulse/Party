@@ -30,6 +30,9 @@ $(document).bind("mobileinit", function () {
 Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
+    
+    NSString * jsCallBack = @"window.getSelection().removeAllRanges();";    
+    [webView stringByEvaluatingJavaScriptFromString:jsCallBack];
 
     // jQuery no-double-tap-zoom plugin
 
