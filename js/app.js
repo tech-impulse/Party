@@ -21,8 +21,7 @@ $(document).bind("mobileinit", function () {
 
     //Cargamos el idioma por defecto de la app
     translateButtons("ca");
-    
-    navigator.splashscreen.hide();
+
 
 });
 
@@ -32,8 +31,6 @@ Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
 
-    navigator.splashscreen.hide();
-    
     // jQuery no-double-tap-zoom plugin
 
     $(window).scroll(function () {
