@@ -22,6 +22,8 @@ $(document).bind("mobileinit", function () {
     //Cargamos el idioma por defecto de la app
     translateButtons("ca");
 
+    cordova.exec(null, null, "SplashScreen", "hide", []);
+    navigator.splashscreen.hide();
 
 });
 
@@ -33,7 +35,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // device APIs are available
 //
 function onDeviceReady() {
-    navigator.splashscreen.hide();
+   // navigator.splashscreen.hide();
 }
 
 
