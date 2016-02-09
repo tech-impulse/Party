@@ -41,8 +41,8 @@ function checkOut() {
                 '</div>';
             $("#divContent").html(html);
             $("#divContent").trigger('create');
-            var n = nodeIds.length + 1;
-            updateBackButton(nodeIds[n], nodeNames[n]);
+            //var n = nodeIds.length + 1;
+            //updateBackButton(nodeIds[n], nodeNames[n]);
         }
     } else {
         alert("No hay productos");
@@ -74,7 +74,7 @@ function updateBackButton(originNode, originName, linkImg) {
     //console.log("Imagen es " + linkImg + " lonjutud es " + nodeIds.length);
     var encontrado = 0;
     if (nodeIds.length == 0) {
-        
+
         console.log("No tenemos paginacion, la iniciamos " + nodeIds.length);
 
         //añadimos volver al menú
@@ -85,20 +85,20 @@ function updateBackButton(originNode, originName, linkImg) {
         nodeIds.push(originNode);
         nodeNames.push(originName);
         nodeImg.push(linkImg);
-        
+
         //console.log("Añadir nueva pagina     -------------------------------------------------------------");
         //console.log(nodeIds);
         //console.log(nodeNames);
         //console.log(nodeImg);
         //console.log("Añadida                 -------------------------------------------------------------");
-        
+
         $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
 
     } else {
 
         console.log("Añadimos un nuevo elemento a la paginacion nuevo pagina " + originNode + " ultimo del array " + nodeIds[nodeIds.length - 1]);
-
-        if (nodeIds[nodeIds.length - 1] != originNode) {//si no es el mismo lo añadimos
+        console.log("Añadimos " + originName + " lonjutud es " + nodeIds.length);
+        if (nodeIds[nodeIds.length - 1] != originNode) { //si no es el mismo lo añadimos
 
             nodeIds.push(originNode);
             nodeNames.push(originName);
@@ -109,15 +109,15 @@ function updateBackButton(originNode, originName, linkImg) {
 
 
         } else {
-            
+
             console.log("Ya lo tenemos guardado -------------------------------------------------------");
             $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
 
         }
 
     }
-    
-    
+
+
     //$("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
     //$("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 1] + ', \'' + nodeNames[nodeNames.length - 1] + '\', \'' + nodeImg[nodeImg.length - 1] + '\')"> <span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px"></span>' + nodeNames[nodeNames.length - 2] + '</div>');
 
@@ -232,11 +232,11 @@ function guardarInfo(accion) {
         var position = (nodeIds.length);
 
         position = nodeIds.length;
-        console.log("Antes de borrar " + nodeIds[position]);
-        nodeIds.splice(position - 1);
-        nodeNames.splice(position - 1);
-        nodeImg.splice(position - 1);
-        console.log(nodeIds);
+        //console.log("Antes de borrar " + nodeIds[position]);
+        //nodeIds.splice(position - 1);
+        //nodeNames.splice(position - 1);
+        //nodeImg.splice(position - 1);
+        //console.log(nodeIds);
 
         /*setTimeout(function () {
             $("#popupPregunta").popup("close");
@@ -266,19 +266,19 @@ function guardarInfo(accion) {
         $("#spPopupCartCount").text(total);
         $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
 
-        var position = (nodeIds.length);
+        //var position = (nodeIds.length);
 
 
-        position = nodeIds.length;
+        //position = nodeIds.length;
         console.log("Antes de borrar " + nodeIds[position]);
-        nodeIds.splice(position - 1);
-        nodeNames.splice(position - 1);
-        nodeImg.splice(position - 1);
+        //nodeIds.splice(position - 1);
+        //nodeNames.splice(position - 1);
+        //nodeImg.splice(position - 1);
         console.log(nodeIds);
         setTimeout(function () {
             $("#popupPregunta").popup("close");
         }, popupTimeout);
-        //getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
+        getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
 
 
     }

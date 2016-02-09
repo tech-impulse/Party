@@ -198,7 +198,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
     console.log('-> Llamamos a guardarInfo'); // TEMP !!
     
     
-    guardarInfo('si');  // TEMP !!
+    //guardarInfo('si');  // TEMP !!
 
     console.log('-> miramos carrito'); // TEMP !!
     

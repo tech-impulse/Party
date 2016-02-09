@@ -53,6 +53,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         var position = 0;
         var type;
 
+        //if (aux && aux != "back") {
         if (aux && aux != "back") {
             //console.log("Eliminamos la pantalla -------------------------------------------------------");
             pantallaActual = "";
@@ -1334,7 +1335,7 @@ function displayProducts(data, originNode, originName, param) {
                     var titulo = data.products[i].name;
                 }
 
-
+                aux_carac = 1;
                 var count = data.products[i].caracteristics.length;
                 var caracteristicas = data.products[i].caracteristics;
 
@@ -2548,13 +2549,13 @@ function loadMenu(data) {
         '<center><a id="login" onclick="displayLogin();" style="text-transform: uppercase;float:left;font-size: 12pt;"><span>' + jsonIdiomas.header.login + '</span></a>' +
         '</div>' +
 
-        
+
         '<div class="ui-block-b" style="margin-top:10px; margin-left:29px; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: left;"> </div>' +
 
         '<div onclick="checkOut();" id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 15%; position: absolute; margin-left: 640px; margin-top: 20px; display: block;">Finalizar pedido</div>' +
-        
+
         '<div class="ui-block-d" style="width:22%; margin-top:3px;margin-left:90px;" id="car_compra">' + cart + '</div>' +
-        
+
         '<div class="ui-block-e" style="margin-top:10px; margin-left:-40px; width:4%">' +
 
 
@@ -2823,11 +2824,11 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
 function displayPantallaSugerencias() {
 
     console.log("Guardamos carrito antes de sugerencias");
-    
-    guardarInfo('si');  // TEMP !!
-    
+
+    guardarInfo('si'); // TEMP !!
+
     console.log("Entramos en la pantalla de sugerencias");
-    
+
     $("#banderas").hide();
     nodeIds = [];
     nodeNames = [];
@@ -2871,14 +2872,14 @@ function displayPantallaSugerencias() {
     $("#divContent").trigger('create');
 
     translateButtons(idiomStore);
-    
+
     console.log("--> Arribo al if amb length: " + CART.length);
-    
+
     pantallaActual = 'sugerencias'; // TEMP !!
-    
+
     if (CART.length < 1) { // TEMP !!!
         console.log("--> IF si: " + CART.length); // TEMP !! log
-        
+
         $("#popupListItems").popup("close");
 
         $("#spBtnAmountPerson").text('');
@@ -2891,14 +2892,14 @@ function displayPantallaSugerencias() {
 
         $("#img_cesta").attr("src", "css/icons/cesta.png");
     } else {
-        
+
         console.log("--> ELSE no: " + CART.length); // TEMP !! log
 
         if (pantallaActual == 'Asistente fiestas') {
             //$("#spBtnAmountPerson").text(precio_persona + " x");
             $("#userIcoCarrito").show();
         }
-        
+
         $("#btn_finalizarpedido").show();
 
         var totalRefresh = 0;
@@ -2918,7 +2919,7 @@ function displayPantallaSugerencias() {
 
 }
 
-function displaySummary(param) {
+/*function displaySummary(param) {
 
 
 
@@ -2975,7 +2976,7 @@ function displaySummary(param) {
 
     translateButtons(idiomStore);
 }
-
+*/
 
 function displayFlags(res) {
 
