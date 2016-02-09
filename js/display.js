@@ -2358,9 +2358,9 @@ function displayPopupItemDetail(id, param, idproduct) {
                     }
 
                     if (PRODUCTS[i].definition == "NULL") {
-                        var definition = CART[i].short_name;
+                        var definition = PRODUCTS[i].short_name;
                     } else {
-                        var definition = CART[i].definition;
+                        var definition = PRODUCTS[i].definition;
                     }
 
                     if (PRODUCTS[i].quantity > 0) {
