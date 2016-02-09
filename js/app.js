@@ -32,6 +32,8 @@ Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
 
+    navigator.splashscreen.hide();
+    
     // jQuery no-double-tap-zoom plugin
 
     $(window).scroll(function () {
