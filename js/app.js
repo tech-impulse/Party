@@ -22,8 +22,8 @@ $(document).bind("mobileinit", function () {
     //Cargamos el idioma por defecto de la app
     translateButtons("ca");
 
-    cordova.exec(null, null, "SplashScreen", "hide", []);
-    navigator.splashscreen.hide();
+    //cordova.exec(null, null, "SplashScreen", "hide", []);
+    //navigator.splashscreen.hide();
 
 });
 
@@ -36,6 +36,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 //
 function onDeviceReady() {
    // navigator.splashscreen.hide();
+    cordova.exec(null, null, "SplashScreen", "hide", []);
+    //navigator.splashscreen.hide();
 }
 
 
@@ -46,6 +48,9 @@ Esto se ejecuta antes que la app se inicie
 $(document).ready(function () {
 
     // jQuery no-double-tap-zoom plugin
+    
+    cordova.exec(null, null, "SplashScreen", "hide", []);
+    navigator.splashscreen.hide();
 
     $(window).scroll(function () {
 
