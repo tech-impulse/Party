@@ -1782,7 +1782,7 @@ function añadirMasProductos(data, originNode, originName, param) {
     -0: mostrar botones de restar y sumas
     -else: esconderlos
 ******************************************************************/
-function displayItemOperations(id, param, position) {
+function displayItemOperations(id, param, position, borrarItem) {
 
     if (param > 0) {
         //console.log("La cantidad que llega es " + param);
@@ -1800,6 +1800,9 @@ function displayItemOperations(id, param, position) {
         //console.log("BORRAMOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" + position);
         //console.log(CART);
 
+    }
+    if (borrarItem == "borrar") {
+        CART.splice(position, 1);
     }
 
     var total = 0;
