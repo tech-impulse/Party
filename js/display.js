@@ -1114,7 +1114,7 @@ function displayProducts(data, originNode, originName, param) {
                 } else {
                     var displayWarning = "";
                 }
-
+// comentario 2.0
                 if (stock == 0) {
                     stock = data.products[i].stock_x_central_store;
                 }
