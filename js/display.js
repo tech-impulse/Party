@@ -2252,7 +2252,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
                     if (stock > PRODUCTS[i].stock_min) {
                         imgAvailability = "css/maqueta/barraVerde.png";
-                    } else if (stock > 0 && stock <= CART[i].stock_min) {
+                    } else if (stock > 0 && stock <= PRODUCTS[i].stock_min) {
                         imgAvailability = "css/maqueta/barraAmarilla.png";
                     } else if (stock == 0) {
                         imgAvailability = "css/maqueta/barraRojo.png";
