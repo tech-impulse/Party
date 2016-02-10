@@ -31,6 +31,18 @@ Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
 
+    //$("#popupListItems").on({               // Evitar el click fuera del popUp.
+    $(".ui-popup").on({               // Evitar el click fuera del popUp.
+        popupbeforeposition: function () {
+            $('.ui-popup-screen').off();
+            $('body').css('overflow','hidden');
+        },
+        popupafterclose: function () {
+            
+            $('body').css('overflow','scroll');
+        }
+    });
+
     // jQuery no-double-tap-zoom plugin
 
     $(window).scroll(function () {
@@ -833,7 +845,7 @@ function deleteItemCart(position) {
     console.log("Eliminar item en posicion " + position + " id: " + CART[position].id);
     $("#labelPrecioTotalProducto" + CART[position].id).text("");
     console.log("Eliminamos el " + CART[position]);
-    displayItemOperations(CART[position].id, 0, position,"borrar"); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
+    displayItemOperations(CART[position].id, 0, position, "borrar"); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
 }
 
 /**
