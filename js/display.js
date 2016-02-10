@@ -1088,6 +1088,21 @@ function displayProducts(data, originNode, originName, param) {
                     var titulo = data.products[i].name;
                 }
 
+                var imgStock = "";
+                var stock = data.products[i].stock_x_store;
+
+                if (stock == 0) {
+                    stock = data.products[i].stock_x_central_store;
+                }
+
+                if (stock > data.products[i].stock_min) {
+                    imgStock = "css/maqueta/barraVerde.png";
+                } else if (stock > 0 && stock <= data.products[i].stock_min) {
+                    imgStock = "css/maqueta/barraAmarilla.png";
+                } else if (stock == 0) {
+                    imgStock = "css/maqueta/barraRojo.png";
+                }
+
 
                 //if (data.products[i].stock_x_store == 0) {
                 if (data.products[i].price_x_region[0].exclusiveWeb == 1 || data.products[i].stock_x_store == 0) {
