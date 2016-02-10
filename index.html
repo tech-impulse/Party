@@ -460,6 +460,21 @@
                         <button id="btnPopupActionRight" onclick='$("#popupConfirmacionVaciarCarrito").popup("close"); vaciaCarrito();' data-theme="d" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
                     </div>
                 </div>
+            
+                <!-- POP CANCELAR PEDIDO -->
+                <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupConfirmacionCancelarPedido" class="ui-shadow ui-btn-inline" style="min-width:400px;">
+                    <div class="ui-bar ui-bar-b" data-theme="b">
+                        <h3>Confirmaci&oacute;n</h3>
+                        <label id="lbpopupAction" style="display:none"></label>
+                    </div>
+                    <div class="ui-body ui-body-b">
+                        <center>
+                            <h3>¿Desea cancelar el pedido?</h3>
+                        </center>
+                        <button id="btnPopupActionLeft" onclick='$("#popupConfirmacionCancelarPedido").popup("close");' data-theme="c" data-iconpos="right" style="width:13em; float:left; margin:10px">No</button>
+                        <button id="btnPopupActionRight" onclick='$("#popupConfirmacionCancelarPedido").popup("close"); vaciaCarrito(); getNodes(0);' data-theme="d" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
+                    </div>
+                </div>
 
                 <!-- POPUP PREGUNTAS -->
                 <div data-role="popup" data-corners="false" data-theme="b" id="popupEmail" style="">
