@@ -170,9 +170,6 @@ function getFlags() {
 
 }
 
-
-
-
 /* Función que solicita la información al webservice de Nodos
     - idNode: id del nodo que se esta solicitando
     - nodeName: el nombre del nodo al que estamos accediento (Necesario para pintar en el botón de atrás el titulo);
@@ -286,13 +283,11 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     node_cero = response;
                     $("#banderas").show();
                     pantallaActual = "menu principal";
-
                 }
 
                 //pantallaActual = "nodos";
                 //console.log("Tenemos nuevos nodos");
                 restOk(response, "nodes", idNode, nodeName, aux, backPage);
-
 
             } else if (response.result == 0) { //ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 

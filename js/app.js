@@ -626,7 +626,7 @@ function addToCart(item, param) {
 
     var product;
     var foundInCart = 0;
-    var i = "";
+    //var i = "";
 
     /*for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
         
@@ -660,7 +660,7 @@ function addToCart(item, param) {
         }
     }*/
 
-    for (i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
+    for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
 
         if (PRODUCTS[i]['id'] == item) { //si coinciden lo añadimos al carrito
 
@@ -679,8 +679,12 @@ function addToCart(item, param) {
                     var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
                     $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
-
+                    
                     displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
+                    
+                    if (CART[j].quantity == 0) // TEMP !!
+                        deleteItemCart(j);
+                    
                     //j = PRODUCTS.length;
                     break;
 
@@ -718,11 +722,6 @@ function addToCart(item, param) {
 
         displayItemOperations(item, product.quantity);
     }
-
-    if (CART.length > 0) {
-        $("#btn_finalizarpedido").show();
-    }
-
 }
 
 /********************************************************************************************************************
