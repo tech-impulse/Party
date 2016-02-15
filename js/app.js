@@ -34,7 +34,7 @@ $(document).ready(function () {
     //$("#popupListItems").on({               // Evitar el click fuera del popUp.
     $(".ui-popup").on({               // Evitar el click fuera del popUp.
         popupbeforeposition: function () {
-            $('.ui-popup-screen').off();
+            //$('.ui-popup-screen').off();
             $('body').css('overflow','hidden');
         },
         popupafterclose: function () {
