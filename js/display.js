@@ -568,7 +568,54 @@ function refreshDisplayProducts(product) {
 
 }
 
+/**
+*       updateCarritoDisplay
+*
+*       Funcion que se encarga de actualizar la visualizacion del carrito i el boton finalizar pedido
+*       en funcion de los productos comprados i la pantalla actual.
+*/
+function updateCarritoDisplay() {
+    var total = 0;
+    
+    for (var i = 0; i < CART.length; i++)   {
+        total = total + CART[i].quantity;
+    }
+    
+    var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
+    
+    $("#spBtnPopupCartProducts").text(total);
+    $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+    $("#spPopupCartCount").text(total);
+    $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
 
+    if (CART.length < 1) {
+        $("#popupListItems").popup("close");
+
+        $("#spBtnAmountPerson").text('');
+
+        $("#circuloCantidad").hide();
+        $("#spBtnPopupCartAmmount").hide();
+        $("#userIcoCarrito").hide();
+
+        $("#btn_finalizarpedido").hide();
+
+        $("#img_cesta").attr("src", "css/icons/cesta.png");
+    } else {
+
+        if (pantallaActual == 'Asistente fiestas') {
+            $("#spBtnAmountPerson").text(precio_persona + " x");
+            $("#userIcoCarrito").show();
+
+            $("#btn_finalizarpedido").show();
+        }
+
+        $("#circuloCantidad").show();
+        $("#spBtnPopupCartAmmount").show();
+
+        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
+    }
+}
 
 function displayProducts(data, originNode, originName, param, param4) {
 
@@ -2063,13 +2110,13 @@ function displayItemOperations(id, param, position, borrarItem) {
         //CART.splice(position, 1);
         //console.log("BORRAMOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" + position);
         //console.log(CART);
-
     }
+    
     if (borrarItem == "borrar") {
         CART.splice(position, 1);
     }
 
-    var total = 0;
+    /*var total = 0;
     for (var i = 0; i < CART.length; i++) {
         total = total + CART[i].quantity;
     }
@@ -2110,7 +2157,12 @@ function displayItemOperations(id, param, position, borrarItem) {
 
         console.log("--> CAMBIO de imagen!!"); // TEMP !! log
         $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
-    }
+    }*/
+    
+    /*if ( CART.length == 1 && CART[0].quantity == 0 )
+        CART = [];*/
+    
+    updateCarritoDisplay();
 
     translateButtons(idiomStore);
 
