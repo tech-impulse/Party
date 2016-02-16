@@ -444,7 +444,6 @@ function displayProductos(idNode, nodeName) {
 
             //console.log("Todos los selects ok. Entramos en el asistente de disfraces.");
             getProducts(idNode, nodeName, info_aux);
-            
 
         }
 
@@ -455,8 +454,7 @@ function displayProductos(idNode, nodeName) {
         if (num_persosnas >= 2) {
 
             //console.log("Todos los selects ok. ASIS. FIESTAS");
-            //getProducts(idNode, nodeName);
-            getProductsClassified(idNode, nodeName, info_aux);
+            getProducts(idNode, nodeName);
 
         } else {
 
@@ -718,7 +716,7 @@ function addToCart(item, param) {
 
         var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
-        console.log($("#labelPrecioTotalProducto" + product.id));
+        //console.log($("#labelPrecioTotalProducto" + product.id));
         $("#labelPrecioTotalProducto" + product.id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
         $("#labelPrecioTotalProducto" + product.id).show();
 
