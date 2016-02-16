@@ -182,9 +182,9 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     console.log('-> getNodes | pantalla actual: ' + pantallaActual + ' AUX: ' + AUX + ' CANRT length ' + CART.length);
 
-    $("#spBtnAmountPerson").text('');   // TEMP !!
-    $("#userIcoCarrito").hide();        // TEMP !!
-    
+    $("#spBtnAmountPerson").text(''); // TEMP !!
+    $("#userIcoCarrito").hide(); // TEMP !!
+
     /*if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
 
         setTimeout(function () {
@@ -194,14 +194,14 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         AUX = 0;
 
     }*/
-    
+
     console.log('-> Llamamos a guardarInfo'); // TEMP !!
-    
-    
+
+
     //guardarInfo('si');  // TEMP !!
 
     console.log('-> miramos carrito'); // TEMP !!
-    
+
     if (CART.length < 1) { // TEMP !!!
         $("#popupListItems").popup("close");
 
@@ -215,13 +215,6 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
         $("#img_cesta").attr("src", "css/icons/cesta.png");
     } else {
-
-        /*if (pantallaActual == 'Asistente fiestas') {
-            //$("#spBtnAmountPerson").text(precio_persona + " x");
-            $("#userIcoCarrito").show();
-
-            $("#btn_finalizarpedido").show();
-        }*/
 
         var totalRefresh = 0;
 
@@ -328,14 +321,14 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     //console.log("Enviar info es 4");
                     //console.log(info);
                     pantallaActual = "Asistente fiestas";
-                    
+
                     if (CART.length > 0 && num_personas_fiesta > 0) {
                         var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
-                        
+
                         $("#spBtnAmountPerson").text(precio_persona + " x");
                         $("#spBtnAmountPerson").show();
                         $("#userIcoCarrito").show();
-                        
+
                         //$("#btn_finalizarpedido").show();
                     }
 
@@ -353,6 +346,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         console.log("Dame productos del catalogo" + nodeName);
                         updateBackButton(idNode, nodeName, aux);
                         getProducts(idNode, nodeName);
+                        
 
                     }
 
@@ -451,8 +445,8 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
 
             //console.log("Datos alternativos");
             //console.log(response);
-            
-            PRODUCTS_ALTER = response.alternativeProducts;        
+
+            PRODUCTS_ALTER = response.alternativeProducts;
 
             displayAlternativeProducts(idnode, idproduct);
 
@@ -558,6 +552,8 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
 
 
 }
+
+
 
 function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
@@ -712,7 +708,94 @@ function getProducts(idNode, nodeName, info_aux) {
     });
 }
 
-function restOk_products(res, typ, param, param2, param3) {
+function getProductsClassified(idNode, nodeName, info_aux) {
+
+    $("#popupCargando").popup("open");
+
+    console.log("Estamos en el asist. de fiestas");
+    //pantallaActual = "Asistente fiestas";
+    //Datos que se van a enviar
+    var dataSend = {
+        lang: language,
+        origin: origin,
+        store: STORE.id,
+        id: idNode
+    };
+    
+    console.log("Datos para enviar");
+    console.log(dataSend);
+
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'getProductsClassified.php',
+        dataType: 'json',
+        type: 'POST',
+        //async:false,
+        timeout: 25000, //10 seg
+        success: function (response) {
+            console.log("Respuesta: ");
+            console.log(response);
+
+            if (response.result == 1) {
+
+                console.log(response);
+                restOk_products(response, "nodes", idNode, nodeName, info_aux,"getProductsClassified");
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("No hay productos...");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+
+            } else if (response.result == -1) {
+
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Error...");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Error de TimeOut...");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Sin conexion a internet");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+            }
+        },
+    });
+}
+
+function restOk_products(res, typ, param, param2, param3,param4) {
     //console.log("Todo bien desde " + typ);
     //console.log("La respuesta es ");
     //console.log(res);
@@ -724,8 +807,9 @@ function restOk_products(res, typ, param, param2, param3) {
         break;
 
     case "nodes":
-
-        displayProducts(res, param, param2, param3);
+            
+        //displayProducts(res, param, param2, param3);
+        displayProducts(res, param, param2, param3,"getProductsClassified");
         break;
 
     default:
