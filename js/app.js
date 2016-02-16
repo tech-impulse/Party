@@ -67,7 +67,21 @@ $(document).ready(function () {
         }
     });
 
-    var elm = document.body; // or some selection of the element you want to disable
+    $(this).bind('touchstart', function preventZoom(e) {
+         alert("-----------------> Hola soy un log!! -------------------------------------"); // TEMP !!
+        var t2 = e.timeStamp,
+            t1 = $(this).data('lastTouch') || t2,
+            dt = t2 - t1,
+            fingers = e.originalEvent.touches.length;
+        $(this).data('lastTouch', t2);
+        if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+
+        e.preventDefault(); // double tap - prevent the zoom
+        // also synthesize click events we just swallowed up
+        $(this).trigger('click').trigger('click');
+    });
+
+   /* var elm = document.body; // or some selection of the element you want to disable
 
     var catcher = function (evt) {
         if (evt.touches.length > 2)
@@ -77,6 +91,8 @@ $(document).ready(function () {
     elm.addEventListener('touchstart', catcher, true);
 
     (function ($) {
+        console.log("-----------------> Hola soy un log!! -------------------------------------"); // TEMP !!
+
         var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
         $.fn.nodoubletapzoom = function () {
             if (IS_IOS)
@@ -94,7 +110,7 @@ $(document).ready(function () {
                 });
         };
     })(jQuery);
-
+*/
     $('#popupCargando').on('popupafteropen', function () {
 
         console.log("Abrimos el popup de cargando");
@@ -679,12 +695,12 @@ function addToCart(item, param) {
                     var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
                     $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
-                    
+
                     displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
-                    
+
                     if (CART[j].quantity == 0) // TEMP !!
                         deleteItemCart(j);
-                    
+
                     //j = PRODUCTS.length;
                     break;
 
