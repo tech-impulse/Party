@@ -68,7 +68,7 @@ $(document).ready(function () {
     });
 
     $(this).bind('touchstart', function preventZoom(e) {
-         alert("-----------------> Hola soy un log!! -------------------------------------"); // TEMP !!
+        //alert("-----------------> Hola soy un log!! -------------------------------------"); // TEMP !!
         var t2 = e.timeStamp,
             t1 = $(this).data('lastTouch') || t2,
             dt = t2 - t1,
