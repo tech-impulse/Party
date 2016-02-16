@@ -2,6 +2,7 @@
     - data: json a parsear con la información
     - originNode: id del nodo Anterior (Del que venimos)
     - originName: nombre del nodo Anterior (Del que venimos)
+    
     */
 
 function displayNode(data, originNode, originName, linkImg, aux) {
