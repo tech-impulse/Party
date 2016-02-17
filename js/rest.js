@@ -1398,7 +1398,7 @@ function imprimirPedido() {
     var request = $.ajax({
         data: dataSend,
         //async: false,
-        url: urlServices + 'guardarPDF.php',
+        url: urlServices + 'convert_pdf.php',
         //dataType: 'json',
         type: 'POST',
         success: function (response) {
