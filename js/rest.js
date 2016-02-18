@@ -1380,16 +1380,6 @@ function sendEmail() {
 ***************************************************************************/
 function imprimirPedido() {
 
-    /* console.log("Email es " + EMAIL_USER);
-
-     if (EMAIL_USER == "") {
-
-         setTimeout(function () {
-             $("#popupEmail").popup("open");
-         }, popupTimeout);
-
-     } else {*/
-
     var dataSend = {
         carrito: CART,
         tienda: STORE.code
@@ -1403,12 +1393,11 @@ function imprimirPedido() {
         type: 'POST',
         success: function (response) {
 
-            console.log("Respuesta es:");
+            console.log("Respuesta de imprimir es:");
             console.log(response);
-
-            if (response.result == 1) {
-
-                /*$("#texto_popup").text("Pedido enviado para imprimir");
+            
+            //temp para puesta en tienda
+            $("#texto_popup").text("Pedido enviado para imprimir");
                 EMAIL_USER = "";
                 INFO_USU = "";
                 $('#popupAlert').popup('open');
@@ -1417,13 +1406,23 @@ function imprimirPedido() {
                 $("#circuloCantidad").hide();
                 $("#spBtnPopupCartAmmount").hide();
                 $("#userIcoCarrito").hide();
+                $("#btn_finalizarpedido").hide();
                 CART = [];
                 nodeNames = [];
                 nodeIds = [];
                 nodeImg = [];
                 EMAIL_USER = "";
                 logout();
-                console.log("Enviamos email");*/
+                console.log("Enviamos a imprimir");
+
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('close');
+                    getNodes(0);
+                }, 1500);
+
+
+            if (parseInt(response.result) == parseInt(1)) {
 
                 $("#texto_popup").text("Pedido enviado para imprimir");
                 EMAIL_USER = "";
@@ -1441,7 +1440,7 @@ function imprimirPedido() {
                 nodeImg = [];
                 EMAIL_USER = "";
                 logout();
-                console.log("Enviamos email");
+                console.log("Enviamos a imprimir");
 
 
                 setTimeout(function () {
