@@ -594,8 +594,27 @@ function refreshDisplayProducts(product) {
 
     }
 
+    updatePrecioTotalArticulo();    // TEMP !!
     translateButtons(idiomStore);
+}
 
+/**
+*       updatePrecioTotalArticulo
+*
+*       Actualiza el precio total mostrado en función del precio del articulo y la cantidad de este.
+*/
+function updatePrecioTotalArticulo() {
+    
+    for(var i=0; i < CART.length; i++)  {
+        var precioArticulo = parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice);
+
+        console.log('-> ACTUALIZANDO precio de procId: ' + CART[i].id + ' a precio por unidad: ' + parseFloat(CART[i].price_x_region[0].totalPrice) );
+        
+        if ( precioArticulo > 0.00 )    {
+            $("#labelPrecioTotalProducto" + CART[i].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
+            $("#labelPrecioTotalProducto" + CART[i].id).show();
+        }
+    }
 }
 
 /**
@@ -1857,6 +1876,9 @@ function displayItemOperations(id, param, position, borrarItem) {
         $("#btnAddProduct" + id).show();
         $("#grid" + id).hide();
         $("#circulo" + id).hide();
+        
+        //console.log('-------> No ocultamos el precio -----------'); // TEMP !!
+        
         $("#labelPrecioTotalProducto" + id).hide();
         //CART.splice(position, 1);
         //console.log("BORRAMOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" + position);

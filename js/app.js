@@ -639,7 +639,8 @@ function carrito(id_producto, operacion, precio) {
 *********************************************************************************************************************/
 
 function addToCart(item, param) {
-
+    console.log('-------------> addToCart con item:' + item + ' param: ' + param);  // TEMP !!
+    
     var product;
     var foundInCart = 0;
     //var i = "";
@@ -678,16 +679,19 @@ function addToCart(item, param) {
 
     for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
 
+        console.log('-> LISTA DE PRODUCTOS comparamos id: ' + PRODUCTS[i]['id'] + ' con item: ' + item); // TEMP !!
+        
         if (PRODUCTS[i]['id'] == item) { //si coinciden lo añadimos al carrito
 
-            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
+            console.log("-->ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
             product = PRODUCTS[i];
             //i = PRODUCTS.length;
 
             for (var j = 0; j < CART.length; j++) {
-
+                console.log('-> CARRITO comparamos id: ' + CART[j]['id'] + ' con item: ' + item); // TEMP !!
+                
                 if (CART[j]['id'] == item) {
-                    //console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
+                    console.log("->ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
                     foundInCart = 1;
                     CART[j].quantity = CART[j].quantity + parseInt(param);
                     CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
@@ -709,7 +713,9 @@ function addToCart(item, param) {
         } //if
     } //for
 
+    
     if (foundInCart == 0) {
+        console.log('---> NO SE ENCONTRO PRODUCTO --> foundInCart: ' + foundInCart); // TEMP !!
 
         if (CART.ammount == undefined) {
             CART.ammount = 0;
@@ -730,14 +736,16 @@ function addToCart(item, param) {
 
         CART.push(product);
 
-        var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+        //var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
         //console.log($("#labelPrecioTotalProducto" + product.id));
-        $("#labelPrecioTotalProducto" + product.id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
-        $("#labelPrecioTotalProducto" + product.id).show();
+        //$("#labelPrecioTotalProducto" + product.id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
+        //$("#labelPrecioTotalProducto" + product.id).show();
 
         displayItemOperations(item, product.quantity);
     }
+    
+    updatePrecioTotalArticulo(); // TEMP !!
 }
 
 /********************************************************************************************************************
