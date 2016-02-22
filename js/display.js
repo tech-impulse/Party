@@ -594,23 +594,23 @@ function refreshDisplayProducts(product) {
 
     }
 
-    updatePrecioTotalArticulo();    // TEMP !!
+    updatePrecioTotalArticulo(); // TEMP !!
     translateButtons(idiomStore);
 }
 
 /**
-*       updatePrecioTotalArticulo
-*
-*       Actualiza el precio total mostrado en función del precio del articulo y la cantidad de este.
-*/
+ *       updatePrecioTotalArticulo
+ *
+ *       Actualiza el precio total mostrado en función del precio del articulo y la cantidad de este.
+ */
 function updatePrecioTotalArticulo() {
-    
-    for(var i=0; i < CART.length; i++)  {
+
+    for (var i = 0; i < CART.length; i++) {
         var precioArticulo = parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice);
 
-        console.log('-> ACTUALIZANDO precio de procId: ' + CART[i].id + ' a precio por unidad: ' + parseFloat(CART[i].price_x_region[0].totalPrice) );
-        
-        if ( precioArticulo > 0.00 )    {
+        console.log('-> ACTUALIZANDO precio de procId: ' + CART[i].id + ' a precio por unidad: ' + parseFloat(CART[i].price_x_region[0].totalPrice));
+
+        if (precioArticulo > 0.00) {
             $("#labelPrecioTotalProducto" + CART[i].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
             $("#labelPrecioTotalProducto" + CART[i].id).show();
         }
@@ -618,20 +618,20 @@ function updatePrecioTotalArticulo() {
 }
 
 /**
-*       updateCarritoDisplay
-*
-*       Funcion que se encarga de actualizar la visualizacion del carrito i el boton finalizar pedido
-*       en funcion de los productos comprados i la pantalla actual.
-*/
+ *       updateCarritoDisplay
+ *
+ *       Funcion que se encarga de actualizar la visualizacion del carrito i el boton finalizar pedido
+ *       en funcion de los productos comprados i la pantalla actual.
+ */
 function updateCarritoDisplay() {
     var total = 0;
-    
-    for (var i = 0; i < CART.length; i++)   {
+
+    for (var i = 0; i < CART.length; i++) {
         total = total + CART[i].quantity;
     }
-    
+
     var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
-    
+
     $("#spBtnPopupCartProducts").text(total);
     $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
     $("#spPopupCartCount").text(total);
@@ -666,7 +666,7 @@ function updateCarritoDisplay() {
     }
 }
 
-function displayProducts(data, originNode, originName, param) {
+function displayProducts(data, originNode, originName, param, param4) {
 
     console.log("DisplayProducts-> Nodo Origen Id" + originNode);
     var aux_carac = 0;
@@ -674,7 +674,6 @@ function displayProducts(data, originNode, originName, param) {
     if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "") { // Hay resultados
 
         AUX = 1;
-
         //PRODUCTS.push(data.products);
         PRODUCTS = PRODUCTS.concat(data.products);
 
@@ -977,7 +976,7 @@ function displayProducts(data, originNode, originName, param) {
 
         }
 
-    }  else if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "getProductsClassified") { // Hay resultados
+    } else if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "getProductsClassified") { // Hay resultados
 
         console.log("Entramos en la nueva visualizacion");
         console.log(data);
@@ -986,270 +985,258 @@ function displayProducts(data, originNode, originName, param) {
 
         COLUMS = parseInt(data.columns);
         ID_NODE = originNode;
-        var htmlContent = new_htmlContent = '';
+        var htmlContent = "";
+        var htmlContent_seccion = "";
+        var new_htmlContent = '';
         var grid = '';
         var block = '';
         var position = 0;
         var type;
         var seccion_titulo = "";
 
+        updateBackButton(originNode, originName);
 
-        //for (var j = 0; j < data.products.length; j++) {
+
+        if (pantallaActual == "Asistente disfraces") {
+            console.log("Estamos en la pantalla " + pantallaActual);
+        } else if (pantallaActual == "Asistente fiestas") {
+            console.log("Estamos en la pantalla " + pantallaActual);
+            num_personas_fiesta = $("#personas_fiesta").val();
+        }
+
+
+
+
         var aux = {};
         aux = data.products;
-        for (j in aux) {
+        console.log("Longitud de secciones es " + aux.length);
 
-            if (aux[j].type != "") {
-
-                console.log("Entramos en la nueva visualizacion 2");
-                console.log(aux[j]);
-
-                updateBackButton(originNode, originName);
-
-                seccion_titulo = "<div id='tituloSeccion' style='display:flex;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div><br>"
+        for (var j = 0 ; j < data.products.length; j++) {
 
 
-                if (pantallaActual == "Asistente disfraces") {
-                    console.log("Estamos en la pantalla ".pantallaActual);
-                } else if (pantallaActual == "Asistente fiestas") {
-                    console.log("Estamos en la pantalla ".pantallaActual);
-                    num_personas_fiesta = $("#personas_fiesta").val();
-                }
+            console.log("Entramos en la nueva visualizacion 2, jota es " + j);
+            console.log(aux[j]);
 
-                switch (parseInt(data.columns)) {
-                case 1:
+            seccion_titulo = "<div id='tituloSeccion' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
 
-                    grid = "<div class='ui-grid-a'>";
-                    type = "vertical";
-                    break;
 
-                case 2:
+            switch (parseInt(data.columns)) {
+            case 1:
 
-                    grid = "<div class='ui-grid-a'>";
-                    type = "horizontal";
-                    break;
+                grid = "<div class='ui-grid-a'>";
+                type = "vertical";
+                break;
 
-                case 3:
+            case 2:
 
-                    grid = "<div class='ui-grid-b'>";
-                    type = "horizontal";
-                    break;
+                grid = "<div class='ui-grid-a'>";
+                type = "horizontal";
+                break;
 
-                case 4:
+            case 3:
 
-                    grid = "<div class='ui-grid-c'>";
-                    type = "horizontal";
-                    break;
+                grid = "<div class='ui-grid-b'>";
+                type = "horizontal";
+                break;
 
-                case 5:
+            case 4:
 
-                    grid = "<div class='ui-grid-d'>";
-                    type = "horizontal";
-                    break;
+                grid = "<div class='ui-grid-c'>";
+                type = "horizontal";
+                break;
 
-                }
+            case 5:
 
-                switch (type) {
-                case "horizontal":
+                grid = "<div class='ui-grid-d'>";
+                type = "horizontal";
+                break;
 
-                    htmlContent = grid;
-                    position = "a";
-                    var precio;
-                    var unidades;
-                    //auxTest = data;
+            }
 
-                    console.log("Productos que tenemos asistente fiestas");
-                    console.log(data.products[j]);
-                    
+            switch (type) {
+            case "horizontal":
 
-                    if (data.products[j].type != undefined) {
+                htmlContent = grid;
+                position = "a";
+                var precio;
+                var unidades;
+                //auxTest = data;
 
-                        for (var i = 0; i < data.products[j].typeproducts.length; i++) {
+                //console.log("Productos que tenemos asistente fiestas");
+                //console.log(data.products[j]);
 
-                            //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
-                            var pro_seccion = data.products[j].typeproducts[i];
-                            var heigth = (W_WIDTH * (0.96));
-                            var heig_block = heigth / parseInt(data.columns);
 
-                            if (position < parseInt(data.columns)) {
+                //if (data.products[j].type != undefined) {
 
-                                switch (position) {
-                                case 0:
+                    for (var i = 0; i < data.products[j].typeproducts.length; i++) {
 
-                                    block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
-                                    break;
+                        //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
+                        var pro_seccion = data.products[j].typeproducts[i];
+                        var heigth = (W_WIDTH * (0.96));
+                        var heig_block = heigth / parseInt(data.columns);
 
-                                case 1:
+                        if (position < parseInt(data.columns)) {
 
-                                    block = '<div class="ui-block-b" style="width:' + heig_block + 'px;">';
-                                    break;
+                            switch (position) {
+                            case 0:
 
-                                case 2:
-
-                                    block = '<div class="ui-block-c" style="width:' + heig_block + 'px;">';
-                                    break;
-
-                                case 3:
-
-                                    block = '<div class="ui-block-d" style="width:' + heig_block + 'px;">';
-                                    break;
-
-                                case 4:
-
-                                    block = '<div class="ui-block-e" style="width:' + heig_block + 'px;">';
-                                    break;
-                                }
-                            } else {
-                                position = 0;
                                 block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                                break;
+
+                            case 1:
+
+                                block = '<div class="ui-block-b" style="width:' + heig_block + 'px;">';
+                                break;
+
+                            case 2:
+
+                                block = '<div class="ui-block-c" style="width:' + heig_block + 'px;">';
+                                break;
+
+                            case 3:
+
+                                block = '<div class="ui-block-d" style="width:' + heig_block + 'px;">';
+                                break;
+
+                            case 4:
+
+                                block = '<div class="ui-block-e" style="width:' + heig_block + 'px;">';
+                                break;
                             }
-
-
-                            if (pro_seccion.price_x_region.length == 0) { // si no tiene precio continuamos
-                                //console.log("Producto " + data.products[i].id + " no tiene precio, no lo mostramos");
-                                continue;
-                            } else {
-                                precio = pro_seccion.price_x_region[0].totalPrice;
-                            }
-
-                            var count = pro_seccion.caracteristics.length;
-                            var caracteristicas = pro_seccion.caracteristics;
-
-                            for (var j = 0; j < count; j++) {
-
-                                //console.log("Caracteristica " + caracteristicas[j].type);
-                                if (caracteristicas[j].type == "9") {
-                                    unidades = caracteristicas[j].name;
-                                    //console.log("Caracteristica encontrada");
-                                    aux_carac = 0;
-                                    break;
-                                } else {
-                                    //console.log("Esta no es la carac buena, pasamos a la siguiente carac");
-                                    aux_carac = 1;
-                                    continue;
-                                }
-
-                            }
-
-                            var imgStock = "";
-                            var stock = pro_seccion.stock_x_store;
-
-                            if (stock == 0) {
-                                stock = pro_seccion.stock_x_central_store;
-                            }
-
-                            if (stock > pro_seccion.stock_min) {
-                                imgStock = "css/maqueta/barraVerde.png";
-                            } else if (stock > 0 && stock <= pro_seccion.stock_min) {
-                                imgStock = "css/maqueta/barraAmarilla.png";
-                            } else if (stock == 0) {
-                                imgStock = "css/maqueta/barraRojo.png";
-                            }
-
-                            if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
-                                //console.log("No tiene unidades saltamos el producto")
-                                unidades = "1 " + jsonIdiomas.cajas.unidades;
-                            }
-
-                            if (pro_seccion.name == "") {
-                                continue;
-                            } else {
-                                var titulo = pro_seccion.name;
-                            }
-
-                            if (pro_seccion.price_x_region[0].exclusiveWeb == 1 || pro_seccion.stock_x_store == 0) {
-                                var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
-                                    '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
-                                    '<div style="text-transform: uppercase;z-index: 3; width:200px; height:20px; position: absolute; bottom: 0px; font-size:15px; padding-bottom:5px; color: #fff; text-align:center; font-weight:bold;">' + (data.products[i].price_x_region[0].exclusiveWeb == 0 ? jsonIdiomas.soloEnWeb : jsonIdiomas.exclusivoWeb) + '</div>' +
-                                    '</div>';
-                            } else {
-                                var displayWarning = "";
-                            }
-
-                            var imgLinkExt = pro_seccion.linkext.replace("wide", "bigPreview");
-
-                            var element = block +
-                                '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
-                                '<div style="position: relative;overflow:hidden">' +
-                                '<div id="circulo' + pro_seccion.id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
-                                '<label id="quantity' + pro_seccion.id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
-                                '</div>' +
-                                '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
-                                '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
-                                '</div>' +
-                                '<div class="ui-grid-a">' +
-                                '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
-                                '<div class="contenedor">' + titulo + '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="ui-grid-a">' +
-                                '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
-                                '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="ui-grid-a">' +
-                                '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
-                                '<strong><label id="labelPrecioTotalProducto' + pro_seccion.id + '" style="color:green;margin-top:5px;"></label></strong>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="ui-grid-a">' +
-                                '<div class="ui-block-a" style="width: 100%;">' +
-                                '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addToCart(' + pro_seccion.id + ',1);">Añadir</button>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
-                                '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + pro_seccion.id + ',-1);" >-</button></div>' +
-                                '<div class="ui-block-b" style="width:10%;"></div>' +
-                                '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + pro_seccion.id + ',1);">+</button></div>' +
-                                '</div></a></div>';
-
-                            htmlContent = htmlContent + element;
-                            if (position == "c") {
-                                htmlContent = htmlContent + grid;
-                            }
-                            position++;
-
-                        }
-                    }
-                    htmlContent += '</div>';
-                    new_htmlContent = seccion_titulo + htmlContent;
-
-                    $("#divContent").html(new_htmlContent);
-                    $("#divContent").trigger('create');
-                    $("#btn_finalizarpedido").show();
-
-                    $("#popupCargando").popup("close");
-
-                    break;
-
-
-                case "vertical":
-
-                    /*htmlContent = grid + " <div class='ui-block-a' style='width:66%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
-                    block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
-                    for (var i = 0; i < data.products.length; i++) {
-
-                        if (data.products[i].name == "") {
-                            var element = '<a  data-corners="false" data-role="button" onclick="">' + data.products[i].name + '</a>';
                         } else {
-                            var element = '<a  data-corners="false" data-role="button" onclick="">' + data.products[i].name + '</a>';
+                            position = 0;
+                            block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
                         }
+
+
+                        if (pro_seccion.price_x_region.length == 0) { // si no tiene precio continuamos
+                            //console.log("Producto " + data.products[i].id + " no tiene precio, no lo mostramos");
+                            continue;
+                        } else {
+                            precio = pro_seccion.price_x_region[0].totalPrice;
+                        }
+
+                        var count = pro_seccion.caracteristics.length;
+                        var caracteristicas = pro_seccion.caracteristics;
+
+                        for (var k = 0; k < count; k++) {
+
+                            //console.log("Caracteristica " + caracteristicas[j].type);
+                            if (caracteristicas[k].type == "9") {
+                                unidades = caracteristicas[k].name;
+                                //console.log("Caracteristica encontrada");
+                                aux_carac = 0;
+                                break;
+                            } else {
+                                //console.log("Esta no es la carac buena, pasamos a la siguiente carac");
+                                aux_carac = 1;
+                                continue;
+                            }
+
+                        }
+
+                        var imgStock = "";
+                        var stock = pro_seccion.stock_x_store;
+
+                        if (stock == 0) {
+                            stock = pro_seccion.stock_x_central_store;
+                        }
+
+                        if (stock > pro_seccion.stock_min) {
+                            imgStock = "css/maqueta/barraVerde.png";
+                        } else if (stock > 0 && stock <= pro_seccion.stock_min) {
+                            imgStock = "css/maqueta/barraAmarilla.png";
+                        } else if (stock == 0) {
+                            imgStock = "css/maqueta/barraRojo.png";
+                        }
+
+                        if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
+                            //console.log("No tiene unidades saltamos el producto")
+                            unidades = "1 " + jsonIdiomas.cajas.unidades;
+                        }
+
+                        if (pro_seccion.name == "") {
+                            continue;
+                        } else {
+                            var titulo = pro_seccion.name;
+                        }
+
+                        if (pro_seccion.price_x_region[0].exclusiveWeb == 1 || pro_seccion.stock_x_store == 0) {
+                            var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
+                                '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
+                                '<div style="text-transform: uppercase;z-index: 3; width:200px; height:20px; position: absolute; bottom: 0px; font-size:15px; padding-bottom:5px; color: #fff; text-align:center; font-weight:bold;">' + (data.products[i].price_x_region[0].exclusiveWeb == 0 ? jsonIdiomas.soloEnWeb : jsonIdiomas.exclusivoWeb) + '</div>' +
+                                '</div>';
+                        } else {
+                            var displayWarning = "";
+                        }
+
+                        var imgLinkExt = pro_seccion.linkext.replace("wide", "bigPreview");
+
+                        var element = block +
+                            '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                            '<div style="position: relative;overflow:hidden">' +
+                            '<div id="circulo' + pro_seccion.id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                            '<label id="quantity' + pro_seccion.id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
+                            '</div>' +
+                            '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
+                            '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                            '</div>' +
+                            '<div class="ui-grid-a">' +
+                            '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
+                            '<div class="contenedor">' + titulo + '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="ui-grid-a">' +
+                            '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
+                            '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="ui-grid-a">' +
+                            '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
+                            '<strong><label id="labelPrecioTotalProducto' + pro_seccion.id + '" style="color:green;margin-top:5px;"></label></strong>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="ui-grid-a">' +
+                            '<div class="ui-block-a" style="width: 100%;">' +
+                            '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addToCart(' + pro_seccion.id + ',1);">Añadir</button>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
+                            '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + pro_seccion.id + ',-1);" >-</button></div>' +
+                            '<div class="ui-block-b" style="width:10%;"></div>' +
+                            '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + pro_seccion.id + ',1);">+</button></div>' +
+                            '</div></a></div>';
 
                         htmlContent = htmlContent + element;
+                        if (position == "c") {
+                            htmlContent = htmlContent + grid;
+                        }
+                        position++;
 
                     }
-                    htmlContent = htmlContent + '</div></div></div>';
-                    $("#divContent").html(htmlContent);
-                    $("#divContent").trigger('create');
-                    $("#divHeader_catalogo").show();
-                    $("#divHeader_menuInicial").hide();
+                //}
 
-                    $("#popupCargando").popup("close");*/
-                    break;
+                htmlContent += '</div>';
+                htmlContent_seccion = seccion_titulo + htmlContent;
+                break;
 
-                }
-            }
-        }
+
+            case "vertical":
+
+                break;
+
+            } //switch
+            
+            new_htmlContent += htmlContent_seccion;
+            
+
+        } //for secciones
+
+        $("#divContent").html(new_htmlContent);
+        $("#divContent").trigger('create');
+        $("#btn_finalizarpedido").show();
+
+        $("#popupCargando").popup("close");
 
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces") {
 
@@ -1452,7 +1439,7 @@ function displayProducts(data, originNode, originName, param) {
                 } else {
                     var displayWarning = "";
                 }
-//comentario para putear al jordi
+                //comentario para putear al jordi
                 if (stock == 0) {
                     stock = data.products[i].stock_x_central_store;
                 }
@@ -2148,15 +2135,15 @@ function displayItemOperations(id, param, position, borrarItem) {
         $("#btnAddProduct" + id).show();
         $("#grid" + id).hide();
         $("#circulo" + id).hide();
-        
+
         //console.log('-------> No ocultamos el precio -----------'); // TEMP !!
-        
+
         $("#labelPrecioTotalProducto" + id).hide();
         //CART.splice(position, 1);
         //console.log("BORRAMOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" + position);
         //console.log(CART);
     }
-    
+
     if (borrarItem == "borrar") {
         CART.splice(position, 1);
     }
@@ -2203,10 +2190,10 @@ function displayItemOperations(id, param, position, borrarItem) {
         console.log("--> CAMBIO de imagen!!"); // TEMP !! log
         $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
     }*/
-    
+
     /*if ( CART.length == 1 && CART[0].quantity == 0 )
         CART = [];*/
-    
+
     updateCarritoDisplay();
 
     translateButtons(idiomStore);

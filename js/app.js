@@ -471,7 +471,8 @@ function displayProductos(idNode, nodeName) {
         if (num_persosnas >= 2) {
 
             //console.log("Todos los selects ok. ASIS. FIESTAS");
-            getProducts(idNode, nodeName);
+            //getProducts(idNode, nodeName);
+            getProductsClassified(idNode, nodeName, info_aux);
 
         } else {
 

@@ -707,6 +707,93 @@ function getProducts(idNode, nodeName, info_aux) {
     });
 }
 
+function getProductsClassified(idNode, nodeName, info_aux) {
+
+    $("#popupCargando").popup("open");
+
+    console.log("Estamos en el asist. de fiestas");
+    //pantallaActual = "Asistente fiestas";
+    //Datos que se van a enviar
+    var dataSend = {
+        lang: language,
+        origin: origin,
+        store: STORE.id,
+        id: idNode
+    };
+    
+    console.log("Datos para enviar");
+    console.log(dataSend);
+
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'getProductsClassified.php',
+        dataType: 'json',
+        type: 'POST',
+        //async:false,
+        timeout: 25000, //10 seg
+        success: function (response) {
+            console.log("Respuesta: ");
+            console.log(response);
+
+            if (response.result == 1) {
+
+                console.log(response);
+                restOk_products(response, "nodes", idNode, nodeName, info_aux,"getProductsClassified");
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("No hay productos...");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+
+            } else if (response.result == -1) {
+
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Error...");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Error de TimeOut...");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Sin conexion a internet");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+            }
+        },
+    });
+}
+
 function restOk_products(res, typ, param, param2, param3) {
     //console.log("Todo bien desde " + typ);
     //console.log("La respuesta es ");
