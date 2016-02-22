@@ -111,6 +111,7 @@ $(document).ready(function () {
         };
     })(jQuery);
 */
+    
     $('#popupCargando').on('popupafteropen', function () {
 
         console.log("Abrimos el popup de cargando");

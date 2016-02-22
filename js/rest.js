@@ -720,7 +720,8 @@ function restOk_products(res, typ, param, param2, param3) {
 
     case "nodes":
 
-        displayProducts(res, param, param2, param3);
+        //displayProducts(res, param, param2, param3);
+        displayProducts(res, param, param2, param3,"getProductsClassified");
         break;
 
     default:

@@ -671,7 +671,7 @@ function displayProducts(data, originNode, originName, param) {
     console.log("DisplayProducts-> Nodo Origen Id" + originNode);
     var aux_carac = 0;
 
-    if (data.result == 1 && pantallaActual == "Asistente fiestas") { // Hay resultados
+    if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "") { // Hay resultados
 
         AUX = 1;
 
@@ -944,8 +944,6 @@ function displayProducts(data, originNode, originName, param) {
                     addToCart(data.products[k].id, 1);
 
                 }
-
-
             }
 
             $("#popupCargando").popup("close");
@@ -977,6 +975,280 @@ function displayProducts(data, originNode, originName, param) {
             $("#popupCargando").popup("close");
             break;
 
+        }
+
+    }  else if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "getProductsClassified") { // Hay resultados
+
+        console.log("Entramos en la nueva visualizacion");
+        console.log(data);
+        AUX = 1;
+        PRODUCTS = PRODUCTS.concat(data.products);
+
+        COLUMS = parseInt(data.columns);
+        ID_NODE = originNode;
+        var htmlContent = new_htmlContent = '';
+        var grid = '';
+        var block = '';
+        var position = 0;
+        var type;
+        var seccion_titulo = "";
+
+
+        //for (var j = 0; j < data.products.length; j++) {
+        var aux = {};
+        aux = data.products;
+        for (j in aux) {
+
+            if (aux[j].type != "") {
+
+                console.log("Entramos en la nueva visualizacion 2");
+                console.log(aux[j]);
+
+                updateBackButton(originNode, originName);
+
+                seccion_titulo = "<div id='tituloSeccion' style='display:flex;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div><br>"
+
+
+                if (pantallaActual == "Asistente disfraces") {
+                    console.log("Estamos en la pantalla ".pantallaActual);
+                } else if (pantallaActual == "Asistente fiestas") {
+                    console.log("Estamos en la pantalla ".pantallaActual);
+                    num_personas_fiesta = $("#personas_fiesta").val();
+                }
+
+                switch (parseInt(data.columns)) {
+                case 1:
+
+                    grid = "<div class='ui-grid-a'>";
+                    type = "vertical";
+                    break;
+
+                case 2:
+
+                    grid = "<div class='ui-grid-a'>";
+                    type = "horizontal";
+                    break;
+
+                case 3:
+
+                    grid = "<div class='ui-grid-b'>";
+                    type = "horizontal";
+                    break;
+
+                case 4:
+
+                    grid = "<div class='ui-grid-c'>";
+                    type = "horizontal";
+                    break;
+
+                case 5:
+
+                    grid = "<div class='ui-grid-d'>";
+                    type = "horizontal";
+                    break;
+
+                }
+
+                switch (type) {
+                case "horizontal":
+
+                    htmlContent = grid;
+                    position = "a";
+                    var precio;
+                    var unidades;
+                    //auxTest = data;
+
+                    console.log("Productos que tenemos asistente fiestas");
+                    console.log(data.products[j]);
+                    
+
+                    if (data.products[j].type != undefined) {
+
+                        for (var i = 0; i < data.products[j].typeproducts.length; i++) {
+
+                            //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
+                            var pro_seccion = data.products[j].typeproducts[i];
+                            var heigth = (W_WIDTH * (0.96));
+                            var heig_block = heigth / parseInt(data.columns);
+
+                            if (position < parseInt(data.columns)) {
+
+                                switch (position) {
+                                case 0:
+
+                                    block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                                    break;
+
+                                case 1:
+
+                                    block = '<div class="ui-block-b" style="width:' + heig_block + 'px;">';
+                                    break;
+
+                                case 2:
+
+                                    block = '<div class="ui-block-c" style="width:' + heig_block + 'px;">';
+                                    break;
+
+                                case 3:
+
+                                    block = '<div class="ui-block-d" style="width:' + heig_block + 'px;">';
+                                    break;
+
+                                case 4:
+
+                                    block = '<div class="ui-block-e" style="width:' + heig_block + 'px;">';
+                                    break;
+                                }
+                            } else {
+                                position = 0;
+                                block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                            }
+
+
+                            if (pro_seccion.price_x_region.length == 0) { // si no tiene precio continuamos
+                                //console.log("Producto " + data.products[i].id + " no tiene precio, no lo mostramos");
+                                continue;
+                            } else {
+                                precio = pro_seccion.price_x_region[0].totalPrice;
+                            }
+
+                            var count = pro_seccion.caracteristics.length;
+                            var caracteristicas = pro_seccion.caracteristics;
+
+                            for (var j = 0; j < count; j++) {
+
+                                //console.log("Caracteristica " + caracteristicas[j].type);
+                                if (caracteristicas[j].type == "9") {
+                                    unidades = caracteristicas[j].name;
+                                    //console.log("Caracteristica encontrada");
+                                    aux_carac = 0;
+                                    break;
+                                } else {
+                                    //console.log("Esta no es la carac buena, pasamos a la siguiente carac");
+                                    aux_carac = 1;
+                                    continue;
+                                }
+
+                            }
+
+                            var imgStock = "";
+                            var stock = pro_seccion.stock_x_store;
+
+                            if (stock == 0) {
+                                stock = pro_seccion.stock_x_central_store;
+                            }
+
+                            if (stock > pro_seccion.stock_min) {
+                                imgStock = "css/maqueta/barraVerde.png";
+                            } else if (stock > 0 && stock <= pro_seccion.stock_min) {
+                                imgStock = "css/maqueta/barraAmarilla.png";
+                            } else if (stock == 0) {
+                                imgStock = "css/maqueta/barraRojo.png";
+                            }
+
+                            if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
+                                //console.log("No tiene unidades saltamos el producto")
+                                unidades = "1 " + jsonIdiomas.cajas.unidades;
+                            }
+
+                            if (pro_seccion.name == "") {
+                                continue;
+                            } else {
+                                var titulo = pro_seccion.name;
+                            }
+
+                            if (pro_seccion.price_x_region[0].exclusiveWeb == 1 || pro_seccion.stock_x_store == 0) {
+                                var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
+                                    '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
+                                    '<div style="text-transform: uppercase;z-index: 3; width:200px; height:20px; position: absolute; bottom: 0px; font-size:15px; padding-bottom:5px; color: #fff; text-align:center; font-weight:bold;">' + (data.products[i].price_x_region[0].exclusiveWeb == 0 ? jsonIdiomas.soloEnWeb : jsonIdiomas.exclusivoWeb) + '</div>' +
+                                    '</div>';
+                            } else {
+                                var displayWarning = "";
+                            }
+
+                            var imgLinkExt = pro_seccion.linkext.replace("wide", "bigPreview");
+
+                            var element = block +
+                                '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                                '<div style="position: relative;overflow:hidden">' +
+                                '<div id="circulo' + pro_seccion.id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
+                                '<label id="quantity' + pro_seccion.id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
+                                '</div>' +
+                                '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
+                                '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                                '</div>' +
+                                '<div class="ui-grid-a">' +
+                                '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
+                                '<div class="contenedor">' + titulo + '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="ui-grid-a">' +
+                                '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
+                                '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="ui-grid-a">' +
+                                '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
+                                '<strong><label id="labelPrecioTotalProducto' + pro_seccion.id + '" style="color:green;margin-top:5px;"></label></strong>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="ui-grid-a">' +
+                                '<div class="ui-block-a" style="width: 100%;">' +
+                                '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addToCart(' + pro_seccion.id + ',1);">Añadir</button>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
+                                '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + pro_seccion.id + ',-1);" >-</button></div>' +
+                                '<div class="ui-block-b" style="width:10%;"></div>' +
+                                '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + pro_seccion.id + ',1);">+</button></div>' +
+                                '</div></a></div>';
+
+                            htmlContent = htmlContent + element;
+                            if (position == "c") {
+                                htmlContent = htmlContent + grid;
+                            }
+                            position++;
+
+                        }
+                    }
+                    htmlContent += '</div>';
+                    new_htmlContent = seccion_titulo + htmlContent;
+
+                    $("#divContent").html(new_htmlContent);
+                    $("#divContent").trigger('create');
+                    $("#btn_finalizarpedido").show();
+
+                    $("#popupCargando").popup("close");
+
+                    break;
+
+
+                case "vertical":
+
+                    /*htmlContent = grid + " <div class='ui-block-a' style='width:66%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
+                    block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
+                    for (var i = 0; i < data.products.length; i++) {
+
+                        if (data.products[i].name == "") {
+                            var element = '<a  data-corners="false" data-role="button" onclick="">' + data.products[i].name + '</a>';
+                        } else {
+                            var element = '<a  data-corners="false" data-role="button" onclick="">' + data.products[i].name + '</a>';
+                        }
+
+                        htmlContent = htmlContent + element;
+
+                    }
+                    htmlContent = htmlContent + '</div></div></div>';
+                    $("#divContent").html(htmlContent);
+                    $("#divContent").trigger('create');
+                    $("#divHeader_catalogo").show();
+                    $("#divHeader_menuInicial").hide();
+
+                    $("#popupCargando").popup("close");*/
+                    break;
+
+                }
+            }
         }
 
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces") {
