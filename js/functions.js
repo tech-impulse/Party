@@ -36,8 +36,6 @@ function checkOut() {
                 '<br>' +
                 '<a data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" >' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                 '<br>' +
-                //'<a data-corners="false" style="width:300px" onclick="displaySummary(\'home\');" data-role="button" data-icon="home" data-iconpos="right" data-theme="b" >Enviar a Casa</a>' +
-                //'<br>' +
                 '<a data-corners="false" style="width:300px" onclick="imprimirPedido();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" > Imprimir en tienda </a>' +
                 '<br>' +
                 '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
@@ -64,54 +62,63 @@ function checkOut() {
 
 }
 
-function addCartAsistFiestas() {
+function addCartAsistFiestas(prod_id) {
+    
+    console.log("Calculamos los articulos para el carrito------------------------------------------------");
 
     // calculo del numero de articulos por producto
-    for (var k = 0; k < data.products.length; k++) {
+    for (var k = 0; k < PRODUCTS.length; k++) {
+        
+        console.log("Comparacion es "+PRODUCTS[k].id+" id que nos llega "+prod_id);
 
-        console.log("Calculamos los articulos para el carrito------------------------------------------------");
-        aux = 0;
-        var count = data.products[k].caracteristics.length;
-        var caracteristicas = data.products[k].caracteristics;
+        if (parseInt(PRODUCTS[k].id) == parseInt(prod_id)) {
 
-        for (var j = 0; j < count; j++) {
+            aux = 0;
+            var count = PRODUCTS[k].caracteristics.length;
+            var caracteristicas = PRODUCTS[k].caracteristics;
 
-            if (caracteristicas[j].type == "9" && data.products[k].name != "" && data.products[k].price_x_region.length > 0) {
+            for (var j = 0; j < count; j++) {
 
-                var num_uni = caracteristicas[j].name;
-                var units = num_uni.split(' ');
+                if (caracteristicas[j].type == "9" && PRODUCTS[k].name != "" && PRODUCTS[k].price_x_region.length > 0) {
 
-                console.log("Encontrada car. Unidades es " + units[0]);
+                    var num_uni = caracteristicas[j].name;
+                    var units = num_uni.split(' ');
 
-                if (parseInt(units[0]) >= parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) { //el articulo tiene suficientes para el grupo
+                    console.log("Encontrada car. Unidades es " + units[0]);
 
-                    console.log("Unidades es1 " + units[0] + " se añade 1");
-                    addToCart(data.products[k].id, 1);
-                    aux = 1;
+                    if (parseInt(units[0]) >= parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) { //el articulo tiene suficientes para el grupo
 
-                } else if (parseInt(units[0]) < parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) {
+                        console.log("Unidades es1 " + units[0] + " se añade 1");
+                        addToCart(PRODUCTS[k].id, 1);
+                        aux = 1;
 
-                    addToCart(data.products[k].id, Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
-                    console.log("Math " + Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
-                    aux = 1;
+                    } else if (parseInt(units[0]) < parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) {
 
-                } else { //mas personas que unidades del articulo
-                    addToCart(data.products[k].id, 1);
-                    aux = 1;
+                        addToCart(PRODUCTS[k].id, Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
+                        console.log("Math " + Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
+                        aux = 1;
+
+                    } else { //mas personas que unidades del articulo
+                        addToCart(PRODUCTS[k].id, 1);
+                        aux = 1;
+                    }
+
+                    break;
+
                 }
-
-                break;
 
             }
 
-        }
+            console.log("Aux es " + aux); // si es cerno no tiene unidades pondremos que es uno
 
-        console.log("Aux es " + aux); // si es cerno no tiene unidades pondremos que es uno
+            if (aux == 0 && PRODUCTS[k].name != "" && PRODUCTS[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
+                addToCart(PRODUCTS[k].id, 1);
 
-        if (aux == 0 && data.products[k].name != "" && data.products[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
-            addToCart(data.products[k].id, 1);
-
-        }
+            }
+            
+            break;
+        } //if
+        
     }
 
 }

@@ -29,9 +29,9 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
     if (parseInt(originNode) == 0) {
         //var altura_menu = "height:" + (heig_block * 0.8) + "px;";
-        var heigth = (W_WIDTH * (0.93));
+        var heigth = (W_WIDTH * (0.95));
     } else {
-        var heigth = (W_WIDTH * (0.915));
+        var heigth = (W_WIDTH * (0.93));
     }
     //var heigth = (W_WIDTH * (0.93));
     var heigth2 = (W_WIDTH * (0.04)); //se utiliza para el margen de separacion de las cajas
@@ -193,26 +193,26 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                     if (position < parseInt(data.columns)) { //columnas que tendra la pantalla
                         switch (position) {
                         case 0:
-                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%;margin-left: 1%;">';
+                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%;margin-left: 1.3%;">';
                             break;
                         case 1:
-                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%">';
+                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         case 2:
-                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%">';
+                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         case 3:
-                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
+                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         case 4:
-                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
+                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         }
 
                     } else {
 
                         position = 0;
-                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%;margin-left: 1%;">';
+                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%;margin-left: 1.3%;">';
 
 
                     }
@@ -368,7 +368,7 @@ function refreshDisplayProducts(product) {
 
             if (data[i].dedonde == nodeIds[nodeIds.length - 1]) {
 
-                var heigth = (W_WIDTH * (0.96));
+                var heigth = (W_WIDTH * (0.98));
                 var heig_block = heigth / parseInt(COLUMS);
 
                 if (position < parseInt(COLUMS)) {
@@ -513,36 +513,6 @@ function refreshDisplayProducts(product) {
                     '<div class="ui-block-b" style="width:10%;"></div>' +
                     '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data[i].id + ',1);">+</button></div>' +
                     '</div></a></div>';
-                /* '<a  data-corners="false" data-role="button" data-theme="f">' +
-                 '<div id="circulo' + data[i].id + '"  class="circulo" style="width: 40px;height: 40px;position: absolute;">' +
-                 '<label id="quantity' + data[i].id + '" style="display:block; margin-top:9px; font-size:22px; color: white;">10</label>' + //dev
-                 '</div>' +
-                 '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + ID_NODE + ',\'PRODUCTOS\',' + data[i].id + ')" style="width: 200px;height: 200px;">' +
-                 '<div class="ui-grid-a">' +
-                 '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
-                 '<div class="contenedor">' + titulo + '</div>' +
-                 '</div>' +
-                 '</div>' +
-                 '<div class="ui-grid-a">' +
-                 '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
-                 '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
-                 '</div>' +
-                 '</div>' +
-                 '<div class="ui-grid-a">' +
-                 '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
-                 '<strong><label id="labelPrecioTotalProducto' + data[i].id + '" style="color:green;margin-top:5px;"></label></strong>' +
-                 '</div>' +
-                 '</div>' +
-                 '<div class="ui-grid-a">' +
-                 '<div class="ui-block-a" style="width: 100%;">' +
-                 '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data[i].id + '" onclick="addToCart(' + data[i].id + ',1);">Añadir</button>' +
-                 '</div>' +
-                 '</div>' +
-                 '<div class="ui-grid-b" id="grid' + data[i].id + '" style="display:none;">' +
-                 '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data[i].id + ',-1);" >-</button></div>' +
-                 '<div class="ui-block-b" style="width:10%;"></div>' +
-                 '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data[i].id + ',1);">+</button></div>' +
-                 '</div></a></div>';*/
 
 
                 htmlContent = htmlContent + element;
@@ -609,7 +579,7 @@ function updatePrecioTotalArticulo() {
     for (var i = 0; i < CART.length; i++) {
         var precioArticulo = parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice);
 
-        console.log('-> ACTUALIZANDO precio de procId: ' + CART[i].id + ' a precio por unidad: ' + parseFloat(CART[i].price_x_region[0].totalPrice));
+        //console.log('-> ACTUALIZANDO precio de procId: ' + CART[i].id + ' a precio por unidad: ' + parseFloat(CART[i].price_x_region[0].totalPrice));
 
         if (precioArticulo > 0.00) {
             $("#labelPrecioTotalProducto" + CART[i].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
@@ -746,7 +716,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
                 //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
 
-                var heigth = (W_WIDTH * (0.96));
+                var heigth = (W_WIDTH * (0.98));
                 var heig_block = heigth / parseInt(data.columns);
 
                 if (position < parseInt(data.columns)) {
@@ -982,7 +952,16 @@ function displayProducts(data, originNode, originName, param, param4) {
         //console.log("Entramos en la nueva visualizacion");
         console.log(data);
         AUX = 1;
-        PRODUCTS = PRODUCTS.concat(data.products);
+        
+        for(var c = 0; c < data.products.length ; c++){//guardamos los productos
+        
+            for(var d = 0 ; d < data.products[c].typeproducts.length ; d++ ){ 
+    
+                PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);  
+            } 
+        }
+        
+        //PRODUCTS = PRODUCTS.concat(data.products);
 
         COLUMS = parseInt(data.columns);
         ID_NODE = originNode;
@@ -1004,9 +983,6 @@ function displayProducts(data, originNode, originName, param, param4) {
             //console.log("Estamos en la pantalla " + pantallaActual);
             num_personas_fiesta = $("#personas_fiesta").val();
         }
-
-
-
 
         var aux = {};
         aux = data.products;
@@ -1064,7 +1040,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
                         //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
                         var pro_seccion = data.products[j].typeproducts[i];
-                        var heigth = (W_WIDTH * (0.96));
+                        var heigth = (W_WIDTH * (0.98));
                         var heig_block = heigth / parseInt(data.columns);
 
                         if (position < parseInt(data.columns)) {
@@ -1190,7 +1166,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                             '</div>' +
                             '<div class="ui-grid-a">' +
                             '<div class="ui-block-a" style="width: 100%;">' +
-                            '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addToCart(' + pro_seccion.id + ',1);">Añadir</button>' +
+                            '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');">Añadir</button>' +
                             '</div>' +
                             '</div>' +
                             '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
@@ -1301,7 +1277,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
             for (var i = 0; i < data.products.length; i++) {
 
-                var heigth = (W_WIDTH * (0.96));
+                var heigth = (W_WIDTH * (0.98));
                 var heig_block = heigth / parseInt(data.columns);
 
                 var count_carac = data.products[i].caracteristics.length;
@@ -1613,7 +1589,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
                 //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
 
-                var heigth = (W_WIDTH * (0.96));
+                var heigth = (W_WIDTH * (0.98));
                 var heig_block = heigth / parseInt(data.columns);
 
                 if (position < parseInt(data.columns)) {
@@ -1895,7 +1871,7 @@ function añadirMasProductos(data, originNode, originName, param) {
 
             //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
 
-            var heigth = (W_WIDTH * (0.96));
+            var heigth = (W_WIDTH * (0.98));
             var heig_block = heigth / parseInt(data.columns);
 
             if (POS_GRID == "A" && continuar == 0) { //continuamos por la ultima caja que tenemos
