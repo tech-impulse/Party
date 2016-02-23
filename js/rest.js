@@ -1581,3 +1581,29 @@ function imprimirPedido() {
 
 
 }
+
+/**
+*   cancelaPedido
+*
+*   funcion que vacia el carrito, vuelve a la pantalla inicial y esta logado, hace un logout.
+*/
+function cancelaPedido()    {
+    vaciaCarrito();
+    
+    if ( EMAIL_USER != "" )   {
+        EMAIL_USER = "";
+    }
+    
+    INFO_USU = "";
+    $('#popupAlert').popup('open');
+    $('#email').val('');
+    $("#spBtnAmountPerson").text('');
+    $("#circuloCantidad").hide();
+    $("#spBtnPopupCartAmmount").hide();
+    $("#userIcoCarrito").hide();
+    $("#btn_finalizarpedido").hide();
+    CART = [];
+    nodeNames = [];
+    nodeIds = [];
+    nodeImg = [];
+}

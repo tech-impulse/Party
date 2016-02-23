@@ -748,6 +748,10 @@ function addToCart(item, param) {
     }
     
     updatePrecioTotalArticulo(); // TEMP !!
+    
+    if (CART.length > 0) {
+        $("#btn_finalizarpedido").show();
+    }
 }
 
 /********************************************************************************************************************
