@@ -681,19 +681,19 @@ function addToCart(item, param) {
 
     for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
 
-        console.log('-> LISTA DE PRODUCTOS comparamos id: ' + PRODUCTS[i]['id'] + ' con item: ' + item); // TEMP !!
+        //console.log('-> LISTA DE PRODUCTOS comparamos id: ' + PRODUCTS[i]['id'] + ' con item: ' + item); // TEMP !!
         
         if (PRODUCTS[i]['id'] == item) { //si coinciden lo añadimos al carrito
 
-            console.log("-->ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
+            //console.log("-->ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
             product = PRODUCTS[i];
             //i = PRODUCTS.length;
 
             for (var j = 0; j < CART.length; j++) {
-                console.log('-> CARRITO comparamos id: ' + CART[j]['id'] + ' con item: ' + item); // TEMP !!
+                //console.log('-> CARRITO comparamos id: ' + CART[j]['id'] + ' con item: ' + item); // TEMP !!
                 
                 if (CART[j]['id'] == item) {
-                    console.log("->ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
+                    //console.log("->ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
                     foundInCart = 1;
                     CART[j].quantity = CART[j].quantity + parseInt(param);
                     CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
@@ -717,7 +717,7 @@ function addToCart(item, param) {
 
     
     if (foundInCart == 0) {
-        console.log('---> NO SE ENCONTRO PRODUCTO --> foundInCart: ' + foundInCart); // TEMP !!
+        // console.log('---> NO SE ENCONTRO PRODUCTO --> foundInCart: ' + foundInCart); // TEMP !!
 
         if (CART.ammount == undefined) {
             CART.ammount = 0;
