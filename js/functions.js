@@ -60,6 +60,58 @@ function checkOut() {
 
 }
 
+function addCartAsistFiestas() {
+
+    // calculo del numero de articulos por producto
+    for (var k = 0; k < data.products.length; k++) {
+
+        console.log("Calculamos los articulos para el carrito------------------------------------------------");
+        aux = 0;
+        var count = data.products[k].caracteristics.length;
+        var caracteristicas = data.products[k].caracteristics;
+
+        for (var j = 0; j < count; j++) {
+
+            if (caracteristicas[j].type == "9" && data.products[k].name != "" && data.products[k].price_x_region.length > 0) {
+
+                var num_uni = caracteristicas[j].name;
+                var units = num_uni.split(' ');
+
+                console.log("Encontrada car. Unidades es " + units[0]);
+
+                if (parseInt(units[0]) >= parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) { //el articulo tiene suficientes para el grupo
+
+                    console.log("Unidades es1 " + units[0] + " se añade 1");
+                    addToCart(data.products[k].id, 1);
+                    aux = 1;
+
+                } else if (parseInt(units[0]) < parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) {
+
+                    addToCart(data.products[k].id, Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
+                    console.log("Math " + Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
+                    aux = 1;
+
+                } else { //mas personas que unidades del articulo
+                    addToCart(data.products[k].id, 1);
+                    aux = 1;
+                }
+
+                break;
+
+            }
+
+        }
+
+        console.log("Aux es " + aux); // si es cerno no tiene unidades pondremos que es uno
+
+        if (aux == 0 && data.products[k].name != "" && data.products[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
+            addToCart(data.products[k].id, 1);
+
+        }
+    }
+
+}
+
 /***********************************************************************
   Esta funcion sirve para actualizar el boton de atras de la pantalla
   Parametros:

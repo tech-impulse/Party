@@ -979,7 +979,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
     } else if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "getProductsClassified") { // Hay resultados
 
-        console.log("Entramos en la nueva visualizacion");
+        //console.log("Entramos en la nueva visualizacion");
         console.log(data);
         AUX = 1;
         PRODUCTS = PRODUCTS.concat(data.products);
@@ -999,9 +999,9 @@ function displayProducts(data, originNode, originName, param, param4) {
 
 
         if (pantallaActual == "Asistente disfraces") {
-            console.log("Estamos en la pantalla " + pantallaActual);
+            //console.log("Estamos en la pantalla " + pantallaActual);
         } else if (pantallaActual == "Asistente fiestas") {
-            console.log("Estamos en la pantalla " + pantallaActual);
+            //console.log("Estamos en la pantalla " + pantallaActual);
             num_personas_fiesta = $("#personas_fiesta").val();
         }
 
@@ -1010,16 +1010,14 @@ function displayProducts(data, originNode, originName, param, param4) {
 
         var aux = {};
         aux = data.products;
-        console.log("Longitud de secciones es " + aux.length);
+        //console.log("Longitud de secciones es " + aux.length);
 
         for (var j = 0 ; j < data.products.length; j++) {
 
-
-            console.log("Entramos en la nueva visualizacion 2, jota es " + j);
-            console.log(aux[j]);
+            //console.log("Entramos en la nueva visualizacion 2, jota es " + j);
+            //console.log(aux[j]);
 
             seccion_titulo = "<div id='tituloSeccion' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
-
 
             switch (parseInt(data.columns)) {
             case 1:
@@ -1061,14 +1059,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                 position = "a";
                 var precio;
                 var unidades;
-                //auxTest = data;
-
-                //console.log("Productos que tenemos asistente fiestas");
-                //console.log(data.products[j]);
-
-
-                //if (data.products[j].type != undefined) {
-
+               
                     for (var i = 0; i < data.products[j].typeproducts.length; i++) {
 
                         //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
@@ -1215,7 +1206,6 @@ function displayProducts(data, originNode, originName, param, param4) {
                         position++;
 
                     }
-                //}
 
                 htmlContent += '</div>';
                 htmlContent_seccion = seccion_titulo + htmlContent;
