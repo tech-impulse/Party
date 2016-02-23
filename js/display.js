@@ -152,27 +152,28 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                             var valorSwitch = parseInt(data.nodes[i].type);
                         }
                         switch (valorSwitch) {
-                        case 1: //catalogo
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                            break;
-                        case 2: //promos
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                            break;
-                        case 3: // asis fistas
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                            break;
-                        case 4: // asis disfra
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                            break;
-                        case 5: // sugerencias
-                            extra = 'displayPantallaSugerencias()';
-                            break;
-                        case 6: // fuera tienda
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                            break;
-                        case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
-                            break;
+                            case 1: //catalogo
+                                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                                break;
+                            case 2: //promos
+                                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                                break;
+                            case 3: // asis fistas
+                                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                                break;
+                            case 4: // asis disfra
+                                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                                break;
+                            case 5: // sugerencias
+                                //extra = 'displayPantallaSugerencias()';
+                                extra = 'displayPopUpPantallaSugerencias()';
+                                break;
+                            case 6: // fuera tienda
+                                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                                break;
+                            case 7: // caso elemento principal no esta definido en la BB.DD esta puesto con codigo mas arriba
+                                extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                                break;
                         }
 
                     } else { //mostramos los bloques sin ningun orden
@@ -2832,7 +2833,8 @@ function loadMenu(data) {
                 extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\',\'4\')';
                 break;
             case 5: // sugerencias
-                extra = 'displayPantallaSugerencias()';
+                //extra = 'displayPantallaSugerencias()';
+                extra = 'displayPopUpPantallaSugerencias()';
                 break;
             case 6: // fuera tienda
                 extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\',\'menu_lateral\')';
@@ -3153,7 +3155,107 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
 
 }
 
+/**
+*   displayPopUpPantallaSugerencias
+*
+*   
+*/
+function displayPopUpPantallaSugerencias()  {
+    //$('#popupElegirTipoUsuario').popup('open');
+    //displayPantallaSugerencias(); // TEMP !!
+    console.log("Guardamos carrito antes de sugerencias");
 
+    guardarInfo('si'); // TEMP !!
+
+    console.log("Entramos en la pantalla de sugerencias");
+
+    $("#banderas").hide();
+    
+    updateBackButton(0, jsonIdiomas.header.menu);
+
+    $("#divHeader_catalogo").show();
+    $("#divHeader_menuInicial").hide();
+    
+    var html = '<div data-corners="false"  id="popupElegirTipoUsuario" style="width:25%; margin:10% auto;">' + 
+                '<label id="labelSugTipo" style="font-weight: bolder; margin-top: 5px;">Tipo de Usuario:</label>' +
+                '<div class="ui-select" style="margin:0 auto;font-size: 20px;">' + 
+                    '<select id="selectUser" name="suge_inci" data-theme="b" data-native-menu="false" data-corners="false" tabindex="-1">' + 
+                        '<option value="1" selected="selected">Cliente</option>' +
+                        '<option value="2">Dependiente</option>' +
+                    '</select>' +
+                    '<div style="display: none;" id="select-43-listbox-placeholder">' +
+                    '</div>' + 
+                '</div>' +
+                 '<div class="ui-grid-c" style="margin:0 auto;">' +
+                    '<button data-theme="b" id="btn_selectPantallaSugerencia" onclick="eligePantalla();" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;" class=" ui-btn ui-btn-b ui-shadow">Acceder</button>' +
+                '</div>' +
+            '</div>';
+    
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
+
+    translateButtons(idiomStore);
+
+    console.log("--> Arribo al if amb length: " + CART.length);
+
+    pantallaActual = 'sugerencias'; // TEMP !!
+    
+    if (CART.length < 1) { // TEMP !!!
+        console.log("--> IF si: " + CART.length); // TEMP !! log
+
+        $("#popupListItems").popup("close");
+
+        $("#spBtnAmountPerson").text('');
+
+        $("#circuloCantidad").hide();
+        $("#spBtnPopupCartAmmount").hide();
+        $("#userIcoCarrito").hide();
+
+        $("#btn_finalizarpedido").hide();
+
+        $("#img_cesta").attr("src", "css/icons/cesta.png");
+    } else {
+
+        console.log("--> ELSE no: " + CART.length + ' i pantalla: ' + pantallaActual); // TEMP !! log
+
+        if (pantallaActual == 'Asistente fiestas') {
+            //$("#spBtnAmountPerson").text(precio_persona + " x");
+            $("#userIcoCarrito").show();
+            $("#spBtnAmountPerson").show();
+        } else {
+            $("#userIcoCarrito").hide();
+            $("#spBtnAmountPerson").hide();
+        }
+
+        $("#btn_finalizarpedido").show();
+
+        var totalRefresh = 0;
+
+        for (var i = 0; i < CART.length; i++) {
+            totalRefresh = totalRefresh + CART[i].quantity;
+        }
+        $("#spBtnPopupCartProducts").text(totalRefresh);
+        $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+
+        $("#circuloCantidad").show();
+        $("#spBtnPopupCartAmmount").show();
+
+        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
+    }
+    
+    $("#selectUser").val(1); // TEMP !!
+}
+
+function eligePantalla()    {
+    
+    if ( $("#selectUser").val() == 1 )  {
+        displayPantallaSugerencias();
+    }
+    else    {
+        // ******************************* TODO !!
+    }
+}
 
 function displayPantallaSugerencias() {
 
