@@ -352,3 +352,17 @@ function cerrar_popup() {
     $("#popupIdiomas").popup("close");
 
 }
+
+function revisarDireccionCorreo() {
+    // Expresion regular para validar el correo
+    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
+    // Se utiliza la funcion test() nativa de JavaScript
+    if (regex.test($('#emailsignup').val().trim())) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+

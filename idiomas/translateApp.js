@@ -58,7 +58,8 @@ function translateButtons(idioma) {
                 "evento_click": {
                     "cam_contraseña": "Type a password",
                     "enviar_registro": "Fill in all fields . Thank you",
-                    "contra_nocoinciden": "Do not match"
+                    "contra_nocoinciden": "Do not match",
+                    "mail_no_valido": "Not a valid adress"
                 },
                 "opcion_no_valida": "Seleccione una opcion válida"
             },
@@ -172,6 +173,7 @@ function translateButtons(idioma) {
                     "cam_contraseña": "Escriba una contraseña",
                     "enviar_registro": "Rellene todos los campos. Gracias",
                     "contra_nocoinciden": "No coinciden",
+                    "mail_no_valido": "Dirección no válida"
                 },
                 "opcion_no_valida": "Seleccione una opcion válida"
             },
@@ -287,6 +289,7 @@ function translateButtons(idioma) {
                     "cam_contraseña": "Introduïu una contrasenya",
                     "enviar_registro": "Ompli tots els camps . Gràcies",
                     "contra_nocoinciden": "No coincideixen",
+                    "mail_no_valido": "Adreça no vàlida"
                 },
                 "opcion_no_valida": "Seleccioneu una opció vàlida"
             },
@@ -390,6 +393,7 @@ function translateButtons(idioma) {
                     "cam_contraseña": "Escriba una contraseña",
                     "enviar_registro": "Rellene todos los campos. Gracias",
                     "contra_nocoinciden": "No coinciden",
+                    "mail_no_valido": "Dirección no válida"
                 },
                 "opcion_no_valida": "Seleccione una opcion válida"
             },
@@ -487,6 +491,7 @@ function translateButtons(idioma) {
                     "cam_contraseña": "Escriba una contraseña",
                     "enviar_registro": "Rellene todos los campos. Gracias",
                     "contra_nocoinciden": "No coinciden",
+                    "mail_no_valido": "Dirección no válida"
                 },
                 "opcion_no_valida": "Seleccione una opcion válida"
             },

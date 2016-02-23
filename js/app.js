@@ -312,6 +312,12 @@ $(document).ready(function () {
             $('#passwordsignup').addClass('colorText');
             $("#passwordsignup_confirm").attr("placeholder", jsonIdiomas.popup_errores.evento_click.contra_nocoinciden);
             $('#passwordsignup_confirm').addClass('colorText');
+            
+        } else if ( !revisarDireccionCorreo() ) {
+            
+            $('#emailsignup').val("");
+            $('#emailsignup').attr("placeholder", jsonIdiomas.popup_errores.evento_click.mail_no_valido);
+            $('#emailsignup').addClass('colorText');
 
         } else if (usuario != "" && contraseña == rep_contraseña && cod_pos != "") {
 
