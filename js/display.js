@@ -65,10 +65,11 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         if (CART.length > 0) {
             $("#btn_finalizarpedido").show();
         }
+        
+        PRODUCTS = [];
 
         if (originNode == 0) {
             loadMenu(data);
-            //CART = [];
             nodeNames = [];
             nodeIds = [];
             nodeImg = [];
@@ -3130,6 +3131,9 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
  *   
  */
 function displayPopUpPantallaSugerencias() {
+    
+    PRODUCTS = [];
+    
     //$('#popupElegirTipoUsuario').popup('open');
     //displayPantallaSugerencias(); // TEMP !!
     console.log("Guardamos carrito antes de sugerencias");
