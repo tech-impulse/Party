@@ -406,6 +406,7 @@ function backPage(idNode, nodeName, linkint) {
     //console.log("Imagen: " + linkint);
     
     PRODUCTS = [];
+    TEMP_PRODUCTS = [];
 
     translateButtons(idiomStore);
 
@@ -874,7 +875,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
 
 
-    refreshDisplayProducts(product);
+    refreshDisplayProducts(TEMP_PRODUCTS);
 
 }
 

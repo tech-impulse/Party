@@ -67,6 +67,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         }
         
         PRODUCTS = [];
+        TEMP_PRODUCTS = [];
 
         if (originNode == 0) {
             loadMenu(data);
@@ -310,7 +311,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
 }
 
-function refreshDisplayProducts() {
+function refreshDisplayProducts(data) {
 
     /*console.log("Refresh DisplayProducts");
     console.log(product);
@@ -3392,6 +3393,7 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
 function displayPopUpPantallaSugerencias() {
     
     PRODUCTS = [];
+    TEMP_PRODUCTS = [];
     
     //$('#popupElegirTipoUsuario').popup('open');
     //displayPantallaSugerencias(); // TEMP !!
