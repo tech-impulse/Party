@@ -65,7 +65,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         if (CART.length > 0) {
             $("#btn_finalizarpedido").show();
         }
-        
+
         PRODUCTS = [];
         TEMP_PRODUCTS = [];
 
@@ -311,279 +311,12 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
 }
 
-function refreshDisplayProducts(data) {
-
-    /*console.log("Refresh DisplayProducts");
-    console.log(product);
-    var aux_carac = 0;
-
-    var htmlContent = '';
-    var grid = '';
-    var block = '';
-    var position = 0;
-    var type;
-
-    switch (parseInt(COLUMS)) {
-    case 1:
-
-        grid = "<div class='ui-grid-a'>";
-        type = "vertical";
-        break;
-
-    case 2:
-
-        grid = "<div class='ui-grid-a'>";
-        type = "horizontal";
-        break;
-
-    case 3:
-
-        grid = "<div class='ui-grid-b'>";
-        type = "horizontal";
-        break;
-
-    case 4:
-
-        grid = "<div class='ui-grid-c'>";
-        type = "horizontal";
-        break;
-
-    case 5:
-
-        grid = "<div class='ui-grid-d'>";
-        type = "horizontal";
-        break;
-
-    }
-
-    switch (type) {
-    case "horizontal":
-
-        htmlContent = grid;
-        position = "a";
-        var precio;
-        var unidades;
-
-        var data = CART;
-
-        for (var i = 0; i < data.length; i++) {
-
-            if (data[i].dedonde == nodeIds[nodeIds.length - 1]) {
-
-                var heigth = (W_WIDTH * (0.98));
-                var heig_block = heigth / parseInt(COLUMS);
-
-                if (position < parseInt(COLUMS)) {
-
-                    switch (position) {
-                    case 0:
-
-                        block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
-                        break;
-
-                    case 1:
-
-                        block = '<div class="ui-block-b" style="width:' + heig_block + 'px;">';
-                        break;
-
-                    case 2:
-
-                        block = '<div class="ui-block-c" style="width:' + heig_block + 'px;">';
-                        break;
-
-                    case 3:
-
-                        block = '<div class="ui-block-d" style="width:' + heig_block + 'px;">';
-                        break;
-
-                    case 4:
-
-                        block = '<div class="ui-block-e" style="width:' + heig_block + 'px;">';
-                        break;
-                    }
-                } else {
-                    position = 0;
-                    block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
-                }
-
-                var imgStock = "";
-                var stock = data[i].stock_x_store;
-
-                if (stock == 0) {
-                    stock = data[i].stock_x_central_store;
-                }
-
-                if (stock > data[i].stock_min) {
-                    imgStock = "css/maqueta/barraVerde.png";
-                } else if (stock > 0 && stock <= data[i].stock_min) {
-                    imgStock = "css/maqueta/barraAmarilla.png";
-                } else if (stock == 0) {
-                    imgStock = "css/maqueta/barraRojo.png";
-                }
-
-                if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
-                    //console.log("No tiene unidades saltamos el producto")
-                    unidades = "1 " + jsonIdiomas.cajas.unidades;
-                }
-
-                if (data[i].name == "") {
-                    continue;
-                } else {
-                    var titulo = data[i].name;
-                }
-
-
-                if (data[i].price_x_region.length == 0) { // si no tiene precio continuamos
-                    continue;
-                } else {
-                    precio = data[i].price_x_region[0].totalPrice;
-                }
-
-                var count = data[i].caracteristics.length;
-                var caracteristicas = data[i].caracteristics;
-
-
-                for (var j = 0; j < count; j++) {
-
-                    if (caracteristicas[j].type == "9") {
-
-                        unidades = caracteristicas[j].name;
-                        aux_carac = 0;
-                        break;
-
-                    } else {
-
-                        aux_carac = 1;
-                        continue;
-
-                    }
-                }
-
-                if (aux_carac == 1) { //no tiene unidades pasamos al siguiente product
-                    unidades = "1 " + jsonIdiomas.cajas.unidades;
-                }
-
-                if (data[i].name == "") {
-                    continue;
-                } else {
-                    var titulo = data[i].name;
-                }
-
-                if (data[i].stock_x_store == 0) {
-                    var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
-                        '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
-                        '<div style="text-transform: uppercase;z-index: 3; width:200px; height:20px; position: absolute; bottom: 0px; font-size:15px; padding-bottom:5px; color: #fff; text-align:center; font-weight:bold;">' + jsonIdiomas.exclusivoWeb + '</div>' +
-                        '</div>';
-                } else {
-                    var displayWarning = "";
-                }
-
-                var imgLinkExt = data[i].linkext.replace("wide", "bigPreview");
-
-                // TEMP !!
-                var element = block +
-                    '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
-                    '<div style="position: relative;overflow:hidden">' +
-                    '<div id="circulo' + data[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
-                    '<label id="quantity' + data[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
-                    '</div>' +
-                    '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
-                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + data[i].id + ',\'PRODUCTOS\',' + data[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
-                    '</div>' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
-                    '<div class="contenedor">' + titulo + '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
-                    '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
-                    '<strong><label id="labelPrecioTotalProducto' + data[i].id + '" style="color:green;margin-top:5px;"></label></strong>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-a">' +
-                    '<div class="ui-block-a" style="width: 100%;">' +
-                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data[i].id + '" onclick="addToCart(' + data[i].id + ',1);">Añadir</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-b" id="grid' + data[i].id + '" style="display:none;">' +
-                    '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data[i].id + ',-1);" >-</button></div>' +
-                    '<div class="ui-block-b" style="width:10%;"></div>' +
-                    '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data[i].id + ',1);">+</button></div>' +
-                    '</div></a></div>';
-
-
-                htmlContent = htmlContent + element;
-                if (position == "c") {
-                    htmlContent = htmlContent + grid;
-                }
-                position++;
-            }
-        }
-
-        htmlContent = htmlContent + '</div>';
-
-        $("#divContent").html(htmlContent);
-        $("#divContent").trigger('create');
-
-        // calculo del numero de articulos por producto
-        for (var k = 0; k < CART.length; k++) {
-
-            displayItemOperations(CART[k].id, CART[k].quantity, k);
-
-        }
-
-        $('#popupListItems').popup('close');
-
-        break;
-
-
-    case "vertical":
-
-        htmlContent = grid + " <div class='ui-block-a' style='width:66%'><center><span class='flaticon-catalog-h' style='color:#EE7F01;'></span></center></div>";
-        block = '<div class="ui-block-b" style="width:30%; margin: 2%"><div style="text-align:right">';
-
-        for (var i = 0; i < data.length; i++) {
-
-            if (data[i].name == "") {
-                var element = '<a  data-corners="false" data-role="button" onclick="">' + data[i].name + '</a>';
-            } else {
-                var element = '<a  data-corners="false" data-role="button" onclick="">' + data[i].name + '</a>';
-            }
-
-            htmlContent = htmlContent + element;
-
-        }
-        htmlContent = htmlContent + '</div></div></div>';
-        $("#divContent").html(htmlContent);
-        $("#divContent").trigger('create');
-        $("#divHeader_catalogo").show();
-        $("#divHeader_menuInicial").hide();
-        break;
-
-    }*/
+function refreshDisplayProducts(data, productAlter,id_produc) {
 
     console.log(data);
+    console.log(productAlter);
     AUX = 1;
 
-    for (var c = 0; c < data.products.length; c++) { //guardamos los productos
-
-        for (var d = 0; d < data.products[c].typeproducts.length; d++) {
-            data.products[c].typeproducts[d].original = true;
-            PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
-            PRODUCTS[d].original = true;
-            console.log(PRODUCTS[d]);
-        }
-    }
-
-    //PRODUCTS = PRODUCTS.concat(data.products);
-
-    COLUMS = parseInt(data.columns);
-    ID_NODE = originNode;
     var htmlContent = "";
     var htmlContent_seccion = "";
     var new_htmlContent = '';
@@ -592,29 +325,30 @@ function refreshDisplayProducts(data) {
     var position = 0;
     var type;
     var seccion_titulo = "";
-
-    updateBackButton(originNode, originName);
-
-
-    if (pantallaActual == "Asistente disfraces") {
-        //console.log("Estamos en la pantalla " + pantallaActual);
-    } else if (pantallaActual == "Asistente fiestas") {
-        //console.log("Estamos en la pantalla " + pantallaActual);
-        num_personas_fiesta = $("#personas_fiesta").val();
-    }
-
     var aux = {};
-    aux = data.products;
+    aux = data;
     //console.log("Longitud de secciones es " + aux.length);
 
-    for (var j = 0; j < data.products.length; j++) {
+    for (var a = 0; a < data.length; a++) { //buscamos el producto alternativo
+        
+        for (var b = 0; b < data[a].typeproducts.length; b++) {
 
-        //console.log("Entramos en la nueva visualizacion 2, jota es " + j);
-        //console.log(aux[j]);
+            if (data[a].typeproducts[b].id == id_produc) {
+                
+                
+                productAlter.quantity =  
+                data[a].typeproducts.push(productAlter);   
+                break;
+            }
+        }
+    }
+
+    for (var j = 0; j < data.length; j++) {
+
 
         seccion_titulo = "<div id='tituloSeccion' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
 
-        switch (parseInt(data.columns)) {
+        switch (parseInt(COLUMS)) {
         case 1:
 
             grid = "<div class='ui-grid-a'>";
@@ -655,14 +389,14 @@ function refreshDisplayProducts(data) {
             var precio;
             var unidades;
 
-            for (var i = 0; i < data.products[j].typeproducts.length; i++) {
+            for (var i = 0; i < data[j].typeproducts.length; i++) {
 
                 //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
-                var pro_seccion = data.products[j].typeproducts[i];
+                var pro_seccion = data[j].typeproducts[i];
                 var heigth = (W_WIDTH * (0.98));
-                var heig_block = heigth / parseInt(data.columns);
+                var heig_block = heigth / parseInt(COLUMS);
 
-                if (position < parseInt(data.columns)) {
+                if (position < parseInt(COLUMS)) {
 
                     switch (position) {
                     case 0:
@@ -766,7 +500,7 @@ function refreshDisplayProducts(data) {
                     '<label id="quantity' + pro_seccion.id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
                     '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
-                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                    '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + ID_NODE + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
@@ -804,6 +538,7 @@ function refreshDisplayProducts(data) {
 
             htmlContent += '</div>';
             htmlContent_seccion = seccion_titulo + htmlContent;
+            $('#popupListItems').popup('close');
             break;
 
 
@@ -1222,7 +957,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                 console.log(PRODUCTS[d]);
             }
         }
-        
+
         TEMP_PRODUCTS = data.products;
 
         //PRODUCTS = PRODUCTS.concat(data.products);
@@ -3391,10 +3126,10 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
  *   
  */
 function displayPopUpPantallaSugerencias() {
-    
+
     PRODUCTS = [];
     TEMP_PRODUCTS = [];
-    
+
     //$('#popupElegirTipoUsuario').popup('open');
     //displayPantallaSugerencias(); // TEMP !!
     console.log("Guardamos carrito antes de sugerencias");

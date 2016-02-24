@@ -780,7 +780,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
     var units = units_alt = 0;
     var j, i;
 
-    for (i = 0; i < PRODUCTS_ALTER.length; i++) { //buscamos el producto alternativo
+    for (var i = 0; i < PRODUCTS_ALTER.length; i++) { //buscamos el producto alternativo
 
         if (PRODUCTS_ALTER[i].id == id_prod_alter) {
 
@@ -808,7 +808,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
         }
     }
 
-    for (j = 0; j < CART.length; j++) {
+    for (var j = 0; j < CART.length; j++) {
 
         console.log("buscando  " + id_produc + " en carrito " + CART[j]['id']);
 
@@ -875,7 +875,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
 
 
-    refreshDisplayProducts(TEMP_PRODUCTS);
+    refreshDisplayProducts(TEMP_PRODUCTS,product,id_produc);
 
 }
 
