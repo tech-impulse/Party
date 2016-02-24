@@ -311,7 +311,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
 }
 
-function refreshDisplayProducts(data, productAlter,id_produc) {
+function refreshDisplayProducts(data, productAlter, id_produc) {
 
     console.log(data);
     console.log(productAlter);
@@ -330,14 +330,34 @@ function refreshDisplayProducts(data, productAlter,id_produc) {
     //console.log("Longitud de secciones es " + aux.length);
 
     for (var a = 0; a < data.length; a++) { //buscamos el producto alternativo
-        
+
         for (var b = 0; b < data[a].typeproducts.length; b++) {
 
             if (data[a].typeproducts[b].id == id_produc) {
-                
-                
-                productAlter.quantity =  
-                data[a].typeproducts.push(productAlter);   
+
+                for (var k = 0; k < data[a].typeproducts[b].caracteristics.length; k++) {
+
+                    var caracteristicas = data[a].typeproducts[b].caracteristics[k];
+
+                    if (caracteristicas.type == "9") {
+
+                        var unidades = caracteristicas.name;
+                        units = unidades.split(' ');
+                        break;
+
+                    } else {
+
+                        units = 1;
+                        continue;
+
+                    }
+                }
+
+                cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units));
+                productAlter.quantity = cantidad;
+                productAlter.original = false; //este campo indica si el articulo ha sido sustituido o no
+                productAlter.dedonde = nodeIds[nodeIds.length - 1];
+                data[a].typeproducts.push(productAlter);
                 break;
             }
         }
@@ -2380,7 +2400,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
     }
 }
 
-function displayAlternativeProducts(idnode, idproduct) {
+function displayAlternativeProducts(idnode, idproduct, cantidad) {
 
     console.log("Productos alternativos");
     console.log(PRODUCTS_ALTER);
@@ -2405,15 +2425,19 @@ function displayAlternativeProducts(idnode, idproduct) {
 
                     var imgLinkExt = prod_alt.linkext.replace("wide", "bigPreview");
 
+                    var click = 'onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');"';
+                    //var nada = "";
+                    //+ (cantidad == 0 ? nada : click) +
+
                     carrusel = carrusel + '<div class="swiper-slide" style="height: 175px;"><ul>' +
                         '<li style="list-style-type: none;">' +
-                        '<img onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');" src="' + imgLinkExt + '" style="max-width: 75px;max-height: 75px;">' +
+                        '<img ' + click + ' src="' + imgLinkExt + '" style="max-width: 75px;max-height: 75px;">' +
                         '</li>' +
                         '<li style="list-style-type: none;" >' +
-                        '<label onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');" style="color:rgb(0, 128, 0);">' + formatoNumero(prod_alt.price_x_region[0].totalPrice, 2, ",", ".", "€") + '</label>' +
+                        '<label ' + click + ' style="color:rgb(0, 128, 0);">' + formatoNumero(prod_alt.price_x_region[0].totalPrice, 2, ",", ".", "€") + '</label>' +
                         '</li>' +
                         '<li style="list-style-type: none;">' +
-                        '<div onclick="displayItemAlter(' + prod_alt.id + ',' + idproduct + ',' + idnode + ');"  style="white-space: normal;font-size: 14px;"><strong>' + prod_alt.name + '</strong></div>' +
+                        '<div ' + click + ' style="white-space: normal;font-size: 14px;"><strong>' + prod_alt.name + '</strong></div>' +
                         '</li>' +
                         '</ul></div>';
 
@@ -2639,6 +2663,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
         var aux_original;
         var html = '';
+        var cantidad = 0;
 
         switch (param) {
         case "CART":
@@ -2681,10 +2706,10 @@ function displayPopupItemDetail(id, param, idproduct) {
                     }
 
                     if (PRODUCTS[i].quantity > 0) {
-                        var cantidad = PRODUCTS[i].quantity;
+                        cantidad = PRODUCTS[i].quantity;
 
                     } else {
-                        var cantidad = 0;
+                        cantidad = 0;
                     }
 
                     div_carrusel = '<li data-role="list-divider" data-theme="c"><span>' + jsonIdiomas.popup_info_item.alternativos + '</span></li>' +
@@ -2735,7 +2760,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
             if (aux_original == true) { // si no es alternativo y tiene cantidad en el carrito se mostraran los alternativos
                 setTimeout(function () {
-                    getAlternativeProducts(id, idproduct);
+                    getAlternativeProducts(id, idproduct, cantidad);
                 }, 510);
             }
 

@@ -704,7 +704,7 @@ function addToCart(item, param) {
                 if (CART[j]['id'] == item) {
                     //console.log("->ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
                     foundInCart = 1;
-                    CART[j].quantity = CART[j].quantity + 1;
+                    CART[j].quantity = CART[j].quantity + parseInt(param);
                     CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
 
                     var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);

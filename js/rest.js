@@ -424,7 +424,7 @@ function restOk(res, typ, param, param2, aux, backPage) {
 
 }
 
-function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+function getAlternativeProducts(idnode, idproduct,cantidad) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
     // Datos que se van a enviar
     var dataSend = {
@@ -449,7 +449,7 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
             
             PRODUCTS_ALTER = response.alternativeProducts;        
 
-            displayAlternativeProducts(idnode, idproduct);
+            displayAlternativeProducts(idnode, idproduct,cantidad);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
