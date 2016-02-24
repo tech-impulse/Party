@@ -353,12 +353,13 @@ function cerrar_popup() {
 
 }
 
-function revisarDireccionCorreo() {
+function revisarDireccionCorreo(id) {
     // Expresion regular para validar el correo
     var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 
     // Se utiliza la funcion test() nativa de JavaScript
-    if (regex.test($('#emailsignup').val().trim())) {
+    //if (regex.test($('#emailsignup').val().trim())) {
+    if ( regex.test( $('#' + id).val().trim() ) ) {
         return true;
     } else {
         return false;

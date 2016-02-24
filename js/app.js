@@ -313,7 +313,7 @@ $(document).ready(function () {
             $("#passwordsignup_confirm").attr("placeholder", jsonIdiomas.popup_errores.evento_click.contra_nocoinciden);
             $('#passwordsignup_confirm').addClass('colorText');
             
-        } else if ( !revisarDireccionCorreo() ) {
+        } else if ( !revisarDireccionCorreo('emailsignup') ) {
             
             $('#emailsignup').val("");
             $('#emailsignup').attr("placeholder", jsonIdiomas.popup_errores.evento_click.mail_no_valido);
@@ -944,120 +944,76 @@ function enviarSugerencia() {
     if (sug_inci == undefined) {
         sug_inci = "incidencia";
     }
-    var nombre = $("#nombre").val();
-    var correo = $("#correo").val();
+    var nombre = $("#nombre").val();  // Obligatorio
+    var correo = $("#correo").val();  // Obligatorio
+    
     var provincia = $("#provincia").val();
     var poblacion = $("#poblacion").val();
-    var t_sugere = $("#tipo_sugenrencia").val();
+    
+    var t_sugere = $("#tipo_sugenrencia").val();  // Obligatorio
+    
     var telefono = $("#telf").val();
     var fecha_naci = $("#fecha_naci").val();
-    var sugerencias = $("#sugerencias").val();
+    
+    var sugerencias = $("#sugerencias").val();  // Obligatorio
 
     console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + provincia + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + " sugerencia " + sugerencias);
 
     if (nombre != "") {
-
         if (correo != "") {
+            if ( revisarDireccionCorreo('correo') ) {
+                  if (t_sugere != "") {
+                       if (sugerencias != "") {
 
-            if (provincia != "") {
+                            console.log("Llegamos hasta el final");
 
-                if (poblacion != "") {
+                            var info = {
+                                name: nombre,
+                                email: correo,
+                                province: provincia,
+                                city: poblacion,
+                                phone: telefono,
+                                birthday: fecha_naci,
+                                about_sugg: t_sugere,
+                                type_sugg: sug_inci,
+                                suggestion: sugerencias
+                            };
 
-                    if (telefono != "") {
-
-                        if (fecha_naci != "") {
-
-                            if (t_sugere != "") {
-
-                                if (sugerencias != "") {
-
-                                    console.log("Llegamos hasta el final");
-
-                                    var info = {
-                                        name: nombre,
-                                        email: correo,
-                                        province: provincia,
-                                        city: poblacion,
-                                        phone: telefono,
-                                        birthday: fecha_naci,
-                                        about_sugg: t_sugere,
-                                        type_sugg: sug_inci,
-                                        suggestion: sugerencias
-                                    };
-
-                                    sendSugerencias(info);
-
-                                } else {
-
-                                    $("#texto_popup").text("Escriba algo en el campo petición/sugerencia");
-                                    $('#popupAlert').popup('open');
-                                    //console.log("No has escrito la sugerencia1");
-
-                                }
-
-                            } else {
-
-                                $("#texto_popup").text("Escriba una sugerencia o incidencia");
-                                $('#popupAlert').popup('open');
-                                //console.log("No has escrito la sugerencia2");
-
-                            }
-
-
+                            sendSugerencias(info);
 
                         } else {
 
-                            $("#texto_popup").text("Escriba un fecha de nacimiento");
+                            $("#texto_popup").text("Escriba algo en el campo petición/sugerencia");
                             $('#popupAlert').popup('open');
-                            //console.log("No has escrito la fecha de nacimiento");
+                            //console.log("No has escrito la sugerencia1");
 
                         }
 
-
                     } else {
 
-                        $("#texto_popup").text("Escriba un telefono");
+                        $("#texto_popup").text("Escriba una sugerencia o incidencia");
                         $('#popupAlert').popup('open');
-                        //console.log("No has escrito el telefono");
+                        //console.log("No has escrito la sugerencia2");
 
                     }
-
-
-
-                } else {
-
-                    $("#texto_popup").text("Escriba una poblacion");
-                    $('#popupAlert').popup('open');
-                    //console.log("No has escrito el poblacion");
-
-                }
-
-
-            } else {
-
-                $("#texto_popup").text("Escriba una provincia");
-                $('#popupAlert').popup('open');
-                //console.log("No has escrito el provincia");
-
             }
-
-        } else {
-
+            else    {
+                $("#texto_popup").text("Escriba una dirección de correo válida correcta");
+                $('#popupAlert').popup('open');
+                //console.log("No has escrito la sugerencia2");
+            }
+        }
+        else    {
             $("#texto_popup").text("Escriba un correo electronico");
             $('#popupAlert').popup('open');
             //console.log("No has escrito el correo electronico");
-
         }
-
-    } else {
-
+    }
+    else    {
         $("#texto_popup").text("Escriba el nombre");
         $('#popupAlert').popup('open');
         //console.log("No has escrito el nombre");
-
-
     }
 
-
-
 }
+
