@@ -2370,7 +2370,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
     $("#contentPopupListItems").html(html);
     $("#contentPopupListItems").trigger("create");
 
-    $("#cantidad_prod_alter").text(aux_cart.quantity);
+    $("#cantidad_prod_alter").text(aux_prod.quantity);
 
     switch (CART.length) {
     case 0:
