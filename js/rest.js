@@ -444,8 +444,8 @@ function getAlternativeProducts(idnode, idproduct) { //esta funcion nos devuelve
         timeout: 10000, //10 seg
         success: function (response) {
 
-            //console.log("Datos alternativos");
-            //console.log(response);
+            console.log("Datos alternativos");
+            console.log(response);
             
             PRODUCTS_ALTER = response.alternativeProducts;        
 

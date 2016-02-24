@@ -628,7 +628,7 @@ function updateCarritoDisplay() {
 
 
         }
-        
+
         $("#btn_finalizarpedido").show();
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
@@ -957,8 +957,10 @@ function displayProducts(data, originNode, originName, param, param4) {
         for (var c = 0; c < data.products.length; c++) { //guardamos los productos
 
             for (var d = 0; d < data.products[c].typeproducts.length; d++) {
-
+                data.products[c].typeproducts[d].original = true;
                 PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
+                PRODUCTS[d].original = true;
+                console.log(PRODUCTS[d]);
             }
         }
 
@@ -2533,7 +2535,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
             setTimeout(function () {
                 getAlternativeProducts(id, idproduct);
-            }, 200);
+            }, 500);
 
         }
 
