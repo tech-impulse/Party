@@ -2350,7 +2350,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
     var imgLinkExt = aux_prod.linkext.replace("wide", "bigPreview");
 
     html = '<ul data-role="listview" data-inset="true">' +
-        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + CART[i].quantity + '</span></li>' +
+        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + aux_prod.quantity + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;;width: 100%;"></div>' +
@@ -2740,7 +2740,7 @@ function displayPopupItemDetail(id, param, idproduct) {
             if (aux_original == true) { // si no es alternativo y tiene cantidad en el carrito se mostraran los alternativos
                 setTimeout(function () {
                     getAlternativeProducts(id, idproduct);
-                }, 200);
+                }, 510);
             }
 
         } //switch
