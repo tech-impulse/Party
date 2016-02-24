@@ -2535,7 +2535,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
             setTimeout(function () {
                 getAlternativeProducts(id, idproduct);
-            }, 500);
+            }, 510);
 
         }
 
