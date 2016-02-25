@@ -179,9 +179,9 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     console.log('-> getNodes | pantalla actual: ' + pantallaActual + ' AUX: ' + AUX + ' CANRT length ' + CART.length);
 
-    $("#spBtnAmountPerson").text('');   // TEMP !!
-    $("#userIcoCarrito").hide();        // TEMP !!
-    
+    $("#spBtnAmountPerson").text(''); // TEMP !!
+    $("#userIcoCarrito").hide(); // TEMP !!
+
     /*if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
 
         setTimeout(function () {
@@ -191,14 +191,14 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         AUX = 0;
 
     }*/
-    
+
     console.log('-> Llamamos a guardarInfo'); // TEMP !!
-    
-    
+
+
     //guardarInfo('si');  // TEMP !!
 
     console.log('-> miramos carrito'); // TEMP !!
-    
+
     if (CART.length < 1) { // TEMP !!!
         $("#popupListItems").popup("close");
 
@@ -323,14 +323,14 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     //console.log("Enviar info es 4");
                     //console.log(info);
                     pantallaActual = "Asistente fiestas";
-                    
+
                     if (CART.length > 0 && num_personas_fiesta > 0) {
                         var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
-                        
+
                         $("#spBtnAmountPerson").text(precio_persona + " x");
                         $("#spBtnAmountPerson").show();
                         $("#userIcoCarrito").show();
-                        
+
                         //$("#btn_finalizarpedido").show();
                     }
 
@@ -424,7 +424,7 @@ function restOk(res, typ, param, param2, aux, backPage) {
 
 }
 
-function getAlternativeProducts(idnode, idproduct,cantidad) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+function getAlternativeProducts(idnode, idproduct, cantidad) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
     // Datos que se van a enviar
     var dataSend = {
@@ -446,10 +446,10 @@ function getAlternativeProducts(idnode, idproduct,cantidad) { //esta funcion nos
 
             console.log("Datos alternativos");
             console.log(response);
-            
-            PRODUCTS_ALTER = response.alternativeProducts;        
 
-            displayAlternativeProducts(idnode, idproduct,cantidad);
+            PRODUCTS_ALTER = response.alternativeProducts;
+
+            displayAlternativeProducts(idnode, idproduct, cantidad);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -720,7 +720,7 @@ function getProductsClassified(idNode, nodeName, info_aux) {
         store: STORE.id,
         id: idNode
     };
-    
+
     console.log("Datos para enviar");
     console.log(dataSend);
 
@@ -739,7 +739,7 @@ function getProductsClassified(idNode, nodeName, info_aux) {
             if (response.result == 1) {
 
                 console.log(response);
-                restOk_products(response, "nodes", idNode, nodeName, info_aux,"getProductsClassified");
+                restOk_products(response, "nodes", idNode, nodeName, info_aux, "getProductsClassified");
 
             } else if (response.result == 0) {
 
@@ -808,7 +808,7 @@ function restOk_products(res, typ, param, param2, param3) {
     case "nodes":
 
         //displayProducts(res, param, param2, param3);
-        displayProducts(res, param, param2, param3,"getProductsClassified");
+        displayProducts(res, param, param2, param3, "getProductsClassified");
         break;
 
     default:
@@ -1048,10 +1048,15 @@ function sendContra(usuario) {
 //WS que devuelve el listado de sexo mas-feme
 function getGender() {
 
+    var dataSend = {
+        lang: language
+    };
+
     var request = $.ajax({
         url: urlServices + 'getGender.php',
+        data: dataSend,
         dataType: 'json',
-        type: 'GET',
+        type: 'POST',
         timeout: 10000, //10 seg
         success: function (response) {
             //console.log("Respuesta: ");
@@ -1127,10 +1132,11 @@ function getGender() {
 function getSize(gender) {
 
     var dataSend = {
-        sex: gender
+        sex: gender,
+        lang: language
     };
 
-    console.log("EL gender es " + gender);
+    console.log("Get gender " + gender);
 
     var request = $.ajax({
         data: dataSend,
@@ -1378,7 +1384,8 @@ function sendEmail() {
 
         var dataSend = {
             email: EMAIL_USER,
-            carrito: CART //JSON.stringify(CART)
+            carrito: CART,
+            store_email: STORE.email
         };
 
         var request = $.ajax({
@@ -1470,7 +1477,9 @@ function imprimirPedido() {
 
     var dataSend = {
         carrito: CART,
-        tienda: STORE.code
+        tienda: STORE.code,
+        currencySymbol: STORE.currencySymbol,
+        lang:language
     };
 
     var request = $.ajax({
@@ -1483,31 +1492,31 @@ function imprimirPedido() {
 
             console.log("Respuesta de imprimir es:");
             console.log(response);
-            
+
             //temp para puesta en tienda
             $("#texto_popup").text("Pedido enviado para imprimir");
-                EMAIL_USER = "";
-                INFO_USU = "";
-                $('#popupAlert').popup('open');
-                $('#email').val('');
-                $("#spBtnAmountPerson").text('');
-                $("#circuloCantidad").hide();
-                $("#spBtnPopupCartAmmount").hide();
-                $("#userIcoCarrito").hide();
-                $("#btn_finalizarpedido").hide();
-                CART = [];
-                nodeNames = [];
-                nodeIds = [];
-                nodeImg = [];
-                EMAIL_USER = "";
-                logout();
-                console.log("Enviamos a imprimir");
+            EMAIL_USER = "";
+            INFO_USU = "";
+            $('#popupAlert').popup('open');
+            $('#email').val('');
+            $("#spBtnAmountPerson").text('');
+            $("#circuloCantidad").hide();
+            $("#spBtnPopupCartAmmount").hide();
+            $("#userIcoCarrito").hide();
+            $("#btn_finalizarpedido").hide();
+            CART = [];
+            nodeNames = [];
+            nodeIds = [];
+            nodeImg = [];
+            EMAIL_USER = "";
+            logout();
+            console.log("Enviamos a imprimir");
 
 
-                setTimeout(function () {
-                    $('#popupAlert').popup('close');
-                    getNodes(0);
-                }, 1500);
+            setTimeout(function () {
+                $('#popupAlert').popup('close');
+                getNodes(0);
+            }, 1500);
 
 
             if (parseInt(response.result) == parseInt(1)) {
@@ -1580,30 +1589,4 @@ function imprimirPedido() {
     //}
 
 
-}
-
-/**
-*   cancelaPedido
-*
-*   funcion que vacia el carrito, vuelve a la pantalla inicial y esta logado, hace un logout.
-*/
-function cancelaPedido()    {
-    vaciaCarrito();
-    
-    if ( EMAIL_USER != "" )   {
-        EMAIL_USER = "";
-    }
-    
-    INFO_USU = "";
-    $('#popupAlert').popup('open');
-    $('#email').val('');
-    $("#spBtnAmountPerson").text('');
-    $("#circuloCantidad").hide();
-    $("#spBtnPopupCartAmmount").hide();
-    $("#userIcoCarrito").hide();
-    $("#btn_finalizarpedido").hide();
-    CART = [];
-    nodeNames = [];
-    nodeIds = [];
-    nodeImg = [];
 }

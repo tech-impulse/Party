@@ -22,7 +22,8 @@ function translateButtons(idioma) {
             },
             "asistente_disfraces": {
                 "select_sexo_button": "Who is the disguise?",
-                "btn_continuar": "CONTINUE"
+                "btn_continuar": "CONTINUE",
+                "categoria": "Categorias"
             },
             "pagina_pago": {
                 "envio_email": "Send email",
@@ -155,7 +156,8 @@ function translateButtons(idioma) {
             "asistente_disfraces": {
                 "select_sexo_button": "¿Para quién es el disfraz?",
                 "btn_continuar": "CONTINUAR",
-                "talla": "¿Que talla tiene?"
+                "talla": "¿Que talla tiene?",
+                "categoria": "Categorias"
             },
             "pop_checkOut": {
                 "realizar_pedido": "Realizar pedido"
@@ -256,7 +258,8 @@ function translateButtons(idioma) {
             "asistente_disfraces": {
                 "select_sexo_button": "Per a qui és la disfressa?",
                 "btn_continuar": "CONTINUAR",
-                "talla": "¿Quina talla té?"
+                "talla": "¿Quina talla té?",
+                "categoria": "Categorias"
             },
             "form_sugerencias": {
                 "labelSugNom": "Nom:",

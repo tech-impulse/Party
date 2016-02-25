@@ -164,7 +164,8 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                             extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
                             break;
                         case 4: // asis disfra
-                            extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                            //extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
+                            extra = 'displayPantallaPreviaDisfraces(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
                             break;
                         case 5: // sugerencias
                             //extra = 'displayPantallaSugerencias()';
@@ -3455,5 +3456,115 @@ function displayFlags(res) {
     $("#contentPopupIdioma").css('font-size', '20px');
 
     translateButtons(idiomStore);
+
+}
+
+function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage) {
+
+    console.log("Asistente de disfraces");
+    pantallaActual = 'Asistente disfraces'; // TEMP !!
+
+    $("#banderas").hide();
+
+    updateBackButton(0, jsonIdiomas.header.menu);
+
+    $("#divHeader_catalogo").show();
+    $("#divHeader_menuInicial").hide();
+    //console.log(data);
+
+    htmlContent = '<div id="page_count" style="display: block;padding-top: 20%;">' +
+        '<center>' +
+        '<label id="labelSugTipo" style="font-weight: bolder; margin-top: 5px;text-align:center;">Seleccione una opcion:</label>' +
+        '<div style="width: 30%">' +
+        '<select id="select_tema" data-theme="f" data-native-menu="false" style="background-color:green;" data-corners="false">' +
+        '<option selected="selected">Tipos de disfraces</option>' +
+        '<option value="1">Edad</option>' +
+        '<option value="2">Temática</option>' +
+        '</select></div>' +
+        '<button style="width: 30%;" id="btn_continuar_dis_previo" data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</button>' +
+        '</center>' +
+        '</div>';
+
+    htmlContent = htmlContent;
+    $("#divContent").html(htmlContent);
+    $("#divContent").trigger('create');
+
+    $("#select_tema").attr("data-native-menu", "false");
+
+    $('#select_tema').change(function () {
+
+        var optionSelected = $(this).find('option:selected');
+        //var optTextSelected = optionSelected.text();
+        var optValueSelected = optionSelected.val();
+        //console.log("Opcion seleccionada es " + optValueSelected);
+
+        if (optValueSelected == 2) {
+
+            $('#btn_continuar_dis_previo').click(function () {
+                getNodes(idNode, nodeName, isAlgo, aux, backPage);
+            });
+
+        } else if (optValueSelected == 1) {
+
+            $('#btn_continuar_dis_previo').click(function () {
+                
+            });
+
+        } else {
+            $("#texto_popup").text(jsonIdiomas.popup_errores.opcion_no_valida);
+            $('#popupAlert').popup('open');
+
+            $("#div_selectTalla").hide();
+        }
+    });
+
+
+    translateButtons(idiomStore);
+
+    //console.log("--> Arribo al if amb length: " + CART.length);
+
+
+    if (CART.length < 1) { // TEMP !!!
+
+        console.log("--> IF si: " + CART.length); // TEMP !! log
+
+        $("#popupListItems").popup("close");
+        $("#spBtnAmountPerson").text('');
+        $("#circuloCantidad").hide();
+        $("#spBtnPopupCartAmmount").hide();
+        $("#userIcoCarrito").hide();
+        $("#btn_finalizarpedido").hide();
+        $("#img_cesta").attr("src", "css/icons/cesta.png");
+
+    } else {
+
+        console.log("--> ELSE no: " + CART.length + ' i pantalla: ' + pantallaActual); // TEMP !! log
+
+        if (pantallaActual == 'Asistente fiestas') {
+            //$("#spBtnAmountPerson").text(precio_persona + " x");
+            $("#userIcoCarrito").show();
+            $("#spBtnAmountPerson").show();
+        } else {
+            $("#userIcoCarrito").hide();
+            $("#spBtnAmountPerson").hide();
+        }
+
+        $("#btn_finalizarpedido").show();
+
+        var totalRefresh = 0;
+
+        for (var i = 0; i < CART.length; i++) {
+            totalRefresh = totalRefresh + CART[i].quantity;
+        }
+
+        $("#spBtnPopupCartProducts").text(totalRefresh);
+        $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+
+        $("#circuloCantidad").show();
+        $("#spBtnPopupCartAmmount").show();
+
+        //console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
+    }
 
 }
