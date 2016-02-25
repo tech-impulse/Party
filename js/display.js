@@ -974,13 +974,10 @@ function displayProducts(data, originNode, originName, param, param4) {
                 data.products[c].typeproducts[d].original = true;
                 PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
                 PRODUCTS[d].original = true;
-                console.log(PRODUCTS[d]);
             }
         }
 
         TEMP_PRODUCTS = data.products;
-
-        //PRODUCTS = PRODUCTS.concat(data.products);
 
         COLUMS = parseInt(data.columns);
         ID_NODE = originNode;
@@ -1105,6 +1102,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
                     var count = pro_seccion.caracteristics.length;
                     var caracteristicas = pro_seccion.caracteristics;
+                    var units = 1;
 
                     for (var k = 0; k < count; k++) {
 
@@ -1112,6 +1110,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                         if (caracteristicas[k].type == "9") {
                             unidades = caracteristicas[k].name;
                             //console.log("Caracteristica encontrada");
+                            units = unidades.split(' ');
                             aux_carac = 0;
                             break;
                         } else {
@@ -1140,6 +1139,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
                         //console.log("No tiene unidades saltamos el producto")
                         unidades = "1 " + jsonIdiomas.cajas.unidades;
+                        units = 1;
                     }
 
                     if (pro_seccion.name == "") {
@@ -1157,13 +1157,28 @@ function displayProducts(data, originNode, originName, param, param4) {
                         var displayWarning = "";
                     }
 
+                    var unidades_prod = 1;
+
+                    if (parseInt(units[0]) >= parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) { //el articulo tiene suficientes para el grupo
+                        unidades_prod = 1;
+                    } else if (parseInt(units[0]) < parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) {
+                        unidades_prod = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0]));
+                    } else { //mas personas que unidades del articulo
+                        unidades_prod = 1;
+                    }
+
+                    if (aux_carac == 1) { //en el caso que no tengamos unidades se añade uno solo
+                        unidades_prod = 1;
+                    }
+
+
                     var imgLinkExt = pro_seccion.linkext.replace("wide", "bigPreview");
 
                     var element = block +
                         '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                         '<div style="position: relative;overflow:hidden">' +
-                        '<div id="circulo' + pro_seccion.id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
-                        '<label id="quantity' + pro_seccion.id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
+                        '<div id="circulo' + pro_seccion.id + '" class="circulo" style="width: 40px;height: 40px;position: absolute;">' +
+                        '<label id="quantity' + pro_seccion.id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">' + unidades_prod + '</label>' +
                         '</div>' +
                         '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
                         '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
@@ -1206,7 +1221,6 @@ function displayProducts(data, originNode, originName, param, param4) {
                 htmlContent_seccion = seccion_titulo + htmlContent;
                 break;
 
-
             case "vertical":
 
                 break;
@@ -1217,6 +1231,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
 
         } //for secciones
+
 
         $("#divContent").html(new_htmlContent);
         $("#divContent").trigger('create');
