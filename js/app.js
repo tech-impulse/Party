@@ -79,6 +79,13 @@ $(document).ready(function () {
         e.preventDefault(); // double tap - prevent the zoom
         // also synthesize click events we just swallowed up
         $(this).trigger('click').trigger('click');
+        
+        $('#principal').show();
+        $('#contentPopupScreenSaver').hide();
+
+        protector = setInterval(function () {
+            displayScreenSaver();
+        }, idleTime);
     });
 
    /* var elm = document.body; // or some selection of the element you want to disable

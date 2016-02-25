@@ -2928,54 +2928,112 @@ function loadMenu(data) {
 
 function displayPantallaIntermediaAsistDisfra(data) {
 
-    $("#divHeader_catalogo").show();
-    $("#divHeader_menuInicial").hide();
-    //console.log(data);
-    var info = data.node;
+    if (data) {
 
-    htmlContent = '<div id="page_count" style="display: block;padding-top: 1%;">' +
-        '<center>' +
-        '<img src="' + info.linkint + '" style="max-width: 30%;">' +
-        '<div style="width: 30%"><select id="select_sexo" data-theme="f" data-native-menu="false" style="background-color:green;" data-corners="false">' +
-        '</select></div>' +
-        '<div id="div_selectTalla" style="width: 30%;display:none"><select id="select_talla" data-theme="f" data-native-menu="false" data-corners="false">' +
-        '</select></div>' +
-        '<button style="width: 30%;" id="btn_continuar_dis" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</button>' +
-        '</center>' +
-        '</div>';
+        $("#divHeader_catalogo").show();
+        $("#divHeader_menuInicial").hide();
+        //console.log(data);
+        var info = data.node;
 
-    htmlContent = htmlContent;
-    $("#divContent").html(htmlContent);
-    $("#divContent").trigger('create');
+        htmlContent = '<div id="page_count" style="display: block;padding-top: 1%;">' +
+            '<center>' +
+            '<img src="' + info.linkint + '" style="max-width: 30%;">' +
+            '<div style="width: 30%"><select id="select_sexo" data-theme="f" data-native-menu="false" style="background-color:green;" data-corners="false">' +
+            '</select></div>' +
+            '<div id="div_selectTalla" style="width: 30%;display:none"><select id="select_talla" data-theme="f" data-native-menu="false" data-corners="false">' +
+            '</select></div>' +
+            '<button style="width: 30%;" id="btn_continuar_dis" onclick="displayProductos(' + info.id + ',\'' + info.name + '\')" data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</button>' +
+            '</center>' +
+            '</div>';
 
-    $("#select_sexo").attr("data-native-menu", "false");
-    $("#select_talla").attr("data-native-menu", "false");
+        htmlContent = htmlContent;
+        $("#divContent").html(htmlContent);
+        $("#divContent").trigger('create');
 
-    $('#select_sexo').scrollTop(5);
-    $('#select_talla').scrollTop(5);
+        $("#select_sexo").attr("data-native-menu", "false");
+        $("#select_talla").attr("data-native-menu", "false");
 
-    getGender(); //llamamos al webservice que tiene los sexos
+        $('#select_sexo').scrollTop(5);
+        $('#select_talla').scrollTop(5);
 
-    $('#select_sexo').change(function () {
-        var optionSelected = $(this).find('option:selected');
-        //var optTextSelected = optionSelected.text();
-        var optValueSelected = optionSelected.val();
-        //console.log("Opcion seleccionada es " + optValueSelected);
+        getGender(); //llamamos al webservice que tiene los sexos
 
-        if (optValueSelected != 0) {
+        $('#select_sexo').change(function () {
+            var optionSelected = $(this).find('option:selected');
+            //var optTextSelected = optionSelected.text();
+            var optValueSelected = optionSelected.val();
+            //console.log("Opcion seleccionada es " + optValueSelected);
 
-            getSize(optValueSelected);
-            $("#div_selectTalla").show();
+            if (optValueSelected != 0) {
 
-        } else {
-            $("#texto_popup").text(jsonIdiomas.popup_errores.opcion_no_valida);
-            $('#popupAlert').popup('open');
+                getSize(optValueSelected);
+                $("#div_selectTalla").show();
 
-            $("#div_selectTalla").hide();
-        }
-    });
+            } else {
+                $("#texto_popup").text(jsonIdiomas.popup_errores.opcion_no_valida);
+                $('#popupAlert').popup('open');
 
-    translateButtons(idiomStore);
+                $("#div_selectTalla").hide();
+            }
+        });
+
+        translateButtons(idiomStore);
+
+
+    } else {
+
+
+        $("#divHeader_catalogo").show();
+        $("#divHeader_menuInicial").hide();
+
+        htmlContent = '<div id="page_count" style="display: block;padding-top: 20%;">' +
+            '<center>' +
+            '<div style="width: 30%"><select id="select_sexo" data-theme="f" data-native-menu="false" style="background-color:green;" data-corners="false">' +
+            '</select></div>' +
+            '<div id="div_selectTalla" style="width: 30%;display:none"><select id="select_talla" data-theme="f" data-native-menu="false" data-corners="false">' +
+            '</select></div>' +
+            '<button style="width: 30%;" id="btn_continuar_dis" onclick="" data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</button>' +
+            '</center>' +
+            '</div>';
+
+        htmlContent = htmlContent;
+        $("#divContent").html(htmlContent);
+        $("#divContent").trigger('create');
+
+        $("#select_sexo").attr("data-native-menu", "false");
+        $("#select_talla").attr("data-native-menu", "false");
+
+        $('#select_sexo').scrollTop(5);
+        $('#select_talla').scrollTop(5);
+
+        getGender(); //llamamos al webservice que tiene los sexos
+
+        $('#select_sexo').change(function () {
+            var optionSelected = $(this).find('option:selected');
+            //var optTextSelected = optionSelected.text();
+            var optValueSelected = optionSelected.val();
+            //console.log("Opcion seleccionada es " + optValueSelected);
+
+            if (optValueSelected != 0) {
+
+                getSize(optValueSelected);
+                $("#div_selectTalla").show();
+
+            } else {
+                $("#texto_popup").text(jsonIdiomas.popup_errores.opcion_no_valida);
+                $('#popupAlert').popup('open');
+
+                $("#div_selectTalla").hide();
+            }
+        });
+
+        translateButtons(idiomStore);
+
+
+
+    }
+
+
 
 
 }
@@ -3611,7 +3669,7 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
         } else if (optValueSelected == 1) {
 
             $('#btn_continuar_dis_previo').click(function () {
-                
+                displayPantallaIntermediaAsistDisfra();
             });
 
         } else {

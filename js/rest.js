@@ -1469,6 +1469,8 @@ function sendEmail() {
   WS para imprimir listado de articulos del carrito
 ***************************************************************************/
 function imprimirPedido() {
+    
+    STORE.currencySymbol = "20AC";
 
     var dataSend = {
         carrito: CART,
@@ -1555,8 +1557,6 @@ function imprimirPedido() {
                 $('#popupAlert').popup('open');
 
             }
-
-
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
