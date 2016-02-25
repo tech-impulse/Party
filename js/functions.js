@@ -17,9 +17,11 @@ function checkOut() {
                 '<center>' +
                 '<h3> ¿Que deseas hacer con el pedido?</h3>' +
                 '<br>' +
-                '<a  data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
+                '<a  data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="mail" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                 '<br>' +
                 '<a  data-corners="false" style="width:300px" onclick="imprimirPedido();" data-role="button" data-icon="home" data-iconpos="right" data-theme="b"> Imprimir en tienda </a>' +
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="pedidoOnline();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b"> Pedido online </a>' +
                 '<br>' +
                 '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
                 '</center>' +
@@ -34,9 +36,11 @@ function checkOut() {
                 '<center>' +
                 '<h3> ¿Que deseas hacer con el pedido?</h3>' +
                 '<br>' +
-                '<a data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="bullets" data-iconpos="right" data-theme="b" >' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
+                '<a data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="mail" data-iconpos="right" data-theme="b" >' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
                 '<br>' +
                 '<a data-corners="false" style="width:300px" onclick="imprimirPedido();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b" > Imprimir en tienda </a>' +
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="pedidoOnline();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b"> Pedido online </a>' +
                 '<br>' +
                 '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
                 '</center>' +

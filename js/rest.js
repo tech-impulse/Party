@@ -1590,3 +1590,143 @@ function imprimirPedido() {
 
 
 }
+<<<<<<< HEAD
+=======
+
+/**
+*   pedidoOnline
+*
+*   funcion que envia los datos del carrito al webservice de pedido online
+*/
+function pedidoOnline()    {
+    
+    var dataSend = {
+        carrito: CART,
+        tienda: STORE.code
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        //async: false,
+        url: urlServices + 'pedidoOnline.php',
+        //dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+
+            console.log("Respuesta de pedidoOnline es:");
+            console.log(response);
+            
+            //temp para puesta en tienda
+            $("#texto_popup").text("Pedido enviado online");
+                EMAIL_USER = "";
+                INFO_USU = "";
+                $('#popupAlert').popup('open');
+                $('#email').val('');
+                $("#spBtnAmountPerson").text('');
+                $("#circuloCantidad").hide();
+                $("#spBtnPopupCartAmmount").hide();
+                $("#userIcoCarrito").hide();
+                $("#btn_finalizarpedido").hide();
+                CART = [];
+                nodeNames = [];
+                nodeIds = [];
+                nodeImg = [];
+                EMAIL_USER = "";
+                logout();
+                console.log("Enviamos el pedido online");
+
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('close');
+                    getNodes(0);
+                }, 1500);
+
+            if (parseInt(response.result) == parseInt(1)) {
+
+                /*$("#texto_popup").text("Pedido enviado online");
+                EMAIL_USER = "";
+                INFO_USU = "";
+                $('#popupAlert').popup('open');
+                $('#email').val('');
+                $("#spBtnAmountPerson").text('');
+                $("#circuloCantidad").hide();
+                $("#spBtnPopupCartAmmount").hide();
+                $("#userIcoCarrito").hide();
+                $("#btn_finalizarpedido").hide();
+                CART = [];
+                nodeNames = [];
+                nodeIds = [];
+                nodeImg = [];
+                EMAIL_USER = "";
+                logout();
+                console.log("Enviamos el pedido online");*/
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('close');
+                    getNodes(0);
+                }, 1500);
+
+            } else if (parseInt(response.result) == parseInt(0)) {      // ***** Cambiar en funcion del webservice a utilizar !!!!! ****
+
+                $("#texto_popup").text("No se ha podido enviar el pedido");
+                $('#popupAlert').popup('open');
+
+            } else if (parseInt(response.result) == parseInt(2)) {
+
+                $("#texto_popup").text("Problemas al generar el pedido");
+                $('#popupAlert').popup('open');
+
+            } else if (parseInt(response.result) == parseInt(0)) {
+
+                $("#texto_popup").text("Faltan datos para poder enviar el pedido");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                //restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+
+        }
+    });
+}
+
+/**
+*   cancelaPedido
+*
+*   funcion que vacia el carrito, vuelve a la pantalla inicial y esta logado, hace un logout.
+*/
+function cancelaPedido()    {
+    vaciaCarrito();
+    
+    if ( EMAIL_USER != "" )   {
+        EMAIL_USER = "";
+    }
+    
+    INFO_USU = "";
+    $('#popupAlert').popup('open');
+    $('#email').val('');
+    $("#spBtnAmountPerson").text('');
+    $("#circuloCantidad").hide();
+    $("#spBtnPopupCartAmmount").hide();
+    $("#userIcoCarrito").hide();
+    $("#btn_finalizarpedido").hide();
+    CART = [];
+    nodeNames = [];
+    nodeIds = [];
+    nodeImg = [];
+}
+>>>>>>> origin/master
