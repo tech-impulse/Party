@@ -2986,6 +2986,110 @@ function displayPantallaIntermediaAsistFiestas(data) {
     //console.log(data);
     console.log("Asistente de fiestas");
     console.log(data);
+    
+    htmlContent = '<div id="page_count" style="display: block;">' +
+                    '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a" style="width: 50%;height:550px;">' + 
+                            '<img src="' + data.linkint + '" style="width:90%; display:block; margin:10% auto;">' +
+                        '</div>' + 
+                        '<center>'+
+                        '<div class="ui-block-b" style="width: 50%;height:550px;">' + 
+                            '<h4 style="margin-top:25%;"><label id="label_num_per_fiesta" style="font-size:20px">' + jsonIdiomas.asistente_fiestas.label_num_per_fiesta + '</label></h4>' +
+                            '<div class="ui-grid-d" style="width: 75%;">' +
+                                '<div class="ui-block-a">' +
+                                    '<img src="img/a_fiesta_u_ico.jpg" />' + 
+                                '</div>' +
+                                '<div class="ui-block-b" onclick=\'$("#personas_fiesta").val("5");\'>' +
+                                    '<img src="img/a_fiesta_num_05.jpg" />' +
+                                '</div>' +
+                                '<div class="ui-block-c" onclick=\'$("#personas_fiesta").val("10");\'>' +
+                                    '<img src="img/a_fiesta_num_10.jpg" />' +
+                                '</div>' +
+                                '<div class="ui-block-d" onclick=\'$("#personas_fiesta").val("15");\'>' +
+                                    '<img src="img/a_fiesta_num_15.jpg" />' +
+                                '</div>' +
+                                '<div class="ui-block-e" onclick=\'$("#personas_fiesta").val("20");\'>' +
+                                    '<img src="img/a_fiesta_num_20.jpg" />' +
+                                '</div>' + 
+                            '</div>' + 
+                            '<div class="ui-grid-b" style="max-width:80%;">' + 
+                                '<div class="ui-block-a" style="width:20%;margin-right:3%;margin-left:2%;"><a  data-corners="false" id="menos_fiesta" onclick="addPeople(0);" data-role="button" data-theme="b">-</a></div>' +
+                                '<div class="ui-block-b" style="width:50%;margin-right:3%;margin-top: 4px;"><input data-corners="false" type="number" id="personas_fiesta" value="2" min="2" max="200" data-clear-btn="true"></div>' +
+                                '<div class="ui-block-c" style="width:20%;"><a data-corners="false" id="mas_fiesta" data-role="button" data-theme="b">+</a></div>' +
+                            '</div>'+
+                            '<a data-corners="false" style="width:68%;margin:0 auto;" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\');" data-role="button" data-theme="b">' + jsonIdiomas.asistente_fiestas.btn_continuar + '</a>' +  
+                        '</div>' + 
+                        
+                      '</center>' +
+                    '</div>' + 
+                '</div>';
+
+    /*htmlContent = '<div id="page_count" style="display: block;">' +
+        '<center>' +
+        '<br>' +
+        '<img src="' + data.linkint + '" style="max-width:30%;width:22%;">' +
+        '<h4><label id="label_num_per_fiesta" style="font-size:20px">' + jsonIdiomas.asistente_fiestas.label_num_per_fiesta + '</label></h4>' +
+        '<div class="ui-grid-b" style="max-width:25%;">' +
+        '<div class="ui-block-a" style="width:30%;margin-right:3%;"><a  data-corners="false" id="menos_fiesta" onclick="addPeople(0);" data-role="button" data-theme="b">-</a></div>' +
+        '<div class="ui-block-b" style="width:30%;margin-right:3%;margin-top: 4px;"><input data-corners="false" type="number" id="personas_fiesta" value="2" min="2" max="200" data-clear-btn="true"></div>' +
+        '<div class="ui-block-c" style="width:30%;"><a data-corners="false" id="mas_fiesta" data-role="button" data-theme="b">+</a></div>' +
+        '</div>' +
+        '<div class="ui-grid-c" style="width: 50%;">' +
+        '<div class="ui-block-a"><div id="circulo5" onclick=\'$("#personas_fiesta").val("5");\' class="circulo" style="width: 40px;height: 40px;">' +
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">5</label>' +
+        '</div></div>' +
+        '<div class="ui-block-b"><div id="circulo10" onclick=\'$("#personas_fiesta").val("10");\' class="circulo" style="width: 40px;height: 40px;">' +
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">10</label>' +
+        '</div></div>' +
+        '<div class="ui-block-c"><div id="circulo15" onclick=\'$("#personas_fiesta").val("15");\' class="circulo" style="width: 40px;height: 40px;">' +
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">15</label>' +
+        '</div></div>' +
+        '<div class="ui-block-d"><div id="circulo20" onclick=\'$("#personas_fiesta").val("20");\' class="circulo" style="width: 40px;height: 40px;">' +
+        '<label id="quantity" style="display: inline-block;margin-top: 7px;font-size:22px; color: white;">20</label>' +
+        '</div></div>' +
+        '</div>' +
+        '<a data-corners="false" style="max-width:15%;" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\');" data-role="button" data-theme="b">' + jsonIdiomas.asistente_fiestas.btn_continuar + '</a>' +
+        '</center>' +
+        '</div>';*/
+    
+    htmlContent = htmlContent + '</div>';
+    $("#divContent").html(htmlContent);
+    $("#divContent").trigger('create');
+
+    $("#mas_fiesta").click(function () {
+
+        var valor = $("#personas_fiesta").val();
+        var oparation = 1;
+        //console.log("Valor de personas es " + valor);
+
+        if (valor == "") valor = 0;
+
+        if (oparation == 0 && valor > 2) { //para que el minimo de personsa sea 2
+            if (valor != 0 || valor != "") {
+                valor = parseInt(valor) - 1;
+                $("#personas_fiesta").val(valor);
+                //console.log("Sumamos " + valor);
+            } else {
+                //console.log("No hacemos nada ya que es cero");
+            }
+        } else if (oparation == 1) {
+            valor = parseInt(valor) + 1;
+            //console.log("Sumamos " + valor);
+            $("#personas_fiesta").val(valor);
+        }
+    });
+
+    translateButtons(idiomStore);
+
+}
+
+
+/*
+function displayPantallaIntermediaAsistFiestas(data) {
+
+    //console.log(data);
+    console.log("Asistente de fiestas");
+    console.log(data);
 
     htmlContent = '<div id="page_count" style="display: block;">' +
         '<center>' +
@@ -3044,7 +3148,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
     translateButtons(idiomStore);
 
 }
-
+*/
 
 function displayRegistro() { //muestra el pop up de registro
 
