@@ -518,6 +518,7 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
                 }
 
 
+
                 if (pro_seccion.price_x_region[0].exclusiveWeb == 1 || pro_seccion.stock_x_store == 0) {
                     var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
                         '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
@@ -593,6 +594,11 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
 
     } //for secciones
 
+    CART.push(productAlter);
+    var precio = parseInt(productAlter.price_x_region[0].totalPrice);
+    var ammount = CART.ammount;
+    CART.ammount = parseInt(ammount) + (precio * parseInt(unidades_prod));
+
     $("#divContent").html(new_htmlContent);
     $("#divContent").trigger('create');
     //$("#btn_finalizarpedido").show();
@@ -600,6 +606,7 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
     $("#popupCargando").popup("close");
 
     updatePrecioTotalArticulo(); // TEMP !!
+    updateCarritoDisplay();
     translateButtons(idiomStore);
 }
 
