@@ -79,16 +79,18 @@ $(document).ready(function () {
         e.preventDefault(); // double tap - prevent the zoom
         // also synthesize click events we just swallowed up
         $(this).trigger('click').trigger('click');
-        
+
+        clearInterval(protector);
         $('#principal').show();
         $('#contentPopupScreenSaver').hide();
 
         protector = setInterval(function () {
             displayScreenSaver();
         }, idleTime);
+
     });
 
-   /* var elm = document.body; // or some selection of the element you want to disable
+    /* var elm = document.body; // or some selection of the element you want to disable
 
     var catcher = function (evt) {
         if (evt.touches.length > 2)
@@ -118,7 +120,7 @@ $(document).ready(function () {
         };
     })(jQuery);
 */
-    
+
     $('#popupCargando').on('popupafteropen', function () {
 
         console.log("Abrimos el popup de cargando");
@@ -319,9 +321,9 @@ $(document).ready(function () {
             $('#passwordsignup').addClass('colorText');
             $("#passwordsignup_confirm").attr("placeholder", jsonIdiomas.popup_errores.evento_click.contra_nocoinciden);
             $('#passwordsignup_confirm').addClass('colorText');
-            
-        } else if ( !revisarDireccionCorreo('emailsignup') ) {
-            
+
+        } else if (!revisarDireccionCorreo('emailsignup')) {
+
             $('#emailsignup').val("");
             $('#emailsignup').attr("placeholder", jsonIdiomas.popup_errores.evento_click.mail_no_valido);
             $('#emailsignup').addClass('colorText');
@@ -411,7 +413,7 @@ function openMenu() {
 function backPage(idNode, nodeName, linkint) {
 
     //console.log("Imagen: " + linkint);
-    
+
     PRODUCTS = [];
     TEMP_PRODUCTS = [];
 
@@ -657,8 +659,8 @@ function carrito(id_producto, operacion, precio) {
 *********************************************************************************************************************/
 
 function addToCart(item, param) {
-    console.log('-------------> addToCart con item:' + item + ' param: ' + param);  // TEMP !!
-    
+    console.log('-------------> addToCart con item:' + item + ' param: ' + param); // TEMP !!
+
     var product;
     var foundInCart = 0;
     //var i = "";
@@ -698,7 +700,7 @@ function addToCart(item, param) {
     for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
 
         //console.log('-> LISTA DE PRODUCTOS comparamos id: ' + PRODUCTS[i]['id'] + ' con item: ' + item); // TEMP !!
-        
+
         if (PRODUCTS[i]['id'] == item) { //si coinciden lo añadimos al carrito
 
             //console.log("-->ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
@@ -707,7 +709,7 @@ function addToCart(item, param) {
 
             for (var j = 0; j < CART.length; j++) {
                 //console.log('-> CARRITO comparamos id: ' + CART[j]['id'] + ' con item: ' + item); // TEMP !!
-                
+
                 if (CART[j]['id'] == item) {
                     //console.log("->ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
                     foundInCart = 1;
@@ -731,7 +733,7 @@ function addToCart(item, param) {
         } //if
     } //for
 
-    
+
     if (foundInCart == 0) {
         // console.log('---> NO SE ENCONTRO PRODUCTO --> foundInCart: ' + foundInCart); // TEMP !!
 
@@ -762,9 +764,9 @@ function addToCart(item, param) {
 
         displayItemOperations(item, product.quantity);
     }
-    
+
     updatePrecioTotalArticulo(); // TEMP !!
-    
+
     if (CART.length > 0) {
         $("#btn_finalizarpedido").show();
     }
@@ -882,7 +884,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
 
 
-    refreshDisplayProducts(TEMP_PRODUCTS,product,id_produc);
+    refreshDisplayProducts(TEMP_PRODUCTS, product, id_produc);
 
 }
 
@@ -954,76 +956,72 @@ function enviarSugerencia() {
     if (sug_inci == undefined) {
         sug_inci = "incidencia";
     }
-    var nombre = $("#nombre").val();  // Obligatorio
-    var correo = $("#correo").val();  // Obligatorio
-    
+    var nombre = $("#nombre").val(); // Obligatorio
+    var correo = $("#correo").val(); // Obligatorio
+
     var provincia = $("#provincia").val();
     var poblacion = $("#poblacion").val();
-    
-    var t_sugere = $("#tipo_sugenrencia").val();  // Obligatorio
-    
+
+    var t_sugere = $("#tipo_sugenrencia").val(); // Obligatorio
+
     var telefono = $("#telf").val();
     var fecha_naci = $("#fecha_naci").val();
-    
-    var sugerencias = $("#sugerencias").val();  // Obligatorio
+
+    var sugerencias = $("#sugerencias").val(); // Obligatorio
 
     console.log("Enviar sugenrencia. Nombre " + nombre + " Correo " + correo + " Provincia " + provincia + " poblacion " + poblacion + " telefono " + telefono + " fecha_naci " + fecha_naci + " sugerencia " + sugerencias);
 
     if (nombre != "") {
         if (correo != "") {
-            if ( revisarDireccionCorreo('correo') ) {
-                  if (t_sugere != "") {
-                       if (sugerencias != "") {
+            if (revisarDireccionCorreo('correo')) {
+                if (t_sugere != "") {
+                    if (sugerencias != "") {
 
-                            console.log("Llegamos hasta el final");
+                        console.log("Llegamos hasta el final");
 
-                            var info = {
-                                name: nombre,
-                                email: correo,
-                                province: provincia,
-                                city: poblacion,
-                                phone: telefono,
-                                birthday: fecha_naci,
-                                about_sugg: t_sugere,
-                                type_sugg: sug_inci,
-                                suggestion: sugerencias
-                            };
+                        var info = {
+                            name: nombre,
+                            email: correo,
+                            province: provincia,
+                            city: poblacion,
+                            phone: telefono,
+                            birthday: fecha_naci,
+                            about_sugg: t_sugere,
+                            type_sugg: sug_inci,
+                            suggestion: sugerencias
+                        };
 
-                            sendSugerencias(info);
-
-                        } else {
-
-                            $("#texto_popup").text("Escriba algo en el campo petición/sugerencia");
-                            $('#popupAlert').popup('open');
-                            //console.log("No has escrito la sugerencia1");
-
-                        }
+                        sendSugerencias(info);
 
                     } else {
 
-                        $("#texto_popup").text("Escriba una sugerencia o incidencia");
+                        $("#texto_popup").text("Escriba algo en el campo petición/sugerencia");
                         $('#popupAlert').popup('open');
-                        //console.log("No has escrito la sugerencia2");
+                        //console.log("No has escrito la sugerencia1");
 
                     }
-            }
-            else    {
+
+                } else {
+
+                    $("#texto_popup").text("Escriba una sugerencia o incidencia");
+                    $('#popupAlert').popup('open');
+                    //console.log("No has escrito la sugerencia2");
+
+                }
+            } else {
                 $("#texto_popup").text("Escriba una dirección de correo válida correcta");
                 $('#popupAlert').popup('open');
                 //console.log("No has escrito la sugerencia2");
             }
-        }
-        else    {
+        } else {
             $("#texto_popup").text("Escriba un correo electronico");
             $('#popupAlert').popup('open');
             //console.log("No has escrito el correo electronico");
         }
-    }
-    else    {
+    } else {
         $("#texto_popup").text("Escriba el nombre");
         $('#popupAlert').popup('open');
         //console.log("No has escrito el nombre");
     }
 
 }
-
