@@ -652,7 +652,7 @@ function updateCarritoDisplay() {
     if (CART.length < 1) {
         $("#popupListItems").popup("close");
 
-        $("#spBtnAmountPerson").text('');
+        //$("#spBtnAmountPerson").text(''); //TEMP 
 
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
@@ -664,7 +664,7 @@ function updateCarritoDisplay() {
     } else {
 
         if (pantallaActual == 'Asistente fiestas') {
-            $("#spBtnAmountPerson").text(precio_persona + " x");
+            //$("#spBtnAmountPerson").text(precio_persona + " x"); //TEMP
             $("#userIcoCarrito").show();
 
 
@@ -2893,11 +2893,15 @@ function loadMenu(data) {
 
     var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width:30%"><img id="img_cesta" src="css/icons/cesta.png" width="75%" style="margin-top:10px;margin-left: 20%"></div>' +
-        '<div class="ui-block-b" style="margin-top:5px;"><div id="circuloCantidad" class="circulo" style="width: 25px; height: 25px; position: absolute; margin-left:-20px;z-index:5; display:none">' +
-        '<label id="spBtnPopupCartProducts" style="display:block;margin-top:1px;font-size: 18px;color: white;">0</label>' +
-        '</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' +
-        '<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;"></div>' +
+        '<div class="ui-block-a" style="width:30%;position: relative;">'+
+        '<div style="position: relative;margin-top:10px;margin-left: 20%;z-index:-1;float: left;"><img id="img_cesta" src="css/icons/cesta.png" style="width: 50px;height: 50px;"></div>'+
+        '<div id="circuloCantidad" class="circulo" style="float: right;width: 25px; height: 25px;z-index:25;display:none;position: absolute;top: 0px;margin-left: 69%;">' +
+        '<label id="spBtnPopupCartProducts" style="margin-top:3%;font-size: 18px;color: white;">0</label></div>' +
+        '</div>' +
+        '<div class="ui-block-b" style="margin-top: 10%;">'+
+        //'</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + //TEMP
+        '<span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span></div>' +
+        //'<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;">' +
         '</div></a>';
 
 
@@ -3405,7 +3409,7 @@ function displayPopUpPantallaSugerencias() {
 
         $("#popupListItems").popup("close");
 
-        $("#spBtnAmountPerson").text('');
+        //$("#spBtnAmountPerson").text(''); //TEMP
 
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
@@ -3419,12 +3423,12 @@ function displayPopUpPantallaSugerencias() {
         console.log("--> ELSE no: " + CART.length + ' i pantalla: ' + pantallaActual); // TEMP !! log
 
         if (pantallaActual == 'Asistente fiestas') {
-            //$("#spBtnAmountPerson").text(precio_persona + " x");
+           
             $("#userIcoCarrito").show();
-            $("#spBtnAmountPerson").show();
+            //$("#spBtnAmountPerson").show(); //TEMP
         } else {
             $("#userIcoCarrito").hide();
-            $("#spBtnAmountPerson").hide();
+            //$("#spBtnAmountPerson").hide(); //TEMP
         }
 
         $("#btn_finalizarpedido").show();
@@ -3517,7 +3521,7 @@ function displayPantallaSugerencias() {
 
         $("#popupListItems").popup("close");
 
-        $("#spBtnAmountPerson").text('');
+        //$("#spBtnAmountPerson").text(''); //TEMP
 
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
@@ -3531,12 +3535,12 @@ function displayPantallaSugerencias() {
         console.log("--> ELSE no: " + CART.length + ' i pantalla: ' + pantallaActual); // TEMP !! log
 
         if (pantallaActual == 'Asistente fiestas') {
-            //$("#spBtnAmountPerson").text(precio_persona + " x");
+            
             $("#userIcoCarrito").show();
-            $("#spBtnAmountPerson").show();
+            //$("#spBtnAmountPerson").show(); //TEMP
         } else {
             $("#userIcoCarrito").hide();
-            $("#spBtnAmountPerson").hide();
+            //$("#spBtnAmountPerson").hide(); //TEMP
         }
 
         $("#btn_finalizarpedido").show();
@@ -3719,7 +3723,7 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
         console.log("--> IF si: " + CART.length); // TEMP !! log
 
         $("#popupListItems").popup("close");
-        $("#spBtnAmountPerson").text('');
+        //$("#spBtnAmountPerson").text(''); //TEMP
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
         $("#userIcoCarrito").hide();
@@ -3731,12 +3735,12 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
         console.log("--> ELSE no: " + CART.length + ' i pantalla: ' + pantallaActual); // TEMP !! log
 
         if (pantallaActual == 'Asistente fiestas') {
-            //$("#spBtnAmountPerson").text(precio_persona + " x");
+            
             $("#userIcoCarrito").show();
-            $("#spBtnAmountPerson").show();
+            //$("#spBtnAmountPerson").show(); //TEMP
         } else {
             $("#userIcoCarrito").hide();
-            $("#spBtnAmountPerson").hide();
+            //$("#spBtnAmountPerson").hide(); //TEMP
         }
 
         $("#btn_finalizarpedido").show();

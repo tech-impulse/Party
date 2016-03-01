@@ -385,7 +385,7 @@ function cancelaPedido()    {
     INFO_USU = "";
     $('#popupAlert').popup('open');
     $('#email').val('');
-    $("#spBtnAmountPerson").text('');
+    //$("#spBtnAmountPerson").text(''); //TEMP
     $("#circuloCantidad").hide();
     $("#spBtnPopupCartAmmount").hide();
     $("#userIcoCarrito").hide();

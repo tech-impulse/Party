@@ -910,7 +910,7 @@ function vaciaCarrito() {
 
     CART = [];
 
-    $("#spBtnAmountPerson").text('');
+    //$("#spBtnAmountPerson").text(''); //TEMP
     $("#circuloCantidad").hide();
     $("#spBtnPopupCartAmmount").hide();
     $("#userIcoCarrito").hide();

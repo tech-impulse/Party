@@ -179,7 +179,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     console.log('-> getNodes | pantalla actual: ' + pantallaActual + ' AUX: ' + AUX + ' CANRT length ' + CART.length);
 
-    $("#spBtnAmountPerson").text(''); // TEMP !!
+    //$("#spBtnAmountPerson").text(''); // TEMP !!
     $("#userIcoCarrito").hide(); // TEMP !!
 
     /*if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
@@ -202,7 +202,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
     if (CART.length < 1) { // TEMP !!!
         $("#popupListItems").popup("close");
 
-        $("#spBtnAmountPerson").text('');
+        //$("#spBtnAmountPerson").text(''); //TEMP
 
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
@@ -212,13 +212,6 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
         $("#img_cesta").attr("src", "css/icons/cesta.png");
     } else {
-
-        /*if (pantallaActual == 'Asistente fiestas') {
-            //$("#spBtnAmountPerson").text(precio_persona + " x");
-            $("#userIcoCarrito").show();
-
-            $("#btn_finalizarpedido").show();
-        }*/
 
         var totalRefresh = 0;
 
@@ -327,8 +320,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     if (CART.length > 0 && num_personas_fiesta > 0) {
                         var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
 
-                        $("#spBtnAmountPerson").text(precio_persona + " x");
-                        $("#spBtnAmountPerson").show();
+                        //$("#spBtnAmountPerson").text(precio_persona + " x"); //TEMP
+                        //$("#spBtnAmountPerson").show(); //TEMP
                         $("#userIcoCarrito").show();
 
                         //$("#btn_finalizarpedido").show();
@@ -1406,7 +1399,7 @@ function sendEmail() {
                     INFO_USU = "";
                     $('#popupAlert').popup('open');
                     $('#email').val('');
-                    $("#spBtnAmountPerson").text('');
+                    //$("#spBtnAmountPerson").text(''); //TEMP
                     $("#circuloCantidad").hide();
                     $("#spBtnPopupCartAmmount").hide();
                     $("#userIcoCarrito").hide();
@@ -1494,7 +1487,7 @@ function imprimirPedido() {
             INFO_USU = "";
             $('#popupAlert').popup('open');
             $('#email').val('');
-            $("#spBtnAmountPerson").text('');
+            //$("#spBtnAmountPerson").text(''); //TEMP
             $("#circuloCantidad").hide();
             $("#spBtnPopupCartAmmount").hide();
             $("#userIcoCarrito").hide();
@@ -1521,7 +1514,7 @@ function imprimirPedido() {
                 INFO_USU = "";
                 $('#popupAlert').popup('open');
                 $('#email').val('');
-                $("#spBtnAmountPerson").text('');
+                //$("#spBtnAmountPerson").text(''); //TEMP
                 $("#circuloCantidad").hide();
                 $("#spBtnPopupCartAmmount").hide();
                 $("#userIcoCarrito").hide();
@@ -1610,7 +1603,7 @@ function pedidoOnline(){
                 INFO_USU = "";
                 $('#popupAlert').popup('open');
                 $('#email').val('');
-                $("#spBtnAmountPerson").text('');
+                //$("#spBtnAmountPerson").text(''); //TEMP
                 $("#circuloCantidad").hide();
                 $("#spBtnPopupCartAmmount").hide();
                 $("#userIcoCarrito").hide();
