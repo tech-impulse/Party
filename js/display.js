@@ -1036,7 +1036,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             //console.log("Entramos en la nueva visualizacion 2, jota es " + j);
             //console.log(aux[j]);
 
-            seccion_titulo = "<div id='tituloSeccion' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
+            seccion_titulo = "<div id='tituloSeccion"+j+"' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;display: inline-table;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
 
             switch (parseInt(data.columns)) {
             case 1:
@@ -2413,7 +2413,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + aux_prod.quantity + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;;width: 100%;"></div>' +
+        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;max-height: 350px;"></div>' +
         '<div class="ui-block-b">' +
         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
         '<p><strong style="font-size: 15px;margin-top:5px;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
@@ -2667,7 +2667,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<li>' +
                         '<div class="ui-grid-a">' +
                         //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;max-height: 350px;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
@@ -2768,7 +2768,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;max-height: 350px;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
