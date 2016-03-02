@@ -316,6 +316,9 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
 
     console.log(data);
     console.log(productAlter);
+
+    PRODUCTS.push(productAlter);
+
     AUX = 1;
 
     var htmlContent = "";
@@ -560,10 +563,10 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
-                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');">Añadir</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');" style="' + (productAlter.id == pro_seccion.id ? displayNone : nada) + '">Añadir</button>' +
+                '</div>' +
+                '</div>' +
+                '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="'+(productAlter.id != pro_seccion.id ? displayNone : nada)+'">' +
                     '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + pro_seccion.id + ',-1);" >-</button></div>' +
                     '<div class="ui-block-b" style="width:10%;"></div>' +
                     '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + pro_seccion.id + ',1);">+</button></div>' +
@@ -636,13 +639,14 @@ function updatePrecioTotalArticulo() {
  *       en funcion de los productos comprados i la pantalla actual.
  */
 function updateCarritoDisplay() {
+    
     var total = 0;
 
     for (var i = 0; i < CART.length; i++) {
         total = total + CART[i].quantity;
     }
 
-    var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
+    //var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
 
     $("#spBtnPopupCartProducts").text(total);
     $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
@@ -650,6 +654,7 @@ function updateCarritoDisplay() {
     $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
 
     if (CART.length < 1) {
+        
         $("#popupListItems").popup("close");
 
         //$("#spBtnAmountPerson").text(''); //TEMP 
@@ -661,14 +666,13 @@ function updateCarritoDisplay() {
         $("#btn_finalizarpedido").hide();
 
         $("#img_cesta").attr("src", "css/icons/cesta.png");
+        
     } else {
 
-        if (pantallaActual == 'Asistente fiestas') {
+        //if (pantallaActual == 'Asistente fiestas') {
             //$("#spBtnAmountPerson").text(precio_persona + " x"); //TEMP
-            $("#userIcoCarrito").show();
-
-
-        }
+            //$("#userIcoCarrito").show();
+        //}
 
         $("#btn_finalizarpedido").show();
         $("#circuloCantidad").show();
@@ -1036,7 +1040,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             //console.log("Entramos en la nueva visualizacion 2, jota es " + j);
             //console.log(aux[j]);
 
-            seccion_titulo = "<div id='tituloSeccion"+j+"' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;display: inline-table;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
+            seccion_titulo = "<div id='tituloSeccion" + j + "' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;display: inline-table;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
 
             switch (parseInt(data.columns)) {
             case 1:
@@ -2293,12 +2297,12 @@ function displayPopupItemList() { //cambios jordi
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background: rgb(154, 205, 50);"><h1>' + jsonIdiomas.popup_errores.tituloPopUp + '</h1></div>';
     var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div></div>';
 
-    var labelsBar = '<div data-role="header" style="background-color:#ffffff; height:30px;">' + 
-                        '<div class="ui-block-e" style="width:8%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;font-weight: bolder;">WEB</label></div>' + 
-                        '<div class="ui-block-e" style="width:7%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;">Tienda</label></div>' + 
-                        '<div class="ui-block-e" style="width:14%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center; font-weight: bolder;">STOCK EN:</label></div>' + 
-                    '</div>';
-   
+    var labelsBar = '<div data-role="header" style="background-color:#ffffff; height:30px;">' +
+        '<div class="ui-block-e" style="width:8%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;font-weight: bolder;">WEB</label></div>' +
+        '<div class="ui-block-e" style="width:7%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;">Tienda</label></div>' +
+        '<div class="ui-block-e" style="width:14%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center; font-weight: bolder;">STOCK EN:</label></div>' +
+        '</div>';
+
     var primeraVez = true;
 
     for (var i = 0; i < CART.length; i++) {
@@ -2893,14 +2897,14 @@ function loadMenu(data) {
 
     var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a" style="width:30%;position: relative;">'+
-        '<div style="position: relative;margin-top:10px;margin-left: 20%;z-index:-1;float: left;"><img id="img_cesta" src="css/icons/cesta.png" style="width: 50px;height: 50px;"></div>'+
+        '<div class="ui-block-a" style="width:30%;position: relative;">' +
+        '<div style="position: relative;margin-top:10px;margin-left: 20%;z-index:-1;float: left;"><img id="img_cesta" src="css/icons/cesta.png" style="width: 50px;height: 50px;"></div>' +
         '<div id="circuloCantidad" class="circulo" style="float: right;width: 25px; height: 25px;z-index:25;display:none;position: absolute;top: 0px;margin-left: 69%;">' +
         '<label id="spBtnPopupCartProducts" style="margin-top:3%;font-size: 18px;color: white;">0</label></div>' +
         '</div>' +
-        '<div class="ui-block-b" style="margin-top: 10%;">'+
+        '<div class="ui-block-b" style="margin-top: 10%;">' +
         //'</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + //TEMP
-        '<span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span></div>' +
+        '<label style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</label></div>' +
         //'<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;">' +
         '</div></a>';
 
@@ -3423,7 +3427,7 @@ function displayPopUpPantallaSugerencias() {
         console.log("--> ELSE no: " + CART.length + ' i pantalla: ' + pantallaActual); // TEMP !! log
 
         if (pantallaActual == 'Asistente fiestas') {
-           
+
             $("#userIcoCarrito").show();
             //$("#spBtnAmountPerson").show(); //TEMP
         } else {
@@ -3535,7 +3539,7 @@ function displayPantallaSugerencias() {
         console.log("--> ELSE no: " + CART.length + ' i pantalla: ' + pantallaActual); // TEMP !! log
 
         if (pantallaActual == 'Asistente fiestas') {
-            
+
             $("#userIcoCarrito").show();
             //$("#spBtnAmountPerson").show(); //TEMP
         } else {
@@ -3735,7 +3739,7 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
         console.log("--> ELSE no: " + CART.length + ' i pantalla: ' + pantallaActual); // TEMP !! log
 
         if (pantallaActual == 'Asistente fiestas') {
-            
+
             $("#userIcoCarrito").show();
             //$("#spBtnAmountPerson").show(); //TEMP
         } else {

@@ -110,14 +110,12 @@ function addCartAsistFiestas(prod_id) {
                     break;
 
                 }
-
             }
 
             console.log("Aux es " + aux); // si es cerno no tiene unidades pondremos que es uno
 
             if (aux == 0 && PRODUCTS[k].name != "" && PRODUCTS[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
                 addToCart(PRODUCTS[k].id, 1);
-
             }
             
             break;

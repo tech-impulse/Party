@@ -720,7 +720,8 @@ function getProductsClassified(idNode, nodeName, info_aux) {
 
     request = $.ajax({
         data: dataSend,
-        url: urlServices + 'getProductsClassified.php',
+        //url: urlServices + 'getProductsClassified.php',
+        url: urlServices + 'getProductsClassifiedCategory.php',
         dataType: 'json',
         type: 'POST',
         //async:false,
