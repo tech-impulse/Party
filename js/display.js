@@ -3091,9 +3091,23 @@ function displayPantallaIntermediaAsistDisfra(data) {
                 getSize(optValueSelected);
                 $("#div_selectTalla").show();
 
-                $("#btn_continuar_dis").click(function () {//TEMP
+                $("#btn_continuar_dis").click(function () { //TEMP
 
-                    getCostumesAge(idNode, nodeName, info_aux);
+
+                    var sexo = $("select#select_sexo option").filter(":selected").val(); // en los dos selects en caso de que no haya seleccionado nada sera cero
+                    var talla = $("select#select_talla option").filter(":selected").val();
+
+                    if (sexo != 0 && talla != 0) {
+
+                        var info_aux = {
+                            talla: talla,
+                            sexo: sexo
+                        }
+
+                        getCostumesAge(info_aux);
+
+                    }
+                    
                 });
 
             } else {

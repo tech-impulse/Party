@@ -700,22 +700,23 @@ function getProducts(idNode, nodeName, info_aux) {
     });
 }
 
-function getCostumesAge(idNode, nodeName, info_aux) {
+function getCostumesAge(info_aux) {
 
     $("#popupCargando").popup("open");
 
     console.log("Venimos del asist. de disfraces");
     pantallaActual = "Asistente disfraces";
     var dataSend = {
+        id: 4,
         lang: language,
         origin: origin,
         store: STORE.id,
         gender: info_aux.sexo,
-        size: info_aux.talla,
-        id: idNode
+        size: info_aux.talla
     };
 
-    //console.log("Enviamos el ajax");
+    console.log("Enviamos el ajax");
+    console.log(dataSend);
 
     request = $.ajax({
         data: dataSend,
@@ -731,7 +732,7 @@ function getCostumesAge(idNode, nodeName, info_aux) {
             if (response.result == 1) {
 
                 //console.log(response);
-                restOk_products(response, "nodes", idNode, nodeName, info_aux);
+                restOk_products(response, "nodes", 4, "Hola",info_aux );
 
             } else if (response.result == 0) {
 
