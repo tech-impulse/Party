@@ -564,9 +564,9 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
                     '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');" style="' + (productAlter.id == pro_seccion.id ? displayNone : nada) + '">Añadir</button>' +
-                '</div>' +
-                '</div>' +
-                '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="'+(productAlter.id != pro_seccion.id ? displayNone : nada)+'">' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="' + (productAlter.id != pro_seccion.id ? displayNone : nada) + '">' +
                     '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + pro_seccion.id + ',-1);" >-</button></div>' +
                     '<div class="ui-block-b" style="width:10%;"></div>' +
                     '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + pro_seccion.id + ',1);">+</button></div>' +
@@ -597,10 +597,19 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
 
     } //for secciones
 
-    CART.push(productAlter);
-    var precio = parseInt(productAlter.price_x_region[0].totalPrice);
-    var ammount = CART.ammount;
-    CART.ammount = parseInt(ammount) + (precio * parseInt(unidades_prod));
+
+    console.log("Len");
+    console.log(CART.length);
+    var precio = productAlter.price_x_region[0].totalPrice;
+
+    if (CART.length < 1) {
+        CART.push(productAlter);
+        CART.ammount = parseInt(precio * parseInt(productAlter.quantity));
+    } else {
+        CART.push(productAlter);
+        var ammount = parseInt(CART.ammount);
+        CART.ammount = ammount + parseInt(precio * parseInt(productAlter.quantity));
+    }
 
     $("#divContent").html(new_htmlContent);
     $("#divContent").trigger('create');
@@ -639,7 +648,7 @@ function updatePrecioTotalArticulo() {
  *       en funcion de los productos comprados i la pantalla actual.
  */
 function updateCarritoDisplay() {
-    
+
     var total = 0;
 
     for (var i = 0; i < CART.length; i++) {
@@ -654,7 +663,7 @@ function updateCarritoDisplay() {
     $("#spPopupTotalAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
 
     if (CART.length < 1) {
-        
+
         $("#popupListItems").popup("close");
 
         //$("#spBtnAmountPerson").text(''); //TEMP 
@@ -666,12 +675,12 @@ function updateCarritoDisplay() {
         $("#btn_finalizarpedido").hide();
 
         $("#img_cesta").attr("src", "css/icons/cesta.png");
-        
+
     } else {
 
         //if (pantallaActual == 'Asistente fiestas') {
-            //$("#spBtnAmountPerson").text(precio_persona + " x"); //TEMP
-            //$("#userIcoCarrito").show();
+        //$("#spBtnAmountPerson").text(precio_persona + " x"); //TEMP
+        //$("#userIcoCarrito").show();
         //}
 
         $("#btn_finalizarpedido").show();
@@ -2166,7 +2175,34 @@ function displayItemOperations(id, param, position, borrarItem) {
     } else {
         $("#btnAddProduct" + id).show();
         $("#grid" + id).hide();
-        $("#circulo" + id).hide();
+        //$("#circulo" + id).text("2");
+        for (var i = 0; i < CART.length; i++) { //TEMP añadimos la cantidad
+            
+            if (CART[i].id == id) {
+
+                for (var k = 0; k < CART[i].caracteristics.length; k++) {
+
+                    var caracteristicas = CART[i].caracteristics[k];
+
+                    if (caracteristicas.type == "9") {
+
+                        var unidades = caracteristicas.name;
+                        units = unidades.split(' ');
+                        break;
+
+                    } else {
+
+                        units = 1;
+                        continue;
+
+                    }
+                }
+
+                var cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units));
+                $("#quantity" + id).text(cantidad);
+            }
+        }
+
 
         //console.log('-------> No ocultamos el precio -----------'); // TEMP !!
 
@@ -2904,7 +2940,7 @@ function loadMenu(data) {
         '</div>' +
         '<div class="ui-block-b" style="margin-top: 10%;">' +
         //'</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + //TEMP
-        '<label style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</label></div>' +
+        '<label style="margin-left:15px;display:none;" id="spBtnPopupCartAmmount">0 €</label></div>' +
         //'<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;">' +
         '</div></a>';
 

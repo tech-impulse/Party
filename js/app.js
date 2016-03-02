@@ -892,7 +892,7 @@ function deleteItemCart(position) {
     console.log("Eliminar item en posicion " + position + " id: " + CART[position].id);
     $("#labelPrecioTotalProducto" + CART[position].id).text("");
     console.log("Eliminamos el " + CART[position]);
-    displayItemOperations(CART[position].id, 0, position, "borrar"); // Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
+    displayItemOperations(CART[position].id, 0, position, "borrar"); //Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
 }
 
 /**
