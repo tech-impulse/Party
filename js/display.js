@@ -3091,7 +3091,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
                 getSize(optValueSelected);
                 $("#div_selectTalla").show();
 
-                $("#btn_continuar_dis").click(function () {
+                $("#btn_continuar_dis").click(function () {//TEMP
 
                     getCostumesAge(idNode, nodeName, info_aux);
                 });
