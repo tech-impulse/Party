@@ -2177,7 +2177,7 @@ function displayItemOperations(id, param, position, borrarItem) {
         $("#grid" + id).hide();
         //$("#circulo" + id).text("2");
         for (var i = 0; i < CART.length; i++) { //TEMP añadimos la cantidad
-            
+
             if (CART[i].id == id) {
 
                 for (var k = 0; k < CART[i].caracteristics.length; k++) {
@@ -3090,6 +3090,11 @@ function displayPantallaIntermediaAsistDisfra(data) {
 
                 getSize(optValueSelected);
                 $("#div_selectTalla").show();
+
+                $("#btn_continuar_dis").click() {
+
+                    getCostumesAge(idNode, nodeName, info_aux);
+                }
 
             } else {
                 $("#texto_popup").text(jsonIdiomas.popup_errores.opcion_no_valida);

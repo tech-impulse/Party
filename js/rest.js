@@ -700,6 +700,90 @@ function getProducts(idNode, nodeName, info_aux) {
     });
 }
 
+function getCostumesAge(idNode, nodeName, info_aux) {
+
+    $("#popupCargando").popup("open");
+
+    console.log("Venimos del asist. de disfraces");
+    pantallaActual = "Asistente disfraces";
+    var dataSend = {
+        lang: language,
+        origin: origin,
+        store: STORE.id,
+        gender: info_aux.sexo,
+        size: info_aux.talla,
+        id: idNode
+    };
+
+    //console.log("Enviamos el ajax");
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'getCostumesAge.php',
+        dataType: 'json',
+        type: 'POST',
+        //async:false,
+        timeout: 25000, //10 seg
+        success: function (response) {
+            console.log("Respuesta: ");
+            console.log(response);
+
+            if (response.result == 1) {
+
+                //console.log(response);
+                restOk_products(response, "nodes", idNode, nodeName, info_aux);
+
+            } else if (response.result == 0) {
+
+                //console.log("No hay productos para este nodo");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("No hay productos...");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+            } else if (response.result == -1) {
+
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Error... Resultado -1");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Error de TimeOut...");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#popupCargando").popup("close");
+                $("#texto_popup").text("Sin conexion a internet");
+
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 250);
+
+            }
+        },
+    });
+}
+
 function getProductsClassified(idNode, nodeName, info_aux) {
 
     $("#popupCargando").popup("open");
@@ -1463,7 +1547,7 @@ function sendEmail() {
   WS para imprimir listado de articulos del carrito
 ***************************************************************************/
 function imprimirPedido() {
-    
+
     STORE.currencySymbol = "20AC";
 
     var dataSend = {
@@ -1576,12 +1660,12 @@ function imprimirPedido() {
 }
 
 /**
-*   pedidoOnline
-*
-*   funcion que envia los datos del carrito al webservice de pedido online
-*/
-function pedidoOnline(){
-    
+ *   pedidoOnline
+ *
+ *   funcion que envia los datos del carrito al webservice de pedido online
+ */
+function pedidoOnline() {
+
     var dataSend = {
         carrito: CART,
         tienda: STORE.code
@@ -1597,41 +1681,41 @@ function pedidoOnline(){
 
             console.log("Respuesta de pedidoOnline es:");
             console.log(response);
-            
+
             //temp para puesta en tienda
             $("#texto_popup").text("Pedido enviado online");
-                EMAIL_USER = "";
-                INFO_USU = "";
-                $('#popupAlert').popup('open');
-                $('#email').val('');
-                //$("#spBtnAmountPerson").text(''); //TEMP
-                $("#circuloCantidad").hide();
-                $("#spBtnPopupCartAmmount").hide();
-                $("#userIcoCarrito").hide();
-                $("#btn_finalizarpedido").hide();
-                CART = [];
-                nodeNames = [];
-                nodeIds = [];
-                nodeImg = [];
-                EMAIL_USER = "";
-                logout();
-                console.log("Enviamos el pedido online");
+            EMAIL_USER = "";
+            INFO_USU = "";
+            $('#popupAlert').popup('open');
+            $('#email').val('');
+            //$("#spBtnAmountPerson").text(''); //TEMP
+            $("#circuloCantidad").hide();
+            $("#spBtnPopupCartAmmount").hide();
+            $("#userIcoCarrito").hide();
+            $("#btn_finalizarpedido").hide();
+            CART = [];
+            nodeNames = [];
+            nodeIds = [];
+            nodeImg = [];
+            EMAIL_USER = "";
+            logout();
+            console.log("Enviamos el pedido online");
 
 
-                setTimeout(function () {
-                    $('#popupAlert').popup('close');
-                    getNodes(0);
-                }, 1500);
+            setTimeout(function () {
+                $('#popupAlert').popup('close');
+                getNodes(0);
+            }, 1500);
 
             if (parseInt(response.result) == parseInt(1)) {
 
-             
+
                 setTimeout(function () {
                     $('#popupAlert').popup('close');
                     getNodes(0);
                 }, 1500);
 
-            } else if (parseInt(response.result) == parseInt(0)) {      // ***** Cambiar en funcion del webservice a utilizar !!!!! ****
+            } else if (parseInt(response.result) == parseInt(0)) { // ***** Cambiar en funcion del webservice a utilizar !!!!! ****
 
                 $("#texto_popup").text("No se ha podido enviar el pedido");
                 $('#popupAlert').popup('open');
