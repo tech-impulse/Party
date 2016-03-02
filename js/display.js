@@ -3091,10 +3091,10 @@ function displayPantallaIntermediaAsistDisfra(data) {
                 getSize(optValueSelected);
                 $("#div_selectTalla").show();
 
-                $("#btn_continuar_dis").click() {
+                $("#btn_continuar_dis").click(function () {
 
                     getCostumesAge(idNode, nodeName, info_aux);
-                }
+                });
 
             } else {
                 $("#texto_popup").text(jsonIdiomas.popup_errores.opcion_no_valida);
