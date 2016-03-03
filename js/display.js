@@ -1281,7 +1281,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces") {
 
-        //PRODUCTS = data.products;
+        /*
         PRODUCTS = PRODUCTS.concat(data.products);
         var htmlContent = '';
         var grid = '';
@@ -1291,8 +1291,6 @@ function displayProducts(data, originNode, originName, param, param4) {
         var aux_carac = 0;
 
         console.log("Productos para el asistente de disfraces");
-        //console.log(data);
-
 
         if (originNode == 0) {
             loadMenu(data);
@@ -1596,11 +1594,271 @@ function displayProducts(data, originNode, originName, param, param4) {
             break;
 
         }
-
+        */
 
     } else if (data.result == 1 && pantallaActual == "catalogo") {
 
+        //console.log("Entramos en la nueva visualizacion");
+        console.log(data);
+        AUX = 1;
 
+        for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+
+            for (var d = 0; d < data.products[c].typeproducts.length; d++) {
+                data.products[c].typeproducts[d].original = true;
+                PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
+                PRODUCTS[d].original = true;
+            }
+        }
+
+        TEMP_PRODUCTS = data.products;
+
+        COLUMS = parseInt(data.columns);
+        ID_NODE = originNode;
+        var htmlContent = "";
+        var htmlContent_seccion = "";
+        var new_htmlContent = '';
+        var grid = '';
+        var block = '';
+        var position = 0;
+        var type;
+        var seccion_titulo = "";
+
+        updateBackButton(originNode, originName);
+
+
+        if (pantallaActual == "Asistente disfraces") {
+            //console.log("Estamos en la pantalla " + pantallaActual);
+        } else if (pantallaActual == "Asistente fiestas") {
+            //console.log("Estamos en la pantalla " + pantallaActual);
+            num_personas_fiesta = $("#personas_fiesta").val();
+        }
+
+        var aux = {};
+        aux = data.products;
+        //console.log("Longitud de secciones es " + aux.length);
+
+        for (var j = 0; j < data.products.length; j++) {
+
+            //console.log("Entramos en la nueva visualizacion 2, jota es " + j);
+            //console.log(aux[j]);
+
+            seccion_titulo = "<div id='tituloSeccion" + j + "' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;display: inline-table;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
+
+            switch (parseInt(data.columns)) {
+            case 1:
+
+                grid = "<div class='ui-grid-a'>";
+                type = "vertical";
+                break;
+
+            case 2:
+
+                grid = "<div class='ui-grid-a'>";
+                type = "horizontal";
+                break;
+
+            case 3:
+
+                grid = "<div class='ui-grid-b'>";
+                type = "horizontal";
+                break;
+
+            case 4:
+
+                grid = "<div class='ui-grid-c'>";
+                type = "horizontal";
+                break;
+
+            case 5:
+
+                grid = "<div class='ui-grid-d'>";
+                type = "horizontal";
+                break;
+
+            }
+
+            switch (type) {
+            case "horizontal":
+
+                htmlContent = grid;
+                position = "a";
+                var precio;
+                var unidades;
+
+                for (var i = 0; i < data.products[j].typeproducts.length; i++) {
+
+                    //console.log("Miramos el producto " + data.products[i].id + "-----------------------------------");
+                    var pro_seccion = data.products[j].typeproducts[i];
+                    var heigth = (W_WIDTH * (0.98));
+                    var heig_block = heigth / parseInt(data.columns);
+
+                    if (position < parseInt(data.columns)) {
+
+                        switch (position) {
+                        case 0:
+
+                            block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                            break;
+
+                        case 1:
+
+                            block = '<div class="ui-block-b" style="width:' + heig_block + 'px;">';
+                            break;
+
+                        case 2:
+
+                            block = '<div class="ui-block-c" style="width:' + heig_block + 'px;">';
+                            break;
+
+                        case 3:
+
+                            block = '<div class="ui-block-d" style="width:' + heig_block + 'px;">';
+                            break;
+
+                        case 4:
+
+                            block = '<div class="ui-block-e" style="width:' + heig_block + 'px;">';
+                            break;
+                        }
+                    } else {
+                        position = 0;
+                        block = '<div class="ui-block-a" style="width:' + heig_block + 'px;">';
+                    }
+
+
+                    if (pro_seccion.price_x_region.length == 0) { // si no tiene precio continuamos
+                        //console.log("Producto " + data.products[i].id + " no tiene precio, no lo mostramos");
+                        continue;
+                    } else {
+                        precio = pro_seccion.price_x_region[0].totalPrice;
+                    }
+
+                    var count = pro_seccion.caracteristics.length;
+                    var caracteristicas = pro_seccion.caracteristics;
+                    var units = 1;
+
+                    for (var k = 0; k < count; k++) {
+
+                        //console.log("Caracteristica " + caracteristicas[j].type);
+                        if (caracteristicas[k].type == "9") {
+                            unidades = caracteristicas[k].name;
+                            //console.log("Caracteristica encontrada");
+                            units = unidades.split(' ');
+                            aux_carac = 0;
+                            break;
+                        } else {
+                            //console.log("Esta no es la carac buena, pasamos a la siguiente carac");
+                            aux_carac = 1;
+                            continue;
+                        }
+
+                    }
+
+                    var imgStock = "";
+                    var stock = pro_seccion.stock_x_store;
+
+                    if (stock == 0) {
+                        stock = pro_seccion.stock_x_central_store;
+                    }
+
+                    if (stock > pro_seccion.stock_min) {
+                        imgStock = "css/maqueta/barraVerde.png";
+                    } else if (stock > 0 && stock <= pro_seccion.stock_min) {
+                        imgStock = "css/maqueta/barraAmarilla.png";
+                    } else if (stock == 0) {
+                        imgStock = "css/maqueta/barraRojo.png";
+                    }
+
+                    if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
+                        //console.log("No tiene unidades saltamos el producto")
+                        unidades = "1 " + jsonIdiomas.cajas.unidades;
+                        units = 1;
+                    }
+
+                    if (pro_seccion.name == "") {
+                        continue;
+                    } else {
+                        var titulo = pro_seccion.name;
+                    }
+
+                    if (pro_seccion.price_x_region[0].exclusiveWeb == 1 || pro_seccion.stock_x_store == 0) {
+                        var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
+                            '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
+                            '<div style="text-transform: uppercase;z-index: 3; width:200px; height:20px; position: absolute; bottom: 0px; font-size:15px; padding-bottom:5px; color: #fff; text-align:center; font-weight:bold;">' + (pro_seccion.price_x_region[0].exclusiveWeb == 0 ? jsonIdiomas.soloEnWeb : jsonIdiomas.exclusivoWeb) + '</div>' +
+                            '</div>';
+                    } else {
+                        var displayWarning = "";
+                    }
+
+                    var imgLinkExt = pro_seccion.linkext.replace("wide", "bigPreview");
+
+                    var element = block +
+                        '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
+                        '<div style="position: relative;overflow:hidden">' +
+                        '<div id="circulo' + pro_seccion.id + '" class="circulo" style="display:none;width: 40px;height: 40px;position: absolute;">' +
+                        '<label id="quantity' + pro_seccion.id + '" style="margin-top: 9px;font-size: 22px;color: white;"></label>' +
+                        '</div>' +
+                        '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
+                        '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
+                        '</div>' +
+                        '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a" style="width: 100%;font-size:12px;z-index:5;">' +
+                        '<div class="contenedor">' + titulo + '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a" style="width: 100%;font-size:20px;z-index:6;">' +
+                        '<strong style="vertical-align:sub;">' + formatoNumero(precio, 2, ",", ".", "€") + ' x ' + unidades + '</strong>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a" style="width: 100%;z-index:7;">' +
+                        '<strong><label id="labelPrecioTotalProducto' + pro_seccion.id + '" style="color:green;margin-top:5px;"></label></strong>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="ui-grid-a">' +
+                        '<div class="ui-block-a" style="width: 100%;">' +
+                        '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');">Añadir</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
+                        '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + pro_seccion.id + ',-1);" >-</button></div>' +
+                        '<div class="ui-block-b" style="width:10%;"></div>' +
+                        '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + pro_seccion.id + ',1);">+</button></div>' +
+                        '</div></a></div>';
+
+                    htmlContent = htmlContent + element;
+                    if (position == "c") {
+                        htmlContent = htmlContent + grid;
+                    }
+                    position++;
+
+                }
+
+                htmlContent += '</div>';
+                htmlContent_seccion = seccion_titulo + htmlContent;
+                break;
+
+            case "vertical":
+
+                break;
+
+            } //switch
+
+            new_htmlContent += htmlContent_seccion;
+
+
+        } //for secciones
+
+
+        $("#divContent").html(new_htmlContent);
+        $("#divContent").trigger('create');
+        //$("#btn_finalizarpedido").show();
+
+        $("#popupCargando").popup("close");
+        
+        /*
         console.log("Productos para el catalago");
         AUX = 1;
         //PRODUCTS = data.products;
@@ -1748,19 +2006,6 @@ function displayProducts(data, originNode, originName, param, param4) {
                 console.log("Unidades es " + unidades);
 
 
-                /*for (var j = 0; j < count_carac; j++) {
-                    //console.log("Caracteristica " + caracteristicas[j].type);
-                    if (caracteristicas[j].type == "9") {
-                        unidades = caracteristicas[j].name;
-                        aux_carac = 0;
-                        break;
-                    } else {
-                        unidades = "1 " + jsonIdiomas.cajas.unidades;
-                        aux_carac = 1;
-                        continue;
-                    }
-
-                }*/
 
                 var imgStock = "";
                 var stock = data.products[i].stock_x_store;
@@ -1875,6 +2120,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             $("#popupCargando").popup("close");
 
         }
+        */
 
     } else {
 

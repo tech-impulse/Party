@@ -472,8 +472,8 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
         lang: parseInt(language),
         origin: origin,
         id: idNode,
-        store: STORE.id,
-        page: parseInt(PAGINA)
+        store: STORE.id
+        //page: parseInt(PAGINA)
     };
 
     console.log("Post catalogo");
