@@ -1643,8 +1643,10 @@ function displayProducts(data, originNode, originName, param, param4) {
             //console.log("Entramos en la nueva visualizacion 2, jota es " + j);
             //console.log(aux[j]);
 
-            seccion_titulo = "<div id='tituloSeccion" + j + "' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;display: inline-table;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
-
+            if (aux[j].type !== "empty") {
+                seccion_titulo = "<div id='tituloSeccion" + j + "' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;display: inline-table;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
+            }
+            
             switch (parseInt(data.columns)) {
             case 1:
 
@@ -1857,7 +1859,7 @@ function displayProducts(data, originNode, originName, param, param4) {
         //$("#btn_finalizarpedido").show();
 
         $("#popupCargando").popup("close");
-        
+
         /*
         console.log("Productos para el catalago");
         AUX = 1;
@@ -3353,7 +3355,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
                         getCostumesAge(info_aux);
 
                     }
-                    
+
                 });
 
             } else {
