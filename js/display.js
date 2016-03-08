@@ -694,7 +694,7 @@ function updateCarritoDisplay() {
 
 function displayProducts(data, originNode, originName, param, param4) {
 
-    console.log("DisplayProducts-> Nodo Origen Id" + originNode);
+    console.log("DisplayProducts-> Nodo Origen Id " + originNode);
     var aux_carac = 0;
 
     if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "") { // Hay resultados
@@ -1281,7 +1281,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces") {
 
-        /*
+        
         PRODUCTS = PRODUCTS.concat(data.products);
         var htmlContent = '';
         var grid = '';
@@ -1594,8 +1594,9 @@ function displayProducts(data, originNode, originName, param, param4) {
             break;
 
         }
-        */
-
+    
+        
+       
     } else if (data.result == 1 && pantallaActual == "catalogo") {
 
         //console.log("Entramos en la nueva visualizacion");
@@ -3370,12 +3371,7 @@ function displayPantallaIntermediaAsistDisfra(data) {
 
         translateButtons(idiomStore);
 
-
-
     }
-
-
-
 
 }
 
