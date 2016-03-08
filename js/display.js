@@ -2548,9 +2548,9 @@ function getImgDisponibilidadStore(product) {
     var imgAvailability = "";
     var stock = CART[product].stock_x_store;
 
-    if (stock > CART[product].stock_min) {
+    if (stock > parseInt(CART[product].stock_min)) {
         imgAvailability = "css/maqueta/barraVerde.png";
-    } else if (stock > 0 && stock <= CART[product].stock_min) {
+    } else if (stock > 0 && stock <= parseInt(CART[product].stock_min)) {
         imgAvailability = "css/maqueta/barraAmarilla.png";
     } else if (stock == 0) {
         imgAvailability = "css/maqueta/barraRojo.png";
@@ -2560,17 +2560,19 @@ function getImgDisponibilidadStore(product) {
 }
 
 function getImgDisponibilidadCentral(product) {
+    
     var imgAvailability = "";
     var stock = CART[product].stock_x_central_store;
+    console.log("Stock "+stock);
 
-    if (stock > CART[product].stock_min) {
+    if (stock > parseInt(CART[product].stock_min)) {
         imgAvailability = "css/maqueta/barraVerde.png";
-    } else if (stock > 0 && stock <= CART[product].stock_min) {
+    } else if (stock > 0 && stock <= parseInt(CART[product].stock_min)) {
         imgAvailability = "css/maqueta/barraAmarilla.png";
     } else if (stock == 0) {
         imgAvailability = "css/maqueta/barraRojo.png";
     }
-
+    console.log("Stock "+imgAvailability);
     return imgAvailability;
 }
 
