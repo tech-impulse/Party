@@ -4,7 +4,6 @@
 **************************************************************/
 function checkOut() {
 
-    //if (LOGGED == true) {
     if (CART.length > 0) {
 
         console.log("Actualizar div");
@@ -53,27 +52,28 @@ function checkOut() {
     } else {
         alert("No hay productos");
     }
-    /*} else {
-        $('.ui-popup').popup('close');
-        setTimeout(function () {
-            REDIRECT = true;
-            $("#popupLogin").popup("open");
-        }, popupTimeout);
-        console.log("No estás logado");
-    }*/
+    //} else {
+    //    $('.ui-popup').popup('close');
+    //    setTimeout(function () {
+    //        REDIRECT = true;
+    //        $("#popupLogin").popup("open");
+    //    }, popupTimeout);
+    //    console.log("No estás logado");
+    //}
 
     $("#page_count").hide();
 
+    
 }
 
 function addCartAsistFiestas(prod_id) {
-    
+
     console.log("Calculamos los articulos para el carrito------------------------------------------------");
 
     // calculo del numero de articulos por producto
     for (var k = 0; k < PRODUCTS.length; k++) {
-        
-        console.log("Comparacion es "+PRODUCTS[k].id+" id que nos llega "+prod_id);
+
+        console.log("Comparacion es " + PRODUCTS[k].id + " id que nos llega " + prod_id);
 
         if (parseInt(PRODUCTS[k].id) == parseInt(prod_id)) {
 
@@ -117,10 +117,10 @@ function addCartAsistFiestas(prod_id) {
             if (aux == 0 && PRODUCTS[k].name != "" && PRODUCTS[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
                 addToCart(PRODUCTS[k].id, 1);
             }
-            
+
             break;
         } //if
-        
+
     }
 
 }
@@ -361,7 +361,7 @@ function revisarDireccionCorreo(id) {
 
     // Se utiliza la funcion test() nativa de JavaScript
     //if (regex.test($('#emailsignup').val().trim())) {
-    if ( regex.test( $('#' + id).val().trim() ) ) {
+    if (regex.test($('#' + id).val().trim())) {
         return true;
     } else {
         return false;
@@ -369,17 +369,17 @@ function revisarDireccionCorreo(id) {
 }
 
 /**
-*   cancelaPedido
-*
-*   funcion que vacia el carrito, vuelve a la pantalla inicial y esta logado, hace un logout.
-*/
-function cancelaPedido()    {
+ *   cancelaPedido
+ *
+ *   funcion que vacia el carrito, vuelve a la pantalla inicial y esta logado, hace un logout.
+ */
+function cancelaPedido() {
     vaciaCarrito();
-    
-    if ( EMAIL_USER != "" )   {
+
+    if (EMAIL_USER != "") {
         EMAIL_USER = "";
     }
-    
+
     INFO_USU = "";
     $('#popupAlert').popup('open');
     $('#email').val('');
@@ -393,6 +393,3 @@ function cancelaPedido()    {
     nodeIds = [];
     nodeImg = [];
 }
-
-
-

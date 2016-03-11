@@ -1281,7 +1281,6 @@ function displayProducts(data, originNode, originName, param, param4) {
 
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces") {
 
-        
         PRODUCTS = PRODUCTS.concat(data.products);
         var htmlContent = '';
         var grid = '';
@@ -1594,9 +1593,9 @@ function displayProducts(data, originNode, originName, param, param4) {
             break;
 
         }
-    
-        
-       
+
+
+
     } else if (data.result == 1 && pantallaActual == "catalogo") {
 
         //console.log("Entramos en la nueva visualizacion");
@@ -1647,7 +1646,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             if (aux[j].type !== "empty") {
                 seccion_titulo = "<div id='tituloSeccion" + j + "' style='display:flex;padding-top: 3px;padding-bottom: 3px;'><div style='width:5%'><hr></div><div style='width:auto;padding: 0px 1%;display: inline-table;'>" + aux[j].type + "</div><div style='width:100%'><hr></div></div>"
             }
-            
+
             switch (parseInt(data.columns)) {
             case 1:
 
@@ -2561,10 +2560,10 @@ function getImgDisponibilidadStore(product) {
 }
 
 function getImgDisponibilidadCentral(product) {
-    
+
     var imgAvailability = "";
     var stock = CART[product].stock_x_central_store;
-    console.log("Stock "+stock);
+    console.log("Stock " + stock);
 
     if (stock > parseInt(CART[product].stock_min)) {
         imgAvailability = "css/maqueta/barraVerde.png";
@@ -2573,7 +2572,7 @@ function getImgDisponibilidadCentral(product) {
     } else if (stock == 0) {
         imgAvailability = "css/maqueta/barraRojo.png";
     }
-    console.log("Stock "+imgAvailability);
+    console.log("Stock " + imgAvailability);
     return imgAvailability;
 }
 
@@ -2625,7 +2624,7 @@ function displayPopupItemList() { //cambios jordi
         }
     }
 
-    html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="checkOut();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
+    html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago(1);"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
@@ -3220,7 +3219,7 @@ function loadMenu(data) {
 
         '<div class="ui-block-c" style="margin-top:10px; margin-left:29px; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: left;"> </div>' +
 
-        '<div onclick="checkOut();" id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 16%; position: absolute; margin-left: 640px; margin-top: 20px; display: none;">Finalizar pedido</div>' +
+        '<div onclick="opcionesPago(1);" id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 16%; position: absolute; margin-left: 640px; margin-top: 20px; display: none;">Finalizar pedido</div>' +
 
         '<div class="ui-block-d" style="width:22%; margin-top:3px;margin-left:90px;" id="car_compra">' + cart + '</div>' +
 
@@ -4065,5 +4064,184 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
         //console.log("--> CAMBIO de imagen!!"); // TEMP !! log
         $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
     }
+
+}
+
+function opcionesPago(casoPago, aux) {//TEMP
+
+    $("#popupListItems").popup("close");
+
+    switch (casoPago) {
+    case 1:
+        var html = '<div>' +
+            '<center>' +
+            '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
+            '<h4>¿DONDE QUIERE ENVIAR SU PEDIDO?</h4>' +
+            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(1)" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25€ + gastos de envio: 4.75€ (gratuito a partir de 30€) = 29.75€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '<br>' +
+            '</center>' +
+            '</div>';
+        break;
+    case 2:
+        var html = '<div>' +
+            '<center>' +
+            '<h2>TIENE 3 PRODUCTOS EN TIENDA Y 2 ONLINE</h2>' +
+            '<h4>¿QUE QUIERES HACER?</h4>' +
+            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): 25.23€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth"><label>Total cesta: 25.23€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): 25.23€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '</center>' +
+            '</div>';
+        break;
+    case 3:
+        var html = '<div>' +
+            '<center>' +
+            '<h2>NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
+            '<h4>¿QUE QUIERES HACER?</h4>' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '</center>' +
+            '</div>';
+        break;
+
+    }
+
+
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
+
+
+}
+
+function opcionesEnvio(casoEnvio) {//TEMP
+
+    switch (casoEnvio) {
+    case 1:
+        var html = '<div>' +
+            '<center>' +
+            '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
+            '<h4>¿QUE QUIERES HACER?</h4>' +
+            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '</center>' +
+            '</div>';
+        break;
+    case 2:
+        var html = '<div>' +
+            '<center>' +
+            '<h2>TIENE 3 PRODUCTOS EN TIENDA Y 2 ONLINE</h2>' +
+            '<h4>¿QUE QUIERES HACER?</h4>' +
+            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a"><label>CLICK AND COLLECT 48H</label></div>' +
+            '</div>' +
+            '<div class="ui-grid-a">' +
+            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+            '</div>' +
+            '</a>' +
+            '</center>' +
+            '</div>';
+        break;
+
+    }
+
+
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
+
+
+}
+
+function sistemasPago() {  //TEMP
+
+    var html = '<div>' +
+        '<center>' +
+        '<h2>OPCIONES DE PAGO</h2>' +
+        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a"><label>CAJA</label></div>' +
+        '</div>' +
+        '</a>' +
+        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a"><label>PAYPAL</label></div>' +
+        '</div>' +
+        '</a>' +
+        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a"><label>TARJETA</label></div>' +
+        '</div>' +
+        '</a>' +
+        '</center>' +
+
+
+        $("#divContent").html(html);
+        $("#divContent").trigger('create');
+
 
 }
