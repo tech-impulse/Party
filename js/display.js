@@ -2576,6 +2576,145 @@ function getImgDisponibilidadCentral(product) {
     return imgAvailability;
 }
 
+
+function displayPopupItemList() { //cambios jordi
+
+    var html = '';
+    var html_store = '';
+    var html_online = '';
+    
+    var precioTotalCesta = 0;
+    var precioTotalProductosTienda = 0;
+    var precioTotalProductosWeb = 0;
+
+    //var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div></div>';
+    var tituloPopUpTienda = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;width:500px;margin-left:150px;">' + jsonIdiomas.popup_errores.tituloPopUpDisponiblesTienda + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div></div>';
+    var tituloPopUpWeb = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;width:500px;margin-left:150px;">' + jsonIdiomas.popup_errores.tituloPopUpDisponiblesWeb + '</h1></div>';
+
+    var labelsBar = '<div data-role="header" style="background-color:#ffffff; height:30px;">' +
+        '<div class="ui-block-e" style="width:8%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;font-weight: bolder;">WEB</label></div>' +
+        '<div class="ui-block-e" style="width:7%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;">Tienda</label></div>' +
+        '<div class="ui-block-e" style="width:14%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center; font-weight: bolder;">STOCK EN:</label></div>' +
+        '</div>';
+
+    
+    var productosEnTienda = 0;
+    var productosEnWeb = 0;
+    
+    for (var i = 0; i < CART.length; i++) {
+
+        var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
+        var srcTienda = getImgDisponibilidadStore(i);
+        var srcCentral = getImgDisponibilidadCentral(i);
+        
+        if (CART[i].quantity > 0 )  {
+            
+            if( CART[i].stock_x_store > 0) {
+
+                //var src = getImgDisponibilidad(i);
+                
+                productosEnTienda++;
+
+                var price = parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2);
+
+                precioTotalProductosTienda += price;
+
+                html_store = html_store +
+                    '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
+                    '<div class="ui-grid-b">' +
+                    '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
+                    '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
+                    '<div class="ui-block-c" style="width:52%;">' +
+                    '<div class="ui-grid-d">' +
+                    '<div class="ui-block-a" style="width:10%;"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+                    '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;">' + parseInt(CART[i].quantity) + '</label></div>' +
+                    '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+                    '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;">' + price + ' €</label></div>' +
+                    '<div class="ui-block-e" style="width:70px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+                    '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
+                    '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcCentral + '" /></div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</li>';
+
+            }
+            else if ( CART[i].stock_x_central_store > 0 )   {
+
+                productosEnWeb++;
+
+                var price = parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2);
+
+                precioTotalProductosWeb += price;
+
+                html_online = html_online +
+                    '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
+                    '<div class="ui-grid-b">' +
+                    '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
+                    '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
+                    '<div class="ui-block-c" style="width:52%;">' +
+                    '<div class="ui-grid-d">' +
+                    '<div class="ui-block-a" style="width:10%;"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+                    '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;">' + parseInt(CART[i].quantity) + '</label></div>' +
+                    '<div class="ui-block-c" style="width:16%;"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+                    '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;">' + price + ' €</label></div>' +
+                    '<div class="ui-block-e" style="width:70px; height:40px;"><a onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+                    '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
+                    '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcCentral + '" /></div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</li>';
+            }
+        }
+    }
+    
+    var opcionCompraProductos = 1;
+    
+    //var productosNoEnTienda = CART.length - productosEnTienda;
+    
+    if ( CART.length - productosEnTienda == 0 ) {                           // 1- Todos los productos estan en tienda
+        opcionCompraProductos = 1;
+    }
+    else if ( productosEnTienda > 0 && productosEnTienda < CART.length ) {  // 2- Existe algun producto en tienda
+        opcionCompraProductos = 2;
+    }
+    else if ( productosEnTienda == 0 ) {                                    // 3- Ningun producto en tienda
+        opcionCompraProductos = 3;
+    }
+
+    //html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="checkOut();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
+    
+    var listadoProdOnLine = tituloPopUpWeb + labelsBar + html_online;
+    
+    html = '<div style="width: 100%; height:600px; overflow: scroll;">' + tituloPopUpTienda + labelsBar + html_store + ( productosEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago('+ opcionCompraProductos +','+productosEnTienda +','+ productosEnWeb +');"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
+
+
+    $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
+
+
+    //$("#contentPopupListItems").html(tituloPopUp + labelsBar + html);
+    $("#contentPopupListItems").html(html);
+    $("#contentPopupListItems").trigger("create");
+
+    switch (CART.length) {
+        case 0:
+
+            console.log("No hay items");
+            break;
+
+        default:
+
+            $("#popupCart").popup("close");
+            setTimeout(function () {
+
+                $("#popupListItems").popup("open");
+            }, popupTimeout);
+
+    }
+    translateButtons(idiomStore);
+}
+
+
+/*
 function displayPopupItemList() { //cambios jordi
 
     var html = '';
@@ -2650,6 +2789,7 @@ function displayPopupItemList() { //cambios jordi
     }
     translateButtons(idiomStore);
 }
+*/
 
 function displayItemAlter(id_prod_alter, id_product, idnode) {
 
@@ -4067,7 +4207,7 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 
 }
 
-function opcionesPago(casoPago, aux) {//TEMP
+function opcionesPago(casoPago, productosEnTienda, productosEnWeb) {//TEMP
 
     $("#popupListItems").popup("close");
 
@@ -4102,7 +4242,7 @@ function opcionesPago(casoPago, aux) {//TEMP
     case 2:
         var html = '<div>' +
             '<center>' +
-            '<h2>TIENE 3 PRODUCTOS EN TIENDA Y 2 ONLINE</h2>' +
+            '<h2>TIENE '+ productosEnTienda +' PRODUCTOS EN TIENDA Y '+ productosEnWeb +' ONLINE</h2>' +
             '<h4>¿QUE QUIERES HACER?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
@@ -4186,7 +4326,7 @@ function opcionesEnvio(casoEnvio) {//TEMP
             '<center>' +
             '<h2>TIENE 3 PRODUCTOS EN TIENDA Y 2 ONLINE</h2>' +
             '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
@@ -4195,7 +4335,7 @@ function opcionesEnvio(casoEnvio) {//TEMP
             '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="formularioTiendaDestino()" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>CLICK AND COLLECT 48H</label></div>' +
             '</div>' +
@@ -4244,4 +4384,170 @@ function sistemasPago() {  //TEMP
         $("#divContent").trigger('create');
 
 
+}
+
+function formularioTiendaDestino()  {
+    
+    console.log('-> formularioTiendaDestino()');    // TEMP !!
+    
+    /*<div id="divTienda" align="center" style="padding-top: 5%;">
+
+        <div>
+            <label id="labelInicio">Seleccione provincia y tienda:</label>
+        </div>
+        <div id="div_select_provincia" data-theme="f" style="width: 25%; color: white; font-size: 20px;"></div>
+        <br/>
+        <div id="div_select_tienda" data-theme="f" style="width: 25%; color: white; font-size: 20px;"></div>
+            
+        <div class="ui-grid-c" style="width: 25%">
+            <button data-theme="b" id="btn_seleccionar_tienda" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;" class=" ui-btn ui-btn-b ui-shadow">Seleccionar</button>
+        </div>
+
+    </div>*/
+    
+    // TEMP !!!!
+     var html = '<div>' +
+        '<center>' +
+        '<h2>SELOCCIONE TIENDA DE DESTINO</h2>' +
+        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<div class="ui-grid-a">' +
+        '<div id="div_select_provincia" class="ui-block-a">'+
+            
+        '</div>' +
+        '</a>' +
+        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">'+
+            
+         '</div>' +
+        '</div>' +
+        '</a>' +
+        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a"><label>SELECCIONAR</label></div>' +
+        '</div>' +
+        '</a>' +
+        '</center>';
+
+
+        $("#divContent").html(html);
+        $("#divContent").trigger('create');
+    
+    loadSelectProvincias();
+    
+     $("#selectProvincia").change( function() {
+        alert("Han cambiado mi valor"); 
+        
+        idProvince = $("#selectProvincia").val();
+         
+        loadSelectShopsFromProvince( idProvince );
+    });
+}
+
+function loadSelectProvincias()  {
+    
+    getProvinces();
+    
+    console.log('-> loadSelectProvincias() con language: ' + language + ' i provincias: ' + PROVINCIAS.length); // TEMP !!
+    
+    //var provincias = getProvinces();
+    //getProvinces();
+    
+    var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="selectProvincia" data-native-menu="false" data-theme="b" style="">';
+
+    for (var i = 0; i < PROVINCIAS.length; i++) {
+
+        var val = PROVINCIAS[i].id;
+        var text = '';
+        
+        switch(language)    {
+            case 1:
+                text = PROVINCIAS[i].name_ca;
+                break;
+            
+            case 2:
+                text = PROVINCIAS[i].name_es;
+                break;
+                
+            case 3:
+                text = PROVINCIAS[i].name_en;
+                break;
+                
+            case 4:
+                text = PROVINCIAS[i].name_ge;
+                break;
+                
+            case 5:
+                text = PROVINCIAS[i].name_pt;
+                break;
+                
+            case 6:
+                text = PROVINCIAS[i].name_fr;
+                break;
+                
+            case 9:
+                text = PROVINCIAS[i].name_it;
+                break;
+                
+            default:
+                text = PROVINCIAS[i].name_es;
+        }
+
+        html = html + '<option value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+
+    }
+
+    html = html + '</select></div>';
+
+    console.log('-> Incluyendo html: ' + html); // TEMP !!
+
+    $("#div_select_provincia").html(html);
+
+    $("#div_select_provincia").trigger('create');
+    //$("#div_select_provincia").css('font-size', '20px');
+}
+
+function loadSelectShopsFromProvince( idProvince )  {
+    shops = getShopsFromProvince( idProvince );
+    
+    var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="selectShop" data-native-menu="false" data-theme="b" style="">';
+
+    for (var i = 0; i < shops.length; i++) {
+
+        var val = shops[i].id;
+        var text = shops[i].name;
+        
+        html = html + '<option value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+
+    }
+
+    html = html + '</select></div>';
+
+    $("#div_select_tienda").html(html);
+
+    $("#div_select_tienda").trigger('create');
+    //$("#div_select_tienda").css('font-size', '20px');
+}
+
+function displayDomicilioForm() {
+    
+    html = '<div id="div_registrarse">' +
+        '<form autocomplete="on">'+
+            '<label id="labelRegistrarse">Registrarse</label>'+
+                
+            '<div class="ui-grid-a">'+
+                '<div class="ui-block-a">'+
+                    '<label id="usernamesignup" class="uname" data-icon="u">Usuario</label>'+
+                    '<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear"><input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. myemail@email.com" autofocus="" data-clear-btn="true"><a href="#" tabindex="-1" aria-hidden="true" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a></div>'+
+                '</div>'+
+                '<div class="ui-block-d">'+
+                    '<label id="labelcodpos" class="youpasswd" data-icon="p">Código postal</label>'+
+                    '<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear"><input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true"><a href="#" tabindex="-1" aria-hidden="true" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a></div>'+
+                '</div>'+
+            '</div>'+
+        '</form>'+
+    '</div>';
+    
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
 }
