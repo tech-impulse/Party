@@ -30,7 +30,7 @@ $(document).bind("mobileinit", function () {
 Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
-
+    
     //$("#popupListItems").on({               // Evitar el click fuera del popUp.
     /*$(".ui-popup").on({               // Evitar el click fuera del popUp.
         popupbeforeposition: function () {
