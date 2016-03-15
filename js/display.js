@@ -4067,7 +4067,7 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 
 }
 
-function opcionesPago(casoPago, aux) {//TEMP
+function opcionesPago(casoPago, aux) { //TEMP
 
     $("#popupListItems").popup("close");
 
@@ -4095,9 +4095,9 @@ function opcionesPago(casoPago, aux) {//TEMP
             '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25€ + gastos de envio: 4.75€ (gratuito a partir de 30€) = 29.75€</label></div>' +
             '</div>' +
             '</a>' +
-            '<br>' +
             '</center>' +
             '</div>';
+
         break;
     case 2:
         var html = '<div>' +
@@ -4161,7 +4161,7 @@ function opcionesPago(casoPago, aux) {//TEMP
 
 }
 
-function opcionesEnvio(casoEnvio) {//TEMP
+function opcionesEnvio(casoEnvio) { //TEMP
 
     switch (casoEnvio) {
     case 1:
@@ -4217,7 +4217,7 @@ function opcionesEnvio(casoEnvio) {//TEMP
 
 }
 
-function sistemasPago() {  //TEMP
+function sistemasPago() { //TEMP
 
     var html = '<div>' +
         '<center>' +
@@ -4227,21 +4227,29 @@ function sistemasPago() {  //TEMP
         '<div class="ui-block-a"><label>CAJA</label></div>' +
         '</div>' +
         '</a>' +
-        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><label>PAYPAL</label></div>' +
-        '</div>' +
-        '</a>' +
+        //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        //'<div class="ui-grid-a">' +
+        //'<div class="ui-block-a"><label>PAYPAL</label></div>' +
+        //'</div>' +
+        //'</a>' +
         '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a"><label>TARJETA</label></div>' +
         '</div>' +
         '</a>' +
-        '</center>' +
+        '<form id="myform" name="_xclick" action="https://www.paypal.com/es/cgi-bin/webscr" method="post">' +
+        '<input type="hidden" name="cmd" value="_xclick">' +
+        '<input type="hidden" name="business" value="me@mybusiness.es">' +
+        '<input type="hidden" name="currency_code" value="EUR">' +
+        '<input type="hidden" name="item_name" value="Pedido Party Fiesta">' +
+        '<input type="hidden" name="amount" value="8.99">' +
+        '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro">' +
+        '</form>' +
+        '</center>';
 
 
-        $("#divContent").html(html);
-        $("#divContent").trigger('create');
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
 
 
 }
