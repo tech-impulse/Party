@@ -50,6 +50,8 @@ function translateButtons(idioma) {
             },
             "popup_errores": {
                 "tituloPopUp": "Products in the cart",
+                "tituloPopUpDisponiblesTienda": "Products available in store",
+                "tituloPopUpDisponiblesWeb": "Products available on web",
                 "tituloBoton": "Empty cart",
                 "campo_vacio": "Fill in this field",
                 "displayProductos": {
@@ -165,6 +167,8 @@ function translateButtons(idioma) {
             "popup_errores": {
                 "labelCargando": "Cargando...",
                 "tituloPopUp": "Productos en la cesta",
+                "tituloPopUpDisponiblesTienda": "Productos disponibles en tienda",
+                "tituloPopUpDisponiblesWeb": "Productos disponibles en web",
                 "tituloBoton": "Vaciar carro",
                 "campo_vacio": "Rellene este campo",
                 "displayProductos": {
@@ -282,6 +286,8 @@ function translateButtons(idioma) {
             "popup_errores": {
                 "labelCargando": "Carregant...",
                 "tituloPopUp": "Productes en la cistella",
+                "tituloPopUpDisponiblesTienda": "Productes disponibles en tenda",
+                "tituloPopUpDisponiblesWeb": "Productes disponibles a la web",
                 "tituloBoton": "Buidar carro",
                 "campo_vacio": "Ompli aquest camp",
                 "displayProductos": {
