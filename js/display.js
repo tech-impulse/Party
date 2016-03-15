@@ -4420,7 +4420,7 @@ function formularioTiendaDestino() {
 
     </div>*/
 
-    // TEMP !!!!
+    // TEMP !!!!!
     var html = '<div>' +
         '<center>' +
         '<h2>SELECCIONE TIENDA DE DESTINO</h2>' +

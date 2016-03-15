@@ -48,6 +48,7 @@ function checkOut() {
             $("#divContent").trigger('create');
             //var n = nodeIds.length + 1;
             //updateBackButton(nodeIds[n], nodeNames[n]);
+            // BORRAR!
         }
     } else {
         alert("No hay productos");
