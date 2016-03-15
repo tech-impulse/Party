@@ -4207,11 +4207,10 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 
 }
 
-<<<<<<< HEAD
-function opcionesPago(casoPago, aux) { //TEMP
-=======
+
+//function opcionesPago(casoPago, aux) { //TEMP
+
 function opcionesPago(casoPago, productosEnTienda, productosEnWeb) {//TEMP
->>>>>>> origin/master
 
     $("#popupListItems").popup("close");
 
