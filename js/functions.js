@@ -401,11 +401,13 @@ function cancelaPedido() {
  */
 function getShopsFromProvince( idProvince ) {
     
+    console.log("getShopsFromProvince con id: " + idProvince);
     
     var request = $.ajax({
         data: idProvince,
         url: urlServices + 'getShopsProvince.php',
         dataType: 'json',
+        async: false,
         type: 'GET',
         timeout: 10000, //10 seg
         success: function (response) {
@@ -457,6 +459,7 @@ function getProvinces() {
     var request = $.ajax({
         url: urlServices + 'getProvinces.php',
         dataType: 'json',
+        async: false,
         type: 'GET',
         timeout: 10000, //10 seg
         success: function (response) {

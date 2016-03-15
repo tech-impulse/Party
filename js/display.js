@@ -4358,32 +4358,32 @@ function opcionesEnvio(casoEnvio) {//TEMP
 }
 
 function sistemasPago() {  //TEMP
+    
+    console.log('--> sistemasPago');
 
     var html = '<div>' +
         '<center>' +
         '<h2>OPCIONES DE PAGO</h2>' +
         '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-a">' +
+        '<div class="ui-grid-solo">' +
         '<div class="ui-block-a"><label>CAJA</label></div>' +
         '</div>' +
         '</a>' +
         '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-a">' +
+        '<div class="ui-grid-solo">' +
         '<div class="ui-block-a"><label>PAYPAL</label></div>' +
         '</div>' +
         '</a>' +
         '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-a">' +
+        '<div class="ui-grid-solo">' +
         '<div class="ui-block-a"><label>TARJETA</label></div>' +
         '</div>' +
         '</a>' +
         '</center>' +
-
+        '</div>';
 
         $("#divContent").html(html);
         $("#divContent").trigger('create');
-
-
 }
 
 function formularioTiendaDestino()  {
@@ -4408,7 +4408,7 @@ function formularioTiendaDestino()  {
     // TEMP !!!!
      var html = '<div>' +
         '<center>' +
-        '<h2>SELOCCIONE TIENDA DE DESTINO</h2>' +
+        '<h2>SELECCIONE TIENDA DE DESTINO</h2>' +
         '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
         '<div class="ui-grid-a">' +
         '<div id="div_select_provincia" class="ui-block-a">'+
@@ -4435,7 +4435,7 @@ function formularioTiendaDestino()  {
     
     loadSelectProvincias();
     
-     $("#selectProvincia").change( function() {
+    $("#selectProvincia").change( function() {
         alert("Han cambiado mi valor"); 
         
         idProvince = $("#selectProvincia").val();
@@ -4493,7 +4493,7 @@ function loadSelectProvincias()  {
                 text = PROVINCIAS[i].name_es;
         }
 
-        html = html + '<option value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+        html = html + '<option value="' + val + '"><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
 
     }
 
@@ -4531,23 +4531,174 @@ function loadSelectShopsFromProvince( idProvince )  {
 
 function displayDomicilioForm() {
     
-    html = '<div id="div_registrarse">' +
-        '<form autocomplete="on">'+
-            '<label id="labelRegistrarse">Registrarse</label>'+
-                
+    html_register_user = '<h2>Registro Usuario</h2>'+
             '<div class="ui-grid-a">'+
                 '<div class="ui-block-a">'+
-                    '<label id="usernamesignup" class="uname" data-icon="u">Usuario</label>'+
-                    '<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear"><input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. myemail@email.com" autofocus="" data-clear-btn="true"><a href="#" tabindex="-1" aria-hidden="true" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a></div>'+
+                    '<label class="uname" data-icon="u">email</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_email" name="input_email" required="required" type="email" placeholder="nombre@email.com" autofocus="" data-clear-btn="true"></div>'+
                 '</div>'+
-                '<div class="ui-block-d">'+
-                    '<label id="labelcodpos" class="youpasswd" data-icon="p">Código postal</label>'+
-                    '<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear"><input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true"><a href="#" tabindex="-1" aria-hidden="true" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a></div>'+
+                '<div class="ui-block-b">'+
+                    '<label class="youpasswd" data-icon="p">Repetir email</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_email" name="input_repetir_email" required="required" type="email" placeholder="nombre@email.com" data-clear-btn="true"></div>'+
+                '</div>'+
+            '</div>' +
+            '<div class="ui-grid-a">'+
+                '<div class="ui-block-a">'+
+                    '<label class="uname" data-icon="u">Contraseña</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pass" name="input_pass" required="required" type="password" placeholder="" autofocus="" data-clear-btn="true"></div>'+
+                '</div>'+
+                '<div class="ui-block-b">'+
+                    '<label class="youpasswd" data-icon="p">Repetir contraseña</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_pass" name="input_repetir_pass" required="required" type="password" placeholder="" data-clear-btn="true"></div>'+
+                '</div>'+
+            '</div>';
+    
+    html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
+        '<form autocomplete="on">'+
+        
+            ( INFO_USU.id != undefined ? '' : html_register_user ) +
+        
+            '<h2 id="h2_direccion">Dirección</h2>'+
+        
+            '<div class="ui-grid-a" style="width:80%;">' +       // --> CHECK DIRECCION !!!!    **********
+                '<div class="ui-block-a">' +
+                    '<label class="uname" data-icon="u">Dirección de entrega y facturación coinciden</label>'+
+                '</div>'+
+                '<div class="ui-block-b">'+
+                    '<div class=" ui-checkbox">'+
+                        '<input id="check_misma_direccion" type="checkbox" value="Click me" onclick="" data-cacheval="false" checked>'+
+                    '</div>'+
+                '</div>'+
+            '</div><br/>'+
+        
+            '<div class="ui-grid-a">'+
+                '<div class="ui-block-a">'+
+                    '<label class="uname" data-icon="u">Nombre</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario" name="input_nombreUsuario" required="required" type="text" placeholder="Nombre" autofocus="" data-clear-btn="true"></div>'+
+                '</div>'+
+                '<div class="ui-block-b">'+
+                    '<label class="youpasswd" data-icon="p">Apellidos</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos" name="input_apellidos" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>'+
                 '</div>'+
             '</div>'+
+            '<div class="ui-grid-a">'+
+                '<div class="ui-block-a">'+
+                    '<label class="uname" data-icon="u">Tel&eacute;fono</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono" name="input_telefono" required="required" type="text" placeholder="930000000" autofocus="" data-clear-btn="true"></div>'+
+                '</div>'+
+                '<div class="ui-block-b">'+
+                    '<label class="youpasswd" data-icon="p">DNI/CIF</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif" name="input_dni_cif" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>'+
+                '</div>'+
+            '</div>'+
+        
+            '<div class="ui-grid-solo">'+
+                '<label class="youpasswd" data-icon="p">Dirección (calle, número, escalera, piso)</label>'+
+                '<div class="ui-block-a" style="width:90%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="number" placeholder="Dirección" data-clear-btn="true"></div>'+
+            '</div>'+
+        
+            '<div class="ui-grid-a">'+
+                '<div class="ui-block-a">'+
+                    '<label class="youpasswd" data-icon="p">Código postal</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal" name="input_postal" required="required" type="number" placeholder="00000" data-clear-btn="true"></div>'+
+                '</div>'+
+                '<div class="ui-block-b">'+
+                    '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad" name="input_ciudad" required="required" type="text" placeholder="Barcelona" autofocus="" data-clear-btn="true"></div>'+
+                '</div>'+
+            '</div>'+
+            '<div class="ui-grid-a">'+
+                '<div class="ui-block-a">'+
+                    '<label class="youpasswd" data-icon="p">País</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais" name="input_pais" required="required" type="number" placeholder="España" data-clear-btn="true"></div>'+
+                '</div>'+
+                '<div class="ui-block-b">'+
+                    '<label id="usernamesignup" class="uname" data-icon="u">Provincia</label>'+
+                    '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia" name="input_provincia" required="required" type="text" placeholder="Barcelona" autofocus="" data-clear-btn="true"></div>'+
+                '</div>'+
+            '</div>'+
+        
+            '<div id="div_direcion_facturacion" style="display:none;">' +       // --> FORMULARIO DIRECCION FACTURACION !!!!    **********
+        
+                '<h2>Dirección de Facturación</h2>'+
+
+                '<div class="ui-grid-a">'+
+                    '<div class="ui-block-a">'+
+                        '<label class="uname" data-icon="u">Nombre</label>'+
+                        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario_2" name="input_nombreUsuario_2" required="required" type="text" placeholder="Nombre" autofocus="" data-clear-btn="true"></div>'+
+                    '</div>'+
+                    '<div class="ui-block-b">'+
+                        '<label class="youpasswd" data-icon="p">Apellidos</label>'+
+                        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos_2" name="input_apellidos_2" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="ui-grid-a">'+
+                    '<div class="ui-block-a">'+
+                        '<label class="uname" data-icon="u">Tel&eacute;fono</label>'+
+                        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono_2" name="input_telefono_2" required="required" type="text" placeholder="930000000" autofocus="" data-clear-btn="true"></div>'+
+                    '</div>'+
+                    '<div class="ui-block-b">'+
+                        '<label class="youpasswd" data-icon="p">DNI/CIF</label>'+
+                        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif_2" name="input_dni_cif_2" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>'+
+                    '</div>'+
+                '</div>'+
+
+                '<div class="ui-grid-solo">'+
+                    '<label class="youpasswd" data-icon="p">Dirección (calle, número, escalera, piso)</label>'+
+                    '<div class="ui-block-a" style="width:90%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="number" placeholder="Dirección" data-clear-btn="true"></div>'+
+                '</div>'+
+
+                '<div class="ui-grid-a">'+
+                    '<div class="ui-block-a">'+
+                        '<label class="youpasswd" data-icon="p">Código postal</label>'+
+                        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal_2" name="input_postal_2" required="required" type="number" placeholder="00000" data-clear-btn="true"></div>'+
+                    '</div>'+
+                    '<div class="ui-block-b">'+
+                        '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>'+
+                        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad_2" name="input_ciudad_2" required="required" type="text" placeholder="Barcelona" autofocus="" data-clear-btn="true"></div>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="ui-grid-a">'+
+                    '<div class="ui-block-a">'+
+                        '<label class="youpasswd" data-icon="p">País</label>'+
+                        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais_2" name="input_pais_2" required="required" type="number" placeholder="España" data-clear-btn="true"></div>'+
+                    '</div>'+
+                    '<div class="ui-block-b">'+
+                        '<label id="usernamesignup" class="uname" data-icon="u">Provincia</label>'+
+                        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia_2" name="input_provincia_2" required="required" type="text" placeholder="Barcelona" autofocus="" data-clear-btn="true"></div>'+
+                    '</div>'+
+                '</div>'+
+        
+            '</div>' +
+        
+            '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="sistemasPago();">Continuar</button>' +
+        
         '</form>'+
     '</div>';
     
     $("#divContent").html(html);
     $("#divContent").trigger('create');
+    
+    $("#check_misma_direccion").click(function () {     //  ---------------     evento de click en el checkbox  --------
+        
+        console.log('--> click!!');
+
+        var chk = $("#check_misma_direccion");
+        
+        if ( chk.prop('checked') )  {
+            $("#div_direcion_facturacion").hide();
+            
+            $("#h2_direccion").text('Dirección');
+            
+            console.log('---> checked');
+        }
+        else    {
+             $("#div_direcion_facturacion").show();
+            
+            $("#h2_direccion").text('Dirección de entrega');
+            
+            console.log('---> NO checked');
+        }
+        
+    });
 }
