@@ -939,9 +939,9 @@ function getTiendas() {
 
 function restOk_tiendas(res, typ, param, param2) {
 
-    //console.log("Las tiendas nos han llegado, cargamos el select" + typ);
-    //console.log("La respuesta es ");
-    //console.log(res);
+    console.log("Las tiendas nos han llegado, cargamos el select" + typ);
+    console.log("La respuesta es ");
+    console.log(res);
 
     var count = res.stores.length;
 
@@ -960,6 +960,8 @@ function restOk_tiendas(res, typ, param, param2) {
     }
 
     html = html + '</select></div>';
+    
+    console.log("--> Añadimos: " + html); // TEMP !!
 
 
     $("#div_select_tienda").html(html);

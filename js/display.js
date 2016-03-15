@@ -520,8 +520,6 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
                     unidades_prod = 1;
                 }
 
-
-
                 if (pro_seccion.price_x_region[0].exclusiveWeb == 1 || pro_seccion.stock_x_store == 0) {
                     var displayWarning = '<div style="position: absolute; bottom: 0px;">' +
                         '<img src="http://partyfiesta.youtter.com/app/alb/css/exclusivoweb.png" style="width: 200px;height: 20px;bottom: 0px;">' +
@@ -4217,7 +4215,7 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
             '<center>' +
             '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
             '<h4>¿DONDE QUIERE ENVIAR SU PEDIDO?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="sistemasPago();" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
             '</div>' +
@@ -4244,7 +4242,7 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
             '<center>' +
             '<h2>TIENE ' + productosEnTienda + ' PRODUCTOS EN TIENDA Y ' + productosEnWeb + ' ONLINE</h2>' +
             '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="sistemasPago();" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
             '</div>' +
@@ -4255,7 +4253,7 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
+            '<div class="ui-block-a"><label>COMPRAR ONLINE</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
@@ -4309,7 +4307,7 @@ function opcionesEnvio(casoEnvio) { //TEMP
             '<center>' +
             '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
             '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
@@ -4421,7 +4419,7 @@ function formularioTiendaDestino() {
     </div>*/
 
     // TEMP !!!!!
-    var html = '<div>' +
+    /*var html = '<div>' +
         '<center>' +
         '<h2>SELECCIONE TIENDA DE DESTINO</h2>' +
         '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
@@ -4456,7 +4454,33 @@ function formularioTiendaDestino() {
         idProvince = $("#selectProvincia").val();
 
         loadSelectShopsFromProvince(idProvince);
-    });
+    });*/
+    
+    /*html = '<div id="divTienda" align="center" style="padding-top: 5%;">' +
+
+    '<div>' +
+        '<label id="labelInicio">Seleccione provincia y tienda:</label>' +
+    '</div>' +
+    '<br/>' +
+    '<div id="div_select_tienda" data-theme="f" style="width: 25%; color: white; font-size: 20px;"></div>' +
+
+    '<div class="ui-grid-c" style="width: 25%">' +
+        '<button data-theme="b" id="btn_seleccionar_tienda" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;" class=" ui-btn ui-btn-b ui-shadow">Seleccionar</button>' +
+    '</div>';*/
+    
+    html =  '<center>' +
+        '<h2>SELECCIONE LA TIENDA DE DESTINO</h2>' +
+        '<center>' +
+        
+        '<div id="div_select_tienda" data-theme="f" style="width: 25%; margin: 0 auto; color: white; font-size: 20px;">'+
+        '<div class="ui-nodisc-icon"><div class="ui-select"><select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" style="" tabindex="-1"><option value="10" style="">C.C. GRAN VÍA 2</option><option value="96" style="">SANT CUGAT</option></select><div style="display: none;" id="select_tienda-listbox-placeholder"><!-- placeholder for select_tienda-listbox --></div></div></div>'+
+        '<button data-theme="b" id="btn_acceder" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;" onclick="sistemasPago();" class="ui-btn ui-btn-b ui-shadow">Seleccionar</button></div>';
+    
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
+    
+    
+    //getTiendas();
 }
 
 function loadSelectProvincias() {
