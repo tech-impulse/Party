@@ -4224,7 +4224,7 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
             '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(1)" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(1,'+ productosEnTienda +','+ productosEnWeb +')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
             '</div>' +
@@ -4251,7 +4251,7 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
             '<div class="ui-block-b" style="float:rigth;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): 25.23€</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2,'+ productosEnTienda +','+ productosEnWeb +')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>COMPRAR ONLINE</label></div>' +
             '</div>' +
@@ -4260,7 +4260,7 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
             '<div class="ui-block-b" style="float:rigth"><label>Total cesta: 25.23€</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2,'+ productosEnTienda +','+ productosEnWeb +')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
             '</div>' +
@@ -4277,7 +4277,7 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
             '<center>' +
             '<h2>NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
             '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2,'+ productosEnTienda +','+ productosEnWeb +')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
             '</div>' +
@@ -4299,7 +4299,7 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
 
 }
 
-function opcionesEnvio(casoEnvio) { //TEMP
+function opcionesEnvio(casoEnvio, productosEnTienda, productosEnWeb) { //TEMP
 
     switch (casoEnvio) {
     case 1:
@@ -4322,7 +4322,7 @@ function opcionesEnvio(casoEnvio) { //TEMP
     case 2:
         var html = '<div>' +
             '<center>' +
-            '<h2>TIENE 3 PRODUCTOS EN TIENDA Y 2 ONLINE</h2>' +
+            '<h2>TIENE '+ productosEnTienda +' PRODUCTOS EN TIENDA Y '+ productosEnWeb +' ONLINE</h2>' + 
             '<h4>¿QUE QUIERES HACER?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
