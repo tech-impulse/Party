@@ -538,15 +538,25 @@ function updateVariblesTiposDeProducto( product, nuevoProducto )   {
     if ( nuevoProducto )    {
         if (product.stock_x_store > 0) {
             productosEnTienda++;
+            
+            precioTotalProductosTienda += product.price_x_region[0].totalPrice;
+            
+            //productAlter.price_x_region[0].totalPrice
         } else if (product.stock_x_central_store > 0) {
             productosEnWeb++;
+            
+            precioTotalProductosWeb += product.price_x_region[0].totalPrice;
         }
     }
     else    {
         if (product.stock_x_store > 0) {
             productosEnTienda--;
+            
+            precioTotalProductosTienda -= product.price_x_region[0].totalPrice;
         } else if (product.stock_x_central_store > 0) {
             productosEnWeb--;
+            
+            precioTotalProductosWeb -= product.price_x_region[0].totalPrice;
         }
     }
     
