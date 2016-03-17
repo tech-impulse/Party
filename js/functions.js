@@ -508,3 +508,47 @@ function getProvinces() {
         },
     });
 }
+
+/**
+*   Funcion updateOpcionCompraProducto
+*
+*   Recalcula opcionCompraProductos en función de las variables productosEnTienda y productosEnWeb
+*/
+function updateOpcionCompraProducto()   {
+    
+    if (CART.length - productosEnTienda == 0) { // 1- Todos los productos estan en tienda i productosEnWeb
+        opcionCompraProductos = 1;
+    } else if (productosEnTienda > 0 && productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
+        opcionCompraProductos = 2;
+    } else if (productosEnTienda == 0) { // 3- Ningun producto en tienda
+        opcionCompraProductos = 3;
+    }
+    
+}
+
+/**
+*   Funcion updateVariblesTiposDeProducto
+*
+*   Recalcula opcionCompraProductos en función de las variables productosEnTienda y productosEnWeb
+*
+*   param: nuevoProducto --> boolean ( true: si se añade un nuevo producto al carrito | false: si se quita del carrito)
+*/
+function updateVariblesTiposDeProducto( product, nuevoProducto )   {
+    
+    if ( nuevoProducto )    {
+        if (product.stock_x_store > 0) {
+            productosEnTienda++;
+        } else if (product.stock_x_central_store > 0) {
+            productosEnWeb++;
+        }
+    }
+    else    {
+        if (product.stock_x_store > 0) {
+            productosEnTienda--;
+        } else if (product.stock_x_central_store > 0) {
+            productosEnWeb--;
+        }
+    }
+    
+}
+

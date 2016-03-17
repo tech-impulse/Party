@@ -2595,11 +2595,10 @@ function displayPopupItemList() { //cambios jordi
         '<div class="ui-block-e" style="width:14%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center; font-weight: bolder;">STOCK EN:</label></div>' +
         '</div>';
 
+    //productosEnTienda = 0;
+    //productosEnWeb = 0;
 
-    var productosEnTienda = 0;
-    var productosEnWeb = 0;
-
-    for (var i = 0; i < CART.length; i++) {
+    for (var i = 0; i < CART.length; i++) {     // develop 2
 
         var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
         var srcTienda = getImgDisponibilidadStore(i);
@@ -2611,7 +2610,7 @@ function displayPopupItemList() { //cambios jordi
 
                 //var src = getImgDisponibilidad(i);
 
-                productosEnTienda++;
+                //productosEnTienda++;
 
                 var price = parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2);
 
@@ -2637,7 +2636,7 @@ function displayPopupItemList() { //cambios jordi
 
             } else if (CART[i].stock_x_central_store > 0) {
 
-                productosEnWeb++;
+                //productosEnWeb++;
 
                 var price = parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2);
 
@@ -2664,23 +2663,24 @@ function displayPopupItemList() { //cambios jordi
         }
     }
 
-    var opcionCompraProductos = 1;
+    //var opcionCompraProductos = 1;
 
     //var productosNoEnTienda = CART.length - productosEnTienda;
 
-    if (CART.length - productosEnTienda == 0) { // 1- Todos los productos estan en tienda
+    /*if (CART.length - productosEnTienda == 0) { // 1- Todos los productos estan en tienda
         opcionCompraProductos = 1;
     } else if (productosEnTienda > 0 && productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
         opcionCompraProductos = 2;
     } else if (productosEnTienda == 0) { // 3- Ningun producto en tienda
         opcionCompraProductos = 3;
-    }
+    }*/
 
     //html = '<div style="width: 100%; height:400px; overflow: scroll;">' + html + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="checkOut();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
 
     var listadoProdOnLine = tituloPopUpWeb + labelsBar + html_online;
 
-    html = '<div style="width: 100%; height:600px; overflow: scroll;">' + tituloPopUpTienda + labelsBar + html_store + (productosEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago(' + opcionCompraProductos + ',' + productosEnTienda + ',' + productosEnWeb + ');"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
+    //html = '<div style="width: 100%; height:600px; overflow: scroll;">' + tituloPopUpTienda + labelsBar + html_store + (productosEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago(' + opcionCompraProductos + ',' + productosEnTienda + ',' + productosEnWeb + ');"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
+    html = '<div style="width: 100%; height:600px; overflow: scroll;">' + tituloPopUpTienda + labelsBar + html_store + (productosEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
@@ -3354,7 +3354,7 @@ function loadMenu(data) {
 
         '<div class="ui-block-c" style="margin-top:10px; margin-left:29px; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%" style="float: left;"> </div>' +
 
-        '<div onclick="opcionesPago(2,1,1);" id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 16%; position: absolute; margin-left: 640px; margin-top: 20px; display: none;">Finalizar pedido</div>' +
+        '<div id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 16%; position: absolute; margin-left: 640px; margin-top: 20px; display: none;">Finalizar pedido</div>' +
 
         '<div class="ui-block-d" style="width:22%; margin-top:3px;margin-left:90px;" id="car_compra">' + cart + '</div>' +
 
@@ -3380,6 +3380,15 @@ function loadMenu(data) {
     }
 
     translateButtons(idiomStore);
+    
+    $('#btn_finalizarpedido').click(function() {    // develop 1
+        
+        console.log( 'Handler for .click() called. con ' + opcionCompraProductos + ' ' + productosEnTienda + ' ' + productosEnWeb);
+        
+        //opcionesPago(opcionCompraProductos, productosEnTienda, productosEnWeb);
+        opcionesPago();
+        
+    });
 }
 
 
@@ -4205,90 +4214,92 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 
 //function opcionesPago(casoPago, aux) { //TEMP
 
-function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
+//function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
+function opcionesPago() { //TEMP
 
     $("#popupListItems").popup("close");
 
-    switch (casoPago) {
-    case 1:
-        var html = '<div>' +
-            '<center>' +
-            '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
-            '<h4>¿DONDE QUIERE ENVIAR SU PEDIDO?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="sistemasPago();" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(1,'+ productosEnTienda +','+ productosEnWeb +')" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25€ + gastos de envio: 4.75€ (gratuito a partir de 30€) = 29.75€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '</center>' +
-            '</div>';
+    //switch (casoPago) {
+    switch (opcionCompraProductos) {
+        case 1:
+            var html = '<div>' +
+                '<center>' +
+                '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
+                '<h4>¿DONDE QUIERE ENVIAR SU PEDIDO?</h4>' +
+                '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(1)" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25€ + gastos de envio: 4.75€ (gratuito a partir de 30€) = 29.75€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '</center>' +
+                '</div>';
 
-        break;
-    case 2:
-        var html = '<div>' +
-            '<center>' +
-            '<h2>TIENE ' + productosEnTienda + ' PRODUCTOS EN TIENDA Y ' + productosEnWeb + ' ONLINE</h2>' +
-            '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="sistemasPago();" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): 25.23€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2,'+ productosEnTienda +','+ productosEnWeb +')" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>COMPRAR ONLINE</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth"><label>Total cesta: 25.23€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2,'+ productosEnTienda +','+ productosEnWeb +')" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): 25.23€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '</center>' +
-            '</div>';
-        break;
-    case 3:
-        var html = '<div>' +
-            '<center>' +
-            '<h2>NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
-            '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2,'+ productosEnTienda +','+ productosEnWeb +')" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '</center>' +
-            '</div>';
-        break;
+            break;
+        case 2:
+            var html = '<div>' +
+                '<center>' +
+                '<h2>TIENE ' + productosEnTienda + ' PRODUCTOS EN TIENDA Y ' + productosEnWeb + ' ONLINE</h2>' +
+                '<h4>¿QUE QUIERES HACER?</h4>' +
+                '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): 25.23€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>COMPRAR ONLINE</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth"><label>Total cesta: 25.23€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): 25.23€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '</center>' +
+                '</div>';
+            break;
+        case 3:
+            var html = '<div>' +
+                '<center>' +
+                '<h2>NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
+                '<h4>¿QUE QUIERES HACER?</h4>' +
+                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '</center>' +
+                '</div>';
+            break;
 
     }
 
@@ -4299,59 +4310,60 @@ function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
 
 }
 
-function opcionesEnvio(casoEnvio, productosEnTienda, productosEnWeb) { //TEMP
+//function opcionesEnvio(casoEnvio, productosEnTienda, productosEnWeb) { //TEMP
+function opcionesEnvio(casoEnvio) { //TEMP
+//function opcionesEnvio() { //TEMP
 
     switch (casoEnvio) {
-    case 1:
-        var html = '<div>' +
-            '<center>' +
-            '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
-            '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '</center>' +
-            '</div>';
-        break;
-    case 2:
-        var html = '<div>' +
-            '<center>' +
-            '<h2>TIENE '+ productosEnTienda +' PRODUCTOS EN TIENDA Y '+ productosEnWeb +' ONLINE</h2>' + 
-            '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="formularioTiendaDestino()" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>CLICK AND COLLECT 48H</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-            '</div>' +
-            '</a>' +
-            '</center>' +
-            '</div>';
-        break;
+        case 1:
+            var html = '<div>' +
+                '<center>' +
+                '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
+                '<h4>¿QUE QUIERES HACER?</h4>' +
+                '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '</center>' +
+                '</div>';
+            break;
+        case 2:
+            var html = '<div>' +
+                '<center>' +
+                '<h2>TIENE '+ productosEnTienda +' PRODUCTOS EN TIENDA Y '+ productosEnWeb +' ONLINE</h2>' + 
+                '<h4>¿QUE QUIERES HACER?</h4>' +
+                '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '<a data-corners="false" style="width:600px" onclick="formularioTiendaDestino()" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a"><label>CLICK AND COLLECT 48H</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+                '</div>' +
+                '</a>' +
+                '</center>' +
+                '</div>';
+            break;
 
     }
 
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
-
 
 }
 
@@ -4740,3 +4752,29 @@ function displayDomicilioForm() {
 
     });
 }
+
+/**
+*
+*   funcion pagarEnCaja
+*
+*   Muesta opciones de Enviar correo, imprimir en tienda y cancelar pedido.
+*/
+function pagarEnCaja()  {
+    
+    var html = '<div>' +
+        '<center>' +
+        '<h3> ¿Que deseas hacer con el pedido?</h3>' +
+        '<br>' +
+        '<a  data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="mail" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
+        '<br>' +
+        '<a  data-corners="false" style="width:300px" onclick="imprimirPedido();" data-role="button" data-icon="home" data-iconpos="right" data-theme="b"> Imprimir en tienda </a>' +
+        '<br>' +
+        //'<a  data-corners="false" style="width:300px" onclick="pedidoOnline();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b"> Pedido online </a>' +
+        //'<br>' +
+        '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+        '</center>' +
+        '</div>';
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
+}
+
