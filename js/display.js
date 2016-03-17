@@ -4247,6 +4247,9 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '</a>' : '' ) +
                 
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+                
                 '</center>' +
                 '</div>';
 
@@ -4285,6 +4288,10 @@ function opcionesPago() { //TEMP
                 '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): '+ CART.ammount +'€ <br/>('+ CART.length +' productos disponibles)</label></div>' +
                 '</div>' +
                 '</a>' +
+                
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+                
                 '</center>' +
                 '</div>';
             break;
@@ -4302,6 +4309,10 @@ function opcionesPago() { //TEMP
                 '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: '+ precioTotalProductosWeb +'€ <br/>('+ productosEnWeb +' productos disponibles)</label></div>' +
                 '</div>' +
                 '</a>' +
+                
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+                
                 '</center>' +
                 '</div>';
             break;
@@ -4334,6 +4345,10 @@ function opcionesEnvio(casoEnvio) { //TEMP
                 '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
                 '</div>' +
                 '</a>' +
+                
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+                
                 '</center>' +
                 '</div>';
             break;
@@ -4360,6 +4375,10 @@ function opcionesEnvio(casoEnvio) { //TEMP
                 '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
                 '</div>' +
                 '</a>' +
+                
+                '<br>' +
+                '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+                
                 '</center>' +
                 '</div>';
             break;
@@ -4403,6 +4422,10 @@ function sistemasPago() { //TEMP
         '<input type="hidden" name="amount" value="8.99">' +
         '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro">' +
         '</form>' +
+        
+        '<br>' +
+        '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+        
         '</center>';
 
 
@@ -4489,11 +4512,15 @@ function formularioTiendaDestino() {
         
         '<div id="div_select_tienda" data-theme="f" style="width: 25%; margin: 0 auto; color: white; font-size: 20px;">'+
         '<div class="ui-nodisc-icon"><div class="ui-select"><select data-corners="false" id="select_tienda" data-native-menu="false" data-theme="b" style="" tabindex="-1"><option value="10" style="">C.C. GRAN VÍA 2</option><option value="96" style="">SANT CUGAT</option></select><div style="display: none;" id="select_tienda-listbox-placeholder"><!-- placeholder for select_tienda-listbox --></div></div></div>'+
-        '<button data-theme="b" id="btn_acceder" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;" onclick="sistemasPago();" class="ui-btn ui-btn-b ui-shadow">Seleccionar</button></div>';
+        '<button data-theme="b" id="btn_acceder" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;" onclick="sistemasPago();" class="ui-btn ui-btn-b ui-shadow">Seleccionar</button></div>'
+    
+        '<center>' +
+        '<br>' +
+        '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+        '</center>';
     
     $("#divContent").html(html);
     $("#divContent").trigger('create');
-    
     
     //getTiendas();
 }
@@ -4728,7 +4755,12 @@ function displayDomicilioForm() {
         '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="sistemasPago();">Continuar</button>' +
 
         '</form>' +
-        '</div>';
+        '</div>' + 
+    
+        '<center>' + 
+        '<br/>' +
+        '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+        '</center>';
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
