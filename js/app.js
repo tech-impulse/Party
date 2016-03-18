@@ -715,6 +715,8 @@ function addToCart(item, param) {
                     foundInCart = 1;
                     CART[j].quantity = CART[j].quantity + parseInt(param);
                     CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
+                    
+                    updateVariblesTiposDeProducto( product, true ); // TEMP !! actulizamos variables.
 
                     var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
@@ -738,7 +740,19 @@ function addToCart(item, param) {
         // console.log('---> NO SE ENCONTRO PRODUCTO --> foundInCart: ' + foundInCart); // TEMP !!
 
         if (CART.ammount == undefined) {
+            
             CART.ammount = 0;
+            CART.precioTotalProductosTienda = 0;
+            CART.productosSoloEnTienda = 0;
+            CART.precioTotalProductosWeb = 0;
+            CART.productosSoloEnWeb = 0;
+            
+            CART.productosEnTienda = 0;
+            CART.productosSoloEnTienda = 0;
+            CART.productosEnWeb = 0;
+            CART.productosSoloEnWeb = 0;
+            
+            
             PRODUCTS.ammount = 0;
         }
 
@@ -914,7 +928,8 @@ function addToCartAlter(id_prod_alter, id_produc) {
             productosEnWeb++;
         }*/
         
-        updateVariblesTiposDeProducto( product, true );
+        updateVariblesTiposDeProducto( CART[j], false );    // Actualizo variables quitando el producto sustituido
+        updateVariblesTiposDeProducto( product, true );     // Actualizo variables poniendo el producto sustituto
         
         PRODUCTS.push(product);
         //displayItemOperations(id_prod_alter, cantidad);

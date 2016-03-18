@@ -516,11 +516,11 @@ function getProvinces() {
 */
 function updateOpcionCompraProducto()   {
     
-    if (CART.length - productosEnTienda == 0) { // 1- Todos los productos estan en tienda i productosEnWeb
+    if (CART.length - CART.productosEnTienda == 0) { // 1- Todos los productos estan en tienda i productosEnWeb
         opcionCompraProductos = 1;
-    } else if (productosEnTienda > 0 && productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
+    } else if ( CART.productosEnTienda > 0 && CART.productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
         opcionCompraProductos = 2;
-    } else if (productosEnTienda == 0) { // 3- Ningun producto en tienda
+    } else if (CART.productosEnTienda == 0) { // 3- Ningun producto en tienda
         opcionCompraProductos = 3;
     }
     
@@ -537,26 +537,53 @@ function updateVariblesTiposDeProducto( product, nuevoProducto )   {
     
     if ( nuevoProducto )    {
         if (product.stock_x_store > 0) {
-            productosEnTienda++;
+            CART.productosEnTienda++;
             
-            precioTotalProductosTienda += product.price_x_region[0].totalPrice;
+            CART.precioTotalProductosTienda += product.quantity * product.price_x_region[0].totalPrice;
+            
+            if ( product.stock_x_central_store <= 0 )   {
+                CART.productosSoloEnTienda++;
+                CART.precioTotalProductosSoloTienda += product.quantity * product.price_x_region[0].totalPrice;
+            }
             
             //productAlter.price_x_region[0].totalPrice
-        } else if (product.stock_x_central_store > 0) {
-            productosEnWeb++;
+        }
+        if ( product.stock_x_central_store > 0 ) {
+            CART.productosEnWeb++;
             
-            precioTotalProductosWeb += product.price_x_region[0].totalPrice;
+            CART.precioTotalProductosWeb += product.quantity * product.price_x_region[0].totalPrice;
+            
+             if (product.stock_x_store <= 0) {
+                CART.productosSoloEnWeb++;
+                 
+                CART.precioTotalProductosSoloWeb += product.quantity * product.price_x_region[0].totalPrice;
+            }
         }
     }
     else    {
         if (product.stock_x_store > 0) {
-            productosEnTienda--;
+            CART.productosEnTienda--;
             
-            precioTotalProductosTienda -= product.price_x_region[0].totalPrice;
-        } else if (product.stock_x_central_store > 0) {
-            productosEnWeb--;
+            CART.precioTotalProductosTienda -= product.quantity * product.price_x_region[0].totalPrice;
             
-            precioTotalProductosWeb -= product.price_x_region[0].totalPrice;
+            if ( product.stock_x_central_store <= 0 )   {
+                CART.productosSoloEnTienda--;
+                
+                CART.precioTotalProductosSoloTienda -= product.quantity * product.price_x_region[0].totalPrice;
+            }
+            
+            //productAlter.price_x_region[0].totalPrice
+        }
+        if ( product.stock_x_central_store > 0 ) {
+            CART.productosEnWeb--;
+            
+            CART.precioTotalProductosWeb -= product.quantity * product.price_x_region[0].totalPrice;
+            
+            if (product.stock_x_store <= 0) {
+                CART.productosSoloEnWeb--;
+                
+                CART.precioTotalProductosSoloWeb -= product.quantity * product.price_x_region[0].totalPrice;
+            }
         }
     }
     

@@ -2680,7 +2680,7 @@ function displayPopupItemList() { //cambios jordi
     var listadoProdOnLine = tituloPopUpWeb + labelsBar + html_online;
 
     //html = '<div style="width: 100%; height:600px; overflow: scroll;">' + tituloPopUpTienda + labelsBar + html_store + (productosEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago(' + opcionCompraProductos + ',' + productosEnTienda + ',' + productosEnWeb + ');"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
-    html = '<div style="width: 100%; height:600px; overflow: scroll;">' + tituloPopUpTienda + labelsBar + html_store + (productosEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
+    html = '<div style="width: 100%; height:600px; overflow: scroll;">' + tituloPopUpTienda + labelsBar + html_store + (CART.productosEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
@@ -3383,7 +3383,7 @@ function loadMenu(data) {
     
     $('#btn_finalizarpedido').click(function() {    // develop 1
         
-        console.log( 'Handler for .click() called. con ' + opcionCompraProductos + ' ' + productosEnTienda + ' ' + productosEnWeb);
+        console.log( 'Handler for .click() called. con ' + opcionCompraProductos + ' ' + CART.productosEnTienda + ' ' + CART.productosEnWeb);
         
         //opcionesPago(opcionCompraProductos, productosEnTienda, productosEnWeb);
         opcionesPago();
@@ -4236,7 +4236,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '</a>' +
                 
-                ( CART.length - productosEnWeb == 0 ? 
+                ( CART.length - CART.productosEnWeb == 0 ? 
                 '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(1)" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
@@ -4257,7 +4257,7 @@ function opcionesPago() { //TEMP
         case 2:
             var html = '<div>' +
                 '<center>' +
-                '<h2>TIENE ' + productosEnTienda + ' PRODUCTOS EN TIENDA Y ' + productosEnWeb + ' ONLINE</h2>' +
+                '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA Y ' + CART.productosEnWeb + ' ONLINE</h2>' +
                 '<h4>¿QUE QUIERES HACER?</h4>' +
                 '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
@@ -4265,7 +4265,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): '+ precioTotalProductosTienda +'€ <br/>('+ productosEnTienda +' productos disponibles)</label></div>' +
+                '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): '+ CART.precioTotalProductosTienda +'€ <br/>('+ CART.productosEnTienda +' productos disponibles)</label></div>' + 
                 '</div>' +
                 '</a>' +
                 
@@ -4275,7 +4275,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: '+ precioTotalProductosWeb +'€ <br/>('+ productosEnWeb +' productos disponibles)</label></div>' +
+                '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: '+ CART.precioTotalProductosWeb +'€ <br/>('+ CART.productosEnWeb +' productos disponibles)</label></div>' +
                 '</div>' +
                 '</a>' +
                 
@@ -4306,7 +4306,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: '+ precioTotalProductosWeb +'€ <br/>('+ productosEnWeb +' productos disponibles)</label></div>' +
+                '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: '+ CART.precioTotalProductosWeb +'€ <br/>('+ CART.productosEnWeb +' productos disponibles)</label></div>' +
                 '</div>' +
                 '</a>' +
                 
@@ -4355,7 +4355,7 @@ function opcionesEnvio(casoEnvio) { //TEMP
         case 2:
             var html = '<div>' +
                 '<center>' +
-                '<h2>TIENE '+ productosEnTienda +' PRODUCTOS EN TIENDA Y '+ productosEnWeb +' ONLINE</h2>' + 
+                '<h2>TIENE '+ CART.productosEnTienda +' PRODUCTOS EN TIENDA Y '+ CART.productosEnWeb +' ONLINE</h2>' + 
                 '<h4>¿QUE QUIERES HACER?</h4>' +
                 '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
