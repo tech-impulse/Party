@@ -375,6 +375,10 @@ function revisarDireccionCorreo(id) {
  *   funcion que vacia el carrito, vuelve a la pantalla inicial y esta logado, hace un logout.
  */
 function cancelaPedido() {
+    
+    $("#btn_finalizarpedido").removeClass("btn_disabled");
+    $("#car_compra").removeClass("btn_disabled");
+    
     vaciaCarrito();
 
     if (EMAIL_USER != "") {

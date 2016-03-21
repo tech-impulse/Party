@@ -7,6 +7,7 @@ function getLogin(usario, contraseña) {
     var dataSend = {
         user: usario,
         password: contraseña
+
     };
 
     var request = $.ajax({
@@ -473,7 +474,7 @@ function getNodesProducts(idNode, nodeName) { //esta funcion nos devuelve la inf
         origin: origin,
         id: idNode,
         store: STORE.id
-        //page: parseInt(PAGINA)
+            //page: parseInt(PAGINA)
     };
 
     console.log("Post catalogo");
@@ -732,7 +733,7 @@ function getCostumesAge(info_aux) {
             if (response.result == 1) {
 
                 //console.log(response);
-                restOk_products(response, "nodes", 4, "Hola",info_aux );
+                restOk_products(response, "nodes", 4, "Hola", info_aux);
 
             } else if (response.result == 0) {
 
@@ -960,7 +961,7 @@ function restOk_tiendas(res, typ, param, param2) {
     }
 
     html = html + '</select></div>';
-    
+
     console.log("--> Añadimos: " + html); // TEMP !!
 
 
@@ -1754,4 +1755,205 @@ function pedidoOnline() {
 
         }
     });
+}
+
+function guardarCarrito() {
+
+    console.log("Guardamos la cesta");
+    var prod = [];
+
+    var aux = {};
+
+    for (var i = 0; i < CART.length; i++) {
+
+        aux.id = CART[i].id;
+        aux.qty = CART[i].quantity;
+
+        prod[i] = aux;
+
+    }
+
+    console.log("Productos");
+    console.log(prod);
+
+    var dataSend = {
+        idClient: INFO_USU.id,
+        products: prod
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'sendBasket.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+
+            console.log("Cesta enviada correctamente");
+            console.log(response);
+
+            if (parseInt(response.result) == parseInt(1)) {
+                console.log("Carrito guardado correctamente");
+                ID_BASKET = response.idBasket;
+            } else if (parseInt(response.result) == parseInt(0)) {
+                //guardarCarrito();
+            } else {
+                //guardarCarrito();
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                $("#texto_popup").text('Error de TimeOut... compruebe su conexion de internet');
+                $('#popupAlert').popup('open');
+
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion.........");
+                //$("#texto_popup").text('Sin conexion a internet...');
+                //$('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
+}
+
+
+
+function sendOrder() {
+
+    console.log("Guardamos la cesta");
+
+    var dataSend = {
+        origin: origin,
+        type: prod,
+        sector: PENDIENTE,
+        billingName: INFO_USU.name,
+        billingNIN: INFO_USU.name,
+        paymentMethod: INFO_USU.name,
+        region: INFO_USU.name,
+        deliveryAddress: INFO_USU.name,
+        deliveryPostalCode: INFO_USU.name,
+        deliveryCity: INFO_USU.name,
+        deliveryProvince: INFO_USU.name,
+        deliveryCountry: INFO_USU.name,
+        deliveryPhone: INFO_USU.name,
+        billingAddress: INFO_USU.name,
+        billingPostalCode: INFO_USU.name,
+        billingCity: INFO_USU.name,
+        billingProvince: INFO_USU.name,
+        billingCountry: INFO_USU.name,
+        billingPhone: INFO_USU.name,
+        productsBasePrice: INFO_USU.name,
+        productsTaxPrice: INFO_USU.name,
+        productsTotalPrice: INFO_USU.name,
+        shippingBasePrice : INFO_USU.name,
+        shippingTaxPrice: INFO_USU.name,
+        shippingTotalPrice: INFO_USU.name,
+        basePrice: INFO_USU.name,
+        taxPrice: INFO_USU.name,
+        totalPrice: INFO_USU.name,
+        internalShippingCost: INFO_USU.name,
+        userId: INFO_USU.id,
+        shopId: STORE.id,
+        idBasket: ID_BASKET,
+        lang: language
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'sendOrder.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+
+            console.log("Cesta enviada correctamente");
+            console.log(response);
+
+            if (parseInt(response.result) == parseInt(1)) {
+                console.log("Order guardado correctamente");
+                ID_ORDER = response.idOrder;
+            } else if (parseInt(response.result) == parseInt(0)) {
+                //guardarCarrito();
+            } else {
+                //guardarCarrito();
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                $("#texto_popup").text('Error de TimeOut... compruebe su conexion de internet');
+                $('#popupAlert').popup('open');
+
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion.........");
+                //$("#texto_popup").text('Sin conexion a internet...');
+                //$('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
+}
+
+function updateOrder() {
+
+    console.log("Actualizamos la cesta");
+
+    var dataSend = {
+        idOrder:ID_ORDER,
+        status: PAGADO,
+        origin: origin
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'updateOrder.php',
+        dataType: 'json',
+        type: 'POST',
+        success: function (response) {
+
+            console.log("Cesta enviada correctamente");
+            console.log(response);
+
+            if (parseInt(response.result) == parseInt(1)) {
+                console.log("Carrito guardado correctamente");
+            } else if (parseInt(response.result) == parseInt(0)) {
+                //guardarCarrito();
+            } else {
+                //guardarCarrito();
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                $("#texto_popup").text('Error de TimeOut... compruebe su conexion de internet');
+                $('#popupAlert').popup('open');
+
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion.........");
+                //$("#texto_popup").text('Sin conexion a internet...');
+                //$('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
 }

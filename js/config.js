@@ -36,11 +36,14 @@ var LINKINT = "";
 var EMAIL_USER = "";
 var COLUMS = "";
 var ID_NODE = "";
+var ID_ORDER = 0;
+var ID_BASKET = 0;
+var PAGADO = "";
 var num_personas_fiesta = "";
 var PAGINA = 0; //pagina donde nos quedamos en la paginacion del catalogo
 var POS_GRID = ""; //guardamos la posicion donde nos quedamos en la recarga de articulos del catalogo para poder la paginacion 
 var opcionEnvio = 0;
-var opcionCompraProductos = 1;  // Opción en que nos encontramos en función de la disponibilidad de productos en tienda y online
+var opcionCompraProductos = 1; // Opción en que nos encontramos en función de la disponibilidad de productos en tienda y online
 //var productosEnTienda = 0;  // Número de productos disponibles en tienda del pedido actual
 //var productosEnWeb = 0;     // Número de productos disponibles online del pedido actual
 

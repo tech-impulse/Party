@@ -3316,7 +3316,7 @@ function loadMenu(data) {
     $("#lateralMenu").trigger('create');
 
 
-    var cart = '<a href="#" onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
+    var cart = '<a onclick="displayPopupItemList();" data-position-to="origin">' + //displayCar();
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="width:30%;position: relative;">' +
         '<div style="position: relative;margin-top:10px;margin-left: 20%;z-index:-1;float: left;"><img id="img_cesta" src="css/icons/cesta.png" style="width: 50px;height: 50px;"></div>' +
@@ -4216,12 +4216,15 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 
 //function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
 function opcionesPago() { //TEMP
+    
+    $("#btn_finalizarpedido").addClass("btn_disabled");
+    $("#car_compra").addClass("btn_disabled");
 
     $("#popupListItems").popup("close");
 
     pantallaActual = "opciones de pago";
 
-    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\')"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">' + nodeNames[nodeNames.length - 2] + '</label></div></div></div>');
+    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\');$(\'#car_compra\').removeClass(\'btn_disabled\');$(\'#btn_finalizarpedido\').removeClass(\'btn_disabled\');"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">' + nodeNames[nodeNames.length - 2] + '</label></div></div></div>');
 
     //switch (casoPago) {
     switch (opcionCompraProductos) {
@@ -4233,28 +4236,27 @@ function opcionesPago() { //TEMP
             '<h4>¿DONDE QUIERE ENVIAR SU PEDIDO?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;"><label>Total cesta: ' + CART.ammount + '€</label></div>' +
+            '<div class="ui-block-b" style="text-align: right;"><label>Total cesta: ' + CART.ammount + '€</label></div>' +
             '</div>' +
             '</a>' +
 
             (CART.length - CART.productosEnWeb == 0 ?
                 '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
-                '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
+                '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + CART.ammount + '€ + gastos de envio: 4.75€ <br/>(gratuito a partir de 30€) = 29.75€</label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + CART.ammount + '€ + gastos de envio: 4.75€<br/>(gratuito a partir de 30€) = 29.75€</label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
             '<br>' +
-            '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
-
+            '<a data-corners="false" style="width: 576px;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</a>' +
             '</center>' +
             '</div>';
 
@@ -4262,38 +4264,38 @@ function opcionesPago() { //TEMP
     case 2:
         opcionEnvio = 2;
         var html = '<div>' +
-            '<center>' +
+            '<center><div style="width: 600px;">' +
             '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA Y ' + CART.productosEnWeb + ' ONLINE</h2>' +
             '<h4>¿QUE QUIERES HACER?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + CART.precioTotalProductosTienda + '€ <br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + CART.precioTotalProductosTienda + '€<br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>COMPRAR ONLINE</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + CART.precioTotalProductosWeb + '€ <br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + CART.precioTotalProductosWeb + '€ <br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + CART.ammount + '€ <br/>(' + CART.length + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + CART.ammount + '€<br/>(' + CART.length + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
-            '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+            '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</a>' +
             '</center>' +
             '</div>';
         break;
@@ -4305,15 +4307,15 @@ function opcionesPago() { //TEMP
             '<h4>¿QUE QUIERES HACER?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>PEDIDO ONLINE</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + CART.precioTotalProductosWeb + '€ <br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label></label></div>' +
+            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + CART.precioTotalProductosWeb + '€<br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
-            '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+            '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</a>' +
             '</center>' +
             '</div>';
         break;
@@ -4343,15 +4345,15 @@ function opcionesEnvio(casoEnvio) { //TEMP
             '<h4>¿QUE QUIERES HACER?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+            '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
-            '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+            '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</a>' +
             '</center>' +
             '</div>';
         break;
@@ -4362,7 +4364,7 @@ function opcionesEnvio(casoEnvio) { //TEMP
             '<h4>¿QUE QUIERES HACER?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a"><label>ENVIO A DOMICILIO 48H</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
@@ -4375,11 +4377,11 @@ function opcionesEnvio(casoEnvio) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+            '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
-            '<a data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+            '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
             '</center>' +
             '</div>';
         break;
@@ -4427,7 +4429,7 @@ function sistemasPago() { //TEMP
         '</form>' +
 
         '<br>' +
-        '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+        '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
 
         '</center>';
 
