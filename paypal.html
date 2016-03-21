@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Party Fiesta</title>
+    <meta name="viewport" content="width=device-width, height=device-height,user-scalable=no" charset="utf-8">
+
+    <meta name="format-detection" content="telephone=no" />
+
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+
+    <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/themes/PartyFiesta.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/flaticon/flaticon.css" />
+
+    <link rel="stylesheet" href="lib/all-animation.min.css" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/estilos.css" />
+
+    <!-- SCRIPTS NUESTROS -->
+    <script src="js/app.js"></script>
+    <!--<script src="js/splash.js"></script>-->
+    <script src="js/config.js"></script>
+    <script src="js/rest.js"></script>
+    <script src="js/display.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="idiomas/translateApp.js"></script>
+</head>
+
+<body>
+    <center>
+        <div data-role="fieldcontain" id="div_paypal" data-theme="b" style="">
+            <form style="width: 75%;" data-theme="b">
+                <label style="background: rgb(255, 255, 255);" data-theme="b">
+                    <input type="radio" name="radio-choice-0" id="radio-choice-0a"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />
+                </label>
+                <label style="background: rgb(255, 255, 255);" data-theme="b">
+                    <input type="radio" name="radio-choice-0" id="radio-choice-0a"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppcmcvdam.png" alt="Pay with PayPal Credit or any major credit card" />
+                </label>
+                <label style="background: rgb(255, 255, 255);color: rgb(0, 0, 0);" data-theme="b">
+                    <input type="radio" name="radio-choice-0" id="radio-choice-0a">PAGAR EN CAJA
+                </label>
+            </form>
+        </div>
+
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="CVT3G3TQNF9D2">
+            <input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
+            <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+        </form>
+    </center>
+
+
+</body>
+
+</html>

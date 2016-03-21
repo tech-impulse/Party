@@ -4218,6 +4218,8 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 function opcionesPago() { //TEMP
 
     $("#popupListItems").popup("close");
+    
+    pantallaActual = "opciones de pago";
 
     //switch (casoPago) {
     switch (opcionCompraProductos) {
