@@ -4624,9 +4624,9 @@ function loadSelectShopsFromProvince(idProvince) {
     //$("#div_select_tienda").css('font-size', '20px');
 }
 
-function displayDomicilioForm() {
-
-    html_register_user = '<h2>Registro Usuario</h2>' +
+function changeFormRegUser(html_register_user)    {
+    
+    var html_register_user = '<h2>Registro Usuario</h2>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">email</label>' +
@@ -4637,6 +4637,7 @@ function displayDomicilioForm() {
         '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_email" name="input_repetir_email" required="required" type="email" placeholder="nombre@email.com" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
+        
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Contraseña</label>' +
@@ -4646,13 +4647,50 @@ function displayDomicilioForm() {
         '<label class="youpasswd" data-icon="p">Repetir contraseña</label>' +
         '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_pass" name="input_repetir_pass" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
+        '</div>' +
+        
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="uname" data-icon="u">Código postal</label>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_cp" name="input_cp" required="required" type="password" placeholder="" autofocus="" data-clear-btn="true"></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        
+        '</div>' +
         '</div>';
+    
+    
+    var div_form_reg_user = $('#div_form_reg_user');
+    
+    div_form_reg_user.empty();
+    
+    div_form_reg_user.html(html_register_user);
+    div_form_reg_user.trigger('create');
+}
+
+function displayDomicilioForm() {
+    
+    var html_login_user = '<h2>Login Usuario</h2>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="uname" data-icon="u">email</label>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_email" name="input_email" required="required" type="email" placeholder="nombre@email.com" autofocus="" data-clear-btn="true"></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label class="uname" data-icon="u">Contraseña</label>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pass" name="input_pass" required="required" type="password" placeholder="" autofocus="" data-clear-btn="true"></div>' +
+        '</div>' +
+        '</div>' +
+        '<center><br>' +
+        '<div onclick="changeFormRegUser();" style="height: 35px;"><a id="registrarse" onclick="changeFormRegUser();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>' +
+        '</center>';
 
     html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
-        '<form autocomplete="on">' +
+        '<form autocomplete="on"><div id="div_form_reg_user">' +
 
-        (INFO_USU.id != undefined ? '' : html_register_user) +
+        (INFO_USU.id != undefined ? '' : html_login_user) +
 
+        '</div>' + 
         '<h2 id="h2_direccion">Dirección</h2>' +
 
         '<div class="ui-grid-a" style="width:80%;">' + // --> CHECK DIRECCION !!!!    **********
