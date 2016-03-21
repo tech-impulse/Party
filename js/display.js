@@ -4245,7 +4245,7 @@ function opcionesPago() { //TEMP
             '</a>' +
 
             (CART.length - CART.productosEnWeb == 0 ?
-                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ')" data-role="button" data-theme="b" >' +
+                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ','+ CART.ammount +')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
                 '</div>' +
@@ -4276,7 +4276,7 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + CART.precioTotalProductosTienda + '€<br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ','+ CART.precioTotalProductosWeb +')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE</label></div>' +
             '</div>' +
@@ -4285,7 +4285,7 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + CART.precioTotalProductosWeb + '€ <br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(2)" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio('+ opcionEnvio +','+ CART.ammount +')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
             '</div>' +
@@ -4305,7 +4305,7 @@ function opcionesPago() { //TEMP
             '<center>' +
             '<h2>NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
             '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ','+ CART.precioTotalProductosWeb +')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
             '</div>' +
@@ -4330,7 +4330,7 @@ function opcionesPago() { //TEMP
 }
 
 //function opcionesEnvio(casoEnvio, productosEnTienda, productosEnWeb) { //TEMP
-function opcionesEnvio(casoEnvio) { //TEMP
+function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
     //function opcionesEnvio() { //TEMP
 
     pantallaActual = "opciones envio";
@@ -4349,7 +4349,11 @@ function opcionesEnvio(casoEnvio) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+<<<<<<< HEAD
             '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+=======
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: '+ totalCesta +'€ + gastos de envio = 30,25€</label></div>' +
+>>>>>>> origin/master
             '</div>' +
             '</a>' +
             '<br>' +
@@ -4368,7 +4372,7 @@ function opcionesEnvio(casoEnvio) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: '+ totalCesta +'€ + gastos de envio = 30,25€</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="formularioTiendaDestino()" data-role="button" data-theme="b" >' +
@@ -4377,7 +4381,11 @@ function opcionesEnvio(casoEnvio) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+<<<<<<< HEAD
             '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+=======
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: '+ totalCesta +'€ + gastos de envio = 30,25€</label></div>' +
+>>>>>>> origin/master
             '</div>' +
             '</a>' +
             '<br>' +
