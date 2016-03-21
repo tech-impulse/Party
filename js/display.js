@@ -4349,11 +4349,11 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-<<<<<<< HEAD
-            '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-=======
+
+           // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+
             '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: '+ totalCesta +'€ + gastos de envio = 30,25€</label></div>' +
->>>>>>> origin/master
+
             '</div>' +
             '</a>' +
             '<br>' +
@@ -4381,11 +4381,11 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-<<<<<<< HEAD
-            '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-=======
+
+            //'<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+
             '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: '+ totalCesta +'€ + gastos de envio = 30,25€</label></div>' +
->>>>>>> origin/master
+
             '</div>' +
             '</a>' +
             '<br>' +
