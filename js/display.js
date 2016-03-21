@@ -4352,7 +4352,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
            // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
 
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: '+ totalCesta +'€ + gastos de envio = 30,25€</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: '+ totalCesta +'€ + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
 
             '</div>' +
             '</a>' +
@@ -4725,9 +4725,20 @@ function displayDomicilioForm() {
         '</div>' +
         '</div>' +
 
-        '<div class="ui-grid-solo">' +
+        /*'<div class="ui-grid-solo">' +
         '<label class="youpasswd" data-icon="p">Dirección (calle, número, escalera, piso)</label>' +
-        '<div class="ui-block-a" style="width:90%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="number" placeholder="Dirección" data-clear-btn="true"></div>' +
+        '<div class="ui-block-a" style="width:90%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
+        '</div>' +*/
+                
+        '<div class="ui-grid-a">' +
+            '<div class="ui-block-a">' +
+                '<label class="youpasswd" data-icon="p">Dirección</label>' +
+                '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="text" placeholder="Dirección" autofocus="" data-clear-btn="true"></div>' +
+            '</div>' +
+            '<div class="ui-block-b">' +
+                '<label class="youpasswd" data-icon="p">Número</label>' +
+                '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion" name="input_num_direccion" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+            '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
@@ -4804,7 +4815,8 @@ function displayDomicilioForm() {
 
         '</div>' +
 
-        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="sistemasPago();">Continuar</button>' +
+        //'<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="sistemasPago();">Continuar</button>' +
+        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="registroUsuarioDomicilio();">Continuar</button>' +
 
         '</form>' +
         '</div>' +

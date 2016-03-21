@@ -593,3 +593,100 @@ function updateVariblesTiposDeProducto( product, nuevoProducto )   {
     
 }
 
+
+function registroUsuarioDomicilio() {   // underDev
+    val user = $('#input_email').val();
+    val password = $('#input_pass').val();
+    
+    val sendName = $('#input_nombreUsuario').val();
+    val sendSurname = $('#input_apellidos').val();
+    val sendPhone = $('#input_telefono').val();
+    val sendNIN = $('#input_dni_cif').val();
+    val sendAddress = $('#input_direccion').val();
+    val sendNumber = $('#input_num_direccion').val();       // ------> CONTINUAR AKI !!!!! <-------
+    
+    
+}
+
+
+function sendRegistroDomicilio( user, password, userPostalCode, sendName, sendSurname, sendPhone, 
+                                sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry) {
+
+    // Datos que se van a enviar
+    var dataSend = {
+        user: user,
+        password: password,
+        userPostalCode: userPostalCode,
+        sendName: sendName,
+        sendSurname: sendSurname,
+        sendPhone: sendPhone,
+        sendNIN: sendNIN,
+        sendAddress: sendAddress,
+        sendNumber: sendNumber,
+        sendCity: sendCity,
+        sendProvince: sendProvince,
+        sendPC: sendPC,
+        sendCountry: sendCountry
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'register.php',
+        dataType: 'json',
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            if (response.result == 1) {
+
+                console.log("Todo ok");
+                console.log(response);
+                LOGGED = true;
+                //console.log(response.info);
+                INFO_USU = response.info;
+                //$('#popupLogin').popup('close');
+                $("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
+                $('#login').attr('onclick', "logout()");
+                $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
+                
+                /*if (REDIRECT) {
+                    console.log("Redirigeme");
+                    REDIRECT = false;
+                    checkOut();
+                }*/
+                
+                sistemasPago();
+
+            } else if (response.result == -1) {
+
+                console.log("Número de parametros incorrecto");
+                $("#texto_popup").text("Número de parametros incorrecto");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -2) {
+
+                $("#texto_popup").text("El usuario ya existe");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
