@@ -4527,7 +4527,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + CART.ammount + '€ + gastos de envio: 4.75€<br/>(gratuito a partir de 30€) = 29.75€</label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + CART.ammount + '€ + gastos de envio: 4.99€<br/>(gratuito a partir de 30€) = 29.75€</label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
