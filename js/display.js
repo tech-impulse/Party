@@ -4941,7 +4941,7 @@ function changeFormRegUser(html_register_user)    {
 
 function displayDomicilioForm() {
     
-    var html_login_user = '<h2>Login Usuario</h2>' +
+    /*var html_login_user = '<h2>Login Usuario</h2>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">email</label>' +
@@ -4953,8 +4953,13 @@ function displayDomicilioForm() {
         '</div>' +
         '</div>' +
         '<center><br>' +
-        '<div onclick="changeFormRegUser();" style="height: 35px;"><a id="registrarse" onclick="changeFormRegUser();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>' +
-        '</center>';
+        '<div onclick="changeFormRegUser();" style="height: 35px;">Es necesar<a id="registrarse" onclick="changeFormRegUser();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>' +
+        '</center>';*/
+    
+    var html_login_user = '<div id="contenedorInfoUsuario"><h2>Info Usuario</h2>' +
+        '<center>' +
+        '<div style="height: 35px;">Es necesario <a id="login2" onclick="displayLogin();" style="margin:10px;color: blue;" class="ui-link">Identificarse</a> o <a id="registrarse" onclick="changeFormRegUser();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>' +
+        '</center></div>';
 
     html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
         '<form autocomplete="on"><div id="div_form_reg_user">' +
