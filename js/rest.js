@@ -291,7 +291,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-                if (ISFIESTA == 4) { 
+                if (ISFIESTA == 4) {
 
                     console.log("Asistentes de disfraces");
                     var info = getInfoNode(idNode);
@@ -304,7 +304,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         $("#divHeader_menuInicial").hide(); // TEMP !!
                         //displayPantallaIntermediaAsistDisfra(info);
                         getProductsClassified(idNode, nodeName);
-                                               
+
                     } else {
                         $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
                         $('#popupAlert').popup('open');
@@ -320,7 +320,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     pantallaActual = "Asistente fiestas";
 
                     if (CART.length > 0 && num_personas_fiesta > 0) {
-                        
+
                         var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
 
                         //$("#spBtnAmountPerson").text(precio_persona + " x"); //TEMP
@@ -1854,7 +1854,7 @@ function sendOrder() {
         productsBasePrice: INFO_USU.name,
         productsTaxPrice: INFO_USU.name,
         productsTotalPrice: INFO_USU.name,
-        shippingBasePrice : INFO_USU.name,
+        shippingBasePrice: INFO_USU.name,
         shippingTaxPrice: INFO_USU.name,
         shippingTotalPrice: INFO_USU.name,
         basePrice: INFO_USU.name,
@@ -1914,7 +1914,7 @@ function updateOrder() {
     console.log("Actualizamos la cesta");
 
     var dataSend = {
-        idOrder:ID_ORDER,
+        idOrder: ID_ORDER,
         status: PAGADO,
         origin: origin
     };
@@ -1960,3 +1960,120 @@ function updateOrder() {
 
 }
 
+/**
+ *   getShopsFromProvince
+ *
+ *   funcion que llama al webservice para conseguir las tiendas en funcion del identificador de provincia.
+ */
+function getShopsFromProvince(idProvince) {
+
+    console.log("getShopsFromProvince con id: " + idProvince);
+
+    var dataSend = {
+        province: idProvince
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'getShopsProvince.php',
+        dataType: 'json',
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            console.log("Respuesta de tiendas para la provincia");
+            console.log(response);
+
+            if (response.result == 1) {
+
+                SHOPS = response.stores;
+
+            } else {
+
+                console.log("-> No se encontraron tiendas");
+                $("#texto_popup").text("No se encontraron tiendas");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            return [];
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
+
+/**
+ *   getProvinces
+ *
+ *   funcion que llama al webservice que devuelve todas las provincias.
+ */
+function getProvinces() {
+
+    console.log("-> Llamando al webservice getProvinces.php");
+
+    var request = $.ajax({
+        url: urlServices + 'getProvinces.php',
+        dataType: 'json',
+        async: false,
+        type: 'GET',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            if (response.result == 1) {
+
+                //var provinces = JSON.parse(response.provinces);
+
+                PROVINCIAS = response.provinces;
+
+                //console.log('response.provinces: ' + response.provinces);
+
+                console.log("-> Encontradas " + PROVINCIAS.length + " provincias");
+                //console.log("-> provincias " + PROVINCIAS);
+
+                //return provinces;
+
+            } else {
+                console.log("-> No se encontraron provincias");
+                $("#texto_popup").text("No se encontraron provincias");
+                $('#popupAlert').popup('open');
+
+                return [];
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            return [];
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}

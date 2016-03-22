@@ -38,6 +38,7 @@ var COLUMS = "";
 var ID_NODE = "";
 var ID_ORDER = 0;
 var ID_BASKET = 0;
+var SHOPS = [];
 var PAGADO = "";
 var num_personas_fiesta = "";
 var PAGINA = 0; //pagina donde nos quedamos en la paginacion del catalogo

@@ -4746,22 +4746,12 @@ function formularioTiendaDestino() {
     </div>*/
 
     // TEMP !!!!!
-    /*var html = '<div>' +
+    var html = '<div>' +
         '<center>' +
         '<h2>SELECCIONE TIENDA DE DESTINO</h2>' +
-        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
         '<div class="ui-grid-a">' +
         '<div id="div_select_provincia" class="ui-block-a">' +
-
         '</div>' +
-        '</a>' +
-        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-a">' +
-        '<div class="ui-block-a">' +
-
-        '</div>' +
-        '</div>' +
-        '</a>' +
         '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a"><label>SELECCIONAR</label></div>' +
@@ -4776,12 +4766,14 @@ function formularioTiendaDestino() {
     loadSelectProvincias();
 
     $("#selectProvincia").change(function () {
-        alert("Han cambiado mi valor");
+        //alert("Han cambiado mi valor");
 
         idProvince = $("#selectProvincia").val();
+        console.log("Provincia "+idProvince);
 
         loadSelectShopsFromProvince(idProvince);
-    });*/
+        
+    });
 
     /*html = '<div id="divTienda" align="center" style="padding-top: 5%;">' +
 
@@ -4793,7 +4785,7 @@ function formularioTiendaDestino() {
 
     '<div class="ui-grid-c" style="width: 25%">' +
         '<button data-theme="b" id="btn_seleccionar_tienda" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;" class=" ui-btn ui-btn-b ui-shadow">Seleccionar</button>' +
-    '</div>';*/
+    '</div>';
 
     html = '<center>' +
         '<h2>SELECCIONE LA TIENDA DE DESTINO</h2>' +
@@ -4809,7 +4801,7 @@ function formularioTiendaDestino() {
     '</center>';
 
     $("#divContent").html(html);
-    $("#divContent").trigger('create');
+    $("#divContent").trigger('create');*/
 
     //getTiendas();
 }
@@ -4818,7 +4810,7 @@ function loadSelectProvincias() {
 
     getProvinces();
 
-    console.log('-> loadSelectProvincias() con language: ' + language + ' i provincias: ' + PROVINCIAS.length); // TEMP !!
+    //console.log('-> loadSelectProvincias() con language: ' + language + ' i provincias: ' + PROVINCIAS.length); // TEMP !!
 
     //var provincias = getProvinces();
     //getProvinces();
@@ -4869,34 +4861,37 @@ function loadSelectProvincias() {
 
     html = html + '</select></div>';
 
-    console.log('-> Incluyendo html: ' + html); // TEMP !!
+    //console.log('-> Incluyendo html: ' + html); // TEMP !!
 
     $("#div_select_provincia").html(html);
-
     $("#div_select_provincia").trigger('create');
     //$("#div_select_provincia").css('font-size', '20px');
 }
 
 function loadSelectShopsFromProvince(idProvince) {
 
-    shops = getShopsFromProvince(idProvince);
+    getShopsFromProvince(idProvince);
+    
+    console.log("SHOPSSSSSS");
+    console.log(SHOPS);
 
     var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="selectShop" data-native-menu="false" data-theme="b" style="">';
 
-    for (var i = 0; i < shops.length; i++) {
+    for (var i = 0; i < SHOPS.length; i++) {
 
-        var val = shops[i].id;
-        var text = shops[i].name;
+        var val = SHOPS[i].id;
+        var text = SHOPS[i].name;
 
         html = html + '<option value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
 
     }
 
     html = html + '</select></div>';
+    
+    console.log(html);
 
-    $("#div_select_tienda").html(html);
-
-    $("#div_select_tienda").trigger('create');
+    $("#selectShop").html(html);
+    $("#selectShop").trigger('create');
     //$("#div_select_tienda").css('font-size', '20px');
 }
 

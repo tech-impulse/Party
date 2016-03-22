@@ -64,7 +64,7 @@ function checkOut() {
 
     $("#page_count").hide();
 
-    
+
 }
 
 function addCartAsistFiestas(prod_id) {
@@ -375,10 +375,10 @@ function revisarDireccionCorreo(id) {
  *   funcion que vacia el carrito, vuelve a la pantalla inicial y esta logado, hace un logout.
  */
 function cancelaPedido() {
-    
+
     $("#btn_finalizarpedido").removeClass("btn_disabled");
     $("#car_compra").removeClass("btn_disabled");
-    
+
     vaciaCarrito();
 
     if (EMAIL_USER != "") {
@@ -399,218 +399,104 @@ function cancelaPedido() {
     nodeImg = [];
 }
 
+
 /**
- *   getShopsFromProvince
+ *   Funcion updateOpcionCompraProducto
  *
- *   funcion que llama al webservice para conseguir las tiendas en funcion del identificador de provincia.
+ *   Recalcula opcionCompraProductos en función de las variables productosEnTienda y productosEnWeb
  */
-function getShopsFromProvince( idProvince ) {
-    
-    console.log("getShopsFromProvince con id: " + idProvince);
-    
-    var request = $.ajax({
-        data: idProvince,
-        url: urlServices + 'getShopsProvince.php',
-        dataType: 'json',
-        async: false,
-        type: 'GET',
-        timeout: 10000, //10 seg
-        success: function (response) {
-            
-            if ( response.result == 1)  {
-                
-                return response.stores;
-                
-            }
-            else    {
-                console.log("-> No se encontraron tiendas");
-                $("#texto_popup").text("No se encontraron tiendas");
-                $('#popupAlert').popup('open');
-                
-                return [];
-            }
-        },
-         error: function (jqXHR, textStatus, errorThrown) {
+function updateOpcionCompraProducto() {
 
-            return []; 
-            
-            if (textStatus === "timeout") {
-                //do something on timeout
-                console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
-
-            } else {
-
-                restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
-                //alert("Sin conexion a internet...");
-                $("#texto_popup").text("Sin conexion a internet");
-                $('#popupAlert').popup('open');
-
-            }
-        },
-    });
-}
-
-/**
- *   getProvinces
- *
- *   funcion que llama al webservice que devuelve todas las provincias.
- */
-function getProvinces() {
-    
-    console.log("-> Llamando al webservice getProvinces.php");
-    
-    var request = $.ajax({
-        url: urlServices + 'getProvinces.php',
-        dataType: 'json',
-        async: false,
-        type: 'GET',
-        timeout: 10000, //10 seg
-        success: function (response) {
-            
-            if ( response.result == 1)  {
-                
-                //var provinces = JSON.parse(response.provinces);
-                
-                PROVINCIAS = response.provinces;
-                
-                //console.log('response.provinces: ' + response.provinces);
-                
-                console.log("-> Encontradas " + PROVINCIAS.length + " provincias");
-                console.log("-> provincias " + PROVINCIAS);
-                
-                //return provinces;
-                
-            }
-            else    {
-                console.log("-> No se encontraron provincias");
-                $("#texto_popup").text("No se encontraron provincias");
-                $('#popupAlert').popup('open');
-                
-                return [];
-            }
-        },
-         error: function (jqXHR, textStatus, errorThrown) {
-
-            return []; 
-            
-            if (textStatus === "timeout") {
-                //do something on timeout
-                console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
-
-            } else {
-
-                restError(jqXHR, "tiendas");
-                console.log("Sin conexion");
-                //alert("Sin conexion a internet...");
-                $("#texto_popup").text("Sin conexion a internet");
-                $('#popupAlert').popup('open');
-
-            }
-        },
-    });
-}
-
-/**
-*   Funcion updateOpcionCompraProducto
-*
-*   Recalcula opcionCompraProductos en función de las variables productosEnTienda y productosEnWeb
-*/
-function updateOpcionCompraProducto()   {
-    
     if (CART.length - CART.productosEnTienda == 0) { // 1- Todos los productos estan en tienda i productosEnWeb
         opcionCompraProductos = 1;
-    } else if ( CART.productosEnTienda > 0 && CART.productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
+    } else if (CART.productosEnTienda > 0 && CART.productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
         opcionCompraProductos = 2;
     } else if (CART.productosEnTienda == 0) { // 3- Ningun producto en tienda
         opcionCompraProductos = 3;
     }
-    
+
 }
 
 /**
-*   Funcion updateVariblesTiposDeProducto
-*
-*   Recalcula opcionCompraProductos en función de las variables productosEnTienda y productosEnWeb
-*
-*   param: nuevoProducto --> boolean ( true: si se añade un nuevo producto al carrito | false: si se quita del carrito)
-*/
-function updateVariblesTiposDeProducto( product, nuevoProducto )   {
-    
-    if ( nuevoProducto )    {
+ *   Funcion updateVariblesTiposDeProducto
+ *
+ *   Recalcula opcionCompraProductos en función de las variables productosEnTienda y productosEnWeb
+ *
+ *   param: nuevoProducto --> boolean ( true: si se añade un nuevo producto al carrito | false: si se quita del carrito)
+ */
+function updateVariblesTiposDeProducto(product, nuevoProducto) {
+
+    if (nuevoProducto) {
         if (product.stock_x_store > 0) {
             CART.productosEnTienda++;
-            
+
             CART.precioTotalProductosTienda += product.quantity * product.price_x_region[0].totalPrice;
-            
-            if ( product.stock_x_central_store <= 0 )   {
+
+            if (product.stock_x_central_store <= 0) {
                 CART.productosSoloEnTienda++;
                 CART.precioTotalProductosSoloTienda += product.quantity * product.price_x_region[0].totalPrice;
             }
-            
+
             //productAlter.price_x_region[0].totalPrice
         }
-        if ( product.stock_x_central_store > 0 ) {
+        if (product.stock_x_central_store > 0) {
             CART.productosEnWeb++;
-            
+
             CART.precioTotalProductosWeb += product.quantity * product.price_x_region[0].totalPrice;
-            
-             if (product.stock_x_store <= 0) {
+
+            if (product.stock_x_store <= 0) {
                 CART.productosSoloEnWeb++;
-                 
+
                 CART.precioTotalProductosSoloWeb += product.quantity * product.price_x_region[0].totalPrice;
             }
         }
-    }
-    else    {
+    } else {
         if (product.stock_x_store > 0) {
             CART.productosEnTienda--;
-            
+
             CART.precioTotalProductosTienda -= product.quantity * product.price_x_region[0].totalPrice;
-            
-            if ( product.stock_x_central_store <= 0 )   {
+
+            if (product.stock_x_central_store <= 0) {
                 CART.productosSoloEnTienda--;
-                
+
                 CART.precioTotalProductosSoloTienda -= product.quantity * product.price_x_region[0].totalPrice;
             }
-            
+
             //productAlter.price_x_region[0].totalPrice
         }
-        if ( product.stock_x_central_store > 0 ) {
+        if (product.stock_x_central_store > 0) {
             CART.productosEnWeb--;
-            
+
             CART.precioTotalProductosWeb -= product.quantity * product.price_x_region[0].totalPrice;
-            
+
             if (product.stock_x_store <= 0) {
                 CART.productosSoloEnWeb--;
-                
+
                 CART.precioTotalProductosSoloWeb -= product.quantity * product.price_x_region[0].totalPrice;
             }
         }
     }
-    
+
 }
 
 
-function registroUsuarioDomicilio() {   // underDev
+function registroUsuarioDomicilio() { // underDev
     var user = $('#input_email').val();
     var password = $('#input_pass').val();
-    
+
     var sendName = $('#input_nombreUsuario').val();
     var sendSurname = $('#input_apellidos').val();
     var sendPhone = $('#input_telefono').val();
     var sendNIN = $('#input_dni_cif').val();
     var sendAddress = $('#input_direccion').val();
-    var sendNumber = $('#input_num_direccion').val();       // ------> CONTINUAR AKI !!!!! <-------
-    
-    
+    var sendNumber = $('#input_num_direccion').val(); // ------> CONTINUAR AKI !!!!! <-------
+
+
 }
 
 
-function sendRegistroDomicilio( user, password, userPostalCode, sendName, sendSurname, sendPhone, 
-                                sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry) {
+function sendRegistroDomicilio(user, password, userPostalCode, sendName, sendSurname, sendPhone,
+    sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry) {
 
     // Datos que se van a enviar
     var dataSend = {
@@ -648,13 +534,13 @@ function sendRegistroDomicilio( user, password, userPostalCode, sendName, sendSu
                 $("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
                 $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
-                
+
                 /*if (REDIRECT) {
                     console.log("Redirigeme");
                     REDIRECT = false;
                     checkOut();
                 }*/
-                
+
                 sistemasPago();
 
             } else if (response.result == -1) {
