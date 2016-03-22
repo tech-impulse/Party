@@ -4946,13 +4946,11 @@ function changeFormRegUser(html_register_user) {
 }
 
 function displayDomicilioForm() {
-<<<<<<< HEAD
 
     var html_login_user = '<h2>Login Usuario</h2>' +
-=======
     
     /*var html_login_user = '<h2>Login Usuario</h2>' +
->>>>>>> origin/master
+
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">email</label>' +
