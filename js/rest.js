@@ -291,19 +291,20 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
                 //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
-                if (ISFIESTA == 4) { // si estamos en algun asistente, ya sea de fistas o disfraces, hay que mostrar una pantalla intermadia
-
-                    updateBackButton(idNode, nodeName, aux);
+                if (ISFIESTA == 4) { 
 
                     console.log("Asistentes de disfraces");
                     var info = getInfoNode(idNode);
 
                     if (info != "undefined") {
                         //console.log("DisplayPantalla intermadia");
+                        updateBackButton(idNode, nodeName, aux);
                         pantallaActual = "Asistente disfraces";
                         $("#divHeader_catalogo").show();
                         $("#divHeader_menuInicial").hide(); // TEMP !!
-                        displayPantallaIntermediaAsistDisfra(info);
+                        //displayPantallaIntermediaAsistDisfra(info);
+                        getProductsClassified(idNode, nodeName);
+                                               
                     } else {
                         $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
                         $('#popupAlert').popup('open');
@@ -319,6 +320,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     pantallaActual = "Asistente fiestas";
 
                     if (CART.length > 0 && num_personas_fiesta > 0) {
+                        
                         var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
 
                         //$("#spBtnAmountPerson").text(precio_persona + " x"); //TEMP
@@ -1767,7 +1769,6 @@ function guardarCarrito() {
     for (var i = 0; i < CART.length; i++) {
 
         aux.id = CART[i].id;
-        aux.id = CART[i].sku;
         aux.qty = CART[i].quantity;
 
         prod[i] = aux;
@@ -1958,3 +1959,4 @@ function updateOrder() {
     });
 
 }
+

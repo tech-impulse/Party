@@ -595,15 +595,15 @@ function updateVariblesTiposDeProducto( product, nuevoProducto )   {
 
 
 function registroUsuarioDomicilio() {   // underDev
-    val user = $('#input_email').val();
-    val password = $('#input_pass').val();
+    var user = $('#input_email').val();
+    var password = $('#input_pass').val();
     
-    val sendName = $('#input_nombreUsuario').val();
-    val sendSurname = $('#input_apellidos').val();
-    val sendPhone = $('#input_telefono').val();
-    val sendNIN = $('#input_dni_cif').val();
-    val sendAddress = $('#input_direccion').val();
-    val sendNumber = $('#input_num_direccion').val();       // ------> CONTINUAR AKI !!!!! <-------
+    var sendName = $('#input_nombreUsuario').val();
+    var sendSurname = $('#input_apellidos').val();
+    var sendPhone = $('#input_telefono').val();
+    var sendNIN = $('#input_dni_cif').val();
+    var sendAddress = $('#input_direccion').val();
+    var sendNumber = $('#input_num_direccion').val();       // ------> CONTINUAR AKI !!!!! <-------
     
     
 }
