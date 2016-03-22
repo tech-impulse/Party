@@ -4947,9 +4947,8 @@ function changeFormRegUser(html_register_user) {
 
 function displayDomicilioForm() {
 
+    /*    
     var html_login_user = '<h2>Login Usuario</h2>' +
-    
-    /*var html_login_user = '<h2>Login Usuario</h2>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
