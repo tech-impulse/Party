@@ -489,9 +489,20 @@ function registroUsuarioDomicilio() { // underDev
     var sendPhone = $('#input_telefono').val();
     var sendNIN = $('#input_dni_cif').val();
     var sendAddress = $('#input_direccion').val();
+<<<<<<< HEAD
     var sendNumber = $('#input_num_direccion').val(); // ------> CONTINUAR AKI !!!!! <-------
 
 
+=======
+    var sendNumber = $('#input_num_direccion').val();
+    var sendPC = $('#input_postal').val();
+    var sendCity = $('#input_ciudad').val();
+    var sendCountry = $('#input_pais').val();
+    var sendProvince = $('#input_provincia').val();
+    
+    sendRegistroDomicilio( user, password, userPostalCode, sendName, sendSurname, sendPhone, 
+                                sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry);
+>>>>>>> origin/master
 }
 
 
