@@ -818,7 +818,7 @@ function getProductsClassified(idNode, nodeName, info_aux) {
         dataType: 'json',
         type: 'POST',
         //async:false,
-        timeout: 25000, //10 seg
+        timeout: 40000, //10 seg
         success: function (response) {
             console.log("Respuesta: ");
             console.log(response);
