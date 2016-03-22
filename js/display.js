@@ -4516,7 +4516,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="text-align: right;"><label>Total cesta: ' + CART.ammount + '€</label></div>' +
+            '<div class="ui-block-b" style="text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '</label></div>' +
             '</div>' +
             '</a>' +
 
@@ -4527,7 +4527,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + CART.ammount + '€ + gastos de envio: 4.99€<br/>(gratuito a partir de 30€) = 29.75€</label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' + gastos de envio: 4.99€<br/>(gratuito a partir de 30€) = 29.75€</label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
@@ -4549,7 +4549,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + CART.precioTotalProductosTienda + '€<br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosWeb + ')" data-role="button" data-theme="b" >' +
@@ -4558,7 +4558,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + CART.precioTotalProductosWeb + '€ <br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€") + '<br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.ammount + ')" data-role="button" data-theme="b" >' +
@@ -4567,7 +4567,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + CART.ammount + '€<br/>(' + CART.length + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '<br/>(' + CART.length + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -4587,7 +4587,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + CART.precioTotalProductosWeb + '€<br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€")  + '<br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -4628,7 +4628,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
             // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
 
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: ' + totalCesta + '€ + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: ' + formatoNumero(totalCesta, 2, ",", ".", "€")  + ' + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
 
             '</div>' +
             '</a>' +
@@ -4648,7 +4648,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>' + totalCesta + '€</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€")  + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="formularioTiendaDestino()" data-role="button" data-theme="b" >' +
@@ -4660,7 +4660,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
             //'<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
 
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + totalCesta + '€</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€")  + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
 
             '</div>' +
             '</a>' +
