@@ -1977,6 +1977,7 @@ function getShopsFromProvince(idProvince) {
         data: dataSend,
         url: urlServices + 'getShopsProvince.php',
         dataType: 'json',
+        async:false,
         type: 'POST',
         timeout: 10000, //10 seg
         success: function (response) {
@@ -2053,7 +2054,6 @@ function getProvinces() {
                 $("#texto_popup").text("No se encontraron provincias");
                 $('#popupAlert').popup('open');
 
-                return [];
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {

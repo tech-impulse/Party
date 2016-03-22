@@ -1278,8 +1278,8 @@ function displayProducts(data, originNode, originName, param, param4) {
         $("#popupCargando").popup("close");
 
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces" && param4 == "getProductsClassified") {
-        
-        
+
+
         //console.log("Entramos en la nueva visualizacion");
         console.log(data);
         AUX = 1;
@@ -4492,7 +4492,7 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 
 //function opcionesPago(casoPago, productosEnTienda, productosEnWeb) { //TEMP
 function opcionesPago() { //TEMP
-    
+
     $("#btn_finalizarpedido").addClass("btn_disabled");
     $("#car_compra").addClass("btn_disabled");
 
@@ -4521,7 +4521,7 @@ function opcionesPago() { //TEMP
             '</a>' +
 
             (CART.length - CART.productosEnWeb == 0 ?
-                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ','+ CART.ammount +')" data-role="button" data-theme="b" >' +
+                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.ammount + ')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
                 '</div>' +
@@ -4552,7 +4552,7 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + CART.precioTotalProductosTienda + '€<br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ','+ CART.precioTotalProductosWeb +')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosWeb + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE</label></div>' +
             '</div>' +
@@ -4561,7 +4561,7 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + CART.precioTotalProductosWeb + '€ <br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio('+ opcionEnvio +','+ CART.ammount +')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.ammount + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
             '</div>' +
@@ -4581,7 +4581,7 @@ function opcionesPago() { //TEMP
             '<center>' +
             '<h2>NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
             '<h4>¿QUE QUIERES HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ','+ CART.precioTotalProductosWeb +')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosWeb + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
             '</div>' +
@@ -4626,9 +4626,9 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
 
-           // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+            // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
 
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: '+ totalCesta +'€ + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: ' + totalCesta + '€ + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
 
             '</div>' +
             '</a>' +
@@ -4648,7 +4648,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>'+ totalCesta +'€</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>' + totalCesta + '€</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="formularioTiendaDestino()" data-role="button" data-theme="b" >' +
@@ -4660,7 +4660,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
             //'<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
 
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>'+ totalCesta +'€</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + totalCesta + '€</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
 
             '</div>' +
             '</a>' +
@@ -4749,31 +4749,28 @@ function formularioTiendaDestino() {
     var html = '<div>' +
         '<center>' +
         '<h2>SELECCIONE TIENDA DE DESTINO</h2>' +
-        '<div class="ui-grid-a">' +
-        '<div id="div_select_provincia" class="ui-block-a">' +
-        '</div>' +
-        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><label>SELECCIONAR</label></div>' +
-        '</div>' +
-        '</a>' +
+        //'<div id="div_select_provincia"></div>' +
+        '<div id="div_select_tienda" style="width: 50%;"><select data-corners="false" id="selectShop" data-native-menu="false" data-theme="b" style=""></select></div>' +
+        '<a data-corners="false" style="width:50%;" onclick="" data-role="button" data-theme="b" ><label>SELECCIONAR</label></a>' +
         '</center>';
 
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
 
-    loadSelectProvincias();
+    loadSelectShopsFromProvince(STORE.province);
 
-    $("#selectProvincia").change(function () {
+    //loadSelectProvincias();
+
+    /*$("#selectProvincia").change(function () {
         //alert("Han cambiado mi valor");
 
         idProvince = $("#selectProvincia").val();
-        console.log("Provincia "+idProvince);
+        console.log("Provincia " + idProvince);
 
         loadSelectShopsFromProvince(idProvince);
-        
-    });
+
+    });*/
 
     /*html = '<div id="divTienda" align="center" style="padding-top: 5%;">' +
 
@@ -4871,32 +4868,41 @@ function loadSelectProvincias() {
 function loadSelectShopsFromProvince(idProvince) {
 
     getShopsFromProvince(idProvince);
-    
+
     console.log("SHOPSSSSSS");
     console.log(SHOPS);
 
-    var html = '<div class="ui-nodisc-icon"><select data-corners="false" id="selectShop" data-native-menu="false" data-theme="b" style="">';
+    //var html = '<select data-corners="false" id="selectShop" data-native-menu="false" data-theme="b" style=""></select>';
+
+    var select = $('#selectShop');
 
     for (var i = 0; i < SHOPS.length; i++) {
 
         var val = SHOPS[i].id;
         var text = SHOPS[i].name;
 
-        html = html + '<option value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+        //html = html + '<option value="' + val + '" style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+
+        select.append($('<option>', {
+            value: val,
+            text: text
+        }));
+
+        select.selectmenu('refresh', true);
 
     }
 
-    html = html + '</select></div>';
-    
-    console.log(html);
+    //html = html + '</select>';
 
-    $("#selectShop").html(html);
-    $("#selectShop").trigger('create');
+    //console.log(html);
+
+    //$("#div_select_tienda").html(html);
+    //$("#div_select_tienda").trigger('create');
     //$("#div_select_tienda").css('font-size', '20px');
 }
 
-function changeFormRegUser(html_register_user)    {
-    
+function changeFormRegUser(html_register_user) {
+
     var html_register_user = '<h2>Registro Usuario</h2>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
@@ -4908,7 +4914,7 @@ function changeFormRegUser(html_register_user)    {
         '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_email" name="input_repetir_email" required="required" type="email" placeholder="nombre@email.com" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
-        
+
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Contraseña</label>' +
@@ -4919,28 +4925,28 @@ function changeFormRegUser(html_register_user)    {
         '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_pass" name="input_repetir_pass" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
-        
+
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Código postal</label>' +
         '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_cp" name="input_cp" required="required" type="password" placeholder="" autofocus="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        
+
         '</div>' +
         '</div>';
-    
-    
+
+
     var div_form_reg_user = $('#div_form_reg_user');
-    
+
     div_form_reg_user.empty();
-    
+
     div_form_reg_user.html(html_register_user);
     div_form_reg_user.trigger('create');
 }
 
 function displayDomicilioForm() {
-    
+
     var html_login_user = '<h2>Login Usuario</h2>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
@@ -4961,7 +4967,7 @@ function displayDomicilioForm() {
 
         (INFO_USU.id != undefined ? '' : html_login_user) +
 
-        '</div>' + 
+        '</div>' +
         '<h2 id="h2_direccion">Dirección</h2>' +
 
         '<div class="ui-grid-a" style="width:80%;">' + // --> CHECK DIRECCION !!!!    **********
@@ -5000,16 +5006,16 @@ function displayDomicilioForm() {
         '<label class="youpasswd" data-icon="p">Dirección (calle, número, escalera, piso)</label>' +
         '<div class="ui-block-a" style="width:90%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
         '</div>' +*/
-                
+
         '<div class="ui-grid-a">' +
-            '<div class="ui-block-a">' +
-                '<label class="youpasswd" data-icon="p">Dirección</label>' +
-                '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="text" placeholder="Dirección" autofocus="" data-clear-btn="true"></div>' +
-            '</div>' +
-            '<div class="ui-block-b">' +
-                '<label class="youpasswd" data-icon="p">Número</label>' +
-                '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion" name="input_num_direccion" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
-            '</div>' +
+        '<div class="ui-block-a">' +
+        '<label class="youpasswd" data-icon="p">Dirección</label>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="text" placeholder="Dirección" autofocus="" data-clear-btn="true"></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label class="youpasswd" data-icon="p">Número</label>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion" name="input_num_direccion" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+        '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
@@ -5062,16 +5068,16 @@ function displayDomicilioForm() {
         '<label class="youpasswd" data-icon="p">Dirección (calle, número, escalera, piso)</label>' +
         '<div class="ui-block-a" style="width:90%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="number" placeholder="Dirección" data-clear-btn="true"></div>' +
         '</div>' +*/
-        
+
         '<div class="ui-grid-a">' +
-            '<div class="ui-block-a">' +
-                '<label class="youpasswd" data-icon="p">Dirección</label>' +
-                '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="text" placeholder="Dirección" autofocus="" data-clear-btn="true"></div>' +
-            '</div>' +
-            '<div class="ui-block-b">' +
-                '<label class="youpasswd" data-icon="p">Número</label>' +
-                '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion_2" name="input_num_direccion_2" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
-            '</div>' +
+        '<div class="ui-block-a">' +
+        '<label class="youpasswd" data-icon="p">Dirección</label>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="text" placeholder="Dirección" autofocus="" data-clear-btn="true"></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label class="youpasswd" data-icon="p">Número</label>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion_2" name="input_num_direccion_2" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+        '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
