@@ -1767,6 +1767,7 @@ function guardarCarrito() {
     for (var i = 0; i < CART.length; i++) {
 
         aux.id = CART[i].id;
+        aux.id = CART[i].sku;
         aux.qty = CART[i].quantity;
 
         prod[i] = aux;
