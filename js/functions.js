@@ -480,29 +480,44 @@ function updateVariblesTiposDeProducto(product, nuevoProducto) {
 }
 
 
-function registroUsuarioDomicilio() { // underDev
+function registroUsuarioDomicilio() {   // underDev
     var user = $('#input_email').val();
     var password = $('#input_pass').val();
-
+    var userPostalCode = $('#input_cp').val();
+    
     var sendName = $('#input_nombreUsuario').val();
     var sendSurname = $('#input_apellidos').val();
     var sendPhone = $('#input_telefono').val();
     var sendNIN = $('#input_dni_cif').val();
     var sendAddress = $('#input_direccion').val();
-<<<<<<< HEAD
-    var sendNumber = $('#input_num_direccion').val(); // ------> CONTINUAR AKI !!!!! <-------
-
-
-=======
     var sendNumber = $('#input_num_direccion').val();
     var sendPC = $('#input_postal').val();
     var sendCity = $('#input_ciudad').val();
     var sendCountry = $('#input_pais').val();
     var sendProvince = $('#input_provincia').val();
     
-    sendRegistroDomicilio( user, password, userPostalCode, sendName, sendSurname, sendPhone, 
-                                sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry);
->>>>>>> origin/master
+    
+    
+    /*if ($('#content').is(':hidden'))
+       $('#content').show();
+    else
+       $('#content').hide();*/
+    
+    if ( $("#registrarse").length > 0 ) {   // El usuario se supone que ya esta registrado
+        
+        sendRegistroDomicilio( user, password, userPostalCode, 
+                            sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+                            facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
+      
+    }
+    else    {   // El usuario quiere registrarse
+        
+        sendRegistroDomicilio( user, password, userPostalCode, 
+                            sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+                            facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
+        
+    }
+    
 }
 
 

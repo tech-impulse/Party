@@ -5015,7 +5015,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Código postal</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal" name="input_postal" required="required" type="number" placeholder="00000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal" name="input_postal" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>' +
@@ -5025,7 +5025,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais" name="input_pais" required="required" type="number" placeholder="España" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais" name="input_pais" required="required" type="text" placeholder="España" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia</label>' +
@@ -5058,15 +5058,26 @@ function displayDomicilioForm() {
         '</div>' +
         '</div>' +
 
-        '<div class="ui-grid-solo">' +
+        /*'<div class="ui-grid-solo">' +
         '<label class="youpasswd" data-icon="p">Dirección (calle, número, escalera, piso)</label>' +
         '<div class="ui-block-a" style="width:90%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="number" placeholder="Dirección" data-clear-btn="true"></div>' +
+        '</div>' +*/
+        
+        '<div class="ui-grid-a">' +
+            '<div class="ui-block-a">' +
+                '<label class="youpasswd" data-icon="p">Dirección</label>' +
+                '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="text" placeholder="Dirección" autofocus="" data-clear-btn="true"></div>' +
+            '</div>' +
+            '<div class="ui-block-b">' +
+                '<label class="youpasswd" data-icon="p">Número</label>' +
+                '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion_2" name="input_num_direccion_2" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+            '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Código postal</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal_2" name="input_postal_2" required="required" type="number" placeholder="00000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal_2" name="input_postal_2" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>' +
@@ -5076,7 +5087,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais_2" name="input_pais_2" required="required" type="number" placeholder="España" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais_2" name="input_pais_2" required="required" type="text" placeholder="España" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia</label>' +
