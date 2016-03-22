@@ -521,14 +521,16 @@ function registroUsuarioDomicilio() {   // underDev
 }
 
 
-function sendRegistroDomicilio(user, password, userPostalCode, sendName, sendSurname, sendPhone,
-    sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry) {
+function sendRegistroDomicilio(user, password, userPostalCode, 
+    sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+    facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince) {
 
     // Datos que se van a enviar
     var dataSend = {
         user: user,
         password: password,
         userPostalCode: userPostalCode,
+        
         sendName: sendName,
         sendSurname: sendSurname,
         sendPhone: sendPhone,
@@ -538,7 +540,19 @@ function sendRegistroDomicilio(user, password, userPostalCode, sendName, sendSur
         sendCity: sendCity,
         sendProvince: sendProvince,
         sendPC: sendPC,
-        sendCountry: sendCountry
+        sendCountry: sendCountry,
+        
+        facName: ( facName != undefined ? facName : sendSurname ),
+        facSurname: ( facSurname != undefined ? facSurname : sendSurname ),
+        facPhone: ( facPhone != undefined ? facPhone : sendPhone ),
+        facNIN: ( facNIN != undefined ? facNIN : sendNIN ),
+        facAddress: ( facAddress != undefined ? facAddress : sendAddress ),
+        facNumber: ( facNumber != undefined ? facNumber : sendNumber ),
+        facPC: ( facPC != undefined ? facPC : sendPC ),
+        facCity: ( facCity != undefined ? facCity : sendCity ),
+        facCountry: ( facCountry != undefined ? facCountry : sendCountry ),
+        facProvince: ( facProvince != undefined ? facProvince : sendProvince )
+        
     };
 
     var request = $.ajax({
