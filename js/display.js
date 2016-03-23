@@ -4929,7 +4929,7 @@ function changeFormRegUser(html_register_user) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Código postal</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_cp" name="input_cp" required="required" type="password" placeholder="" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_cp" name="input_cp" required="required" type="text" placeholder="00000" autofocus="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
 
@@ -4966,7 +4966,7 @@ function displayDomicilioForm() {
     
     var html_login_user = '<div id="contenedorInfoUsuario"><h2>Info Usuario</h2>' +
         '<center>' +
-        '<div style="height: 35px;">Es necesario <a id="login2" onclick="displayLogin();" style="margin:10px;color: blue;" class="ui-link">Identificarse</a> o <a id="registrarse" onclick="changeFormRegUser();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>' +
+        '<div style="height: 35px;">Es necesario <a id="login2" onclick="displayLogin();" style="margin:10px;color: blue;" class="ui-link">Identificarse</a> o <a id="registrarse_reg_domicilio" onclick="changeFormRegUser();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>' +
         '</center></div>';
 
     html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
@@ -5145,6 +5145,26 @@ function displayDomicilioForm() {
         }
 
     });
+    
+    if ( INFO_USU.id != undefined )   {     // si el usuario ha hecho login rellenar campos
+        
+        console.log('--> Cargando datos de sesion en formulario:'); // TEMP !!
+        console.log(INFO_USU); // TEMP !!
+        
+        $('#input_nombreUsuario').val( INFO_USU.name )
+        $('#input_apellidos').val( INFO_USU.surname );
+        $('#input_telefono').val( INFO_USU.name );
+        $('#input_dni_cif').val( INFO_USU.phone );
+        $('#input_direccion').val( INFO_USU.address );
+        //$('#input_num_direccion').val( INFO_USU. );       // --> falta modificar el webservice login.php
+        $('#input_postal').val( INFO_USU.postalCode );
+        $('#input_ciudad').val( INFO_USU.city );
+        $('#input_pais').val( INFO_USU.country );
+        $('#input_provincia').val( INFO_USU.province );
+    }
+    else    {   // TEMP !!
+        console.log('-->Usuario no logueado, no se cargaran datos de sesion en formulario:'); // TEMP !!   
+    }
 }
 
 /**

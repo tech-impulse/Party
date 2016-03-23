@@ -481,9 +481,10 @@ function updateVariblesTiposDeProducto(product, nuevoProducto) {
 
 
 function registroUsuarioDomicilio() {   // underDev
-    var user = $('#input_email').val();
-    var password = $('#input_pass').val();
-    var userPostalCode = $('#input_cp').val();
+    
+    var user = ( INFO_USU.id != undefined ? INFO_USU.email : $('#input_email').val() );
+    var password = ( INFO_USU.id != undefined ? '' : $('#input_pass').val() );
+    var userPostalCode = ( INFO_USU.id != undefined ? INFO_USU.postalCode : $('#input_cp').val() );
     
     var sendName = $('#input_nombreUsuario').val();
     var sendSurname = $('#input_apellidos').val();
@@ -496,6 +497,16 @@ function registroUsuarioDomicilio() {   // underDev
     var sendCountry = $('#input_pais').val();
     var sendProvince = $('#input_provincia').val();
     
+    var facName = ( $('#check_misma_direccion').prop('checked') ? sendName : $('#input_nombreUsuario_2').val() );
+    var facSurname = ( $('#check_misma_direccion').prop('checked') ? sendSurname : $('#input_apellidos_2').val() );
+    var facPhone = ( $('#check_misma_direccion').prop('checked') ? sendPhone : $('#input_telefono_2').val() );
+    var facNIN = ( $('#check_misma_direccion').prop('checked') ? sendNIN : $('#input_dni_cif_2').val() );
+    var facAddress = ( $('#check_misma_direccion').prop('checked') ? sendAddress : $('#input_direccion_2').val() );
+    var facNumber = ( $('#check_misma_direccion').prop('checked') ? sendNumber : $('#input_num_direccion_2').val() );
+    var facPC = ( $('#check_misma_direccion').prop('checked') ? sendPC : $('#input_postal_2').val() );
+    var facCity = ( $('#check_misma_direccion').prop('checked') ? sendCity : $('#input_ciudad_2').val() );
+    var facCountry = ( $('#check_misma_direccion').prop('checked') ? sendCountry : $('#input_pais_2').val() );
+    var facProvince = ( $('#check_misma_direccion').prop('checked') ? sendProvince : $('#input_provincia_2').val() );
     
     
     /*if ($('#content').is(':hidden'))
@@ -503,14 +514,18 @@ function registroUsuarioDomicilio() {   // underDev
     else
        $('#content').hide();*/
     
-    if ( $("#registrarse").length > 0 ) {   // El usuario se supone que ya esta registrado
+    if ( $('#registrarse_reg_domicilio').length ) {   // El usuario se supone que ya esta registrado
         
-        sendRegistroDomicilio( user, password, userPostalCode, 
+        console.log('registrarse es true llamamos a updateRegistroUser');   // TEMP
+        
+        updateRegistroUser( user, 
                             sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
                             facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
       
     }
     else    {   // El usuario quiere registrarse
+        
+        console.log('registrarse es false llamamos a sendRegistroDomicilio');   // TEMP
         
         sendRegistroDomicilio( user, password, userPostalCode, 
                             sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
@@ -521,16 +536,15 @@ function registroUsuarioDomicilio() {   // underDev
 }
 
 
-function sendRegistroDomicilio(user, password, userPostalCode, 
+function updateRegistroUser( user, 
     sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
     facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince) {
 
+    console.log('Arguments update: ' + arguments); // TEMP
     // Datos que se van a enviar
     var dataSend = {
         user: user,
-        password: password,
-        userPostalCode: userPostalCode,
-        
+
         sendName: sendName,
         sendSurname: sendSurname,
         sendPhone: sendPhone,
@@ -541,20 +555,117 @@ function sendRegistroDomicilio(user, password, userPostalCode,
         sendProvince: sendProvince,
         sendPC: sendPC,
         sendCountry: sendCountry,
-        
-        facName: ( facName != undefined ? facName : sendSurname ),
-        facSurname: ( facSurname != undefined ? facSurname : sendSurname ),
-        facPhone: ( facPhone != undefined ? facPhone : sendPhone ),
-        facNIN: ( facNIN != undefined ? facNIN : sendNIN ),
-        facAddress: ( facAddress != undefined ? facAddress : sendAddress ),
-        facNumber: ( facNumber != undefined ? facNumber : sendNumber ),
-        facPC: ( facPC != undefined ? facPC : sendPC ),
-        facCity: ( facCity != undefined ? facCity : sendCity ),
-        facCountry: ( facCountry != undefined ? facCountry : sendCountry ),
-        facProvince: ( facProvince != undefined ? facProvince : sendProvince )
-        
-    };
+        //userPostalCode: userPostalCode,
 
+        facName: facName,
+        facSurname: facSurname,
+        facPhone: facPhone,
+        facNIN: facNIN,
+        facAddress: facAddress,
+        facNumber: facNumber,
+        facCity: facCity,
+        facProvince: facProvince,
+        facPC: facPC,
+        facCountry: facCountry
+    };
+    
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'updateUser.php',
+        dataType: 'json',
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            if (response.result == 1) {
+
+                console.log("Todo ok");
+                console.log(response);
+                LOGGED = true;
+                //console.log(response.info);
+                //INFO_USU = response.info;
+                //$('#popupLogin').popup('close');
+                //$("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
+                //$('#login').attr('onclick', "logout()");
+                //$("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
+
+                /*if (REDIRECT) {
+                    console.log("Redirigeme");
+                    REDIRECT = false;
+                    checkOut();
+                }*/
+
+                sistemasPago();
+
+            } else if (response.result == -1) {
+
+                console.log("Número de parametros incorrecto");
+                $("#texto_popup").text("Número de parametros incorrecto");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -2) {
+
+                $("#texto_popup").text("El usuario no existe");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
+
+function sendRegistroDomicilio( user, password, userPostalCode, 
+    sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+    facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince) {
+
+    console.log('Arguments update: ' + arguments); // TEMP
+    
+    // Datos que se van a enviar
+    var dataSend = {
+        user: user,
+        password: password,
+        userPostalCode: userPostalCode,
+
+        sendName: sendName,
+        sendSurname: sendSurname,
+        sendPhone: sendPhone,
+        sendNIN: sendNIN,
+        sendAddress: sendAddress,
+        sendNumber: sendNumber,
+        sendCity: sendCity,
+        sendProvince: sendProvince,
+        sendPC: sendPC,
+        sendCountry: sendCountry,
+
+        facName: facName,
+        facSurname: facSurname,
+        facPhone: facPhone,
+        facNIN: facNIN,
+        facAddress: facAddress,
+        facNumber: facNumber,
+        facCity: facCity,
+        facProvince: facProvince,
+        facPC: facPC,
+        facCountry: facCountry
+    };
+    
     var request = $.ajax({
         data: dataSend,
         url: urlServices + 'register.php',
