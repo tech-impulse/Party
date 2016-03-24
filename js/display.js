@@ -4045,6 +4045,11 @@ function logout() { //muestra el pop up de inicio de session
     LOGGED = false;
     $('#usrnm').val("");
     $('#pswd').val("");
+    
+            
+    if ( $("#contenedorInfoUsuario").length > 0 && $("#contenedorInfoUsuario").is(':hidden') ) {    // Si estoy en formulario de domicilio y hago logout, muestro opciones de registro de usuario.
+        $("#contenedorInfoUsuario").show();
+    }
 
     translateButtons(idiomStore);
 
@@ -4972,7 +4977,9 @@ function displayDomicilioForm() {
     html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
         '<form autocomplete="on"><div id="div_form_reg_user">' +
 
-        (INFO_USU.id != undefined ? '' : html_login_user) +
+        //(INFO_USU.id != undefined ? '<div id="contenedorInfoUsuario"></div>' : html_login_user) +
+        
+        html_login_user +
 
         '</div>' +
         '<h2 id="h2_direccion">Dirección</h2>' +
@@ -5123,6 +5130,10 @@ function displayDomicilioForm() {
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
+    
+    if ( INFO_USU.id != undefined ) {           //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
+        $("#contenedorInfoUsuario").hide();
+    }
 
     $("#check_misma_direccion").click(function () { //  ---------------     evento de click en el checkbox  --------
 
@@ -5151,20 +5162,25 @@ function displayDomicilioForm() {
         console.log('--> Cargando datos de sesion en formulario:'); // TEMP !!
         console.log(INFO_USU); // TEMP !!
         
-        $('#input_nombreUsuario').val( INFO_USU.name )
-        $('#input_apellidos').val( INFO_USU.surname );
-        $('#input_telefono').val( INFO_USU.name );
-        $('#input_dni_cif').val( INFO_USU.phone );
-        $('#input_direccion').val( INFO_USU.address );
-        //$('#input_num_direccion').val( INFO_USU. );       // --> falta modificar el webservice login.php
-        $('#input_postal').val( INFO_USU.postalCode );
-        $('#input_ciudad').val( INFO_USU.city );
-        $('#input_pais').val( INFO_USU.country );
-        $('#input_provincia').val( INFO_USU.province );
+        cargaDatosUsuarioAFormularioRegistro();
     }
     else    {   // TEMP !!
         console.log('-->Usuario no logueado, no se cargaran datos de sesion en formulario:'); // TEMP !!   
     }
+}
+
+
+function cargaDatosUsuarioAFormularioRegistro() {
+    $('#input_nombreUsuario').val( INFO_USU.name )
+    $('#input_apellidos').val( INFO_USU.surname );
+    $('#input_telefono').val( INFO_USU.name );
+    $('#input_dni_cif').val( INFO_USU.phone );
+    $('#input_direccion').val( INFO_USU.address );
+    $('#input_num_direccion').val( INFO_USU.NIN );       // --> falta modificar el webservice login.php
+    $('#input_postal').val( INFO_USU.postalCode );
+    $('#input_ciudad').val( INFO_USU.city );
+    $('#input_pais').val( INFO_USU.country );
+    $('#input_provincia').val( INFO_USU.province );
 }
 
 /**

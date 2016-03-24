@@ -30,9 +30,16 @@ function getLogin(usario, contraseña) {
                 $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
                 
-                if ( $("#login2").length > 0 ) {    // Si estoy en formulario de domicilio y hago login, vacio opciones de registro de usuario.
+                //if ( $("#login2").length > 0 ) {    // Si estoy en formulario de domicilio y hago login, vacio opciones de registro de usuario.
+                if ( $("#contenedorInfoUsuario").is(':visible') ) {
                     $("#contenedorInfoUsuario").hide();
+                    
+                    cargaDatosUsuarioAFormularioRegistro();
                 }
+                
+                /*if ( $("#input_nombreUsuario").length > 0 ) {    // Si estoy en formulario de domicilio y hago login, vacio opciones de registro de usuario.
+                    $("#contenedorInfoUsuario").hide();
+                }*/
                 
                 if (REDIRECT) {
                     console.log("Redirigeme");

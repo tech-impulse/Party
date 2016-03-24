@@ -514,7 +514,8 @@ function registroUsuarioDomicilio() {   // underDev
     else
        $('#content').hide();*/
     
-    if ( $('#registrarse_reg_domicilio').length ) {   // El usuario se supone que ya esta registrado
+    //if ( $('#registrarse_reg_domicilio').length ) {   // El usuario se supone que ya esta registrado
+    if ( INFO_USU.id != undefined ) {   // El usuario se supone que ya esta registrado
         
         console.log('registrarse es true llamamos a updateRegistroUser');   // TEMP
         
@@ -583,11 +584,11 @@ function updateRegistroUser( user,
                 console.log(response);
                 LOGGED = true;
                 //console.log(response.info);
-                //INFO_USU = response.info;
+                INFO_USU = response.info;
                 //$('#popupLogin').popup('close');
-                //$("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
-                //$('#login').attr('onclick', "logout()");
-                //$("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
+                $("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
+                $('#login').attr('onclick', "logout()");
+                $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
 
                 /*if (REDIRECT) {
                     console.log("Redirigeme");
