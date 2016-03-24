@@ -5173,12 +5173,13 @@ function displayDomicilioForm() {
 function cargaDatosUsuarioAFormularioRegistro() {
     $('#input_nombreUsuario').val( INFO_USU.name )
     $('#input_apellidos').val( INFO_USU.surname );
-    $('#input_telefono').val( INFO_USU.name );
-    $('#input_dni_cif').val( INFO_USU.phone );
+    $('#input_telefono').val( INFO_USU.phone );
+    $('#input_dni_cif').val( INFO_USU.NIN );
     $('#input_direccion').val( INFO_USU.address );
     $('#input_num_direccion').val( INFO_USU.NIN );       // --> falta modificar el webservice login.php
     $('#input_postal').val( INFO_USU.postalCode );
     $('#input_ciudad').val( INFO_USU.city );
+    $('#input_num_direccion').val( INFO_USU.addressNumber );
     $('#input_pais').val( INFO_USU.country );
     $('#input_provincia').val( INFO_USU.province );
 }
