@@ -4912,7 +4912,7 @@ function changeFormRegUser(html_register_user) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">email</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_email" name="input_email" required="required" type="email" placeholder="nombre@email.com" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_email" name="input_email" required="required" type="email" placeholder="nombre@email.com" autofocus data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Repetir email</label>' +
@@ -4923,7 +4923,7 @@ function changeFormRegUser(html_register_user) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Contraseña</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pass" name="input_pass" required="required" type="password" placeholder="" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pass" name="input_pass" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Repetir contraseña</label>' +
@@ -4934,7 +4934,7 @@ function changeFormRegUser(html_register_user) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Código postal</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_cp" name="input_cp" required="required" type="text" placeholder="00000" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_cp" name="input_cp" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
 
@@ -4998,7 +4998,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Nombre</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario" name="input_nombreUsuario" required="required" type="text" placeholder="Nombre" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario" name="input_nombreUsuario" required="required" type="text" placeholder="Nombre" autofocus data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Apellidos</label>' +
@@ -5008,7 +5008,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Tel&eacute;fono</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono" name="input_telefono" required="required" type="text" placeholder="930000000" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono" name="input_telefono" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">DNI/CIF</label>' +
@@ -5024,7 +5024,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Dirección</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="text" placeholder="Dirección" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Número</label>' +
@@ -5039,7 +5039,7 @@ function displayDomicilioForm() {
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad" name="input_ciudad" required="required" type="text" placeholder="Barcelona" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad" name="input_ciudad" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
@@ -5049,7 +5049,7 @@ function displayDomicilioForm() {
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia" name="input_provincia" required="required" type="text" placeholder="Barcelona" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia" name="input_provincia" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
@@ -5060,7 +5060,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Nombre</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario_2" name="input_nombreUsuario_2" required="required" type="text" placeholder="Nombre" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario_2" name="input_nombreUsuario_2" required="required" type="text" placeholder="Nombre" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Apellidos</label>' +
@@ -5070,7 +5070,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Tel&eacute;fono</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono_2" name="input_telefono_2" required="required" type="text" placeholder="930000000" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono_2" name="input_telefono_2" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">DNI/CIF</label>' +
@@ -5086,7 +5086,7 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Dirección</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="text" placeholder="Dirección" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Número</label>' +
@@ -5101,7 +5101,7 @@ function displayDomicilioForm() {
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad_2" name="input_ciudad_2" required="required" type="text" placeholder="Barcelona" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad_2" name="input_ciudad_2" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
@@ -5111,7 +5111,7 @@ function displayDomicilioForm() {
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia_2" name="input_provincia_2" required="required" type="text" placeholder="Barcelona" autofocus="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia_2" name="input_provincia_2" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
