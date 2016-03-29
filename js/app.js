@@ -716,7 +716,9 @@ function addToCart(item, param) {
                     CART[j].quantity = CART[j].quantity + parseInt(param);
                     CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
                     
-                    updateVariblesTiposDeProducto( product, true ); // TEMP !! actulizamos variables.
+                    console.log('PRODUCTS[i][id] == item --> foundInCart = 1'); // TEMP !!
+                    
+                    updateVariblesTiposDeProducto( product, ( param > 0 ? true : false ) ); // TEMP !! actulizamos variables.
 
                     var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
@@ -778,7 +780,10 @@ function addToCart(item, param) {
             }*/
          //}
         
-        updateVariblesTiposDeProducto( product, true );
+        console.log('(foundInCart == 0)'); // TEMP !!
+        
+        //updateVariblesTiposDeProducto( product, true );
+        updateVariblesTiposDeProducto( product, ( param > 0 ? true : false ) ); // TEMP !! actulizamos variables.
 
         //var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
@@ -961,7 +966,9 @@ function deleteItemCart(position) { // develop 4
         productosEnWeb--;
     }*/
     
-    updateVariblesTiposDeProducto( CART[position], false );
+    //updateVariblesTiposDeProducto( CART[position], false );
+    
+    updateOpcionCompraProducto(); // TEMP.
     
     displayItemOperations(CART[position].id, 0, position, "borrar"); //Al pasarle un 0 en el campo cantidad, lo que hacemos es borrarlo
 }

@@ -405,16 +405,26 @@ function cancelaPedido() {
  *
  *   Recalcula opcionCompraProductos en función de las variables productosEnTienda y productosEnWeb
  */
-function updateOpcionCompraProducto() {
+function updateOpcionCompraProducto() { // dev 29-03-2016
 
-    if (CART.length - CART.productosEnTienda == 0) { // 1- Todos los productos estan en tienda i productosEnWeb
-        opcionCompraProductos = 1;
-    } else if (CART.productosEnTienda > 0 && CART.productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
-        opcionCompraProductos = 2;
-    } else if (CART.productosEnTienda == 0) { // 3- Ningun producto en tienda
-        opcionCompraProductos = 3;
+    console.log('-> Recalculamos opcionCompraProductos, antes valia: ' + opcionCompraProductos);
+    
+    if (CART.length == 0)   {
+         opcionCompraProductos = 1;
+    }
+    else    {
+        
+        if (CART.length - CART.productosEnTienda == 0) { // 1- Todos los productos estan en tienda i productosEnWeb
+            opcionCompraProductos = 1;
+        } else if (CART.productosEnTienda > 0 && CART.productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
+            opcionCompraProductos = 2;
+        } else if (CART.productosEnTienda == 0) { // 3- Ningun producto en tienda
+            opcionCompraProductos = 3;
+        }
+        
     }
 
+    console.log('-> Ahora vale: ' + opcionCompraProductos);
 }
 
 /**
@@ -425,6 +435,17 @@ function updateOpcionCompraProducto() {
  *   param: nuevoProducto --> boolean ( true: si se añade un nuevo producto al carrito | false: si se quita del carrito)
  */
 function updateVariblesTiposDeProducto(product, nuevoProducto) {
+    
+    console.log('-> Recalculamos VariblesTiposDeProducto con:');
+    console.log('-> Producto stoc en tienda: ' + product.stock_x_store);
+    console.log('-> Producto stoc en web: ' + product.stock_x_central_store);
+    
+    console.log('-> CART.productosEnTienda: ' + CART.productosEnTienda);
+    console.log('-> CART.productosSoloEnTienda: ' + CART.productosSoloEnTienda);
+    console.log('-> CART.productosEnWeb: ' + CART.productosEnWeb);
+    console.log('-> CART.productosSoloEnWeb: ' + CART.productosSoloEnWeb);
+    
+    console.log('\n-> Los nuevos valores son:\n');
 
     if (nuevoProducto) {
         if (product.stock_x_store > 0) {
@@ -451,6 +472,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto) {
             }
         }
     } else {
+        
         if (product.stock_x_store > 0) {
             CART.productosEnTienda--;
 
@@ -477,6 +499,11 @@ function updateVariblesTiposDeProducto(product, nuevoProducto) {
         }
     }
 
+    console.log('-> CART.productosEnTienda: ' + CART.productosEnTienda);
+    console.log('-> CART.productosSoloEnTienda: ' + CART.productosSoloEnTienda);
+    console.log('-> CART.productosEnWeb: ' + CART.productosEnWeb);
+    console.log('-> CART.productosSoloEnWeb: ' + CART.productosSoloEnWeb);
+    
 }
 
 

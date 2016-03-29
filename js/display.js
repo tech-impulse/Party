@@ -4561,7 +4561,7 @@ function opcionesPago() { //TEMP
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosWeb + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE</label></div>' +
+            '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE (TODO EL PEDIDO)</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
@@ -4574,7 +4574,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '<br/>(' + CART.length + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + formatoNumero( CART.ammount - CART.precioTotalProductosTienda , 2, ",", ".", "€") + '<br/>(' + CART.length + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
