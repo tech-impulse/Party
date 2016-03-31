@@ -309,13 +309,14 @@ function guardarInfo(accion) {
         //getNodes(nodeIds[nodeIds.length - 1], nodeNames[nodeNames.length - 1], 0, nodeImg[nodeImg.length - 1], "back");
 
         console.log("--> Dins IF si"); // TEMP !!
+        
     } else {
 
         for (var i = CART.length - 1; i >= 0; i--) {
             if (CART[i].dedonde == "Asistente fiestas") {
                 //console.log("Borramos el item " + CART[i].id);
 
-                CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity)
+                CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity);
                 deleteItemCart(i);
             }
 
@@ -408,12 +409,11 @@ function cancelaPedido() {
 function updateOpcionCompraProducto() { // dev 29-03-2016
 
     console.log('-> Recalculamos opcionCompraProductos, antes valia: ' + opcionCompraProductos);
-    
-    if (CART.length == 0)   {
-         opcionCompraProductos = 1;
-    }
-    else    {
-        
+
+    if (CART.length == 0) {
+        opcionCompraProductos = 1;
+    } else {
+
         if (CART.length - CART.productosEnTienda == 0) { // 1- Todos los productos estan en tienda i productosEnWeb
             opcionCompraProductos = 1;
         } else if (CART.productosEnTienda > 0 && CART.productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
@@ -421,7 +421,7 @@ function updateOpcionCompraProducto() { // dev 29-03-2016
         } else if (CART.productosEnTienda == 0) { // 3- Ningun producto en tienda
             opcionCompraProductos = 3;
         }
-        
+
     }
 
     console.log('-> Ahora vale: ' + opcionCompraProductos);
@@ -435,16 +435,16 @@ function updateOpcionCompraProducto() { // dev 29-03-2016
  *   param: nuevoProducto --> boolean ( true: si se añade un nuevo producto al carrito | false: si se quita del carrito)
  */
 function updateVariblesTiposDeProducto(product, nuevoProducto) {
-    
+
     console.log('-> Recalculamos VariblesTiposDeProducto con:');
     console.log('-> Producto stoc en tienda: ' + product.stock_x_store);
     console.log('-> Producto stoc en web: ' + product.stock_x_central_store);
-    
+
     console.log('-> CART.productosEnTienda: ' + CART.productosEnTienda);
     console.log('-> CART.productosSoloEnTienda: ' + CART.productosSoloEnTienda);
     console.log('-> CART.productosEnWeb: ' + CART.productosEnWeb);
     console.log('-> CART.productosSoloEnWeb: ' + CART.productosSoloEnWeb);
-    
+
     console.log('\n-> Los nuevos valores son:\n');
 
     if (nuevoProducto) {
@@ -502,16 +502,16 @@ function updateVariblesTiposDeProducto(product, nuevoProducto) {
     console.log('-> CART.productosSoloEnTienda: ' + CART.productosSoloEnTienda);
     console.log('-> CART.productosEnWeb: ' + CART.productosEnWeb);
     console.log('-> CART.productosSoloEnWeb: ' + CART.productosSoloEnWeb);
-    
+
 }
 
 
-function registroUsuarioDomicilio() {   // underDev
-    
-    var user = ( INFO_USU.id != undefined ? INFO_USU.email : $('#input_email').val() );
-    var password = ( INFO_USU.id != undefined ? '' : $('#input_pass').val() );
-    var userPostalCode = ( INFO_USU.id != undefined ? INFO_USU.postalCode : $('#input_cp').val() );
-    
+function registroUsuarioDomicilio() { // underDev
+
+    var user = (INFO_USU.id != undefined ? INFO_USU.email : $('#input_email').val());
+    var password = (INFO_USU.id != undefined ? '' : $('#input_pass').val());
+    var userPostalCode = (INFO_USU.id != undefined ? INFO_USU.postalCode : $('#input_cp').val());
+
     var sendName = $('#input_nombreUsuario').val();
     var sendSurname = $('#input_apellidos').val();
     var sendPhone = $('#input_telefono').val();
@@ -522,48 +522,47 @@ function registroUsuarioDomicilio() {   // underDev
     var sendCity = $('#input_ciudad').val();
     var sendCountry = $('#input_pais').val();
     var sendProvince = $('#input_provincia').val();
-    
-    var facName = ( $('#check_misma_direccion').prop('checked') ? sendName : $('#input_nombreUsuario_2').val() );
-    var facSurname = ( $('#check_misma_direccion').prop('checked') ? sendSurname : $('#input_apellidos_2').val() );
-    var facPhone = ( $('#check_misma_direccion').prop('checked') ? sendPhone : $('#input_telefono_2').val() );
-    var facNIN = ( $('#check_misma_direccion').prop('checked') ? sendNIN : $('#input_dni_cif_2').val() );
-    var facAddress = ( $('#check_misma_direccion').prop('checked') ? sendAddress : $('#input_direccion_2').val() );
-    var facNumber = ( $('#check_misma_direccion').prop('checked') ? sendNumber : $('#input_num_direccion_2').val() );
-    var facPC = ( $('#check_misma_direccion').prop('checked') ? sendPC : $('#input_postal_2').val() );
-    var facCity = ( $('#check_misma_direccion').prop('checked') ? sendCity : $('#input_ciudad_2').val() );
-    var facCountry = ( $('#check_misma_direccion').prop('checked') ? sendCountry : $('#input_pais_2').val() );
-    var facProvince = ( $('#check_misma_direccion').prop('checked') ? sendProvince : $('#input_provincia_2').val() );
-    
-    
+
+    var facName = ($('#check_misma_direccion').prop('checked') ? sendName : $('#input_nombreUsuario_2').val());
+    var facSurname = ($('#check_misma_direccion').prop('checked') ? sendSurname : $('#input_apellidos_2').val());
+    var facPhone = ($('#check_misma_direccion').prop('checked') ? sendPhone : $('#input_telefono_2').val());
+    var facNIN = ($('#check_misma_direccion').prop('checked') ? sendNIN : $('#input_dni_cif_2').val());
+    var facAddress = ($('#check_misma_direccion').prop('checked') ? sendAddress : $('#input_direccion_2').val());
+    var facNumber = ($('#check_misma_direccion').prop('checked') ? sendNumber : $('#input_num_direccion_2').val());
+    var facPC = ($('#check_misma_direccion').prop('checked') ? sendPC : $('#input_postal_2').val());
+    var facCity = ($('#check_misma_direccion').prop('checked') ? sendCity : $('#input_ciudad_2').val());
+    var facCountry = ($('#check_misma_direccion').prop('checked') ? sendCountry : $('#input_pais_2').val());
+    var facProvince = ($('#check_misma_direccion').prop('checked') ? sendProvince : $('#input_provincia_2').val());
+
+
     /*if ($('#content').is(':hidden'))
        $('#content').show();
     else
        $('#content').hide();*/
-    
+
     //if ( $('#registrarse_reg_domicilio').length ) {   // El usuario se supone que ya esta registrado
-    if ( INFO_USU.id != undefined ) {   // El usuario se supone que ya esta registrado
-        
-        console.log('registrarse es true llamamos a updateRegistroUser');   // TEMP
-        
-        updateRegistroUser( user, 
-                            sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
-                            facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
-      
+    if (INFO_USU.id != undefined) { // El usuario se supone que ya esta registrado
+
+        console.log('registrarse es true llamamos a updateRegistroUser'); // TEMP
+
+        updateRegistroUser(user,
+            sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+            facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
+
+    } else { // El usuario quiere registrarse
+
+        console.log('registrarse es false llamamos a sendRegistroDomicilio'); // TEMP
+
+        sendRegistroDomicilio(user, password, userPostalCode,
+            sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+            facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
+
     }
-    else    {   // El usuario quiere registrarse
-        
-        console.log('registrarse es false llamamos a sendRegistroDomicilio');   // TEMP
-        
-        sendRegistroDomicilio( user, password, userPostalCode, 
-                            sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
-                            facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
-        
-    }
-    
+
 }
 
 
-function updateRegistroUser( user, 
+function updateRegistroUser(user,
     sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
     facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince) {
 
@@ -595,7 +594,7 @@ function updateRegistroUser( user,
         facPC: facPC,
         facCountry: facCountry
     };
-    
+
     var request = $.ajax({
         data: dataSend,
         url: urlServices + 'updateUser.php',
@@ -658,12 +657,12 @@ function updateRegistroUser( user,
     });
 }
 
-function sendRegistroDomicilio( user, password, userPostalCode, 
+function sendRegistroDomicilio(user, password, userPostalCode,
     sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
     facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince) {
 
     console.log('Arguments update: ' + arguments); // TEMP
-    
+
     // Datos que se van a enviar
     var dataSend = {
         user: user,
@@ -692,7 +691,7 @@ function sendRegistroDomicilio( user, password, userPostalCode,
         facPC: facPC,
         facCountry: facCountry
     };
-    
+
     var request = $.ajax({
         data: dataSend,
         url: urlServices + 'register.php',
@@ -754,3 +753,4 @@ function sendRegistroDomicilio( user, password, userPostalCode,
         },
     });
 }
+

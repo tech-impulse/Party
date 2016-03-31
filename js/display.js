@@ -2671,7 +2671,7 @@ function displayItemOperations(id, param, position, borrarItem) {
     } else {
         $("#btnAddProduct" + id).show();
         $("#grid" + id).hide();
-        
+
         if (pantallaActual != "Asistente fiestas") {
             $("#circulo" + id).hide();
         }
@@ -2770,15 +2770,29 @@ function displayItemOperations(id, param, position, borrarItem) {
 
 }
 
-function openPopupAction(param) {
+function openPopupAction(param, id) {
 
     $("#lbpopupAction").text(param);
+    $("#lbpopupAction").data('id',id);
+
     switch (param) {
     case 'deleteItem':
+
         $("#popupListItems").popup("close");
         setTimeout(function () {
             $("#popupAction").popup("open");
         }, popupTimeout);
+            
+        /*for (var i = CART.length - 1; i >= 0; i--) {
+
+            if (CART[i].id == id) {
+                CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity);
+            }
+
+        }
+
+        $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));*/
+            
         break;
     }
 
@@ -2842,7 +2856,7 @@ function displayPopupItemList() { //cambios jordi
 
     //var tituloPopUp = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;">' + jsonIdiomas.popup_errores.tituloPopUp + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div></div>';
     var tituloPopUpTienda = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;width:500px;margin-left:150px;">' + jsonIdiomas.popup_errores.tituloPopUpDisponiblesTienda + '</h1><div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div></div>';
-    var tituloPopUpWeb = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;width:500px;margin-left:150px;">' + jsonIdiomas.popup_errores.tituloPopUpDisponiblesWeb + '</h1>'+ (CART.productosEnTienda <= 0 ? '<div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div>' : '') +'</div>';
+    var tituloPopUpWeb = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;width:500px;margin-left:150px;">' + jsonIdiomas.popup_errores.tituloPopUpDisponiblesWeb + '</h1>' + (CART.productosEnTienda <= 0 ? '<div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div>' : '') + '</div>';
 
     var labelsBar = '<div data-role="header" style="background-color:#ffffff; height:30px;">' +
         '<div class="ui-block-e" style="width:8%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;font-weight: bolder;">WEB</label></div>' +
@@ -2882,7 +2896,7 @@ function displayPopupItemList() { //cambios jordi
                     '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;">' + parseInt(CART[i].quantity) + '</label></div>' +
                     '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
                     '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;">' + price + ' €</label></div>' +
-                    '<div class="ui-block-e" style="width:70px; height:40px;"><a id="div_eliminar' + CART[i].id + '"" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+                    '<div class="ui-block-e" style="width:70px; height:40px;"><a id="div_eliminar' + CART[i].id + '" onclick="openPopupAction(\'deleteItem\',' + CART[i].id + '); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcCentral + '" /></div>' +
                     '</div>' +
@@ -2908,7 +2922,7 @@ function displayPopupItemList() { //cambios jordi
                     '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;">' + parseInt(CART[i].quantity) + '</label></div>' +
                     '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
                     '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;">' + price + ' €</label></div>' +
-                    '<div class="ui-block-e" style="width:70px; height:40px;"><a id="" onclick="openPopupAction(\'deleteItem\'); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+                    '<div class="ui-block-e" style="width:70px; height:40px;"><a id="div_eliminar' + CART[i].id + '" onclick="openPopupAction(\'deleteItem\',' + CART[i].id + ');$(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcCentral + '" /></div>' +
                     '</div>' +
@@ -4063,9 +4077,9 @@ function logout() { //muestra el pop up de inicio de session
     LOGGED = false;
     $('#usrnm').val("");
     $('#pswd').val("");
-    
-            
-    if ( $("#contenedorInfoUsuario").length > 0 && $("#contenedorInfoUsuario").is(':hidden') ) {    // Si estoy en formulario de domicilio y hago logout, muestro opciones de registro de usuario.
+
+
+    if ($("#contenedorInfoUsuario").length > 0 && $("#contenedorInfoUsuario").is(':hidden')) { // Si estoy en formulario de domicilio y hago logout, muestro opciones de registro de usuario.
         $("#contenedorInfoUsuario").show();
     }
 
@@ -4609,7 +4623,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + formatoNumero( CART.ammount - CART.precioTotalProductosTienda , 2, ",", ".", "€") + '<br/>(' + CART.length + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.ammount - CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br/>(' + CART.length + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -4629,7 +4643,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€")  + '<br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€") + '<br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -4670,7 +4684,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
             // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
 
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: ' + formatoNumero(totalCesta, 2, ",", ".", "€")  + ' + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: ' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
 
             '</div>' +
             '</a>' +
@@ -4690,7 +4704,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€")  + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="formularioTiendaDestino()" data-role="button" data-theme="b" >' +
@@ -4702,7 +4716,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
             //'<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
 
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€")  + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
 
             '</div>' +
             '</a>' +
@@ -4919,33 +4933,29 @@ function loadSelectShopsFromProvince(idProvince) {
 
     var select = $('#selectShop');
 
-    for (var i = 0; i < SHOPS.length; i++) {
+    setTimeout(function () {
 
-        var val = SHOPS[i].id;
-        var text = SHOPS[i].name;
 
-        //html = html + '<option value="' + val + '" style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+        for (var i = 0; i < SHOPS.length; i++) {
 
-        select.append($('<option>', {
-            value: val,
-            text: text
-        }));
+            var val = SHOPS[i].id;
+            var text = SHOPS[i].name;
 
-        select.selectmenu('refresh', true);
+            //html = html + '<option value="' + val + '" style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
 
-    }
+            select.append($('<option>', {
+                value: val,
+                text: text
+            }));
+
+            select.selectmenu('refresh', true);
+
+        }
+
+    }, 250);
 
     $('#div_select_tienda_pago').css('display', 'block');
 
-    //$("#div_select_tienda").show();
-
-    //html = html + '</select>';
-
-    //console.log(html);
-
-    //$("#div_select_tienda").html(html);
-    //$("#div_select_tienda").trigger('create');
-    //$("#div_select_tienda").css('font-size', '20px');
 }
 
 function changeFormRegUser(html_register_user) {
@@ -5020,7 +5030,7 @@ function displayDomicilioForm() {
         '<form autocomplete="on"><div id="div_form_reg_user">' +
 
         //(INFO_USU.id != undefined ? '<div id="contenedorInfoUsuario"></div>' : html_login_user) +
-        
+
         html_login_user +
 
         '</div>' +
@@ -5172,8 +5182,8 @@ function displayDomicilioForm() {
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
-    
-    if ( INFO_USU.id != undefined ) {           //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
+
+    if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
     }
 
@@ -5198,32 +5208,31 @@ function displayDomicilioForm() {
         }
 
     });
-    
-    if ( INFO_USU.id != undefined )   {     // si el usuario ha hecho login rellenar campos
-        
+
+    if (INFO_USU.id != undefined) { // si el usuario ha hecho login rellenar campos
+
         console.log('--> Cargando datos de sesion en formulario:'); // TEMP !!
         console.log(INFO_USU); // TEMP !!
-        
+
         cargaDatosUsuarioAFormularioRegistro();
-    }
-    else    {   // TEMP !!
+    } else { // TEMP !!
         console.log('-->Usuario no logueado, no se cargaran datos de sesion en formulario:'); // TEMP !!   
     }
 }
 
 
 function cargaDatosUsuarioAFormularioRegistro() {
-    $('#input_nombreUsuario').val( INFO_USU.name )
-    $('#input_apellidos').val( INFO_USU.surname );
-    $('#input_telefono').val( INFO_USU.phone );
-    $('#input_dni_cif').val( INFO_USU.NIN );
-    $('#input_direccion').val( INFO_USU.address );
-    $('#input_num_direccion').val( INFO_USU.NIN );       // --> falta modificar el webservice login.php
-    $('#input_postal').val( INFO_USU.postalCode );
-    $('#input_ciudad').val( INFO_USU.city );
-    $('#input_num_direccion').val( INFO_USU.addressNumber );
-    $('#input_pais').val( INFO_USU.country );
-    $('#input_provincia').val( INFO_USU.province );
+    $('#input_nombreUsuario').val(INFO_USU.name)
+    $('#input_apellidos').val(INFO_USU.surname);
+    $('#input_telefono').val(INFO_USU.phone);
+    $('#input_dni_cif').val(INFO_USU.NIN);
+    $('#input_direccion').val(INFO_USU.address);
+    $('#input_num_direccion').val(INFO_USU.NIN); // --> falta modificar el webservice login.php
+    $('#input_postal').val(INFO_USU.postalCode);
+    $('#input_ciudad').val(INFO_USU.city);
+    $('#input_num_direccion').val(INFO_USU.addressNumber);
+    $('#input_pais').val(INFO_USU.country);
+    $('#input_provincia').val(INFO_USU.province);
 }
 
 /**
