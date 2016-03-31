@@ -314,8 +314,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         pantallaActual = "Asistente disfraces";
                         $("#divHeader_catalogo").show();
                         $("#divHeader_menuInicial").hide(); // TEMP !!
-                        //displayPantallaIntermediaAsistDisfra(info);
-                        getProductsClassified(idNode, nodeName);
+                        displayPantallaIntermediaAsistDisfra(info);
+                        //getProductsClassified(idNode, nodeName);
 
                     } else {
                         $("#texto_popup").text("Ocurrio un problema. Contacte con el administrador de la app");
@@ -579,7 +579,7 @@ function getInfoNode(idNode) { //esta funcion nos devuelve la info de un nodo pa
         dataType: 'json',
         async: false,
         type: 'POST',
-        timeout: 1000, //10 seg
+        timeout: 10000, //10 seg
         success: function (response) {
 
             enviarInfo = response;
@@ -715,19 +715,19 @@ function getProducts(idNode, nodeName, info_aux) {
     });
 }
 
-function getCostumesAge(info_aux) {
+function getCostumes(info_aux) {
 
     $("#popupCargando").popup("open");
 
     console.log("Venimos del asist. de disfraces");
     pantallaActual = "Asistente disfraces";
     var dataSend = {
-        id: 4,
+        id: INFO_AUX.id,
         lang: language,
         origin: origin,
         store: STORE.id,
-        gender: info_aux.sexo,
-        size: info_aux.talla
+        gender: INFO_AUX.gender,
+        size: SIZE
     };
 
     console.log("Enviamos el ajax");
@@ -735,7 +735,7 @@ function getCostumesAge(info_aux) {
 
     request = $.ajax({
         data: dataSend,
-        url: urlServices + 'getCostumesAge.php',
+        url: urlServices + 'getCostumes.php',
         dataType: 'json',
         type: 'POST',
         //async:false,
@@ -747,7 +747,7 @@ function getCostumesAge(info_aux) {
             if (response.result == 1) {
 
                 //console.log(response);
-                restOk_products(response, "nodes", 4, "Hola", info_aux);
+                restOk_products(response, "nodes", INFO_AUX.id, INFO_AUX.name, "");
 
             } else if (response.result == 0) {
 
@@ -1232,10 +1232,11 @@ function getSize(gender) {
         lang: language
     };
 
-    console.log("Get gender " + gender);
+    console.log("Get size " + gender);
 
     var request = $.ajax({
         data: dataSend,
+        async: false,
         url: urlServices + 'getSize.php',
         dataType: 'json',
         type: 'POST',
@@ -1248,14 +1249,19 @@ function getSize(gender) {
 
                 console.log(response);
 
-                $('#select_talla  option').remove();
+                //$('#select_edad  option').remove();
 
                 var count = response.sizes.length;
-                var select = $('#select_talla');
+                var select = $('#select_edad');
+
+                select.append($('<option>', {
+                    value: -1,
+                    text: jsonIdiomas.asistente_disfraces.talla
+                }));
 
                 select.append($('<option>', {
                     value: 0,
-                    text: jsonIdiomas.asistente_disfraces.talla
+                    text: "Mostrar todas"
                 }));
 
 
@@ -1274,9 +1280,6 @@ function getSize(gender) {
 
                 }
 
-
-                //var option1 = $($("option", select).get(1));
-                //option1.attr('selected', 'selected');
                 select.selectmenu();
 
             } else if (response.result == 0) {
@@ -1989,7 +1992,7 @@ function getShopsFromProvince(idProvince) {
         data: dataSend,
         url: urlServices + 'getShopsProvince.php',
         dataType: 'json',
-        async:false,
+        async: false,
         type: 'POST',
         timeout: 10000, //10 seg
         success: function (response) {

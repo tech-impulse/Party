@@ -413,6 +413,12 @@ function openMenu() {
 function backPage(idNode, nodeName, linkint) {
 
     //console.log("Imagen: " + linkint);
+    
+    if (pantallaActual != "opciones de pago" || pantallaActual != "opciones envio" || pantallaActual != "sistemas pago") {
+        
+        $("#btn_finalizarpedido").removeClass("btn_disabled");
+
+    }
 
     PRODUCTS = [];
     TEMP_PRODUCTS = [];

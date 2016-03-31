@@ -377,7 +377,7 @@ function revisarDireccionCorreo(id) {
 function cancelaPedido() {
 
     $("#btn_finalizarpedido").removeClass("btn_disabled");
-    $("#car_compra").removeClass("btn_disabled");
+    //$("#car_compra").removeClass("btn_disabled");
 
     vaciaCarrito();
 
@@ -472,7 +472,6 @@ function updateVariblesTiposDeProducto(product, nuevoProducto) {
             }
         }
     } else {
-        
         if (product.stock_x_store > 0) {
             CART.productosEnTienda--;
 
