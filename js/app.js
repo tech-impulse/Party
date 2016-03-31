@@ -1,3 +1,11 @@
+/*< div >
+    < input required = ""
+type = "checkbox" > He leído y acepto el < a href = "/es/ayuda/aviso-legal"
+target = "_blank" > Aviso legal < /a>
+
+< /div>*/
+
+
 /******************************************
 Esto se ejecuta antes que la app se inicie  
 ******************************************/

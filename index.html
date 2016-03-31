@@ -4,8 +4,8 @@
 <head>
     <title>Party Fiesta</title>
     <meta name="viewport" content="width=device-width, height=device-height,user-scalable=no" charset="utf-8">
-    
-    <meta name = "format-detection" content = "telephone=no" />
+
+    <meta name="format-detection" content="telephone=no" />
 
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src="lib/jquery.mobile-1.4.5.min.js"></script>
@@ -31,11 +31,11 @@
 </head>
 
 <style>
-    *:not(input,textarea) {
+    *:not(input, textarea) {
         -webkit-touch-callout: none;
-        -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
+        -webkit-user-select: none;
+        /* Disable selection/Copy of UIWebView */
     }
-
     
     .btn_finalizarpedido {
         width: 25%;
@@ -56,7 +56,6 @@
         text-shadow: 0px 1px 1px rgba(78, 78, 78, 1);
         text-transform: uppercase;
     }
-    
     /*@font-face {
         font-family: "font";
         src: url("http://partyfiesta.youtter.com/app/alb/css/fonts/DINRegular.ttf");
@@ -352,7 +351,7 @@
                     </div>
                 </div>
             </div>-->
-            
+
             <!-- POPUP DE ARTICULOS -->
             <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupAction" class="ui-shadow ui-btn-inline" style="min-width:400px;">
                 <div class="ui-bar ui-bar-b" data-theme="b">
@@ -396,10 +395,10 @@
                 </div>
 
                 <!-- POPUP DE REGISTRO -->
-                <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupRegistro" class="ui-content" style="min-width:250px;">
+                <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupRegistro" class="ui-content" style="min-width:300px;">
                     <a href="#" onclick="$('.ui-popup').popup('close');" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="transform: scale(1.5);"></a>
                     <div id="div_registrarse">
-                        <form autocomplete="on">
+                        <form>
                             <label id="labelRegistrarse"><strong>
                              Registrarse </strong>
                             </label>
@@ -419,12 +418,14 @@
                                 <label id="labelcodpos" class="youpasswd" data-icon="p">Código postal</label>
                                 <input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true">
                             </p>
+                            <div>
+                                <input required type="checkbox"><label>He leído y acepto el</label><a href="http://www.partyfiesta.com/es/ayuda/aviso-legal" target="_blank">Aviso legal</a>
+                            </div>
                             <p>
                                 <button type="button" id="enviar_registro">Crear cuenta</button>
                             </p>
-                            <p class="change_link">
-                                <label id="labelYAesClient" class="youpasswd" data-icon="p">¿Ya es cliente?</label>
-                                <a id="linkIniSes" onclick="displayLogin();">Iniciar sessión</a>
+                            <p>
+                                <label id="labelYAesClient">¿Ya es cliente?</label><a id="linkIniSes" onclick="displayLogin();">Iniciar sessión</a>
                             </p>
                         </form>
                     </div>
@@ -474,7 +475,7 @@
                         <button id="btnPopupActionRight" onclick='$("#popupConfirmacionVaciarCarrito").popup("close"); vaciaCarrito();' data-theme="d" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
                     </div>
                 </div>
-            
+
                 <!-- POP CANCELAR PEDIDO -->
                 <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupConfirmacionCancelarPedido" class="ui-shadow ui-btn-inline" style="min-width:400px;">
                     <div class="ui-bar ui-bar-b" data-theme="b">
@@ -531,7 +532,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <!--    SELECT USER    -->
                 <!--<div class="ui-popup-container ui-popup-hidden" id="select-43-listbox-popup" style="max-width: 994px; top: 320.797px; left: 81px;">
                     <div id="select-43-listbox" class="ui-selectmenu ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all">
@@ -557,7 +558,7 @@
                     <img src="css/icons/footer.jpg" style="position: relative;width: 100vw;height: 38px;z-index: -3;">
 
                 </div>
-                
+
 </body>
 
 </html>
