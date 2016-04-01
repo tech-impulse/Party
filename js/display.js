@@ -3841,27 +3841,29 @@ function displayPantallaIntermediaAsistFiestas(data) {
         '<center>' +
         '<div class="ui-block-b" style="width: 50%;height:550px;">' +
         '<h4 style="margin-top:25%;"><label id="label_num_per_fiesta" style="font-size:20px">' + jsonIdiomas.asistente_fiestas.label_num_per_fiesta + '</label></h4>' +
-        '<div class="ui-grid-d" style="width: 75%;">' +
+        '<div class="ui-grid-c" style="width: 75%;">' +
         '<div class="ui-block-a">' +
         '<img src="img/a_fiesta_u_ico.jpg" />' +
         '</div>' +
-        '<div class="ui-block-b" onclick=\'$("#personas_fiesta").val("5");\'>' +
-        '<img src="img/a_fiesta_num_05.jpg" />' +
+        '<div class="ui-block-b" onclick=\'$("#personas_fiesta").val("4");\'>' +
+        '<img src="img/4.png" />' +
         '</div>' +
-        '<div class="ui-block-c" onclick=\'$("#personas_fiesta").val("10");\'>' +
-        '<img src="img/a_fiesta_num_10.jpg" />' +
+        '<div class="ui-block-c" onclick=\'$("#personas_fiesta").val("8");\'>' +
+        '<img src="img/8.png" />' +
         '</div>' +
-        '<div class="ui-block-d" onclick=\'$("#personas_fiesta").val("15");\'>' +
-        '<img src="img/a_fiesta_num_15.jpg" />' +
+        '<div class="ui-block-d" onclick=\'$("#personas_fiesta").val("12");\'>' +
+        '<img src="img/12.png" />' +
         '</div>' +
-        '<div class="ui-block-e" onclick=\'$("#personas_fiesta").val("20");\'>' +
-        '<img src="img/a_fiesta_num_20.jpg" />' +
+        //'<div class="ui-block-e" onclick=\'$("#personas_fiesta").val("20");\'>' +
+        //'<img src="img/a_fiesta_num_20.jpg" />' +
+        //'</div>' +
         '</div>' +
-        '</div>' +
-        '<div class="ui-grid-b" style="max-width:80%;">' +
-        '<div class="ui-block-a" style="width:20%;margin-right:3%;margin-left:2%;"><a  data-corners="false" id="menos_fiesta" onclick="addPeople(0);" data-role="button" data-theme="b">-</a></div>' +
-        '<div class="ui-block-b" style="width:50%;margin-right:3%;margin-top: 4px;"><input data-corners="false" type="number" id="personas_fiesta" value="2" min="2" max="200" data-clear-btn="true"></div>' +
-        '<div class="ui-block-c" style="width:20%;"><a data-corners="false" id="mas_fiesta" data-role="button" data-theme="b">+</a></div>' +
+        '<div class="ui-grid-b" style="max-width:80%;margin-bottom: 2%;margin-top: 2%;">' +
+        //'<div class="ui-block-a" style="width:20%;margin-right:3%;margin-left:2%;"><a  data-corners="false" id="menos_fiesta" onclick="addPeople(0);" data-role="button" data-theme="b"><img src="img/menos.png"/></a></div>' +
+        '<div class="ui-block-a" style="width:20%;margin-right:3%;margin-left:2%;" id="menos_fiesta" onclick="addPeople(0);"><img src="img/menos.png"/></div>' +
+        '<div class="ui-block-b" style="width:50%;margin-right:3%;"><input data-corners="false" type="number" id="personas_fiesta" value="2" min="2" max="200" data-clear-btn="true"></div>' +
+        '<div class="ui-block-c" style="width:20%;" id="mas_fiesta"><img src="img/mas.png"/></div>' +
+        //'<div class="ui-block-c" style="width:20%;"><a data-corners="false" id="mas_fiesta" data-role="button" data-theme="b"><img src="img/mas.png"/></a></div>' +
         '</div>' +
         '<a data-corners="false" style="width:68%;margin:0 auto;" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\');" data-role="button" data-theme="b">' + jsonIdiomas.asistente_fiestas.btn_continuar + '</a>' +
         '</div>' +
