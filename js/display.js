@@ -1572,7 +1572,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             updateBackButton(originNode, originName);
         }
 
-        console.log("Estamos en el " + pantallaActual);
+        console.log("Estamos en el " + pantallaActual +" nuevo modo");
 
 
         switch (parseInt(data.columns)) {
@@ -1630,35 +1630,8 @@ function displayProducts(data, originNode, originName, param, param4) {
                 var count_uses = data.products[i].uses.length;
                 var uses = data.products[i].uses;
 
-                /*for (var k = 0; k < count_uses; k++) {
-
-                    if (parseInt(uses[k].id) == parseInt(1)) { //si el articulo no es un disfraz se muesta, ya que sera un complemento
-
-                        for (var j = 0; j < count_carac; j++) { // comprobamos que la talla y sexo sea el escogido en los selects
-
-                            if (caracteristicas[j].name == sexo) {
-
-                                for (var m = 0; m < count_carac; m++) {
-
-                                    if (caracteristicas[m].name == talla) {
-                                        generoDisfraz = 1;
-                                    } else {
-                                        continue;
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        generoDisfraz = 1;
-                    }
-                }
-
-                if (generoDisfraz == 0) { //sexo no valido lo saltamos
-                    continue;
-                }*/
-
                 for (var j = 0; j < count_carac; j++) {
-                    console.log("Caracteristica " + caracteristicas[j].type);
+                    //console.log("Caracteristica " + caracteristicas[j].type);
                     if (caracteristicas[j].type == "9") {
                         unidades = caracteristicas[j].name;
                         break;
