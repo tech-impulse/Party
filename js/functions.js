@@ -506,65 +506,112 @@ function updateVariblesTiposDeProducto(product, nuevoProducto) {
 }
 
 
-function registroUsuarioDomicilio() { // underDev
-
-    var user = (INFO_USU.id != undefined ? INFO_USU.email : $('#input_email').val());
-    var password = (INFO_USU.id != undefined ? '' : $('#input_pass').val());
-    var userPostalCode = (INFO_USU.id != undefined ? INFO_USU.postalCode : $('#input_cp').val());
-
-    var sendName = $('#input_nombreUsuario').val();
-    var sendSurname = $('#input_apellidos').val();
-    var sendPhone = $('#input_telefono').val();
-    var sendNIN = $('#input_dni_cif').val();
-    var sendAddress = $('#input_direccion').val();
-    var sendNumber = $('#input_num_direccion').val();
-    var sendPC = $('#input_postal').val();
-    var sendCity = $('#input_ciudad').val();
-    var sendCountry = $('#input_pais').val();
-    var sendProvince = $('#input_provincia').val();
-
-    var facName = ($('#check_misma_direccion').prop('checked') ? sendName : $('#input_nombreUsuario_2').val());
-    var facSurname = ($('#check_misma_direccion').prop('checked') ? sendSurname : $('#input_apellidos_2').val());
-    var facPhone = ($('#check_misma_direccion').prop('checked') ? sendPhone : $('#input_telefono_2').val());
-    var facNIN = ($('#check_misma_direccion').prop('checked') ? sendNIN : $('#input_dni_cif_2').val());
-    var facAddress = ($('#check_misma_direccion').prop('checked') ? sendAddress : $('#input_direccion_2').val());
-    var facNumber = ($('#check_misma_direccion').prop('checked') ? sendNumber : $('#input_num_direccion_2').val());
-    var facPC = ($('#check_misma_direccion').prop('checked') ? sendPC : $('#input_postal_2').val());
-    var facCity = ($('#check_misma_direccion').prop('checked') ? sendCity : $('#input_ciudad_2').val());
-    var facCountry = ($('#check_misma_direccion').prop('checked') ? sendCountry : $('#input_pais_2').val());
-    var facProvince = ($('#check_misma_direccion').prop('checked') ? sendProvince : $('#input_provincia_2').val());
-
-
-    /*if ($('#content').is(':hidden'))
-       $('#content').show();
-    else
-       $('#content').hide();*/
-
-    //if ( $('#registrarse_reg_domicilio').length ) {   // El usuario se supone que ya esta registrado
-    if (INFO_USU.id != undefined) { // El usuario se supone que ya esta registrado
-
-        console.log('registrarse es true llamamos a updateRegistroUser'); // TEMP
-
-        updateRegistroUser(user,
-            sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
-            facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
-
-    } else { // El usuario quiere registrarse
-
-        console.log('registrarse es false llamamos a sendRegistroDomicilio'); // TEMP
-
-        sendRegistroDomicilio(user, password, userPostalCode,
-            sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
-            facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince);
-
+function registroUsuarioDomicilio(soloFacturacion) {   // underDev
+    
+    var user = ( INFO_USU.id != undefined ? INFO_USU.email : $('#input_email').val() );
+    var password = ( INFO_USU.id != undefined ? '' : $('#input_pass').val() );
+    var userPostalCode = ( INFO_USU.id != undefined ? INFO_USU.postalCode : $('#input_cp').val() );
+    
+    var sendName = null;
+    var sendSurname = null;
+    var sendPhone = null;
+    var sendNIN = null;
+    var sendAddress = null;
+    var sendNumber = null;
+    var sendPC = null;
+    var sendCity = null;
+    var sendCountry = null;
+    var sendProvince = null;
+    
+    var facName = null;
+    var facSurname = null;
+    var facPhone = null;
+    var facNIN = null;
+    var facAddress = null;
+    var facNumber = null;
+    var facPC = null;
+    var facCity = null;
+    var facCountry = null;
+    var facProvince = null;
+    
+    if ( soloFacturacion != undefined && soloFacturacion == 1 ) {
+        facName = $('#input_nombreUsuario_2').val();
+        facSurname = $('#input_apellidos_2').val();
+        facPhone = $('#input_telefono_2').val();
+        facNIN = $('#input_dni_cif_2').val();
+        facAddress = $('#input_direccion_2').val();
+        facNumber = $('#input_num_direccion_2').val();
+        facPC = $('#input_postal_2').val();
+        facCity = $('#input_ciudad_2').val();
+        facCountry = $('#input_pais_2').val();
+        facProvince = $('#input_provincia_2').val();
     }
+    else    {
+        sendName = $('#input_nombreUsuario').val();
+        sendSurname = $('#input_apellidos').val();
+        sendPhone = $('#input_telefono').val();
+        sendNIN = $('#input_dni_cif').val();
+        sendAddress = $('#input_direccion').val();
+        sendNumber = $('#input_num_direccion').val();
+        sendPC = $('#input_postal').val();
+        sendCity = $('#input_ciudad').val();
+        sendCountry = $('#input_pais').val();
+        sendProvince = $('#input_provincia').val();
 
+        facName = ( $('#check_misma_direccion').prop('checked') ? sendName : $('#input_nombreUsuario_2').val() );
+        facSurname = ( $('#check_misma_direccion').prop('checked') ? sendSurname : $('#input_apellidos_2').val() );
+        facPhone = ( $('#check_misma_direccion').prop('checked') ? sendPhone : $('#input_telefono_2').val() );
+        facNIN = ( $('#check_misma_direccion').prop('checked') ? sendNIN : $('#input_dni_cif_2').val() );
+        facAddress = ( $('#check_misma_direccion').prop('checked') ? sendAddress : $('#input_direccion_2').val() );
+        facNumber = ( $('#check_misma_direccion').prop('checked') ? sendNumber : $('#input_num_direccion_2').val() );
+        facPC = ( $('#check_misma_direccion').prop('checked') ? sendPC : $('#input_postal_2').val() );
+        facCity = ( $('#check_misma_direccion').prop('checked') ? sendCity : $('#input_ciudad_2').val() );
+        facCountry = ( $('#check_misma_direccion').prop('checked') ? sendCountry : $('#input_pais_2').val() );
+        facProvince = ( $('#check_misma_direccion').prop('checked') ? sendProvince : $('#input_provincia_2').val() );
+    }   
+    
+    if ( INFO_USU.id != undefined ) {   // El usuario se supone que ya esta registrado
+        
+        console.log('registrarse es true llamamos a updateRegistroUser');   // TEMP
+        
+        if ( soloFacturacion != undefined && soloFacturacion == 1 ) {
+            
+            updateRegistroUser( user, 
+                                facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince,
+                                facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince, 1);
+        }
+        else    {
+            
+            updateRegistroUser( user, 
+                                sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+                                facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince, 0);
+        }
+      
+    }
+    else    {   // El usuario quiere registrarse
+        
+        console.log('registrarse es false llamamos a sendRegistroDomicilio');   // TEMP
+        
+        if ( soloFacturacion != undefined && soloFacturacion == 1 ) {
+            
+            sendRegistroDomicilio( user, password, userPostalCode, 
+                                facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince,
+                                facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince, 1);
+        }
+        else    {
+            sendRegistroDomicilio( user, password, userPostalCode, 
+                                sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+                                facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince, 0);
+        }
+        
+    }
+    
 }
 
 
-function updateRegistroUser(user,
+function updateRegistroUser( user, 
     sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
-    facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince) {
+    facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince, pantallaSiguiente) {
 
     console.log('Arguments update: ' + arguments); // TEMP
     // Datos que se van a enviar
@@ -621,8 +668,16 @@ function updateRegistroUser(user,
                     checkOut();
                 }*/
 
-                sistemasPago();
-
+                switch( pantallaSiguiente )    {
+                    case 0:
+                        sistemasPago();
+                        break;
+                        
+                    case 1:
+                        formularioTiendaDestino();
+                        break;
+                }
+                
             } else if (response.result == -1) {
 
                 console.log("Número de parametros incorrecto");
@@ -657,12 +712,12 @@ function updateRegistroUser(user,
     });
 }
 
-function sendRegistroDomicilio(user, password, userPostalCode,
+function sendRegistroDomicilio( user, password, userPostalCode, 
     sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
-    facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince) {
+    facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince, pantallaSiguiente) {
 
     console.log('Arguments update: ' + arguments); // TEMP
-
+    
     // Datos que se van a enviar
     var dataSend = {
         user: user,
@@ -691,7 +746,7 @@ function sendRegistroDomicilio(user, password, userPostalCode,
         facPC: facPC,
         facCountry: facCountry
     };
-
+    
     var request = $.ajax({
         data: dataSend,
         url: urlServices + 'register.php',
@@ -718,7 +773,15 @@ function sendRegistroDomicilio(user, password, userPostalCode,
                     checkOut();
                 }*/
 
-                sistemasPago();
+                switch( pantallaSiguiente )    {
+                    case 0:
+                        sistemasPago();
+                        break;
+                        
+                    case 1:
+                        formularioTiendaDestino();
+                        break;
+                }
 
             } else if (response.result == -1) {
 
@@ -753,4 +816,3 @@ function sendRegistroDomicilio(user, password, userPostalCode,
         },
     });
 }
-
