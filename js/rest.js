@@ -1094,7 +1094,7 @@ function sendContra(usuario) {
 
     var request = $.ajax({
         data: dataSend,
-        url: urlServices + 'email.php',
+        url: urlServices + 'changePassword.php',
         dataType: 'json',
         type: 'POST',
         timeout: 10000, //10 seg

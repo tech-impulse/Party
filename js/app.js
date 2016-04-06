@@ -451,8 +451,8 @@ function backPage(idNode, nodeName, linkint) {
 
     }
 
-    PRODUCTS = [];
-    TEMP_PRODUCTS = [];
+    //PRODUCTS = [];
+    //TEMP_PRODUCTS = [];
 
     translateButtons(idiomStore);
 
@@ -696,43 +696,12 @@ function carrito(id_producto, operacion, precio) {
 *********************************************************************************************************************/
 
 function addToCart(item, param) {
+    
     console.log('-------------> addToCart con item:' + item + ' param: ' + param); // TEMP !!
 
     var product;
     var foundInCart = 0;
     //var i = "";
-
-    /*for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
-        
-        
-        if (PRODUCTS[i]['id'] == item) {
-            console.log("ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
-            product = PRODUCTS[i];
-            i = PRODUCTS.length;
-                        
-            break;
-        }
-        
-    }
-
-    for (var j = 0; j < CART.length; j++) {
-        //console.log("buscando  " + item + " en carrito " + CART[j]['id']);
-        if (CART[j]['id'] == item) {
-            //console.log("ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
-            foundInCart = 1;
-            CART[j].quantity = CART[j].quantity + parseInt(param);
-            CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
-
-            var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
-            //console.log("Precio del articulo es " + precioArticulo);
-            $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
-
-            displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
-            j = PRODUCTS.length;
-            //console.log("Añadimos mas "+CART[j].quantity);
-
-        }
-    }*/
 
     for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
 
@@ -794,6 +763,9 @@ function addToCart(item, param) {
 
             PRODUCTS.ammount = 0;
         }
+        
+        console.log("Product--------------------------------------------------------------------------------");
+        console.log(product);
 
         if (parseInt(param) > 1) {
             product.quantity = parseInt(param);
@@ -803,19 +775,10 @@ function addToCart(item, param) {
 
         CART.ammount = (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice)) + parseFloat(CART.ammount);
         PRODUCTS.ammount = CART.ammount;
-        //product.dedonde = pantallaActual;
         product.dedonde = nodeIds[nodeIds.length - 1];
         product.original = true; //este campo indica si el articulo ha sido sustituido o no
 
         CART.push(product);
-
-        //if (product.quantity > 0) {
-        /*if (product.stock_x_store > 0) {
-            productosEnTienda++;
-        } else if (product.stock_x_central_store > 0) {
-            productosEnWeb++;
-        }*/
-        //}
 
         console.log('(foundInCart == 0)'); // TEMP !!
 
@@ -831,25 +794,8 @@ function addToCart(item, param) {
         displayItemOperations(item, product.quantity);
     }
 
-    /*for (var i = 0; i < CART.length; i++) {         // Recuento de productos en tienda i online dentro del carrito
-         if (CART[i].quantity > 0) {
-            if (CART[i].stock_x_store > 0) {
-                productosEnTienda++;
-            } else if (CART[i].stock_x_central_store > 0) {
-                productosEnWeb++;
-            }
-         }
-    }*/
 
     updateOpcionCompraProducto();
-
-    /*if (CART.length - productosEnTienda == 0) { // 1- Todos los productos estan en tienda
-        opcionCompraProductos = 1;
-    } else if (productosEnTienda > 0 && productosEnTienda < CART.length) { // 2- Existe algun producto en tienda
-        opcionCompraProductos = 2;
-    } else if (productosEnTienda == 0) { // 3- Ningun producto en tienda
-        opcionCompraProductos = 3;
-    }*/
 
     updatePrecioTotalArticulo(); // TEMP !!
 

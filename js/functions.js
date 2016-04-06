@@ -126,6 +126,25 @@ function addCartAsistFiestas(prod_id) {
 
 }
 
+function refrescarPantallaProductos(prod_id) {
+
+    console.log("Refrescamos los articulos segun el carrito------------------------------------------------");
+
+    for (var k = 0; k < CART.length; k++) {
+
+        console.log("Comparacion es " + PRODUCTS[k].id + " id que nos llega " + prod_id);
+
+        if (parseInt(CART[k].id) == parseInt(prod_id)) {
+
+            addToCart(CART[k].id, parseInt(CART[k].quantity));
+      
+        } 
+
+    }
+
+}
+
+
 /***********************************************************************
   Esta funcion sirve para actualizar el boton de atras de la pantalla
   Parametros:
