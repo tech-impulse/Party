@@ -1572,7 +1572,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             updateBackButton(originNode, originName);
         }
 
-        console.log("Estamos en el " + pantallaActual +" nuevo modo");
+        console.log("Estamos en el " + pantallaActual);
 
 
         switch (parseInt(data.columns)) {
@@ -1630,8 +1630,35 @@ function displayProducts(data, originNode, originName, param, param4) {
                 var count_uses = data.products[i].uses.length;
                 var uses = data.products[i].uses;
 
+                /*for (var k = 0; k < count_uses; k++) {
+
+                    if (parseInt(uses[k].id) == parseInt(1)) { //si el articulo no es un disfraz se muesta, ya que sera un complemento
+
+                        for (var j = 0; j < count_carac; j++) { // comprobamos que la talla y sexo sea el escogido en los selects
+
+                            if (caracteristicas[j].name == sexo) {
+
+                                for (var m = 0; m < count_carac; m++) {
+
+                                    if (caracteristicas[m].name == talla) {
+                                        generoDisfraz = 1;
+                                    } else {
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        generoDisfraz = 1;
+                    }
+                }
+
+                if (generoDisfraz == 0) { //sexo no valido lo saltamos
+                    continue;
+                }*/
+
                 for (var j = 0; j < count_carac; j++) {
-                    //console.log("Caracteristica " + caracteristicas[j].type);
+                    console.log("Caracteristica " + caracteristicas[j].type);
                     if (caracteristicas[j].type == "9") {
                         unidades = caracteristicas[j].name;
                         break;
@@ -2746,7 +2773,7 @@ function displayItemOperations(id, param, position, borrarItem) {
 function openPopupAction(param, id) {
 
     $("#lbpopupAction").text(param);
-    $("#lbpopupAction").data('id',id);
+    $("#lbpopupAction").data('id', id);
 
     switch (param) {
     case 'deleteItem':
@@ -2755,7 +2782,7 @@ function openPopupAction(param, id) {
         setTimeout(function () {
             $("#popupAction").popup("open");
         }, popupTimeout);
-            
+
         /*for (var i = CART.length - 1; i >= 0; i--) {
 
             if (CART[i].id == id) {
@@ -2765,7 +2792,7 @@ function openPopupAction(param, id) {
         }
 
         $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));*/
-            
+
         break;
     }
 
@@ -4688,11 +4715,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-
             //'<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-
             '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
-
             '</div>' +
             '</a>' +
             '<br>' +
@@ -4716,6 +4740,34 @@ function sistemasPago() { //TEMP
 
     $("#divBack").html('<div onclick="opcionesEnvio(' + opcionEnvio + ')"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de envio</label></div></div></div>');
 
+    //inicializamos el boton
+    var paypal = '<form method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
+        '<input type="hidden" name="business" value="test@paypal.es">';
+
+    var add = '';
+
+    for (var i = 0; i < CART.length; i++) {
+
+        if (i == 0) add = '<input type="hidden" name="add" value="1">';
+        else add = '<input type="hidden" name="upload" value="1">';
+
+        paypal += add +
+            '<input type="hidden" name="cmd" value="_cart">' +
+            '<input type="hidden" name="currency_code" value="EUR">' +
+            '<input type="hidden" name="item_name" value="' + CART[i].name + '">' +
+            '<input type="hidden" name="item_number" value="' + parseInt(CART[i].sku) + '">' +
+            '<input type="hidden" name="amount" value="' + parseInt(CART[i].price_x_region[0].totalPrice) + '">' +
+            '<input type="hidden" name="quantity" value="' + parseInt(CART[i].quantity) + '">';
+
+    }
+
+    paypal +=
+        '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
+        '</form>';
+
+    console.log("PAYPALLLLLLLLLL");
+    console.log(paypal);
+
     var html = '<div>' +
         '<center>' +
         '<h2>OPCIONES DE PAGO</h2>' +
@@ -4724,36 +4776,18 @@ function sistemasPago() { //TEMP
         '<div class="ui-block-a"><label>CAJA</label></div>' +
         '</div>' +
         '</a>' +
-        //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        //'<div class="ui-grid-a">' +
-        //'<div class="ui-block-a"><label>PAYPAL</label></div>' +
-        //'</div>' +
-        //'</a>' +
         '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
         '<div class="ui-grid-solo">' +
         '<div class="ui-block-a"><label>TARJETA</label></div>' +
         '</div>' +
         '</a>' +
-        '<form id="myform" name="_xclick" action="https://www.paypal.com/es/cgi-bin/webscr" method="post">' +
-        '<input type="hidden" name="cmd" value="_xclick">' +
-        '<input type="hidden" name="business" value="me@mybusiness.es">' +
-        '<input type="hidden" name="currency_code" value="EUR">' +
-        '<input type="hidden" name="item_name" value="Pedido Party Fiesta">' +
-        '<input type="hidden" name="amount" value="8.99">' +
-        '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro">' +
-        '</form>' +
-
+        '<br>' + paypal +
         '<br>' +
         '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
-
         '</center>';
-
-
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
-
-
 
 }
 
@@ -4988,11 +5022,11 @@ function displayDomicilioFacturacionForm() {
         '<form autocomplete="on"><div id="div_form_reg_user">' +
 
         //(INFO_USU.id != undefined ? '<div id="contenedorInfoUsuario"></div>' : html_login_user) +
-        
+
         html_login_user +
 
         '</div>' +
-        
+
         '<div id="div_direcion_facturacion">' + // --> FORMULARIO DIRECCION FACTURACION !!!!    **********
 
         '<h2>Dirección de Facturación</h2>' +
@@ -5064,19 +5098,18 @@ function displayDomicilioFacturacionForm() {
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
-    
-    if ( INFO_USU.id != undefined ) {           //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
+
+    if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
     }
 
-    if ( INFO_USU.id != undefined )   {     // si el usuario ha hecho login rellenar campos
-        
+    if (INFO_USU.id != undefined) { // si el usuario ha hecho login rellenar campos
+
         console.log('--> Cargando datos de sesion en formulario:'); // TEMP !!
         console.log(INFO_USU); // TEMP !!
-        
+
         cargaDatosUsuarioAFormularioRegistro();
-    }
-    else    {   // TEMP !!
+    } else { // TEMP !!
         console.log('-->Usuario no logueado, no se cargaran datos de sesion en formulario:'); // TEMP !!   
     }
 }
@@ -5284,7 +5317,7 @@ function displayDomicilioForm() {
             $("#h2_direccion").text('Dirección de entrega');
 
             console.log('---> NO checked');
-            
+
             cargaDatosDeDirecciónEntregaAFacturacion();
         }
 
@@ -5301,136 +5334,134 @@ function displayDomicilioForm() {
     }
 }
 
-function checkFormRegUser()	{
-    
+function checkFormRegUser() {
+
     $mail_1 = S('input_email').val();
     $mail_2 = S('input_repetir_email').val();
-    
-    if ( $mail_1.localeCompare('') == 0 )	{
-        
+
+    if ($mail_1.localeCompare('') == 0) {
+
         S('input_email').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         return false;
-    }
-    else  if ( $mail_1.search("@") == -1)	{
-        
+    } else if ($mail_1.search("@") == -1) {
+
         S('input_email').focus();
-        
+
         $("#texto_popup").text('Email incorrecto');
         $('#popupAlert').popup('open');
-        
+
         return false;
     }
-    
-    if ( $mail_2.localeCompare('') == 0 )	{
-        
+
+    if ($mail_2.localeCompare('') == 0) {
+
         S('input_repetir_email').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         return false;
-    }
-    else  if ( $mail_2.search("@") == -1)	{
-        
+    } else if ($mail_2.search("@") == -1) {
+
         S('input_repetir_email').focus();
-        
+
         $("#texto_popup").text('Email incorrecto');
         $('#popupAlert').popup('open');
-        
+
         return false;
     }
-    
+
     $compare = $mail_1.localeCompare($mail_2);
 
-    if ( $compare != 0 )	{
-        
+    if ($compare != 0) {
+
         S('input_email').focus();
-        
+
         $("#texto_popup").text('Los campos de email no coinciden');
         $('#popupAlert').popup('open');
-        
+
         return false;
     }
-    
-    
+
+
     $pass_1 = S('input_pass').val();
     $pass_2 = S('input_repetir_pass').val();
-    
-    if ( $pass_1.localeCompare('') == 0 )	{
-        
+
+    if ($pass_1.localeCompare('') == 0) {
+
         S('input_pass').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         return false;
     }
-    
-    if ( $pass_2.localeCompare('') == 0 )	{
-        
+
+    if ($pass_2.localeCompare('') == 0) {
+
         S('input_repetir_pass').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         return false;
     }
-    
+
     $compare = $pass_1.localeCompare($pass_2);
-    
-    if ( $compare != 0 )	{
-        
+
+    if ($compare != 0) {
+
         S('input_pass').focus();
-        
+
         $("#texto_popup").text('Los campos de password no coinciden');
         $('#popupAlert').popup('open');
-        
+
         return false;
     }
-    
+
     $cp_user = S('input_cp').val();
-    
-    if ( $cp_user.localeCompare('') == 0 )	{
-        
+
+    if ($cp_user.localeCompare('') == 0) {
+
         S('input_cp').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         return false;
     }
-    
+
     return true;
 }
 
 function cargaDatosDeDirecciónEntregaAFacturacion() {
-    
+
     console.log('--> Cargando datos de direccion a facturacion'); // TEMP !!
-    
-    $('#input_nombreUsuario_2').val( $('#input_nombreUsuario').val() )            // ----> Click and collect
-    $('#input_apellidos_2').val( $('#input_apellidos').val() );
-    $('#input_telefono_2').val(  $('#input_telefono').val() );
-    $('#input_dni_cif_2').val( $('#input_dni_cif').val() );
-    $('#input_direccion_2').val(  $('#input_direccion').val() );
-    $('#input_num_direccion_2').val( $('#input_num_direccion').val() ); // --> falta modificar el webservice login.php
-    $('#input_postal_2').val( $('#input_postal').val() );
-    $('#input_ciudad_2').val( $('#input_ciudad').val() );
-    $('#input_num_direccion_2').val( $('#input_num_direccion').val() );
-    $('#input_pais_2').val( $('#input_pais').val() );
-    $('#input_provincia_2').val( $('#input_provincia').val() );
-    
+
+    $('#input_nombreUsuario_2').val($('#input_nombreUsuario').val()) // ----> Click and collect
+    $('#input_apellidos_2').val($('#input_apellidos').val());
+    $('#input_telefono_2').val($('#input_telefono').val());
+    $('#input_dni_cif_2').val($('#input_dni_cif').val());
+    $('#input_direccion_2').val($('#input_direccion').val());
+    $('#input_num_direccion_2').val($('#input_num_direccion').val()); // --> falta modificar el webservice login.php
+    $('#input_postal_2').val($('#input_postal').val());
+    $('#input_ciudad_2').val($('#input_ciudad').val());
+    $('#input_num_direccion_2').val($('#input_num_direccion').val());
+    $('#input_pais_2').val($('#input_pais').val());
+    $('#input_provincia_2').val($('#input_provincia').val());
+
 }
 
 function cargaDatosUsuarioAFormularioRegistro() {
-    
-    if ( $("#input_nombreUsuario").length > 0 ) {               // ----> Envio a domicilio
-        
+
+    if ($("#input_nombreUsuario").length > 0) { // ----> Envio a domicilio
+
         console.log('Cargando datos de usuario en Direccion entrega');
-        
+
         $('#input_nombreUsuario').val(INFO_USU.name)
         $('#input_apellidos').val(INFO_USU.surname);
         $('#input_telefono').val(INFO_USU.phone);
@@ -5442,13 +5473,12 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_num_direccion').val(INFO_USU.addressNumber);
         $('#input_pais').val(INFO_USU.country);
         $('#input_provincia').val(INFO_USU.province);
-        
-    }
-    else    {
-        
+
+    } else {
+
         console.log('Cargando datos de usuario en Direccion Facturación');
-        
-        $('#input_nombreUsuario_2').val(INFO_USU.name)            // ----> Click and collect
+
+        $('#input_nombreUsuario_2').val(INFO_USU.name) // ----> Click and collect
         $('#input_apellidos_2').val(INFO_USU.surname);
         $('#input_telefono_2').val(INFO_USU.phone);
         $('#input_dni_cif_2').val(INFO_USU.NIN);
@@ -5459,7 +5489,7 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_num_direccion_2').val(INFO_USU.addressNumber);
         $('#input_pais_2').val(INFO_USU.country);
         $('#input_provincia_2').val(INFO_USU.province);
-        
+
     }
 }
 
