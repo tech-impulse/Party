@@ -693,7 +693,8 @@ function updateCarritoDisplay() {
 
 function displayProducts(data, originNode, originName, param, param4) {
 
-    console.log("DisplayProducts-> Nodo Origen Id " + originNode);
+    console.log("DisplayProducts-> Nodo Origen Id " + originNode + " param4 " + param4 + " pantalla " + pantallaActual);
+
     var aux_carac = 0;
 
     if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "") { // Hay resultados
@@ -1029,7 +1030,7 @@ function displayProducts(data, originNode, originName, param, param4) {
         var type;
         var seccion_titulo = "";
 
-        updateBackButton(originNode, originName);
+        updateBackButton(originNode, originName, "productos");
 
 
         if (pantallaActual == "Asistente disfraces") {
@@ -1271,7 +1272,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
         } //for secciones
 
-        
+
         $("#divContent").html(new_htmlContent);
         $("#divContent").trigger('create');
 
@@ -1312,11 +1313,8 @@ function displayProducts(data, originNode, originName, param, param4) {
 
         console.log("Productos para el asistente de disfraces");
 
-        if (originNode == 0) {
-            loadMenu(data);
-        } else {
-            updateBackButton(originNode, originName);
-        }
+        updateBackButton(originNode, originName, "productos");
+
 
         console.log("Estamos en el " + pantallaActual);
 
@@ -3717,7 +3715,9 @@ function opcionesPago() { //TEMP
 
     pantallaActual = "opciones de pago";
 
-    $("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\');$(\'#car_compra\').removeClass(\'btn_disabled\');"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">' + nodeNames[nodeNames.length - 2] + '</label></div></div></div>');
+    updateBackButton(999999, "Opciones de pago", "productos"); //si enviamos productos se cargan los productos del nodo
+
+    //$("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\');$(\'#car_compra\').removeClass(\'btn_disabled\');"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">' + nodeNames[nodeNames.length - 2] + '</label></div></div></div>');
 
     //switch (casoPago) {
     switch (opcionCompraProductos) {
@@ -3818,6 +3818,12 @@ function opcionesPago() { //TEMP
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
+    
+    //borramos la ultima posicion para que cargue bien al volver atras
+    var position = (nodeIds.length);
+    nodeIds.splice(position - 1); //TEMP
+    nodeNames.splice(position - 1);
+    nodeImg.splice(position - 1);
 
 
 }
@@ -3901,6 +3907,7 @@ function sistemasPago() { //TEMP
 
     //inicializamos el boton
     var paypal = '<form method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
+        '<input type="hidden" name="currency_code" value="EUR">' +
         '<input type="hidden" name="business" value="test@paypal.es">';
 
     var add = '';
@@ -3910,13 +3917,12 @@ function sistemasPago() { //TEMP
         if (i == 0) add = '<input type="hidden" name="add" value="1">';
         else add = '<input type="hidden" name="upload" value="1">';
 
-        paypal += add +
-            '<input type="hidden" name="cmd" value="_cart">' +
-            '<input type="hidden" name="currency_code" value="EUR">' +
-            '<input type="hidden" name="item_name" value="' + CART[i].name + '">' +
-            '<input type="hidden" name="item_number" value="' + parseInt(CART[i].sku) + '">' +
-            '<input type="hidden" name="amount" value="' + parseInt(CART[i].price_x_region[0].totalPrice) + '">' +
-            '<input type="hidden" name="quantity" value="' + parseInt(CART[i].quantity) + '">';
+        paypal +=
+            '<input type="hidden" name="cmd" value="_cart">' + add +
+            '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
+            '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
+            '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
 
     }
 

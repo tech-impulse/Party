@@ -183,6 +183,7 @@ function updateBackButton(originNode, originName, linkImg) {
 
         console.log("Añadimos un nuevo elemento a la paginacion nuevo pagina " + originNode + " ultimo del array " + nodeIds[nodeIds.length - 1]);
         console.log("Añadimos " + originName + " lonjutud es " + nodeIds.length);
+        
         if (nodeIds[nodeIds.length - 1] != originNode) { //si no es el mismo lo añadimos
 
             nodeIds.push(originNode);

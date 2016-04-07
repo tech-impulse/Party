@@ -445,51 +445,57 @@ function backPage(idNode, nodeName, linkint) {
 
     //console.log("Imagen: " + linkint);
 
-    if (pantallaActual != "opciones de pago" || pantallaActual != "opciones envio" || pantallaActual != "sistemas pago") {
+    if (linkint == "productos") {
 
-        $("#btn_finalizarpedido").removeClass("btn_disabled");
-
-    }
-
-    //PRODUCTS = [];
-    //TEMP_PRODUCTS = [];
-
-    translateButtons(idiomStore);
-
-    /*if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) { //mostramos el popup para poder vaciar el cart
-
-        setTimeout(function () {
-            $("#popupPregunta").popup("open");
-        }, popupTimeout);
-
-        AUX = 0;
-
-    } else {*/
-
-    var position = (nodeIds.length);
-    console.log("Posicion " + position);
-
-    if (position > 2 && idNode != 0) {
-
-        //console.log("Tenemos cola");
-        //console.log(nodeIds);
-        console.log("Antes de borrar " + position);
-        nodeIds.splice(position - 2); //borramos el ultimo nodo
-        nodeNames.splice(position - 2);
-        nodeImg.splice(position - 2);
-        console.log(nodeIds);
-        position = nodeIds.length; //despues de borrar
-        console.log("Despues de borrar " + position);
-        getNodes(idNode, nodeName, 0, linkint, "back");
-        //getNodes(nodeIds[position - 2], nodeNames[position - 2], 0, nodeImg[position - 2], "back");
+        displayProductos(idNode, nodeName);
 
     } else {
-        getNodes(0);
-        nodeIds = [];
-        nodeNames = [];
-        nodeImg = [];
-    }
 
+        if (pantallaActual != "opciones de pago" || pantallaActual != "opciones envio" || pantallaActual != "sistemas pago") {
+
+            $("#btn_finalizarpedido").removeClass("btn_disabled");
+
+        }
+
+        //PRODUCTS = [];
+        //TEMP_PRODUCTS = [];
+
+        translateButtons(idiomStore);
+
+        /*if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) { //mostramos el popup para poder vaciar el cart
+
+            setTimeout(function () {
+                $("#popupPregunta").popup("open");
+            }, popupTimeout);
+
+            AUX = 0;
+
+        } else {*/
+
+        var position = (nodeIds.length);
+        console.log("Posicion " + position);
+
+        if (position > 2 && idNode != 0) {
+
+            //console.log("Tenemos cola");
+            //console.log(nodeIds);
+            console.log("Antes de borrar " + position);
+            nodeIds.splice(position - 2); //borramos el ultimo nodo
+            nodeNames.splice(position - 2);
+            nodeImg.splice(position - 2);
+            console.log(nodeIds);
+            position = nodeIds.length; //despues de borrar
+            console.log("Despues de borrar " + position);
+            getNodes(idNode, nodeName, 0, linkint, "back");
+            //getNodes(nodeIds[position - 2], nodeNames[position - 2], 0, nodeImg[position - 2], "back");
+
+        } else {
+            getNodes(0);
+            nodeIds = [];
+            nodeNames = [];
+            nodeImg = [];
+        }
+    }
     //}
 }
 
@@ -513,7 +519,7 @@ function displayProductos(idNode, nodeName) {
                 talla: talla,
                 sexo: sexo
             }
-
+            pantallaActual = "Asistente disfraces";
             //console.log("Todos los selects ok. Entramos en el asistente de disfraces.");
             getProducts(idNode, nodeName, info_aux);
 
@@ -521,16 +527,21 @@ function displayProductos(idNode, nodeName) {
 
     } else if (ISFIESTA == 3) { //por aqui se accede desde el asistente de fiestas
 
-        var num_persosnas = $('#personas_fiesta').val();
+        //var num_persosnas = $('#personas_fiesta').val();
+        if (num_personas_fiesta == "" || num_personas_fiesta == undefined) {
+            num_personas_fiesta = $('#personas_fiesta').val();
+        }
 
-        if (num_persosnas >= 2) {
 
-            //console.log("Todos los selects ok. ASIS. FIESTAS");
+        if (parseInt(num_personas_fiesta) >= 2) {
+
+            console.log("Todo ok ASIS. FIESTAS " + num_personas_fiesta);
             //getProducts(idNode, nodeName);
+            pantallaActual = "Asistente fiestas";
             getProductsClassified(idNode, nodeName, info_aux);
 
         } else {
-
+            console.log("Todo ok ASIS. FIESTAS " + num_personas_fiesta);
             $("#texto_popup").text("Añada alguna persona a la fiesta");
             $('#popupAlert').popup('open');
 
@@ -696,7 +707,7 @@ function carrito(id_producto, operacion, precio) {
 *********************************************************************************************************************/
 
 function addToCart(item, param) {
-    
+
     console.log('-------------> addToCart con item:' + item + ' param: ' + param); // TEMP !!
 
     var product;
@@ -763,7 +774,7 @@ function addToCart(item, param) {
 
             PRODUCTS.ammount = 0;
         }
-        
+
         console.log("Product--------------------------------------------------------------------------------");
         console.log(product);
 

@@ -224,6 +224,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         $("#btn_finalizarpedido").hide();
 
         $("#img_cesta").attr("src", "css/icons/cesta.png");
+        
     } else {
 
         var totalRefresh = 0;
@@ -310,7 +311,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                     if (info != "undefined") {
                         //console.log("DisplayPantalla intermadia");
-                        updateBackButton(idNode, nodeName, aux);
+                        //updateBackButton(idNode, nodeName, aux);
                         pantallaActual = "Asistente disfraces";
                         $("#divHeader_catalogo").show();
                         $("#divHeader_menuInicial").hide(); // TEMP !!
@@ -347,14 +348,14 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         console.log("DisplayPantalla intermadia");
                         console.log(info);
                         //pantallaActual = "Asistente fiestas";
-                        updateBackButton(idNode, nodeName, aux);
+                        //updateBackButton(idNode, nodeName, aux);
 
                         displayPantallaIntermediaAsistFiestas(info.node);
 
                     } else {
 
                         console.log("Dame productos del catalogo" + nodeName);
-                        updateBackButton(idNode, nodeName, aux);
+                        //updateBackButton(idNode, nodeName, aux);
                         getProducts(idNode, nodeName);
 
                     }
@@ -362,7 +363,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                 } else if (ISFIESTA == 1) { //1 catalogo
 
                     $('#popupCargando').popup('open');
-
+                    pantallaActual = "catalogo";
                     getNodesProducts(idNode, nodeName);
 
                 } else {
@@ -630,8 +631,8 @@ function getProducts(idNode, nodeName, info_aux) {
 
     } else {
 
-        console.log("Estamos en el asist. de fiestas");
-        //pantallaActual = "Asistente fiestas";
+        console.log("Estamos en el asist. de fiestas getProducts");
+        pantallaActual = "Asistente fiestas";
         // Datos que se van a enviar
         var dataSend = {
             lang: language,
