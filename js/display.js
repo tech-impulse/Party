@@ -1008,14 +1008,27 @@ function displayProducts(data, originNode, originName, param, param4) {
         console.log(data);
         AUX = 1;
 
-        for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+        if (PRODUCTS.length > 0) {//se añadido este if para no duplicar productos en PRODUCTS
 
-            for (var d = 0; d < data.products[c].typeproducts.length; d++) {
-                data.products[c].typeproducts[d].original = true;
-                PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
-                PRODUCTS[d].original = true;
+            for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+                for (var d = 0; d < data.products[c].typeproducts.length; d++) {
+                    añadirProductosArray(data.products[c].typeproducts[d]);
+                }
             }
+
+        } else {
+
+            for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+
+                for (var d = 0; d < data.products[c].typeproducts.length; d++) {
+                    data.products[c].typeproducts[d].original = true;
+                    PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
+                    PRODUCTS[d].original = true;
+                }
+            }
+
         }
+
 
         TEMP_PRODUCTS = data.products;
 
@@ -1303,7 +1316,8 @@ function displayProducts(data, originNode, originName, param, param4) {
 
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces" && param4 == "getProductsClassified") {
 
-        PRODUCTS = PRODUCTS.concat(data.products);
+        //PRODUCTS = PRODUCTS.concat(data.products);
+        añadirProductosArray(data.products);
         var htmlContent = '';
         var grid = '';
         var block = '';
@@ -1314,7 +1328,6 @@ function displayProducts(data, originNode, originName, param, param4) {
         console.log("Productos para el asistente de disfraces");
 
         updateBackButton(originNode, originName, "productos");
-
 
         console.log("Estamos en el " + pantallaActual);
 
@@ -3818,7 +3831,7 @@ function opcionesPago() { //TEMP
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
-    
+
     //borramos la ultima posicion para que cargue bien al volver atras
     var position = (nodeIds.length);
     nodeIds.splice(position - 1); //TEMP
