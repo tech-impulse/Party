@@ -2093,3 +2093,121 @@ function getProvinces() {
         },
     });
 }
+
+/**
+ *   getCountrys
+ *
+ *   funcion que llama al webservice que devuelve todos los paises.
+ */
+function getCountrys() {
+
+    console.log("-> Llamando al webservice getCountrys.php");
+
+    var request = $.ajax({
+        url: urlServices + 'getCountrys.php',
+        dataType: 'json',
+        async: false,
+        type: 'GET',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            if (response.result == 1) {
+
+                //var provinces = JSON.parse(response.provinces);
+
+                PAISES = response.countrys;
+
+                //console.log('response.provinces: ' + response.provinces);
+
+                console.log("-> Encontrados " + PAISES.length + " paises");
+                //console.log("-> provincias " + PROVINCIAS);
+
+                //return provinces;
+
+            } else {
+                console.log("-> No se encontraron paises");
+                $("#texto_popup").text("No se encontraron paises");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            return [];
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
+
+/**
+ *   getProvincesFromCountry
+ *
+ *   funcion que llama al webservice para conseguir las provincias en funcion del identificador de pais.
+ */
+function getProvincesFromCountry(idCountry) {
+
+    console.log("getProvincesFromCountry con id: " + idCountry);
+
+    var dataSend = {
+        country: idCountry
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'getProvinces.php',
+        dataType: 'json',
+        async: false,
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            console.log("Respuesta de provincias para el pais");
+            console.log(response);
+
+            if (response.result == 1) {
+
+                PROVINCIAS = response.provinces;
+
+            } else {
+
+                console.log("-> No se encontraron provincias");
+                $("#texto_popup").text("No se encontraron provincias");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            return [];
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}

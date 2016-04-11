@@ -10,6 +10,7 @@ var nodeIds = [];
 var nodeImg = [];
 var TIENDAS = [];
 var PROVINCIAS = [];
+var PAISES = [];
 var W_WIDTH = "";
 var W_HEIGTH = "";
 var STORE = "";

@@ -4017,36 +4017,36 @@ function loadSelectProvincias() {
         var text = '';
 
         switch (language) {
-        case 1:
-            text = PROVINCIAS[i].name_ca;
-            break;
+            case 1:
+                text = PROVINCIAS[i].name_ca;
+                break;
 
-        case 2:
-            text = PROVINCIAS[i].name_es;
-            break;
+            case 2:
+                text = PROVINCIAS[i].name_es;
+                break;
 
-        case 3:
-            text = PROVINCIAS[i].name_en;
-            break;
+            case 3:
+                text = PROVINCIAS[i].name_en;
+                break;
 
-        case 4:
-            text = PROVINCIAS[i].name_ge;
-            break;
+            case 4:
+                text = PROVINCIAS[i].name_ge;
+                break;
 
-        case 5:
-            text = PROVINCIAS[i].name_pt;
-            break;
+            case 5:
+                text = PROVINCIAS[i].name_pt;
+                break;
 
-        case 6:
-            text = PROVINCIAS[i].name_fr;
-            break;
+            case 6:
+                text = PROVINCIAS[i].name_fr;
+                break;
 
-        case 9:
-            text = PROVINCIAS[i].name_it;
-            break;
+            case 9:
+                text = PROVINCIAS[i].name_it;
+                break;
 
-        default:
-            text = PROVINCIAS[i].name_es;
+            default:
+                text = PROVINCIAS[i].name_es;
         }
 
         html = html + '<option value="' + val + '"><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
@@ -4059,6 +4059,135 @@ function loadSelectProvincias() {
 
     $("#div_select_provincia").html(html);
     $("#div_select_provincia").trigger('create');
+    //$("#div_select_provincia").css('font-size', '20px');
+}
+
+
+function loadSelectProvinciasFromCountry( divName, idCountry ) {
+
+    getProvincesFromCountry( idCountry );
+
+    //console.log('-> loadSelectProvincias() con language: ' + language + ' i provincias: ' + PROVINCIAS.length); // TEMP !!
+
+    //var provincias = getProvinces();
+    //getProvinces();
+
+    var html = '<select data-corners="false" id="selectProvince" data-native-menu="false" data-theme="b" style="">';
+
+    for (var i = 0; i < PROVINCIAS.length; i++) {
+
+        var val = PROVINCIAS[i].id;
+        var text = '';
+
+        switch (language) {
+            case 1:
+                text = PROVINCIAS[i].name_ca;
+                break;
+
+            case 2:
+                text = PROVINCIAS[i].name_es;
+                break;
+
+            case 3:
+                text = PROVINCIAS[i].name_en;
+                break;
+
+            case 4:
+                text = PROVINCIAS[i].name_ge;
+                break;
+
+            case 5:
+                text = PROVINCIAS[i].name_pt;
+                break;
+
+            case 6:
+                text = PROVINCIAS[i].name_fr;
+                break;
+
+            case 9:
+                text = PROVINCIAS[i].name_it;
+                break;
+
+            default:
+                text = PROVINCIAS[i].name_es;
+        }
+
+        html = html + '<option value="' + val + '"><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+
+    }
+
+    html = html + '</select>';
+
+    //console.log('-> Incluyendo html: ' + html); // TEMP !!
+    
+     var idDiv = '#' + divName;
+
+    $( idDiv ).html(html);
+    $( idDiv ).trigger('create');
+    //$("#div_select_provincia").css('font-size', '20px');
+}
+
+function loadSelectPaises( divName, idSelect ) {
+
+    getCountrys();
+
+    //console.log('-> loadSelectProvincias() con language: ' + language + ' i provincias: ' + PROVINCIAS.length); // TEMP !!
+
+    //var provincias = getProvinces();
+    //getProvinces();
+
+    var html = '<select data-corners="false" id="'+ idSelect +'" data-native-menu="false" style="">';
+
+    for (var i = 0; i < PAISES.length; i++) {
+
+        var val = PAISES[i].id;
+        var text = '';
+
+        switch (language) {
+            case 1:
+                text = PAISES[i].name_ca;
+                break;
+
+            case 2:
+                text = PAISES[i].name_es;
+                break;
+
+            case 3:
+                text = PAISES[i].name_en;
+                break;
+
+            case 4:
+                text = PAISES[i].name_ge;
+                break;
+
+            case 5:
+                text = PAISES[i].name_pt;
+                break;
+
+            case 6:
+                text = PAISES[i].name_fr;
+                break;
+
+            case 9:
+                text = PAISES[i].name_it;
+                break;
+
+            default:
+                text = PAISES[i].name_es;
+        }
+
+        html = html + '<option value="' + val + '"><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+
+    }
+
+    html = html + '</select>';
+
+    //console.log('-> Incluyendo html: ' + html); // TEMP !!
+    
+    var idDiv = '#' + divName;
+
+    $(idDiv).html(html);
+    $(idDiv).trigger('create');
     //$("#div_select_provincia").css('font-size', '20px');
 }
 
@@ -4102,29 +4231,29 @@ function changeFormRegUser(html_register_user) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">email *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_email" name="input_email" required="required" type="email" placeholder="nombre@email.com" autofocus data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_email" name="input_email" data-type="user_reg" required="required" type="email" placeholder="nombre@email.com" autofocus data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Repetir email *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_email" name="input_repetir_email" required="required" type="email" placeholder="nombre@email.com" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_email" name="input_repetir_email" data-type="user_reg" required="required" type="email" placeholder="nombre@email.com" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Contraseña *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pass" name="input_pass" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pass" name="input_pass" data-type="user_reg" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Repetir contraseña *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_pass" name="input_repetir_pass" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_pass" name="input_repetir_pass" data-type="user_reg" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Código postal *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_cp" name="input_cp" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_cp" name="input_cp" data-type="user_reg" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
 
@@ -4148,14 +4277,14 @@ function displayDomicilioFacturacionForm() {
         '</center></div>';
 
     html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
-        '<form autocomplete="on"><div id="div_form_reg_user">' +
+        '<form id="formFacturacion" autocomplete="on"><div id="div_form_reg_user">' +
 
         //(INFO_USU.id != undefined ? '<div id="contenedorInfoUsuario"></div>' : html_login_user) +
-
+        
         html_login_user +
 
         '</div>' +
-
+        
         '<div id="div_direcion_facturacion">' + // --> FORMULARIO DIRECCION FACTURACION !!!!    **********
 
         '<h2>Dirección de Facturación</h2>' +
@@ -4163,59 +4292,64 @@ function displayDomicilioFacturacionForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Nombre</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario_2" name="input_nombreUsuario_2" required="required" type="text" placeholder="Nombre" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario_2" name="input_nombreUsuario_2" data-type="facturacion" required="required" type="text" placeholder="Nombre" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Apellidos</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos_2" name="input_apellidos_2" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos_2" name="input_apellidos_2" data-type="facturacion" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Tel&eacute;fono</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono_2" name="input_telefono_2" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono_2" name="input_telefono_2" data-type="facturacion" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">DNI/CIF</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif_2" name="input_dni_cif_2" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif_2" name="input_dni_cif_2" data-type="facturacion" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Dirección</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" data-type="facturacion" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Número</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion_2" name="input_num_direccion_2" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion_2" name="input_num_direccion_2" data-type="facturacion" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Código postal</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal_2" name="input_postal_2" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal_2" name="input_postal_2" data-type="facturacion" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad_2" name="input_ciudad_2" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad_2" name="input_ciudad_2" data-type="facturacion" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais_2" name="input_pais_2" required="required" type="text" placeholder="España" data-clear-btn="true"></div>' +
+        //'<div id="div_input_pais_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais_2" name="input_pais_2" data-type="facturacion" required="required" type="text" placeholder="España" data-clear-btn="true"></div>' +
+        
+        '<div id="div_input_pais_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia_2" name="input_provincia_2" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
+        
+        '<div id="div_input_provincia_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        
         '</div>' +
         '</div>' +
 
         '</div>' +
 
-        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="registroUsuarioDomicilio(1);">Continuar</button>' +
+        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="if(checkForm()){registroUsuarioDomicilio(1);}">Continuar</button>' +
 
         '</form>' +
         '</div>' +
@@ -4227,20 +4361,25 @@ function displayDomicilioFacturacionForm() {
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
-
-    if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
+    
+    if ( INFO_USU.id != undefined ) {           //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
     }
 
-    if (INFO_USU.id != undefined) { // si el usuario ha hecho login rellenar campos
-
+    if ( INFO_USU.id != undefined )   {     // si el usuario ha hecho login rellenar campos
+        
         console.log('--> Cargando datos de sesion en formulario:'); // TEMP !!
         console.log(INFO_USU); // TEMP !!
 
         cargaDatosUsuarioAFormularioRegistro();
-    } else { // TEMP !!
+    }
+    else    {   // TEMP !!
         console.log('-->Usuario no logueado, no se cargaran datos de sesion en formulario:'); // TEMP !!   
     }
+    
+    
+    loadSelectPaises( 'div_input_pais_2', 'selectCountry' );
+    loadSelectProvinciasFromCountry( 'div_input_provincia_2', 1 );
 }
 
 function displayDomicilioForm() {
@@ -4251,7 +4390,7 @@ function displayDomicilioForm() {
         '</center></div>';
 
     html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
-        '<form autocomplete="on"><div id="div_form_reg_user">' +
+        '<form id="formDirecciones" autocomplete="on"><div id="div_form_reg_user">' +
 
         //(INFO_USU.id != undefined ? '<div id="contenedorInfoUsuario"></div>' : html_login_user) +
 
@@ -4274,53 +4413,57 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Nombre *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario" name="input_nombreUsuario" required="required" type="text" placeholder="Nombre" autofocus data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario" name="input_nombreUsuario" data-type="entrega" required="required" type="text" placeholder="Nombre" autofocus data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Apellidos *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos" name="input_apellidos" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos" name="input_apellidos" data-type="entrega" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Tel&eacute;fono *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono" name="input_telefono" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono" name="input_telefono" data-type="entrega" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">DNI/CIF *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif" name="input_dni_cif" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif" name="input_dni_cif" data-type="entrega" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Dirección *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion" name="input_direccion" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion" name="input_direccion" data-type="entrega" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Número *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion" name="input_num_direccion" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion" name="input_num_direccion" data-type="entrega" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Código postal</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal" name="input_postal" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal" name="input_postal" data-type="entrega" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad" name="input_ciudad" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad" name="input_ciudad" data-type="entrega" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais" name="input_pais" required="required" type="text" placeholder="España" data-clear-btn="true"></div>' +
+        
+        '<div id="div_input_pais" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia" name="input_provincia" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
+        
+        '<div id="div_input_provincia" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        
         '</div>' +
         '</div>' +
 
@@ -4331,21 +4474,21 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Nombre *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario_2" name="input_nombreUsuario_2" required="required" type="text" placeholder="Nombre" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario_2" name="input_nombreUsuario_2" data-type="facturacion" required="required" type="text" placeholder="Nombre" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Apellidos *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos_2" name="input_apellidos_2" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos_2" name="input_apellidos_2" data-type="facturacion" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Tel&eacute;fono *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono_2" name="input_telefono_2" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono_2" name="input_telefono_2" data-type="facturacion" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">DNI/CIF *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif_2" name="input_dni_cif_2" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif_2" name="input_dni_cif_2" data-type="facturacion" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
@@ -4357,39 +4500,43 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Dirección *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" data-type="facturacion" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Número *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion_2" name="input_num_direccion_2" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion_2" name="input_num_direccion_2" data-type="facturacion" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Código postal *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal_2" name="input_postal_2" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal_2" name="input_postal_2" data-type="facturacion" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Ciudad *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad_2" name="input_ciudad_2" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad_2" name="input_ciudad_2" data-type="facturacion" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais_2" name="input_pais_2" required="required" type="text" placeholder="España" data-clear-btn="true"></div>' +
+        
+        '<div id="div_input_pais_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_provincia_2" name="input_provincia_2" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
+        
+        '<div id="div_input_provincia_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        
         '</div>' +
         '</div>' +
 
         '</div>' +
 
         //'<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="sistemasPago();">Continuar</button>' +
-        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="registroUsuarioDomicilio();">Continuar</button>' +
+        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="if(checkForm()){registroUsuarioDomicilio();}">Continuar</button>' +
 
         '</form>' +
         '</div>' +
@@ -4405,6 +4552,28 @@ function displayDomicilioForm() {
     if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
     }
+    
+    loadSelectPaises( 'div_input_pais', 'selectCountry' );
+    loadSelectProvinciasFromCountry( 'div_input_provincia', 1 );
+    
+    loadSelectPaises( 'div_input_pais_2', 'selectCountry_2' );
+    loadSelectProvinciasFromCountry( 'div_input_provincia_2', 1 );
+    
+    $( "#selectCountry" ).change(function() {
+        
+        console.log('Cambio de pais, ahora es:' +  $( "#selectCountry" ).val() );
+        
+        loadSelectProvinciasFromCountry( 'div_input_provincia', $( "#selectCountry" ).val() );
+        
+    });
+    
+    $( "#selectCountry_2" ).change(function() {
+        
+        console.log('Cambio de pais, ahora es:' +  $( "#selectCountry_2" ).val() );
+        
+        loadSelectProvinciasFromCountry( 'div_input_provincia', $( "#selectCountry_2" ).val() );
+        
+    });
 
     $("#check_misma_direccion").click(function () { //  ---------------     evento de click en el checkbox  --------
 
@@ -4412,19 +4581,19 @@ function displayDomicilioForm() {
 
         var chk = $("#check_misma_direccion");
 
-        if (chk.prop('checked')) {
+        if (chk.prop('checked')) {                              // Las direcciones de entrega y facturación son las mismas
             $("#div_direcion_facturacion").hide();
 
             $("#h2_direccion").text('Dirección');
 
             console.log('---> checked');
-        } else {
+        } else {                                                // Las direcciones de entrega y facturación son diferentes (2 formularios)
             $("#div_direcion_facturacion").show();
 
             $("#h2_direccion").text('Dirección de entrega');
 
             console.log('---> NO checked');
-
+            
             cargaDatosDeDirecciónEntregaAFacturacion();
         }
 
@@ -4441,134 +4610,278 @@ function displayDomicilioForm() {
     }
 }
 
-function checkFormRegUser() {
+function checkForm()    {
+    
+    var chk = $("#check_misma_direccion");
+    
+    var link_reg_usuario  = $("#registrarse_reg_domicilio");
+    
+    if (  link_reg_usuario.length > 0 && link_reg_usuario.is(":visible") )    { // El usuario NO ha clicado en registrarse
+        
+        console.log('-->Realizar control registro Usuario.');
+        
+        if ( chk.length > 0 )   {
+            
+            if ( chk.prop('checked') )   {
+                console.log('-->Control Form Entrega.');
+            
+                return ( checkFormRegUser() && checkFormDireccion('entrega') );
+            }
+            else    {
+                console.log('-->Control Form Entrega y facturación.');
+            
+                return ( checkFormRegUser() && checkFormDireccion('entrega') && checkFormDireccion('facturacion') );
+            }
+            
+        }
+        else    {
+            return ( checkFormRegUser() && checkFormDireccion('facturacion') );
+        }
+        
+    }
+    else    {                       // El usuario ha clicado en registrarse, se muestra el formulario.
+        
+        console.log('-->NO Realizar control registro Usuario.');
+        
+        if ( chk.length > 0 )   {
+            
+            if ( chk.prop('checked') )   {
+                console.log('-->Control Form Entrega.');
+            
+                return checkFormDireccion('entrega');
+            }
+            else    {
+                console.log('-->Control Form Entrega y facturación.');
+            
+                return ( checkFormDireccion('entrega') && checkFormDireccion('facturacion') );
+            }
+            
+        }
+        else    {
+            return checkFormDireccion('facturacion');
+        }
+        
+    }
+}
 
-    $mail_1 = S('input_email').val();
-    $mail_2 = S('input_repetir_email').val();
+/**
+*       checkFormDireccion
+*
+*       checkea formulario de direcciones
+*       param: tipoDireccion ( 'entrega' | 'facturacion' )
+*/
 
-    if ($mail_1.localeCompare('') == 0) {
+var E; // TEMP !!
 
-        S('input_email').focus();
-
+function checkFormDireccion( tipoDireccion )	{
+    
+    /*var field = $('input_nombreUsuario');
+    
+    if (  field.val().localeCompare('') == 0 )	{
+        field.focus();
+        
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-
+        
         return false;
-    } else if ($mail_1.search("@") == -1) {
+    }*/
+    
+    console.log('--> Address forms para tipoDireccion: ' + tipoDireccion);
+    
+    var valor = true;
+    
+    var formDirecciones = ( tipoDireccion == 'entrega' ? $("#formDirecciones") : $("#formFacturacion") );
+    
+    
+    //$("#formDirecciones").find(':text').each(function() {   // itera sobre todos los campos de tipo text
+    formDirecciones.find(':text').each(function() {   // itera sobre todos los campos de tipo text
+        
+        var elemento = $(this);
+        
+        E = elemento; // TEMP !!
+        
+        var bla  = $(this).data('type'); // temp !!
+        
+        console.log('-----> BLA!!: ' + bla); // TEMP !!
+        //alert("elemento.id="+ elemento.id + ", elemento.value=" + elemento.value);
+        
+        console.log('-----> Checking: ' + elemento.id); // TEMP !!
+        
+        //if ( $(this).data("type").localeCompare( tipoDireccion ) == 0 )   {
+        if ( elemento.data('type').localeCompare( tipoDireccion ) == 0 )   {
+            
+            if ( elemento.val() == undefined || elemento.val() == '' )	{
+                elemento.focus();
 
-        S('input_email').focus();
+                $("#texto_popup").text('Campo Vacio');
+                $('#popupAlert').popup('open');
 
-        $("#texto_popup").text('Email incorrecto');
-        $('#popupAlert').popup('open');
+                console.log('--> returning false.'); // TEMP !!
 
-        return false;
-    }
+                console.log('-> El campo es false!! ----------------------------.'); // TEMP !!
+                
+                valor = false;
 
-    if ($mail_2.localeCompare('') == 0) {
+                return false;
+            }
+            
+        }
+        
+    });
+    
+    return valor;
+}
 
-        S('input_repetir_email').focus();
-
+function checkFormRegUser()	{
+    
+    console.log('--> Checking user form');
+    
+    $mail_1 = $('#input_email').val();
+    $mail_2 = $('#input_repetir_email').val();
+    
+    if ( $mail_1 == undefined || $mail_1.localeCompare('') == 0 )	{
+        
+        $('#input_email').focus();
+        
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-
-        return false;
-    } else if ($mail_2.search("@") == -1) {
-
-        S('input_repetir_email').focus();
-
-        $("#texto_popup").text('Email incorrecto');
-        $('#popupAlert').popup('open');
-
+        
+         console.log('------------------------------> $mail_1 false.'); // TEMP !!
+        
         return false;
     }
-
+    else  if ( $mail_1.search("@") == -1)	{
+        
+        $('#input_email').focus();
+        
+        $("#texto_popup").text('Email incorrecto');
+        $('#popupAlert').popup('open');
+        
+        console.log('------------------------------> $mail_1 no @ false.'); // TEMP !!
+        
+        return false;
+    }
+    
+    if ( $mail_2 == undefined || $mail_2.localeCompare('') == 0 )	{
+        
+        $('#input_repetir_email').focus();
+        
+        $("#texto_popup").text('Campo Vacio');
+        $('#popupAlert').popup('open');
+        
+        console.log('------------------------------> $mail_2 false.'); // TEMP !!
+        
+        return false;
+    }
+    else  if ( $mail_2.search("@") == -1)	{
+        
+        $('#input_repetir_email').focus();
+        
+        $("#texto_popup").text('Email incorrecto');
+        $('#popupAlert').popup('open');
+        
+        console.log('------------------------------> $mail_2 no @ false.'); // TEMP !!
+        
+        return false;
+    }
+    
     $compare = $mail_1.localeCompare($mail_2);
 
-    if ($compare != 0) {
-
-        S('input_email').focus();
-
+    if ( $compare != 0 )	{
+        
+        $('#input_email').focus();
+        
         $("#texto_popup").text('Los campos de email no coinciden');
         $('#popupAlert').popup('open');
-
+        
+        console.log('------------------------------> No coinciden false.'); // TEMP !!
+        
         return false;
     }
-
-
-    $pass_1 = S('input_pass').val();
-    $pass_2 = S('input_repetir_pass').val();
-
-    if ($pass_1.localeCompare('') == 0) {
-
-        S('input_pass').focus();
-
+    
+    
+    $pass_1 = $('#input_pass').val();
+    $pass_2 = $('#input_repetir_pass').val();
+    
+    if ( $pass_1 == undefined || $pass_1.localeCompare('') == 0 )	{
+        
+        $('#input_pass').focus();
+        
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-
+        
+        console.log('------------------------------> $pass_1 false.'); // TEMP !!
+        
         return false;
     }
-
-    if ($pass_2.localeCompare('') == 0) {
-
-        S('input_repetir_pass').focus();
-
+    
+    if ( $pass_2 == undefined || $pass_2.localeCompare('') == 0 )	{
+        
+        $('#input_repetir_pass').focus();
+        
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-
+        
+        console.log('------------------------------> $pass_2 false.'); // TEMP !!
+        
         return false;
     }
-
+    
     $compare = $pass_1.localeCompare($pass_2);
-
-    if ($compare != 0) {
-
-        S('input_pass').focus();
-
+    
+    if ( $compare != 0 )	{
+        
+        $('#input_pass').focus();
+        
         $("#texto_popup").text('Los campos de password no coinciden');
         $('#popupAlert').popup('open');
-
+        
+        console.log('------------------------------> $pass no coinciden false.'); // TEMP !!
+        
         return false;
     }
-
-    $cp_user = S('input_cp').val();
-
-    if ($cp_user.localeCompare('') == 0) {
-
-        S('input_cp').focus();
-
+    
+    $cp_user = $('#input_cp').val();
+    
+    if ( $cp_user == undefined || $cp_user.localeCompare('') == 0 )	{
+        
+        $('#input_cp').focus();
+        
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-
+        
+        console.log('------------------------------> $cp_user false.'); // TEMP !!
+        
         return false;
     }
-
+    
     return true;
 }
 
 function cargaDatosDeDirecciónEntregaAFacturacion() {
-
+    
     console.log('--> Cargando datos de direccion a facturacion'); // TEMP !!
-
-    $('#input_nombreUsuario_2').val($('#input_nombreUsuario').val()) // ----> Click and collect
-    $('#input_apellidos_2').val($('#input_apellidos').val());
-    $('#input_telefono_2').val($('#input_telefono').val());
-    $('#input_dni_cif_2').val($('#input_dni_cif').val());
-    $('#input_direccion_2').val($('#input_direccion').val());
-    $('#input_num_direccion_2').val($('#input_num_direccion').val()); // --> falta modificar el webservice login.php
-    $('#input_postal_2').val($('#input_postal').val());
-    $('#input_ciudad_2').val($('#input_ciudad').val());
-    $('#input_num_direccion_2').val($('#input_num_direccion').val());
-    $('#input_pais_2').val($('#input_pais').val());
-    $('#input_provincia_2').val($('#input_provincia').val());
-
+    
+    $('#input_nombreUsuario_2').val( $('#input_nombreUsuario').val() )            // ----> Click and collect
+    $('#input_apellidos_2').val( $('#input_apellidos').val() );
+    $('#input_telefono_2').val(  $('#input_telefono').val() );
+    $('#input_dni_cif_2').val( $('#input_dni_cif').val() );
+    $('#input_direccion_2').val(  $('#input_direccion').val() );
+    $('#input_num_direccion_2').val( $('#input_num_direccion').val() ); // --> falta modificar el webservice login.php
+    $('#input_postal_2').val( $('#input_postal').val() );
+    $('#input_ciudad_2').val( $('#input_ciudad').val() );
+    $('#input_num_direccion_2').val( $('#input_num_direccion').val() );
+    $('#input_pais_2').val( $('#input_pais').val() );
+    $('#input_provincia_2').val( $('#input_provincia').val() );
+    
 }
 
 function cargaDatosUsuarioAFormularioRegistro() {
-
-    if ($("#input_nombreUsuario").length > 0) { // ----> Envio a domicilio
-
+    
+    if ( $("#input_nombreUsuario").length > 0 ) {               // ----> Envio a domicilio
+        
         console.log('Cargando datos de usuario en Direccion entrega');
-
+        
         $('#input_nombreUsuario').val(INFO_USU.name)
         $('#input_apellidos').val(INFO_USU.surname);
         $('#input_telefono').val(INFO_USU.phone);
@@ -4580,12 +4893,13 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_num_direccion').val(INFO_USU.addressNumber);
         $('#input_pais').val(INFO_USU.country);
         $('#input_provincia').val(INFO_USU.province);
-
-    } else {
-
+        
+    }
+    else    {
+        
         console.log('Cargando datos de usuario en Direccion Facturación');
-
-        $('#input_nombreUsuario_2').val(INFO_USU.name) // ----> Click and collect
+        
+        $('#input_nombreUsuario_2').val(INFO_USU.name)            // ----> Click and collect
         $('#input_apellidos_2').val(INFO_USU.surname);
         $('#input_telefono_2').val(INFO_USU.phone);
         $('#input_dni_cif_2').val(INFO_USU.NIN);
@@ -4596,7 +4910,7 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_num_direccion_2').val(INFO_USU.addressNumber);
         $('#input_pais_2').val(INFO_USU.country);
         $('#input_provincia_2').val(INFO_USU.province);
-
+        
     }
 }
 
@@ -4628,3 +4942,4 @@ function pagarEnCaja() {
     $("#divContent").html(html);
     $("#divContent").trigger('create');
 }
+
