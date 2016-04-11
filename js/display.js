@@ -1008,7 +1008,7 @@ function displayProducts(data, originNode, originName, param, param4) {
         console.log(data);
         AUX = 1;
 
-        if (PRODUCTS.length > 0) {//se añadido este if para no duplicar productos en PRODUCTS
+        if (PRODUCTS.length > 0) { //se añadido este if para no duplicar productos en PRODUCTS
 
             for (var c = 0; c < data.products.length; c++) { //guardamos los productos
                 for (var d = 0; d < data.products[c].typeproducts.length; d++) {
@@ -3921,21 +3921,45 @@ function sistemasPago() { //TEMP
     //inicializamos el boton
     var paypal = '<form method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
         '<input type="hidden" name="currency_code" value="EUR">' +
-        '<input type="hidden" name="business" value="test@paypal.es">';
+        '<input type="hidden" name="lc" value="ES">' +
+        '<input type="hidden" name="return" value="https://partyfiesta.youtter.com/app/alb/">' +
+        '<input type="hidden" name="cancel_return" value="https://partyfiesta.youtter.com/app/alb/">' +
+        '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
 
     var add = '';
 
     for (var i = 0; i < CART.length; i++) {
 
-        if (i == 0) add = '<input type="hidden" name="add" value="1">';
-        else add = '<input type="hidden" name="upload" value="1">';
+        if (parseInt(CART.length) == 1) {
 
-        paypal +=
+            add = '<input type="hidden" name="add" value="1">';
+            paypal +=
+            '<input type="hidden" name="cmd" value="_cart">' + add +
+            '<input type="hidden" name="item_name" value="' + CART[i].name + '">' +
+            '<input type="hidden" name="item_number" value="' + parseInt(CART[i].sku) + '">' +
+            //'<input type="hidden" name="amount" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+            '<input type="hidden" name="amount" value="0.25">' +
+            '<input type="hidden" name="quantity" value="' + parseInt(CART[i].quantity) + '">';
+
+        } else {
+
+            add = '<input type="hidden" name="upload" value="1">';
+            paypal +=
+            '<input type="hidden" name="cmd" value="_cart">' + add +
+            '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
+            '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
+            //'<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+            '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
+            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+
+        }
+
+        /*paypal +=
             '<input type="hidden" name="cmd" value="_cart">' + add +
             '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
             '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
             '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';*/
 
     }
 

@@ -843,7 +843,7 @@ function añadirProductosArray(data) {
 
     for (var i = 0; i < PRODUCTS.length; i++) {
 
-        for (var j = 0; j < PRODUCTS.length; j++) {
+        for (var j = 0; j < data.length; j++) {
 
             if (PRODUCTS[i].id == data[j].id) {
                 encotrado = true;

@@ -1,6 +1,6 @@
 // AQUI VAN DEFINIDAS LAS VARIABLES QUE SE USARÁN MAS DE UNA VEZ EN MÁS DE UN FICHERO
 
-var urlServices = "http://partyfiesta.youtter.com/webservices/"; // URL del servidor de Webservices fuera de creapolis
+var urlServices = "https://partyfiesta.youtter.com/webservices/"; // URL del servidor de Webservices fuera de creapolis
 //var urlServices = "http://partyfiesta-prod.youtter.com/webservices/"; // URL del servidor de Webservices
 var request;
 var language = 2; // El idioma de la aplicación por defecto demomento CATALAN
