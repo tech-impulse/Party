@@ -3912,7 +3912,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
 function sistemasPago() { //TEMP
 
-    console.log('--> sistemasPago');
+    /*console.log('--> sistemasPago');
 
     pantallaActual = "sistemas pago";
 
@@ -3951,6 +3951,85 @@ function sistemasPago() { //TEMP
             //'<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
             '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
             '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+
+        }
+
+        /*paypal +=
+            '<input type="hidden" name="cmd" value="_cart">' + add +
+            '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
+            '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
+            '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';*/
+
+    }
+
+    paypal +=
+        '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
+        '</form>';
+
+    console.log("PAYPALLLLLLLLLL");
+    console.log(paypal);
+
+    var html = '<div>' +
+        '<center>' +
+        '<h2>OPCIONES DE PAGO</h2>' +
+        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<div class="ui-grid-solo">' +
+        '<div class="ui-block-a"><label>CAJA</label></div>' +
+        '</div>' +
+        '</a>' +
+        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<div class="ui-grid-solo">' +
+        '<div class="ui-block-a"><label>TARJETA</label></div>' +
+        '</div>' +
+        '</a>' +
+        '<br>' + paypal +
+        '<br>' +
+        '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+        '</center>';
+
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');*/
+
+    console.log('--> sistemasPago');
+
+    pantallaActual = "sistemas pago";
+
+    $("#divBack").html('<div onclick="opcionesEnvio(' + opcionEnvio + ')"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de envio</label></div></div></div>');
+
+    //inicializamos el boton
+    var paypal = '<form method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
+        '<input type="hidden" name="currency_code" value="EUR">' +
+        '<input type="hidden" name="lc" value="ES">' +
+        '<input type="hidden" name="return" value="https://partyfiesta.youtter.com/app/alb/">' +
+        '<input type="hidden" name="cancel_return" value="https://partyfiesta.youtter.com/app/alb/">' +
+        '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
+
+    var add = '';
+
+    for (var i = 0; i < CART.length; i++) {
+
+        if (parseInt(CART.length) == 1) {
+
+            add = '<input type="hidden" name="add" value="1">';
+            paypal +=
+                '<input type="hidden" name="cmd" value="_cart">' + add +
+                '<input type="hidden" name="item_name" value="' + CART[i].name + '">' +
+                '<input type="hidden" name="item_number" value="' + parseInt(CART[i].sku) + '">' +
+                //'<input type="hidden" name="amount" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+                '<input type="hidden" name="amount" value="0.25">' +
+                '<input type="hidden" name="quantity" value="' + parseInt(CART[i].quantity) + '">';
+
+        } else {
+
+            add = '<input type="hidden" name="upload" value="1">';
+            paypal +=
+                '<input type="hidden" name="cmd" value="_cart">' + add +
+                '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
+                '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
+                //'<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+                '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
+                '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
 
         }
 
@@ -4041,36 +4120,36 @@ function loadSelectProvincias() {
         var text = '';
 
         switch (language) {
-            case 1:
-                text = PROVINCIAS[i].name_ca;
-                break;
+        case 1:
+            text = PROVINCIAS[i].name_ca;
+            break;
 
-            case 2:
-                text = PROVINCIAS[i].name_es;
-                break;
+        case 2:
+            text = PROVINCIAS[i].name_es;
+            break;
 
-            case 3:
-                text = PROVINCIAS[i].name_en;
-                break;
+        case 3:
+            text = PROVINCIAS[i].name_en;
+            break;
 
-            case 4:
-                text = PROVINCIAS[i].name_ge;
-                break;
+        case 4:
+            text = PROVINCIAS[i].name_ge;
+            break;
 
-            case 5:
-                text = PROVINCIAS[i].name_pt;
-                break;
+        case 5:
+            text = PROVINCIAS[i].name_pt;
+            break;
 
-            case 6:
-                text = PROVINCIAS[i].name_fr;
-                break;
+        case 6:
+            text = PROVINCIAS[i].name_fr;
+            break;
 
-            case 9:
-                text = PROVINCIAS[i].name_it;
-                break;
+        case 9:
+            text = PROVINCIAS[i].name_it;
+            break;
 
-            default:
-                text = PROVINCIAS[i].name_es;
+        default:
+            text = PROVINCIAS[i].name_es;
         }
 
         html = html + '<option value="' + val + '"><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
@@ -4087,16 +4166,16 @@ function loadSelectProvincias() {
 }
 
 
-function loadSelectProvinciasFromCountry( divName, idCountry ) {
+function loadSelectProvinciasFromCountry(divName, idCountry, idSelect) {
 
-    getProvincesFromCountry( idCountry );
+    getProvincesFromCountry(idCountry);
 
     //console.log('-> loadSelectProvincias() con language: ' + language + ' i provincias: ' + PROVINCIAS.length); // TEMP !!
 
     //var provincias = getProvinces();
     //getProvinces();
 
-    var html = '<select data-corners="false" id="selectProvince" data-native-menu="false" data-theme="b" style="">';
+    var html = '<select data-corners="false" id="' + idSelect + '" data-native-menu="false" data-theme="b" style="">';
 
     for (var i = 0; i < PROVINCIAS.length; i++) {
 
@@ -4104,36 +4183,36 @@ function loadSelectProvinciasFromCountry( divName, idCountry ) {
         var text = '';
 
         switch (language) {
-            case 1:
-                text = PROVINCIAS[i].name_ca;
-                break;
+        case 1:
+            text = PROVINCIAS[i].name_ca;
+            break;
 
-            case 2:
-                text = PROVINCIAS[i].name_es;
-                break;
+        case 2:
+            text = PROVINCIAS[i].name_es;
+            break;
 
-            case 3:
-                text = PROVINCIAS[i].name_en;
-                break;
+        case 3:
+            text = PROVINCIAS[i].name_en;
+            break;
 
-            case 4:
-                text = PROVINCIAS[i].name_ge;
-                break;
+        case 4:
+            text = PROVINCIAS[i].name_ge;
+            break;
 
-            case 5:
-                text = PROVINCIAS[i].name_pt;
-                break;
+        case 5:
+            text = PROVINCIAS[i].name_pt;
+            break;
 
-            case 6:
-                text = PROVINCIAS[i].name_fr;
-                break;
+        case 6:
+            text = PROVINCIAS[i].name_fr;
+            break;
 
-            case 9:
-                text = PROVINCIAS[i].name_it;
-                break;
+        case 9:
+            text = PROVINCIAS[i].name_it;
+            break;
 
-            default:
-                text = PROVINCIAS[i].name_es;
+        default:
+            text = PROVINCIAS[i].name_es;
         }
 
         html = html + '<option value="' + val + '"><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
@@ -4143,15 +4222,15 @@ function loadSelectProvinciasFromCountry( divName, idCountry ) {
     html = html + '</select>';
 
     //console.log('-> Incluyendo html: ' + html); // TEMP !!
-    
-     var idDiv = '#' + divName;
 
-    $( idDiv ).html(html);
-    $( idDiv ).trigger('create');
+    var idDiv = '#' + divName;
+
+    $(idDiv).html(html);
+    $(idDiv).trigger('create');
     //$("#div_select_provincia").css('font-size', '20px');
 }
 
-function loadSelectPaises( divName, idSelect ) {
+function loadSelectPaises(divName, idSelect) {
 
     getCountrys();
 
@@ -4160,7 +4239,7 @@ function loadSelectPaises( divName, idSelect ) {
     //var provincias = getProvinces();
     //getProvinces();
 
-    var html = '<select data-corners="false" id="'+ idSelect +'" data-native-menu="false" style="">';
+    var html = '<select data-corners="false" id="' + idSelect + '" data-native-menu="false" style="">';
 
     for (var i = 0; i < PAISES.length; i++) {
 
@@ -4168,36 +4247,36 @@ function loadSelectPaises( divName, idSelect ) {
         var text = '';
 
         switch (language) {
-            case 1:
-                text = PAISES[i].name_ca;
-                break;
+        case 1:
+            text = PAISES[i].name_ca;
+            break;
 
-            case 2:
-                text = PAISES[i].name_es;
-                break;
+        case 2:
+            text = PAISES[i].name_es;
+            break;
 
-            case 3:
-                text = PAISES[i].name_en;
-                break;
+        case 3:
+            text = PAISES[i].name_en;
+            break;
 
-            case 4:
-                text = PAISES[i].name_ge;
-                break;
+        case 4:
+            text = PAISES[i].name_ge;
+            break;
 
-            case 5:
-                text = PAISES[i].name_pt;
-                break;
+        case 5:
+            text = PAISES[i].name_pt;
+            break;
 
-            case 6:
-                text = PAISES[i].name_fr;
-                break;
+        case 6:
+            text = PAISES[i].name_fr;
+            break;
 
-            case 9:
-                text = PAISES[i].name_it;
-                break;
+        case 9:
+            text = PAISES[i].name_it;
+            break;
 
-            default:
-                text = PAISES[i].name_es;
+        default:
+            text = PAISES[i].name_es;
         }
 
         html = html + '<option value="' + val + '"><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
@@ -4207,7 +4286,7 @@ function loadSelectPaises( divName, idSelect ) {
     html = html + '</select>';
 
     //console.log('-> Incluyendo html: ' + html); // TEMP !!
-    
+
     var idDiv = '#' + divName;
 
     $(idDiv).html(html);
@@ -4304,11 +4383,11 @@ function displayDomicilioFacturacionForm() {
         '<form id="formFacturacion" autocomplete="on"><div id="div_form_reg_user">' +
 
         //(INFO_USU.id != undefined ? '<div id="contenedorInfoUsuario"></div>' : html_login_user) +
-        
+
         html_login_user +
 
         '</div>' +
-        
+
         '<div id="div_direcion_facturacion">' + // --> FORMULARIO DIRECCION FACTURACION !!!!    **********
 
         '<h2>Dirección de Facturación</h2>' +
@@ -4359,15 +4438,15 @@ function displayDomicilioFacturacionForm() {
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País</label>' +
         //'<div id="div_input_pais_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pais_2" name="input_pais_2" data-type="facturacion" required="required" type="text" placeholder="España" data-clear-btn="true"></div>' +
-        
+
         '<div id="div_input_pais_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
-        
+
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia</label>' +
-        
+
         '<div id="div_input_provincia_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
-        
+
         '</div>' +
         '</div>' +
 
@@ -4385,25 +4464,24 @@ function displayDomicilioFacturacionForm() {
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
-    
-    if ( INFO_USU.id != undefined ) {           //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
+
+    if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
     }
 
-    if ( INFO_USU.id != undefined )   {     // si el usuario ha hecho login rellenar campos
-        
+    if (INFO_USU.id != undefined) { // si el usuario ha hecho login rellenar campos
+
         console.log('--> Cargando datos de sesion en formulario:'); // TEMP !!
         console.log(INFO_USU); // TEMP !!
 
         cargaDatosUsuarioAFormularioRegistro();
-    }
-    else    {   // TEMP !!
+    } else { // TEMP !!
         console.log('-->Usuario no logueado, no se cargaran datos de sesion en formulario:'); // TEMP !!   
     }
-    
-    
-    loadSelectPaises( 'div_input_pais_2', 'selectCountry' );
-    loadSelectProvinciasFromCountry( 'div_input_provincia_2', 1 );
+
+
+    loadSelectPaises('div_input_pais_2', 'selectCountry');
+    loadSelectProvinciasFromCountry('div_input_provincia_2', 1, 'selectProvince_2');
 }
 
 function displayDomicilioForm() {
@@ -4479,15 +4557,15 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País *</label>' +
-        
+
         '<div id="div_input_pais" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
-        
+
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia *</label>' +
-        
+
         '<div id="div_input_provincia" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
-        
+
         '</div>' +
         '</div>' +
 
@@ -4545,15 +4623,15 @@ function displayDomicilioForm() {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País *</label>' +
-        
+
         '<div id="div_input_pais_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
-        
+
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia *</label>' +
-        
+
         '<div id="div_input_provincia_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
-        
+
         '</div>' +
         '</div>' +
 
@@ -4576,27 +4654,27 @@ function displayDomicilioForm() {
     if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
     }
-    
-    loadSelectPaises( 'div_input_pais', 'selectCountry' );
-    loadSelectProvinciasFromCountry( 'div_input_provincia', 1 );
-    
-    loadSelectPaises( 'div_input_pais_2', 'selectCountry_2' );
-    loadSelectProvinciasFromCountry( 'div_input_provincia_2', 1 );
-    
-    $( "#selectCountry" ).change(function() {
-        
-        console.log('Cambio de pais, ahora es:' +  $( "#selectCountry" ).val() );
-        
-        loadSelectProvinciasFromCountry( 'div_input_provincia', $( "#selectCountry" ).val() );
-        
+
+    loadSelectPaises('div_input_pais', 'selectCountry');
+    loadSelectProvinciasFromCountry('div_input_provincia', 1, 'selectProvince');
+
+    loadSelectPaises('div_input_pais_2', 'selectCountry_2');
+    loadSelectProvinciasFromCountry('div_input_provincia_2', 1, 'selectProvince_2');
+
+    $("#selectCountry").change(function () {
+
+        console.log('Cambio de pais, ahora es:' + $("#selectCountry").val());
+
+        loadSelectProvinciasFromCountry('div_input_provincia', $("#selectCountry").val(), 'selectProvince');
+
     });
-    
-    $( "#selectCountry_2" ).change(function() {
-        
-        console.log('Cambio de pais, ahora es:' +  $( "#selectCountry_2" ).val() );
-        
-        loadSelectProvinciasFromCountry( 'div_input_provincia', $( "#selectCountry_2" ).val() );
-        
+
+    $("#selectCountry_2").change(function () {
+
+        console.log('Cambio de pais, ahora es:' + $("#selectCountry_2").val());
+
+        loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry_2").val(), 'selectProvince_2');
+
     });
 
     $("#check_misma_direccion").click(function () { //  ---------------     evento de click en el checkbox  --------
@@ -4605,19 +4683,19 @@ function displayDomicilioForm() {
 
         var chk = $("#check_misma_direccion");
 
-        if (chk.prop('checked')) {                              // Las direcciones de entrega y facturación son las mismas
+        if (chk.prop('checked')) { // Las direcciones de entrega y facturación son las mismas
             $("#div_direcion_facturacion").hide();
 
             $("#h2_direccion").text('Dirección');
 
             console.log('---> checked');
-        } else {                                                // Las direcciones de entrega y facturación son diferentes (2 formularios)
+        } else { // Las direcciones de entrega y facturación son diferentes (2 formularios)
             $("#div_direcion_facturacion").show();
 
             $("#h2_direccion").text('Dirección de entrega');
 
             console.log('---> NO checked');
-            
+
             cargaDatosDeDirecciónEntregaAFacturacion();
         }
 
@@ -4634,71 +4712,66 @@ function displayDomicilioForm() {
     }
 }
 
-function checkForm()    {
-    
+function checkForm() {
+
     var chk = $("#check_misma_direccion");
-    
-    var link_reg_usuario  = $("#registrarse_reg_domicilio");
-    
-    if (  link_reg_usuario.length > 0 && link_reg_usuario.is(":visible") )    { // El usuario NO ha clicado en registrarse
-        
+
+    var link_reg_usuario = $("#registrarse_reg_domicilio");
+
+    if (link_reg_usuario.length > 0 && link_reg_usuario.is(":visible")) { // El usuario NO ha clicado en registrarse
+
         console.log('-->Realizar control registro Usuario.');
-        
-        if ( chk.length > 0 )   {
-            
-            if ( chk.prop('checked') )   {
+
+        if (chk.length > 0) {
+
+            if (chk.prop('checked')) {
                 console.log('-->Control Form Entrega.');
-            
-                return ( checkFormRegUser() && checkFormDireccion('entrega') );
-            }
-            else    {
+
+                return (checkFormRegUser() && checkFormDireccion('entrega'));
+            } else {
                 console.log('-->Control Form Entrega y facturación.');
-            
-                return ( checkFormRegUser() && checkFormDireccion('entrega') && checkFormDireccion('facturacion') );
+
+                return (checkFormRegUser() && checkFormDireccion('entrega') && checkFormDireccion('facturacion'));
             }
-            
+
+        } else {
+            return (checkFormRegUser() && checkFormDireccion('facturacion'));
         }
-        else    {
-            return ( checkFormRegUser() && checkFormDireccion('facturacion') );
-        }
-        
-    }
-    else    {                       // El usuario ha clicado en registrarse, se muestra el formulario.
-        
+
+    } else { // El usuario ha clicado en registrarse, se muestra el formulario.
+
         console.log('-->NO Realizar control registro Usuario.');
-        
-        if ( chk.length > 0 )   {
-            
-            if ( chk.prop('checked') )   {
+
+        if (chk.length > 0) {
+
+            if (chk.prop('checked')) {
                 console.log('-->Control Form Entrega.');
-            
+
                 return checkFormDireccion('entrega');
-            }
-            else    {
+            } else {
                 console.log('-->Control Form Entrega y facturación.');
-            
-                return ( checkFormDireccion('entrega') && checkFormDireccion('facturacion') );
+
+                return (checkFormDireccion('entrega') && checkFormDireccion('facturacion'));
             }
-            
-        }
-        else    {
+
+        } else {
             return checkFormDireccion('facturacion');
         }
-        
+
     }
 }
 
 /**
-*       checkFormDireccion
-*
-*       checkea formulario de direcciones
-*       param: tipoDireccion ( 'entrega' | 'facturacion' )
-*/
+ *       checkFormDireccion
+ *
+ *       checkea formulario de direcciones
+ *       param: tipoDireccion ( 'entrega' | 'facturacion' )
+ */
 
 var E; // TEMP !!
 
-function checkFormDireccion( tipoDireccion )	{
-    
+function checkFormDireccion(tipoDireccion) {
+
     /*var field = $('input_nombreUsuario');
     
     if (  field.val().localeCompare('') == 0 )	{
@@ -4709,32 +4782,32 @@ function checkFormDireccion( tipoDireccion )	{
         
         return false;
     }*/
-    
+
     console.log('--> Address forms para tipoDireccion: ' + tipoDireccion);
-    
+
     var valor = true;
-    
-    var formDirecciones = ( tipoDireccion == 'entrega' ? $("#formDirecciones") : $("#formFacturacion") );
-    
-    
+
+    var formDirecciones = (tipoDireccion == 'entrega' ? $("#formDirecciones") : $("#formFacturacion"));
+
+
     //$("#formDirecciones").find(':text').each(function() {   // itera sobre todos los campos de tipo text
-    formDirecciones.find(':text').each(function() {   // itera sobre todos los campos de tipo text
-        
+    formDirecciones.find(':text').each(function () { // itera sobre todos los campos de tipo text
+
         var elemento = $(this);
-        
+
         E = elemento; // TEMP !!
-        
-        var bla  = $(this).data('type'); // temp !!
-        
+
+        var bla = $(this).data('type'); // temp !!
+
         console.log('-----> BLA!!: ' + bla); // TEMP !!
         //alert("elemento.id="+ elemento.id + ", elemento.value=" + elemento.value);
-        
+
         console.log('-----> Checking: ' + elemento.id); // TEMP !!
-        
+
         //if ( $(this).data("type").localeCompare( tipoDireccion ) == 0 )   {
-        if ( elemento.data('type').localeCompare( tipoDireccion ) == 0 )   {
-            
-            if ( elemento.val() == undefined || elemento.val() == '' )	{
+        if (elemento.data('type').localeCompare(tipoDireccion) == 0) {
+
+            if (elemento.val() == undefined || elemento.val() == '') {
                 elemento.focus();
 
                 $("#texto_popup").text('Campo Vacio');
@@ -4743,169 +4816,193 @@ function checkFormDireccion( tipoDireccion )	{
                 console.log('--> returning false.'); // TEMP !!
 
                 console.log('-> El campo es false!! ----------------------------.'); // TEMP !!
-                
+
                 valor = false;
 
                 return false;
             }
-            
+
         }
-        
+
     });
-    
+
     return valor;
 }
 
-function checkFormRegUser()	{
-    
+function checkFormRegUser() {
+
     console.log('--> Checking user form');
-    
+
     $mail_1 = $('#input_email').val();
     $mail_2 = $('#input_repetir_email').val();
-    
-    if ( $mail_1 == undefined || $mail_1.localeCompare('') == 0 )	{
-        
+
+    if ($mail_1 == undefined || $mail_1.localeCompare('') == 0) {
+
         $('#input_email').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
-         console.log('------------------------------> $mail_1 false.'); // TEMP !!
-        
+
+        console.log('------------------------------> $mail_1 false.'); // TEMP !!
+
         return false;
-    }
-    else  if ( $mail_1.search("@") == -1)	{
-        
+    } else if ($mail_1.search("@") == -1) {
+
         $('#input_email').focus();
-        
+
         $("#texto_popup").text('Email incorrecto');
         $('#popupAlert').popup('open');
-        
+
         console.log('------------------------------> $mail_1 no @ false.'); // TEMP !!
-        
+
         return false;
     }
-    
-    if ( $mail_2 == undefined || $mail_2.localeCompare('') == 0 )	{
-        
+
+    if ($mail_2 == undefined || $mail_2.localeCompare('') == 0) {
+
         $('#input_repetir_email').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         console.log('------------------------------> $mail_2 false.'); // TEMP !!
-        
+
         return false;
-    }
-    else  if ( $mail_2.search("@") == -1)	{
-        
+    } else if ($mail_2.search("@") == -1) {
+
         $('#input_repetir_email').focus();
-        
+
         $("#texto_popup").text('Email incorrecto');
         $('#popupAlert').popup('open');
-        
+
         console.log('------------------------------> $mail_2 no @ false.'); // TEMP !!
-        
+
         return false;
     }
-    
+
     $compare = $mail_1.localeCompare($mail_2);
 
-    if ( $compare != 0 )	{
-        
+    if ($compare != 0) {
+
         $('#input_email').focus();
-        
+
         $("#texto_popup").text('Los campos de email no coinciden');
         $('#popupAlert').popup('open');
-        
+
         console.log('------------------------------> No coinciden false.'); // TEMP !!
-        
+
         return false;
     }
-    
-    
+
+
     $pass_1 = $('#input_pass').val();
     $pass_2 = $('#input_repetir_pass').val();
-    
-    if ( $pass_1 == undefined || $pass_1.localeCompare('') == 0 )	{
-        
+
+    if ($pass_1 == undefined || $pass_1.localeCompare('') == 0) {
+
         $('#input_pass').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         console.log('------------------------------> $pass_1 false.'); // TEMP !!
-        
+
         return false;
     }
-    
-    if ( $pass_2 == undefined || $pass_2.localeCompare('') == 0 )	{
-        
+
+    if ($pass_2 == undefined || $pass_2.localeCompare('') == 0) {
+
         $('#input_repetir_pass').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         console.log('------------------------------> $pass_2 false.'); // TEMP !!
-        
+
         return false;
     }
-    
+
     $compare = $pass_1.localeCompare($pass_2);
-    
-    if ( $compare != 0 )	{
-        
+
+    if ($compare != 0) {
+
         $('#input_pass').focus();
-        
+
         $("#texto_popup").text('Los campos de password no coinciden');
         $('#popupAlert').popup('open');
-        
+
         console.log('------------------------------> $pass no coinciden false.'); // TEMP !!
-        
+
         return false;
     }
-    
+
     $cp_user = $('#input_cp').val();
-    
-    if ( $cp_user == undefined || $cp_user.localeCompare('') == 0 )	{
-        
+
+    if ($cp_user == undefined || $cp_user.localeCompare('') == 0) {
+
         $('#input_cp').focus();
-        
+
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
-        
+
         console.log('------------------------------> $cp_user false.'); // TEMP !!
-        
+
         return false;
     }
-    
+
     return true;
 }
 
 function cargaDatosDeDirecciónEntregaAFacturacion() {
-    
+
     console.log('--> Cargando datos de direccion a facturacion'); // TEMP !!
+
+    $('#input_nombreUsuario_2').val($('#input_nombreUsuario').val()) // ----> Click and collect
+    $('#input_apellidos_2').val($('#input_apellidos').val());
+    $('#input_telefono_2').val($('#input_telefono').val());
+    $('#input_dni_cif_2').val($('#input_dni_cif').val());
+    $('#input_direccion_2').val($('#input_direccion').val());
+    $('#input_num_direccion_2').val($('#input_num_direccion').val()); // --> falta modificar el webservice login.php
+    $('#input_postal_2').val($('#input_postal').val());
+    $('#input_ciudad_2').val($('#input_ciudad').val());
+    $('#input_num_direccion_2').val($('#input_num_direccion').val());
+
+    /*$('#selectCountry_2 option').each(function () {
+        if (this.value == $('#selectCountry').val()) {
+            console.log('- Valor encontrado en selectCountry_2 marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
+            this.selected = true;
+        } else {
+            this.selected = false;
+        }
+    });*/
     
-    $('#input_nombreUsuario_2').val( $('#input_nombreUsuario').val() )            // ----> Click and collect
-    $('#input_apellidos_2').val( $('#input_apellidos').val() );
-    $('#input_telefono_2').val(  $('#input_telefono').val() );
-    $('#input_dni_cif_2').val( $('#input_dni_cif').val() );
-    $('#input_direccion_2').val(  $('#input_direccion').val() );
-    $('#input_num_direccion_2').val( $('#input_num_direccion').val() ); // --> falta modificar el webservice login.php
-    $('#input_postal_2').val( $('#input_postal').val() );
-    $('#input_ciudad_2').val( $('#input_ciudad').val() );
-    $('#input_num_direccion_2').val( $('#input_num_direccion').val() );
-    $('#input_pais_2').val( $('#input_pais').val() );
-    $('#input_provincia_2').val( $('#input_provincia').val() );
+    $('#selectCountry_2 > option[value="'+$("#selectCountry").val()+'"]').attr('selected', 'selected');
+    $( "#selectCountry_2").selectmenu('refresh', true);
+
+    //$('#input_pais_2').val( $('#input_pais').val() );
+
+    /*$('#selectProvince_2 option').each(function () {
+        if (this.value == $('#selectProvince').val()) {
+            console.log('- Valor encontrado en selectProvince_2 marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
+            this.selected = true;
+        } else {
+            this.selected = false;
+        }
+    });*/
     
+    $('#selectProvince_2 > option[value="'+$("#selectProvince").val()+'"]').attr('selected', 'selected');
+    $( "#selectProvince_2").selectmenu('refresh', true);
+
+    //$('#input_provincia_2').val( $('#input_provincia').val() );
+
 }
 
 function cargaDatosUsuarioAFormularioRegistro() {
-    
-    if ( $("#input_nombreUsuario").length > 0 ) {               // ----> Envio a domicilio
-        
+
+    if ($("#input_nombreUsuario").length > 0) { // ----> Envio a domicilio
+
         console.log('Cargando datos de usuario en Direccion entrega');
-        
+
         $('#input_nombreUsuario').val(INFO_USU.name)
         $('#input_apellidos').val(INFO_USU.surname);
         $('#input_telefono').val(INFO_USU.phone);
@@ -4915,15 +5012,40 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_postal').val(INFO_USU.postalCode);
         $('#input_ciudad').val(INFO_USU.city);
         $('#input_num_direccion').val(INFO_USU.addressNumber);
-        $('#input_pais').val(INFO_USU.country);
-        $('#input_provincia').val(INFO_USU.province);
+
+        /*$('#selectCountry option').each(function () {
+            if (this.value == INFO_USU.country) {
+                console.log('- Valor encontrado en selectCountry marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
+                this.selected = true;
+            } else {
+                this.selected = false;
+            }
+        });*/
         
-    }
-    else    {
+        $('#selectCountry > option[value="'+ INFO_USU.country +'"]').attr('selected', 'selected');
+        $( "#selectCountry").selectmenu('refresh', true);
+
+        //$('#input_pais').val(INFO_USU.country);
+
+        /*$('#selectProvince option').each(function () {
+            if (this.value == INFO_USU.province) {
+                console.log('- Valor encontrado en selectProvince marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
+                this.selected = true;
+            } else {
+                this.selected = false;
+            }
+        });*/
         
+        $('#selectProvince > option[value="'+ INFO_USU.province +'"]').attr('selected', 'selected');
+        $( "#selectProvince").selectmenu('refresh', true);
+
+        //$('#input_provincia').val(INFO_USU.province);
+
+    } else {
+
         console.log('Cargando datos de usuario en Direccion Facturación');
-        
-        $('#input_nombreUsuario_2').val(INFO_USU.name)            // ----> Click and collect
+
+        $('#input_nombreUsuario_2').val(INFO_USU.name) // ----> Click and collect
         $('#input_apellidos_2').val(INFO_USU.surname);
         $('#input_telefono_2').val(INFO_USU.phone);
         $('#input_dni_cif_2').val(INFO_USU.NIN);
@@ -4932,9 +5054,35 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_postal_2').val(INFO_USU.postalCode);
         $('#input_ciudad_2').val(INFO_USU.city);
         $('#input_num_direccion_2').val(INFO_USU.addressNumber);
-        $('#input_pais_2').val(INFO_USU.country);
-        $('#input_provincia_2').val(INFO_USU.province);
+
+        /*$('#selectCountry_2 option').each(function () {
+            if (this.value == INFO_USU.country) {
+                console.log('- Valor encontrado en selectCountry_2 marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
+                this.selected = true;
+            } else {
+                this.selected = false;
+            }
+        });*/
         
+        $('#selectCountry_2 > option[value="'+ INFO_USU.country +'"]').attr('selected', 'selected');
+        $( "#selectCountry_2").selectmenu('refresh', true);
+
+        //$('#selectCountry_2').val(INFO_USU.country);
+
+        /*$('#selectProvince_2 option').each(function () {
+            if (this.value == INFO_USU.province) {
+                console.log('- Valor encontrado en selectProvince_2 marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
+                this.selected = true;
+            } else {
+                this.selected = false;
+            }
+        });*/
+        
+        $('#selectProvince_2 > option[value="'+ INFO_USU.province +'"]').attr('selected', 'selected');
+        $( "#selectProvince_2").selectmenu('refresh', true);
+
+        //$('#input_provincia_2').val(INFO_USU.province);
+
     }
 }
 

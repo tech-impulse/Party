@@ -563,8 +563,10 @@ function registroUsuarioDomicilio(soloFacturacion) {   // underDev
         facNumber = $('#input_num_direccion_2').val();
         facPC = $('#input_postal_2').val();
         facCity = $('#input_ciudad_2').val();
-        facCountry = $('#input_pais_2').val();
-        facProvince = $('#input_provincia_2').val();
+        //facCountry = $('#input_pais_2').val();
+        facCountry = $('#selectCountry_2').val()
+        //facProvince = $('#input_provincia_2').val();
+        facProvince = $('#selectProvince_2').val();
     }
     else    {
         sendName = $('#input_nombreUsuario').val();
@@ -575,8 +577,11 @@ function registroUsuarioDomicilio(soloFacturacion) {   // underDev
         sendNumber = $('#input_num_direccion').val();
         sendPC = $('#input_postal').val();
         sendCity = $('#input_ciudad').val();
-        sendCountry = $('#input_pais').val();
-        sendProvince = $('#input_provincia').val();
+        //sendCountry = $('#input_pais').val();
+        sendCountry = $('#selectCountry').val()
+        //sendProvince = $('#input_provincia').val();
+        sendProvince = $('#selectProvince').val();
+        
 
         facName = ( $('#check_misma_direccion').prop('checked') ? sendName : $('#input_nombreUsuario_2').val() );
         facSurname = ( $('#check_misma_direccion').prop('checked') ? sendSurname : $('#input_apellidos_2').val() );
@@ -586,9 +591,13 @@ function registroUsuarioDomicilio(soloFacturacion) {   // underDev
         facNumber = ( $('#check_misma_direccion').prop('checked') ? sendNumber : $('#input_num_direccion_2').val() );
         facPC = ( $('#check_misma_direccion').prop('checked') ? sendPC : $('#input_postal_2').val() );
         facCity = ( $('#check_misma_direccion').prop('checked') ? sendCity : $('#input_ciudad_2').val() );
-        facCountry = ( $('#check_misma_direccion').prop('checked') ? sendCountry : $('#input_pais_2').val() );
-        facProvince = ( $('#check_misma_direccion').prop('checked') ? sendProvince : $('#input_provincia_2').val() );
-    }   
+        //facCountry = ( $('#check_misma_direccion').prop('checked') ? sendCountry : $('#input_pais_2').val() );
+        facCountry = ( $('#check_misma_direccion').prop('checked') ? sendCountry : $('#selectCountry_2').val() );
+        //facProvince = ( $('#check_misma_direccion').prop('checked') ? sendProvince : $('#input_provincia_2').val() );
+        facProvince = ( $('#check_misma_direccion').prop('checked') ? sendProvince : $('#selectProvince_2').val() );
+    }
+    
+    console.log('--> registroUsuarioDomicilio con sendCountry: '+ sendCountry +' sendProvince: ' + sendProvince +' facCountry: ' + facCountry + ' facProvince: ' + facProvince);    // TEMP !!
     
     if ( INFO_USU.id != undefined ) {   // El usuario se supone que ya esta registrado
         
