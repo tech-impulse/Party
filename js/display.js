@@ -4976,7 +4976,7 @@ function cargaDatosDeDirecciónEntregaAFacturacion() {
         }
     });*/
     
-    $('#selectCountry_2 > option[value="'+$("#selectCountry").val()+'"]').attr('selected', 'selected');
+    $('#selectCountry_2 option[value="'+$("#selectCountry").val()+'"]').attr('selected', 'selected');
     $( "#selectCountry_2").selectmenu('refresh', true);
 
     //$('#input_pais_2').val( $('#input_pais').val() );
@@ -4990,8 +4990,10 @@ function cargaDatosDeDirecciónEntregaAFacturacion() {
         }
     });*/
     
-    $('#selectProvince_2 > option[value="'+$("#selectProvince").val()+'"]').attr('selected', 'selected');
-    $( "#selectProvince_2").selectmenu('refresh', true);
+    //$('#selectProvince_2 option[value="'+$("#selectProvince").val()+'"]').attr('selected', 'selected');
+    //$( "#selectProvince_2").selectmenu('refresh', true);
+    
+    loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry_2").val(), 'selectProvince_2');
 
     //$('#input_provincia_2').val( $('#input_provincia').val() );
 
@@ -5022,7 +5024,7 @@ function cargaDatosUsuarioAFormularioRegistro() {
             }
         });*/
         
-        $('#selectCountry > option[value="'+ INFO_USU.country +'"]').attr('selected', 'selected');
+        $('#selectCountry option[value="'+ INFO_USU.country +'"]').attr('selected', 'selected');
         $( "#selectCountry").selectmenu('refresh', true);
 
         //$('#input_pais').val(INFO_USU.country);
@@ -5064,7 +5066,7 @@ function cargaDatosUsuarioAFormularioRegistro() {
             }
         });*/
         
-        $('#selectCountry_2 > option[value="'+ INFO_USU.country +'"]').attr('selected', 'selected');
+        $('#selectCountry_2 option[value="'+ INFO_USU.country +'"]').attr('selected', 'selected');
         $( "#selectCountry_2").selectmenu('refresh', true);
 
         //$('#selectCountry_2').val(INFO_USU.country);
@@ -5078,7 +5080,7 @@ function cargaDatosUsuarioAFormularioRegistro() {
             }
         });*/
         
-        $('#selectProvince_2 > option[value="'+ INFO_USU.province +'"]').attr('selected', 'selected');
+        $('#selectProvince_2 option[value="'+ INFO_USU.province +'"]').attr('selected', 'selected');
         $( "#selectProvince_2").selectmenu('refresh', true);
 
         //$('#input_provincia_2').val(INFO_USU.province);
