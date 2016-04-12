@@ -4994,6 +4994,9 @@ function cargaDatosDeDirecciónEntregaAFacturacion() {
     //$( "#selectProvince_2").selectmenu('refresh', true);
     
     loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry_2").val(), 'selectProvince_2');
+    
+    $('#selectProvince_2 option[value="'+$("#selectProvince").val()+'"]').attr('selected', 'selected');
+    $( "#selectProvince_2").selectmenu('refresh', true);
 
     //$('#input_provincia_2').val( $('#input_provincia').val() );
 
