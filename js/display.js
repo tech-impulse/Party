@@ -3959,7 +3959,7 @@ function sistemasPago() { //TEMP
             '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
             '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
             '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';*/
+            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
 
     }
 
