@@ -712,7 +712,6 @@ function addToCart(item, param) {
 
     var product;
     var foundInCart = 0;
-    //var i = "";
 
     for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
 

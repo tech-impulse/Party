@@ -1004,27 +1004,37 @@ function displayProducts(data, originNode, originName, param, param4) {
 
     } else if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "getProductsClassified") { // Hay resultados
 
-        //console.log("Entramos en la nueva visualizacion");
+        console.log("Entramos en la nueva visualizacion");
         console.log(data);
         AUX = 1;
 
         if (PRODUCTS.length > 0) { //se añadido este if para no duplicar productos en PRODUCTS
+            
+            console.log("Añadimos mas productos------------------- AAAAAAAAAAAAAAAAAAAAAAAAA ----------------------");
 
             for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+                
                 for (var d = 0; d < data.products[c].typeproducts.length; d++) {
+                    
                     añadirProductosArray(data.products[c].typeproducts[d]);
+                    
                 }
             }
 
         } else {
+            
+            console.log("VACIO ------------------- AAAAAAAAAAAAAAAAAAAAAAAAA ----------------------");
 
             for (var c = 0; c < data.products.length; c++) { //guardamos los productos
 
                 for (var d = 0; d < data.products[c].typeproducts.length; d++) {
+                    
                     data.products[c].typeproducts[d].original = true;
                     PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
                     PRODUCTS[d].original = true;
+                    
                 }
+                
             }
 
         }
@@ -1317,7 +1327,30 @@ function displayProducts(data, originNode, originName, param, param4) {
     } else if (data.result == 1 && pantallaActual == "Asistente disfraces" && param4 == "getProductsClassified") {
 
         //PRODUCTS = PRODUCTS.concat(data.products);
-        añadirProductosArray(data.products);
+        console.log("Productos");
+        console.log(data);
+        //añadirProductosArray(data.products);
+
+        if (PRODUCTS.length > 0) { //se añadido este if para no duplicar productos en PRODUCTS
+
+            for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+                
+                    añadirProductosArray(data.products[c]);
+                
+            }
+
+        } else {
+
+            for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+
+                data.products[c].original = true;
+                PRODUCTS = PRODUCTS.concat(data.products[c]);
+
+            }
+
+        }
+
+
         var htmlContent = '';
         var grid = '';
         var block = '';
@@ -1541,6 +1574,27 @@ function displayProducts(data, originNode, originName, param, param4) {
 
             $("#popupCargando").popup("close");
 
+            //mostrar los productos añadidos al carrito al cargar
+            if (CART.length > 0) {
+
+                for (var l = 0; l < data.products.length; l++) {
+
+                    var prod = data.products[l]; //recorremos todos los productos
+
+                    for (var n = 0; n < CART.length; n++) {
+
+                        if (parseInt(CART[n].id) == parseInt(prod.id)) {
+
+                            console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO");
+                            displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
+
+                        }
+
+                    }
+
+                }
+            }
+
             break;
 
 
@@ -1584,7 +1638,6 @@ function displayProducts(data, originNode, originName, param, param4) {
             for (var d = 0; d < data.products[c].typeproducts.length; d++) {
                 data.products[c].typeproducts[d].original = true;
                 PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
-                PRODUCTS[d].original = true;
             }
         }
 
@@ -1835,6 +1888,29 @@ function displayProducts(data, originNode, originName, param, param4) {
         $("#divContent").trigger('create');
 
         $("#popupCargando").popup("close");
+
+        //mostrar los productos añadidos al carrito al cargar
+        if (CART.length > 0) {
+
+            for (var l = 0; l < data.products.length; l++) {
+
+                for (var m = 0; m < data.products[l].typeproducts.length; m++) {
+
+                    var prod = data.products[l].typeproducts[m]; //recorremos todos los productos
+
+                    for (var n = 0; n < CART.length; n++) {
+
+                        if (parseInt(CART[n].id) == parseInt(prod.id)) {
+
+                            console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO");
+                            displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
+
+                        }
+
+                    }
+                }
+            }
+        }
 
 
 
@@ -3738,8 +3814,10 @@ function opcionesPago() { //TEMP
         opcionEnvio = 1;
         var html = '<div>' +
             '<center>' +
-            '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
-            '<h4>¿DONDE QUIERE ENVIAR SU PEDIDO?</h4>' +
+            //'<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
+            //'<h2>Todos los artículos están disponibles tanto en tienda como online</h2>' +
+            '<h2>TODOS LOS ARTICULOS ESTAN DISPONIBLES TANTO EN TIENDA COMO ONLINE</h2>' +
+            '<h4>¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
@@ -3757,7 +3835,8 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' + gastos de envio: 4.99€<br/>(gratuito a partir de 30€) = ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + '</label></div>' +
+                //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' + gastos de envio: 4.99€<br/>(gratuito a partir de 30€) = ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + '</label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + ' ( ' + CART.ammount + ' 4.99€ gastos de envio incluidos ) <br/> envio gratuito para compras superiores a 30€ </label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
@@ -3771,33 +3850,33 @@ function opcionesPago() { //TEMP
         opcionEnvio = 2;
         var html = '<div>' +
             '<center><div style="width: 600px;">' +
-            '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA Y ' + CART.productosEnWeb + ' ONLINE</h2>' +
-            '<h4>¿QUE QUIERES HACER?</h4>' +
+            '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA<br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
+            '<h4>¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosWeb + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + (CART.ammount + 4.99) + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE (TODO EL PEDIDO)</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€") + '<br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + '<br> gastos de envio incluidos (4.99€) <br/>(' + (CART.length) + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.ammount + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + (CART.precioTotalProductosWeb + 4.99) + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.ammount - CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br/>(' + CART.length + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(( CART.precioTotalProductosWeb + 4.99), 2, ",", ".", "€") + '<br> gastos de envio incluidos (4.99€) <br/>(' + CART.length + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -3810,7 +3889,7 @@ function opcionesPago() { //TEMP
         var html = '<div>' +
             '<center>' +
             '<h2>NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
-            '<h4>¿QUE QUIERES HACER?</h4>' +
+            '<h4>¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosWeb + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
@@ -3847,23 +3926,23 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
     pantallaActual = "opciones envio";
 
+    console.log("Estamos en la opcion " + casoEnvio + "-----------------------------------------");
+
     $("#divBack").html('<div onclick="opcionesPago();"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de pago</label></div></div></div>');
 
     switch (casoEnvio) {
     case 1:
         var html = '<div>' +
             '<center>' +
-            '<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
-            '<h4>¿QUE QUIERES HACER?</h4>' +
+            '<h2>TODOS LOS ARTICULOS ESTAN DISPONIBLES TANTO EN TIENDA COMO ONLINE</h2>' +
+            '<h4>¿QUE QUIERE HACER?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-
             // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-
             '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: ' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
 
             '</div>' +
@@ -3876,15 +3955,15 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
     case 2:
         var html = '<div>' +
             '<center>' +
-            '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA Y ' + CART.productosEnWeb + ' ONLINE</h2>' +
-            '<h4>¿QUE QUIERES HACER?</h4>' +
+            '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA <br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
+            '<h4>¿QUE QUIERE HACER?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + ( cesta + 4,99€ de gastos de envio )<br>( envio gratuito a partir de 75€ )</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm()" data-role="button" data-theme="b" >' +
@@ -3894,7 +3973,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
             //'<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + ( cesta + 4,99€ de gastos de envio )<br>( gratuito a partir de 30€ )</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -3911,85 +3990,6 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
 
 function sistemasPago() { //TEMP
-
-    /*console.log('--> sistemasPago');
-
-    pantallaActual = "sistemas pago";
-
-    $("#divBack").html('<div onclick="opcionesEnvio(' + opcionEnvio + ')"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de envio</label></div></div></div>');
-
-    //inicializamos el boton
-    var paypal = '<form method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
-        '<input type="hidden" name="currency_code" value="EUR">' +
-        '<input type="hidden" name="lc" value="ES">' +
-        '<input type="hidden" name="return" value="https://partyfiesta.youtter.com/app/alb/">' +
-        '<input type="hidden" name="cancel_return" value="https://partyfiesta.youtter.com/app/alb/">' +
-        '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
-
-    var add = '';
-
-    for (var i = 0; i < CART.length; i++) {
-
-        if (parseInt(CART.length) == 1) {
-
-            add = '<input type="hidden" name="add" value="1">';
-            paypal +=
-            '<input type="hidden" name="cmd" value="_cart">' + add +
-            '<input type="hidden" name="item_name" value="' + CART[i].name + '">' +
-            '<input type="hidden" name="item_number" value="' + parseInt(CART[i].sku) + '">' +
-            //'<input type="hidden" name="amount" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-            '<input type="hidden" name="amount" value="0.25">' +
-            '<input type="hidden" name="quantity" value="' + parseInt(CART[i].quantity) + '">';
-
-        } else {
-
-            add = '<input type="hidden" name="upload" value="1">';
-            paypal +=
-            '<input type="hidden" name="cmd" value="_cart">' + add +
-            '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
-            '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
-            //'<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-            '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
-            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
-
-        }
-
-        /*paypal +=
-            '<input type="hidden" name="cmd" value="_cart">' + add +
-            '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
-            '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
-            '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
-
-    }
-
-    paypal +=
-        '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
-        '</form>';
-
-    console.log("PAYPALLLLLLLLLL");
-    console.log(paypal);
-
-    var html = '<div>' +
-        '<center>' +
-        '<h2>OPCIONES DE PAGO</h2>' +
-        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-solo">' +
-        '<div class="ui-block-a"><label>CAJA</label></div>' +
-        '</div>' +
-        '</a>' +
-        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-solo">' +
-        '<div class="ui-block-a"><label>TARJETA</label></div>' +
-        '</div>' +
-        '</a>' +
-        '<br>' + paypal +
-        '<br>' +
-        '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
-        '</center>';
-
-    $("#divContent").html(html);
-    $("#divContent").trigger('create');*/
 
     console.log('--> sistemasPago');
 
@@ -4975,9 +4975,9 @@ function cargaDatosDeDirecciónEntregaAFacturacion() {
             this.selected = false;
         }
     });*/
-    
-    $('#selectCountry_2 option[value="'+$("#selectCountry").val()+'"]').attr('selected', 'selected');
-    $( "#selectCountry_2").selectmenu('refresh', true);
+
+    $('#selectCountry_2 option[value="' + $("#selectCountry").val() + '"]').attr('selected', 'selected');
+    $("#selectCountry_2").selectmenu('refresh', true);
 
     //$('#input_pais_2').val( $('#input_pais').val() );
 
@@ -4989,14 +4989,14 @@ function cargaDatosDeDirecciónEntregaAFacturacion() {
             this.selected = false;
         }
     });*/
-    
+
     //$('#selectProvince_2 option[value="'+$("#selectProvince").val()+'"]').attr('selected', 'selected');
     //$( "#selectProvince_2").selectmenu('refresh', true);
-    
+
     loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry_2").val(), 'selectProvince_2');
-    
-    $('#selectProvince_2 option[value="'+$("#selectProvince").val()+'"]').attr('selected', 'selected');
-    $( "#selectProvince_2").selectmenu('refresh', true);
+
+    $('#selectProvince_2 option[value="' + $("#selectProvince").val() + '"]').attr('selected', 'selected');
+    $("#selectProvince_2").selectmenu('refresh', true);
 
     //$('#input_provincia_2').val( $('#input_provincia').val() );
 
@@ -5026,9 +5026,9 @@ function cargaDatosUsuarioAFormularioRegistro() {
                 this.selected = false;
             }
         });*/
-        
-        $('#selectCountry option[value="'+ INFO_USU.country +'"]').attr('selected', 'selected');
-        $( "#selectCountry").selectmenu('refresh', true);
+
+        $('#selectCountry option[value="' + INFO_USU.country + '"]').attr('selected', 'selected');
+        $("#selectCountry").selectmenu('refresh', true);
 
         //$('#input_pais').val(INFO_USU.country);
 
@@ -5040,9 +5040,9 @@ function cargaDatosUsuarioAFormularioRegistro() {
                 this.selected = false;
             }
         });*/
-        
-        $('#selectProvince > option[value="'+ INFO_USU.province +'"]').attr('selected', 'selected');
-        $( "#selectProvince").selectmenu('refresh', true);
+
+        $('#selectProvince > option[value="' + INFO_USU.province + '"]').attr('selected', 'selected');
+        $("#selectProvince").selectmenu('refresh', true);
 
         //$('#input_provincia').val(INFO_USU.province);
 
@@ -5068,9 +5068,9 @@ function cargaDatosUsuarioAFormularioRegistro() {
                 this.selected = false;
             }
         });*/
-        
-        $('#selectCountry_2 option[value="'+ INFO_USU.country +'"]').attr('selected', 'selected');
-        $( "#selectCountry_2").selectmenu('refresh', true);
+
+        $('#selectCountry_2 option[value="' + INFO_USU.country + '"]').attr('selected', 'selected');
+        $("#selectCountry_2").selectmenu('refresh', true);
 
         //$('#selectCountry_2').val(INFO_USU.country);
 
@@ -5082,9 +5082,9 @@ function cargaDatosUsuarioAFormularioRegistro() {
                 this.selected = false;
             }
         });*/
-        
-        $('#selectProvince_2 option[value="'+ INFO_USU.province +'"]').attr('selected', 'selected');
-        $( "#selectProvince_2").selectmenu('refresh', true);
+
+        $('#selectProvince_2 option[value="' + INFO_USU.province + '"]').attr('selected', 'selected');
+        $("#selectProvince_2").selectmenu('refresh', true);
 
         //$('#input_provincia_2').val(INFO_USU.province);
 
@@ -5119,4 +5119,3 @@ function pagarEnCaja() {
     $("#divContent").html(html);
     $("#divContent").trigger('create');
 }
-
