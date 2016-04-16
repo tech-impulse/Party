@@ -1059,7 +1059,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
         if (pantallaActual == "Asistente disfraces") {
             //console.log("Estamos en la pantalla " + pantallaActual);
-        } else if (pantallaActual == "Asistente fiestas") {
+        } else if (pantallaActual == "Asistente fiestas" && (num_personas_fiesta == "" || num_personas_fiesta == undefined )) {
             //console.log("Estamos en la pantalla " + pantallaActual);
             num_personas_fiesta = $("#personas_fiesta").val();
         }
@@ -1657,13 +1657,6 @@ function displayProducts(data, originNode, originName, param, param4) {
 
         updateBackButton(originNode, originName);
 
-
-        if (pantallaActual == "Asistente disfraces") {
-            //console.log("Estamos en la pantalla " + pantallaActual);
-        } else if (pantallaActual == "Asistente fiestas") {
-            //console.log("Estamos en la pantalla " + pantallaActual);
-            num_personas_fiesta = $("#personas_fiesta").val();
-        }
 
         var aux = {};
         aux = data.products;
