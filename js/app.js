@@ -379,21 +379,22 @@ $(document).ready(function () {
         switch (action) {
         case "deleteItem":
 
-
-
             var id = $("#lbpopupAction").data('id');
             console.log("Clicamos en si y eliminamos id " + id);
-
-            for (var i = 0; i < CART.length; i++) {
+            var i = 0;
+            for (i = 0; i < CART.length; i++) {
                 console.log("ID cart " + CART[i].id + " id pasada " + id);
                 if (parseInt(CART[i].id) == parseInt(id)) {
                     console.log("Encontrado el elemnto a restar del ammount");
                     CART.ammount = CART.ammount - (CART[i].price_x_region[0].totalPrice * CART[i].quantity);
+                    break;
                 }
 
             }
 
             $("#spBtnPopupCartAmmount").text(formatoNumero(CART.ammount, 2, ",", ".", "€"));
+
+            updateVariblesTiposDeProducto(CART[i], false); // TEMP !! actulizamos variables.
 
             setTimeout(function () {
                 deleteItemCart($("#lbpopupAction").val());
@@ -734,13 +735,13 @@ function addToCart(item, param) {
 
                     console.log('PRODUCTS[i][id] == item --> foundInCart = 1'); // TEMP !!
 
-                    updateVariblesTiposDeProducto(product, (param > 0 ? true : false)); // TEMP !! actulizamos variables.
-
                     var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
                     $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
 
                     displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
+                    
+                    updateVariblesTiposDeProducto(product, (param > 0 ? true : false),foundInCart); // TEMP !! actulizamos variables.
 
                     if (CART[j].quantity == 0) // TEMP !!
                         deleteItemCart(j);
@@ -753,7 +754,7 @@ function addToCart(item, param) {
         } //if
     } //for
 
-
+    //producto nuevo
     if (foundInCart == 0) { // --> develop deluxe !! -----------------------
         // console.log('---> NO SE ENCONTRO PRODUCTO --> foundInCart: ' + foundInCart); // TEMP !!
 
@@ -792,7 +793,6 @@ function addToCart(item, param) {
 
         console.log('(foundInCart == 0)'); // TEMP !!
 
-        //updateVariblesTiposDeProducto( product, true );
         updateVariblesTiposDeProducto(product, (param > 0 ? true : false)); // TEMP !! actulizamos variables.
 
         //var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);

@@ -454,9 +454,9 @@ function updateOpcionCompraProducto() { // dev 29-03-2016
  *
  *   param: nuevoProducto --> boolean ( true: si se añade un nuevo producto al carrito | false: si se quita del carrito)
  */
-function updateVariblesTiposDeProducto(product, nuevoProducto) {
+function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
-    console.log('-> Recalculamos VariblesTiposDeProducto con:');
+    /*console.log('-> Recalculamos VariblesTiposDeProducto con:');
     console.log('-> Producto stoc en tienda: ' + product.stock_x_store);
     console.log('-> Producto stoc en web: ' + product.stock_x_central_store);
 
@@ -465,64 +465,164 @@ function updateVariblesTiposDeProducto(product, nuevoProducto) {
     console.log('-> CART.productosEnWeb: ' + CART.productosEnWeb);
     console.log('-> CART.productosSoloEnWeb: ' + CART.productosSoloEnWeb);
 
-    console.log('\n-> Los nuevos valores son:\n');
+    console.log('\n-> Los nuevos valores son:\n');*/
 
     if (nuevoProducto) {
+
+        console.log("Nuevo prod " + nuevoProducto);
 
         if (product.stock_x_store > 0) {
 
             console.log("Entramos para poner mas productos de tienda");
 
-            CART.productosEnTienda++;
+            if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-            CART.precioTotalProductosTienda += product.quantity * product.price_x_region[0].totalPrice;
+                CART.precioTotalProductosTienda += parseFloat(product.price_x_region[0].totalPrice);
 
-            if (product.stock_x_central_store <= 0) {
-                CART.productosSoloEnTienda++;
-                CART.precioTotalProductosSoloTienda += product.quantity * product.price_x_region[0].totalPrice;
+            } else { //nuevo articulo en tienda
+
+                CART.productosEnTienda++;
+                CART.precioTotalProductosTienda += parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+
+            }
+
+            if (product.stock_x_central_store <= 0) { //no esta en el almacen pero si en tienda
+
+                if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
+
+                    CART.precioTotalProductosSoloTienda += parseFloat(product.price_x_region[0].totalPrice);
+
+                } else { //nuevo articulo solo disponible en tienda
+
+                    CART.productosSoloEnTienda++;
+                    CART.precioTotalProductosSoloTienda += parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+
+                }
             }
 
         }
-        if (product.stock_x_central_store > 0 && product.stock_x_store == 0) {
 
-            CART.productosEnWeb++;
+        if (product.stock_x_central_store > 0 && product.stock_x_store == 0) { //producto no disponible en tienda pero si en el almacen
 
-            CART.precioTotalProductosWeb += product.quantity * product.price_x_region[0].totalPrice;
+
+            if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
+
+                CART.precioTotalProductosWeb += parseFloat(product.price_x_region[0].totalPrice);
+
+            } else { //nuevo articulo en web 
+
+                CART.productosEnWeb++;
+                CART.precioTotalProductosWeb += parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+
+            }
 
             if (product.stock_x_store <= 0) {
-                CART.productosSoloEnWeb++;
 
-                CART.precioTotalProductosSoloWeb += product.quantity * product.price_x_region[0].totalPrice;
+                if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
+
+                    CART.precioTotalProductosSoloWeb += parseFloat(product.price_x_region[0].totalPrice);
+
+                } else { //nuevo articulo solo disponible en tienda
+
+                    CART.productosSoloEnWeb++;
+                    CART.precioTotalProductosSoloWeb += parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+
+                }
             }
         }
 
     } else {
+
+        console.log("Quitamos productos");
+        console.log(product);
+
         if (product.stock_x_store > 0) {
 
-            CART.productosEnTienda--;
+            if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-            CART.precioTotalProductosTienda -= product.quantity * product.price_x_region[0].totalPrice;
+                CART.precioTotalProductosTienda -= parseFloat(product.price_x_region[0].totalPrice);
 
-            if (product.stock_x_central_store <= 0) {
-                CART.productosSoloEnTienda--;
+                if (parseInt(product.quantity) == 0) {
+                    CART.productosEnTienda--;
+                } else {
 
-                CART.precioTotalProductosSoloTienda -= product.quantity * product.price_x_region[0].totalPrice;
+                }
+
+
+            } else { //lo borramos del todo
+
+                CART.productosEnTienda--;
+                CART.precioTotalProductosTienda -= parseFloat(product.price_x_region[0].totalPrice);
+
+            }
+
+            if (product.stock_x_central_store <= 0) { //no esta disponible en almacen si en almacen
+
+
+                if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
+
+                    CART.precioTotalProductosSoloTienda -= parseFloat(product.price_x_region[0].totalPrice);
+
+                    if (parseInt(product.quantity) == 0) {
+                        CART.productosSoloEnTienda--;
+                    } else {
+
+                    }
+
+
+                } else { //lo borramos del todo
+
+                    CART.productosSoloEnTienda--;
+                    CART.precioTotalProductosSoloTienda -= parseFloat(product.price_x_region[0].totalPrice);
+
+                }
             }
 
             //productAlter.price_x_region[0].totalPrice
         }
         if (product.stock_x_central_store > 0 && product.stock_x_store == 0) {
 
-            CART.productosEnWeb--;
+            if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-            CART.precioTotalProductosWeb -= product.quantity * product.price_x_region[0].totalPrice;
+                CART.precioTotalProductosWeb -= parseFloat(product.price_x_region[0].totalPrice);
 
-            if (product.stock_x_store <= 0) {
-                CART.productosSoloEnWeb--;
+                if (parseInt(product.quantity) == 0) {
+                    CART.productosEnWeb--;
+                } else {
 
-                CART.precioTotalProductosSoloWeb -= product.quantity * product.price_x_region[0].totalPrice;
+                }
+
+
+            } else { //lo borramos del todo
+
+                CART.productosEnWeb--;
+                CART.precioTotalProductosWeb -= parseFloat(product.price_x_region[0].totalPrice);
+
+            }
+
+            if (product.stock_x_store <= 0) { //solo disponible en almacen
+
+                if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
+
+                    CART.precioTotalProductosSoloWeb -= parseFloat(product.price_x_region[0].totalPrice);
+
+                    if (parseInt(product.quantity) == 0) {
+                        CART.productosSoloEnWeb--;
+                    } else {
+
+                    }
+
+
+                } else { //lo borramos del todo
+
+                    CART.productosSoloEnWeb--;
+                    CART.precioTotalProductosSoloWeb -= parseFloat(product.price_x_region[0].totalPrice);
+
+                }
             }
         }
+
+
     }
 
     console.log('-> CART.productosEnTienda: ' + CART.productosEnTienda);
@@ -867,7 +967,7 @@ function añadirProductosArray(data) {
     }
 
     if (encotrado == false) {
-        console.log("No esta en la lista de productos lo añadimos");
+        //console.log("No esta en la lista de productos lo añadimos");
         data.original = true;
         console.log(data);
         PRODUCTS = PRODUCTS.concat(data);

@@ -629,6 +629,7 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
 function updatePrecioTotalArticulo() {
 
     for (var i = 0; i < CART.length; i++) {
+        
         var precioArticulo = parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice);
 
         //console.log('-> ACTUALIZANDO precio de procId: ' + CART[i].id + ' a precio por unidad: ' + parseFloat(CART[i].price_x_region[0].totalPrice));
