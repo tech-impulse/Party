@@ -1,6 +1,6 @@
 function translateButtons(idioma) {
 
-    console.log("Cambiamos el idioma " + idioma);
+    //console.log("Cambiamos el idioma " + idioma);
     //$("#popupIdiomas").popup("close");
 
     switch (idioma) {

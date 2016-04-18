@@ -8,7 +8,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
     //console.log("DisplayNode-> Nodes es " + data.result + " link " + linkImg);
 
-    console.log("Cargamos nuevos los nodos");
+    console.log("Entramos al displayNode. Cargamos nuevos nodos");
     console.log(data);
 
     var len = data.nodes.length;
@@ -76,7 +76,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
             nodeIds = [];
             nodeImg = [];
         } else {
-            console.log("Nodo origen " + originNode + " nombre " + originName + " link " + linkImg + "--------------------------------------------");
+            console.log("Nodo origen " + originNode + " nombre " + originName + "******************");
             updateBackButton(originNode, originName, linkImg);
         }
 
@@ -629,7 +629,7 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
 function updatePrecioTotalArticulo() {
 
     for (var i = 0; i < CART.length; i++) {
-        
+
         var precioArticulo = parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice);
 
         //console.log('-> ACTUALIZANDO precio de procId: ' + CART[i].id + ' a precio por unidad: ' + parseFloat(CART[i].price_x_region[0].totalPrice));
@@ -687,7 +687,7 @@ function updateCarritoDisplay() {
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
 
-        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        //console.log("--> CAMBIO de imagen!!"); // TEMP !! log
         $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
     }
 }
@@ -927,7 +927,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             // calculo del numero de articulos por producto
             for (var k = 0; k < data.products.length; k++) {
 
-                console.log("Calculamos los articulos para el carrito------------------------------------------------");
+                //console.log("Calculamos los articulos para el carrito------------------------------------------------");
                 aux = 0;
                 var count = data.products[k].caracteristics.length;
                 var caracteristicas = data.products[k].caracteristics;
@@ -939,18 +939,18 @@ function displayProducts(data, originNode, originName, param, param4) {
                         var num_uni = caracteristicas[j].name;
                         var units = num_uni.split(' ');
 
-                        console.log("Encontrada car. Unidades es " + units[0]);
+                        //console.log("Encontrada car. Unidades es " + units[0]);
 
                         if (parseInt(units[0]) >= parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) { //el articulo tiene suficientes para el grupo
 
-                            console.log("Unidades es1 " + units[0] + " se añade 1");
+                            //console.log("Unidades es1 " + units[0] + " se añade 1");
                             addToCart(data.products[k].id, 1);
                             aux = 1;
 
                         } else if (parseInt(units[0]) < parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) {
 
                             addToCart(data.products[k].id, Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
-                            console.log("Math " + Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
+                            //console.log("Math " + Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0])));
                             aux = 1;
 
                         } else { //mas personas que unidades del articulo
@@ -964,7 +964,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
                 }
 
-                console.log("Aux es " + aux); // si es cerno no tiene unidades pondremos que es uno
+                //console.log("Aux es " + aux); // si es cerno no tiene unidades pondremos que es uno
 
                 if (aux == 0 && data.products[k].name != "" && data.products[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
                     addToCart(data.products[k].id, 1);
@@ -1005,37 +1005,34 @@ function displayProducts(data, originNode, originName, param, param4) {
 
     } else if (data.result == 1 && pantallaActual == "Asistente fiestas" && param4 == "getProductsClassified") { // Hay resultados
 
-        console.log("Entramos en la nueva visualizacion");
+        console.log("Cargamos la pantalla de productos");
         console.log(data);
         AUX = 1;
 
         if (PRODUCTS.length > 0) { //se añadido este if para no duplicar productos en PRODUCTS
-            
-            console.log("Añadimos mas productos------------------- AAAAAAAAAAAAAAAAAAAAAAAAA ----------------------");
+
 
             for (var c = 0; c < data.products.length; c++) { //guardamos los productos
-                
+
                 for (var d = 0; d < data.products[c].typeproducts.length; d++) {
-                    
+
                     añadirProductosArray(data.products[c].typeproducts[d]);
-                    
+
                 }
             }
 
         } else {
-            
-            console.log("VACIO ------------------- AAAAAAAAAAAAAAAAAAAAAAAAA ----------------------");
 
             for (var c = 0; c < data.products.length; c++) { //guardamos los productos
 
                 for (var d = 0; d < data.products[c].typeproducts.length; d++) {
-                    
+
                     data.products[c].typeproducts[d].original = true;
                     PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
                     PRODUCTS[d].original = true;
-                    
+
                 }
-                
+
             }
 
         }
@@ -1059,7 +1056,7 @@ function displayProducts(data, originNode, originName, param, param4) {
 
         if (pantallaActual == "Asistente disfraces") {
             //console.log("Estamos en la pantalla " + pantallaActual);
-        } else if (pantallaActual == "Asistente fiestas" && (num_personas_fiesta == "" || num_personas_fiesta == undefined )) {
+        } else if (pantallaActual == "Asistente fiestas" && (num_personas_fiesta == "" || num_personas_fiesta == undefined)) {
             //console.log("Estamos en la pantalla " + pantallaActual);
             num_personas_fiesta = $("#personas_fiesta").val();
         }
@@ -1335,9 +1332,9 @@ function displayProducts(data, originNode, originName, param, param4) {
         if (PRODUCTS.length > 0) { //se añadido este if para no duplicar productos en PRODUCTS
 
             for (var c = 0; c < data.products.length; c++) { //guardamos los productos
-                
-                    añadirProductosArray(data.products[c]);
-                
+
+                añadirProductosArray(data.products[c]);
+
             }
 
         } else {
@@ -2556,7 +2553,7 @@ function displayAlternativeProducts(idnode, idproduct, cantidad) {
 
     var carrusel = "";
 
-    console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+    //console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
 
     if (productList != null) {
 
@@ -3469,7 +3466,7 @@ function displayPopUpPantallaSugerencias() {
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
 
-        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        //console.log("--> CAMBIO de imagen!!"); // TEMP !! log
         $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
     }
 
@@ -3581,7 +3578,7 @@ function displayPantallaSugerencias() {
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
 
-        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        //console.log("--> CAMBIO de imagen!!"); // TEMP !! log
         $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
     }
 
@@ -3792,7 +3789,6 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 function opcionesPago() { //TEMP
 
     $("#btn_finalizarpedido").addClass("btn_disabled");
-    //$("#car_compra").addClass("btn_disabled");
 
     $("#popupListItems").popup("close");
 
@@ -3800,16 +3796,11 @@ function opcionesPago() { //TEMP
 
     updateBackButton(999999, "Opciones de pago", "productos"); //si enviamos productos se cargan los productos del nodo
 
-    //$("#divBack").html('<div onclick="backPage(' + nodeIds[nodeIds.length - 2] + ', \'' + nodeNames[nodeNames.length - 2] + '\', \'' + nodeImg[nodeImg.length - 2] + '\');$(\'#car_compra\').removeClass(\'btn_disabled\');"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">' + nodeNames[nodeNames.length - 2] + '</label></div></div></div>');
-
-    //switch (casoPago) {
     switch (opcionCompraProductos) {
     case 1:
         opcionEnvio = 1;
         var html = '<div>' +
             '<center>' +
-            //'<h2>Todos los artículos selecionados en tu cesta están en tienda y online</h2>' +
-            //'<h2>Todos los artículos están disponibles tanto en tienda como online</h2>' +
             '<h2>TODOS LOS ARTICULOS ESTAN DISPONIBLES TANTO EN TIENDA COMO ONLINE</h2>' +
             '<h4>¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
             '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
@@ -3829,8 +3820,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' + gastos de envio: 4.99€<br/>(gratuito a partir de 30€) = ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + '</label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + ' ( ' + CART.ammount + ' 4.99€ gastos de envio incluidos ) <br/> envio gratuito para compras superiores a 30€ </label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + 4.99€ gastos de envio incluidos <br/>Envio gratuito para compras superiores a 30€</label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
@@ -3855,22 +3845,22 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br/>(' + CART.productosEnTienda + ' productos disponibles)</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + (CART.ammount + 4.99) + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.ammount + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE (TODO EL PEDIDO)</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + '<br> gastos de envio incluidos (4.99€) <br/>(' + (CART.length) + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero((CART.ammount + 4.99), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + 4.99€ gastos de envio  <br/> ' + (CART.length) + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + (CART.precioTotalProductosWeb + 4.99) + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosWeb + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(( CART.precioTotalProductosWeb + 4.99), 2, ",", ".", "€") + '<br> gastos de envio incluidos (4.99€) <br/>(' + CART.length + ' productos disponibles)</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero((CART.precioTotalProductosWeb + 4.99), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€") + ' cesta + 4.99€ gastos de envio <br/>' + CART.length + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -3937,7 +3927,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
             // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: ' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' + gastos de envio (4,99€)<br>(gratuito a partir de 30€ con entrega en tienda o<br> a partir de 75€ con entrega a domicilio)</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero((totalCesta + 4.99), 2, ",", ".", "€") + '</strong><br> ' + formatoNumero(totalCesta, 2, ",", ".", "€") + 'cesta + 4,99€ gastos de envio <br>Envio gratuito a partir de 75€</label></div>' +
 
             '</div>' +
             '</a>' +
@@ -3957,7 +3947,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + ( cesta + 4,99€ de gastos de envio )<br>( envio gratuito a partir de 75€ )</label></div>' +
+            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero((totalCesta+4.99), 2, ",", ".", "€") + '</strong><br>' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' cesta + 4,99€ de gastos de envio <br>Envio gratuito a partir de 75€</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm()" data-role="button" data-theme="b" >' +
@@ -3967,7 +3957,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
             //'<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong> + ( cesta + 4,99€ de gastos de envio )<br>( gratuito a partir de 30€ )</label></div>' +
+            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero((totalCesta+4.99), 2, ",", ".", "€") + '</strong><br>' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' cesta + 4,99€ de gastos de envio <br>Envio gratuito a partir de 30€</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +

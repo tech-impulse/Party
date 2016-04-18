@@ -709,26 +709,21 @@ function carrito(id_producto, operacion, precio) {
 
 function addToCart(item, param) {
 
-    console.log('-------------> addToCart con item:' + item + ' param: ' + param); // TEMP !!
+    console.log('AddToCart con item:' + item + ' param: ' + param); // TEMP !!
 
     var product;
     var foundInCart = 0;
 
     for (var i = 0; i < PRODUCTS.length; i++) { //cogemos los datos del producto con el id que tenemos
 
-        //console.log('-> LISTA DE PRODUCTOS comparamos id: ' + PRODUCTS[i]['id'] + ' con item: ' + item); // TEMP !!
-
         if (PRODUCTS[i]['id'] == item) { //si coinciden lo añadimos al carrito
 
-            //console.log("-->ENCONTRADO EN LISTA DE PRODUCTOS " + PRODUCTS[i]['id'] + " es igual a " + item);
             product = PRODUCTS[i];
-            //i = PRODUCTS.length;
 
             for (var j = 0; j < CART.length; j++) {
-                //console.log('-> CARRITO comparamos id: ' + CART[j]['id'] + ' con item: ' + item); // TEMP !!
 
                 if (CART[j]['id'] == item) {
-                    //console.log("->ENCONTRADO EN CARRITO " + CART[j]['id'] + " es igual a " + item);
+
                     foundInCart = 1;
                     CART[j].quantity = CART[j].quantity + parseInt(param);
                     CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
@@ -741,12 +736,11 @@ function addToCart(item, param) {
 
                     displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
                     
-                    updateVariblesTiposDeProducto(product, (param > 0 ? true : false),foundInCart); // TEMP !! actulizamos variables.
+                    updateVariblesTiposDeProducto(product, (param > 0 ? true : false),foundInCart); //actulizamos variables del carrito para el pago.
 
                     if (CART[j].quantity == 0) // TEMP !!
                         deleteItemCart(j);
 
-                    //j = PRODUCTS.length;
                     break;
 
                 } //if
@@ -756,7 +750,6 @@ function addToCart(item, param) {
 
     //producto nuevo
     if (foundInCart == 0) { // --> develop deluxe !! -----------------------
-        // console.log('---> NO SE ENCONTRO PRODUCTO --> foundInCart: ' + foundInCart); // TEMP !!
 
         if (CART.ammount == undefined) {
 
@@ -775,9 +768,6 @@ function addToCart(item, param) {
             PRODUCTS.ammount = 0;
         }
 
-        console.log("Product--------------------------------------------------------------------------------");
-        console.log(product);
-
         if (parseInt(param) > 1) {
             product.quantity = parseInt(param);
         } else {
@@ -791,15 +781,7 @@ function addToCart(item, param) {
 
         CART.push(product);
 
-        console.log('(foundInCart == 0)'); // TEMP !!
-
         updateVariblesTiposDeProducto(product, (param > 0 ? true : false)); // TEMP !! actulizamos variables.
-
-        //var precioArticulo = parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
-
-        //console.log($("#labelPrecioTotalProducto" + product.id));
-        //$("#labelPrecioTotalProducto" + product.id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
-        //$("#labelPrecioTotalProducto" + product.id).show();
 
         displayItemOperations(item, product.quantity);
     }

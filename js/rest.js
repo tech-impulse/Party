@@ -238,7 +238,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
 
-        console.log("--> CAMBIO de imagen!!"); // TEMP !! log
+        //console.log("--> CAMBIO de imagen!!"); // TEMP !! log
         $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
     }
 
@@ -976,9 +976,6 @@ function restOk_tiendas(res, typ, param, param2) {
     }
 
     html = html + '</select></div>';
-
-    console.log("--> Añadimos: " + html); // TEMP !!
-
 
     $("#div_select_tienda").html(html);
 
@@ -2210,4 +2207,92 @@ function getProvincesFromCountry(idCountry) {
             }
         },
     });
+}
+
+function sendBasket() { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+
+    // Datos que se van a enviar
+    var dataSend = {
+        product: CART
+    };
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'sendBasket.php',
+        dataType: 'json',
+        async: false,
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            console.log("Datos alternativos");
+            console.log(response);
+
+            PRODUCTS_ALTER = response.alternativeProducts;
+
+            displayAlternativeProducts(idnode, idproduct, cantidad);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                //console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                //console.log("Sin conexion");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
+}
+
+function getSendPrice() { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+
+    // Datos que se van a enviar
+    var dataSend = {
+        product: CART
+    };
+
+    request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'sendBasket.php',
+        dataType: 'json',
+        async: false,
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            console.log("Datos alternativos");
+            console.log(response);
+
+            PRODUCTS_ALTER = response.alternativeProducts;
+
+            displayAlternativeProducts(idnode, idproduct, cantidad);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                //console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                //console.log("Sin conexion");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+
 }
