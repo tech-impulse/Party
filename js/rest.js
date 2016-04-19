@@ -2253,28 +2253,32 @@ function sendBasket() { //esta funcion nos devuelve la info de un nodo pasandole
 
 }
 
-function getSendPrice() { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+
+/*Esta funcion sirve para obtener el precio de envio. La respuesta es -1 faltan parametros y si es -2 no llegamos al precio min de envio*/
+function getSendPrice() { 
 
     // Datos que se van a enviar
     var dataSend = {
-        product: CART
+        totalPrice: CART.ammount,
+        lang: language,
+        idShop: STORE.id,
+        origin: origin
     };
 
     request = $.ajax({
         data: dataSend,
-        url: urlServices + 'sendBasket.php',
+        url: urlServices + 'getSendPrice.php',
         dataType: 'json',
-        async: false,
         type: 'POST',
         timeout: 10000, //10 seg
         success: function (response) {
 
-            console.log("Datos alternativos");
+            console.log("Respuesta");
             console.log(response);
-
-            PRODUCTS_ALTER = response.alternativeProducts;
-
-            displayAlternativeProducts(idnode, idproduct, cantidad);
+            
+            SEND_INFO = response;
+            
+            opcionesPago();
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -2282,12 +2286,12 @@ function getSendPrice() { //esta funcion nos devuelve la info de un nodo pasando
             if (textStatus === "timeout") {
 
                 //console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
+                $("#texto_popup").text("Timeout");
+                $('#popupAlert').popup('open');
 
             } else {
 
                 restError(jqXHR, "tiendas");
-                //console.log("Sin conexion");
                 $("#texto_popup").text("Sin conexion a internet");
                 $('#popupAlert').popup('open');
 

@@ -368,6 +368,7 @@ $(document).ready(function () {
         case "deleteItem":
 
             displayPopupItemList();
+            
             break;
         }
     });
@@ -402,8 +403,9 @@ $(document).ready(function () {
 
             setTimeout(function () {
                 displayPopupItemList();
+                updateOpcionCompraProducto();
             }, 250);
-
+                
             break;
         }
     });
@@ -735,8 +737,8 @@ function addToCart(item, param) {
                     $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
 
                     displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
-                    
-                    updateVariblesTiposDeProducto(product, (param > 0 ? true : false),foundInCart); //actulizamos variables del carrito para el pago.
+
+                    updateVariblesTiposDeProducto(product, (param > 0 ? true : false), foundInCart); //actulizamos variables del carrito para el pago.
 
                     if (CART[j].quantity == 0) // TEMP !!
                         deleteItemCart(j);
