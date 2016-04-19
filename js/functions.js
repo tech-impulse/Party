@@ -474,6 +474,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
         if (product.stock_x_store > 0) {
 
             //console.log("Entramos para poner mas productos de tienda");
+            if (isNaN(CART.precioTotalProductosTienda) == true) CART.precioTotalProductosTienda = 0;
 
             if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
@@ -487,6 +488,8 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
             }
 
             if (product.stock_x_central_store <= 0) { //no esta en el almacen pero si en tienda
+
+                if (isNaN(CART.precioTotalProductosSoloTienda) == true) CART.precioTotalProductosSoloTienda = 0;
 
                 if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
@@ -504,6 +507,8 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
         if (product.stock_x_central_store > 0) { //producto no disponible en tienda pero si en el almacen
 
+            if (isNaN(CART.precioTotalProductosWeb) == true) CART.precioTotalProductosWeb = 0;
+
 
             if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
@@ -518,16 +523,17 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
             if (product.stock_x_store <= 0) {
 
+                if (isNaN(CART.precioTotalProductosSoloWeb) == true) CART.precioTotalProductosSoloWeb = 0;
+
                 if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                    CART.precioTotalProductosSoloWeb =  parseFloat(CART.precioTotalProductosSoloWeb) + parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloWeb = parseFloat(CART.precioTotalProductosSoloWeb) + parseFloat(product.price_x_region[0].totalPrice);
 
                 } else { //nuevo articulo solo disponible en tienda
+
                     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                     console.log(CART.precioTotalProductosSoloWeb);
                     console.log(product);
-                    
-                    if( isNaN(CART.precioTotalProductosSoloWeb) == true ) CART.precioTotalProductosSoloWeb = 0;
 
                     CART.productosSoloEnWeb++;
                     CART.precioTotalProductosSoloWeb = parseFloat(CART.precioTotalProductosSoloWeb) + (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice));

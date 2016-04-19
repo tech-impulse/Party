@@ -695,6 +695,8 @@ function updateCarritoDisplay() {
 function displayProducts(data, originNode, originName, param, param4) {
 
     console.log("DisplayProducts-> Nodo Origen Id " + originNode + " param4 " + param4 + " pantalla " + pantallaActual);
+    
+    $("#btn_finalizarpedido").removeClass("btn_disabled");
 
     var aux_carac = 0;
 
@@ -3821,7 +3823,8 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio incluidos</label></div>' +
+                //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio incluidos</label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br><label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
@@ -3852,7 +3855,8 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio<br/> ' + (CART.length) + ' productos disponibles</label></div>' +
+            //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio<br/> ' + (CART.length) + ' productos disponibles</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br/> ' + (CART.length) + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
             '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosSoloWeb + ')" data-role="button" data-theme="b" >' +
@@ -3861,7 +3865,8 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.precioTotalProductosSoloWeb, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio <br/>' + CART.length + ' productos disponibles</label></div>' +
+            //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb) , 2, ",", ".", "€") + '<br>' + formatoNumero(CART.precioTotalProductosSoloWeb, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio <br/>' + CART.length + ' productos disponibles</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb) , 2, ",", ".", "€") + '<br/>' + CART.length + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -3949,8 +3954,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
             '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong><br>' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + ' € de gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div>' +
             '</div>' +
-            '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm()" data-role="button" data-theme="b" >';
+            '</a>';
 
         if (parseInt(STORE.deliveryStore) == 0 || parseInt(SEND_INFO.price_shop.result) == -3) {
 
@@ -3959,33 +3963,33 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         } else if (parseInt(SEND_INFO.price_shop.result) == -2) {
 
-            html += '<div class="ui-grid-a">' +
+            html += '<a class="btn_disabled" data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm()" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong><br>Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div>' +
+                '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong><br>Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div>' +
                 '</div>' +
-                '</a>' +
-                '<br>' +
-                '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>';
+                '</a>';
 
         } else {
 
-            html += '<div class="ui-grid-a">' +
+            html += '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm()" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
                 '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong><br>' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_shop.totalPrice).toFixed(2) + ' € de gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div>' +
                 '</div>' +
-                '</a>' +
-                '<br>' +
-                '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>';
+                '</a>';
 
         }
 
-        html += '</center>' +
+        html += '<br>' +
+            '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+            '</center>' +
             '</div>';
 
 
