@@ -477,12 +477,12 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
             if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                CART.precioTotalProductosTienda += parseFloat(product.price_x_region[0].totalPrice);
+                CART.precioTotalProductosTienda = parseFloat(CART.precioTotalProductosTienda) + parseFloat(product.price_x_region[0].totalPrice);
 
             } else { //nuevo articulo en tienda
 
                 CART.productosEnTienda++;
-                CART.precioTotalProductosTienda += parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+                CART.precioTotalProductosTienda = parseFloat(CART.precioTotalProductosTienda) + (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice));
 
             }
 
@@ -490,12 +490,12 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
                 if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                    CART.precioTotalProductosSoloTienda += parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloTienda = parseFloat(CART.precioTotalProductosSoloTienda) + parseFloat(product.price_x_region[0].totalPrice);
 
                 } else { //nuevo articulo solo disponible en tienda
 
                     CART.productosSoloEnTienda++;
-                    CART.precioTotalProductosSoloTienda += parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloTienda = parseFloat(CART.precioTotalProductosSoloTienda) + (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice));
 
                 }
             }
@@ -507,12 +507,12 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
             if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                CART.precioTotalProductosWeb += parseFloat(product.price_x_region[0].totalPrice);
+                CART.precioTotalProductosWeb = parseFloat(CART.precioTotalProductosWeb) + parseFloat(product.price_x_region[0].totalPrice);
 
             } else { //nuevo articulo en web 
 
                 CART.productosEnWeb++;
-                CART.precioTotalProductosWeb += parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+                CART.precioTotalProductosWeb = parseFloat(CART.precioTotalProductosWeb) + (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice));
 
             }
 
@@ -520,12 +520,17 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
                 if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                    CART.precioTotalProductosSoloWeb += parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloWeb =  parseFloat(CART.precioTotalProductosSoloWeb) + parseFloat(product.price_x_region[0].totalPrice);
 
                 } else { //nuevo articulo solo disponible en tienda
+                    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    console.log(CART.precioTotalProductosSoloWeb);
+                    console.log(product);
+                    
+                    if( isNaN(CART.precioTotalProductosSoloWeb) == true ) CART.precioTotalProductosSoloWeb = 0;
 
                     CART.productosSoloEnWeb++;
-                    CART.precioTotalProductosSoloWeb += parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloWeb = parseFloat(CART.precioTotalProductosSoloWeb) + (parseInt(product.quantity) * parseFloat(product.price_x_region[0].totalPrice));
 
                 }
             }
@@ -540,7 +545,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
             if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                CART.precioTotalProductosTienda -= parseFloat(product.price_x_region[0].totalPrice);
+                CART.precioTotalProductosTienda = CART.precioTotalProductosTienda - parseFloat(product.price_x_region[0].totalPrice);
 
                 if (parseInt(product.quantity) == 0) {
                     CART.productosEnTienda--;
@@ -552,7 +557,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
             } else { //lo borramos del todo
 
                 CART.productosEnTienda--;
-                CART.precioTotalProductosTienda -= parseFloat(product.price_x_region[0].totalPrice);
+                CART.precioTotalProductosTienda = CART.precioTotalProductosTienda - parseFloat(product.price_x_region[0].totalPrice);
 
             }
 
@@ -561,7 +566,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
                 if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                    CART.precioTotalProductosSoloTienda -= parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloTienda = CART.precioTotalProductosSoloTienda - parseFloat(product.price_x_region[0].totalPrice);
 
                     if (parseInt(product.quantity) == 0) {
                         CART.productosSoloEnTienda--;
@@ -573,7 +578,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
                 } else { //lo borramos del todo
 
                     CART.productosSoloEnTienda--;
-                    CART.precioTotalProductosSoloTienda -= parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloTienda = CART.precioTotalProductosSoloTienda - parseFloat(product.price_x_region[0].totalPrice);
 
                 }
             }
@@ -584,7 +589,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
             if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                CART.precioTotalProductosWeb -= parseFloat(product.price_x_region[0].totalPrice);
+                CART.precioTotalProductosWeb = CART.precioTotalProductosWeb - parseFloat(product.price_x_region[0].totalPrice);
 
                 if (parseInt(product.quantity) == 0) {
                     CART.productosEnWeb--;
@@ -596,7 +601,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
             } else { //lo borramos del todo
 
                 CART.productosEnWeb--;
-                CART.precioTotalProductosWeb -= parseFloat(product.price_x_region[0].totalPrice);
+                CART.precioTotalProductosWeb = CART.precioTotalProductosWeb - parseFloat(product.price_x_region[0].totalPrice);
 
             }
 
@@ -604,7 +609,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
                 if (foundInCart == 1) { //ya tenemos el producto en cuenta modificamos el precio total
 
-                    CART.precioTotalProductosSoloWeb -= parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloWeb = CART.precioTotalProductosSoloWeb - parseFloat(product.price_x_region[0].totalPrice);
 
                     if (parseInt(product.quantity) == 0) {
                         CART.productosSoloEnWeb--;
@@ -616,7 +621,7 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
                 } else { //lo borramos del todo
 
                     CART.productosSoloEnWeb--;
-                    CART.precioTotalProductosSoloWeb -= parseFloat(product.price_x_region[0].totalPrice);
+                    CART.precioTotalProductosSoloWeb = CART.precioTotalProductosSoloWeb - parseFloat(product.price_x_region[0].totalPrice);
 
                 }
             }

@@ -3821,7 +3821,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero((parseFloat(CART.ammount) + (parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2))), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio incluidos <br/>Envio gratuito para compras superiores a 30€</label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio incluidos</label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
@@ -3855,13 +3855,13 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio<br/> ' + (CART.length) + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosWeb + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosSoloWeb + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosWeb) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio <br/>' + CART.length + ' productos disponibles</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.precioTotalProductosSoloWeb, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio <br/>' + CART.length + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -3953,12 +3953,12 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm()" data-role="button" data-theme="b" >';
 
         if (parseInt(STORE.deliveryStore) == 0 || parseInt(SEND_INFO.price_shop.result) == -3) {
-            
+
             console.log("No tiene envio a tienda");
 
 
         } else if (parseInt(SEND_INFO.price_shop.result) == -2) {
- 
+
             html += '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
                 '</div>' +

@@ -2209,11 +2209,44 @@ function getProvincesFromCountry(idCountry) {
     });
 }
 
-function sendBasket() { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+function sendBasketAndOrder() { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
     // Datos que se van a enviar
     var dataSend = {
-        product: CART
+        product: CART,
+        origin: origin,
+        type: prod,
+        sector: null,
+        billingName: INFO_USU.name,
+        billingNIN: INFO_USU.name,
+        paymentMethod: INFO_USU.name,//metodo de pago (creditCard, paypal, bankTransfer, Caja)
+        region: INFO_USU.name,
+        deliveryAddress: INFO_USU.name,
+        deliveryPostalCode: INFO_USU.name,
+        deliveryCity: INFO_USU.name,
+        deliveryProvince: INFO_USU.name,
+        deliveryCountry: INFO_USU.name,
+        deliveryPhone: INFO_USU.name,
+        billingAddress: INFO_USU.name,
+        billingPostalCode: INFO_USU.name,
+        billingCity: INFO_USU.name,
+        billingProvince: INFO_USU.name,
+        billingCountry: INFO_USU.name,
+        billingPhone: INFO_USU.name,
+        productsBasePrice: INFO_USU.name,
+        productsTaxPrice: INFO_USU.name,
+        productsTotalPrice: INFO_USU.name,
+        shippingBasePrice: INFO_USU.name,
+        shippingTaxPrice: INFO_USU.name,
+        shippingTotalPrice: INFO_USU.name,
+        basePrice: INFO_USU.name,
+        taxPrice: INFO_USU.name,
+        totalPrice: INFO_USU.name,
+        internalShippingCost: INFO_USU.name,
+        userId: INFO_USU.id,
+        shopId: STORE.id,
+        idBasket: ID_BASKET,
+        lang: language
     };
 
     request = $.ajax({
