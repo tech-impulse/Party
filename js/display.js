@@ -2413,7 +2413,7 @@ function displayPopupItemList() { //cambios jordi
     var listadoProdTienda = tituloPopUpTienda + labelsBar + html_store;
     var listadoProdOnLine = tituloPopUpWeb + labelsBar + html_online;
 
-    html = '<div style="width: 100%; height:600px; overflow: scroll;">' + (CART.productosEnTienda > 0 ? listadoProdTienda : '') + (CART.productosSoloEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
+    html = '<div style="width: 100%; height:600px; overflow: scroll;">' + (CART.productosEnTienda > 0 ? listadoProdTienda : '') + (CART.productosSoloEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="getSendPrice();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
@@ -3918,7 +3918,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
     console.log("Estamos en la opcion " + casoEnvio + "-----------------------------------------");
 
-    $("#divBack").html('<div onclick="opcionesPago();"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de pago</label></div></div></div>');
+    $("#divBack").html('<div onclick="getSendPrice();"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de pago</label></div></div></div>');
 
     switch (casoEnvio) {
     case 1:
