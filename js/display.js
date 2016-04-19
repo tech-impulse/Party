@@ -695,7 +695,7 @@ function updateCarritoDisplay() {
 function displayProducts(data, originNode, originName, param, param4) {
 
     console.log("DisplayProducts-> Nodo Origen Id " + originNode + " param4 " + param4 + " pantalla " + pantallaActual);
-    
+
     $("#btn_finalizarpedido").removeClass("btn_disabled");
 
     var aux_carac = 0;
@@ -3824,7 +3824,7 @@ function opcionesPago() { //TEMP
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
                 //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio incluidos</label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br><label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br><label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
@@ -3866,7 +3866,7 @@ function opcionesPago() { //TEMP
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
             //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb) , 2, ",", ".", "€") + '<br>' + formatoNumero(CART.precioTotalProductosSoloWeb, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio <br/>' + CART.length + ' productos disponibles</label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb) , 2, ",", ".", "€") + '<br/>' + CART.length + ' productos disponibles</label></div>' +
+            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb), 2, ",", ".", "€") + '<br/>' + CART.length + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
             '<br>' +
@@ -3912,7 +3912,6 @@ function opcionesPago() { //TEMP
 
 //function opcionesEnvio(casoEnvio, productosEnTienda, productosEnWeb) { //TEMP
 function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
-    //function opcionesEnvio() { //TEMP
 
     pantallaActual = "opciones envio";
 
@@ -3926,13 +3925,13 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<center>' +
             '<h2>TODOS LOS ARTICULOS ESTAN DISPONIBLES TANTO EN TIENDA COMO ONLINE</h2>' +
             '<h4>¿QUE QUIERE HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            // '<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
+            //'<div class="ui-block-b" style="text-align: right;width:100%;"><label>Total cesta: 25.23€ + gastos de envio = 30,25€</label></div>' +
             '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong><br> ' + formatoNumero(totalCesta, 2, ",", ".", "€") + 'cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div>' +
             '</div>' +
             '</a>' +
@@ -3946,7 +3945,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<center>' +
             '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA <br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
             '<h4>¿QUE QUIERE HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm()" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
@@ -3963,7 +3962,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         } else if (parseInt(SEND_INFO.price_shop.result) == -2) {
 
-            html += '<a class="btn_disabled" data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm()" data-role="button" data-theme="b" >' +
+            html += '<a class="btn_disabled" data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
                 '</div>' +
@@ -3975,7 +3974,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         } else {
 
-            html += '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm()" data-role="button" data-theme="b" >' +
+            html += '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
                 '</div>' +
@@ -4011,7 +4010,7 @@ function sistemasPago() { //TEMP
     $("#divBack").html('<div onclick="opcionesEnvio(' + opcionEnvio + ')"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de envio</label></div></div></div>');
 
     //inicializamos el boton
-    var paypal = '<form method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
+    var paypal = '<form id="formPaypal" method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
         '<input type="hidden" name="currency_code" value="EUR">' +
         '<input type="hidden" name="lc" value="ES">' +
         '<input type="hidden" name="return" value="https://partyfiesta.youtter.com/app/alb/">' +
@@ -4046,18 +4045,24 @@ function sistemasPago() { //TEMP
 
         }
 
-        /*paypal +=
-            '<input type="hidden" name="cmd" value="_cart">' + add +
-            '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
-            '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
-            '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-            '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';*/
-
     }
 
     paypal +=
         '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
         '</form>';
+
+    
+    $("#formPaypal").submit(function (event) {
+        
+        event.preventDefault();
+        alert("Handler for .submit() called.");
+        
+        sendBasketAndOrder( paymentMethod, ENVIO );
+        
+        
+        
+    });
+
 
     //console.log("PAYPALLLLLLLLLL");
     //console.log(paypal);
@@ -4497,7 +4502,11 @@ function displayDomicilioFacturacionForm() {
     loadSelectProvinciasFromCountry('div_input_provincia_2', 1, 'selectProvince_2');
 }
 
-function displayDomicilioForm() {
+
+
+function displayDomicilioForm(destinoEnvio,info_envio) {
+    
+    PAYMENTMETHOD = destinoEnvio;
 
     var html_login_user = '<div id="contenedorInfoUsuario"><h2>Info Usuario</h2>' +
         '<center>' +

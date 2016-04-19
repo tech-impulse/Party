@@ -2209,80 +2209,92 @@ function getProvincesFromCountry(idCountry) {
     });
 }
 
-function sendBasketAndOrder() { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+function sendBasketAndOrder( paymentMethod, price ) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
-    // Datos que se van a enviar
-    var dataSend = {
-        product: CART,
-        origin: origin,
-        type: prod,
-        sector: null,
-        billingName: INFO_USU.name,
-        billingNIN: INFO_USU.name,
-        paymentMethod: INFO_USU.name,//metodo de pago (creditCard, paypal, bankTransfer, Caja)
-        region: INFO_USU.name,
-        deliveryAddress: INFO_USU.name,
-        deliveryPostalCode: INFO_USU.name,
-        deliveryCity: INFO_USU.name,
-        deliveryProvince: INFO_USU.name,
-        deliveryCountry: INFO_USU.name,
-        deliveryPhone: INFO_USU.name,
-        billingAddress: INFO_USU.name,
-        billingPostalCode: INFO_USU.name,
-        billingCity: INFO_USU.name,
-        billingProvince: INFO_USU.name,
-        billingCountry: INFO_USU.name,
-        billingPhone: INFO_USU.name,
-        productsBasePrice: INFO_USU.name,
-        productsTaxPrice: INFO_USU.name,
-        productsTotalPrice: INFO_USU.name,
-        shippingBasePrice: INFO_USU.name,
-        shippingTaxPrice: INFO_USU.name,
-        shippingTotalPrice: INFO_USU.name,
-        basePrice: INFO_USU.name,
-        taxPrice: INFO_USU.name,
-        totalPrice: INFO_USU.name,
-        internalShippingCost: INFO_USU.name,
-        userId: INFO_USU.id,
-        shopId: STORE.id,
-        idBasket: ID_BASKET,
-        lang: language
-    };
+   // Datos que se van a enviar
+   var basePriceCount = 0;
+   var taxPriceCount = 0;
+   var totalPriceCount = 0;
+   
+   for ( var i = 0; i < CART.length; i++ ) {
+       basePriceCount += CART[i].basePrice;
+       taxPriceCount += CART[i].taxPrice;
+       totalPriceCount += CART[i].totalPrice;
+   }
+   
+   var dataSend = {
+       product: CART,
+       origin: origin,
+       type: prod,
+       sector: null,
+       billingName: INFO_USU.billingName,
+       billingNIN: INFO_USU.billingNIN,
+       
+       paymentMethod: paymentMethod,//metodo de pago (creditCard, paypal, bankTransfer, Caja)
+       region: INFO_USU.region,
+       
+       deliveryAddress: INFO_USU.address,
+       deliveryPostalCode: INFO_USU.postalCode,
+       deliveryCity: INFO_USU.city,
+       deliveryProvince: INFO_USU.province,
+       deliveryCountry: INFO_USU.country,
+       deliveryPhone: INFO_USU.phone,
+       billingAddress: INFO_USU.billingAddress,
+       billingPostalCode: INFO_USU.billingPC,
+       billingCity: INFO_USU.billingCity,
+       billingProvince: INFO_USU.billingProvince,
+       billingCountry: INFO_USU.billingCountry,
+       billingPhone: INFO_USU.billingPhone,
+       
+       productsBasePrice: basePriceCount,
+       productsTaxPrice: taxPriceCount,
+       productsTotalPrice: totalPriceCount,
+       
+       shippingBasePrice: price.basePrice,
+       shippingTaxPrice: price.taxPrice,
+       shippingTotalPrice: price.totalPrice,
+       
+       basePrice: basePriceCount + price.basePrice,
+       taxPrice: taxPriceCount + price.taxPrice,
+       totalPrice: totalPriceCount + price.totalPrice,
+       
+       internalShippingCost: null,
+       
+       userId: INFO_USU.id,
+       shopId: STORE.id,
+       idBasket: ID_BASKET,
+       lang: language
+   };
 
-    request = $.ajax({
-        data: dataSend,
-        url: urlServices + 'sendBasket.php',
-        dataType: 'json',
-        async: false,
-        type: 'POST',
-        timeout: 10000, //10 seg
-        success: function (response) {
+   request = $.aja{
+       data: dataSend,
+       url: urlServices + 'sendBasketAndOrder.php',
+       dataType: 'json',
+       //async: false,
+       type: 'POST',
+       timeout: 10000, //10 seg
+       success: function (response) {
 
-            console.log("Datos alternativos");
-            console.log(response);
+           console.log('-- Bascket enviada --');
+           
+       },
+       error: function (jqXHR, textStatus, errorThrown) {
 
-            PRODUCTS_ALTER = response.alternativeProducts;
+           if (textStatus === "timeout") {
 
-            displayAlternativeProducts(idnode, idproduct, cantidad);
+               //console.log("Timeout");
+               alert("Error de TimeOut... compruebe su conexion de internet");
 
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
+           } else {
 
-            if (textStatus === "timeout") {
+               restError(jqXHR, "tiendas");
+               //console.log("Sin conexion");
+               $("#texto_popup").text("Sin conexion a internet");
+               $('#popupAlert').popup('open');
 
-                //console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
-
-            } else {
-
-                restError(jqXHR, "tiendas");
-                //console.log("Sin conexion");
-                $("#texto_popup").text("Sin conexion a internet");
-                $('#popupAlert').popup('open');
-
-            }
-        },
-    });
+           }
+       },
+   });
 
 }
 
