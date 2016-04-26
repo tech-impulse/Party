@@ -4060,8 +4060,8 @@ function sistemasPago() { //TEMP
                 '<input type="hidden" name="cmd" value="_cart">' + add +
                 '<input type="hidden" name="item_name" value="' + CART[i].name + '">' +
                 '<input type="hidden" name="item_number" value="' + parseInt(CART[i].sku) + '">' +
-                '<input type="hidden" name="amount" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-                //'<input type="hidden" name="amount" value="0.25">' +
+                //'<input type="hidden" name="amount" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+                '<input type="hidden" name="amount" value="0.01">' +
                 '<input type="hidden" name="quantity" value="' + parseInt(CART[i].quantity) + '">';
 
         } else {
@@ -4071,8 +4071,8 @@ function sistemasPago() { //TEMP
                 '<input type="hidden" name="cmd" value="_cart">' + add +
                 '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
                 '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
-                '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-                //'<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
+                //'<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+                '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
                 '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
 
         }
@@ -4085,8 +4085,8 @@ function sistemasPago() { //TEMP
         '<input type="hidden" name="cmd" value="_cart">' + add +
         '<input type="hidden" name="item_name_' + (i + 1) + '" value="Gastos de envio">' +
         '<input type="hidden" name="item_number_' + (i + 1) + '" value="">' +
-        '<input type="hidden" name="amount_' + (i + 1) + '" value="4.99">' +
-        //'<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
+        //'<input type="hidden" name="amount_' + (i + 1) + '" value="4.99">' +
+        '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
         '<input type="hidden" name="quantity_' + (i + 1) + '" value="1">' +
         '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
         //'<input type="image" src="" border="0" name="submit" alt="">' +
