@@ -29,18 +29,18 @@ function getLogin(usario, contraseña) {
                 $("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
                 $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
-                
+
                 //if ( $("#login2").length > 0 ) {    // Si estoy en formulario de domicilio y hago login, vacio opciones de registro de usuario.
-                if ( $("#contenedorInfoUsuario").is(':visible') ) {
+                if ($("#contenedorInfoUsuario").is(':visible')) {
                     $("#contenedorInfoUsuario").hide();
-                    
+
                     cargaDatosUsuarioAFormularioRegistro();
                 }
-                
+
                 /*if ( $("#input_nombreUsuario").length > 0 ) {    // Si estoy en formulario de domicilio y hago login, vacio opciones de registro de usuario.
                     $("#contenedorInfoUsuario").hide();
                 }*/
-                
+
                 if (REDIRECT) {
                     console.log("Redirigeme");
                     REDIRECT = false;
@@ -224,7 +224,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         $("#btn_finalizarpedido").hide();
 
         $("#img_cesta").attr("src", "css/icons/cesta.png");
-        
+
     } else {
 
         var totalRefresh = 0;
@@ -1465,7 +1465,7 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
 /**************************************************************************
   WS para enviar el correo con el listado de articulos del carrito
 ***************************************************************************/
-function sendEmail() {
+function sendEmail(pantallaIntermediaPago) {
 
     console.log("Email es " + EMAIL_USER);
 
@@ -1499,27 +1499,36 @@ function sendEmail() {
                 if (parseInt(response.result) == parseInt(1)) {
 
                     $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
-                    EMAIL_USER = "";
-                    INFO_USU = "";
-                    $('#popupAlert').popup('open');
-                    $('#email').val('');
-                    //$("#spBtnAmountPerson").text(''); //TEMP
-                    $("#circuloCantidad").hide();
-                    $("#spBtnPopupCartAmmount").hide();
-                    $("#userIcoCarrito").hide();
-                    $("#btn_finalizarpedido").hide();
-                    CART = [];
-                    nodeNames = [];
-                    nodeIds = [];
-                    nodeImg = [];
-                    EMAIL_USER = "";
-                    logout();
+
                     console.log("Enviamos email");
 
-                    setTimeout(function () {
-                        $('#popupAlert').popup('close');
-                        getNodes(0);
-                    }, 1500);
+                    if (pantallaIntermediaPago == 1) {
+                        setTimeout(function () {
+                            $('#popupAlert').popup('close');
+                            sistemasPago();
+                        }, 1500);
+                    } else {
+                        EMAIL_USER = "";
+                        INFO_USU = "";
+                        $('#popupAlert').popup('open');
+                        $('#email').val('');
+                        //$("#spBtnAmountPerson").text(''); //TEMP
+                        $("#circuloCantidad").hide();
+                        $("#spBtnPopupCartAmmount").hide();
+                        $("#userIcoCarrito").hide();
+                        $("#btn_finalizarpedido").hide();
+                        CART = [];
+                        nodeNames = [];
+                        nodeIds = [];
+                        nodeImg = [];
+                        EMAIL_USER = "";
+                        logout();
+                        setTimeout(function () {
+                            $('#popupAlert').popup('close');
+                            getNodes(0);
+                        }, 1500);
+                    }
+
 
 
                 } else if (parseInt(response.result) == parseInt(0)) {
@@ -1565,7 +1574,7 @@ function sendEmail() {
 /**************************************************************************
   WS para imprimir listado de articulos del carrito
 ***************************************************************************/
-function imprimirPedido() {
+function imprimirPedido(pantallaIntermediaPago) {
 
     STORE.currencySymbol = "20AC";
 
@@ -1585,57 +1594,67 @@ function imprimirPedido() {
             console.log("Respuesta de imprimir es:");
             console.log(response);
 
-            //temp para puesta en tienda
-            $("#texto_popup").text("Pedido enviado para imprimir");
-            EMAIL_USER = "";
-            INFO_USU = "";
-            $('#popupAlert').popup('open');
-            $('#email').val('');
-            //$("#spBtnAmountPerson").text(''); //TEMP
-            $("#circuloCantidad").hide();
-            $("#spBtnPopupCartAmmount").hide();
-            $("#userIcoCarrito").hide();
-            $("#btn_finalizarpedido").hide();
-            CART = [];
-            nodeNames = [];
-            nodeIds = [];
-            nodeImg = [];
-            EMAIL_USER = "";
-            logout();
+
             console.log("Enviamos a imprimir");
-
-
-            setTimeout(function () {
-                $('#popupAlert').popup('close');
-                getNodes(0);
-            }, 1500);
-
 
             if (parseInt(response.result) == parseInt(1)) {
 
-                $("#texto_popup").text("Pedido enviado para imprimir");
-                EMAIL_USER = "";
-                INFO_USU = "";
-                $('#popupAlert').popup('open');
-                $('#email').val('');
-                //$("#spBtnAmountPerson").text(''); //TEMP
-                $("#circuloCantidad").hide();
-                $("#spBtnPopupCartAmmount").hide();
-                $("#userIcoCarrito").hide();
-                $("#btn_finalizarpedido").hide();
-                CART = [];
-                nodeNames = [];
-                nodeIds = [];
-                nodeImg = [];
-                EMAIL_USER = "";
-                logout();
-                console.log("Enviamos a imprimir");
+                if (pantallaIntermediaPago == 1) {
+
+                    $("#texto_popup").text("Pedido enviado para imprimir");
+
+                    setTimeout(function () {
+                        $('#popupAlert').popup('close');
+                        sistemasPago();
+                    }, 1500);
+
+                } else {
+                    //temp para puesta en tienda
+                    $("#texto_popup").text("Pedido enviado para imprimir");
+                    EMAIL_USER = "";
+                    INFO_USU = "";
+                    $('#popupAlert').popup('open');
+                    $('#email').val('');
+                    //$("#spBtnAmountPerson").text(''); //TEMP
+                    $("#circuloCantidad").hide();
+                    $("#spBtnPopupCartAmmount").hide();
+                    $("#userIcoCarrito").hide();
+                    $("#btn_finalizarpedido").hide();
+                    CART = [];
+                    nodeNames = [];
+                    nodeIds = [];
+                    nodeImg = [];
+                    EMAIL_USER = "";
+                    logout();
+                    setTimeout(function () {
+                        $('#popupAlert').popup('close');
+                        getNodes(0);
+                    }, 1500);
+                }
+
+                /* $("#texto_popup").text("Pedido enviado para imprimir");
+                 EMAIL_USER = "";
+                 INFO_USU = "";
+                 $('#popupAlert').popup('open');
+                 $('#email').val('');
+                 //$("#spBtnAmountPerson").text(''); //TEMP
+                 $("#circuloCantidad").hide();
+                 $("#spBtnPopupCartAmmount").hide();
+                 $("#userIcoCarrito").hide();
+                 $("#btn_finalizarpedido").hide();
+                 CART = [];
+                 nodeNames = [];
+                 nodeIds = [];
+                 nodeImg = [];
+                 EMAIL_USER = "";
+                 logout();
+                 console.log("Enviamos a imprimir");
 
 
-                setTimeout(function () {
-                    $('#popupAlert').popup('close');
-                    getNodes(0);
-                }, 1500);
+                 setTimeout(function () {
+                     $('#popupAlert').popup('close');
+                     getNodes(0);
+                 }, 1500);*/
 
 
             } else if (parseInt(response.result) == parseInt(0)) {
@@ -2209,98 +2228,114 @@ function getProvincesFromCountry(idCountry) {
     });
 }
 
-function sendBasketAndOrder( paymentMethod, price ) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
+function sendBasketAndOrder(paymentMethod) { //esta funcion nos devuelve la info de un nodo pasandole como parametro el id_nodo
 
-   // Datos que se van a enviar
-   var basePriceCount = 0;
-   var taxPriceCount = 0;
-   var totalPriceCount = 0;
-   
-   for ( var i = 0; i < CART.length; i++ ) {
-       basePriceCount += CART[i].basePrice;
-       taxPriceCount += CART[i].taxPrice;
-       totalPriceCount += CART[i].totalPrice;
-   }
-   
-   var dataSend = {
-       product: CART,
-       origin: origin,
-       type: prod,
-       sector: null,
-       billingName: INFO_USU.billingName,
-       billingNIN: INFO_USU.billingNIN,
-       
-       paymentMethod: paymentMethod,//metodo de pago (creditCard, paypal, bankTransfer, Caja)
-       region: INFO_USU.region,
-       
-       deliveryAddress: INFO_USU.address,
-       deliveryPostalCode: INFO_USU.postalCode,
-       deliveryCity: INFO_USU.city,
-       deliveryProvince: INFO_USU.province,
-       deliveryCountry: INFO_USU.country,
-       deliveryPhone: INFO_USU.phone,
-       billingAddress: INFO_USU.billingAddress,
-       billingPostalCode: INFO_USU.billingPC,
-       billingCity: INFO_USU.billingCity,
-       billingProvince: INFO_USU.billingProvince,
-       billingCountry: INFO_USU.billingCountry,
-       billingPhone: INFO_USU.billingPhone,
-       
-       productsBasePrice: basePriceCount,
-       productsTaxPrice: taxPriceCount,
-       productsTotalPrice: totalPriceCount,
-       
-       shippingBasePrice: price.basePrice,
-       shippingTaxPrice: price.taxPrice,
-       shippingTotalPrice: price.totalPrice,
-       
-       basePrice: basePriceCount + price.basePrice,
-       taxPrice: taxPriceCount + price.taxPrice,
-       totalPrice: totalPriceCount + price.totalPrice,
-       
-       internalShippingCost: null,
-       
-       userId: INFO_USU.id,
-       shopId: STORE.id,
-       idBasket: ID_BASKET,
-       lang: language
-   };
+    // Datos que se van a enviar
+    var basePriceCount = 0;
+    var taxPriceCount = 0;
+    var totalPriceCount = 0;
 
-   request = $.aja{
-       data: dataSend,
-       url: urlServices + 'sendBasketAndOrder.php',
-       dataType: 'json',
-       //async: false,
-       type: 'POST',
-       timeout: 10000, //10 seg
-       success: function (response) {
+    var price = {};
+    price = PRECIOSENVIO;
 
-           console.log('-- Bascket enviada --');
-           
-       },
-       error: function (jqXHR, textStatus, errorThrown) {
+    for (var i = 0; i < CART.length; i++) {
+        basePriceCount += parseFloat(CART[i].price_x_region[0].basePrice);
+        taxPriceCount += parseFloat(CART[i].price_x_region[0].taxPrice);
+        totalPriceCount += parseFloat(CART[i].price_x_region[0].totalPrice);
+    }
 
-           if (textStatus === "timeout") {
+    var type = "";
 
-               //console.log("Timeout");
-               alert("Error de TimeOut... compruebe su conexion de internet");
+    if (parseFloat(PRECIOSENVIO.totalPrice) > 0) {
+        type = "normal";
+    } else {
+        type = "freeOfCharge";
+    }
 
-           } else {
+    var dataSend = {
+        products: CART,
+        origin: origin,
+        type: type, //normal freeOfCharge
+        sector: "null",
+        billingName: INFO_USU.billingName,
+        billingNIN: INFO_USU.billingNIN,
 
-               restError(jqXHR, "tiendas");
-               //console.log("Sin conexion");
-               $("#texto_popup").text("Sin conexion a internet");
-               $('#popupAlert').popup('open');
+        paymentMethod: paymentMethod, //metodo de pago (creditCard, paypal, bankTransfer, Caja)
+        region: INFO_USU.region,
 
-           }
-       },
-   });
+        deliveryAddress: INFO_USU.address,
+        deliveryPostalCode: INFO_USU.postalCode,
+        deliveryCity: INFO_USU.city,
+        deliveryProvince: INFO_USU.province,
+        deliveryCountry: INFO_USU.country,
+        deliveryPhone: INFO_USU.phone,
+        billingAddress: INFO_USU.billingAddress,
+        billingPostalCode: INFO_USU.billingPC,
+        billingCity: INFO_USU.billingCity,
+        billingProvince: INFO_USU.billingProvince,
+        billingCountry: INFO_USU.billingCountry,
+        billingPhone: INFO_USU.billingPhone,
+
+        productsBasePrice: parseFloat(basePriceCount),
+        productsTaxPrice: parseFloat(taxPriceCount),
+        productsTotalPrice: parseFloat(totalPriceCount),
+
+        shippingBasePrice: parseFloat(price.basePrice),
+        shippingTaxPrice: parseFloat(price.taxPrice),
+        shippingTotalPrice: parseFloat(price.totalPrice),
+
+        basePrice: parseFloat(basePriceCount + price.basePrice),
+        taxPrice: parseFloat(taxPriceCount + price.taxPrice),
+        totalPrice: parseFloat(totalPriceCount + price.totalPrice),
+
+        internalShippingCost: "null",
+
+        userId: INFO_USU.id,
+        shopId: STORE.id,
+        idBasket: ID_BASKET,
+        lang: language
+    };
+
+    console.log("Mis datos son");
+    console.log(dataSend);
+
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'sendBasketAndOrder.php',
+        dataType: 'json',
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            console.log('-- Bascket enviada --');
+            console.log(response);
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+
+                //console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                //console.log("Sin conexion");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
 
 }
 
 
 /*Esta funcion sirve para obtener el precio de envio. La respuesta es -1 faltan parametros y si es -2 no llegamos al precio min de envio*/
-function getSendPrice() { 
+function getSendPrice() {
 
     // Datos que se van a enviar
     var dataSend = {
@@ -2320,9 +2355,9 @@ function getSendPrice() {
 
             console.log("Respuesta");
             console.log(response);
-            
+
             SEND_INFO = response;
-            
+
             opcionesPago();
 
         },

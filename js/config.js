@@ -49,7 +49,8 @@ var POS_GRID = ""; //guardamos la posicion donde nos quedamos en la recarga de a
 var opcionEnvio = 0;
 var opcionCompraProductos = 1; // Opción en que nos encontramos en función de la disponibilidad de productos en tienda y online
 var SEND_INFO = []; //se guarda la info de los dos tipos de envio
-var PAYMENTMETHOD = ""; //si es a domicilio o tienda 
+var PRECIOSENVIO = {};
+var OPCIONPEDIDO = 0;
 //var productosEnTienda = 0;  // Número de productos disponibles en tienda del pedido actual
 //var productosEnWeb = 0;     // Número de productos disponibles online del pedido actual
 

@@ -1633,12 +1633,32 @@ function displayProducts(data, originNode, originName, param, param4) {
         console.log(data);
         AUX = 1;
 
-        for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+        if (PRODUCTS.length > 0) { //se añadido este if para no duplicar productos en PRODUCTS
 
-            for (var d = 0; d < data.products[c].typeproducts.length; d++) {
-                data.products[c].typeproducts[d].original = true;
-                PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
+
+            for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+
+                for (var d = 0; d < data.products[c].typeproducts.length; d++) {
+
+                    añadirProductosArray(data.products[c].typeproducts[d]);
+
+                }
             }
+
+        } else {
+
+            for (var c = 0; c < data.products.length; c++) { //guardamos los productos
+
+                for (var d = 0; d < data.products[c].typeproducts.length; d++) {
+
+                    data.products[c].typeproducts[d].original = true;
+                    PRODUCTS = PRODUCTS.concat(data.products[c].typeproducts[d]);
+                    PRODUCTS[d].original = true;
+
+                }
+
+            }
+
         }
 
         TEMP_PRODUCTS = data.products;
@@ -3354,6 +3374,8 @@ function logout() { //muestra el pop up de inicio de session
     LOGGED = false;
     $('#usrnm').val("");
     $('#pswd').val("");
+    
+    $(':input').val('');//limpiamos todos los inputs de la app
 
 
     if ($("#contenedorInfoUsuario").length > 0 && $("#contenedorInfoUsuario").is(':hidden')) { // Si estoy en formulario de domicilio y hago logout, muestro opciones de registro de usuario.
@@ -3364,6 +3386,14 @@ function logout() { //muestra el pop up de inicio de session
 
 
 }
+
+/*
+
+<form action='expresscheckout.php' METHOD='POST'>
+<input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal'/>
+</form>
+
+*/
 
 function displayScreenSaver() { //muestra el pop up de inicio de session
 
@@ -3812,7 +3842,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '</label></div>' +
+            '<div class="ui-block-b" style="text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '<br>' + CART.length + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
 
@@ -3824,7 +3854,7 @@ function opcionesPago() { //TEMP
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="float:left;"><label></label></div>' +
                 //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio incluidos</label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br><label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br>' + CART.length + ' productos disponibles<label></div>' +
                 '</div>' +
                 '</a>' : '') +
 
@@ -3840,7 +3870,7 @@ function opcionesPago() { //TEMP
             '<center><div style="width: 600px;">' +
             '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA<br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
             '<h4>¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="pagarEnCaja();OPCIONPEDIDO=1;" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
             '</div>' +
@@ -3849,7 +3879,7 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br>' + CART.productosEnTienda + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.ammount + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.ammount + ');OPCIONPEDIDO=2;" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE (TODO EL PEDIDO)</label></div>' +
             '</div>' +
@@ -3859,7 +3889,7 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br/> ' + (CART.length) + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosSoloWeb + ')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + opcionEnvio + ',' + CART.precioTotalProductosSoloWeb + ');OPCIONPEDIDO=3;" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
             '</div>' +
@@ -3925,7 +3955,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<center>' +
             '<h2>TODOS LOS ARTICULOS ESTAN DISPONIBLES TANTO EN TIENDA COMO ONLINE</h2>' +
             '<h4>¿QUE QUIERE HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
@@ -3945,7 +3975,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<center>' +
             '<h2>TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA <br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
             '<h4>¿QUE QUIERE HACER?</h4>' +
-            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\')" data-role="button" data-theme="b" >' +
+            '<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
             '</div>' +
@@ -3962,7 +3992,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         } else if (parseInt(SEND_INFO.price_shop.result) == -2) {
 
-            html += '<a class="btn_disabled" data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\')" data-role="button" data-theme="b" >' +
+            html += '<a class="btn_disabled" data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
                 '</div>' +
@@ -3974,7 +4004,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         } else {
 
-            html += '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\')" data-role="button" data-theme="b" >' +
+            html += '<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
                 '</div>' +
@@ -4015,11 +4045,13 @@ function sistemasPago() { //TEMP
         '<input type="hidden" name="lc" value="ES">' +
         '<input type="hidden" name="return" value="https://partyfiesta.youtter.com/app/alb/">' +
         '<input type="hidden" name="cancel_return" value="https://partyfiesta.youtter.com/app/alb/">' +
+
         '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
 
     var add = '';
+    var i = 0;
 
-    for (var i = 0; i < CART.length; i++) {
+    for (i = 0; i < CART.length; i++) {
 
         if (parseInt(CART.length) == 1) {
 
@@ -4047,20 +4079,27 @@ function sistemasPago() { //TEMP
 
     }
 
+
+
     paypal +=
+        '<input type="hidden" name="cmd" value="_cart">' + add +
+        '<input type="hidden" name="item_name_' + (i + 1) + '" value="Gastos de envio">' +
+        '<input type="hidden" name="item_number_' + (i + 1) + '" value="">' +
+        '<input type="hidden" name="amount_' + (i + 1) + '" value="4.99">' +
+        //'<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
+        '<input type="hidden" name="quantity_' + (i + 1) + '" value="1">' +
         '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
+        //'<input type="image" src="" border="0" name="submit" alt="">' +
         '</form>';
 
-    
+
     $("#formPaypal").submit(function (event) {
-        
+
         event.preventDefault();
         alert("Handler for .submit() called.");
-        
-        sendBasketAndOrder( paymentMethod, ENVIO );
-        
-        
-        
+
+        sendBasketAndOrder('paypal');
+
     });
 
 
@@ -4070,17 +4109,21 @@ function sistemasPago() { //TEMP
     var html = '<div>' +
         '<center>' +
         '<h2>OPCIONES DE PAGO</h2>' +
-        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        '<a data-corners="false" style="width:600px" onclick="sendBasketAndOrder(\'cash register\');" data-role="button" data-theme="b" >' +
         '<div class="ui-grid-solo">' +
         '<div class="ui-block-a"><label>CAJA</label></div>' +
         '</div>' +
         '</a>' +
-        '<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-solo">' +
-        '<div class="ui-block-a"><label>TARJETA</label></div>' +
-        '</div>' +
-        '</a>' +
-        '<br>' + paypal +
+        //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
+        //'<div class="ui-grid-solo">' +
+        //'<div class="ui-block-a"><label>TARJETA/PAYPAL</label></div>' +
+        //'</div>' +
+        //'</a>' +
+        '<br>' +
+        //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >TARJETA / PAYPAL' +
+        ///paypal +
+        //'</a>' +
+        paypal +
         '<br>' +
         '<a data-corners="false" style="width:576px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
         '</center>';
@@ -4470,7 +4513,7 @@ function displayDomicilioFacturacionForm() {
 
         '</div>' +
 
-        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="if(checkForm()){registroUsuarioDomicilio(1);}">Continuar</button>' +
+        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" >Continuar</button>' + //onclick="if(checkForm()){registroUsuarioDomicilio(1);}"
 
         '</form>' +
         '</div>' +
@@ -4482,6 +4525,27 @@ function displayDomicilioFacturacionForm() {
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
+    
+    $("#button_continuar_direcciones").click(function () { 
+
+        if (OPCIONPEDIDO == 3) {
+            console.log("Entra 3");
+            if (checkForm()) {
+                pagarEnCajaPrevioPago();
+                OPCIONPEDIDO = 0;
+            }
+
+        } else {
+            console.log("Entra no es 3");
+            if (checkForm()) {
+                registroUsuarioDomicilio(1);
+                OPCIONPEDIDO = 0;
+            }
+        }
+
+
+    });
+
 
     if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
@@ -4504,9 +4568,13 @@ function displayDomicilioFacturacionForm() {
 
 
 
-function displayDomicilioForm(destinoEnvio,info_envio) {
-    
-    PAYMENTMETHOD = destinoEnvio;
+function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
+
+    PRECIOSENVIO = {
+        taxPrice: taxPrice,
+        totalPrice: totalPrice,
+        basePrice: basePrice
+    };
 
     var html_login_user = '<div id="contenedorInfoUsuario"><h2>Info Usuario</h2>' +
         '<center>' +
@@ -4537,7 +4605,7 @@ function displayDomicilioForm(destinoEnvio,info_envio) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Nombre *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario" name="input_nombreUsuario" data-type="entrega" required="required" type="text" placeholder="Nombre" autofocus data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario" name="input_nombreUsuario" data-type="entrega" required="required" type="text" placeholder="Nombre" data-clear-btn="true"></div>' + //autofocus 
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Apellidos *</label>' +
@@ -4660,7 +4728,7 @@ function displayDomicilioForm(destinoEnvio,info_envio) {
         '</div>' +
 
         //'<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="sistemasPago();">Continuar</button>' +
-        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="if(checkForm()){registroUsuarioDomicilio();}">Continuar</button>' +
+        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" >Continuar</button>' +
 
         '</form>' +
         '</div>' +
@@ -4672,6 +4740,27 @@ function displayDomicilioForm(destinoEnvio,info_envio) {
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
+
+    $("#button_continuar_direcciones").click(function () { 
+
+        if (OPCIONPEDIDO == 3) {
+            console.log("Entra 3");
+            if (checkForm()) {
+                pagarEnCajaPrevioPago();
+                OPCIONPEDIDO = 0;
+            }
+
+        } else {
+            console.log("Entra no es 3");
+            if (checkForm()) {
+                registroUsuarioDomicilio();
+                OPCIONPEDIDO = 0;
+            }
+        }
+
+
+    });
+
 
     if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
@@ -4722,6 +4811,7 @@ function displayDomicilioForm(destinoEnvio,info_envio) {
         }
 
     });
+
 
     if (INFO_USU.id != undefined) { // si el usuario ha hecho login rellenar campos
 
@@ -5132,6 +5222,29 @@ function pagarEnCaja() {
         '<a  data-corners="false" style="width:300px" onclick="sendEmail();" data-role="button" data-icon="mail" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
         '<br>' +
         '<a  data-corners="false" style="width:300px" onclick="imprimirPedido();" data-role="button" data-icon="home" data-iconpos="right" data-theme="b"> Imprimir en tienda </a>' +
+        '<br>' +
+        //'<a  data-corners="false" style="width:300px" onclick="pedidoOnline();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b"> Pedido online </a>' +
+        //'<br>' +
+        '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+        '</center>' +
+        '</div>';
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
+}
+
+
+
+function pagarEnCajaPrevioPago() { 
+
+    $("#divBack").html('<div onclick="opcionesPago()"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de pago</label></div></div></div>');
+
+    var html = '<div>' +
+        '<center>' +
+        '<h3> ¿Qué deseas hacer con los productos que están en tienda?</h3>' +
+        '<br>' +
+        '<a  data-corners="false" style="width:300px" onclick="sendEmail(1);" data-role="button" data-icon="mail" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
+        '<br>' +
+        '<a  data-corners="false" style="width:300px" onclick="imprimirPedido(1);" data-role="button" data-icon="home" data-iconpos="right" data-theme="b"> Imprimir en tienda </a>' +
         '<br>' +
         //'<a  data-corners="false" style="width:300px" onclick="pedidoOnline();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b"> Pedido online </a>' +
         //'<br>' +
