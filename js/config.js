@@ -51,6 +51,7 @@ var opcionCompraProductos = 1; // Opción en que nos encontramos en función de 
 var SEND_INFO = []; //se guarda la info de los dos tipos de envio
 var PRECIOSENVIO = {};
 var OPCIONPEDIDO = 0;
+var OPCIONENVIO = 0;
 //var productosEnTienda = 0;  // Número de productos disponibles en tienda del pedido actual
 //var productosEnWeb = 0;     // Número de productos disponibles online del pedido actual
 

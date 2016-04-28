@@ -2335,11 +2335,11 @@ function sendBasketAndOrder(paymentMethod) { //esta funcion nos devuelve la info
 
 
 /*Esta funcion sirve para obtener el precio de envio. La respuesta es -1 faltan parametros y si es -2 no llegamos al precio min de envio*/
-function getSendPrice() {
+function getSendPrice(precio) {
 
     // Datos que se van a enviar
     var dataSend = {
-        totalPrice: CART.ammount,
+        totalPrice: precio,
         lang: language,
         idShop: STORE.id,
         origin: origin
@@ -2358,7 +2358,9 @@ function getSendPrice() {
 
             SEND_INFO = response;
 
-            opcionesPago();
+            //opcionesPago();
+            
+            opcionesEnvio(OPCIONENVIO,precio);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
