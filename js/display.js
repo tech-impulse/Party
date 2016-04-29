@@ -3849,7 +3849,7 @@ function opcionesPago() { //TEMP
             '</a>' +
 
             (CART.length - CART.productosEnWeb == 0 ?
-                '<a data-corners="false" style="width:600px" onclick="opcionesEnvio(' + OPCIONENVIO + ',' + CART.ammount + ')" data-role="button" data-theme="b" >' +
+                '<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.ammount + ')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
                 '</div>' +
