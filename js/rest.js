@@ -2360,11 +2360,7 @@ function getSendPrice(precio) {
 
             //opcionesPago();
 
-            if (typeof SEND_INFO !== 'undefined' && SEND_INFO.length > 0) {
-                opcionesEnvio(OPCIONENVIO, precio);
-            }
-
-
+            opcionesEnvio(OPCIONENVIO, precio);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
