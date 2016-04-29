@@ -1535,16 +1535,40 @@ function sendEmail(pantallaIntermediaPago) {
 
                     $("#texto_popup").text("No se ha podido enviar el correo a " + EMAIL_USER);
                     $('#popupAlert').popup('open');
+                    
+                    setTimeout(function () {
+                        $('#popupAlert').popup('close');
+                    }, 1500);
+
+                    setTimeout(function () {
+                        $("#popupEmail").popup("open");
+                    }, popupTimeout);
 
                 } else if (parseInt(response.result) == parseInt(2)) {
 
                     $("#texto_popup").text("Problemas al generar el correo");
                     $('#popupAlert').popup('open');
+                    
+                    setTimeout(function () {
+                        $('#popupAlert').popup('close');
+                    }, 1500);
+
+                    setTimeout(function () {
+                        $("#popupEmail").popup("open");
+                    }, popupTimeout);
 
                 } else if (parseInt(response.result) == parseInt(0)) {
 
                     $("#texto_popup").text("Faltan datos para poder enviar el correo");
                     $('#popupAlert').popup('open');
+                    
+                    setTimeout(function () {
+                        $('#popupAlert').popup('close');
+                    }, 1500);
+
+                    setTimeout(function () {
+                        $("#popupEmail").popup("open");
+                    }, popupTimeout);
 
                 }
 
@@ -1554,15 +1578,32 @@ function sendEmail(pantallaIntermediaPago) {
                 if (textStatus === "timeout") {
 
                     console.log("Timeout");
-                    alert("Error de TimeOut... compruebe su conexion de internet");
+                    $("#texto_popup").text("Error de TimeOut... compruebe su conexion de internet");
+                    $('#popupAlert').popup('open');
+
+                    setTimeout(function () {
+                        $('#popupAlert').popup('close');
+                    }, 1500);
+
+                    setTimeout(function () {
+                        $("#popupEmail").popup("open");
+                    }, popupTimeout);
 
                 } else {
 
                     restError(jqXHR, "tiendas");
                     console.log("Sin conexion");
                     //alert("Sin conexion a internet...");
-                    $("#texto_popup").text("Sin conexion a internet");
+                    $("#texto_popup").text("Error de TimeOut... compruebe su conexion de internet");
                     $('#popupAlert').popup('open');
+
+                    setTimeout(function () {
+                        $('#popupAlert').popup('close');
+                    }, 1500);
+
+                    setTimeout(function () {
+                        $("#popupEmail").popup("open");
+                    }, popupTimeout);
 
                 }
                 INFO_USU = "";
