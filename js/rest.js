@@ -2359,8 +2359,12 @@ function getSendPrice(precio) {
             SEND_INFO = response;
 
             //opcionesPago();
-            
-            opcionesEnvio(OPCIONENVIO,precio);
+
+            if (typeof SEND_INFO !== 'undefined' && SEND_INFO.length > 0) {
+                opcionesEnvio(OPCIONENVIO, precio);
+            }
+
+
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
