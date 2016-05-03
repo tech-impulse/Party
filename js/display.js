@@ -874,7 +874,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
+                var imgLinkExt = data.products[i].linkext;
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1235,7 +1235,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     }
 
 
-                    var imgLinkExt = pro_seccion.linkext.replace("wide", "bigPreview");
+                    var imgLinkExt = pro_seccion.linkext;
 
                     var element = block +
                         '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1512,7 +1512,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext.replace("wide", "bigPreview");
+                var imgLinkExt = data.products[i].linkext;
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1836,7 +1836,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                         var displayWarning = "";
                     }
 
-                    var imgLinkExt = pro_seccion.linkext.replace("wide", "bigPreview");
+                    var imgLinkExt = pro_seccion.linkext;
 
                     var element = block +
                         '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -2367,7 +2367,7 @@ function displayPopupItemList() { //cambios jordi
 
     for (var i = 0; i < CART.length; i++) { // develop 2
 
-        var imgLinkExt = CART[i].linkext.replace("wide", "normalPreview");
+        var imgLinkExt = CART[i].linkext.replace("normalPreview", "smallThumbnail");
         var srcTienda = getImgDisponibilidadStore(i);
         var srcCentral = getImgDisponibilidadCentral(i);
 
@@ -2529,7 +2529,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         var definition = aux_prod.definition;
     }
 
-    var imgLinkExt = aux_prod.linkext.replace("wide", "bigPreview");
+    var imgLinkExt = aux_prod.linkext.replace("normalPreview", "bigPreview");
 
     html = '<ul data-role="listview" data-inset="true">' +
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + aux_prod.quantity + '</span></li>' +
@@ -2781,7 +2781,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-                    //var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview"); // TEMP !!
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "bigPreview"); // TEMP !!
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
@@ -2789,7 +2789,8 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<li>' +
                         '<div class="ui-grid-a">' +
                         //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;max-height: 350px;"></div>' +
+                        //'<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;max-height: 350px;"></div>' +
+                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;max-height: 350px;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
@@ -2878,6 +2879,9 @@ function displayPopupItemDetail(id, param, idproduct) {
                         cantidad = 0;
                     }
 
+                    
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "bigPreview"); // TEMP !!
+                    
                     div_carrusel = '<li data-role="list-divider" data-theme="c"><span>' + jsonIdiomas.popup_info_item.alternativos + '</span></li>' +
                         '<li style="height: 175px;" id="img_prod_alter"><div class="ui-grid-a" style="height: 175px;">' +
                         '<div id="imgBarraCarga"><center><label>' + jsonIdiomas.popup_errores.labelCargando + '</label></center></div>' +
@@ -2890,7 +2894,8 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;max-height: 350px;"></div>' +
+                        //'<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;max-height: 350px;"></div>' +
+                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;max-height: 350px;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
                         '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
