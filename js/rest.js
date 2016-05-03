@@ -1535,7 +1535,7 @@ function sendEmail(pantallaIntermediaPago) {
 
                     $("#texto_popup").text("No se ha podido enviar el correo a " + EMAIL_USER);
                     $('#popupAlert').popup('open');
-                    
+
                     setTimeout(function () {
                         $('#popupAlert').popup('close');
                     }, 1500);
@@ -1548,7 +1548,7 @@ function sendEmail(pantallaIntermediaPago) {
 
                     $("#texto_popup").text("Problemas al generar el correo");
                     $('#popupAlert').popup('open');
-                    
+
                     setTimeout(function () {
                         $('#popupAlert').popup('close');
                     }, 1500);
@@ -1561,7 +1561,7 @@ function sendEmail(pantallaIntermediaPago) {
 
                     $("#texto_popup").text("Faltan datos para poder enviar el correo");
                     $('#popupAlert').popup('open');
-                    
+
                     setTimeout(function () {
                         $('#popupAlert').popup('close');
                     }, 1500);
@@ -1634,15 +1634,15 @@ function imprimirPedido(pantallaIntermediaPago) {
 
             console.log("Respuesta de imprimir es:");
             console.log(response);
-
-
+            
             console.log("Enviamos a imprimir");
 
-            if (parseInt(response.result) == parseInt(1)) {
+            if (parseInt(response[10]) == 1) {
 
                 if (pantallaIntermediaPago == 1) {
 
                     $("#texto_popup").text("Pedido enviado para imprimir");
+                    $('#popupAlert').popup('open');
 
                     setTimeout(function () {
                         $('#popupAlert').popup('close');
@@ -1650,11 +1650,13 @@ function imprimirPedido(pantallaIntermediaPago) {
                     }, 1500);
 
                 } else {
+
                     //temp para puesta en tienda
                     $("#texto_popup").text("Pedido enviado para imprimir");
+                    $('#popupAlert').popup('open');
                     EMAIL_USER = "";
                     INFO_USU = "";
-                    $('#popupAlert').popup('open');
+
                     $('#email').val('');
                     //$("#spBtnAmountPerson").text(''); //TEMP
                     $("#circuloCantidad").hide();
@@ -1671,32 +1673,8 @@ function imprimirPedido(pantallaIntermediaPago) {
                         $('#popupAlert').popup('close');
                         getNodes(0);
                     }, 1500);
+
                 }
-
-                /* $("#texto_popup").text("Pedido enviado para imprimir");
-                 EMAIL_USER = "";
-                 INFO_USU = "";
-                 $('#popupAlert').popup('open');
-                 $('#email').val('');
-                 //$("#spBtnAmountPerson").text(''); //TEMP
-                 $("#circuloCantidad").hide();
-                 $("#spBtnPopupCartAmmount").hide();
-                 $("#userIcoCarrito").hide();
-                 $("#btn_finalizarpedido").hide();
-                 CART = [];
-                 nodeNames = [];
-                 nodeIds = [];
-                 nodeImg = [];
-                 EMAIL_USER = "";
-                 logout();
-                 console.log("Enviamos a imprimir");
-
-
-                 setTimeout(function () {
-                     $('#popupAlert').popup('close');
-                     getNodes(0);
-                 }, 1500);*/
-
 
             } else if (parseInt(response.result) == parseInt(0)) {
 
