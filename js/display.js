@@ -875,7 +875,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext.replace("normalPreview", "product-bigPreview");
+                var imgLinkExt = data.products[i].linkext.replace("normalPreview", "bigPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1236,7 +1236,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     }
 
 
-                    var imgLinkExt = pro_seccion.linkext.replace("normalPreview", "product-bigPreview");
+                    var imgLinkExt = pro_seccion.linkext.replace("normalPreview", "bigPreview");
 
                     var element = block +
                         '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1513,7 +1513,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext.replace("normalPreview", "product-bigPreview");
+                var imgLinkExt = data.products[i].linkext.replace("normalPreview", "bigPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1837,7 +1837,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                         var displayWarning = "";
                     }
 
-                    var imgLinkExt = pro_seccion.linkext.replace("normalPreview", "product-bigPreview");
+                    var imgLinkExt = pro_seccion.linkext.replace("normalPreview", "bigPreview");
 
                     var element = block +
                         '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
