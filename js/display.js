@@ -2253,8 +2253,10 @@ function displayItemOperations(id, param, position, borrarItem) {
 
                     }
                 }
-
+                
+                
                 var cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units));
+                if(units == 1) var cantidad = 1;
                 $("#quantity" + id).text(cantidad);
             }
         }
