@@ -248,8 +248,9 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                             var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;">' +
                                 '<center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
                                 '<br>' +
-                                '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);text-transform: uppercase;">' + data.nodes[i].name +
-                                '</label></a></div>';
+                                '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);text-transform: uppercase;">' + data.nodes[i].name + '</label>' +
+                                '</a>' +
+                                '</div>';
 
                         }
 
@@ -874,7 +875,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext;
+                var imgLinkExt = data.products[i].linkext.replace("normalPreview", "product-bigPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1235,7 +1236,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     }
 
 
-                    var imgLinkExt = pro_seccion.linkext;
+                    var imgLinkExt = pro_seccion.linkext.replace("normalPreview", "product-bigPreview");
 
                     var element = block +
                         '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1512,7 +1513,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     var displayWarning = "";
                 }
 
-                var imgLinkExt = data.products[i].linkext;
+                var imgLinkExt = data.products[i].linkext.replace("normalPreview", "product-bigPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -1836,7 +1837,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                         var displayWarning = "";
                     }
 
-                    var imgLinkExt = pro_seccion.linkext;
+                    var imgLinkExt = pro_seccion.linkext.replace("normalPreview", "product-bigPreview");
 
                     var element = block +
                         '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
@@ -2367,7 +2368,7 @@ function displayPopupItemList() { //cambios jordi
 
     for (var i = 0; i < CART.length; i++) { // develop 2
 
-        var imgLinkExt = CART[i].linkext.replace("normalPreview", "smallThumbnail");
+        var imgLinkExt = CART[i].linkext;
         var srcTienda = getImgDisponibilidadStore(i);
         var srcCentral = getImgDisponibilidadCentral(i);
 
@@ -2432,7 +2433,7 @@ function displayPopupItemList() { //cambios jordi
 
     var listadoProdTienda = tituloPopUpTienda + labelsBar + html_store;
     var listadoProdOnLine = tituloPopUpWeb + labelsBar + html_online;
-//getSendPrice();
+    //getSendPrice();
     html = '<div style="width: 100%; height:600px; overflow: scroll;">' + (CART.productosEnTienda > 0 ? listadoProdTienda : '') + (CART.productosSoloEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
 
 
@@ -2781,7 +2782,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-                    var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "bigPreview"); // TEMP !!
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "wide"); // TEMP !!
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
@@ -2879,9 +2880,9 @@ function displayPopupItemDetail(id, param, idproduct) {
                         cantidad = 0;
                     }
 
-                    
-                    var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "bigPreview"); // TEMP !!
-                    
+
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "wide"); // TEMP !!
+
                     div_carrusel = '<li data-role="list-divider" data-theme="c"><span>' + jsonIdiomas.popup_info_item.alternativos + '</span></li>' +
                         '<li style="height: 175px;" id="img_prod_alter"><div class="ui-grid-a" style="height: 175px;">' +
                         '<div id="imgBarraCarga"><center><label>' + jsonIdiomas.popup_errores.labelCargando + '</label></center></div>' +
@@ -3090,7 +3091,7 @@ function loadMenu(data) {
         //opcionesPago(opcionCompraProductos, productosEnTienda, productosEnWeb);
 
         //getSendPrice();
-        
+
         opcionesPago();
 
     });
@@ -3852,7 +3853,6 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '<br>' + CART.length + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
-
             (CART.length - CART.productosEnWeb == 0 ?
                 '<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.ammount + ')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
@@ -3864,7 +3864,6 @@ function opcionesPago() { //TEMP
                 '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br>' + CART.length + ' productos disponibles<label></div>' +
                 '</div>' +
                 '</a>' : '') +
-
             '<br>' +
             '<a data-corners="false" style="width: 576px;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</a>' +
             '</center>' +
@@ -3886,15 +3885,16 @@ function opcionesPago() { //TEMP
             '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br>' + CART.productosEnTienda + ' productos disponibles</label></div>' +
             '</div>' +
             '</a>' +
-            '<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.ammount + ');OPCIONPEDIDO=2;" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE (TODO EL PEDIDO)</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br/> ' + (CART.length) + ' productos disponibles</label></div>' +
-            '</div>' +
-            '</a>' +
+            (parseInt(CART.productosSoloEnTienda) > 0 ? '' :
+                '<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.ammount + ');OPCIONPEDIDO=2;" data-role="button" data-theme="b" >' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE (TODO EL PEDIDO)</label></div>' +
+                '</div>' +
+                '<div class="ui-grid-a">' +
+                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
+                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br/> ' + (CART.length) + ' productos disponibles</label></div>' +
+                '</div>' +
+                '</a>') +
             '<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.precioTotalProductosSoloWeb + ');OPCIONPEDIDO=3;" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
@@ -3911,7 +3911,7 @@ function opcionesPago() { //TEMP
         break;
 
     case 3:
-        opcionEnvio = 2;
+        OPCIONENVIO = 2;
         var html = '<div>' +
             '<center>' +
             '<h2>NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
@@ -3953,7 +3953,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
     pantallaActual = "opciones envio";
 
     console.log("Estamos en la opcion " + casoEnvio + "-----------------------------------------");
-//getSendPrice();
+    //getSendPrice();
     $("#divBack").html('<div onclick="opcionesPago();"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de pago</label></div></div></div>');
 
     switch (casoEnvio) {
@@ -4394,25 +4394,23 @@ function changeFormRegUser(html_register_user) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">email *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_email" name="input_email" data-type="user_reg" required="required" type="email" placeholder="nombre@email.com" autofocus data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_email" type="email" name="input_email" required  placeholder="nombre@email.com" autofocus data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Repetir email *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_email" name="input_repetir_email" data-type="user_reg" required="required" type="email" placeholder="nombre@email.com" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input size="48" id="input_repetir_email" name="input_repetir_email" required="required" type="email" placeholder="nombre@email.com" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
-
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Contraseña *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pass" name="input_pass" data-type="user_reg" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_pass" name="input_pass" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Repetir contraseña *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_pass" name="input_repetir_pass" data-type="user_reg" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_repetir_pass" name="input_repetir_pass" required="required" type="password" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
-
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Código postal *</label>' +
@@ -4430,6 +4428,38 @@ function changeFormRegUser(html_register_user) {
 
     div_form_reg_user.html(html_register_user);
     div_form_reg_user.trigger('create');
+
+
+    function ValidateEmail(email) {
+        var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        return expr.test(email);
+    };
+
+    $("#input_email").focusout(function () {
+        if (!ValidateEmail($("#input_email").val())) {
+            console.log("Email invalido");
+            $("#input_email").val("");
+            $("#input_email").attr("placeholder", "El correo no es válido");
+            $("#input_email").text("");
+        } else {
+            console.log("Email valido");
+        }
+    });
+
+   /* $("#input_repetir_email").focusout(function () {
+
+        if (!ValidateEmail($("#input_repetir_email").val())) {
+            console.log("Email invalido");
+            $("#input_repetir_email").attr("placeholder", "Correo no es válido").placeholder();
+            $("#input_repetir_email").val("");
+        } else {
+            console.log("Email valido");
+        }
+
+    });*/
+
+
+
 }
 
 function displayDomicilioFacturacionForm() {
@@ -4858,15 +4888,15 @@ function checkForm() {
             if (chk.prop('checked')) {
                 console.log('-->Control Form Entrega.');
 
-                return checkFormDireccion('entrega');
+                return (checkFormRegUser() && checkFormDireccion('entrega'));
             } else {
                 console.log('-->Control Form Entrega y facturación.');
 
-                return (checkFormDireccion('entrega') && checkFormDireccion('facturacion'));
+                return ( checkFormRegUser() && checkFormDireccion('entrega') && checkFormDireccion('facturacion'));
             }
 
         } else {
-            return checkFormDireccion('facturacion');
+            return (checkFormRegUser() && checkFormDireccion('facturacion'));
         }
 
     }
@@ -4954,9 +4984,10 @@ function checkFormRegUser() {
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> $mail_1 false.'); // TEMP !!
+        console.log('------------------------------> 1 $mail_1 false.'); // TEMP !!
 
         return false;
+        
     } else if ($mail_1.search("@") == -1) {
 
         $('#input_email').focus();
@@ -4964,7 +4995,7 @@ function checkFormRegUser() {
         $("#texto_popup").text('Email incorrecto');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> $mail_1 no @ false.'); // TEMP !!
+        console.log('------------------------------> 2 $mail_1 no @ false.'); // TEMP !!
 
         return false;
     }
@@ -4976,7 +5007,7 @@ function checkFormRegUser() {
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> $mail_2 false.'); // TEMP !!
+        console.log('------------------------------> 3 $mail_2 false.'); // TEMP !!
 
         return false;
     } else if ($mail_2.search("@") == -1) {
@@ -4986,7 +5017,7 @@ function checkFormRegUser() {
         $("#texto_popup").text('Email incorrecto');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> $mail_2 no @ false.'); // TEMP !!
+        console.log('------------------------------> 4 $mail_2 no @ false.'); // TEMP !!
 
         return false;
     }
@@ -5000,7 +5031,7 @@ function checkFormRegUser() {
         $("#texto_popup").text('Los campos de email no coinciden');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> No coinciden false.'); // TEMP !!
+        console.log('------------------------------> 5 No coinciden false.'); // TEMP !!
 
         return false;
     }
@@ -5016,7 +5047,7 @@ function checkFormRegUser() {
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> $pass_1 false.'); // TEMP !!
+        console.log('------------------------------> 6 $pass_1 false.'); // TEMP !!
 
         return false;
     }
@@ -5028,7 +5059,7 @@ function checkFormRegUser() {
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> $pass_2 false.'); // TEMP !!
+        console.log('------------------------------> 7 $pass_2 false.'); // TEMP !!
 
         return false;
     }
@@ -5042,7 +5073,7 @@ function checkFormRegUser() {
         $("#texto_popup").text('Los campos de password no coinciden');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> $pass no coinciden false.'); // TEMP !!
+        console.log('------------------------------> 8 $pass no coinciden false.'); // TEMP !!
 
         return false;
     }
@@ -5056,7 +5087,7 @@ function checkFormRegUser() {
         $("#texto_popup").text('Campo Vacio');
         $('#popupAlert').popup('open');
 
-        console.log('------------------------------> $cp_user false.'); // TEMP !!
+        console.log('------------------------------> 9 $cp_user false.'); // TEMP !!
 
         return false;
     }
