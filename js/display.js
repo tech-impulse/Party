@@ -193,30 +193,29 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                         var altura_menu = "";
                     }
 
-
                     if (position < parseInt(data.columns)) { //columnas que tendra la pantalla
                         switch (position) {
                         case 0:
-                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%;margin-left: 1.3%;">';
+                            block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + (originNode == 0 ? "" : "border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;") + '' + altura_menu + 'width:' + heig_block + 'px;margin-right: 1%;margin-bottom:1%;margin-left: 1.3%;">';
                             break;
                         case 1:
-                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
+                            block = '<div class="ui-block-b"  data-corners="false" onclick="' + extra + '" style="' + (originNode == 0 ? "" : "border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;") + '' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         case 2:
-                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
+                            block = '<div class="ui-block-c"  data-corners="false" onclick="' + extra + '" style="' + (originNode == 0 ? "" : "border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;") + '' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         case 3:
-                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
+                            block = '<div class="ui-block-d"  data-corners="false" onclick="' + extra + '" style="' + (originNode == 0 ? "" : "border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;") + '' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         case 4:
-                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
+                            block = '<div class="ui-block-e"  data-corners="false" onclick="' + extra + '" style="' + (originNode == 0 ? "" : "border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;") + '' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%">';
                             break;
                         }
 
                     } else {
 
                         position = 0;
-                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%;margin-left: 1.3%;">';
+                        block = '<div class="ui-block-a"  data-corners="false" onclick="' + extra + '" style="' + (originNode == 0 ? "" : "border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;") + '' + altura_menu + 'width:' + heig_block + 'px;margin-right:1%;margin-bottom:1%;margin-left: 1.3%;">';
 
 
                     }
@@ -244,12 +243,12 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                                 '</div>';
 
                         } else {
-
-                            var element = block + '<a  data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;">' +
-                                '<center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
+                            //border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;
+                            var element = block + //'<a  data-corners="false" data-role="button" data-theme="f" style="">' +
+                                '<br><center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
                                 '<br>' +
-                                '<label style="width: 100%;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);text-transform: uppercase;">' + data.nodes[i].name + '</label>' +
-                                '</a>' +
+                                '<label style="margin-bottom: 0px;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);text-transform: uppercase;">' + data.nodes[i].name + '</label>' +
+                                //'</a>' +
                                 '</div>';
 
                         }
@@ -2253,10 +2252,10 @@ function displayItemOperations(id, param, position, borrarItem) {
 
                     }
                 }
-                
-                
+
+
                 var cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units));
-                if(units == 1) var cantidad = 1;
+                if (units == 1) var cantidad = 1;
                 $("#quantity" + id).text(cantidad);
             }
         }
@@ -4448,17 +4447,17 @@ function changeFormRegUser(html_register_user) {
         }
     });
 
-   /* $("#input_repetir_email").focusout(function () {
+    /* $("#input_repetir_email").focusout(function () {
 
-        if (!ValidateEmail($("#input_repetir_email").val())) {
-            console.log("Email invalido");
-            $("#input_repetir_email").attr("placeholder", "Correo no es válido").placeholder();
-            $("#input_repetir_email").val("");
-        } else {
-            console.log("Email valido");
-        }
+         if (!ValidateEmail($("#input_repetir_email").val())) {
+             console.log("Email invalido");
+             $("#input_repetir_email").attr("placeholder", "Correo no es válido").placeholder();
+             $("#input_repetir_email").val("");
+         } else {
+             console.log("Email valido");
+         }
 
-    });*/
+     });*/
 
 
 
@@ -4894,7 +4893,7 @@ function checkForm() {
             } else {
                 console.log('-->Control Form Entrega y facturación.');
 
-                return ( checkFormRegUser() && checkFormDireccion('entrega') && checkFormDireccion('facturacion'));
+                return (checkFormRegUser() && checkFormDireccion('entrega') && checkFormDireccion('facturacion'));
             }
 
         } else {
@@ -4989,7 +4988,7 @@ function checkFormRegUser() {
         console.log('------------------------------> 1 $mail_1 false.'); // TEMP !!
 
         return false;
-        
+
     } else if ($mail_1.search("@") == -1) {
 
         $('#input_email').focus();
