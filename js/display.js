@@ -4005,7 +4005,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 90%;height: 45px;text-align: right;padding-right: 20px;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 25px;margin-top: 10px;float:right;"></div></div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 94%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 6%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 15px;margin-top: 15px;"></div></div>' +
             '</div>' +
             //'<div style="width:50%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</div>' +
             '<div class="ui-grid-a" style="width: 50%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
@@ -4030,7 +4030,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 90%;height: 45px;text-align: left;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 10%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 25px;margin-top: 10px;"></div></div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 94%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 6%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 15px;margin-top: 15px;"></div></div>' +
             '</div>';
 
         if (parseInt(STORE.deliveryStore) == 0 || parseInt(SEND_INFO.price_shop.result) == -3) {
@@ -4054,7 +4054,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>CLICK AND COLLECT 48H</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + '€ gastos de envio </label></div></div>' +
-                '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 90%;height: 45px;text-align: left;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 25px;margin-top: 10px;"></div></div>' +
+                '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 94%;height: 45px;text-align: right;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 6%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 15px;margin-top: 15px;"></div></div>' +
                 '</div>';
 
 
@@ -4074,7 +4074,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>CLICK AND COLLECT 48H</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
-                '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 90%;height: 45px;text-align: left;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 25px;margin-top: 10px;"></div></div>' +
+                '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 94%;height: 45px;text-align: right;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 6%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 15px;margin-top: 15px;"></div></div>' +
                 '</div>';
 
         }
@@ -4109,7 +4109,6 @@ function sistemasPago() { //TEMP
         '<input type="hidden" name="lc" value="ES">' +
         '<input type="hidden" name="return" value="https://partyfiesta.youtter.com/app/alb/pedido_finalizado.html">' +
         '<input type="hidden" name="cancel_return" value="https://partyfiesta.youtter.com/app/alb/">' +
-
         '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
 
     var add = '';
@@ -4147,19 +4146,8 @@ function sistemasPago() { //TEMP
         '<input type="hidden" name="item_number_' + (i + 1) + '" value="">' +
         '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
         '<input type="hidden" name="quantity_' + (i + 1) + '" value="1">' +
-        '<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
-        '</form>';
-
-
-    $("#formPaypal").submit(function (event) {
-
-        event.preventDefault();
-        alert("Handler for .submit() called.");
-
-        sendBasketAndOrder('paypal');
-
-    });
-
+        //'<input type="image" src="" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
+        '</form>'; //https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png
 
     var html = '<div>' +
         '<center>' +
@@ -4181,14 +4169,14 @@ function sistemasPago() { //TEMP
         //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >TARJETA / PAYPAL' +
         ///paypal +
         //'</a>' +
-        '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="sendBasketAndOrder(\'cash register\');">' +
+        '<div id="paypal" style="width: 50%;margin: 0% 0% 1% 0%;">' +
         '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 60px;line-height: 60px;" class="ui-grid-c">' +
         '<div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div>' +
         '<div class="ui-block-b" style="width: 50%;height: 60px;text-align: left;"><label>PAGAR POR PAYPAL</label></div>' +
         '<div class="ui-block-c" style="width: 35%;height: 60px;text-align: left;">' + paypal + '</div>' +
         '</div>' +
         '</div>' +
-        paypal +
+        //paypal +
         '<br>' +
         //'<div style="width:50%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </div>' +
         '<div class="ui-grid-a" style="width: 50%;background-color:#dd3324;margin; 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
@@ -4196,6 +4184,21 @@ function sistemasPago() { //TEMP
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
+
+
+    $("#paypal").click(function () {
+        sendBasketAndOrder('cash register');
+        $("#formPaypal").submit();
+    });
+    
+    /*$("#formPaypal").submit(function (event) {
+
+        event.preventDefault();
+        alert("Handler for .submit() called.");
+
+        sendBasketAndOrder('paypal');
+
+    });*/
 
 }
 

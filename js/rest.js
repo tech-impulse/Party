@@ -47,16 +47,27 @@ function getLogin(usario, contraseña) {
                     checkOut();
                 }
 
-            } else if (response.result == 0) {
-
-                console.log("No exite");
-                $("#texto_popup").text("Usuario o contraseña incorrectos");
-                $('#popupAlert').popup('open');
-
             } else if (response.result == -1) {
 
-                $("#texto_popup").text("Error login...");
-                $('#popupAlert').popup('open');
+                console.log("No exite");
+                //$("#texto_popup").text("Usuario o contraseña incorrectos");
+                //$('#popupAlert').popup('open');
+                
+                /*$('#popupCargando').popup('close');
+                
+                $("#texto_popup").text("El usuario ya existe");
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 750);*/
+                
+                alert("¡Faltan datos!");
+
+            } else if (response.result == -2 || response.result == 0) {
+
+                //$("#texto_popup").text("Error login...");
+                //$('#popupAlert').popup('open');
+                
+                alert("Usuario o contraseña incorrectos");
 
             }
 
@@ -73,8 +84,9 @@ function getLogin(usario, contraseña) {
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
                 //alert("Sin conexion a internet...");
-                $("#texto_popup").text("Sin conexion a internet");
-                $('#popupAlert').popup('open');
+                //$("#texto_popup").text("Sin conexion a internet");
+                //$('#popupAlert').popup('open');
+                alert("Sin conexion a internet");
 
             }
         },
@@ -107,17 +119,27 @@ function getRegistro(usario, contraseña, cod_pos) {
                 $("#usrnm").val(usario);
 
 
-            } else if (response.result == -2) {
+            } else if (parseInt(response.result) == -2) {
 
                 //console.log("No hay productos para este nodo");
+                               
+               
+                /*$('#popupCargando').popup('close');
+                
                 $("#texto_popup").text("El usuario ya existe");
-                $('#popupAlert').popup('open');
+                setTimeout(function () {
+                    $('#popupAlert').popup('open');
+                }, 750);*/
+                
+                alert("El usuario ya existe");
 
-            } else if (response.result == -1) {
+            } else if (parseInt(response.result) == -1) {
 
-                $("#texto_popup").text("Error registro...");
-                $('#popupAlert').popup('open');
+                //$("#texto_popup").text("Error registro...");
+                //$('#popupAlert').popup('open');
 
+                alert("Sin conexion a internet");
+                
             }
 
         },
@@ -133,8 +155,9 @@ function getRegistro(usario, contraseña, cod_pos) {
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
                 //alert("Sin conexion a internet...");
-                $("#texto_popup").text("Sin conexion a internet");
-                $('#popupAlert').popup('open');
+                //$("#texto_popup").text("Sin conexion a internet");
+                alert("Sin conexion a internet");
+                //$('#popupAlert').popup('open');
 
             }
         },
