@@ -4165,16 +4165,17 @@ function sistemasPago() { //TEMP
         //'<div class="ui-block-a"><label>TARJETA/PAYPAL</label></div>' +
         //'</div>' +
         //'</a>' +
-        '<br>' +
+        //'<br>' +
         //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >TARJETA / PAYPAL' +
         ///paypal +
         //'</a>' +
         '<div id="paypal" style="width: 50%;margin: 0% 0% 1% 0%;">' +
         '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 60px;line-height: 60px;" class="ui-grid-c">' +
         '<div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div>' +
-        '<div class="ui-block-b" style="width: 50%;height: 60px;text-align: left;"><label>PAGAR POR PAYPAL</label></div>' +
-        '<div class="ui-block-c" style="width: 35%;height: 60px;text-align: left;">' + paypal + '</div>' +
+        '<div class="ui-block-b" style="width: 45%;height: 60px;text-align: left;"><label>PAGAR POR PAYPAL</label></div>' +
+        '<div class="ui-block-c" style="width: 40%;height: 60px;text-align: left;"><img src="img/logotipo_paypal_tarjetas.png" style="margin-top: 13px;"></div>' +
         '</div>' +
+        paypal +
         '</div>' +
         //paypal +
         '<br>' +
@@ -4190,15 +4191,7 @@ function sistemasPago() { //TEMP
         sendBasketAndOrder('cash register');
         $("#formPaypal").submit();
     });
-    
-    /*$("#formPaypal").submit(function (event) {
 
-        event.preventDefault();
-        alert("Handler for .submit() called.");
-
-        sendBasketAndOrder('paypal');
-
-    });*/
 
 }
 
