@@ -1425,7 +1425,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                 var uses = data.products[i].uses;
 
                 for (var j = 0; j < count_carac; j++) {
-                    console.log("Caracteristica " + caracteristicas[j].type);
+                    //console.log("Caracteristica " + caracteristicas[j].type);
                     if (caracteristicas[j].type == "9") {
                         unidades = caracteristicas[j].name;
                         break;
@@ -1549,7 +1549,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
                     '</div>' +
                     '</div>' +
-                    '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
+                    '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
                     //'<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
                     '<div class="ui-block-a" onclick="addToCart(' + data.products[i].id + ',-1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/menos_prod.png" style="width: 45px;padding-bottom: 0px;"></div>' +
                     '<div class="ui-block-b" style="width:10%;"></div>' +

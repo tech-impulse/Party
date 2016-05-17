@@ -531,8 +531,8 @@ function updateVariblesTiposDeProducto(product, nuevoProducto, foundInCart) {
 
                 } else { //nuevo articulo solo disponible en tienda
 
-                    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                    console.log(CART.precioTotalProductosSoloWeb);
+                    //console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    //console.log(CART.precioTotalProductosSoloWeb);
                     console.log(product);
 
                     CART.productosSoloEnWeb++;
