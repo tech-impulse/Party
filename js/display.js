@@ -882,7 +882,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
-                    '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
+                    '<div style="float:right;width: 50px;padding-right: 20px;overflow:hidden"><img src="' + imgStock + '" style="width: 40px;position:absolute;float:right;"></div>' + displayWarning +
                     '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                     '</div>' +
                     '<div class="ui-grid-a">' +
@@ -906,9 +906,11 @@ function displayProducts(data, originNode, originName, param, param4) {
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
-                    '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                    //'<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                    '<div class="ui-block-a" onclick="addToCart(' + data.products[i].id + ',-1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/menos_prod.png" style="width: 40px;"></div>' +
                     '<div class="ui-block-b" style="width:10%;"></div>' +
-                    '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                    '<div class="ui-block-c" onclick="addToCart(' + data.products[i].id + ',1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/msd.png" style="width: 40px;"></div>' +
+                    //'<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                     '</div></a></div>';
 
                 htmlContent = htmlContent + element;
@@ -1243,7 +1245,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                         '<div id="circulo' + pro_seccion.id + '" class="circulo" style="width: 40px;height: 40px;position: absolute;">' +
                         '<label id="quantity' + pro_seccion.id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">' + unidades_prod + '</label>' +
                         '</div>' +
-                        '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
+                        '<div style="float:right;width: 50px;padding-right: 20px;overflow:hidden"><img src="' + imgStock + '" style="width: 40px;position:absolute;float:right;"></div>' + displayWarning +
                         '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                         '</div>' +
                         '<div class="ui-grid-a">' +
@@ -1267,9 +1269,11 @@ function displayProducts(data, originNode, originName, param, param4) {
                         '</div>' +
                         '</div>' +
                         '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
-                        '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + pro_seccion.id + ',-1);" >-</button></div>' +
+                        //'<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                        '<div class="ui-block-a" onclick="addToCart(' + pro_seccion.id + ',-1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/menos_prod.png" style="width: 45px;padding-bottom: 0px;"></div>' +
                         '<div class="ui-block-b" style="width:10%;"></div>' +
-                        '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + pro_seccion.id + ',1);">+</button></div>' +
+                        '<div class="ui-block-c" onclick="addToCart(' + pro_seccion.id + ',1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/msd.png" style="width: 45px;padding-bottom: 0px;"></div>' +
+                        //'<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                         '</div></a></div>';
 
                     htmlContent = htmlContent + element;
@@ -1520,7 +1524,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
                     '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
                     '</div>' +
-                    '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>'
+                    '<div style="float:right;width: 50px;padding-right: 20px;overflow:hidden"><img src="' + imgStock + '" style="width: 40px;position:absolute;float:right;"></div>'
                     //'<img src="' + imgStock + '" style="position:absolute;float:right;width: 40px;height: 40px;">'
                     + displayWarning +
                     '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
@@ -1545,10 +1549,11 @@ function displayProducts(data, originNode, originName, param, param4) {
                     '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
                     '</div>' +
                     '</div>' +
-                    '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
-                    '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                    //'<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                    '<div class="ui-block-a" onclick="addToCart(' + data.products[i].id + ',-1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/menos_prod.png" style="width: 45px;padding-bottom: 0px;"></div>' +
                     '<div class="ui-block-b" style="width:10%;"></div>' +
-                    '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                    '<div class="ui-block-c" onclick="addToCart(' + data.products[i].id + ',1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/msd.png" style="width: 45px;padding-bottom: 0px;"></div>' +
+                    //'<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                     '</div></a></div>';
 
 
@@ -1844,7 +1849,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                         '<div id="circulo' + pro_seccion.id + '" class="circulo" style="display:none;width: 40px;height: 40px;position: absolute;">' +
                         '<label id="quantity' + pro_seccion.id + '" style="margin-top: 9px;font-size: 22px;color: white;"></label>' +
                         '</div>' +
-                        '<div style="float:right;width: 50px;padding-right: 10px;overflow:hidden"><img src="' + imgStock + '" style="width: 50px;position:absolute;float:right;"></div>' + displayWarning +
+                        '<div style="float:right;width: 50px;padding-right: 20px;overflow:hidden"><img src="' + imgStock + '" style="width: 40px;position:absolute;float:right;"></div>' + displayWarning +
                         '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + pro_seccion.id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
                         '</div>' +
                         '<div class="ui-grid-a">' +
@@ -1867,10 +1872,11 @@ function displayProducts(data, originNode, originName, param, param4) {
                         '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');">Añadir</button>' +
                         '</div>' +
                         '</div>' +
-                        '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
-                        '<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + pro_seccion.id + ',-1);" >-</button></div>' +
+                        //'<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                        '<div class="ui-block-a" onclick="addToCart(' + pro_seccion.id + ',-1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/menos_prod.png" style="width: 45px;padding-bottom: 0px;"></div>' +
                         '<div class="ui-block-b" style="width:10%;"></div>' +
-                        '<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + pro_seccion.id + ',1);">+</button></div>' +
+                        '<div class="ui-block-c" onclick="addToCart(' + pro_seccion.id + ',1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/msd.png" style="width: 45px;padding-bottom: 0px;"></div>' +
+                        //'<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                         '</div></a></div>';
 
                     htmlContent = htmlContent + element;
@@ -2162,9 +2168,11 @@ function añadirMasProductos(data, originNode, originName, param) {
                 '</div>' +
                 '</div>' +
                 '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
-                '<div class="ui-block-a" class=" ui-btn ui-btn-b ui-shadow" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
-                '<div class="ui-block-b" style="width:10%;"></div>' +
-                '<div class="ui-block-c" class=" ui-btn ui-btn-b ui-shadow" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                //'<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
+                        '<div class="ui-block-a" onclick="addToCart(' + pro_seccion.id + ',-1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/menos_prod.png" style="width: 45px;padding-bottom: 0px;"></div>' +
+                        '<div class="ui-block-b" style="width:10%;"></div>' +
+                        '<div class="ui-block-c" onclick="addToCart(' + pro_seccion.id + ',1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/msd.png" style="width: 45px;padding-bottom: 0px;"></div>' +
+                        //'<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                 '</div></a></div>';
 
 
@@ -5223,33 +5231,16 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_ciudad').val(INFO_USU.city);
         $('#input_num_direccion').val(INFO_USU.addressNumber);
 
-        /*$('#selectCountry option').each(function () {
-            if (this.value == INFO_USU.country) {
-                console.log('- Valor encontrado en selectCountry marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
-                this.selected = true;
-            } else {
-                this.selected = false;
-            }
-        });*/
-
-        $('#selectCountry option[value="' + INFO_USU.country + '"]').attr('selected', 'selected');
+        //$('#selectCountry option[value="' + INFO_USU.country + '"]').attr('selected', 'selected');
+        $('#selectCountry option[value="' + INFO_USU.country + '"]').prop("selected",true);
         $("#selectCountry").selectmenu('refresh', true);
+        
+        loadSelectProvinciasFromCountry('div_input_provincia', INFO_USU.country , 'selectProvince');
 
-        //$('#input_pais').val(INFO_USU.country);
-
-        /*$('#selectProvince option').each(function () {
-            if (this.value == INFO_USU.province) {
-                console.log('- Valor encontrado en selectProvince marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
-                this.selected = true;
-            } else {
-                this.selected = false;
-            }
-        });*/
-
-        $('#selectProvince > option[value="' + INFO_USU.province + '"]').attr('selected', 'selected');
+        //$('#selectProvince > option[value="' + INFO_USU.province + '"]').attr('selected', 'selected');
+        $('#selectProvince > option[value="' + INFO_USU.province + '"]').prop("selected",true);
         $("#selectProvince").selectmenu('refresh', true);
 
-        //$('#input_provincia').val(INFO_USU.province);
 
     } else {
 
@@ -5265,33 +5256,17 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_ciudad_2').val(INFO_USU.city);
         $('#input_num_direccion_2').val(INFO_USU.addressNumber);
 
-        /*$('#selectCountry_2 option').each(function () {
-            if (this.value == INFO_USU.country) {
-                console.log('- Valor encontrado en selectCountry_2 marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
-                this.selected = true;
-            } else {
-                this.selected = false;
-            }
-        });*/
-
-        $('#selectCountry_2 option[value="' + INFO_USU.country + '"]').attr('selected', 'selected');
+        $('#selectCountry_2 option[value="' + INFO_USU.country + '"]').prop("selected",true);
         $("#selectCountry_2").selectmenu('refresh', true);
-
-        //$('#selectCountry_2').val(INFO_USU.country);
-
-        /*$('#selectProvince_2 option').each(function () {
-            if (this.value == INFO_USU.province) {
-                console.log('- Valor encontrado en selectProvince_2 marcada opcion: ' + this.value + ' - ' + this.text); // TEMP!!
-                this.selected = true;
-            } else {
-                this.selected = false;
-            }
-        });*/
-
-        $('#selectProvince_2 option[value="' + INFO_USU.province + '"]').attr('selected', 'selected');
+        
+        //getProvincesFromCountry(idCountry);
+        
+        loadSelectProvinciasFromCountry('div_input_provincia_2', INFO_USU.country, 'selectProvince_2');
+        
+ 
+        $('#selectProvince_2 option[value="' + INFO_USU.province + '"]').prop("selected",true);
         $("#selectProvince_2").selectmenu('refresh', true);
 
-        //$('#input_provincia_2').val(INFO_USU.province);
 
     }
 }
