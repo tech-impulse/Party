@@ -2171,10 +2171,10 @@ function añadirMasProductos(data, originNode, originName, param) {
                 '</div>' +
                 '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
                 //'<div class="ui-block-a" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="restar" onclick="addToCart(' + data.products[i].id + ',-1);" >-</button></div>' +
-                        '<div class="ui-block-a" onclick="addToCart(' + pro_seccion.id + ',-1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/menos_prod.png" style="width: 45px;padding-bottom: 0px;"></div>' +
-                        '<div class="ui-block-b" style="width:10%;"></div>' +
-                        '<div class="ui-block-c" onclick="addToCart(' + pro_seccion.id + ',1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/msd.png" style="width: 45px;padding-bottom: 0px;"></div>' +
-                        //'<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
+                '<div class="ui-block-a" onclick="addToCart(' + pro_seccion.id + ',-1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/menos_prod.png" style="width: 45px;padding-bottom: 0px;"></div>' +
+                '<div class="ui-block-b" style="width:10%;"></div>' +
+                '<div class="ui-block-c" onclick="addToCart(' + pro_seccion.id + ',1);" style="width: 45%;background-color: #0197d4;height: 45px;"><img src="img/msd.png" style="width: 45px;padding-bottom: 0px;"></div>' +
+                //'<div class="ui-block-c" onclick="" style="width: 45%;"><button  data-corners="false" data-theme="b" id="sumar" onclick="addToCart(' + data.products[i].id + ',1);">+</button></div>' +
                 '</div></a></div>';
 
 
@@ -4015,7 +4015,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 94%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 6%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 15px;margin-top: 15px;"></div></div>' +
+            //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width:4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
             '</div>' +
             //'<div style="width:50%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</div>' +
             '<div class="ui-grid-a" style="width: 50%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
@@ -4040,7 +4041,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 94%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 6%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 15px;margin-top: 15px;"></div></div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
+            //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin-top: 15px;"></div></div>' +
             '</div>';
 
         if (parseInt(STORE.deliveryStore) == 0 || parseInt(SEND_INFO.price_shop.result) == -3) {
@@ -4064,7 +4066,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>CLICK AND COLLECT 48H</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + '€ gastos de envio </label></div></div>' +
-                '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 94%;height: 45px;text-align: right;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 6%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 15px;margin-top: 15px;"></div></div>' +
+                '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
+                //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin-top: 15px;"></div></div>' +
                 '</div>';
 
 
@@ -4084,7 +4087,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>CLICK AND COLLECT 48H</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
-                '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 94%;height: 45px;text-align: right;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 6%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/icono_info.png" style="width: 15px;margin-top: 15px;"></div></div>' +
+                '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
+                //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin-top: 15px;"></div></div>' +
                 '</div>';
 
         }
@@ -4542,19 +4546,13 @@ function displayDomicilioFacturacionForm() {
         '<div style="height: 35px;">Es necesario <a id="login2" onclick="displayLogin();" style="margin:10px;color: blue;" class="ui-link">Identificarse</a> o <a id="registrarse_reg_domicilio" onclick="changeFormRegUser();" style="margin:10px;color: green;" class="ui-link">Registrarse</a></div>' +
         '</center></div>';
 
-    html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
-        '<form id="formFacturacion" autocomplete="on"><div id="div_form_reg_user">' +
-
+    html = //'<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
+        //'<form id="formFacturacion" autocomplete="on"><div id="div_form_reg_user">' +
         //(INFO_USU.id != undefined ? '<div id="contenedorInfoUsuario"></div>' : html_login_user) +
-
-        html_login_user +
-
-        '</div>' +
-
+        //html_login_user +
+        //'</div>' +
         '<div id="div_direcion_facturacion">' + // --> FORMULARIO DIRECCION FACTURACION !!!!    **********
-
         '<h2>Dirección de Facturación</h2>' +
-
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Nombre</label>' +
@@ -4684,79 +4682,77 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         '</center></div>';
 
     html = '<div id="div_registrarse" style="width:80%; margin:0 auto;">' +
-        '<form id="formDirecciones" autocomplete="on"><div id="div_form_reg_user">' +
+        //'<form id="formDirecciones" autocomplete="on"><div id="div_form_reg_user">' +
 
         //(INFO_USU.id != undefined ? '<div id="contenedorInfoUsuario"></div>' : html_login_user) +
 
-        html_login_user +
+        //html_login_user +
 
-        '</div>' +
-        '<h2 id="h2_direccion">Dirección</h2>' +
-
-        '<div class="ui-grid-a" style="width:80%;">' + // --> CHECK DIRECCION !!!!    **********
-        '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u">Dirección de entrega y facturación coinciden</label>' +
+        //'</div>' +
+        '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;">Dirección</h2><hr style="background-color:#0197d4;">' +
+        '<div class="ui-grid-a" style="margin-top: 10px;height: 25px;">' + // --> CHECK DIRECCION !!!!    **********
+        '<div class="ui-block-a" style="width: 40%;">' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">Dirección de entrega y facturación coinciden</label>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<div class=" ui-checkbox">' +
-        '<input id="check_misma_direccion" type="checkbox" value="Click me" onclick="" data-cacheval="false" checked>' +
-        '</div>' +
-        '</div>' +
-        '</div><br/>' +
-
-        '<div class="ui-grid-a">' +
-        '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u">Nombre *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario" name="input_nombreUsuario" data-type="entrega" required="required" type="text" placeholder="Nombre" data-clear-btn="true"></div>' + //autofocus 
-        '</div>' +
-        '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p">Apellidos *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos" name="input_apellidos" data-type="entrega" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>' +
+        //'<div class=" ui-checkbox">' +
+        '<input id="check_misma_direccion" style="margin-top: -7px;" type="checkbox" value="Click me" onclick="" data-cacheval="false" checked>' +
+        //'</div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u">Tel&eacute;fono *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono" name="input_telefono" data-type="entrega" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">Nombre *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_nombreUsuario" name="input_nombreUsuario" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' + //autofocus 
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p">DNI/CIF *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif" name="input_dni_cif" data-type="entrega" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Apellidos *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_apellidos" name="input_apellidos" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
-
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p">Dirección *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion" name="input_direccion" data-type="entrega" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">Tel&eacute;fono *</label>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_telefono" name="input_telefono" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p">Número *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion" name="input_num_direccion" data-type="entrega" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">DNI/CIF *</label>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_dni_cif" name="input_dni_cif" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p">Código postal</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal" name="input_postal" data-type="entrega" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Dirección *</label>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_direccion" name="input_direccion" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u">Ciudad</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad" name="input_ciudad" data-type="entrega" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Número *</label>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_num_direccion" name="input_num_direccion" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Código postal</label>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_postal" name="input_postal" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Ciudad</label>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_ciudad" name="input_ciudad" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p">País *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">País *</label>' +
 
-        '<div id="div_input_pais" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        '<div id="div_input_pais" class="" data-corners="false" style="width:80%;"></div>' +
 
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u">Provincia *</label>' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Provincia *</label>' +
 
-        '<div id="div_input_provincia" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        '<div id="div_input_provincia" class="" data-corners="false" style="width:80%;"></div>' +
 
         '</div>' +
         '</div>' +
@@ -4768,77 +4764,73 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Nombre *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_nombreUsuario_2" name="input_nombreUsuario_2" data-type="facturacion" required="required" type="text" placeholder="Nombre" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_nombreUsuario_2" name="input_nombreUsuario_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Apellidos *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_apellidos_2" name="input_apellidos_2" data-type="facturacion" required="required" type="text" placeholder="Apellido1 Apellido2" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_apellidos_2" name="input_apellidos_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u">Tel&eacute;fono *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_telefono_2" name="input_telefono_2" data-type="facturacion" required="required" type="text" placeholder="930000000" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_telefono_2" name="input_telefono_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">DNI/CIF *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_dni_cif_2" name="input_dni_cif_2" data-type="facturacion" required="required" type="text" placeholder="45444444T" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_dni_cif_2" name="input_dni_cif_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
-
-        /*'<div class="ui-grid-solo">' +
-        '<label class="youpasswd" data-icon="p">Dirección (calle, número, escalera, piso)</label>' +
-        '<div class="ui-block-a" style="width:90%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" required="required" type="number" placeholder="Dirección" data-clear-btn="true"></div>' +
-        '</div>' +*/
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Dirección *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_direccion_2" name="input_direccion_2" data-type="facturacion" required="required" type="text" placeholder="Dirección" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_direccion_2" name="input_direccion_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p">Número *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_num_direccion_2" name="input_num_direccion_2" data-type="facturacion" required="required" type="text" placeholder="Número" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_num_direccion_2" name="input_num_direccion_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
 
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">Código postal *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_postal_2" name="input_postal_2" data-type="facturacion" required="required" type="text" placeholder="00000" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_postal_2" name="input_postal_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Ciudad *</label>' +
-        '<div class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"><input id="input_ciudad_2" name="input_ciudad_2" data-type="facturacion" required="required" type="text" placeholder="Barcelona" data-clear-btn="true"></div>' +
+        '<div class="l" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_ciudad_2" name="input_ciudad_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p">País *</label>' +
 
-        '<div id="div_input_pais_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        '<div id="div_input_pais_2" class="" style="width:80%;"></div>' +
 
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u">Provincia *</label>' +
 
-        '<div id="div_input_provincia_2" class="ui-body-inherit ui-corner-all" style="width:80%; margin:0 auto;"></div>' +
+        '<div id="div_input_provincia_2" class="" style="width:80%;"></div>' +
 
         '</div>' +
         '</div>' +
-
         '</div>' +
-
-        //'<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" onclick="sistemasPago();">Continuar</button>' +
-        '<button type="button" id="button_continuar_direcciones" class="ui-btn ui-shadow ui-corner-all" >Continuar</button>' +
 
         '</form>' +
-        '</div>' +
 
+        '<button type="button" data-corners="false" id="button_continuar_direcciones" class="" style="text-transform: uppercase;background-color:#0197d4;">Continuar</button>' +
+        //'<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
         '<center>' +
-        '<br/>' +
-        '<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
-        '</center>';
+        '<div class="ui-grid-a" style="background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
+        '</center>' +
+        '</div>';
+
+    //'<center>' +
+    //'<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
+    //'</center>';
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
@@ -5234,13 +5226,13 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_num_direccion').val(INFO_USU.addressNumber);
 
         //$('#selectCountry option[value="' + INFO_USU.country + '"]').attr('selected', 'selected');
-        $('#selectCountry option[value="' + INFO_USU.country + '"]').prop("selected",true);
+        $('#selectCountry option[value="' + INFO_USU.country + '"]').prop("selected", true);
         $("#selectCountry").selectmenu('refresh', true);
-        
-        loadSelectProvinciasFromCountry('div_input_provincia', INFO_USU.country , 'selectProvince');
+
+        loadSelectProvinciasFromCountry('div_input_provincia', INFO_USU.country, 'selectProvince');
 
         //$('#selectProvince > option[value="' + INFO_USU.province + '"]').attr('selected', 'selected');
-        $('#selectProvince > option[value="' + INFO_USU.province + '"]').prop("selected",true);
+        $('#selectProvince > option[value="' + INFO_USU.province + '"]').prop("selected", true);
         $("#selectProvince").selectmenu('refresh', true);
 
 
@@ -5258,15 +5250,15 @@ function cargaDatosUsuarioAFormularioRegistro() {
         $('#input_ciudad_2').val(INFO_USU.city);
         $('#input_num_direccion_2').val(INFO_USU.addressNumber);
 
-        $('#selectCountry_2 option[value="' + INFO_USU.country + '"]').prop("selected",true);
+        $('#selectCountry_2 option[value="' + INFO_USU.country + '"]').prop("selected", true);
         $("#selectCountry_2").selectmenu('refresh', true);
-        
+
         //getProvincesFromCountry(idCountry);
-        
+
         loadSelectProvinciasFromCountry('div_input_provincia_2', INFO_USU.country, 'selectProvince_2');
-        
- 
-        $('#selectProvince_2 option[value="' + INFO_USU.province + '"]').prop("selected",true);
+
+
+        $('#selectProvince_2 option[value="' + INFO_USU.province + '"]').prop("selected", true);
         $("#selectProvince_2").selectmenu('refresh', true);
 
 

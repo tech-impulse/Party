@@ -23,23 +23,18 @@ function getLogin(usario, contraseña) {
                 console.log("Todo ok");
                 console.log(response);
                 LOGGED = true;
-                //console.log(response.info);
+
                 INFO_USU = response.info;
                 $('#popupLogin').popup('close');
                 $("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
                 $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
 
-                //if ( $("#login2").length > 0 ) {    // Si estoy en formulario de domicilio y hago login, vacio opciones de registro de usuario.
                 if ($("#contenedorInfoUsuario").is(':visible')) {
+                    
                     $("#contenedorInfoUsuario").hide();
-
                     cargaDatosUsuarioAFormularioRegistro();
                 }
-
-                /*if ( $("#input_nombreUsuario").length > 0 ) {    // Si estoy en formulario de domicilio y hago login, vacio opciones de registro de usuario.
-                    $("#contenedorInfoUsuario").hide();
-                }*/
 
                 if (REDIRECT) {
                     console.log("Redirigeme");
@@ -50,24 +45,22 @@ function getLogin(usario, contraseña) {
             } else if (response.result == -1) {
 
                 console.log("No exite");
-                //$("#texto_popup").text("Usuario o contraseña incorrectos");
-                //$('#popupAlert').popup('open');
                 
-                /*$('#popupCargando').popup('close');
-                
-                $("#texto_popup").text("El usuario ya existe");
-                setTimeout(function () {
-                    $('#popupAlert').popup('open');
-                }, 750);*/
-                
-                alert("¡Faltan datos!");
+                $.jAlert({ 
+                    'title': 'Alerta',
+                    'content': '¡Faltan datos!',
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
 
             } else if (response.result == -2 || response.result == 0) {
 
-                //$("#texto_popup").text("Error login...");
-                //$('#popupAlert').popup('open');
-                
-                alert("Usuario o contraseña incorrectos");
+                 $.jAlert({ 
+                    'title': 'Alerta',
+                    'content': 'Usuario o contraseña incorrectos',
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
 
             }
 
@@ -75,18 +68,27 @@ function getLogin(usario, contraseña) {
         error: function (jqXHR, textStatus, errorThrown) {
 
             if (textStatus === "timeout") {
-                //do something on timeout
+               
                 console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
+               
+                $.jAlert({ 
+                    'title': 'Alerta',
+                    'content': "Error de TimeOut... compruebe su conexion de internet",
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
 
             } else {
 
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
-                //alert("Sin conexion a internet...");
-                //$("#texto_popup").text("Sin conexion a internet");
-                //$('#popupAlert').popup('open');
-                alert("Sin conexion a internet");
+                           
+                $.jAlert({
+                    'title': 'Alerta',
+                    'content': "Sin conexion a internet",
+                    'theme': 'black',
+                    'size': 'xsm'
+                });
 
             }
         },
@@ -120,44 +122,48 @@ function getRegistro(usario, contraseña, cod_pos) {
 
 
             } else if (parseInt(response.result) == -2) {
-
-                //console.log("No hay productos para este nodo");
-                               
-               
-                /*$('#popupCargando').popup('close');
                 
-                $("#texto_popup").text("El usuario ya existe");
-                setTimeout(function () {
-                    $('#popupAlert').popup('open');
-                }, 750);*/
-                
-                alert("El usuario ya existe");
+                $.jAlert({
+                    'title': 'Alerta',
+                    'content': "El usuario ya existe",
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
 
             } else if (parseInt(response.result) == -1) {
-
-                //$("#texto_popup").text("Error registro...");
-                //$('#popupAlert').popup('open');
-
-                alert("Sin conexion a internet");
                 
+                $.jAlert({
+                    'title': 'Alerta',
+                    'content': "Sin conexion a internet",
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
+
             }
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
 
             if (textStatus === "timeout") {
-                //do something on timeout
-                console.log("Timeout");
-                alert("Error de TimeOut... compruebe su conexion de internet");
+  
+                $.jAlert({
+                    'title': 'Alerta',
+                    'content': "Error de TimeOut... compruebe su conexion de internet",
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
 
             } else {
 
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
-                //alert("Sin conexion a internet...");
-                //$("#texto_popup").text("Sin conexion a internet");
-                alert("Sin conexion a internet");
-                //$('#popupAlert').popup('open');
+                                
+                $.jAlert({
+                    'title': 'Alerta',
+                    'content': "Sin conexion a internet",
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
 
             }
         },
@@ -1657,7 +1663,7 @@ function imprimirPedido(pantallaIntermediaPago) {
 
             console.log("Respuesta de imprimir es:");
             console.log(response);
-            
+
             console.log("Enviamos a imprimir");
 
             if (parseInt(response[10]) == 1) {
