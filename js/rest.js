@@ -30,11 +30,14 @@ function getLogin(usario, contraseña) {
                 $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
 
-                if ($("#contenedorInfoUsuario").is(':visible')) {
+                /*if ($("#contenedorInfoUsuario").is(':visible')) {
                     
                     $("#contenedorInfoUsuario").hide();
                     cargaDatosUsuarioAFormularioRegistro();
-                }
+                    
+                }*/
+                
+                cargaDatosUsuarioAFormularioRegistro();
 
                 if (REDIRECT) {
                     console.log("Redirigeme");

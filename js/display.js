@@ -3868,7 +3868,7 @@ function opcionesPago() { //TEMP
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
-            '</div><br>' +
+            '</div>' +
             (CART.length - CART.productosEnWeb == 0 ?
                 /*'<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.ammount + ')" data-role="button" data-theme="b" >' +
                 '<div class="ui-grid-a">' +
@@ -4689,7 +4689,7 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         //html_login_user +
 
         //'</div>' +
-        '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;">Dirección</h2><hr style="background-color:#0197d4;">' +
+        '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;">Dirección</h2><hr style="border-color:#0197d4;">' +
         '<div class="ui-grid-a" style="margin-top: 10px;height: 25px;">' + // --> CHECK DIRECCION !!!!    **********
         '<div class="ui-block-a" style="width: 40%;">' +
         '<label class="uname" data-icon="u" style="color:#0197d4;">Dirección de entrega y facturación coinciden</label>' +
@@ -4703,129 +4703,112 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u" style="color:#0197d4;">Nombre *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_nombreUsuario" name="input_nombreUsuario" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' + //autofocus 
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_nombreUsuario" name="input_nombreUsuario" data-type="entrega" required="required" type="text" placeholder="""></div>' + //autofocus   data-clear-btn="true
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Apellidos *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_apellidos" name="input_apellidos" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_apellidos" name="input_apellidos" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u" style="color:#0197d4;">Tel&eacute;fono *</label>' +
-        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_telefono" name="input_telefono" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_telefono" name="input_telefono" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">DNI/CIF *</label>' +
-        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_dni_cif" name="input_dni_cif" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_dni_cif" name="input_dni_cif" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Dirección *</label>' +
-        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_direccion" name="input_direccion" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_direccion" name="input_direccion" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Número *</label>' +
-        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_num_direccion" name="input_num_direccion" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_num_direccion" name="input_num_direccion" data-type="entrega" required="required" type="text" placeholder="" ></div>' +
         '</div>' +
         '</div>' +
-
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Código postal</label>' +
-        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_postal" name="input_postal" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_postal" name="input_postal" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Ciudad</label>' +
-        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_ciudad" name="input_ciudad" data-type="entrega" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_ciudad" name="input_ciudad" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">País *</label>' +
-
         '<div id="div_input_pais" class="" data-corners="false" style="width:80%;"></div>' +
-
         '</div>' +
         '<div class="ui-block-b">' +
         '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Provincia *</label>' +
-
         '<div id="div_input_provincia" class="" data-corners="false" style="width:80%;"></div>' +
-
         '</div>' +
         '</div>' +
-
-        '<div id="div_direcion_facturacion" style="display:none;">' + // --> FORMULARIO DIRECCION FACTURACION !!!!    **********
-
-        '<h2>Dirección de Facturación</h2>' +
-
+        '<div id="div_direcion_facturacion" style="display:none;">' + // ----------------------------------------> FORMULARIO DIRECCION FACTURACION !!!!    **********
+        '<h2 style="margin: 0 0 0 0;color:#0197d4;">Dirección de Facturación</h2><hr style="border-color:#0197d4;">' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u">Nombre *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_nombreUsuario_2" name="input_nombreUsuario_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">Nombre *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_nombreUsuario_2" name="input_nombreUsuario_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p">Apellidos *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_apellidos_2" name="input_apellidos_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Apellidos *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_apellidos_2" name="input_apellidos_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u">Tel&eacute;fono *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_telefono_2" name="input_telefono_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">Tel&eacute;fono *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_telefono_2" name="input_telefono_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p">DNI/CIF *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_dni_cif_2" name="input_dni_cif_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">DNI/CIF *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_dni_cif_2" name="input_dni_cif_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p">Dirección *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_direccion_2" name="input_direccion_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Dirección *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_direccion_2" name="input_direccion_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p">Número *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_num_direccion_2" name="input_num_direccion_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Número *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_num_direccion_2" name="input_num_direccion_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p">Código postal *</label>' +
-        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_postal_2" name="input_postal_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Código postal *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_postal_2" name="input_postal_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u">Ciudad *</label>' +
-        '<div class="l" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" id="input_ciudad_2" name="input_ciudad_2" data-type="facturacion" required="required" type="text" placeholder="" data-clear-btn="true"></div>' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Ciudad *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_ciudad_2" name="input_ciudad_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p">País *</label>' +
-
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">País *</label>' +
         '<div id="div_input_pais_2" class="" style="width:80%;"></div>' +
-
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u">Provincia *</label>' +
-
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Provincia *</label>' +
         '<div id="div_input_provincia_2" class="" style="width:80%;"></div>' +
-
         '</div>' +
         '</div>' +
         '</div>' +
-
         '</form>' +
-
-        '<button type="button" data-corners="false" id="button_continuar_direcciones" class="" style="text-transform: uppercase;background-color:#0197d4;">Continuar</button>' +
+        '<button type="button" data-corners="false" id="button_continuar_direcciones" class="" style="width: 90%;text-transform: uppercase;background-color:#0197d4;">Continuar</button>' +
         //'<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
-        '<center>' +
-        '<div class="ui-grid-a" style="background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
-        '</center>' +
+        //'<center>' +
+        '<div class="ui-grid-a" style="width: 90%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="padding-left: 290px;width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width:10%;height:45px;padding-left: 20px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
+        //'</center>' +
         '</div>';
 
     //'<center>' +
@@ -5215,7 +5198,7 @@ function cargaDatosUsuarioAFormularioRegistro() {
 
         console.log('Cargando datos de usuario en Direccion entrega');
 
-        $('#input_nombreUsuario').val(INFO_USU.name)
+        $('#input_nombreUsuario').val(INFO_USU.name);
         $('#input_apellidos').val(INFO_USU.surname);
         $('#input_telefono').val(INFO_USU.phone);
         $('#input_dni_cif').val(INFO_USU.NIN);
@@ -5317,4 +5300,21 @@ function pagarEnCajaPrevioPago() {
         '</div>';
     $("#divContent").html(html);
     $("#divContent").trigger('create');
+}
+
+function pantallaInterLoginPago() {
+
+    var html = '<div style="width: 30%;margin: 0 auto;">' +
+        '<div style="background-color:#0197d4;text-transform:uppercase;height: 50px;line-height: 50px;margin-bottom: 10px;"><label style="font-size: x-large;text-align: center;color:white;">INFO USUARIO</label></div>' +
+        '<div style="background-color:white;height: 50px;line-height: 50px;margin-bottom: 10px;"><label style="font-size: larger;text-align: center;text-align: center;color:#0197d4;">Es necesario:</label></div>' +
+        '<div class="ui-grid-a" style="height: 50px;line-height: 50px;">' +
+        '<div class="ui-block-a" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;text-transform: uppercase;line-height: 45px;"><label style="text-align: center;text-align: center;color:#0197d4;">Identificarse</label></div>' +
+        '<div class="ui-block-b" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;text-transform: uppercase;line-height: 45px;"><label style="text-align: center;text-align: center;color:#0197d4;">Registrarse</label></div>' +
+        '</div>' +
+        '</div>';
+
+    $("#divContent").html(html);
+    $("#divContent").trigger('create');
+
+
 }
