@@ -30,14 +30,17 @@ function getLogin(usario, contraseña) {
                 $('#login').attr('onclick', "logout()");
                 $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
 
-                /*if ($("#contenedorInfoUsuario").is(':visible')) {
-                    
-                    $("#contenedorInfoUsuario").hide();
+                if (pantallaActual == "opciones envio") {
+
+                    if (OPCIONENTREGA == "dom") {
+                        displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_dom.taxPrice, SEND_INFO.price_dom.totalPrice, SEND_INFO.price_dom.basePrice);
+                    } else {
+                        displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_shop.taxPrice, SEND_INFO.price_shop.totalPrice, SEND_INFO.price_shop.basePrice);
+                    }
+
                     cargaDatosUsuarioAFormularioRegistro();
-                    
-                }*/
-                
-                cargaDatosUsuarioAFormularioRegistro();
+
+                }
 
                 if (REDIRECT) {
                     console.log("Redirigeme");
@@ -48,8 +51,8 @@ function getLogin(usario, contraseña) {
             } else if (response.result == -1) {
 
                 console.log("No exite");
-                
-                $.jAlert({ 
+
+                $.jAlert({
                     'title': 'Alerta',
                     'content': '¡Faltan datos!',
                     'theme': 'gray',
@@ -58,7 +61,7 @@ function getLogin(usario, contraseña) {
 
             } else if (response.result == -2 || response.result == 0) {
 
-                 $.jAlert({ 
+                $.jAlert({
                     'title': 'Alerta',
                     'content': 'Usuario o contraseña incorrectos',
                     'theme': 'gray',
@@ -71,10 +74,10 @@ function getLogin(usario, contraseña) {
         error: function (jqXHR, textStatus, errorThrown) {
 
             if (textStatus === "timeout") {
-               
+
                 console.log("Timeout");
-               
-                $.jAlert({ 
+
+                $.jAlert({
                     'title': 'Alerta',
                     'content': "Error de TimeOut... compruebe su conexion de internet",
                     'theme': 'gray',
@@ -85,7 +88,7 @@ function getLogin(usario, contraseña) {
 
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
-                           
+
                 $.jAlert({
                     'title': 'Alerta',
                     'content': "Sin conexion a internet",
@@ -125,7 +128,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 
 
             } else if (parseInt(response.result) == -2) {
-                
+
                 $.jAlert({
                     'title': 'Alerta',
                     'content': "El usuario ya existe",
@@ -134,7 +137,7 @@ function getRegistro(usario, contraseña, cod_pos) {
                 });
 
             } else if (parseInt(response.result) == -1) {
-                
+
                 $.jAlert({
                     'title': 'Alerta',
                     'content': "Sin conexion a internet",
@@ -148,7 +151,7 @@ function getRegistro(usario, contraseña, cod_pos) {
         error: function (jqXHR, textStatus, errorThrown) {
 
             if (textStatus === "timeout") {
-  
+
                 $.jAlert({
                     'title': 'Alerta',
                     'content': "Error de TimeOut... compruebe su conexion de internet",
@@ -160,7 +163,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 
                 restError(jqXHR, "tiendas");
                 console.log("Sin conexion");
-                                
+
                 $.jAlert({
                     'title': 'Alerta',
                     'content': "Sin conexion a internet",
@@ -2432,4 +2435,227 @@ function getSendPrice(precio) {
         },
     });
 
+}
+
+
+function updateRegistroUser(user,
+    sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+    facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince, pantallaSiguiente) {
+
+    console.log('Arguments update: ' + arguments); // TEMP
+    // Datos que se van a enviar
+    var dataSend = {
+        user: user,
+
+        sendName: sendName,
+        sendSurname: sendSurname,
+        sendPhone: sendPhone,
+        sendNIN: sendNIN,
+        sendAddress: sendAddress,
+        sendNumber: sendNumber,
+        sendCity: sendCity,
+        sendProvince: sendProvince,
+        sendPC: sendPC,
+        sendCountry: sendCountry,
+        //userPostalCode: userPostalCode,
+
+        facName: facName,
+        facSurname: facSurname,
+        facPhone: facPhone,
+        facNIN: facNIN,
+        facAddress: facAddress,
+        facNumber: facNumber,
+        facCity: facCity,
+        facProvince: facProvince,
+        facPC: facPC,
+        facCountry: facCountry
+    };
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'updateUser.php',
+        dataType: 'json',
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            if (response.result == 1) {
+
+                console.log("Todo ok");
+                console.log(response);
+                LOGGED = true;
+                //console.log(response.info);
+                INFO_USU = response.info;
+                //$('#popupLogin').popup('close');
+                $("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
+                $('#login').attr('onclick', "logout()");
+                $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
+
+                /*if (REDIRECT) {
+                    console.log("Redirigeme");
+                    REDIRECT = false;
+                    checkOut();
+                }*/
+
+                switch (pantallaSiguiente) {
+                case 0:
+                    sistemasPago();
+                    break;
+
+                case 1:
+                    formularioTiendaDestino();
+                    break;
+                }
+
+            } else if (response.result == -1) {
+
+                console.log("Número de parametros incorrecto");
+                $("#texto_popup").text("Número de parametros incorrecto");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -2) {
+
+                $("#texto_popup").text("El usuario no existe");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
+}
+
+function sendRegistroDomicilio(user, password, userPostalCode,
+    sendName, sendSurname, sendPhone, sendNIN, sendAddress, sendNumber, sendCity, sendProvince, sendPC, sendCountry,
+    facName, facSurname, facPhone, facNIN, facAddress, facNumber, facPC, facCity, facCountry, facProvince, pantallaSiguiente) {
+
+    console.log('Arguments update: ' + arguments); // TEMP
+
+    // Datos que se van a enviar
+    var dataSend = {
+        user: user,
+        password: password,
+        userPostalCode: userPostalCode,
+
+        sendName: sendName,
+        sendSurname: sendSurname,
+        sendPhone: sendPhone,
+        sendNIN: sendNIN,
+        sendAddress: sendAddress,
+        sendNumber: sendNumber,
+        sendCity: sendCity,
+        sendProvince: sendProvince,
+        sendPC: sendPC,
+        sendCountry: sendCountry,
+
+        facName: facName,
+        facSurname: facSurname,
+        facPhone: facPhone,
+        facNIN: facNIN,
+        facAddress: facAddress,
+        facNumber: facNumber,
+        facCity: facCity,
+        facProvince: facProvince,
+        facPC: facPC,
+        facCountry: facCountry
+    };
+
+    console.log('Arguments update2: ' + dataSend); // TEMP
+
+    var request = $.ajax({
+        data: dataSend,
+        url: urlServices + 'register.php',
+        dataType: 'json',
+        type: 'POST',
+        timeout: 10000, //10 seg
+        success: function (response) {
+
+            if (response.result == 1) {
+
+                console.log("Todo ok");
+                console.log(response);
+                LOGGED = true;
+                //console.log(response.info);
+                INFO_USU = response.info;
+                //$('#popupLogin').popup('close');
+                $("#login").text("Bienvenido/a " + response.info.name + ","); // + usario + "
+                $('#login').attr('onclick', "logout()");
+                $("#login").append('<img src="http://partyfiesta.youtter.com/webservices/img/nodos/salir.jpg" style="width: 15px;margin-top: 0px;">');
+
+                /*if (REDIRECT) {
+                    console.log("Redirigeme");
+                    REDIRECT = false;
+                    checkOut();
+                }*/
+
+                switch (pantallaSiguiente) {
+                case 0:
+                    sistemasPago();
+                    break;
+
+                case 1:
+                    formularioTiendaDestino();
+                    break;
+                case 2:
+
+                    if (OPCIONENTREGA == "dom") {
+                        displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_dom.taxPrice, SEND_INFO.price_dom.totalPrice, SEND_INFO.price_dom.basePrice);
+                    } else {
+                        displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_shop.taxPrice, SEND_INFO.price_shop.totalPrice, SEND_INFO.price_shop.basePrice);
+                    }
+
+                    cargaDatosUsuarioAFormularioRegistro();
+
+                    break;
+                }
+
+
+            } else if (response.result == -1) {
+
+                console.log("Número de parametros incorrecto");
+                $("#texto_popup").text("Número de parametros incorrecto");
+                $('#popupAlert').popup('open');
+
+            } else if (response.result == -2) {
+
+                $("#texto_popup").text("El usuario ya existe");
+                $('#popupAlert').popup('open');
+
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            if (textStatus === "timeout") {
+                //do something on timeout
+                console.log("Timeout");
+                alert("Error de TimeOut... compruebe su conexion de internet");
+
+            } else {
+
+                restError(jqXHR, "tiendas");
+                console.log("Sin conexion");
+                //alert("Sin conexion a internet...");
+                $("#texto_popup").text("Sin conexion a internet");
+                $('#popupAlert').popup('open');
+
+            }
+        },
+    });
 }

@@ -2369,9 +2369,9 @@ function displayPopupItemList() { //cambios jordi
     var tituloPopUpWeb = '<div data-role="header" data-theme="a" style="background-color:#0097d3;"><h1 style="font-size:20px;text-transform: uppercase;color:white;width:500px;margin-left:150px;">' + jsonIdiomas.popup_errores.tituloPopUpDisponiblesWeb + '</h1>' + (CART.productosEnTienda <= 0 ? '<div onclick="openPopUpConfirmacionVaciarCarrito();" class="btnPopUp"><img src="img/vaciar.png" style="width:32px; heigth:30px;" /></div>' : '') + '</div>';
 
     var labelsBar = '<div data-role="header" style="background-color:#ffffff; height:30px;">' +
-        '<div class="ui-block-e" style="width:8%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;font-weight: bolder;">WEB</label></div>' +
-        '<div class="ui-block-e" style="width:7%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;">Tienda</label></div>' +
-        '<div class="ui-block-e" style="width:14%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center; font-weight: bolder;">STOCK EN:</label></div>' +
+        '<div class="ui-block-e" style="width:8%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;color:#0197d4;">WEB</label></div>' +
+        '<div class="ui-block-e" style="width:7%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;color:#0197d4;">Tienda</label></div>' +
+        '<div class="ui-block-e" style="width:14%;float:right;margin-top:5px;"><label id="labelPopUpItemListPrice" style="text-align: center;color:#0197d4;">STOCK EN:</label></div>' +
         '</div>';
 
     //productosEnTienda = 0;
@@ -2399,13 +2399,13 @@ function displayPopupItemList() { //cambios jordi
                     '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
                     '<div class="ui-grid-b">' +
                     '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
-                    '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
+                    '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align:center;color:#0197d4;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
                     '<div class="ui-block-c" style="width:52%;">' +
                     '<div class="ui-grid-d">' +
                     '<div class="ui-block-a" style="width:10%;" id="div_resta' + CART[i].id + '"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
-                    '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;">' + parseInt(CART[i].quantity) + '</label></div>' +
+                    '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;color:#0197d4;">' + parseInt(CART[i].quantity) + '</label></div>' +
                     '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
-                    '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;">' + price + ' €</label></div>' +
+                    '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;color:#0197d4;">' + price + ' €</label></div>' +
                     '<div class="ui-block-e" style="width:70px; height:40px;"><a id="div_eliminar' + CART[i].id + '" onclick="openPopupAction(\'deleteItem\',' + CART[i].id + '); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcCentral + '" /></div>' +
@@ -2422,16 +2422,16 @@ function displayPopupItemList() { //cambios jordi
                 precioTotalProductosWeb += price;
 
                 html_online = html_online +
-                    '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' + //margin-left: 2%;
+                    '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' +
                     '<div class="ui-grid-b">' +
                     '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
-                    '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
+                    '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;color:#0197d4;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
                     '<div class="ui-block-c" style="width:52%;">' +
                     '<div class="ui-grid-d">' +
                     '<div class="ui-block-a" style="width:10%;" id="div_resta' + CART[i].id + '"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
-                    '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;">' + parseInt(CART[i].quantity) + '</label></div>' +
+                    '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;color:#0197d4;">' + parseInt(CART[i].quantity) + '</label></div>' +
                     '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
-                    '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;">' + price + ' €</label></div>' +
+                    '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;color:#0197d4;">' + price + ' €</label></div>' +
                     '<div class="ui-block-e" style="width:70px; height:40px;"><a id="div_eliminar' + CART[i].id + '" onclick="openPopupAction(\'deleteItem\',' + CART[i].id + ');$(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcCentral + '" /></div>' +
@@ -2547,13 +2547,13 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + aux_prod.quantity + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
-        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;max-height: 350px;"></div>' +
+        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="width: 325px;max-height: 350px;"></div>' +
         '<div class="ui-block-b">' +
         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
         '<p><strong style="font-size: 15px;margin-top:5px;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
         '<p><strong style="font-size: 15px;margin-top:5px;"> Descripción: </strong></p>' +
         '<strong style=""><p style="white-space: initial;font-size: 15px;margin-top:5px;">' + definition + '</p></strong>' +
-        '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
+        '<p class="ui-li-aside"><img src="' + imgAvailability + '" style="width:50px;"></p>' +
         '</div></div>' +
         '</ul>' +
         '<div class="ui-grid-a">' +
@@ -2709,7 +2709,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
                         '<p><strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
-                        '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
+                        '<p class="ui-li-aside"><img src="' + imgAvailability + '" style="width:50px;"></p>' +
                         '</div>' +
                         '</li>' +
                         '</ul>';
@@ -2808,7 +2808,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
                         '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
-                        '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
+                        '<p class="ui-li-aside"><img src="' + imgAvailability + '" style="width: 50px;"></p>' +
                         '</div>' +
                         '</li>' +
                         '</ul>';
@@ -2913,7 +2913,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
                         '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
-                        '<p class="ui-li-aside"><img src="' + imgAvailability + '"></p>' +
+                        '<p class="ui-li-aside"><img src="' + imgAvailability + '"style="width: 50px;"></p>' +
                         '</div>' +
                         '</li>' + div_carrusel +
                         '</ul>';
@@ -3348,6 +3348,7 @@ function displaySugerencias() { //muestra el pop up de registro
 function displayLogin() { //muestra el pop up de inicio de session
 
     $('#usrnm').val("");
+    $('#pswd').val("");
     $("#popupRegistro").popup("close");
     setTimeout(function () {
         $("#popupLogin").popup("open");
@@ -3397,11 +3398,16 @@ function logout() { //muestra el pop up de inicio de session
     $(':input').val(''); //limpiamos todos los inputs de la app
 
 
-    if ($("#contenedorInfoUsuario").length > 0 && $("#contenedorInfoUsuario").is(':hidden')) { // Si estoy en formulario de domicilio y hago logout, muestro opciones de registro de usuario.
+    /*if ($("#contenedorInfoUsuario").length > 0 && $("#contenedorInfoUsuario").is(':hidden')) { // Si estoy en formulario de domicilio y hago logout, muestro opciones de registro de usuario.
         $("#contenedorInfoUsuario").show();
-    }
+    }*/
 
     translateButtons(idiomStore);
+
+    if (pantallaActual == "opciones envio") {
+        getNodes(0);
+    }
+
 
 
 }
@@ -3996,8 +4002,13 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
     //getSendPrice();
     $("#divBack").html('<div onclick="opcionesPago();"><div class="ui-grid-b"><div class="ui-block-a" style="width: 15%;"><span  class="flaticon-leftarrow" style="font-size:8px; margin-right:10px" style="text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 55%;"><label style="font-weight: bold;">Opciones de pago</label></div></div></div>');
 
+
+
     switch (casoEnvio) {
     case 1:
+
+        OPCIONENTREGA = "dom";
+
         var html = '<div>' +
             '<center>' +
             '<h2 style="text-transform: uppercase;color:#0197d4;">TODOS LOS ARTICULOS ESTAN DISPONIBLES<br>TANTO EN TIENDA COMO ONLINE</h2>' +
@@ -4011,7 +4022,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong><br> ' + formatoNumero(totalCesta, 2, ",", ".", "€") + 'cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div>' +
             '</div>' +
             '</a>' +*/
-            '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
+            //'<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
+            '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
@@ -4024,6 +4036,9 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</div>';
         break;
     case 2:
+
+        OPCIONENTREGA = "dom";
+
         var html = '<div>' +
             '<center>' +
             '<h2 style="text-transform: uppercase;color:#0197d4;">TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA <br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
@@ -4037,7 +4052,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong><br>' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + ' € de gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div>' +
             '</div>' +
             '</a>'*/
-            '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
+            //'<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
+            '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
@@ -4052,6 +4068,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         } else if (parseInt(SEND_INFO.price_shop.result) == -2) {
 
+            OPCIONENTREGA = "shop";
+
             html +=
                 /*'<a class="btn_disabled" data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')" data-role="button" data-theme="b" >' +
                                '<div class="ui-grid-a">' +
@@ -4062,7 +4080,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
                                '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong><br>Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div>' +
                                '</div>' +
                                '</a>' +*/
-                '<div style="width: 50%;margin: 0% 25% 1% 25%;" onclick="displayDomicilioFacturacionForm(\'shop\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
+                //'<div style="width: 50%;margin: 0% 25% 1% 25%;" onclick="displayDomicilioFacturacionForm(' + OPCIONENTREGA + ',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
+                '<div style="width: 50%;margin: 0% 25% 1% 25%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>CLICK AND COLLECT 48H</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + '€ gastos de envio </label></div></div>' +
@@ -4072,6 +4091,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
 
         } else {
+
+            OPCIONENTREGA = "shop";
 
             html +=
                 /*'<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')" data-role="button" data-theme="b" >' +
@@ -4083,7 +4104,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
                                '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong><br>' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_shop.totalPrice).toFixed(2) + ' € de gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div>' +
                                '</div>' +
                                '</a>'+*/
-                '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioFacturacionForm(\'shop\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
+                //'<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioFacturacionForm(' + OPCIONENTREGA + ',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
+                '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>CLICK AND COLLECT 48H</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
@@ -4695,9 +4717,7 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         '<label class="uname" data-icon="u" style="color:#0197d4;">Dirección de entrega y facturación coinciden</label>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        //'<div class=" ui-checkbox">' +
         '<input id="check_misma_direccion" style="margin-top: -7px;" type="checkbox" value="Click me" onclick="" data-cacheval="false" checked>' +
-        //'</div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
@@ -4803,7 +4823,7 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         '</div>' +
         '</div>' +
         '</div>' +
-        '</form>' +
+        //'</form>' +
         '<button type="button" data-corners="false" id="button_continuar_direcciones" class="" style="width: 90%;text-transform: uppercase;background-color:#0197d4;">Continuar</button>' +
         //'<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
         //'<center>' +
@@ -4839,9 +4859,9 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
     });
 
 
-    if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
+    /*if (INFO_USU.id != undefined) { //  ------- Si el susuario esta logado no muestro cuadro de opciones de registro
         $("#contenedorInfoUsuario").hide();
-    }
+    }*/
 
     loadSelectPaises('div_input_pais', 'selectCountry');
     loadSelectProvinciasFromCountry('div_input_provincia', 1, 'selectProvince');
@@ -4892,10 +4912,11 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
 
     if (INFO_USU.id != undefined) { // si el usuario ha hecho login rellenar campos
 
-        console.log('--> Cargando datos de sesion en formulario:'); // TEMP !!
+        console.log('--> Cargando datos de sesion en formulario:'); //TEMP !!
         console.log(INFO_USU); // TEMP !!
 
         cargaDatosUsuarioAFormularioRegistro();
+
     } else { // TEMP !!
         console.log('-->Usuario no logueado, no se cargaran datos de sesion en formulario:'); // TEMP !!   
     }
@@ -5302,19 +5323,174 @@ function pagarEnCajaPrevioPago() {
     $("#divContent").trigger('create');
 }
 
-function pantallaInterLoginPago() {
+function pantallaInterLoginPago(destinoEnvio, taxPrice, totalPrice, basePrice) {
 
-    var html = '<div style="width: 30%;margin: 0 auto;">' +
-        '<div style="background-color:#0197d4;text-transform:uppercase;height: 50px;line-height: 50px;margin-bottom: 10px;"><label style="font-size: x-large;text-align: center;color:white;">INFO USUARIO</label></div>' +
-        '<div style="background-color:white;height: 50px;line-height: 50px;margin-bottom: 10px;"><label style="font-size: larger;text-align: center;text-align: center;color:#0197d4;">Es necesario:</label></div>' +
-        '<div class="ui-grid-a" style="height: 50px;line-height: 50px;">' +
-        '<div class="ui-block-a" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;text-transform: uppercase;line-height: 45px;"><label style="text-align: center;text-align: center;color:#0197d4;">Identificarse</label></div>' +
-        '<div class="ui-block-b" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;text-transform: uppercase;line-height: 45px;"><label style="text-align: center;text-align: center;color:#0197d4;">Registrarse</label></div>' +
+    console.log(destinoEnvio + "," + taxPrice + "," + totalPrice + "," + basePrice + " datos del envio ----------------------- ");
+
+    if (INFO_USU.id != undefined) {
+
+        displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice);
+
+    } else {
+
+        var html = '<div style="width: 30%;margin: 0 auto;">' +
+            '<div style="background-color:#0197d4;text-transform:uppercase;height: 50px;line-height: 50px;margin-bottom: 10px;"><label style="font-size: x-large;text-align: center;color:white;">INFO USUARIO</label></div>' +
+            '<div style="background-color:white;height: 30px;line-height: 30px;margin-bottom: 10px;"><label style="font-size: larger;text-align: center;text-align: center;color:#0197d4;">Es necesario:</label></div>' +
+            '<div class="ui-grid-a" style="">' +
+            '<div class="ui-block-a" onclick="displayLogin();" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;line-height: 45px;float: left;"><label style="text-align: center;text-align: center;color:#0197d4;margin-bottom: 0px;">Identificarse</label></div>' +
+            '<div class="ui-block-b" onclick="pantallaRegistroPago();" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;line-height: 45px;float: right;"><label style="text-align: center;text-align: center;color:#0197d4;margin-bottom: 0px;">Registrarse</label></div>' +
+            '</div>' +
+            '</div>';
+
+        $("#divContent").html(html);
+        $("#divContent").trigger('create');
+
+    }
+
+}
+
+
+function pantallaRegistroPago() {
+
+    var html = '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">registro usuario</h2><hr style="border-color:#0197d4;">' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">email *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_email" name="in_email" data-type="entrega" required="required" type="text" placeholder="""></div>' + //autofocus   data-clear-btn="true
         '</div>' +
-        '</div>';
+        '<div class="ui-block-b">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">repetir email *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_email_re" name="in_email_re" data-type="entrega" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">contraseña *</label>' +
+        '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_pass" name="in_pass" data-type="entrega" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">repetir contraseña *</label>' +
+        '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_pass_re" name="in_pass_re" data-type="entrega" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">codigo postal *</label>' +
+        '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_codpos" name="in_codpos" data-type="entrega" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '<div class="ui-block-b"></div>' +
+        '</div>' +
+        //direccion de envio
+        '<h2 style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">Direccion</h2><hr style="border-color:#0197d4;">' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">Nombre *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_name" name="in_name" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Apellidos *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_apellidos" name="in_apellidos" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">Tel&eacute;fono *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_tel" name="in_tel" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">DNI/CIF *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_dni" name="in_dni" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Dirección *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_direc" name="in_direc" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Número *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_num_direc" name="in_num_direc" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Código postal *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_postal" name="in_postal" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Ciudad *</label>' +
+        '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_ciudad" name="in_ciudad" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="ui-grid-a">' +
+        '<div class="ui-block-a">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">País *</label>' +
+        '<div id="div_input_pais" class="" style="width:80%;"></div>' +
+        '</div>' +
+        '<div class="ui-block-b">' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Provincia *</label>' +
+        '<div id="div_input_provincia_2" class="" style="width:80%;"></div>' +
+        '</div>' +
+        '</div>' +
+        '<button type="button" data-corners="false" id="btn_registro_pago" class="" style="width: 90%;text-transform: uppercase;background-color:#0197d4;">Continuar</button>';
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
 
+    $("#btn_registro_pago").click(function () {
+
+        console.log("pruebas!!!!!!!!!!!!!!!");
+        //sendBasketAndOrder('cash register');
+        //$("#formulario_reg_pago").submit();
+        
+        var email = $('#in_email').val();
+        var email_re = $('#in_email_re').val();
+        var pass = $('#in_pass').val();
+        var pass_re = $('#in_pass_re').val();
+        var codpos = $('#in_codpos').val();
+        var name = $('#in_name').val();
+        var apellidos = $('#in_apellidos').val();
+        var tel = $('#in_tel').val();
+        var dni = $('#in_dni').val();
+        var direc = $('#in_direc').val();
+        var num_direc = $('#in_num_direc').val();
+        var postal = $('#in_postal').val();
+        var ciudad = $('#in_ciudad').val();
+        var selectCountry = $('#selectCountry').val();
+        var selectProvince_2 = $('#selectProvince_2').val();
+        
+        if( email == email_re && pass == pass_re && codpos != "" && name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != ""){
+        
+            console.log("Todos los campos ok");
+            sendRegistroDomicilio(email, pass, codpos,
+                                    name, apellidos, tel, dni, direc, num_direc, ciudad, selectProvince_2, postal, selectCountry,
+                                    name, apellidos, tel, dni, direc, num_direc, postal, ciudad, selectCountry, selectProvince_2, 2);
+            
+        
+        }else{
+            
+            $.jAlert({ 
+                'title': 'Alerta',
+                'content': '¡Faltan datos!',
+                'theme': 'gray',
+                'size': 'xsm'
+            });        
+        
+        }
+
+        
+
+    });
+
+    loadSelectPaises('div_input_pais', 'selectCountry');
+    loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry_2").val(), 'selectProvince_2');
+
+    $("#selectCountry_2").change(function () {
+
+        console.log('Cambio de pais, ahora es:' + $("#selectCountry").val());
+
+        loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry").val(), 'selectProvince_2');
+
+    });
 
 }
