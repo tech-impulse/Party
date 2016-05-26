@@ -821,7 +821,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                 var count = data.products[i].caracteristics.length;
                 var caracteristicas = data.products[i].caracteristics;
 
-                for (var j = 0; j < count; j++) {
+                /*for (var j = 0; j < count; j++) {
 
                     //console.log("Caracteristica " + caracteristicas[j].type);
                     if (caracteristicas[j].type == "9") {
@@ -834,6 +834,23 @@ function displayProducts(data, originNode, originName, param, param4) {
                         aux_carac = 1;
                         continue;
 
+                    }
+
+                }*/
+
+                for (var k = 0; k < count; k++) {
+
+                    //console.log("Caracteristica " + caracteristicas[j].type);
+                    if (caracteristicas[k].type == "9") {
+                        unidades = caracteristicas[k].name;
+                        //console.log("Caracteristica encontrada");
+                        units = unidades.split(' ');
+                        aux_carac = 0;
+                        break;
+                    } else {
+                        //console.log("Esta no es la carac buena, pasamos a la siguiente carac");
+                        aux_carac = 1;
+                        continue;
                     }
 
                 }
@@ -857,12 +874,26 @@ function displayProducts(data, originNode, originName, param, param4) {
                 if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
                     //console.log("No tiene unidades saltamos el producto")
                     unidades = "1 " + jsonIdiomas.cajas.unidades;
+                    units = 1;
                 }
+
+
+                /*if (aux_carac == 1) { //no tiene unidades pasamos al siguiente producto
+                    //console.log("No tiene unidades saltamos el producto")
+                    unidades = "1 " + jsonIdiomas.cajas.unidades;
+                }*/
 
                 if (data.products[i].name == "") {
                     continue;
                 } else {
                     var titulo = data.products[i].name;
+                }
+
+                var unidades_prod = 1;
+
+
+                if (aux_carac == 1) { //en el caso que no tengamos unidades se añade uno solo
+                    unidades_prod = 1;
                 }
 
                 if (data.products[i].price_x_region[0].exclusiveWeb == 1 || data.products[i].stock_x_store == 0) {
@@ -874,13 +905,21 @@ function displayProducts(data, originNode, originName, param, param4) {
                     var displayWarning = "";
                 }
 
+                if (parseInt(units[0]) >= parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) { //el articulo tiene suficientes para el grupo
+                    unidades_prod = 1;
+                } else if (parseInt(units[0]) < parseInt(num_personas_fiesta) && parseInt(units[0]) > 1) {
+                    unidades_prod = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units[0]));
+                } else { //mas personas que unidades del articulo
+                    unidades_prod = 1;
+                }
+
                 var imgLinkExt = data.products[i].linkext.replace("normalPreview", "bigPreview");
 
                 var element = block +
                     '<a data-corners="false" data-role="button" data-theme="f" style="border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgb(23, 152, 209);">' +
                     '<div style="position: relative;overflow:hidden">' +
-                    '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;display: none;position: absolute;">' +
-                    '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">10</label>' +
+                    '<div id="circulo' + data.products[i].id + '" class="circulo" style="width: 40px;height: 40px;position: absolute;">' + //display: none;
+                    '<label id="quantity' + data.products[i].id + '" style="display:block;margin-top: 9px;font-size: 22px;color: white;">' + unidades_prod + '</label>' +
                     '</div>' +
                     '<div style="float:right;width: 50px;padding-right: 20px;overflow:hidden"><img src="' + imgStock + '" style="width: 40px;position:absolute;float:right;"></div>' + displayWarning +
                     '<img src="' + imgLinkExt + '" onclick="displayPopupItemDetail(' + originNode + ',\'PRODUCTOS\',' + data.products[i].id + ')" style="width: 200px;height: 200px; z-index: -3;">' +
@@ -902,7 +941,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
-                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addCartAsistFiestas(' + data.products[i].id + ');">Añadir</button>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
@@ -925,9 +964,8 @@ function displayProducts(data, originNode, originName, param, param4) {
 
             $("#divContent").html(htmlContent);
             $("#divContent").trigger('create');
-            //$("#btn_finalizarpedido").show();
 
-            var aux = 0;
+            /*var aux = 0;
             // calculo del numero de articulos por producto
             for (var k = 0; k < data.products.length; k++) {
 
@@ -973,6 +1011,29 @@ function displayProducts(data, originNode, originName, param, param4) {
                 if (aux == 0 && data.products[k].name != "" && data.products[k].price_x_region.length > 0) { //en el caso que no tengamos unidades se añade uno solo
                     addToCart(data.products[k].id, 1);
 
+                }
+            }*/
+
+            //mostrar los productos añadidos al carrito al cargar
+            if (CART.length > 0) {
+
+                for (var l = 0; l < data.products.length; l++) {
+
+                    for (var m = 0; m < data.products[l].typeproducts.length; m++) {
+
+                        var prod = data.products[l].typeproducts[m]; //recorremos todos los productos
+
+                        for (var n = 0; n < CART.length; n++) {
+
+                            if (parseInt(CART[n].id) == parseInt(prod.id)) {
+
+                                console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO");
+                                displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
+
+                            }
+
+                        }
+                    }
                 }
             }
 
@@ -2445,7 +2506,22 @@ function displayPopupItemList() { //cambios jordi
     var listadoProdTienda = tituloPopUpTienda + labelsBar + html_store;
     var listadoProdOnLine = tituloPopUpWeb + labelsBar + html_online;
     //getSendPrice();
-    html = '<div style="width: 100%; height:600px; overflow: scroll;">' + (CART.productosEnTienda > 0 ? listadoProdTienda : '') + (CART.productosSoloEnWeb > 0 ? listadoProdOnLine : '') + '</div><div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago();"><label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>';
+    html = '<div style="width: 100%; height:600px; overflow: scroll;">' +
+        (CART.productosEnTienda > 0 ? listadoProdTienda : '') + (CART.productosSoloEnWeb > 0 ? listadoProdOnLine : '') + '</div>' +
+        //'<div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago();">' +
+        //'<label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label>'+
+        //'</div>' +
+        '<div id="btn_nuevo" onclick="opcionesPago();" style="height: 65px;background-color:#0097d3;" class="ui-grid-c">' +
+        '<div class="ui-block-a" style="width: 10%;margin-top: 10px;"></div>' +
+        '<div class="ui-block-b" style="width: 58%;margin-top: 10px;">' +
+        '<div style="border:2px solid white;border-radius:25px;height:45px;width:65%;margin-left: 130px;" class="ui-grid-b">' +
+        '<div class="ui-block-a" style="width: 19%;"><img src="img/play_button.png" style="width: 45px;"></div>' +
+        '<div class="ui-block-b" style="width: 75%;"><label style="margin-top:5px;font-size:25px;text-transform:uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>' +
+        '</div></div>' +
+        '<div class="ui-block-c" style="width:32%;text-transform:uppercase;margin-top: 10px;">'+
+        '<div class="ui-block-a"><label style="color:white;margin-top:19px;">Total cuenta: </label></div>'+
+        '<div class="ui-block-b" style="margin-left: 8px;"><label style="font-size: 30px;color:white;margin-top:5px;" id="total_popup">' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' </label></div></div>' +
+        '</div>';
 
 
     $("#lbPopupListItems").text("Total : " + parseFloat(CART.ammount).toFixed(2) + " €");
@@ -2706,7 +2782,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + (PRODUCTS[i].position_x_store.section == "undefined" ? PRODUCTS[i].position_x_store.section : '') + ' ' + (PRODUCTS[i].position_x_store.module == undefined ? '' : PRODUCTS[i].position_x_store.section) + ' ' + (PRODUCTS[i].position_x_store.position == undefined ? '' : PRODUCTS[i].position_x_store.section) + ' </strong></p>' +
                         '<p><strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '" style="width:50px;"></p>' +
@@ -5442,7 +5518,7 @@ function pantallaRegistroPago() {
         console.log("pruebas!!!!!!!!!!!!!!!");
         //sendBasketAndOrder('cash register');
         //$("#formulario_reg_pago").submit();
-        
+
         var email = $('#in_email').val();
         var email_re = $('#in_email_re').val();
         var pass = $('#in_pass').val();
@@ -5458,27 +5534,27 @@ function pantallaRegistroPago() {
         var ciudad = $('#in_ciudad').val();
         var selectCountry = $('#selectCountry').val();
         var selectProvince_2 = $('#selectProvince_2').val();
-        
-        if( email == email_re && pass == pass_re && codpos != "" && name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != ""){
-        
+
+        if (email == email_re && pass == pass_re && codpos != "" && name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != "") {
+
             console.log("Todos los campos ok");
             sendRegistroDomicilio(email, pass, codpos,
-                                    name, apellidos, tel, dni, direc, num_direc, ciudad, selectProvince_2, postal, selectCountry,
-                                    name, apellidos, tel, dni, direc, num_direc, postal, ciudad, selectCountry, selectProvince_2, 2);
-            
-        
-        }else{
-            
-            $.jAlert({ 
+                name, apellidos, tel, dni, direc, num_direc, ciudad, selectProvince_2, postal, selectCountry,
+                name, apellidos, tel, dni, direc, num_direc, postal, ciudad, selectCountry, selectProvince_2, 2);
+
+
+        } else {
+
+            $.jAlert({
                 'title': 'Alerta',
                 'content': '¡Faltan datos!',
                 'theme': 'gray',
                 'size': 'xsm'
-            });        
-        
+            });
+
         }
 
-        
+
 
     });
 
