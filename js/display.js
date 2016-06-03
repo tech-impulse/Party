@@ -2518,8 +2518,8 @@ function displayPopupItemList() { //cambios jordi
         '<div class="ui-block-a" style="width: 19%;"><img src="img/play_button.png" style="width: 45px;"></div>' +
         '<div class="ui-block-b" style="width: 75%;"><label style="margin-top:5px;font-size:25px;text-transform:uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label></div>' +
         '</div></div>' +
-        '<div class="ui-block-c" style="width:32%;text-transform:uppercase;margin-top: 10px;">'+
-        '<div class="ui-block-a"><label style="color:white;margin-top:19px;">Total cuenta: </label></div>'+
+        '<div class="ui-block-c" style="width:32%;text-transform:uppercase;margin-top: 10px;">' +
+        '<div class="ui-block-a"><label style="color:white;margin-top:19px;">Total cuenta: </label></div>' +
         '<div class="ui-block-b" style="margin-left: 8px;"><label style="font-size: 30px;color:white;margin-top:5px;" id="total_popup">' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' </label></div></div>' +
         '</div>';
 
@@ -3504,7 +3504,6 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
     $('#principal').hide();
     $('#contentPopupScreenSaver').show();
 
-    //}
 
     translateButtons(idiomStore);
 
@@ -4219,7 +4218,7 @@ function sistemasPago() { //TEMP
     var paypal = '<form id="formPaypal" method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
         '<input type="hidden" name="currency_code" value="EUR">' +
         '<input type="hidden" name="lc" value="ES">' +
-        '<input type="hidden" name="return" value="https://partyfiesta.youtter.com/app/alb/pedido_finalizado.html">' +
+        '<input type="hidden" name="return" value="https://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email="' + INFO_USU.email + '"">' +
         '<input type="hidden" name="cancel_return" value="https://partyfiesta.youtter.com/app/alb/">' +
         '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
 

@@ -64,7 +64,8 @@ $(document).ready(function () {
         $('#contentPopupScreenSaver').hide();
 
         protector = setInterval(function () {
-            displayScreenSaver();
+            logout();
+            displayScreenSaver();   
         }, idleTime);
 
         if ($(window).scrollTop() == $(document).height() - $(window).height() && pantallaActual == "catalogo") { //carga mas productos en el catalogo cuando se acabe la pagina
@@ -93,7 +94,8 @@ $(document).ready(function () {
         $('#contentPopupScreenSaver').hide();
 
         protector = setInterval(function () {
-            displayScreenSaver();
+            logout();
+            displayScreenSaver();   
         }, idleTime);
 
     });
@@ -179,7 +181,8 @@ $(document).ready(function () {
 
     //Protector de pantalla de la app
     protector = setInterval(function () {
-        displayScreenSaver();
+        logout();
+        displayScreenSaver();        
     }, idleTime);
 
     //Detectamos cuando clicamos en la pantalla para desactivar el protector de pantalla
@@ -194,6 +197,7 @@ $(document).ready(function () {
         $('#contentPopupScreenSaver').hide();
 
         protector = setInterval(function () {
+            logout();
             displayScreenSaver();
         }, idleTime);
 
