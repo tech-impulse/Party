@@ -3504,7 +3504,6 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
     $('#principal').hide();
     $('#contentPopupScreenSaver').show();
 
-
     translateButtons(idiomStore);
 
 

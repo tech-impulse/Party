@@ -65,7 +65,7 @@ $(document).ready(function () {
 
         protector = setInterval(function () {
             logout();
-            displayScreenSaver();   
+            displayScreenSaver();
         }, idleTime);
 
         if ($(window).scrollTop() == $(document).height() - $(window).height() && pantallaActual == "catalogo") { //carga mas productos en el catalogo cuando se acabe la pagina
@@ -76,27 +76,58 @@ $(document).ready(function () {
         }
     });
 
-    $(this).bind('touchstart', function preventZoom(e) {
-        //alert("-----------------> Hola soy un log!! -------------------------------------"); // TEMP !!
-        var t2 = e.timeStamp,
-            t1 = $(this).data('lastTouch') || t2,
-            dt = t2 - t1,
-            fingers = e.originalEvent.touches.length;
-        $(this).data('lastTouch', t2);
-        if (!dt || dt > 500 || fingers > 1) return; // not double-tap
-
-        e.preventDefault(); // double tap - prevent the zoom
-        // also synthesize click events we just swallowed up
-        $(this).trigger('click').trigger('click');
+    //Detectamos cuando clicamos en la pantalla para desactivar el protector de pantalla
+    /*$(window).on("click", function (e) {
 
         clearInterval(protector);
+
+        console.log("Click");
+
         $('#principal').show();
         $('#contentPopupScreenSaver').hide();
 
         protector = setInterval(function () {
             logout();
-            displayScreenSaver();   
+            displayScreenSaver();
         }, idleTime);
+
+    });*/
+
+    //$(this).bind('touchstart', function preventZoom(e) {
+    $(this).bind('touchstart', function preventZoom(e) {
+
+        //console.log("-----------------> Hola soy un log!! -------------------------------------"); // TEMP !!
+
+        clearInterval(protector);
+
+        protector = setInterval(function () {
+            logout();
+            displayScreenSaver();
+        }, idleTime);
+
+
+        if ($('#contentPopupScreenSaver').is(':hidden')){ //escondido
+
+            //console.log('Hola2');
+            var t2 = e.timeStamp,
+                t1 = $(this).data('lastTouch') || t2,
+                dt = t2 - t1,
+                fingers = e.originalEvent.touches.length;
+            $(this).data('lastTouch', t2);
+            if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+
+            e.preventDefault(); // double tap - prevent the zoom
+            // also synthesize click events we just swallowed up
+            $(this).trigger('click').trigger('click');
+
+        } else {
+            
+            //console.log('Hola');
+            e.preventDefault();
+            $('#principal').show();
+            $('#contentPopupScreenSaver').hide();
+
+        }
 
     });
 
@@ -182,26 +213,10 @@ $(document).ready(function () {
     //Protector de pantalla de la app
     protector = setInterval(function () {
         logout();
-        displayScreenSaver();        
+        displayScreenSaver();
     }, idleTime);
 
-    //Detectamos cuando clicamos en la pantalla para desactivar el protector de pantalla
-    $(window).on("click", function (ev) {
 
-        var e = ev.originalEvent;
-        clearInterval(protector);
-
-        //console.log("Click");
-
-        $('#principal').show();
-        $('#contentPopupScreenSaver').hide();
-
-        protector = setInterval(function () {
-            logout();
-            displayScreenSaver();
-        }, idleTime);
-
-    });
 
     var htmlHeader_menu = '<div id="barra_sup" style="position:relative" onclick="changeIdiomPopUp();">' +
         '<img src="css/icons/header.jpg" width="100%" style="height: 38px;"><div id="banderas" style="position:absolute; top:0px;right: 0px;margin-top: .5%;margin-right: 3%;">' +
@@ -372,7 +387,7 @@ $(document).ready(function () {
         case "deleteItem":
 
             displayPopupItemList();
-            
+
             break;
         }
     });
@@ -409,7 +424,7 @@ $(document).ready(function () {
                 displayPopupItemList();
                 updateOpcionCompraProducto();
             }, 250);
-                
+
             break;
         }
     });
