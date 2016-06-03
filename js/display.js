@@ -169,8 +169,8 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                             //extra = 'displayPantallaPreviaDisfraces(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
                             break;
                         case 5: // sugerencias
-                            //extra = 'displayPantallaSugerencias()';
-                            extra = 'displayPopUpPantallaSugerencias()';
+                            extra = 'displayPantallaSugerencias()';
+                            //extra = 'displayPopUpPantallaSugerencias()';//con select de usuario o dependiente
                             break;
                         case 6: // fuera tienda
                             extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',' + data.nodes[i].type + ',\'' + data.nodes[i].linkext + '\')';
@@ -4233,7 +4233,7 @@ function sistemasPago() { //TEMP
                 '<input type="hidden" name="cmd" value="_cart">' + add +
                 '<input type="hidden" name="item_name" value="' + CART[i].name + '">' +
                 '<input type="hidden" name="item_number" value="' + parseInt(CART[i].sku) + '">' +
-                '<input type="hidden" name="amount" value="0.01">' +
+                '<input type="hidden" name="amount" value="' + CART[i].price_x_region[0].totalPrice + '">' +
                 '<input type="hidden" name="quantity" value="' + parseInt(CART[i].quantity) + '">';
 
         } else {
@@ -4243,7 +4243,7 @@ function sistemasPago() { //TEMP
                 '<input type="hidden" name="cmd" value="_cart">' + add +
                 '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
                 '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
-                '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
+                '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
                 '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
 
         }
