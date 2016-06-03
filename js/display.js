@@ -4250,11 +4250,21 @@ function sistemasPago() { //TEMP
 
     }
 
+    if (OPCIONENTREGA == 'shop') {
+
+        var precio_envio = SEND_INFO.price_shop.taxPrice;
+
+    } else {
+
+        var precio_envio = SEND_INFO.price_dom.taxPrice;
+
+    }
+
     paypal +=
-        '<input type="hidden" name="cmd" value="_cart">' + add +
+        '<input type="hidden" name="cmd" value="_cart">' + '<input type="hidden" name="upload" value="1">' +
         '<input type="hidden" name="item_name_' + (i + 1) + '" value="Gastos de envio">' +
         '<input type="hidden" name="item_number_' + (i + 1) + '" value="">' +
-        '<input type="hidden" name="amount_' + (i + 1) + '" value="0.01">' +
+        '<input type="hidden" name="amount_' + (i + 1) + '" value="' + precio_envio + '">' +
         '<input type="hidden" name="quantity_' + (i + 1) + '" value="1">' +
         //'<input type="image" src="" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
         '</form>'; //https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png
