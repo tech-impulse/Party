@@ -3086,7 +3086,8 @@ function loadMenu(data) {
                 break;
             case 5: // sugerencias
                 //extra = 'displayPantallaSugerencias()';
-                extra = 'displayPopUpPantallaSugerencias()';
+                //extra = 'displayPopUpPantallaSugerencias()';
+                extra = 'displayPantallaSugerencias()';
                 break;
             case 6: // fuera tienda
                 extra = 'getNodes(' + data.nodes[i].id + ', \'' + data.nodes[i].name + '\',0,\'' + data.nodes[i].linkext + '\',\'menu_lateral\')';

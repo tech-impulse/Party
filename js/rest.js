@@ -281,6 +281,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     if (idNode != 0) {
         $("#banderas").hide();
+    }else{
+        PRODUCTS=[];
     }
 
     PAGINA = 0; //se reinicia la pagina del catalogo
