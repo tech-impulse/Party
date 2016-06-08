@@ -3119,7 +3119,7 @@ function loadMenu(data) {
         //'</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + //TEMP
         '<label style="margin-left:7px;display:none;color:#0197d4" id="spBtnPopupCartAmmount">0 €</label></div>' +
         //'<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;">' +
-        '</div>';//+'</a>';
+        '</div>'; //+'</a>';
 
 
     /*HEADER  de la pantalla*/
@@ -3144,15 +3144,15 @@ function loadMenu(data) {
         '<center><a id="login" onclick="displayLogin();" style="text-transform: uppercase;float:left;font-size: 12pt;"><span>' + aux_login + '</span></a>' +
         '</div>' +
 
-        '<div class="ui-block-c" style="width:44%;">'+
-        '<div class="ui-grid-a">'+
+        '<div class="ui-block-c" style="width:44%;">' +
+        '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="margin-top:10px; width:65%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="100%%" style="float: left;"></div>' +
         '<div class="ui-block-b" style="margin-top:20px; width:35%;padding-left:3px;"><div id="btn_finalizarpedido" class="btn_finalizarpedido" style="display: none;">Finalizar pedido</div></div>' +
-        '</div></div>'+
-        
+        '</div></div>' +
+
         '<div class="ui-block-d" style="width:14%; margin-top:3px;" id="car_compra">' + cart + '</div>' +
         //'<div id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 16%; position: absolute; margin-left: 640px; margin-top: 20px; display: none;">Finalizar pedido</div>'+
-        
+
         '<div class="ui-block-e" style="margin-top:10px;width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
         '</div>' +
@@ -3364,6 +3364,18 @@ function displayPantallaIntermediaAsistFiestas(data) {
     htmlContent = htmlContent + '</div>';
     $("#divContent").html(htmlContent);
     $("#divContent").trigger('create');
+
+
+    //called when key is pressed in textbox
+    $("#personas_fiesta").keypress(function (e) {
+        //if the letter is not digit then display error and don't type anything
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            //display error message
+            $("#errmsg").html("Solo números").show().fadeOut("slow");
+            return false;
+        }
+    });
+
 
     $("#mas_fiesta").click(function () {
 
@@ -3981,7 +3993,7 @@ function opcionesPago() { //TEMP
             '<center>' +
             '<h2 style="margin: 1% 0 1% 0;color:#0197d4">TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA<br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
             '<h4 style="margin: 0 0 1% 0;color:#0197d4">¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
-           
+
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pagarEnCaja();OPCIONPEDIDO=1;">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): <strong font-size: 20px;>' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '</strong></label></div></div>' +
@@ -4140,7 +4152,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
         } else if (parseInt(SEND_INFO.price_shop.result) == -2) {
 
             OPCIONENTREGA = "shop";
-            
+
             //NO CUMPLE ENVIO MINIMO HA TIENDA
 
             html +=
@@ -4218,7 +4230,7 @@ function sistemasPago() { //TEMP
         '<input type="hidden" name="lc" value="ES">' +
         '<input type="hidden" name="cmd" value="_cart">' +
         '<input type="hidden" name="upload" value="1">' +
-        '<input type="hidden" name="return" value="http://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email=' + INFO_USU.email.replace(/\s/g, " ") + '&idUser='+INFO_USU.id+'">' +
+        '<input type="hidden" name="return" value="http://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email=' + INFO_USU.email.replace(/\s/g, " ") + '&idUser=' + INFO_USU.id + '">' +
         '<input type="hidden" name="cancel_return" value="http://partyfiesta.youtter.com/app/alb/">' +
         '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
 
