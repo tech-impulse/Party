@@ -1633,14 +1633,8 @@ function displayProducts(data, originNode, originName, param, param4) {
 
             htmlContent = htmlContent + '</div>';
 
-
-            setTimeout(function () {
-
-                $("#divContent").html(htmlContent);
-                $("#divContent").trigger('create');
-
-            }, 50);
-
+            $("#divContent").html(htmlContent);
+            $("#divContent").trigger('create');
 
             $("#popupCargando").popup("close");
 
@@ -1650,12 +1644,13 @@ function displayProducts(data, originNode, originName, param, param4) {
                 for (var l = 0; l < data.products.length; l++) {
 
                     var prod = data.products[l]; //recorremos todos los productos
+                    console.log("Prod " + prod.id);
 
                     for (var n = 0; n < CART.length; n++) {
 
                         if (parseInt(CART[n].id) == parseInt(prod.id)) {
 
-                            console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO");
+                            console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO disfraces solo " + CART[n].id + " ene es " + n);
                             displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
 
                         }
@@ -1979,20 +1974,17 @@ function displayProducts(data, originNode, originName, param, param4) {
 
             for (var l = 0; l < data.products.length; l++) {
 
-                for (var m = 0; m < data.products[l].typeproducts.length; m++) {
+                var prod = data.products[l]; //recorremos todos los productos
 
-                    var prod = data.products[l].typeproducts[m]; //recorremos todos los productos
+                for (var n = 0; n < CART.length; n++) {
 
-                    for (var n = 0; n < CART.length; n++) {
+                    if (parseInt(CART[n].id) == parseInt(prod.id)) {
 
-                        if (parseInt(CART[n].id) == parseInt(prod.id)) {
-
-                            console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO");
-                            displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
-
-                        }
+                        console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO catalogo");
+                        displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
 
                     }
+
                 }
             }
         }
@@ -2410,7 +2402,7 @@ function getImgDisponibilidadCentral(product) {
         imgAvailability = "css/maqueta/barraVerde.png";
     } else if (stock > 0 && stock <= parseInt(CART[product].stock_min)) {
         imgAvailability = "css/maqueta/barraAmarilla.png";
-    } else if (stock == 0) {
+    } else if (stock <= 0) {
         imgAvailability = "css/maqueta/barraRojo.png";
     }
     console.log("Stock " + imgAvailability);

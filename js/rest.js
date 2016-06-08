@@ -395,7 +395,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                         console.log("Dame productos del catalogo" + nodeName);
                         //updateBackButton(idNode, nodeName, aux);
-                        getProducts(idNode, nodeName);
+                        //getProducts(idNode, nodeName);
+                        getCostumes(idNode, nodeName);
 
                     }
 
@@ -656,7 +657,7 @@ function getProducts(idNode, nodeName, info_aux) {
 
     if (info_aux != undefined) { // asist. de disfraces
 
-        console.log("Venimos del asist. de disfraces");
+        console.log("Venimos del asist. de disfraces getProducts");
         pantallaActual = "Asistente disfraces";
         var dataSend = {
             lang: language,
@@ -759,7 +760,7 @@ function getCostumes(info_aux) {
 
     $("#popupCargando").popup("open");
 
-    console.log("Venimos del asist. de disfraces");
+    console.log("Venimos del asist. de disfraces getCostumes");
     pantallaActual = "Asistente disfraces";
     var dataSend = {
         id: INFO_AUX.id,

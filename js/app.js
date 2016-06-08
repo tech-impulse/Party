@@ -542,8 +542,9 @@ function displayProductos(idNode, nodeName) {
                 sexo: sexo
             }
             pantallaActual = "Asistente disfraces";
-            //console.log("Todos los selects ok. Entramos en el asistente de disfraces.");
-            getProducts(idNode, nodeName, info_aux);
+            console.log("Todos los selects ok. Entramos en el asistente de disfraces.");
+            //getProducts(idNode, nodeName, info_aux);
+            getCostumes(idNode, nodeName, info_aux);
 
         }
 
