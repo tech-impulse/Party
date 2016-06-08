@@ -227,6 +227,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     console.log('-> getNodes | pantalla actual: ' + pantallaActual + ' AUX: ' + AUX + ' CANRT length ' + CART.length);
 
+    ID_NODE = idNode;
+
     //$("#spBtnAmountPerson").text(''); // TEMP !!
     $("#userIcoCarrito").hide(); // TEMP !!
 
@@ -938,9 +940,9 @@ function restOk_products(res, typ, param, param2, param3) {
     case "nodes":
 
         //displayProducts(res, param, param2, param3);
-        console.log("Type " + res.products[0].type);
-        if (res.products[0].type == undefined) {
-            displayProducts(res, param, param2, param3,"");
+        console.log("Type " + res.products[0].typeproducts);
+        if (res.products[0].typeproducts == undefined) {
+            displayProducts(res, param, param2, param3, "");
         } else {
             displayProducts(res, param, param2, param3, "getProductsClassified");
         }
@@ -1267,7 +1269,10 @@ function getSize(gender) {
 
     var dataSend = {
         sex: gender,
-        lang: language
+        lang: language,
+        origin: origin,
+        store: STORE.id,
+        id: ID_NODE
     };
 
     console.log("Get size " + gender);
@@ -2311,6 +2316,8 @@ function sendBasketAndOrder(paymentMethod) { //esta funcion nos devuelve la info
         type = "freeOfCharge";
     }
 
+    console.log("Info usu " + INFO_USU);
+
     var dataSend = {
         products: CART,
         origin: origin,
@@ -2370,6 +2377,9 @@ function sendBasketAndOrder(paymentMethod) { //esta funcion nos devuelve la info
             console.log('-- Bascket enviada --');
             console.log(response);
 
+            if (response.result == -1) {
+                console.log("Faltan parametros");
+            }
 
         },
         error: function (jqXHR, textStatus, errorThrown) {

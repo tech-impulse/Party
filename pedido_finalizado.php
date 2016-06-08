@@ -1,16 +1,10 @@
 <?php
 
-echo "hola<br>";
-
 $email = $_GET['email'];
 
 if(empty($email) != true){
     
     $correo = $email;
-
-}else{
-    
-    //echo "No hemos recibido nada<br>";
 
 }
 
@@ -27,18 +21,18 @@ if(empty($email) != true){
     </head>
 
     <script>
-        
-        var correo = <?php echo $correo ?>;
+        var correo = "<?php echo $correo; ?>";
         console.log("Correo " + correo);
+        var urlServices = "http://partyfiesta.youtter.com/webservices/";
 
         if (correo) {
 
-            console.log("Email es " + EMAIL_USER);
+            console.log("Email es " + correo);
 
             var dataSend = {
-                email: EMAIL_USER,
-                carrito: CART,
-                store_email: STORE.email
+                email: correo,
+                //carrito: CART,
+                //store_email: STORE.email
             };
 
             var request = $.ajax({
@@ -53,34 +47,30 @@ if(empty($email) != true){
 
                     if (parseInt(response.result) == parseInt(1)) {
 
-                        $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
+                        $("#texto_popup").text("Correo enviado a " + correo);
 
                         console.log("Enviamos email");
 
                     } else if (parseInt(response.result) == parseInt(0)) {
 
-
+                        console.log("Error 0");
 
                     } else if (parseInt(response.result) == parseInt(2)) {
 
+                        console.log("Error 1");
 
-
-                    } else if (parseInt(response.result) == parseInt(0)) {
-
-
-
-                    }
+                    } 
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
 
                     if (textStatus === "timeout") {
 
-
+                        console.log("timeout");
 
                     } else {
 
-
+                        console.log("Error");
 
                     }
 
@@ -112,9 +102,3 @@ if(empty($email) != true){
     </body>
 
     </html>
-
-    <?php
-
-echo "hola<br>";
-
-?>

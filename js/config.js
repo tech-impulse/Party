@@ -1,5 +1,4 @@
 // AQUI VAN DEFINIDAS LAS VARIABLES QUE SE USARÁN MAS DE UNA VEZ EN MÁS DE UN FICHERO
-
 var urlServices = "http://partyfiesta.youtter.com/webservices/"; // URL del servidor de Webservices fuera de creapolis
 //var urlServices = "http://partyfiesta-prod.youtter.com/webservices/"; // URL del servidor de Webservices
 var request;
@@ -55,6 +54,5 @@ var OPCIONENVIO = 0;
 var OPCIONENTREGA = "";
 //var productosEnTienda = 0;  // Número de productos disponibles en tienda del pedido actual
 //var productosEnWeb = 0;     // Número de productos disponibles online del pedido actual
-
 //var precioTotalProductosTienda = 0;     // Precio total de los productos disponibles en tienda
 //var precioTotalProductosWeb = 0;        // Precio total de los productos disponibles en web
