@@ -4297,8 +4297,8 @@ function sistemasPago() { //TEMP
         '<div class="ui-block-a"><label>CAJA</label></div>' +
         '</div>' +
         '</a>' +*/
-        '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="sendBasketAndOrder(\'cash register\');">' +
-        '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 60px;line-height: 60px;" class="ui-grid-a"><div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div><div class="ui-block-b" style="width: 85%;height: 60px;text-align: left;"><label>PAGAR EN CAJA</label></div></div>' +
+        '<div id="caja" style="width: 50%;margin: 0% 0% 1% 0%;" onclick="">' +
+        '<div style="background-color: #0197d4;color:white;text-align:left;width:100%;height:60px;line-height:60px;" class="ui-grid-a"><div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div><div class="ui-block-b" style="width: 85%;height: 60px;text-align: left;"><label>PAGAR EN CAJA</label></div></div>' +
         '</div>' +
         //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
         //'<div class="ui-grid-solo">' +
@@ -4329,6 +4329,39 @@ function sistemasPago() { //TEMP
     $("#paypal").click(function () {
         sendBasketAndOrder('cash register');
         $("#formPaypal").submit();
+    });
+
+    $("#caja").click(function () {
+        
+        sendBasketAndOrder('cash register');
+                            
+        html = '<center>' +
+            '<div style="margin-top:10%;width: 50%;" onclick="getNodes(0);">' +
+            '<img src="css/icons/logo.png" style="width: 100%;">' +
+            '</div>' +
+            '<br>' +
+            '<br>' +
+            '<div class="ui-grid-solo" style="color:#0197d4;">' +
+            '<label style="font-size:x-large;">PAGO EN CAJA</label>' +
+            '</div>' +
+            '<br>' +
+            '<br>' +
+            '<div class="ui-grid-solo" style="width: 45px;height:45px;background-color:#0197d4;">' +
+            '<img src="img/check.png" style="width:45px">' +
+            '</div>' +
+            '<br>' +
+            '<div class="ui-grid-solo" style="width: 50%;">' +
+            '<label style="color:black;line-height: normal;font-size: x-large;">Ya puede pasar a pagar su pedido en caja.Identif&iacute;quese con su nombre.</label>' +
+            '</div>' +
+            '</center>';
+
+        $("#divContent").html(html);
+        $("#divContent").trigger('create');
+
+        setTimeout(function () {
+            getNodes(0);
+        }, 2500);
+
     });
 
 
