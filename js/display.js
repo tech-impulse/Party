@@ -1391,7 +1391,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             }
         }
 
-    } else if (data.result == 1 && pantallaActual == "Asistente disfraces" && param4 == "getProductsClassified") {
+    } else if (data.result == 1 && pantallaActual == "Asistente disfraces" && param4 == "") {//getProductsClassified
 
         //PRODUCTS = PRODUCTS.concat(data.products);
         console.log("Productos");
@@ -3354,7 +3354,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
         '<div class="ui-block-c" style="width:20%;" id="mas_fiesta"><img src="img/mas.png" style="width: 50px;"></div>' +
         //'<div class="ui-block-c" style="width:20%;"><a data-corners="false" id="mas_fiesta" data-role="button" data-theme="b"><img src="img/mas.png"/></a></div>' +
         '</div>' +
-        '<a data-corners="false" style="width:68%;margin:0 auto;" id="btn_continuar" onclick="displayProductos(' + data.id + ',\'' + data.name + '\');" data-role="button" data-theme="b">' + jsonIdiomas.asistente_fiestas.btn_continuar + '</a>' +
+        '<a data-corners="false" style="width:68%;margin:0 auto;" id="btn_continuar_fiestas" onclick="" data-role="button" data-theme="b">' + jsonIdiomas.asistente_fiestas.btn_continuar + '</a>' +
         '</div>' +
 
         '</center>' +
@@ -3374,6 +3374,25 @@ function displayPantallaIntermediaAsistFiestas(data) {
             $("#errmsg").html("Solo números").show().fadeOut("slow");
             return false;
         }
+    });
+
+
+    $("#btn_continuar_fiestas").click(function () {
+
+        var valor = $("#personas_fiesta").val();
+
+        if (valor >= 2) {
+            displayProductos(data.id, data.name);
+        } else {
+            $.jAlert({
+                'title': 'Alerta',
+                'content': "Solo se permiten números",
+                'theme': 'gray',
+                'size': 'xsm'
+            });
+
+        }
+
     });
 
 
@@ -3398,9 +3417,11 @@ function displayPantallaIntermediaAsistFiestas(data) {
             //console.log("Sumamos " + valor);
             $("#personas_fiesta").val(valor);
         }
-    });
 
-    translateButtons(idiomStore);
+
+        translateButtons(idiomStore);
+
+    });
 
 }
 
@@ -5074,14 +5095,14 @@ function checkFormDireccion(tipoDireccion) {
 
     /*var field = $('input_nombreUsuario');
     
-    if (  field.val().localeCompare('') == 0 )	{
-        field.focus();
-        
-        $("#texto_popup").text('Campo Vacio');
-        $('#popupAlert').popup('open');
-        
-        return false;
-    }*/
+                if (  field.val().localeCompare('') == 0 )	{
+                    field.focus();
+                    
+                    $("#texto_popup").text('Campo Vacio');
+                    $('#popupAlert').popup('open');
+                    
+                    return false;
+                }*/
 
     console.log('--> Address forms para tipoDireccion: ' + tipoDireccion);
 
