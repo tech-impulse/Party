@@ -3117,7 +3117,7 @@ function loadMenu(data) {
         '</div>' +
         '<div class="ui-block-b" style="width:50%;margin-top:14%;">' +
         //'</div><span style="margin:15px;display:none;" id="spBtnPopupCartAmmount">0 €</span><br><span style="margin:15px" id="spBtnAmountPerson"></span>' + //TEMP
-        '<label style="margin-left:15px;display:none;color:#0197d4" id="spBtnPopupCartAmmount">0 €</label></div>' +
+        '<label style="margin-left:7px;display:none;color:#0197d4" id="spBtnPopupCartAmmount">0 €</label></div>' +
         //'<img id="userIcoCarrito" style="display:none;" src="img/user_carrito.png" style="margin-left:-8px; margin-top:4px;">' +
         '</div>';//+'</a>';
 
