@@ -214,11 +214,16 @@ function updateBackButton(originNode, originName, linkImg) {
 ******************************************/
 function changeIdiomPopUp() {
 
-    console.log("PopUp idiomas");
+    if (pantallaActual == "menu") {
+        console.log("PopUp idiomas");
 
-    setTimeout(function () {
-        $("#popupIdiomas").popup("open");
-    }, popupTimeout);
+        setTimeout(function () {
+            $("#popupIdiomas").popup("open");
+        }, popupTimeout);
+
+    }
+
+
 
 }
 

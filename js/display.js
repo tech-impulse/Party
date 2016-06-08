@@ -240,11 +240,16 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
                         if (parseInt(originNode) == 0) { //se carga el menu cuando se hace un getNodes(0)
 
+                            pantallaActual = "menu";
+
                             var element = block + '<div style="position:absolute; display: table; height:' + alturaBox + 'px;width:' + heig_block + 'px;background-image:url(\'' + imgLinkExt + '\'); background-size:cover; background-position: top center; background-repeat: no-repeat;">' +
                                 '<div style="width:' + heig_block + 'px;position:absolute; bottom:0; font-size:30px;color: white; text-align: center; display: block;text-transform: uppercase;">' + data.nodes[i].name + '</div></div>' +
                                 '</div>';
 
                         } else {
+                            
+                            pantallaActual = "";
+                            
                             //border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;
                             var element = block + //'<a  data-corners="false" data-role="button" data-theme="f" style="">' +
                                 '<br><center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
@@ -1391,7 +1396,7 @@ function displayProducts(data, originNode, originName, param, param4) {
             }
         }
 
-    } else if (data.result == 1 && pantallaActual == "Asistente disfraces" && param4 == "") {//getProductsClassified
+    } else if (data.result == 1 && pantallaActual == "Asistente disfraces" && param4 == "") { //getProductsClassified
 
         //PRODUCTS = PRODUCTS.concat(data.products);
         console.log("Productos");
