@@ -247,9 +247,9 @@ function displayNode(data, originNode, originName, linkImg, aux) {
                                 '</div>';
 
                         } else {
-                            
+
                             pantallaActual = "";
-                            
+
                             //border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;
                             var element = block + //'<a  data-corners="false" data-role="button" data-theme="f" style="">' +
                                 '<br><center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
@@ -1026,18 +1026,14 @@ function displayProducts(data, originNode, originName, param, param4) {
 
                 for (var l = 0; l < data.products.length; l++) {
 
-                    for (var m = 0; m < data.products[l].typeproducts.length; m++) {
+                    var prod = data.products[l]; //recorremos todos los productos
 
-                        var prod = data.products[l].typeproducts[m]; //recorremos todos los productos
+                    for (var n = 0; n < CART.length; n++) {
 
-                        for (var n = 0; n < CART.length; n++) {
+                        if (parseInt(CART[n].id) == parseInt(prod.id)) {
 
-                            if (parseInt(CART[n].id) == parseInt(prod.id)) {
-
-                                console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO");
-                                displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
-
-                            }
+                            console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO");
+                            displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
 
                         }
                     }
