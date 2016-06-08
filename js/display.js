@@ -3981,15 +3981,7 @@ function opcionesPago() { //TEMP
             '<center>' +
             '<h2 style="margin: 1% 0 1% 0;color:#0197d4">TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA<br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
             '<h4 style="margin: 0 0 1% 0;color:#0197d4">¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
-            /*'<a data-corners="false" style="width:600px" onclick="pagarEnCaja();OPCIONPEDIDO=1;" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): ' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '<br>' + CART.productosEnTienda + ' productos disponibles</label></div>' +
-            '</div>' +
-            '</a>' +*/
+           
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pagarEnCaja();OPCIONPEDIDO=1;">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): <strong font-size: 20px;>' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '</strong></label></div></div>' +
@@ -4021,7 +4013,7 @@ function opcionesPago() { //TEMP
             '</a>' +*/
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.precioTotalProductosSoloWeb + ');OPCIONPEDIDO=3;">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label style="font-size: smaller;">RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE</label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): <strong font-size: 20px;>' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb), 2, ",", ".", "€") + '</strong></label></div></div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos web): <strong font-size: 20px;>' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
             '</div>' +
             //'<div data-corners="false" style="width:50%" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</div>' +
