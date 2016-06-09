@@ -3173,11 +3173,6 @@ function loadMenu(data) {
     $('#btn_finalizarpedido').click(function () { // develop 1
 
         console.log('Handler for .click() called. con ' + opcionCompraProductos + ' ' + CART.productosEnTienda + ' ' + CART.productosEnWeb);
-
-        //opcionesPago(opcionCompraProductos, productosEnTienda, productosEnWeb);
-
-        //getSendPrice();
-
         opcionesPago();
 
     });
@@ -3187,7 +3182,8 @@ function loadMenu(data) {
 function displayPantallaIntermediaAsistDisfra(data) {
 
     if (data) {
-
+        
+        //console.log("Tenemos datos para cargar el select de disfraces");
         $("#divHeader_catalogo").show();
         $("#divHeader_menuInicial").hide();
         console.log("Info del nodo");
@@ -3200,8 +3196,6 @@ function displayPantallaIntermediaAsistDisfra(data) {
             '<img src="' + info.linkint + '" style="max-width: 30%;">' +
             '<div style="width: 30%"><select id="select_edad" data-theme="f" data-native-menu="false" style="background-color:green;" data-corners="false">' +
             '</select></div>' +
-            //'<div id="div_selectTalla" style="width: 30%;display:none"><select id="select_talla" data-theme="f" data-native-menu="false" data-corners="false">' +
-            //'</select></div>' +
             '<button style="width: 30%;" id="btn_continuar_dis"  data-role="button" data-theme="b" data-corners="false">' + jsonIdiomas.asistente_disfraces.btn_continuar + '</button>' +
             '</center>' +
             '</div>';
@@ -3211,28 +3205,20 @@ function displayPantallaIntermediaAsistDisfra(data) {
         $("#divContent").trigger('create');
 
         $("#select_edad").attr("data-native-menu", "false");
-        //$("#select_talla").attr("data-native-menu", "false");
 
         $('#select_edad').scrollTop(5);
-        //$('#select_talla').scrollTop(5);
 
         getSize(info.gender); //llamamos al webservice que tiene los sexos
 
         $('#select_edad').change(function () {
             var optionSelected = $(this).find('option:selected');
             var optValueSelected = optionSelected.val();
-            //console.log("Opcion seleccionada es " + optValueSelected);
-
             SIZE = optValueSelected;
-
         });
-
 
         $('#btn_continuar_dis').click(function () {
-            //displayProductos(info.id ,info.name, SIZE);
             getCostumes(INFO_AUX, SIZE);
         });
-
 
         translateButtons(idiomStore);
 
@@ -3266,10 +3252,11 @@ function displayPantallaIntermediaAsistDisfra(data) {
         getGender(); //llamamos al webservice que tiene los sexos
 
         $('#select_sexo').change(function () {
+            
+            
             var optionSelected = $(this).find('option:selected');
-            //var optTextSelected = optionSelected.text();
             var optValueSelected = optionSelected.val();
-            //console.log("Opcion seleccionada es " + optValueSelected);
+            console.log("Opcion seleccionada es " + optValueSelected);
 
             if (optValueSelected != 0) {
 

@@ -229,30 +229,11 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     ID_NODE = idNode;
 
-    //$("#spBtnAmountPerson").text(''); // TEMP !!
-    $("#userIcoCarrito").hide(); // TEMP !!
+    $("#userIcoCarrito").hide();
 
-    /*if (pantallaActual == "Asistente fiestas" && AUX == 1 && CART.length > 0) {
-
-        setTimeout(function () {
-            $("#popupPregunta").popup("open");
-        }, popupTimeout);
-
-        AUX = 0;
-
-    }*/
-
-    console.log('-> Llamamos a guardarInfo'); // TEMP !!
-
-
-    //guardarInfo('si');  // TEMP !!
-
-    console.log('-> miramos carrito'); // TEMP !!
-
-    if (CART.length < 1) { // TEMP !!!
+    if (CART.length < 1) { 
+        
         $("#popupListItems").popup("close");
-
-        //$("#spBtnAmountPerson").text(''); //TEMP
 
         $("#circuloCantidad").hide();
         $("#spBtnPopupCartAmmount").hide();
@@ -275,14 +256,13 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         $("#circuloCantidad").show();
         $("#spBtnPopupCartAmmount").show();
 
-        //console.log("--> CAMBIO de imagen!!"); // TEMP !! log
         $("#img_cesta").attr("src", "img/cesta_parpadea.gif");
     }
 
     if (idNode != 0) {
         $("#banderas").hide();
-    }else{
-        PRODUCTS=[];
+    } else {
+        PRODUCTS = [];
     }
 
     PAGINA = 0; //se reinicia la pagina del catalogo
@@ -331,17 +311,12 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                     pantallaActual = "menu principal";
                 }
 
-                //pantallaActual = "nodos";
-                //console.log("Tenemos nuevos nodos");
                 restOk(response, "nodes", idNode, nodeName, aux, backPage);
 
             } else if (response.result == 0) { //ya no tenemos mas nodos que mostrar, ahora se mostratan los productos
 
                 //console.log("Resultado del nodo es cero");
                 //console.log(response);
-
-                //console.log("Pedimos los productos. Id " + idNode + " nombre " + nodeName);
-                //console("¿Estamos en el asistente de fiestas? " + ISFIESTA);
 
                 if (ISFIESTA == 4) {
 
@@ -354,6 +329,7 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
                         pantallaActual = "Asistente disfraces";
                         $("#divHeader_catalogo").show();
                         $("#divHeader_menuInicial").hide(); // TEMP !!
+                        $("#popupCargando").popup("open");
                         displayPantallaIntermediaAsistDisfra(info);
                         //getProductsClassified(idNode, nodeName);
 
@@ -375,27 +351,19 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
                         var precio_persona = formatoNumero((CART.ammount / num_personas_fiesta), 2, ",", ".", "€");
 
-                        //$("#spBtnAmountPerson").text(precio_persona + " x"); //TEMP
-                        //$("#spBtnAmountPerson").show(); //TEMP
                         $("#userIcoCarrito").show();
 
-                        //$("#btn_finalizarpedido").show();
                     }
 
                     if (info != undefined) {
 
                         console.log("DisplayPantalla intermadia");
                         console.log(info);
-                        //pantallaActual = "Asistente fiestas";
-                        //updateBackButton(idNode, nodeName, aux);
-
                         displayPantallaIntermediaAsistFiestas(info.node);
 
                     } else {
 
                         console.log("Dame productos del catalogo" + nodeName);
-                        //updateBackButton(idNode, nodeName, aux);
-                        //getProducts(idNode, nodeName);
                         getCostumes(idNode, nodeName);
 
                     }
@@ -1327,6 +1295,12 @@ function getSize(gender) {
                 }
 
                 select.selectmenu();
+    
+                setTimeout(function () {
+                    $("#popupCargando").popup("close");
+                }, 500);
+
+                
 
             } else if (response.result == 0) {
 
