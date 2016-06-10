@@ -106,7 +106,7 @@ $(document).ready(function () {
         }, idleTime);
 
 
-        if ($('#contentPopupScreenSaver').is(':hidden')){ //escondido
+        if ($('#contentPopupScreenSaver').is(':hidden')) { //escondido
 
             //console.log('Hola2');
             var t2 = e.timeStamp,
@@ -121,7 +121,7 @@ $(document).ready(function () {
             $(this).trigger('click').trigger('click');
 
         } else {
-            
+
             //console.log('Hola');
             e.preventDefault();
             $('#principal').show();
@@ -174,7 +174,12 @@ $(document).ready(function () {
 
     });
 
+    $("#contentPopupScreenSaver").click(function () {
 
+        $('#principal').hide();
+        $('#contentPopupScreenSaver').show();
+
+    });
 
     $("#popupListItems").bind({
         popupafterclose: function (event, ui) {

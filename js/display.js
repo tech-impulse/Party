@@ -3265,7 +3265,6 @@ function displayPantallaIntermediaAsistDisfra(data) {
 
                 $("#btn_continuar_dis").click(function () { //TEMP
 
-
                     var sexo = $("select#select_sexo option").filter(":selected").val(); // en los dos selects en caso de que no haya seleccionado nada sera cero
                     var talla = $("select#select_talla option").filter(":selected").val();
 
