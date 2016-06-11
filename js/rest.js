@@ -231,8 +231,8 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     $("#userIcoCarrito").hide();
 
-    if (CART.length < 1) { 
-        
+    if (CART.length < 1) {
+
         $("#popupListItems").popup("close");
 
         $("#circuloCantidad").hide();
@@ -261,9 +261,10 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
 
     if (idNode != 0) {
         $("#banderas").hide();
-    }/* else {
-        PRODUCTS = [];
-    }*/
+    }
+    /* else {
+            PRODUCTS = [];
+        }*/
 
     PAGINA = 0; //se reinicia la pagina del catalogo
 
@@ -839,12 +840,12 @@ function getProductsClassified(idNode, nodeName, info_aux) {
             console.log("Respuesta: ");
             console.log(response);
 
-            if (response.result == 1) {
+            if (response.result == 1 && response.products.length > 0) {
 
                 console.log(response);
                 restOk_products(response, "nodes", idNode, nodeName, info_aux, "getProductsClassified");
 
-            } else if (response.result == 0) {
+            } else if (response.result == 0 || response.products.length == 0) {
 
                 //console.log("No hay productos para este nodo");
                 $("#popupCargando").popup("close");
@@ -911,7 +912,7 @@ function restOk_products(res, typ, param, param2, param3) {
     case "nodes":
 
         //displayProducts(res, param, param2, param3);
-        console.log("Type " + res.products[0].typeproducts);
+        //console.log("Type " + res.products[0].typeproducts);
         if (res.products[0].typeproducts == undefined) {
             displayProducts(res, param, param2, param3, "");
         } else {
@@ -1295,12 +1296,12 @@ function getSize(gender) {
                 }
 
                 select.selectmenu();
-    
+
                 setTimeout(function () {
                     $("#popupCargando").popup("close");
                 }, 500);
 
-                
+
 
             } else if (response.result == 0) {
 
@@ -1453,14 +1454,28 @@ function getTraduccion(idioma) { //esta funcion nos devuelve la info de un nodo 
             console.log("Respuesta: ");
             console.log(response);
 
-            for (var i = 0; i < CART.length; i++) {
-                if (response[i].id == CART[i].id) {
-                    CART[i].definition = response[i].definition;
-                    CART[i].name = response[i].name;
-                    CART[i].short_name = response[i].short_name;
-                    CART[i].suggestions = response[i].suggestions;
+            if (response.result == 1) {
+
+                for (var i = 0; i < CART.length; i++) {
+                    if (response[i].id == CART[i].id) {
+                        CART[i].definition = response[i].definition;
+                        CART[i].name = response[i].name;
+                        CART[i].short_name = response[i].short_name;
+                        CART[i].suggestions = response[i].suggestions;
+                    }
                 }
+
+            } else {
+
+                $.jAlert({
+                    'title': 'Alerta',
+                    'content': 'Error al cambiar de idioma. Respuesta ' + response.result,
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
+
             }
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
 

@@ -249,7 +249,7 @@ function changeIdiom(idioma, idiomaId) {
 
     translateButtons(idiomStore);
 
-    if (pantallaActual == "menu principal") {
+    if (pantallaActual == "menu") {
 
         getNodes(0);
 

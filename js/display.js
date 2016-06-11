@@ -4313,6 +4313,7 @@ function sistemasPago() { //TEMP
 
 
     $("#paypal").click(function () {
+        $("#popupCargando").popup("open");
         sendBasketAndOrder('cash register');
         $("#formPaypal").submit();
     });
