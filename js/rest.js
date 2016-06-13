@@ -985,7 +985,12 @@ function restOk_tiendas(res, typ, param, param2) {
         var val = res.stores[i].id;
         var text = res.stores[i].name;
 
-        html = html + '<option value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+        if (i == 0) {
+            html = html + '<option selected="selected" value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+            OPCIONSELECTED = val;
+        } else {
+            html = html + '<option value=' + val + ' style=""><label style="color:white;text-transform: uppercase;">' + text + '</label></option>';
+        }
 
     }
 

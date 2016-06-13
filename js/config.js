@@ -25,7 +25,7 @@ var node_cero = [];
 var LOGGED = false;
 var REDIRECT = false;
 var popupTimeout = 150;
-var idleTime = 180000; /// tiempo de inactividad
+var idleTime = 3000;//180000; /// tiempo de inactividad
 var idleTimeActive = false;
 var idiomStore;
 var protector;
@@ -52,6 +52,7 @@ var PRECIOSENVIO = {};
 var OPCIONPEDIDO = 0;
 var OPCIONENVIO = 0;
 var OPCIONENTREGA = "";
+var OPCIONSELECTED = "";
 //var productosEnTienda = 0;  // Número de productos disponibles en tienda del pedido actual
 //var productosEnWeb = 0;     // Número de productos disponibles online del pedido actual
 //var precioTotalProductosTienda = 0;     // Precio total de los productos disponibles en tienda

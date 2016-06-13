@@ -241,9 +241,13 @@ $(document).ready(function () {
     //Boton de acceso a la app
     $("#btn_acceder").click(function () {
 
-        var seleccion = $("#select_tienda option:selected").val();
-        //console.log("Seleccion es " + seleccion);
+        //var seleccion = $("#select_tienda option:selected").val();
+        console.log("Seleccion es " + seleccion);
 
+        $('#select_tienda').val(OPCIONSELECTED).selectmenu('refresh');
+                
+        var seleccion = $("#select_tienda option:selected").val();
+        
         if (seleccion != undefined) {
 
             $("#divTienda").hide();
@@ -262,7 +266,6 @@ $(document).ready(function () {
                     TIENDAS = "";
                     break;
                 }
-
             }
 
             //console.log("Item seleccionado " + STORE + " y tiene entraga en tienda? " + SHOPDELIVERY);
@@ -271,7 +274,14 @@ $(document).ready(function () {
 
         } else {
 
-            console.log("¿Seleccione una tienda!");
+            console.log("!Seleccione una tienda!");
+            
+            $.jAlert({
+                'title': 'Alerta',
+                'content': '!Seleccione una tienda!',
+                'theme': 'gray',
+                'size': 'xsm'
+            });
 
         }
 
