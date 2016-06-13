@@ -4361,7 +4361,7 @@ function sistemasPago() { //TEMP
 
         setTimeout(function () {
             getNodes(0);
-        }, 2500);
+        }, 5000);
 
     });
 
