@@ -4260,11 +4260,25 @@ function sistemasPago() { //TEMP
         }
 
     }
+    
+    var precio_envio = 0;
 
     if (OPCIONENTREGA == 'shop') {
-        var precio_envio = SEND_INFO.price_shop.taxPrice;
+        
+        if(SEND_INFO.price_shop.taxPrice == undefined){
+            var precio_envio = 0;
+        }else{
+            var precio_envio = SEND_INFO.price_shop.taxPrice;
+        }
+        
     } else {
-        var precio_envio = SEND_INFO.price_dom.taxPrice;
+        
+        if(SEND_INFO.price_shop.taxPrice == undefined){
+            var precio_envio = 0;
+        }else{
+            var precio_envio = SEND_INFO.price_dom.taxPrice;
+        }
+        
     }
 
     paypal += //'<input type="hidden" name="upload" value="1">' +
@@ -5453,7 +5467,8 @@ function pantallaInterLoginPago(destinoEnvio, taxPrice, totalPrice, basePrice) {
     console.log(destinoEnvio + "," + taxPrice + "," + totalPrice + "," + basePrice + " datos del envio ----------------------- ");
 
     if (INFO_USU.id != undefined) {
-
+        
+        console.log("Logado mostramos form de envio");
         displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice);
 
     } else {
