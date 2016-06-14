@@ -25,7 +25,7 @@ var node_cero = [];
 var LOGGED = false;
 var REDIRECT = false;
 var popupTimeout = 150;
-var idleTime = 5000; /// tiempo de inactividad
+var idleTime = 180000; /// tiempo de inactividad
 var idleTimeActive = false;
 var idiomStore;
 var protector;
