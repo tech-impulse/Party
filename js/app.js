@@ -176,8 +176,8 @@ $(document).ready(function () {
 
     $("#contentPopupScreenSaver").click(function () {
 
-        $('#principal').hide();
-        $('#contentPopupScreenSaver').show();
+        $('#principal').show();
+        $('#contentPopupScreenSaver').hide();
 
     });
 
