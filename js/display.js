@@ -4231,7 +4231,7 @@ function sistemasPago() { //TEMP
         '<input type="hidden" name="lc" value="ES">' +
         '<input type="hidden" name="cmd" value="_cart">' +
         '<input type="hidden" name="upload" value="1">' +
-        '<input type="hidden" name="return" value="http://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email=' + INFO_USU.email.replace(/\s/g, " ") + '&idUser=' + INFO_USU.id + '">' +
+        '<input type="hidden" name="return" value="http://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email=' + INFO_USU.email.replace(/\s/g, " ") + '&idUser=' + INFO_USU.id + '&shop='+STORE.id+'">' +
         '<input type="hidden" name="cancel_return" value="http://partyfiesta.youtter.com/app/alb/">' +
         '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
 
@@ -4361,7 +4361,7 @@ function sistemasPago() { //TEMP
 
         setTimeout(function () {
             getNodes(0);
-        }, 5000);
+        }, 7500);
 
     });
 
@@ -4822,7 +4822,16 @@ function displayDomicilioFacturacionForm() {
 
 
     loadSelectPaises('div_input_pais_2', 'selectCountry');
-    loadSelectProvinciasFromCountry('div_input_provincia_2', 1, 'selectProvince_2');
+    
+    
+    $("#selectCountry").change(function () {
+
+        console.log('Cambio de pais, ahora es:' + $("#selectCountry").val());
+
+        loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry").val(), 'selectProvince_2');
+
+    });
+    
 }
 
 

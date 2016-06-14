@@ -2376,6 +2376,13 @@ function sendBasketAndOrder(paymentMethod) { //esta funcion nos devuelve la info
 
             if (response.result == -1) {
                 console.log("Faltan parametros");
+            } else {
+                CART = [];
+                nodeNames = [];
+                nodeIds = [];
+                nodeImg = [];
+                EMAIL_USER = "";
+                logout();
             }
 
         },
@@ -2626,13 +2633,13 @@ function sendRegistroDomicilio(user, password, userPostalCode,
                     break;
                 case 2:
 
-                    if (OPCIONENTREGA == "dom") {
+                    if (OPCIONENTREGA == "dom") { //mostramos el formulario de direccion de facturacion
                         displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_dom.taxPrice, SEND_INFO.price_dom.totalPrice, SEND_INFO.price_dom.basePrice);
                     } else {
                         displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_shop.taxPrice, SEND_INFO.price_shop.totalPrice, SEND_INFO.price_shop.basePrice);
                     }
 
-                    cargaDatosUsuarioAFormularioRegistro();
+                    cargaDatosUsuarioAFormularioRegistro(); //cargamos los datos del cliente automaticamente
 
                     break;
                 }
