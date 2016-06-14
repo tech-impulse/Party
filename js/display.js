@@ -4699,6 +4699,8 @@ function changeFormRegUser(html_register_user) {
 }
 
 function displayDomicilioFacturacionForm() {
+    
+    console.log("Cargamos el form de facturacion");
 
     var html_login_user = '<div id="contenedorInfoUsuario"><h2>Info Usuario</h2>' +
         '<center>' +
@@ -5634,7 +5636,7 @@ function pantallaRegistroPago() {
     loadSelectPaises('div_input_pais', 'selectCountry');
     loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry_2").val(), 'selectProvince_2');
 
-    $("#selectCountry_2").change(function () {
+    $("#selectCountry").change(function () {
 
         console.log('Cambio de pais, ahora es:' + $("#selectCountry").val());
 
