@@ -3182,7 +3182,7 @@ function loadMenu(data) {
 function displayPantallaIntermediaAsistDisfra(data) {
 
     if (data) {
-        
+
         //console.log("Tenemos datos para cargar el select de disfraces");
         $("#divHeader_catalogo").show();
         $("#divHeader_menuInicial").hide();
@@ -3252,8 +3252,8 @@ function displayPantallaIntermediaAsistDisfra(data) {
         getGender(); //llamamos al webservice que tiene los sexos
 
         $('#select_sexo').change(function () {
-            
-            
+
+
             var optionSelected = $(this).find('option:selected');
             var optValueSelected = optionSelected.val();
             console.log("Opcion seleccionada es " + optValueSelected);
@@ -4231,7 +4231,7 @@ function sistemasPago() { //TEMP
         '<input type="hidden" name="lc" value="ES">' +
         '<input type="hidden" name="cmd" value="_cart">' +
         '<input type="hidden" name="upload" value="1">' +
-        '<input type="hidden" name="return" value="http://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email=' + INFO_USU.email.replace(/\s/g, " ") + '&idUser=' + INFO_USU.id + '&shop='+STORE.id+'">' +
+        '<input type="hidden" name="return" value="http://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email=' + INFO_USU.email.replace(/\s/g, " ") + '&idUser=' + INFO_USU.id + '&shop=' + STORE.id + '">' +
         '<input type="hidden" name="cancel_return" value="http://partyfiesta.youtter.com/app/alb/">' +
         '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
 
@@ -4260,25 +4260,25 @@ function sistemasPago() { //TEMP
         }
 
     }
-    
+
     var precio_envio = 0;
 
     if (OPCIONENTREGA == 'shop') {
-        
-        if(SEND_INFO.price_shop.taxPrice == undefined){
+
+        if (SEND_INFO.price_shop.taxPrice == undefined) {
             var precio_envio = 0;
-        }else{
+        } else {
             var precio_envio = SEND_INFO.price_shop.taxPrice;
         }
-        
+
     } else {
-        
-        if(SEND_INFO.price_shop.taxPrice == undefined){
+
+        if (SEND_INFO.price_shop.taxPrice == undefined) {
             var precio_envio = 0;
-        }else{
+        } else {
             var precio_envio = SEND_INFO.price_dom.taxPrice;
         }
-        
+
     }
 
     paypal += //'<input type="hidden" name="upload" value="1">' +
@@ -4333,9 +4333,9 @@ function sistemasPago() { //TEMP
     });
 
     $("#caja").click(function () {
-        
+
         sendBasketAndOrder('cash register');
-                            
+
         html = '<center>' +
             '<div style="margin-top:10%;width: 50%;" onclick="getNodes(0);">' +
             '<img src="css/icons/logo.png" style="width: 100%;">' +
@@ -4361,7 +4361,7 @@ function sistemasPago() { //TEMP
 
         setTimeout(function () {
             getNodes(0);
-        }, 7500);
+        }, 10000);
 
     });
 
@@ -4699,7 +4699,7 @@ function changeFormRegUser(html_register_user) {
 }
 
 function displayDomicilioFacturacionForm() {
-    
+
     console.log("Cargamos el form de facturacion");
 
     var html_login_user = '<div id="contenedorInfoUsuario"><h2>Info Usuario</h2>' +
@@ -4824,8 +4824,8 @@ function displayDomicilioFacturacionForm() {
 
 
     loadSelectPaises('div_input_pais_2', 'selectCountry');
-    
-    
+
+
     $("#selectCountry").change(function () {
 
         console.log('Cambio de pais, ahora es:' + $("#selectCountry").val());
@@ -4833,12 +4833,14 @@ function displayDomicilioFacturacionForm() {
         loadSelectProvinciasFromCountry('div_input_provincia_2', $("#selectCountry").val(), 'selectProvince_2');
 
     });
-    
+
 }
 
 
 
 function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
+
+
 
     PRECIOSENVIO = {
         taxPrice: taxPrice,
@@ -4846,7 +4848,12 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         basePrice: basePrice
     };
 
-    console.log("Precios envio " + PRECIOSENVIO);
+    if (PRECIOSENVIO.taxPrice == undefined) PRECIOSENVIO.taxPrice = 0;
+    if (PRECIOSENVIO.totalPrice == undefined) PRECIOSENVIO.totalPrice = 0;
+    if (PRECIOSENVIO.basePrice == undefined) PRECIOSENVIO.basePrice = 0;
+
+    console.log("Precios envio ")
+    console.log(PRECIOSENVIO);
 
     var html_login_user = '<div id="contenedorInfoUsuario"><h2>Info Usuario</h2>' +
         '<center>' +
@@ -5478,7 +5485,7 @@ function pantallaInterLoginPago(destinoEnvio, taxPrice, totalPrice, basePrice) {
     console.log(destinoEnvio + "," + taxPrice + "," + totalPrice + "," + basePrice + " datos del envio ----------------------- ");
 
     if (INFO_USU.id != undefined) {
-        
+
         console.log("Logado mostramos form de envio");
         displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice);
 

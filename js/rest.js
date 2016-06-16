@@ -2395,9 +2395,9 @@ function sendBasketAndOrder(paymentMethod) { //esta funcion nos devuelve la info
 
             } else {
 
-                restError(jqXHR, "tiendas");
+                //restError(jqXHR, "tiendas");
                 //console.log("Sin conexion");
-                $("#texto_popup").text("Sin conexion a internet");
+                $("#texto_popup").text("Error de ws");
                 $('#popupAlert').popup('open');
 
             }
@@ -2447,7 +2447,7 @@ function getSendPrice(precio) {
             } else {
 
                 restError(jqXHR, "tiendas");
-                $("#texto_popup").text("Sin conexion a internet");
+                $("#texto_popup").text("Error de ws");
                 $('#popupAlert').popup('open');
 
             }
