@@ -4840,8 +4840,6 @@ function displayDomicilioFacturacionForm() {
 
 function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
 
-
-
     PRECIOSENVIO = {
         taxPrice: taxPrice,
         totalPrice: totalPrice,
