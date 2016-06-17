@@ -245,9 +245,9 @@ $(document).ready(function () {
         console.log("Seleccion es " + seleccion);
 
         $('#select_tienda').val(OPCIONSELECTED).selectmenu('refresh');
-                
+
         var seleccion = $("#select_tienda option:selected").val();
-        
+
         if (seleccion != undefined) {
 
             $("#divTienda").hide();
@@ -275,7 +275,7 @@ $(document).ready(function () {
         } else {
 
             console.log("!Seleccione una tienda!");
-            
+
             $.jAlert({
                 'title': 'Alerta',
                 'content': '!Seleccione una tienda!',
@@ -761,26 +761,39 @@ function addToCart(item, param) {
 
                 if (CART[j]['id'] == item) {
 
-                    foundInCart = 1;
-                    CART[j].quantity = CART[j].quantity + parseInt(param);
-                    CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
+                    if (CART[j].quantity < CART[j].stock_x_store) {
 
-                    console.log('PRODUCTS[i][id] == item --> foundInCart = 1'); // TEMP !!
+                        foundInCart = 1;
+                        CART[j].quantity = CART[j].quantity + parseInt(param);
+                        CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
 
-                    var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
+                        console.log('PRODUCTS[i][id] == item --> foundInCart = 1'); // TEMP !!
 
-                    $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
+                        var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
 
-                    displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
+                        $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
 
-                    updateVariblesTiposDeProducto(product, (param > 0 ? true : false), foundInCart); //actulizamos variables del carrito para el pago.
+                        displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
 
-                    if (CART[j].quantity == 0) // TEMP !!
-                        deleteItemCart(j);
+                        updateVariblesTiposDeProducto(product, (param > 0 ? true : false), foundInCart); //actulizamos variables del carrito para el pago.
 
-                    break;
+                        if (CART[j].quantity == 0) // TEMP !!
+                            deleteItemCart(j);
 
-                } //if
+                        break;
+
+                    } else {
+                        
+                        foundInCart = 1;
+                        $.jAlert({
+                            'title': 'Alerta',
+                            'content': 'No hay mas productos en stock',
+                            'theme': 'gray',
+                            'size': 'xsm'
+                        });
+
+                    }
+                }
             } //for
         } //if
     } //for

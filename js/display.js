@@ -5529,13 +5529,13 @@ function pantallaRegistroPago() {
         '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_pass_re" name="in_pass_re" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-        '<div class="ui-grid-a">' +
+        /*'<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">codigo postal *</label>' +
         '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_codpos" name="in_codpos" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b"></div>' +
-        '</div>' +
+        '</div>' +*/
         //direccion de envio
         '<h2 style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">Direccion</h2><hr style="border-color:#0197d4;">' +
         '<div class="ui-grid-a">' +
@@ -5603,7 +5603,7 @@ function pantallaRegistroPago() {
         var email_re = $('#in_email_re').val();
         var pass = $('#in_pass').val();
         var pass_re = $('#in_pass_re').val();
-        var codpos = $('#in_codpos').val();
+        //var codpos = $('#in_codpos').val();
         var name = $('#in_name').val();
         var apellidos = $('#in_apellidos').val();
         var tel = $('#in_tel').val();
@@ -5615,10 +5615,10 @@ function pantallaRegistroPago() {
         var selectCountry = $('#selectCountry').val();
         var selectProvince_2 = $('#selectProvince_2').val();
 
-        if (email == email_re && pass == pass_re && codpos != "" && name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != "") {
+        if (email == email_re && pass == pass_re &&  name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != "") {//codpos != "" &&
 
             console.log("Todos los campos ok");
-            sendRegistroDomicilio(email, pass, codpos,
+            sendRegistroDomicilio(email, pass, postal,
                 name, apellidos, tel, dni, direc, num_direc, ciudad, selectProvince_2, postal, selectCountry,
                 name, apellidos, tel, dni, direc, num_direc, postal, ciudad, selectCountry, selectProvince_2, 2);
 
