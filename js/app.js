@@ -782,8 +782,30 @@ function addToCart(item, param) {
 
                         break;
 
-                    } else {
+                    } else if (CART[j].stock_x_store == 0 && CART[j].quantity < CART[j].stock_x_central_store) {
                         
+                        foundInCart = 1;
+                        CART[j].quantity = CART[j].quantity + parseInt(param);
+                        CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
+
+                        console.log('PRODUCTS[i][id] == item --> foundInCart = 1'); // TEMP !!
+
+                        var precioArticulo = parseInt(CART[j].quantity) * parseFloat(product.price_x_region[0].totalPrice);
+
+                        $("#labelPrecioTotalProducto" + CART[j].id).text(jsonIdiomas.cajas.precio_total_label + formatoNumero(precioArticulo, 2, ",", ".", "€"));
+
+                        displayItemOperations(CART[j].id, parseInt(CART[j].quantity), j);
+
+                        updateVariblesTiposDeProducto(product, (param > 0 ? true : false), foundInCart); //actulizamos variables del carrito para el pago.
+
+                        if (CART[j].quantity == 0) // TEMP !!
+                            deleteItemCart(j);
+
+                        break;
+
+
+                    } else {
+
                         foundInCart = 1;
                         $.jAlert({
                             'title': 'Alerta',
