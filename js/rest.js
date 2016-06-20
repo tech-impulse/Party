@@ -1541,7 +1541,7 @@ function sendEmail(pantallaIntermediaPago) {
                 if (parseInt(response.result) == parseInt(1)) {
 
                     if (pantallaIntermediaPago == 1) {
-                        $("#texto_popup").text("Correo enviado a " + EMAIL_USER + ".\nAcontinuación finalizaremos el pedido online.");
+                        $("#texto_popup").text("Correo enviado a " + EMAIL_USER + ".\nA continuación finalizaremos el pedido online.");
                         $('#popupAlert').popup('open');
                         console.log("Enviamos email");
                         setTimeout(function () {
