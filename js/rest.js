@@ -1540,16 +1540,18 @@ function sendEmail(pantallaIntermediaPago) {
 
                 if (parseInt(response.result) == parseInt(1)) {
 
-                    $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
-
-                    console.log("Enviamos email");
-
                     if (pantallaIntermediaPago == 1) {
+                        $("#texto_popup").text("Correo enviado a " + EMAIL_USER + ".\nAcontinuación finalizaremos el pedido online.");
+                        $('#popupAlert').popup('open');
+                        console.log("Enviamos email");
                         setTimeout(function () {
                             $('#popupAlert').popup('close');
-                            sistemasPago();
-                        }, 1500);
+                            sistemasPago("si");
+                        }, 5000);
                     } else {
+                        $("#texto_popup").text("Correo enviado a " + EMAIL_USER );
+                        $('#popupAlert').popup('open');
+                        console.log("Enviamos email");
                         EMAIL_USER = "";
                         INFO_USU = "";
                         $('#popupAlert').popup('open');
@@ -2634,9 +2636,9 @@ function sendRegistroDomicilio(user, password, userPostalCode,
                 case 2:
 
                     if (OPCIONENTREGA == "dom") { //mostramos el formulario de direccion de facturacion
-                        displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_dom.taxPrice, SEND_INFO.price_dom.totalPrice, SEND_INFO.price_dom.basePrice);
+                        displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_dom.totalPrice, SEND_INFO.price_dom.totalPrice, SEND_INFO.price_dom.basePrice);
                     } else {
-                        displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_shop.taxPrice, SEND_INFO.price_shop.totalPrice, SEND_INFO.price_shop.basePrice);
+                        displayDomicilioForm(OPCIONENTREGA, SEND_INFO.price_shop.totalPrice, SEND_INFO.price_shop.totalPrice, SEND_INFO.price_shop.basePrice);
                     }
 
                     cargaDatosUsuarioAFormularioRegistro(); //cargamos los datos del cliente automaticamente

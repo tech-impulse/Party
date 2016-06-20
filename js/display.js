@@ -4217,9 +4217,9 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 }
 
 
-function sistemasPago() { //TEMP
+function sistemasPago(soloOnline) { //TEMP
 
-    console.log('--> sistemasPago');
+    console.log('--> sistemasPago ' + soloOnline);
 
     pantallaActual = "sistemas pago";
 
@@ -4238,56 +4238,106 @@ function sistemasPago() { //TEMP
     var add = '';
     var i = 0;
 
-    for (i = 0; i < CART.length; i++) {
+    if (soloOnline == "si") {
 
-        if (parseInt(CART.length) == 1) {
+        console.log("Solo online");
+        var aux = 0;
+        for (i = 0; i < CART.length; i++) {
 
-            paypal +=
-                // '<input type="hidden" name="add" value="1">' +
-                '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
-                '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
-                '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-                '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+            if (CART[i].stock_x_store == 0) { //solo cargaremos los productos online
 
-        } else {
+                console.log("Prod ");
+                console.log(CART[i]);
 
-            paypal += //'<input type="hidden" name="upload" value="1">' +
-                '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
-                '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
-                '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-                '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+                if (aux == 0) {
 
+                    paypal +=
+                        // '<input type="hidden" name="add" value="1">' +
+                        '<input type="hidden" name="item_name_' + (aux + 1) + '" value="' + CART[i].name + '">' +
+                        '<input type="hidden" name="item_number_' + (aux + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
+                        '<input type="hidden" name="amount_' + (aux + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+                        '<input type="hidden" name="quantity_' + (aux + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+
+                } else {
+
+                    paypal += //'<input type="hidden" name="upload" value="1">' +
+                        '<input type="hidden" name="item_name_' + (aux + 1) + '" value="' + CART[i].name + '">' +
+                        '<input type="hidden" name="item_number_' + (aux + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
+                        '<input type="hidden" name="amount_' + (aux + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+                        '<input type="hidden" name="quantity_' + (aux + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+
+                }
+                aux++;
+
+            }
         }
 
-    }
+        paypal += //'<input type="hidden" name="upload" value="1">' +
+            '<input type="hidden" name="item_name_' + (aux + 1) + '" value="Gastos de envio">' +
+            //'<input type="hidden" name="item_number_' + i + '" value="00000">' +
+            '<input type="hidden" name="amount_' + (aux+ 1) + '" value="' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '">' +
+            '<input type="hidden" name="quantity_' + (aux+ 1) + '" value="1">' +
+            //'<input type="image" src="" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
+            '</form>'; //https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png
 
-    var precio_envio = 0;
-
-    if (OPCIONENTREGA == 'shop') {
-
-        if (SEND_INFO.price_shop.taxPrice == undefined) {
-            var precio_envio = 0;
-        } else {
-            var precio_envio = SEND_INFO.price_shop.taxPrice;
-        }
 
     } else {
 
-        if (SEND_INFO.price_shop.taxPrice == undefined) {
-            var precio_envio = 0;
-        } else {
-            var precio_envio = SEND_INFO.price_dom.taxPrice;
+        for (i = 0; i < CART.length; i++) {
+
+            if (parseInt(CART.length) == 1) {
+
+                paypal +=
+                    // '<input type="hidden" name="add" value="1">' +
+                    '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
+                    '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
+                    '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+                    '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+
+            } else {
+
+                paypal += //'<input type="hidden" name="upload" value="1">' +
+                    '<input type="hidden" name="item_name_' + (i + 1) + '" value="' + CART[i].name + '">' +
+                    '<input type="hidden" name="item_number_' + (i + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
+                    '<input type="hidden" name="amount_' + (i + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
+                    '<input type="hidden" name="quantity_' + (i + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+
+            }
+
         }
+
+        var precio_envio = 0;
+
+        if (OPCIONENTREGA == 'shop') {
+
+            if (SEND_INFO.price_shop.taxPrice == undefined) {
+                var precio_envio = 0;
+            } else {
+                var precio_envio = SEND_INFO.price_shop.totalPrice;
+            }
+
+        } else {
+
+            if (SEND_INFO.price_shop.taxPrice == undefined) {
+                var precio_envio = 0;
+            } else {
+                var precio_envio = SEND_INFO.price_dom.totalPrice;
+            }
+
+        }
+
+        paypal += //'<input type="hidden" name="upload" value="1">' +
+            '<input type="hidden" name="item_name_' + (i + 1) + '" value="Gastos de envio">' +
+            //'<input type="hidden" name="item_number_' + i + '" value="00000">' +
+            '<input type="hidden" name="amount_' + (i + 1) + '" value="' + parseFloat(precio_envio).toFixed(2) + '">' +
+            '<input type="hidden" name="quantity_' + (i + 1) + '" value="1">' +
+            //'<input type="image" src="" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
+            '</form>'; //https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png
+
 
     }
 
-    paypal += //'<input type="hidden" name="upload" value="1">' +
-        '<input type="hidden" name="item_name_' + (i + 1) + '" value="Gastos de envio">' +
-        //'<input type="hidden" name="item_number_' + i + '" value="00000">' +
-        '<input type="hidden" name="amount_' + (i + 1) + '" value="' + parseFloat(precio_envio).toFixed(2) + '">' +
-        '<input type="hidden" name="quantity_' + (i + 1) + '" value="1">' +
-        //'<input type="image" src="" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
-        '</form>'; //https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png
+
 
     var html = '<div>' +
         '<center>' +
@@ -5615,7 +5665,7 @@ function pantallaRegistroPago() {
         var selectCountry = $('#selectCountry').val();
         var selectProvince_2 = $('#selectProvince_2').val();
 
-        if (email == email_re && pass == pass_re &&  name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != "") {//codpos != "" &&
+        if (email == email_re && pass == pass_re && name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != "") { //codpos != "" &&
 
             console.log("Todos los campos ok");
             sendRegistroDomicilio(email, pass, postal,
