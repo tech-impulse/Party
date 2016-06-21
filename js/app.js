@@ -244,23 +244,24 @@ $(document).ready(function () {
         //var seleccion = $("#select_tienda option:selected").val();
         console.log("Seleccion es " + seleccion);
 
-        $('#select_tienda').val(OPCIONSELECTED).selectmenu('refresh');
+        //$('#select_tienda').val(OPCIONSELECTED).selectmenu('refresh');
 
         var seleccion = $("#select_tienda option:selected").val();
+
 
         if (seleccion != undefined) {
 
             $("#divTienda").hide();
             $("#divContent").show();
 
-            STORE = seleccion;
+            STORE = $("#select_tienda option:selected").val();
 
             var countTiendas = TIENDAS.stores.length;
 
             for (var i = 0; i < countTiendas; i++) {
 
                 if (TIENDAS.stores[i].id == STORE) {
-                    SHOPDELIVERY = TIENDAS.stores[i].deliveryStore; //guardamos el id de la tienda
+                    SHOPDELIVERY = TIENDAS.stores[i].deliveryStore;
                     //language = TIENDAS.stores[i].language;  
                     STORE = TIENDAS.stores[i];
                     TIENDAS = "";
@@ -783,7 +784,7 @@ function addToCart(item, param) {
                         break;
 
                     } else if (CART[j].stock_x_store == 0 && CART[j].quantity < CART[j].stock_x_central_store) {
-                        
+
                         foundInCart = 1;
                         CART[j].quantity = CART[j].quantity + parseInt(param);
                         CART.ammount = parseFloat((product.price_x_region[0].totalPrice * param)) + parseFloat(CART.ammount);
