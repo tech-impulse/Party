@@ -126,6 +126,10 @@ $(document).ready(function () {
             e.preventDefault();
             $('#principal').show();
             $('#contentPopupScreenSaver').hide();
+            getNodes(0);
+            setTimeout(function () {
+                getNodes(0);
+            }, 50);
 
         }
 
@@ -178,7 +182,10 @@ $(document).ready(function () {
 
         $('#principal').show();
         $('#contentPopupScreenSaver').hide();
-
+        getNodes(0);
+        setTimeout(function () {
+            getNodes(0);
+        }, 50);
     });
 
     $("#popupListItems").bind({
@@ -279,7 +286,7 @@ $(document).ready(function () {
 
             $.jAlert({
                 'title': 'Alerta',
-                'content': '!Seleccione una tienda!',
+                'content': jsonIdiomas.alertas.select_tienda,
                 'theme': 'gray',
                 'size': 'xsm'
             });
@@ -810,7 +817,7 @@ function addToCart(item, param) {
                         foundInCart = 1;
                         $.jAlert({
                             'title': 'Alerta',
-                            'content': 'No hay mas productos en stock',
+                            'content': jsonIdiomas.alertas.sin_stock,
                             'theme': 'gray',
                             'size': 'xsm'
                         });

@@ -13,6 +13,8 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
     ID_NODE = originNode;
 
+    num_personas_fiesta = 0;
+
     var len = data.nodes.length;
 
     if (parseInt(len) < parseInt(data.columns)) {
@@ -569,7 +571,7 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
-                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');" style="' + (productAlter.id == pro_seccion.id ? displayNone : nada) + '">Añadir</button>' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');" style="' + (productAlter.id == pro_seccion.id ? displayNone : nada) + '">' + jsonIdiomas.asistente_fiestas.btn_añadir_prod + '</button>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="' + (productAlter.id != pro_seccion.id ? displayNone : nada) + '">' +
@@ -948,7 +950,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
-                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addCartAsistFiestas(' + data.products[i].id + ');">Añadir</button>' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addCartAsistFiestas(' + data.products[i].id + ');">' + jsonIdiomas.asistente_fiestas.btn_añadir_prod + '</button>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
@@ -1329,7 +1331,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                         '</div>' +
                         '<div class="ui-grid-a">' +
                         '<div class="ui-block-a" style="width: 100%;">' +
-                        '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');">Añadir</button>' +
+                        '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');">' + jsonIdiomas.asistente_fiestas.btn_añadir_prod + '</button>' +
                         '</div>' +
                         '</div>' +
                         '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
@@ -1610,7 +1612,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                     '</div>' +
                     '<div class="ui-grid-a">' +
                     '<div class="ui-block-a" style="width: 100%;">' +
-                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                    '<button  data-corners="false" data-theme="b" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">' + jsonIdiomas.asistente_fiestas.btn_añadir_prod + '</button>' +
                     '</div>' +
                     '</div>' +
                     '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
@@ -1929,7 +1931,7 @@ function displayProducts(data, originNode, originName, param, param4) {
                         '</div>' +
                         '<div class="ui-grid-a">' +
                         '<div class="ui-block-a" style="width: 100%;">' +
-                        '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');">Añadir</button>' +
+                        '<button  data-corners="false" data-theme="b" id="btnAddProduct' + pro_seccion.id + '" onclick="addCartAsistFiestas(' + pro_seccion.id + ');">' + jsonIdiomas.asistente_fiestas.btn_añadir_prod + '</button>' +
                         '</div>' +
                         '</div>' +
                         '<div class="ui-grid-b" id="grid' + pro_seccion.id + '" style="display:none;">' +
@@ -2222,7 +2224,7 @@ function añadirMasProductos(data, originNode, originName, param) {
                 '</div>' +
                 '<div class="ui-grid-a">' +
                 '<div class="ui-block-a" style="width: 100%;">' +
-                '<button  data-corners="false" data-theme="b" class=" ui-btn ui-btn-b ui-shadow" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">Añadir</button>' +
+                '<button  data-corners="false" data-theme="b" class=" ui-btn ui-btn-b ui-shadow" id="btnAddProduct' + data.products[i].id + '" onclick="addToCart(' + data.products[i].id + ',1);">' + jsonIdiomas.asistente_fiestas.btn_añadir_prod + '</button>' +
                 '</div>' +
                 '</div>' +
                 '<div class="ui-grid-b" id="grid' + data.products[i].id + '" style="display:none;">' +
@@ -2866,6 +2868,16 @@ function displayPopupItemDetail(id, param, idproduct) {
 
                     var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "wide"); // TEMP !!
 
+                    var section = PRODUCTS[i].position_x_store.section;
+                    var section = PRODUCTS[i].position_x_store.module;
+                    var section = PRODUCTS[i].position_x_store.position;
+
+                    var ubicacion = PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position;
+
+                    if (PRODUCTS[i].position_x_store.section == undefined) {
+                        ubicacion = "";
+                    }
+
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
                         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
@@ -2876,7 +2888,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;max-height: 350px;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + ubicacion + ' </strong></p>' +
                         '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '" style="width: 50px;"></p>' +
@@ -2962,6 +2974,16 @@ function displayPopupItemDetail(id, param, idproduct) {
                         cantidad = 0;
                     }
 
+                    var section = PRODUCTS[i].position_x_store.section;
+                    var section = PRODUCTS[i].position_x_store.module;
+                    var section = PRODUCTS[i].position_x_store.position;
+
+                    var ubicacion = PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position;
+
+                    if (PRODUCTS[i].position_x_store.section == undefined) {
+                        ubicacion = "";
+                    }
+
 
                     var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "wide"); // TEMP !!
 
@@ -2981,7 +3003,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;max-height: 350px;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:10px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + PRODUCTS[i].position_x_store.section + ' ' + PRODUCTS[i].position_x_store.module + ' ' + PRODUCTS[i].position_x_store.position + ' </strong></p>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:10px;"> Ubicación: ' + ubicacion + ' </strong></p>' +
                         '<p><strong style="font-size: 15px;margin-top:5px;margin-top:10px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;margin-top:5px;margin-top:10px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '"style="width: 50px;"></p>' +
@@ -3141,12 +3163,10 @@ function loadMenu(data) {
         '<div class="ui-block-c" style="width:44%;">' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a" style="margin-top:10px; width:65%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="100%%" style="float: left;"></div>' +
-        '<div class="ui-block-b" style="margin-top:20px; width:35%;padding-left:3px;"><div id="btn_finalizarpedido" class="btn_finalizarpedido" style="display: none;">Finalizar pedido</div></div>' +
+        '<div class="ui-block-b" style="margin-top:20px; width:35%;padding-left:3px;"><div id="btn_finalizarpedido" class="btn_finalizarpedido" style="display: none;">' + jsonIdiomas.btn_finalizar_pedido + '</div></div>' +
         '</div></div>' +
 
         '<div class="ui-block-d" style="width:14%; margin-top:3px;" id="car_compra">' + cart + '</div>' +
-        //'<div id="btn_finalizarpedido" class="btn_finalizarpedido" style="width: 16%; position: absolute; margin-left: 640px; margin-top: 20px; display: none;">Finalizar pedido</div>'+
-
         '<div class="ui-block-e" style="margin-top:10px;width:4%">' +
         '<a id="btnMenuLateral" onclick="openMenu()" style="margin:10px; float:right"> <span class="flaticon-menu"></span> </a>' +
         '</div>' +
@@ -3366,7 +3386,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
         } else {
             $.jAlert({
                 'title': 'Alerta',
-                'content': "Solo se permiten números",
+                'content': jsonIdiomas.alertas.pan_inter_asis_fiestas,
                 'theme': 'gray',
                 'size': 'xsm'
             });
@@ -3488,7 +3508,7 @@ function logout() { //muestra el pop up de inicio de session
     LOGGED = false;
     $('#usrnm').val("");
     $('#pswd').val("");
-
+    CART = [];
     $(':input').val(''); //limpiamos todos los inputs de la app
 
 
@@ -3498,9 +3518,9 @@ function logout() { //muestra el pop up de inicio de session
 
     translateButtons(idiomStore);
 
-    if (pantallaActual == "opciones envio") {
-        getNodes(0);
-    }
+    //if (pantallaActual == "opciones envio" || pantallaActual == "opciones de pago") {
+    // getNodes(0);
+    //}
 
 
 
@@ -3523,7 +3543,6 @@ function displayScreenSaver() { //muestra el pop up de inicio de session
     $('#contentPopupScreenSaver').show();
 
     translateButtons(idiomStore);
-
 
 }
 
@@ -3951,8 +3970,8 @@ function opcionesPago() { //TEMP
         OPCIONENVIO = 1;
         var html = '<div>' +
             '<center>' +
-            '<h2 style="margin: 1% 0 1% 0;color:#0197d4">TODOS LOS ARTICULOS ESTAN DISPONIBLES<br>TANTO EN TIENDA COMO ONLINE</h2>' +
-            '<h4 style="margin: 0 0 1% 0;color:#0197d4">¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
+            '<h2 style="margin: 1% 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_uno + '<br>' + jsonIdiomas.proceso_pago.tl_dos + '</h2>' +
+            '<h4 style="margin: 0 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_pregunta + '</h4>' +
             /*'<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
@@ -3963,7 +3982,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '</a>' +*/
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pagarEnCaja();">' +
-            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div></div>' +
+            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_seis + '</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
             '</div>' +
@@ -3979,7 +3998,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '</a>'*/
                 '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.ammount + ')">' +
-                '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>PEDIDO ONLINE</label></div></div>' +
+                '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_siete + '</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
                 '</div>' : '') +
@@ -3992,11 +4011,11 @@ function opcionesPago() { //TEMP
         OPCIONENVIO = 2;
         var html = '<div>' +
             '<center>' +
-            '<h2 style="margin: 1% 0 1% 0;color:#0197d4">TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA<br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
-            '<h4 style="margin: 0 0 1% 0;color:#0197d4">¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
+            '<h2 style="margin: 1% 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_tres + ' ' + CART.productosEnTienda + ' ' + jsonIdiomas.proceso_pago.tl_quatro + '<br>' + jsonIdiomas.proceso_pago.tl_tres + ' ' + CART.productosEnWeb + ' ' + jsonIdiomas.proceso_pago.tl_cinco + '</h2>' +
+            '<h4 style="margin: 0 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_pregunta + '</h4>' +
 
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pagarEnCaja();OPCIONPEDIDO=1;">' +
-            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>COMPRAR SOLO LO DISPONIBLE EN TIENDA</label></div></div>' +
+            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_ocho + '</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): <strong font-size: 20px;>' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.productosEnTienda + ' producto disponibles</label></div></div>' +
             '</div>' +
@@ -4011,7 +4030,7 @@ function opcionesPago() { //TEMP
                 '</div>' +
                 '</a>'*/
                 '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.ammount + ');OPCIONPEDIDO=2;">' +
-                '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>COMPRAR ONLINE(TODO EL PEDIDO)</label></div></div>' +
+                '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_nueve + '</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
                 '</div>') +
@@ -4025,7 +4044,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '</a>' +*/
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.precioTotalProductosSoloWeb + ');OPCIONPEDIDO=3;">' +
-            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label style="font-size: smaller;">RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE</label></div></div>' +
+            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label style="font-size: smaller;">' + jsonIdiomas.proceso_pago.tl_diez + '</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos web): <strong font-size: 20px;>' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
             '</div>' +
@@ -4040,7 +4059,7 @@ function opcionesPago() { //TEMP
         var html = '<div>' +
             '<center>' +
             '<h2 style="margin: 1% 0 1% 0;color:#0197d4">NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
-            '<h4 style="margin: 0% 0 1% 0;color:#0197d4">¿QUE QUIERE HACER CON SU PEDIDO?</h4>' +
+            '<h4 style="margin: 0% 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_pregunta + '</h4>' +
             /*'<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.precioTotalProductosWeb + ');" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
@@ -4051,7 +4070,7 @@ function opcionesPago() { //TEMP
             '</div>' +
             '</a>' +*/
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.precioTotalProductosWeb + ');">' +
-            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>PEDIDO ONLINE(TODO EL PEDIDO)</label></div></div>' +
+            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_once + '</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.productosEnWeb + '  producto/os disponibles</label></div></div>' +
             '</div>' +
@@ -4095,8 +4114,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         var html = '<div>' +
             '<center>' +
-            '<h2 style="text-transform: uppercase;color:#0197d4;">TODOS LOS ARTICULOS ESTAN DISPONIBLES<br>TANTO EN TIENDA COMO ONLINE</h2>' +
-            '<h4 style="text-transform: uppercase;color:#0197d4;">¿QUE QUIERE HACER?</h4>' +
+            '<h2 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_uno + '<br>' + jsonIdiomas.proceso_pago.tl_dos + '</h2>' +
+            '<h4 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_pregunta_2 + '</h4>' +
             /*'<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
@@ -4108,7 +4127,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '</a>' +*/
             //'<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
-            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div></div>' +
+            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_doce + '</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
             //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width:4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
@@ -4125,8 +4144,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         var html = '<div>' +
             '<center>' +
-            '<h2 style="text-transform: uppercase;color:#0197d4;">TIENE ' + CART.productosEnTienda + ' PRODUCTOS EN TIENDA <br> TIENE ' + CART.productosEnWeb + ' PRODUCTOS ONLINE</h2>' +
-            '<h4 style="text-transform: uppercase;color:#0197d4;">¿QUE QUIERE HACER?</h4>' +
+            '<h2 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_tres + ' ' + CART.productosEnTienda + ' ' + jsonIdiomas.proceso_pago.tl_quatro + '<br>' + jsonIdiomas.proceso_pago.tl_tres + ' ' + CART.productosEnWeb + ' ' + jsonIdiomas.proceso_pago.tl_cinco + '</h2>' +
+            '<h4 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_pregunta_2 + '</h4>' +
             /*'<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')" data-role="button" data-theme="b" >' +
             '<div class="ui-grid-a">' +
             '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
@@ -4168,7 +4187,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
                                '</a>' +*/
                 //'<div style="width: 50%;margin: 0% 25% 1% 25%;" onclick="displayDomicilioFacturacionForm(' + OPCIONENTREGA + ',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
                 '<div class="btn_disabled" style="width: 50%;margin: 0% 25% 1% 25%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
-                '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>CLICK AND COLLECT 48H</label></div></div>' +
+                '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_trece + '</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong></label></div></div>' +
                 //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + '€ gastos de envio </label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio disponible a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
@@ -4192,7 +4211,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
                                '</a>'+*/
                 //'<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioFacturacionForm(' + OPCIONENTREGA + ',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
                 '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
-                '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>CLICK AND COLLECT 48H</label></div></div>' +
+                '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_trece + '</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
@@ -4226,7 +4245,7 @@ function sistemasPago(soloOnline) { //TEMP
     $("#divBack").html('<div onclick="opcionesEnvio(' + OPCIONENVIO + ')"><div class="ui-grid-b"><div class="ui-block-a" style="width: 10%;"><span  class="flaticon-leftarrow" style="font-size:8px;float:left;text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 90%;"><label style="font-weight: bold;">Opciones de envio</label></div></div></div>');
 
     //inicializamos el boton
-    var paypal = '<form id="formPaypal" method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
+    var paypal = '<form id="formPaypal" method="post" action="https://www.paypal.com/cgi-bin/webscr" target="_blank">' +
         '<input type="hidden" name="currency_code" value="EUR">' +
         '<input type="hidden" name="lc" value="ES">' +
         '<input type="hidden" name="cmd" value="_cart">' +
@@ -4275,8 +4294,8 @@ function sistemasPago(soloOnline) { //TEMP
         paypal += //'<input type="hidden" name="upload" value="1">' +
             '<input type="hidden" name="item_name_' + (aux + 1) + '" value="Gastos de envio">' +
             //'<input type="hidden" name="item_number_' + i + '" value="00000">' +
-            '<input type="hidden" name="amount_' + (aux+ 1) + '" value="' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '">' +
-            '<input type="hidden" name="quantity_' + (aux+ 1) + '" value="1">' +
+            '<input type="hidden" name="amount_' + (aux + 1) + '" value="' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '">' +
+            '<input type="hidden" name="quantity_' + (aux + 1) + '" value="1">' +
             //'<input type="image" src="" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">' +
             '</form>'; //https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png
 
@@ -4341,14 +4360,14 @@ function sistemasPago(soloOnline) { //TEMP
 
     var html = '<div>' +
         '<center>' +
-        '<h2 style="text-transform: uppercase;color:#0197d4;">OPCIONES DE PAGO</h2>' +
+        '<h2 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_catorce + '</h2>' +
         /*'<a data-corners="false" style="width:600px" onclick="sendBasketAndOrder(\'cash register\');" data-role="button" data-theme="b" >' +
         '<div class="ui-grid-solo">' +
         '<div class="ui-block-a"><label>CAJA</label></div>' +
         '</div>' +
         '</a>' +*/
         '<div id="caja" style="width: 50%;margin: 0% 0% 1% 0%;" onclick="">' +
-        '<div style="background-color: #0197d4;color:white;text-align:left;width:100%;height:60px;line-height:60px;" class="ui-grid-a"><div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div><div class="ui-block-b" style="width: 85%;height: 60px;text-align: left;"><label>PAGAR EN CAJA</label></div></div>' +
+        '<div style="background-color: #0197d4;color:white;text-align:left;width:100%;height:60px;line-height:60px;" class="ui-grid-a"><div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div><div class="ui-block-b" style="width: 85%;height: 60px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_quince + '</label></div></div>' +
         '</div>' +
         //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
         //'<div class="ui-grid-solo">' +
@@ -4362,7 +4381,7 @@ function sistemasPago(soloOnline) { //TEMP
         '<div id="paypal" style="width: 50%;margin: 0% 0% 1% 0%;">' +
         '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 60px;line-height: 60px;" class="ui-grid-c">' +
         '<div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div>' +
-        '<div class="ui-block-b" style="width: 45%;height: 60px;text-align: left;"><label>PAGAR POR PAYPAL</label></div>' +
+        '<div class="ui-block-b" style="width: 45%;height: 60px;text-align: left;"><label>' + jsonIdiomas.btn_paypal + '</label></div>' +
         '<div class="ui-block-c" style="width: 40%;height: 60px;text-align: left;"><img src="img/logotipo_paypal_tarjetas.png" style="margin-top: 13px;"></div>' +
         '</div>' +
         paypal +
@@ -4388,21 +4407,13 @@ function sistemasPago(soloOnline) { //TEMP
 
         html = '<center>' +
             '<div style="margin-top:10%;width: 50%;" onclick="getNodes(0);">' +
-            '<img src="css/icons/logo.png" style="width: 100%;">' +
-            '</div>' +
-            '<br>' +
-            '<br>' +
             '<div class="ui-grid-solo" style="color:#0197d4;">' +
-            '<label style="font-size:x-large;">PAGO EN CAJA</label>' +
+            '<label style="font-size:x-large;">' + jsonIdiomas.pago_caja + '</label>' +
             '</div>' +
-            '<br>' +
-            '<br>' +
-            '<div class="ui-grid-solo" style="width: 45px;height:45px;background-color:#0197d4;">' +
-            '<img src="img/check.png" style="width:45px">' +
+            '<div class="ui-grid-b" style="height:58px;background-color:#0197d4;">' +
+            '<div class="ui-block-a" style="width:10%;padding-top: 6px;"><img src="img/check.png" style="width:45px"></div>' +
+            '<div class="ui-block-b" style="width:90%;"><label style="color:white;line-height: normal;font-size: x-large;">' + jsonIdiomas.proceso_pago.tl_diezyseis + '</label></div>' +
             '</div>' +
-            '<br>' +
-            '<div class="ui-grid-solo" style="width: 50%;">' +
-            '<label style="color:black;line-height: normal;font-size: x-large;">Ya puede pasar a pagar su pedido en caja.Identif&iacute;quese con su nombre.</label>' +
             '</div>' +
             '</center>';
 
@@ -4916,10 +4927,10 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         //html_login_user +
 
         //'</div>' +
-        '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;">Dirección</h2><hr style="border-color:#0197d4;">' +
+        '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;">' + jsonIdiomas.dir_facturacion.tl_direccion + '</h2><hr style="border-color:#0197d4;">' +
         '<div class="ui-grid-a" style="margin-top: 10px;height: 25px;">' + // --> CHECK DIRECCION !!!!    **********
         '<div class="ui-block-a" style="width: 40%;">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">Dirección de entrega y facturación coinciden</label>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.sel_dir_fac_envio + '</label>' +
         '</div>' +
         '<div class="ui-block-b">' +
         '<input id="check_misma_direccion" style="margin-top: -7px;" type="checkbox" value="Click me" onclick="" data-cacheval="false" checked>' +
@@ -4927,112 +4938,112 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">Nombre *</label>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.nombre + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_nombreUsuario" name="input_nombreUsuario" data-type="entrega" required="required" type="text" placeholder="""></div>' + //autofocus   data-clear-btn="true
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Apellidos *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.apellidos + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_apellidos" name="input_apellidos" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">Tel&eacute;fono *</label>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.telf + ' *</label>' +
         '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_telefono" name="input_telefono" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">DNI/CIF *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.dni + ' *</label>' +
         '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_dni_cif" name="input_dni_cif" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Dirección *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.tl_direccion + ' *</label>' +
         '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_direccion" name="input_direccion" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Número *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.numero + ' *</label>' +
         '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_num_direccion" name="input_num_direccion" data-type="entrega" required="required" type="text" placeholder="" ></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Código postal</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.codPos + '</label>' +
         '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_postal" name="input_postal" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Ciudad</label>' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.ciudad + '</label>' +
         '<div class="" style="width:80%;"><input data-corners="false" style="width: 100%;border:1px solid #0197d4" id="input_ciudad" name="input_ciudad" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">País *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.pais + ' *</label>' +
         '<div id="div_input_pais" class="" data-corners="false" style="width:80%;"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Provincia *</label>' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.prov + ' *</label>' +
         '<div id="div_input_provincia" class="" data-corners="false" style="width:80%;"></div>' +
         '</div>' +
         '</div>' +
         '<div id="div_direcion_facturacion" style="display:none;">' + // ----------------------------------------> FORMULARIO DIRECCION FACTURACION !!!!    **********
-        '<h2 style="margin: 0 0 0 0;color:#0197d4;">Dirección de Facturación</h2><hr style="border-color:#0197d4;">' +
+        '<h2 style="margin: 0 0 0 0;color:#0197d4;">' + jsonIdiomas.dir_facturacion.tl_dir_fac + '</h2><hr style="border-color:#0197d4;">' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">Nombre *</label>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.nombre + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_nombreUsuario_2" name="input_nombreUsuario_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Apellidos *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.apellidos + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_apellidos_2" name="input_apellidos_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">Tel&eacute;fono *</label>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.telf + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_telefono_2" name="input_telefono_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">DNI/CIF *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.dni + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_dni_cif_2" name="input_dni_cif_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Dirección *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.telf + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_direccion_2" name="input_direccion_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Número *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.numero + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_num_direccion_2" name="input_num_direccion_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Código postal *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.codPos + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_postal_2" name="input_postal_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Ciudad *</label>' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.ciudad + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="input_ciudad_2" name="input_ciudad_2" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">País *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.pais + ' *</label>' +
         '<div id="div_input_pais_2" class="" style="width:80%;"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Provincia *</label>' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.dir_facturacion.prov + ' *</label>' +
         '<div id="div_input_provincia_2" class="" style="width:80%;"></div>' +
         '</div>' +
         '</div>' +
         '</div>' +
         //'</form>' +
-        '<button type="button" data-corners="false" id="button_continuar_direcciones" class="" style="width: 90%;text-transform: uppercase;background-color:#0197d4;">Continuar</button>' +
+        '<button type="button" data-corners="false" id="button_continuar_direcciones" class="" style="width: 90%;text-transform: uppercase;background-color:#0197d4;">' + jsonIdiomas.dir_facturacion.continuar + '</button>' +
         //'<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
         //'<center>' +
-        '<div class="ui-grid-a" style="width: 90%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="padding-left: 290px;width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width:10%;height:45px;padding-left: 20px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
+        '<div class="ui-grid-a" style="width: 90%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="padding-left: 290px;width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">' + jsonIdiomas.dir_facturacion.cancelar + '</div><div class="ui-block-b" style="width:10%;height:45px;padding-left: 20px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
         //'</center>' +
         '</div>';
 
@@ -5488,16 +5499,16 @@ function pagarEnCaja() {
 
     var html = '<div>' +
         '<center>' +
-        '<h3 style="text-transform: uppercase;color:#0197d4;">¿Que deseas hacer con el pedido?</h3>' +
+        '<h3 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.pan_pago_tienda.tl_tienda + '</h3>' +
         '<br>' +
-        '<a  data-corners="false" style="width:35%" onclick="sendEmail();" data-role="button" data-icon="mail" data-iconpos="right" data-theme="b">' + jsonIdiomas.pagina_pago.envio_email + '</a>' +
+        '<a  data-corners="false" style="width:35%" onclick="sendEmail();" data-role="button" data-icon="mail" data-iconpos="right" data-theme="b">' + jsonIdiomas.pan_pago_tienda.envio_email + '</a>' +
         '<br>' +
-        '<a  data-corners="false" style="width:35%" onclick="imprimirPedido();" data-role="button" data-icon="home" data-iconpos="right" data-theme="b"> Imprimir en tienda </a>' +
+        '<a  data-corners="false" style="width:35%" onclick="imprimirPedido();" data-role="button" data-icon="home" data-iconpos="right" data-theme="b">' + jsonIdiomas.pan_pago_tienda.imprimir + '</a>' +
         '<br>' +
         //'<a  data-corners="false" style="width:300px" onclick="pedidoOnline();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b"> Pedido online </a>' +
         //'<br>' +
         //'<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
-        '<div class="ui-grid-a" style="width:41%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
+        '<div class="ui-grid-a" style="width:41%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">' + jsonIdiomas.pan_pago_tienda.cancelar + '</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
         '</center>' +
         '</div>';
     $("#divContent").html(html);
@@ -5540,11 +5551,11 @@ function pantallaInterLoginPago(destinoEnvio, taxPrice, totalPrice, basePrice) {
     } else {
 
         var html = '<div style="width: 30%;margin: 0 auto;">' +
-            '<div style="background-color:#0197d4;text-transform:uppercase;height: 50px;line-height: 50px;margin-bottom: 10px;"><label style="font-size: x-large;text-align: center;color:white;">INFO USUARIO</label></div>' +
+            '<div style="background-color:#0197d4;text-transform:uppercase;height: 50px;line-height: 50px;margin-bottom: 10px;"><label style="font-size: x-large;text-align: center;color:white;">' + jsonIdiomas.pt_inter_pago_login.titulo + '</label></div>' +
             '<div style="background-color:white;height: 30px;line-height: 30px;margin-bottom: 10px;"><label style="font-size: larger;text-align: center;text-align: center;color:#0197d4;">Es necesario:</label></div>' +
             '<div class="ui-grid-a" style="">' +
-            '<div class="ui-block-a" onclick="displayLogin();" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;line-height: 45px;float: left;"><label style="text-align: center;text-align: center;color:#0197d4;margin-bottom: 0px;">Identificarse</label></div>' +
-            '<div class="ui-block-b" onclick="pantallaRegistroPago();" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;line-height: 45px;float: right;"><label style="text-align: center;text-align: center;color:#0197d4;margin-bottom: 0px;">Registrarse</label></div>' +
+            '<div class="ui-block-a" onclick="displayLogin();" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;line-height: 45px;float: left;"><label style="text-align: center;text-align: center;color:#0197d4;margin-bottom: 0px;">' + jsonIdiomas.pt_inter_pago_login.Identificarse + '</label></div>' +
+            '<div class="ui-block-b" onclick="pantallaRegistroPago();" style="border: 1px solid rgb(1, 151, 212);width: 49%;color:white;line-height: 45px;float: right;"><label style="text-align: center;text-align: center;color:#0197d4;margin-bottom: 0px;">' + jsonIdiomas.pt_inter_pago_login.Registrarse + '</label></div>' +
             '</div>' +
             '</div>';
 
@@ -5558,94 +5569,87 @@ function pantallaInterLoginPago(destinoEnvio, taxPrice, totalPrice, basePrice) {
 
 function pantallaRegistroPago() {
 
-    var html = '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">registro usuario</h2><hr style="border-color:#0197d4;">' +
+    var html = '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">' + jsonIdiomas.reg_pant_pedido.tl_uno + '</h2><hr style="border-color:#0197d4;">' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">email *</label>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.email + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_email" name="in_email" data-type="entrega" required="required" type="text" placeholder="""></div>' + //autofocus   data-clear-btn="true
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">repetir email *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.rep_email + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_email_re" name="in_email_re" data-type="entrega" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">contraseña *</label>' +
-        '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_pass" name="in_pass" data-type="entrega" required="required" type="text" placeholder=""></div>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.contra + ' *</label>' +
+        '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_pass" name="in_pass" data-type="entrega" required="required" type="password" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">repetir contraseña *</label>' +
-        '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_pass_re" name="in_pass_re" data-type="entrega" required="required" type="text" placeholder=""></div>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.rep_contra + ' *</label>' +
+        '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_pass_re" name="in_pass_re" data-type="entrega" required="required" type="password" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-        /*'<div class="ui-grid-a">' +
-        '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">codigo postal *</label>' +
-        '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_codpos" name="in_codpos" data-type="entrega" required="required" type="text" placeholder=""></div>' +
-        '</div>' +
-        '<div class="ui-block-b"></div>' +
-        '</div>' +*/
         //direccion de envio
-        '<h2 style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">Direccion</h2><hr style="border-color:#0197d4;">' +
+        '<h2 style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">' + jsonIdiomas.reg_pant_pedido.direcc + '</h2><hr style="border-color:#0197d4;">' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">Nombre *</label>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.nombre + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_name" name="in_name" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Apellidos *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.apellido + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_apellidos" name="in_apellidos" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="uname" data-icon="u" style="color:#0197d4;">Tel&eacute;fono *</label>' +
+        '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.telf + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_tel" name="in_tel" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">DNI/CIF *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.dni + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_dni" name="in_dni" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Dirección *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.direcc + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_direc" name="in_direc" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Número *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.numero + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_num_direc" name="in_num_direc" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">Código postal *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.codPos + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_postal" name="in_postal" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Ciudad *</label>' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.ciudad + ' *</label>' +
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_ciudad" name="in_ciudad" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
-        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">País *</label>' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.pais + ' *</label>' +
         '<div id="div_input_pais" class="" style="width:80%;"></div>' +
         '</div>' +
         '<div class="ui-block-b">' +
-        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">Provincia *</label>' +
+        '<label id="usernamesignup" class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.prov + ' *</label>' +
         '<div id="div_input_provincia_2" class="" style="width:80%;"></div>' +
         '</div>' +
         '</div>' +
-        '<button type="button" data-corners="false" id="btn_registro_pago" class="" style="width: 90%;text-transform: uppercase;background-color:#0197d4;">Continuar</button>';
+        '<button type="button" data-corners="false" id="btn_registro_pago" class="" style="width: 90%;text-transform: uppercase;background-color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.continuar + '</button>';
 
     $("#divContent").html(html);
     $("#divContent").trigger('create');
 
     $("#btn_registro_pago").click(function () {
 
-        console.log("pruebas!!!!!!!!!!!!!!!");
+        console.log("Nos registramos en la pantalla del pedido");
         //sendBasketAndOrder('cash register');
         //$("#formulario_reg_pago").submit();
 
@@ -5677,7 +5681,7 @@ function pantallaRegistroPago() {
 
             $.jAlert({
                 'title': 'Alerta',
-                'content': '¡Faltan datos!',
+                'content': jsonIdiomas.alertas.form_imcompleto,
                 'theme': 'gray',
                 'size': 'xsm'
             });

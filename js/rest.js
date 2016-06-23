@@ -54,7 +54,7 @@ function getLogin(usario, contraseña) {
 
                 $.jAlert({
                     'title': 'Alerta',
-                    'content': '¡Faltan datos!',
+                    'content': jsonIdiomas.alertas.form_imcompleto,
                     'theme': 'gray',
                     'size': 'xsm'
                 });
@@ -63,7 +63,7 @@ function getLogin(usario, contraseña) {
 
                 $.jAlert({
                     'title': 'Alerta',
-                    'content': 'Usuario o contraseña incorrectos',
+                    'content': jsonIdiomas.alertas.error_login,
                     'theme': 'gray',
                     'size': 'xsm'
                 });
@@ -79,7 +79,7 @@ function getLogin(usario, contraseña) {
 
                 $.jAlert({
                     'title': 'Alerta',
-                    'content': "Error de TimeOut... compruebe su conexion de internet",
+                    'content': jsonIdiomas.alertas.error_timeout,
                     'theme': 'gray',
                     'size': 'xsm'
                 });
@@ -91,7 +91,7 @@ function getLogin(usario, contraseña) {
 
                 $.jAlert({
                     'title': 'Alerta',
-                    'content': "Sin conexion a internet",
+                    'content': jsonIdiomas.alertas.error_ws,
                     'theme': 'black',
                     'size': 'xsm'
                 });
@@ -131,7 +131,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 
                 $.jAlert({
                     'title': 'Alerta',
-                    'content': "El usuario ya existe",
+                    'content': jsonIdiomas.alertas.error_usr,
                     'theme': 'gray',
                     'size': 'xsm'
                 });
@@ -140,7 +140,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 
                 $.jAlert({
                     'title': 'Alerta',
-                    'content': "Sin conexion a internet",
+                    'content': jsonIdiomas.alertas.error_login,
                     'theme': 'gray',
                     'size': 'xsm'
                 });
@@ -154,7 +154,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 
                 $.jAlert({
                     'title': 'Alerta',
-                    'content': "Error de TimeOut... compruebe su conexion de internet",
+                    'content': jsonIdiomas.alertas.error_timeout,
                     'theme': 'gray',
                     'size': 'xsm'
                 });
@@ -166,7 +166,7 @@ function getRegistro(usario, contraseña, cod_pos) {
 
                 $.jAlert({
                     'title': 'Alerta',
-                    'content': "Sin conexion a internet",
+                    'content': jsonIdiomas.alertas.error_ws,
                     'theme': 'gray',
                     'size': 'xsm'
                 });

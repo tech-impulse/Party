@@ -1,13 +1,24 @@
 function translateButtons(idioma) {
 
-    //console.log("Cambiamos el idioma " + idioma);
-    //$("#popupIdiomas").popup("close");
-
     switch (idioma) {
 
     case "en":
 
         jsonIdiomas = {
+            "alertas": {
+                "pan_inter_asis_fiestas": "Solo se permiten números",
+                "form_imcompleto": "¡Faltan datos!",
+                "error_login": "Usuario o contraseña incorrectos",
+                "error_timeout": "Error de TimeOut... compruebe su conexion de internet",
+                "error_ws": "Error ws",
+                "error_usr": "El usuario ya existe",
+                "select_tienda": "!Seleccione una tienda!",
+                "sin_stock": "No hay mas productos en stock"
+            },
+            "inicio": {
+                "labelInicio": "Seleccioneu una botiga:",
+                "selectInicio": ""
+            },
             "header": {
                 "menu": "Menu",
                 "login": "login!",
@@ -18,7 +29,9 @@ function translateButtons(idioma) {
             },
             "asistente_fiestas": {
                 "label_num_per_fiesta": "How many people will attend the party?",
-                "btn_continuar": "NEXT"
+                "btn_continuar": "NEXT",
+                "btn_continuar_fiestas": "NEXT",
+                "btn_añadir_prod": "Añadir"
             },
             "asistente_disfraces": {
                 "select_sexo_button": "Who is the disguise?",
@@ -74,8 +87,76 @@ function translateButtons(idioma) {
                 "precio_total_label": "Item price: ",
                 "unidades": "units"
             },
+            "proceso_pago": {
+                "tl_pregunta": "¿QUE QUIERE HACER CON SU PEDIDO?",
+                "tl_pregunta_2": "¿QUE QUIERE HACER?",
+                "tl_uno": "TODOS LOS ARTICULOS ESTAN DISPONIBLES",
+                "tl_dos": "TANTO EN TIENDA COMO ONLINE",
+                "tl_tres": "TIENE",
+                "tl_quatro": "PRODUCTOS EN TIENDA",
+                "tl_cinco": "PRODUCTOS ONLINE",
+                "tl_seis": "PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA",
+                "tl_siete": "PEDIDO ONLINE",
+                "tl_ocho": "COMPRAR SOLO LO DISPONIBLE EN TIENDA",
+                "tl_nueve": "COMPRAR ONLINE(TODO EL PEDIDO)",
+                "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
+                "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
+                "tl_doce": "ENVIO A DOMICILIO 48H",
+                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_catorce": "OPCIONES DE PAGO",
+                "tl_quince": "PAGAR EN CAJA",
+                "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
+            },
+            "pt_inter_pago_login": {
+                "titulo": "INFO USUARIO",
+                "Identificarse": "Identificarse",
+                "Registrarse": "Registrarse",
+            },
+            "reg_pant_pedido": {
+                "tl_uno": "registro usuario",
+                "email": "email",
+                "rep_email": "repetir email",
+                "contra": "contraseña",
+                "rep_contra": "repetir contraseña",
+                "direcc": "Dirección",
+                "nombre": "Nombre",
+                "apellido": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "continuar": "Continuar"
+            },
+            "dir_facturacion": {
+                "tl_direccion": "Dirección",
+                "sel_dir_fac_envio": "Dirección de entrega y facturación coinciden",
+                "nombre": "Nombre",
+                "apellidos": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "tl_dir_fac": "Dirección de Facturación",
+                "continuar": "Continuar",
+                "cancelar": "Cancelar pedido"
+            },
+            "pan_pago_tienda": {
+                "tl_tienda": "¿Que deseas hacer con el pedido?",
+                "imprimir": "Imprimir en tienda",
+                "envio_email": "Enviar correo",
+                "cancelar": "Cancelar pedido"
+            },
             "exclusivoWeb": "EXCLUSIVE WEB!",
-            "soloEnWeb": "ONLY WEB"
+            "soloEnWeb": "ONLY WEB",
+            "btn_finalizar_pedido": "Finalizar pedido",
+            "btn_paypal": "PAGAR POR PAYPAL",
+            "pago_caja": "PAGO EN CAJA"
 
         }
 
@@ -118,13 +199,30 @@ function translateButtons(idioma) {
         $('#enviar_registro').text("Create account");
         $('#labelYAesClient').text("Already a customer?");
         $('#linkIniSes').text("Login");
-
+        var avisoText = "He leído y acepto el ";
+        var avisoLink = "Aviso legal";
+        $('#aviso_legal').html(avisoText + '<a id="link_aviso_legal" href="http://www.partyfiesta.com/es/ayuda/aviso-legal" target="_blank">' + avisoLink + '</a>');
 
         break;
 
     case "es":
 
         jsonIdiomas = {
+            "alertas": {
+                "pan_inter_asis_fiestas": "Solo se permiten números",
+                "form_imcompleto": "¡Faltan datos!",
+                "error_login": "Usuario o contraseña incorrectos",
+                "error_timeout": "Error de TimeOut... compruebe su conexion de internet",
+                "error_ws": "Error ws",
+                "error_usr": "El usuario ya existe",
+                "select_tienda": "!Seleccione una tienda!",
+                "sin_stock": "No hay mas productos en stock"
+
+            },
+            "inicio": {
+                "labelInicio": "Seleccione una tienda:",
+                "selectInicio": ""
+            },
             "header": {
                 "menu": "Menú",
                 "login": "identificarse!",
@@ -135,7 +233,9 @@ function translateButtons(idioma) {
             },
             "asistente_fiestas": {
                 "label_num_per_fiesta": "¿Cuantas personas asistirán a la fiesta?",
-                "btn_continuar": "CONTINUAR"
+                "btn_continuar": "CONTINUAR",
+                "btn_continuar_fiestas": "CONTINUAR",
+                "btn_añadir_prod": "Añadir"
             },
             "pagina_pago": {
                 "envio_email": "Enviar correo",
@@ -191,8 +291,76 @@ function translateButtons(idioma) {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
             },
-            "exclusivoWeb": "EXCLUSIVO WEB!",
-            "soloEnWeb": "SOLO WEB"
+            "proceso_pago": {
+                "tl_pregunta": "¿QUE QUIERE HACER CON SU PEDIDO?",
+                "tl_pregunta_2": "¿QUE QUIERE HACER?",
+                "tl_uno": "TODOS LOS ARTICULOS ESTAN DISPONIBLES",
+                "tl_dos": "TANTO EN TIENDA COMO ONLINE",
+                "tl_tres": "TIENE",
+                "tl_quatro": "PRODUCTOS EN TIENDA",
+                "tl_cinco": "PRODUCTOS ONLINE",
+                "tl_seis": "PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA",
+                "tl_siete": "PEDIDO ONLINE",
+                "tl_ocho": "COMPRAR SOLO LO DISPONIBLE EN TIENDA",
+                "tl_nueve": "COMPRAR ONLINE(TODO EL PEDIDO)",
+                "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
+                "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
+                "tl_doce": "ENVIO A DOMICILIO 48H",
+                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_catorce": "OPCIONES DE PAGO",
+                "tl_quince": "PAGAR EN CAJA",
+                "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
+            },
+            "pt_inter_pago_login": {
+                "titulo": "INFO USUARIO",
+                "Identificarse": "Identificarse",
+                "Registrarse": "Registrarse",
+            },
+            "reg_pant_pedido": {
+                "tl_uno": "registro usuario",
+                "email": "email",
+                "rep_email": "repetir email",
+                "contra": "contraseña",
+                "rep_contra": "repetir contraseña",
+                "direcc": "Dirección",
+                "nombre": "Nombre",
+                "apellido": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "continuar": "Continuar"
+            },
+            "dir_facturacion": {
+                "tl_direccion": "Dirección",
+                "sel_dir_fac_envio": "Dirección de entrega y facturación coinciden",
+                "nombre": "Nombre",
+                "apellidos": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "tl_dir_fac": "Dirección de Facturación",
+                "continuar": "Continuar",
+                "cancelar": "Cancelar pedido"
+            },
+            "pan_pago_tienda": {
+                "tl_tienda": "¿Que deseas hacer con el pedido?",
+                "imprimir": "Imprimir en tienda",
+                "envio_email": "Enviar correo",
+                "cancelar": "Cancelar pedido"
+            },
+            "exclusivoWeb": "EXCLUSIVE WEB!",
+            "soloEnWeb": "ONLY WEB",
+            "btn_finalizar_pedido": "Finalizar pedido",
+            "btn_paypal": "PAGAR POR PAYPAL",
+            "pago_caja": "PAGO EN CAJA"
         }
 
         //pagina de inicio    
@@ -233,12 +401,26 @@ function translateButtons(idioma) {
         $('#enviar_registro').text("Crear cuenta");
         $('#labelYAesClient').text("¿Ya es cliente?");
         $('#linkIniSes').text("Iniciar sessión");
+        var avisoText = "He leído y acepto el ";
+        var avisoLink = "Aviso legal";
+        $('#aviso_legal').html(avisoText + '<a id="link_aviso_legal" href="http://www.partyfiesta.com/es/ayuda/aviso-legal" target="_blank">' + avisoLink + '</a>');
 
         break;
 
     case "ca":
 
         jsonIdiomas = {
+            "alertas": {
+                "pan_inter_asis_fiestas": "Solo se permiten números",
+                "form_imcompleto": "¡Faltan datos!",
+                "error_login": "Usuario o contraseña incorrectos",
+                "error_timeout": "Error de TimeOut... compruebe su conexion de internet",
+                "error_ws": "Error ws",
+                "error_usr": "El usuario ya existe",
+                "select_tienda": "!Seleccione una tienda!",
+                "sin_stock": "No hay mas productos en stock"
+
+            },
             "inicio": {
                 "labelInicio": "Seleccioneu una botiga:",
                 "selectInicio": ""
@@ -253,11 +435,27 @@ function translateButtons(idioma) {
             },
             "asistente_fiestas": {
                 "label_num_per_fiesta": "¿Quantes persones assistiran a la festa?",
-                "btn_continuar": "CONTINUAR"
+                "btn_continuar": "CONTINUAR",
+                "btn_continuar_fiestas": "CONTINUAR",
+                "btn_añadir_prod": "Añadir"
             },
             "pagina_pago": {
                 "envio_email": "Enviar correo",
                 "envio_casa": ""
+            },
+            "form_sugerencias": {
+                "labelSugNom": "Nombre:",
+                "labelSugNaci": "Fecha de nacimiento:",
+                "labelSugMail": "Correo electrónico:",
+                "labelSugNPob": "Población:",
+                "labelSugTelf": "Teléfono:",
+                "labelSugProv": "Provincia:",
+                "labelSugTipo": "Tipo de sugerencia:",
+                "labelSugNSugPreg": "¿Sobre que es la petición/sugerencia?",
+                "sugerenciasPlaceholder": "Escríbalas aquí...",
+                "enviar_sugerencia": "¡Enviar!",
+                "selectOption": "Incidencia",
+                "labelSugPreg": "¿Tiene alguna sugerencia?"
             },
             "asistente_disfraces": {
                 "select_sexo_button": "Per a qui és la disfressa?",
@@ -279,7 +477,6 @@ function translateButtons(idioma) {
                 "selectOption": "Incidència",
                 "labelSugPreg": "Té algun suggeriment?"
             },
-
             "pop_checkOut": {
                 "realizar_pedido": "Fer la comanda"
             },
@@ -310,8 +507,76 @@ function translateButtons(idioma) {
                 "precio_total_label": "Total article: ",
                 "unidades": "unitats"
             },
-            "exclusivoWeb": "EXCLUSIU WEB!",
-            "soloEnWeb": "NOMÉS WEB"
+            "proceso_pago": {
+                "tl_pregunta": "¿QUE QUIERE HACER CON SU PEDIDO?",
+                "tl_pregunta_2": "¿QUE QUIERE HACER?",
+                "tl_uno": "TODOS LOS ARTICULOS ESTAN DISPONIBLES",
+                "tl_dos": "TANTO EN TIENDA COMO ONLINE",
+                "tl_tres": "TIENE",
+                "tl_quatro": "PRODUCTOS EN TIENDA",
+                "tl_cinco": "PRODUCTOS ONLINE",
+                "tl_seis": "PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA",
+                "tl_siete": "PEDIDO ONLINE",
+                "tl_ocho": "COMPRAR SOLO LO DISPONIBLE EN TIENDA",
+                "tl_nueve": "COMPRAR ONLINE(TODO EL PEDIDO)",
+                "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
+                "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
+                "tl_doce": "ENVIO A DOMICILIO 48H",
+                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_catorce": "OPCIONES DE PAGO",
+                "tl_quince": "PAGAR EN CAJA",
+                "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
+            },
+            "pt_inter_pago_login": {
+                "titulo": "INFO USUARIO",
+                "Identificarse": "Identificarse",
+                "Registrarse": "Registrarse",
+            },
+            "reg_pant_pedido": {
+                "tl_uno": "registro usuario",
+                "email": "email",
+                "rep_email": "repetir email",
+                "contra": "contraseña",
+                "rep_contra": "repetir contraseña",
+                "direcc": "Dirección",
+                "nombre": "Nombre",
+                "apellido": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "continuar": "Continuar"
+            },
+            "dir_facturacion": {
+                "tl_direccion": "Dirección",
+                "sel_dir_fac_envio": "Dirección de entrega y facturación coinciden",
+                "nombre": "Nombre",
+                "apellidos": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "tl_dir_fac": "Dirección de Facturación",
+                "continuar": "Continuar",
+                "cancelar": "Cancelar pedido"
+            },
+            "pan_pago_tienda": {
+                "tl_tienda": "¿Que deseas hacer con el pedido?",
+                "imprimir": "Imprimir en tienda",
+                "envio_email": "Enviar correo",
+                "cancelar": "Cancelar pedido"
+            },
+            "exclusivoWeb": "EXCLUSIVE WEB!",
+            "soloEnWeb": "ONLY WEB",
+            "btn_finalizar_pedido": "Finalizar pedido",
+            "btn_paypal": "PAGAR POR PAYPAL",
+            "pago_caja": "PAGO EN CAJA"
 
         }
 
@@ -353,6 +618,9 @@ function translateButtons(idioma) {
         $('#enviar_registro').text("Crea un compte");
         $('#labelYAesClient').text("Ja és client?");
         $('#linkIniSes').text("Inicia sessió");
+        var avisoText = "He leído y acepto el ";
+        var avisoLink = "Aviso legal";
+        $('#aviso_legal').html(avisoText + '<a id="link_aviso_legal" href="http://www.partyfiesta.com/es/ayuda/aviso-legal" target="_blank">' + avisoLink + '</a>');
 
 
         break;
@@ -360,15 +628,52 @@ function translateButtons(idioma) {
     case "pr":
 
         jsonIdiomas = {
+            "alertas": {
+                "pan_inter_asis_fiestas": "Solo se permiten números",
+                "form_imcompleto": "¡Faltan datos!",
+                "error_login": "Usuario o contraseña incorrectos",
+                "error_timeout": "Error de TimeOut... compruebe su conexion de internet",
+                "error_ws": "Error ws",
+                "error_usr": "El usuario ya existe",
+                "select_tienda": "!Seleccione una tienda!",
+                "sin_stock": "No hay mas productos en stock"
+
+            },
+            "inicio": {
+                "labelInicio": "Seleccioneu una botiga:",
+                "selectInicio": ""
+            },
             "header": {
-                "menu": "Menú"
+                "menu": "Menu",
+                "login": "login!",
+                "labelProductos": " Prod"
             },
             "menu_lateral": {
                 "menu": "Ir al Menú"
             },
             "asistente_fiestas": {
                 "label_num_per_fiesta": "¿Cuantas personas asistirán a la fiesta?",
-                "btn_continuar": "CONTINUAR"
+                "btn_continuar": "CONTINUAR",
+                "btn_continuar_fiestas": "CONTINUAR",
+                "btn_añadir_prod": "Añadir"
+            },
+            "pagina_pago": {
+                "envio_email": "Enviar correo",
+                "envio_casa": ""
+            },
+            "form_sugerencias": {
+                "labelSugNom": "Nombre:",
+                "labelSugNaci": "Fecha de nacimiento:",
+                "labelSugMail": "Correo electrónico:",
+                "labelSugNPob": "Población:",
+                "labelSugTelf": "Teléfono:",
+                "labelSugProv": "Provincia:",
+                "labelSugTipo": "Tipo de sugerencia:",
+                "labelSugNSugPreg": "¿Sobre que es la petición/sugerencia?",
+                "sugerenciasPlaceholder": "Escríbalas aquí...",
+                "enviar_sugerencia": "¡Enviar!",
+                "selectOption": "Incidencia",
+                "labelSugPreg": "¿Tiene alguna sugerencia?"
             },
             "asistente_disfraces": {
                 "select_sexo_button": "¿Para quién es el disfraz?",
@@ -414,13 +719,82 @@ function translateButtons(idioma) {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
             },
-            "exclusivoWeb": " EXCLUSIVO WEB!",
-            "soloEnWeb": "SOLO WEB"
+            "proceso_pago": {
+                "tl_pregunta": "¿QUE QUIERE HACER CON SU PEDIDO?",
+                "tl_pregunta_2": "¿QUE QUIERE HACER?",
+                "tl_uno": "TODOS LOS ARTICULOS ESTAN DISPONIBLES",
+                "tl_dos": "TANTO EN TIENDA COMO ONLINE",
+                "tl_tres": "TIENE",
+                "tl_quatro": "PRODUCTOS EN TIENDA",
+                "tl_cinco": "PRODUCTOS ONLINE",
+                "tl_seis": "PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA",
+                "tl_siete": "PEDIDO ONLINE",
+                "tl_ocho": "COMPRAR SOLO LO DISPONIBLE EN TIENDA",
+                "tl_nueve": "COMPRAR ONLINE(TODO EL PEDIDO)",
+                "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
+                "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
+                "tl_doce": "ENVIO A DOMICILIO 48H",
+                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_catorce": "OPCIONES DE PAGO",
+                "tl_quince": "PAGAR EN CAJA",
+                "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
+            },
+            "pt_inter_pago_login": {
+                "titulo": "INFO USUARIO",
+                "Identificarse": "Identificarse",
+                "Registrarse": "Registrarse",
+            },
+            "reg_pant_pedido": {
+                "tl_uno": "registro usuario",
+                "email": "email",
+                "rep_email": "repetir email",
+                "contra": "contraseña",
+                "rep_contra": "repetir contraseña",
+                "direcc": "Dirección",
+                "nombre": "Nombre",
+                "apellido": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "continuar": "Continuar"
+            },
+            "dir_facturacion": {
+                "tl_direccion": "Dirección",
+                "sel_dir_fac_envio": "Dirección de entrega y facturación coinciden",
+                "nombre": "Nombre",
+                "apellidos": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "tl_dir_fac": "Dirección de Facturación",
+                "continuar": "Continuar",
+                "cancelar": "Cancelar pedido"
+            },
+            "pan_pago_tienda": {
+                "tl_tienda": "¿Que deseas hacer con el pedido?",
+                "imprimir": "Imprimir en tienda",
+                "envio_email": "Enviar correo",
+                "cancelar": "Cancelar pedido"
+            },
+            "exclusivoWeb": "EXCLUSIVE WEB!",
+            "soloEnWeb": "ONLY WEB",
+            "btn_finalizar_pedido": "Finalizar pedido",
+            "btn_paypal": "PAGAR POR PAYPAL",
+            "pago_caja": "PAGO EN CAJA"
         }
 
         //pagina de inicio    
         $('#btn_acceder').text('Acceder');
-        $('#labelCargando').text('Cargando...');
+        $('#labelInicio').text('Select a store:');
+        $('#labelCargando').text('Loading...');
 
         //header 
         $('#labelCarrito').text('Tú carrito');
@@ -455,22 +829,61 @@ function translateButtons(idioma) {
         $('#enviar_registro').text("Crear cuenta");
         $('#labelYAesClient').text("¿Ya es cliente?");
         $('#linkIniSes').text("Iniciar sessión");
-
+        var avisoText = "He leído y acepto el ";
+        var avisoLink = "Aviso legal";
+        $('#aviso_legal').html(avisoText + '<a id="link_aviso_legal" href="http://www.partyfiesta.com/es/ayuda/aviso-legal" target="_blank">' + avisoLink + '</a>');
 
         break;
 
     case "fr":
 
         jsonIdiomas = {
+            "alertas": {
+                "pan_inter_asis_fiestas": "Solo se permiten números",
+                "form_imcompleto": "¡Faltan datos!",
+                "error_login": "Usuario o contraseña incorrectos",
+                "error_timeout": "Error de TimeOut... compruebe su conexion de internet",
+                "error_ws": "Error ws",
+                "error_usr": "El usuario ya existe",
+                "select_tienda": "!Seleccione una tienda!",
+                "sin_stock": "No hay mas productos en stock"
+
+            },
+            "inicio": {
+                "labelInicio": "Seleccioneu una botiga:",
+                "selectInicio": ""
+            },
             "header": {
-                "menu": "Menú"
+                "menu": "Menu",
+                "login": "login!",
+                "labelProductos": " Prod"
             },
             "menu_lateral": {
                 "menu": "Ir al Menú"
             },
             "asistente_fiestas": {
                 "label_num_per_fiesta": "¿Cuantas personas asistirán a la fiesta?",
-                "btn_continuar": "CONTINUAR"
+                "btn_continuar": "CONTINUAR",
+                "btn_continuar_fiestas": "CONTINUAR",
+                "btn_añadir_prod": "Añadir"
+            },
+            "pagina_pago": {
+                "envio_email": "Enviar correo",
+                "envio_casa": ""
+            },
+            "form_sugerencias": {
+                "labelSugNom": "Nombre:",
+                "labelSugNaci": "Fecha de nacimiento:",
+                "labelSugMail": "Correo electrónico:",
+                "labelSugNPob": "Población:",
+                "labelSugTelf": "Teléfono:",
+                "labelSugProv": "Provincia:",
+                "labelSugTipo": "Tipo de sugerencia:",
+                "labelSugNSugPreg": "¿Sobre que es la petición/sugerencia?",
+                "sugerenciasPlaceholder": "Escríbalas aquí...",
+                "enviar_sugerencia": "¡Enviar!",
+                "selectOption": "Incidencia",
+                "labelSugPreg": "¿Tiene alguna sugerencia?"
             },
             "asistente_disfraces": {
                 "select_sexo_button": "¿Para quién es el disfraz?",
@@ -512,12 +925,82 @@ function translateButtons(idioma) {
                 "precio_total_label": "Total artículo: ",
                 "unidades": "unidad"
             },
-            "exclusivoWeb": "EXCLUSIF WEB!",
-            "soloEnWeb": "SOLO WEB"
+            "proceso_pago": {
+                "tl_pregunta": "¿QUE QUIERE HACER CON SU PEDIDO?",
+                "tl_pregunta_2": "¿QUE QUIERE HACER?",
+                "tl_uno": "TODOS LOS ARTICULOS ESTAN DISPONIBLES",
+                "tl_dos": "TANTO EN TIENDA COMO ONLINE",
+                "tl_tres": "TIENE",
+                "tl_quatro": "PRODUCTOS EN TIENDA",
+                "tl_cinco": "PRODUCTOS ONLINE",
+                "tl_seis": "PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA",
+                "tl_siete": "PEDIDO ONLINE",
+                "tl_ocho": "COMPRAR SOLO LO DISPONIBLE EN TIENDA",
+                "tl_nueve": "COMPRAR ONLINE(TODO EL PEDIDO)",
+                "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
+                "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
+                "tl_doce": "ENVIO A DOMICILIO 48H",
+                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_catorce": "OPCIONES DE PAGO",
+                "tl_quince": "PAGAR EN CAJA",
+                "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
+            },
+            "pt_inter_pago_login": {
+                "titulo": "INFO USUARIO",
+                "Identificarse": "Identificarse",
+                "Registrarse": "Registrarse",
+            },            
+            "reg_pant_pedido": {
+                "tl_uno": "registro usuario",
+                "email": "email",
+                "rep_email": "repetir email",
+                "contra": "contraseña",
+                "rep_contra": "repetir contraseña",
+                "direcc": "Dirección",
+                "nombre": "Nombre",
+                "apellido": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "continuar": "Continuar"
+            },
+            "dir_facturacion": {
+                "tl_direccion": "Dirección",
+                "sel_dir_fac_envio": "Dirección de entrega y facturación coinciden",
+                "nombre": "Nombre",
+                "apellidos": "Apellidos",
+                "telf": "Tel&eacute;fono",
+                "dni": "DNI/CIF",
+                "numero": "Número",
+                "codPos": "Código postal",
+                "ciudad": "Ciudad",
+                "pais": "País",
+                "prov": "Provincia",
+                "tl_dir_fac": "Dirección de Facturación",
+                "continuar": "Continuar",
+                "cancelar": "Cancelar pedido"
+            },
+            "pan_pago_tienda": {
+                "tl_tienda": "¿Que deseas hacer con el pedido?",
+                "imprimir": "Imprimir en tienda",
+                "envio_email": "Enviar correo",
+                "cancelar": "Cancelar pedido"
+            },
+            "exclusivoWeb": "EXCLUSIVE WEB!",
+            "soloEnWeb": "ONLY WEB",
+            "btn_finalizar_pedido": "Finalizar pedido",
+            "btn_paypal": "PAGAR POR PAYPAL",
+            "pago_caja": "PAGO EN CAJA"
         }
 
         //pagina de inicio    
         $('#btn_acceder').text('Acceder');
+        $('#labelInicio').text('Select a store:');
+        $('#labelCargando').text('Loading...');
 
         //header 
         $('#login').text('identificarse!');
@@ -553,6 +1036,9 @@ function translateButtons(idioma) {
         $('#enviar_registro').text("Crear cuenta");
         $('#labelYAesClient').text("¿Ya es cliente?");
         $('#linkIniSes').text("Iniciar sessión");
+        var avisoText = "He leído y acepto el ";
+        var avisoLink = "Aviso legal";
+        $('#aviso_legal').html(avisoText + '<a id="link_aviso_legal" href="http://www.partyfiesta.com/es/ayuda/aviso-legal" target="_blank">' + avisoLink + '</a>');
 
 
         break;
