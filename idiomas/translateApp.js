@@ -220,7 +220,7 @@ function translateButtons(idioma) {
 
             },
             "inicio": {
-                "labelInicio": "Seleccione una tienda:",
+                "labelInicio": "Seleccione una tiendaaaaaa:",
                 "selectInicio": ""
             },
             "header": {
@@ -365,7 +365,7 @@ function translateButtons(idioma) {
 
         //pagina de inicio    
         $('#btn_acceder').text('Acceder');
-        $('#labelInicio').text('Seleccione una tienda:');
+        $('#labelInicio').text('Seleccione una tiendaaaaaa:');
         $('#labelCargando').text('Cargando...');
 
         //header 

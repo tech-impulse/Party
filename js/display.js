@@ -4245,7 +4245,7 @@ function sistemasPago(soloOnline) { //TEMP
     $("#divBack").html('<div onclick="opcionesEnvio(' + OPCIONENVIO + ')"><div class="ui-grid-b"><div class="ui-block-a" style="width: 10%;"><span  class="flaticon-leftarrow" style="font-size:8px;float:left;text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 90%;"><label style="font-weight: bold;">Opciones de envio</label></div></div></div>');
 
     //inicializamos el boton
-    var paypal = '<form id="formPaypal" method="post" action="https://www.paypal.com/cgi-bin/webscr" target="_blank">' +
+    var paypal = '<form id="formPaypal" method="post" action="https://www.paypal.com/cgi-bin/webscr">' +
         '<input type="hidden" name="currency_code" value="EUR">' +
         '<input type="hidden" name="lc" value="ES">' +
         '<input type="hidden" name="cmd" value="_cart">' +
