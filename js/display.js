@@ -21,7 +21,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         console.log("Length " + len);
         len = data.columns;
     }
-    
+
     var alturaMin = W_HEIGTH * 0.6;
     var filas = Math.ceil(len / data.columns);
     var count = 1;
@@ -2617,6 +2617,18 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
 
     var imgLinkExt = aux_prod.linkext.replace("normalPreview", "bigPreview");
 
+    var sec = mod = pos = "";
+
+    if (aux_prod.position_x_store.section != undefined) {
+        sec = aux_prod.position_x_store.section;
+    }
+    if (aux_prod.position_x_store.module != undefined) {
+        mod = aux_prod.position_x_store.module;
+    }
+    if (aux_prod.position_x_store.position != undefined) {
+        pos = aux_prod.position_x_store.position;
+    }
+
     html = '<ul data-role="listview" data-inset="true">' +
         '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + aux_prod.quantity + '</span></li>' +
         '<li>' +
@@ -2624,7 +2636,7 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
         '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="width: 325px;max-height: 350px;"></div>' +
         '<div class="ui-block-b">' +
         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(aux_prod.price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-        '<p><strong style="font-size: 15px;margin-top:5px;"> Ubicación: ' + aux_prod.position_x_store.section + ' ' + aux_prod.position_x_store.module + ' ' + aux_prod.position_x_store.position + ' </strong></p>' +
+        '<p><strong style="font-size: 15px;margin-top:5px;"> Ubicación: ' + sec + ' ' + mod + ' ' + pos + ' </strong></p>' +
         '<p><strong style="font-size: 15px;margin-top:5px;"> Descripción: </strong></p>' +
         '<strong style=""><p style="white-space: initial;font-size: 15px;margin-top:5px;">' + definition + '</p></strong>' +
         '<p class="ui-li-aside"><img src="' + imgAvailability + '" style="width:50px;"></p>' +
@@ -2780,7 +2792,7 @@ function displayPopupItemDetail(id, param, idproduct) {
                         '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + (PRODUCTS[i].position_x_store.section == "undefined" ? PRODUCTS[i].position_x_store.section : '') + ' ' + (PRODUCTS[i].position_x_store.module == undefined ? '' : PRODUCTS[i].position_x_store.section) + ' ' + (PRODUCTS[i].position_x_store.position == undefined ? '' : PRODUCTS[i].position_x_store.section) + ' </strong></p>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + (PRODUCTS[i].position_x_store.section == "undefined" ? '' : PRODUCTS[i].position_x_store.section) + ' ' + (PRODUCTS[i].position_x_store.module == undefined ? '' : PRODUCTS[i].position_x_store.module) + ' ' + (PRODUCTS[i].position_x_store.position == undefined ? '' : PRODUCTS[i].position_x_store.position) + ' </strong></p>' +
                         '<p><strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '" style="width:50px;"></p>' +
@@ -4253,7 +4265,7 @@ function sistemasPago(soloOnline) { //TEMP
         '<input type="hidden" name="upload" value="1">' +
         '<input type="hidden" name="return" value="http://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email=' + INFO_USU.email.replace(/\s/g, " ") + '&idUser=' + INFO_USU.id + '&shop=' + STORE.id + '">' +
         '<input type="hidden" name="cancel_return" value="http://partyfiesta.youtter.com/app/alb/">' +
-        '<input type="hidden" name="business" value="javier.fernandez@youtter.com">';
+        '<input type="hidden" name="business" value="tiendaonline@partyfiesta.com">';
 
     var add = '';
     var i = 0;
