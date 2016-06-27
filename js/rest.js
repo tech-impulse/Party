@@ -275,6 +275,12 @@ function getNodes(idNode, nodeName, isAlgo, aux, backPage) {
         openMenu();
     }
 
+    if (STORE == "") {
+        $("#divTienda").hide();
+        $("#divContent").show();
+        STORE = JSON.parse(localStorage['tiendas']);
+    }
+
     //language = 1;
     // Datos que se van a enviar
     var dataSend = {
@@ -940,6 +946,7 @@ function getTiendas() {
         timeout: 10000, //10 seg
         success: function (response) {
 
+            console.log("Cargamos las tiendas en el select");
             restOk_tiendas(response, "tiendas");
 
         },
@@ -1549,7 +1556,7 @@ function sendEmail(pantallaIntermediaPago) {
                             sistemasPago("si");
                         }, 5000);
                     } else {
-                        $("#texto_popup").text("Correo enviado a " + EMAIL_USER );
+                        $("#texto_popup").text("Correo enviado a " + EMAIL_USER);
                         $('#popupAlert').popup('open');
                         console.log("Enviamos email");
                         EMAIL_USER = "";

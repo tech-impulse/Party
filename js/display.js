@@ -2,7 +2,7 @@
     - data: json a parsear con la información
     - originNode: id del nodo Anterior (Del que venimos)
     - originName: nombre del nodo Anterior (Del que venimos)
-    */
+*/
 
 function displayNode(data, originNode, originName, linkImg, aux) {
 
@@ -21,6 +21,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
         console.log("Length " + len);
         len = data.columns;
     }
+    
     var alturaMin = W_HEIGTH * 0.6;
     var filas = Math.ceil(len / data.columns);
     var count = 1;
@@ -314,7 +315,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
     } else {
 
-        console.log("Error en el envio de parametros");
+        console.log("Error en el envio");
 
     }
 
@@ -3140,7 +3141,7 @@ function loadMenu(data) {
 
     /*HEADER  de la pantalla*/
     htmlHeaderMenuInicial = '';
-    htmlHeaderMenuInicial = '<div class="ui-grid-d">' +
+    htmlHeaderMenuInicial = '<div class="ui-grid-d" id="headerMenuIniical">' +
         '<div class="ui-block-b" style="margin-top:10px;margin-left: 37%; width:32%;"><img src="css/icons/logo.png" onclick="getNodes(0);" width="75%"></div>' +
         '</div>';
 

@@ -1,11 +1,3 @@
-/*< div >
-    < input required = ""
-type = "checkbox" > He leído y acepto el < a href = "/es/ayuda/aviso-legal"
-target = "_blank" > Aviso legal < /a>
-
-< /div>*/
-
-
 /******************************************
 Esto se ejecuta antes que la app se inicie  
 ******************************************/
@@ -23,7 +15,6 @@ $(document).bind("mobileinit", function () {
     });
 
     // Obtenermos el listado banderas y tiendas
-    //alert("Antes de cargar");
     getFlags();
     getTiendas();
 
@@ -39,26 +30,11 @@ Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
 
-    //$("#popupListItems").on({               // Evitar el click fuera del popUp.
-    /*$(".ui-popup").on({               // Evitar el click fuera del popUp.
-        popupbeforeposition: function () {
-            $('.ui-popup-screen').off();
-            $('body').css('overflow','hidden');
-        },
-        popupafterclose: function () {
-            
-            $('body').css('overflow','scroll');
-        }
-    });*/
-
-    // jQuery no-double-tap-zoom plugin
-
+    
     $(window).scroll(function () {
 
         //console.log("Mas scroll y reinicar tiempo salvapantallas");
         clearInterval(protector);
-
-        //console.log("Click");
 
         $('#principal').show();
         $('#contentPopupScreenSaver').hide();
@@ -76,24 +52,7 @@ $(document).ready(function () {
         }
     });
 
-    //Detectamos cuando clicamos en la pantalla para desactivar el protector de pantalla
-    /*$(window).on("click", function (e) {
 
-        clearInterval(protector);
-
-        console.log("Click");
-
-        $('#principal').show();
-        $('#contentPopupScreenSaver').hide();
-
-        protector = setInterval(function () {
-            logout();
-            displayScreenSaver();
-        }, idleTime);
-
-    });*/
-
-    //$(this).bind('touchstart', function preventZoom(e) {
     $(this).bind('touchstart', function preventZoom(e) {
 
         //console.log("-----------------> Hola soy un log!! -------------------------------------"); // TEMP !!
@@ -135,36 +94,6 @@ $(document).ready(function () {
 
     });
 
-    /* var elm = document.body; // or some selection of the element you want to disable
-
-    var catcher = function (evt) {
-        if (evt.touches.length > 2)
-            evt.preventDefault();
-    };
-
-    elm.addEventListener('touchstart', catcher, true);
-
-    (function ($) {
-        console.log("-----------------> Hola soy un log!! -------------------------------------"); // TEMP !!
-
-        var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
-        $.fn.nodoubletapzoom = function () {
-            if (IS_IOS)
-                $(this).bind('touchstart', function preventZoom(e) {
-                    var t2 = e.timeStamp,
-                        t1 = $(this).data('lastTouch') || t2,
-                        dt = t2 - t1,
-                        fingers = e.originalEvent.touches.length;
-                    $(this).data('lastTouch', t2);
-                    if (!dt || dt > 500 || fingers > 1) return; // not double-tap
-
-                    e.preventDefault(); // double tap - prevent the zoom
-                    // also synthesize click events we just swallowed up
-                    $(this).trigger('click').trigger('click');
-                });
-        };
-    })(jQuery);
-*/
 
     $('#popupCargando').on('popupafteropen', function () {
 
@@ -244,6 +173,11 @@ $(document).ready(function () {
 
     //Cargamos el idioma por defecto de la app
     translateButtons("es");
+    
+    if (localStorage['tiendas'] != undefined) {
+        $("#headerMenuIniical").hide();
+        getNodes(0);
+    }
 
     //Boton de acceso a la app
     $("#btn_acceder").click(function () {
@@ -268,16 +202,20 @@ $(document).ready(function () {
             for (var i = 0; i < countTiendas; i++) {
 
                 if (TIENDAS.stores[i].id == STORE) {
+                    
                     SHOPDELIVERY = TIENDAS.stores[i].deliveryStore;
                     //language = TIENDAS.stores[i].language;  
                     STORE = TIENDAS.stores[i];
+
+                    localStorage['tiendas'] = JSON.stringify(STORE); // para recuperar info JSON.parse(localStorage['tiendas']);
+
                     TIENDAS = "";
                     break;
                 }
             }
 
             //console.log("Item seleccionado " + STORE + " y tiene entraga en tienda? " + SHOPDELIVERY);
-            $("#logo_inicio").hide();
+            //$("#logo_inicio").hide();
             getNodes(0);
 
         } else {

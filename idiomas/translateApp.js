@@ -411,14 +411,14 @@ function translateButtons(idioma) {
 
         jsonIdiomas = {
             "alertas": {
-                "pan_inter_asis_fiestas": "Solo se permiten números",
-                "form_imcompleto": "¡Faltan datos!",
-                "error_login": "Usuario o contraseña incorrectos",
-                "error_timeout": "Error de TimeOut... compruebe su conexion de internet",
+                "pan_inter_asis_fiestas": "Únicament es permeten números",
+                "form_imcompleto": "¡Falten dades!",
+                "error_login": "Usuari o contrasenya incorrecte",
+                "error_timeout": "Temps excedit... comprovi conexió Internet",
                 "error_ws": "Error ws",
-                "error_usr": "El usuario ya existe",
-                "select_tienda": "!Seleccione una tienda!",
-                "sin_stock": "No hay mas productos en stock"
+                "error_usr": "L'usuari ja existeix",
+                "select_tienda": "!Seleccioneu una tenda!",
+                "sin_stock": "No hi ha més productes en stock"
 
             },
             "inicio": {
@@ -437,38 +437,38 @@ function translateButtons(idioma) {
                 "label_num_per_fiesta": "¿Quantes persones assistiran a la festa?",
                 "btn_continuar": "CONTINUAR",
                 "btn_continuar_fiestas": "CONTINUAR",
-                "btn_añadir_prod": "Añadir"
+                "btn_añadir_prod": "Afegir"
             },
             "pagina_pago": {
-                "envio_email": "Enviar correo",
+                "envio_email": "Enviar correu",
                 "envio_casa": ""
-            },
-            "form_sugerencias": {
-                "labelSugNom": "Nombre:",
-                "labelSugNaci": "Fecha de nacimiento:",
-                "labelSugMail": "Correo electrónico:",
-                "labelSugNPob": "Población:",
-                "labelSugTelf": "Teléfono:",
-                "labelSugProv": "Provincia:",
-                "labelSugTipo": "Tipo de sugerencia:",
-                "labelSugNSugPreg": "¿Sobre que es la petición/sugerencia?",
-                "sugerenciasPlaceholder": "Escríbalas aquí...",
-                "enviar_sugerencia": "¡Enviar!",
-                "selectOption": "Incidencia",
-                "labelSugPreg": "¿Tiene alguna sugerencia?"
-            },
-            "asistente_disfraces": {
-                "select_sexo_button": "Per a qui és la disfressa?",
-                "btn_continuar": "CONTINUAR",
-                "talla": "¿Quina talla té?",
-                "categoria": "Categorias"
             },
             "form_sugerencias": {
                 "labelSugNom": "Nom:",
                 "labelSugNaci": "Data de naixement:",
                 "labelSugMail": "Correu electrònic:",
                 "labelSugNPob": "Població:",
-                "labelSugTelf": "Teléfon:",
+                "labelSugTelf": "Telèfon:",
+                "labelSugProv": "Província:",
+                "labelSugTipo": "Tipus de suggeriment:",
+                "labelSugNSugPreg": "Sobre que és la petició / suggeriment?",
+                "sugerenciasPlaceholder": "Escriviu aquí ...",
+                "enviar_sugerencia": "¡Enviar!",
+                "selectOption": "Incidència",
+                "labelSugPreg": "Té algun suggeriment?"
+            },
+            "asistente_disfraces": {
+                "select_sexo_button": "Per a qui és la disfressa?",
+                "btn_continuar": "CONTINUAR",
+                "talla": "¿Quina talla té?",
+                "categoria": "Categories"
+            },
+            "form_sugerencias": {
+                "labelSugNom": "Nom:",
+                "labelSugNaci": "Data de naixement:",
+                "labelSugMail": "Correu electrònic:",
+                "labelSugNPob": "Població:",
+                "labelSugTelf": "Telèfon:",
                 "labelSugProv": "Província:",
                 "labelSugTipo": "Tipus de suggeriment:",
                 "labelSugNSugPreg": "Sobre que és la petició / suggeriment?",
@@ -508,75 +508,75 @@ function translateButtons(idioma) {
                 "unidades": "unitats"
             },
             "proceso_pago": {
-                "tl_pregunta": "¿QUE QUIERE HACER CON SU PEDIDO?",
-                "tl_pregunta_2": "¿QUE QUIERE HACER?",
-                "tl_uno": "TODOS LOS ARTICULOS ESTAN DISPONIBLES",
-                "tl_dos": "TANTO EN TIENDA COMO ONLINE",
-                "tl_tres": "TIENE",
-                "tl_quatro": "PRODUCTOS EN TIENDA",
+                "tl_pregunta": "QUE VOL FER AMB LA SEVA COMANDA?",
+                "tl_pregunta_2": "QUE VOL FER?",
+                "tl_uno": "TOTS ELS ARTICLES ESTAN DISPONIBLES",
+                "tl_dos": "TANT EN BOTIGA COM EN WEB",
+                "tl_tres": "TÉ ",
+                "tl_quatro": "PRODUCTES EN BOTIGA",
                 "tl_cinco": "PRODUCTOS ONLINE",
-                "tl_seis": "PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA",
-                "tl_siete": "PEDIDO ONLINE",
-                "tl_ocho": "COMPRAR SOLO LO DISPONIBLE EN TIENDA",
-                "tl_nueve": "COMPRAR ONLINE(TODO EL PEDIDO)",
-                "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
-                "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
-                "tl_doce": "ENVIO A DOMICILIO 48H",
+                "tl_seis": "RECOLLIR JO MATEIX A LA TENDA I PAGAMENT EN CAIXA",
+                "tl_siete": "DEMANAR ONLINE",
+                "tl_ocho": "COMPRAR NOMÉS EL DISPONIBLE A LA TENDA",
+                "tl_nueve": "COMPRAR ONLINE(TOTA LA COMANDA)",
+                "tl_diez": "RECOLLIR LO DISPONIBLE A LA TIENDA I LA RESTA ONLINE",
+                "tl_once": "COMANDA ONLINE(TOTA LA COMANDA)",
+                "tl_doce": "ENVIAMENT A DOMICILI 48H",
                 "tl_trece": "CLICK AND COLLECT 48H",
-                "tl_catorce": "OPCIONES DE PAGO",
-                "tl_quince": "PAGAR EN CAJA",
-                "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
+                "tl_catorce": "OPCIONS DE PAGAMENT",
+                "tl_quince": "PAGAR A CAIXA",
+                "tl_diezyseis": "Ja pot passar a pagar la seva comanda a caja. Identifiquis amb el teu nom."
             },
             "pt_inter_pago_login": {
-                "titulo": "INFO USUARIO",
-                "Identificarse": "Identificarse",
-                "Registrarse": "Registrarse",
+                "titulo": "INFO USUARI",
+                "Identificarse": "Identificar-se",
+                "Registrarse": "Registrar-se",
             },
             "reg_pant_pedido": {
-                "tl_uno": "registro usuario",
+                "tl_uno": "Registre usuari",
                 "email": "email",
                 "rep_email": "repetir email",
-                "contra": "contraseña",
-                "rep_contra": "repetir contraseña",
-                "direcc": "Dirección",
-                "nombre": "Nombre",
-                "apellido": "Apellidos",
-                "telf": "Tel&eacute;fono",
+                "contra": "contrasenya",
+                "rep_contra": "repetir contrasenya",
+                "direcc": "Direcció",
+                "nombre": "Nom",
+                "apellido": "Cognoms",
+                "telf": "telèfon",
                 "dni": "DNI/CIF",
                 "numero": "Número",
-                "codPos": "Código postal",
-                "ciudad": "Ciudad",
+                "codPos": "Codi postal",
+                "ciudad": "Ciutat",
                 "pais": "País",
-                "prov": "Provincia",
+                "prov": "província",
                 "continuar": "Continuar"
             },
             "dir_facturacion": {
-                "tl_direccion": "Dirección",
-                "sel_dir_fac_envio": "Dirección de entrega y facturación coinciden",
-                "nombre": "Nombre",
-                "apellidos": "Apellidos",
-                "telf": "Tel&eacute;fono",
+                "tl_direccion": "Direcció",
+                "sel_dir_fac_envio": "Direcció de lliurament i facturació coincideixen",
+                "nombre": "Nom",
+                "apellidos": "Cognom",
+                "telf": "telèfon",
                 "dni": "DNI/CIF",
                 "numero": "Número",
                 "codPos": "Código postal",
                 "ciudad": "Ciudad",
                 "pais": "País",
                 "prov": "Provincia",
-                "tl_dir_fac": "Dirección de Facturación",
+                "tl_dir_fac": "Direcció de Facturació",
                 "continuar": "Continuar",
-                "cancelar": "Cancelar pedido"
+                "cancelar": "Cancelar comanda"
             },
             "pan_pago_tienda": {
-                "tl_tienda": "¿Que deseas hacer con el pedido?",
-                "imprimir": "Imprimir en tienda",
-                "envio_email": "Enviar correo",
-                "cancelar": "Cancelar pedido"
+                "tl_tienda": "Que vols fer amb la comanda?",
+                "imprimir": "Imprimir en tenda",
+                "envio_email": "Enviar correu",
+                "cancelar": "Cancelar comanda"
             },
-            "exclusivoWeb": "EXCLUSIVE WEB!",
-            "soloEnWeb": "ONLY WEB",
-            "btn_finalizar_pedido": "Finalizar pedido",
-            "btn_paypal": "PAGAR POR PAYPAL",
-            "pago_caja": "PAGO EN CAJA"
+            "exclusivoWeb": "EXCLUSIU WEB!",
+            "soloEnWeb": "UNICAMENT WEB",
+            "btn_finalizar_pedido": "finalitzar comanda",
+            "btn_paypal": "PAGAR PAYPAL",
+            "pago_caja": "PAGAMENT EN CAIXA"
 
         }
 
@@ -949,7 +949,7 @@ function translateButtons(idioma) {
                 "titulo": "INFO USUARIO",
                 "Identificarse": "Identificarse",
                 "Registrarse": "Registrarse",
-            },            
+            },
             "reg_pant_pedido": {
                 "tl_uno": "registro usuario",
                 "email": "email",
