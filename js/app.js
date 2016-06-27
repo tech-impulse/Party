@@ -17,6 +17,11 @@ $(document).bind("mobileinit", function () {
     // Obtenermos el listado banderas y tiendas
     getFlags();
     getTiendas();
+    
+    if (localStorage['tiendas'] != undefined) {
+        $("#headerMenuIniical").hide();
+        getNodes(0);
+    }
 
     //Cargamos el idioma por defecto de la app
     translateButtons("ca");
