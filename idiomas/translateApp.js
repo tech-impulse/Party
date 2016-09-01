@@ -90,6 +90,7 @@ function translateButtons(idioma) {
             "proceso_pago": {
                 "tl_pregunta": "¿QUE QUIERE HACER CON SU PEDIDO?",
                 "tl_pregunta_2": "¿QUE QUIERE HACER?",
+                "tl_cero": "LOS ARTICULOS ESTAN DISPONIBLES SOLO EN TIENDA",
                 "tl_uno": "TODOS LOS ARTICULOS ESTAN DISPONIBLES",
                 "tl_dos": "TANTO EN TIENDA COMO ONLINE",
                 "tl_tres": "TIENE",
@@ -102,7 +103,7 @@ function translateButtons(idioma) {
                 "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
                 "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
                 "tl_doce": "ENVIO A DOMICILIO 48H",
-                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_trece": "ROCOGER EN TIENDA",
                 "tl_catorce": "OPCIONES DE PAGO",
                 "tl_quince": "PAGAR EN CAJA",
                 "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
@@ -156,6 +157,7 @@ function translateButtons(idioma) {
             "soloEnWeb": "ONLY WEB",
             "btn_finalizar_pedido": "Finalizar pedido",
             "btn_paypal": "PAGAR POR PAYPAL",
+            "btn_tarjeta": "PAGAR EN DATAFONO",
             "pago_caja": "PAGO EN CAJA"
 
         }
@@ -238,7 +240,7 @@ function translateButtons(idioma) {
                 "btn_añadir_prod": "Añadir"
             },
             "pagina_pago": {
-                "envio_email": "Enviar correo",
+                "envio_email": "Enviar lista por email",
                 "envio_casa": ""
             },
             "form_sugerencias": {
@@ -271,6 +273,7 @@ function translateButtons(idioma) {
                 "tituloPopUpDisponiblesWeb": "Productos disponibles en web",
                 "tituloBoton": "Vaciar carro",
                 "campo_vacio": "Rellene este campo",
+                "campo_vacio_oass": "Rellene este campo.Minimo 8 carácteres.",
                 "displayProductos": {
                     "isfiesta_3": "Todos los selects ok",
                     "else": "Seleccione un campo valido para poder continuar"
@@ -294,6 +297,7 @@ function translateButtons(idioma) {
             "proceso_pago": {
                 "tl_pregunta": "¿QUE QUIERE HACER CON SU PEDIDO?",
                 "tl_pregunta_2": "¿QUE QUIERE HACER?",
+                "tl_cero": "LOS ARTICULOS SOLO ESTAN DISPONIBLES EN TIENDA",
                 "tl_uno": "TODOS LOS ARTICULOS ESTAN DISPONIBLES",
                 "tl_dos": "TANTO EN TIENDA COMO ONLINE",
                 "tl_tres": "TIENE",
@@ -306,7 +310,7 @@ function translateButtons(idioma) {
                 "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
                 "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
                 "tl_doce": "ENVIO A DOMICILIO 48H",
-                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_trece": "RECOGER EN TIENDA",
                 "tl_catorce": "OPCIONES DE PAGO",
                 "tl_quince": "PAGAR EN CAJA",
                 "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
@@ -356,10 +360,11 @@ function translateButtons(idioma) {
                 "envio_email": "Enviar correo",
                 "cancelar": "Cancelar pedido"
             },
-            "exclusivoWeb": "EXCLUSIVE WEB!",
-            "soloEnWeb": "ONLY WEB",
+            "exclusivoWeb": "EXCLUSIVO WEB!",
+            "soloEnWeb": "SOLO WEB",
             "btn_finalizar_pedido": "Finalizar pedido",
             "btn_paypal": "PAGAR POR PAYPAL",
+            "btn_tarjeta": "PAGAR EN DATAFONO",
             "pago_caja": "PAGO EN CAJA"
         }
 
@@ -440,7 +445,7 @@ function translateButtons(idioma) {
                 "btn_añadir_prod": "Afegir"
             },
             "pagina_pago": {
-                "envio_email": "Enviar correu",
+                "envio_email": "Enviar lista per correu",
                 "envio_casa": ""
             },
             "form_sugerencias": {
@@ -487,6 +492,7 @@ function translateButtons(idioma) {
                 "tituloPopUpDisponiblesWeb": "Productes disponibles a la web",
                 "tituloBoton": "Buidar carro",
                 "campo_vacio": "Ompli aquest camp",
+                "campo_vacio_oass": "Ompli aquest camp.Minim 8 caracters.",
                 "displayProductos": {
                     "isfiesta_3": "Tots els selects ok",
                     "else": "Seleccioni un camp valid per poder continuar"
@@ -510,6 +516,7 @@ function translateButtons(idioma) {
             "proceso_pago": {
                 "tl_pregunta": "QUE VOL FER AMB LA SEVA COMANDA?",
                 "tl_pregunta_2": "QUE VOL FER?",
+                "tl_cero": "ELS ARTICLES NOMES ESTAN DISPONIBLES A LA BOTIGA",
                 "tl_uno": "TOTS ELS ARTICLES ESTAN DISPONIBLES",
                 "tl_dos": "TANT EN BOTIGA COM EN WEB",
                 "tl_tres": "TÉ ",
@@ -522,7 +529,7 @@ function translateButtons(idioma) {
                 "tl_diez": "RECOLLIR LO DISPONIBLE A LA TIENDA I LA RESTA ONLINE",
                 "tl_once": "COMANDA ONLINE(TOTA LA COMANDA)",
                 "tl_doce": "ENVIAMENT A DOMICILI 48H",
-                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_trece": "RECOGER EN TIENDA",
                 "tl_catorce": "OPCIONS DE PAGAMENT",
                 "tl_quince": "PAGAR A CAIXA",
                 "tl_diezyseis": "Ja pot passar a pagar la seva comanda a caja. Identifiquis amb el teu nom."
@@ -576,6 +583,7 @@ function translateButtons(idioma) {
             "soloEnWeb": "UNICAMENT WEB",
             "btn_finalizar_pedido": "finalitzar comanda",
             "btn_paypal": "PAGAR PAYPAL",
+            "btn_tarjeta": "PAGAR EN DATAFONO",
             "pago_caja": "PAGAMENT EN CAIXA"
 
         }
@@ -734,7 +742,7 @@ function translateButtons(idioma) {
                 "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
                 "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
                 "tl_doce": "ENVIO A DOMICILIO 48H",
-                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_trece": "RECOGER EN TIENDA",
                 "tl_catorce": "OPCIONES DE PAGO",
                 "tl_quince": "PAGAR EN CAJA",
                 "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
@@ -785,9 +793,10 @@ function translateButtons(idioma) {
                 "cancelar": "Cancelar pedido"
             },
             "exclusivoWeb": "EXCLUSIVE WEB!",
-            "soloEnWeb": "ONLY WEB",
+            "soloEnWeb": "Només WEB",
             "btn_finalizar_pedido": "Finalizar pedido",
             "btn_paypal": "PAGAR POR PAYPAL",
+            "btn_tarjeta": "PAGAR EN DATAFONO",
             "pago_caja": "PAGO EN CAJA"
         }
 
@@ -940,7 +949,7 @@ function translateButtons(idioma) {
                 "tl_diez": "RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO ONLINE",
                 "tl_once": "PEDIDO ONLINE(TODO EL PEDIDO)",
                 "tl_doce": "ENVIO A DOMICILIO 48H",
-                "tl_trece": "CLICK AND COLLECT 48H",
+                "tl_trece": "RECOGER EN TIENDA",
                 "tl_catorce": "OPCIONES DE PAGO",
                 "tl_quince": "PAGAR EN CAJA",
                 "tl_diezyseis": "Ya puede pasar a pagar su pedido en caja.Identifíquese con su nombre."
@@ -994,6 +1003,7 @@ function translateButtons(idioma) {
             "soloEnWeb": "ONLY WEB",
             "btn_finalizar_pedido": "Finalizar pedido",
             "btn_paypal": "PAGAR POR PAYPAL",
+            "btn_tarjeta": "PAGAR EN DATAFONO",
             "pago_caja": "PAGO EN CAJA"
         }
 

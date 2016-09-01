@@ -80,6 +80,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
             nodeNames = [];
             nodeIds = [];
             nodeImg = [];
+            PRODUCTS = [];
         } else {
             console.log("Nodo origen " + originNode + " nombre " + originName + "******************");
             updateBackButton(originNode, originName, linkImg);
@@ -225,7 +226,8 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
                     }
 
-                    var imgLinkExt = data.nodes[i].linkext.replace("wide", "bigPreview");
+                    //var imgLinkExt = data.nodes[i].linkext.replace("wide", "bigPreview");
+                    var imgLinkExt = data.nodes[i].linkext;
 
                     if (valorSwitch == 7) { //despues de la primera fila se mostrara el elemento principal que ocupa toda una fila
 
@@ -255,7 +257,7 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
                             //border: 1px solid rgb(23, 152, 209);box-shadow: 0px 0px 1px 1px rgba(23,152,209,1);text-transform: uppercase;
                             var element = block + //'<a  data-corners="false" data-role="button" data-theme="f" style="">' +
-                                '<br><center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="max-width:' + (heig_block * 0.8) + 'px;"></div></center>' +
+                                '<br><center><div style="height:' + (heig_block * 0.7) + 'px;min-width: ' + (heig_block * 0.8) + 'px;display: table-cell;vertical-align: middle;"><img src="' + imgLinkExt + '" style="width:' + (heig_block * 0.8) + 'px;max-height:' + (heig_block * 0.7) + 'px;"></div></center>' +
                                 '<br>' +
                                 '<label style="margin-bottom: 0px;text-align:center;line-height: ' + (heig_block * 0.15) + 'px;height: ' + (heig_block * 0.15) + 'px;overflow: hidden;text-overflow: ellipsis;background-color: rgb(23, 152, 209);color: rgb(255, 255, 255);text-transform: uppercase;">' + data.nodes[i].name + '</label>' +
                                 //'</a>' +
@@ -325,8 +327,8 @@ function displayNode(data, originNode, originName, linkImg, aux) {
 
 function refreshDisplayProducts(data, productAlter, id_produc) {
 
-    console.log(data);
-    console.log(productAlter);
+    //console.log(data);
+    //console.log(productAlter);
 
     PRODUCTS.push(productAlter);
 
@@ -368,16 +370,16 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
                     }
                 }
 
-                cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units));
+                /*cantidad = Math.ceil(parseInt(num_personas_fiesta) / parseInt(units));
                 productAlter.quantity = cantidad;
                 productAlter.original = false; //este campo indica si el articulo ha sido sustituido o no
-                productAlter.dedonde = nodeIds[nodeIds.length - 1];
+                productAlter.dedonde = nodeIds[nodeIds.length - 1];*/
                 data[a].typeproducts.push(productAlter);
                 break;
             }
         }
     }
-
+    
     for (var j = 0; j < data.length; j++) {
 
 
@@ -611,14 +613,14 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
     console.log(CART.length);
     var precio = productAlter.price_x_region[0].totalPrice;
 
-    if (CART.length < 1) {
+    /*if (CART.length < 1) {
         CART.push(productAlter);
         CART.ammount = parseInt(precio * parseInt(productAlter.quantity));
     } else {
         CART.push(productAlter);
         var ammount = parseInt(CART.ammount);
         CART.ammount = ammount + parseInt(precio * parseInt(productAlter.quantity));
-    }
+    }*/
 
     $("#divContent").html(new_htmlContent);
     $("#divContent").trigger('create');
@@ -626,9 +628,14 @@ function refreshDisplayProducts(data, productAlter, id_produc) {
 
     $("#popupCargando").popup("close");
 
-    updatePrecioTotalArticulo(); // TEMP !!
-    updateCarritoDisplay();
+    //updatePrecioTotalArticulo(); // TEMP !!
+    //updateCarritoDisplay();
+    TEMP_PRODUCTS=[];
     translateButtons(idiomStore);
+    updateOpcionCompraProducto(); //actualizamos las opciones para la compra
+    calcularTotalStoreOnline(); //añadimos los prod en tienda, web, etc
+    updateCarritoDisplay();
+    
 }
 
 /**
@@ -703,6 +710,8 @@ function updateCarritoDisplay() {
 }
 
 function displayProducts(data, originNode, originName, param, param4) {
+
+    PRODUCTS = [];
 
     console.log("DisplayProducts-> Nodo Origen Id " + originNode + " param4 " + param4 + " pantalla " + pantallaActual);
 
@@ -1977,22 +1986,23 @@ function displayProducts(data, originNode, originName, param, param4) {
 
             for (var l = 0; l < data.products.length; l++) {
 
-                var prod = data.products[l]; //recorremos todos los productos
+                for (var m = 0; m < data.products[l].typeproducts.length; m++) {
 
-                for (var n = 0; n < CART.length; n++) {
+                    var prod = data.products[l].typeproducts[m]; //recorremos todos los productos
 
-                    if (parseInt(CART[n].id) == parseInt(prod.id)) {
+                    for (var n = 0; n < CART.length; n++) {
 
-                        console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO catalogo");
-                        displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
+                        if (parseInt(CART[n].id) == parseInt(prod.id)) {
+
+                            console.log("ACTUALIZAMOS LA LISTA SEGUN EL CARRITO");
+                            displayItemOperations(CART[n].id, parseInt(CART[n].quantity));
+
+                        }
 
                     }
-
                 }
             }
         }
-
-
 
     } else {
 
@@ -2000,16 +2010,10 @@ function displayProducts(data, originNode, originName, param, param4) {
 
     }
 
-
     translateButtons(idiomStore);
 
-
-
-
-
-
-
 }
+
 
 function añadirMasProductos(data, originNode, originName, param) {
 
@@ -2439,6 +2443,7 @@ function displayPopupItemList() { //cambios jordi
     for (var i = 0; i < CART.length; i++) { // develop 2
 
         var imgLinkExt = CART[i].linkext;
+
         var srcTienda = getImgDisponibilidadStore(i);
         var srcCentral = getImgDisponibilidadCentral(i);
 
@@ -2450,7 +2455,10 @@ function displayPopupItemList() { //cambios jordi
 
                 //productosEnTienda++;
 
-                var price = parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2);
+                console.log('Añadimos un articulo de tienda');
+                console.log(CART[i]);
+
+                var price = parseFloat(parseInt(CART[i].store_quantity) * CART[i].price_x_region[0].totalPrice).toFixed(2);
 
                 precioTotalProductosTienda += price;
 
@@ -2461,9 +2469,9 @@ function displayPopupItemList() { //cambios jordi
                     '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align:center;color:#0197d4;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
                     '<div class="ui-block-c" style="width:52%;">' +
                     '<div class="ui-grid-d">' +
-                    '<div class="ui-block-a" style="width:10%;" id="div_resta' + CART[i].id + '"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
-                    '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;color:#0197d4;">' + parseInt(CART[i].quantity) + '</label></div>' +
-                    '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+                    '<div class="ui-block-a" style="width:10%;" id="div_resta' + CART[i].id + '"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1,1);"></a></div>' + //setTimeout(function () {displayPopupItemList();}, 550);
+                    '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;color:#0197d4;">' + parseInt(CART[i].store_quantity) + '</label></div>' +
+                    '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1,1);"></a></div>' + //setTimeout(function () {displayPopupItemList();}, 550);
                     '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;color:#0197d4;">' + price + ' €</label></div>' +
                     '<div class="ui-block-e" style="width:70px; height:40px;"><a id="div_eliminar' + CART[i].id + '" onclick="openPopupAction(\'deleteItem\',' + CART[i].id + '); $(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
@@ -2472,11 +2480,39 @@ function displayPopupItemList() { //cambios jordi
                     '</div>' +
                     '</li>';
 
+                if (CART[i].online_quantity > 0) { //el prod tambien esta online
+
+                    console.log('Añadimos el articlo tambien en online');
+
+                    var price = parseFloat(CART[i].online_quantity * CART[i].price_x_region[0].totalPrice).toFixed(2);
+
+                    html_online = html_online +
+                        '<li style="border: 1px solid #AAAAAA;list-style-type: none;padding:1% 0% 1% 0%;"> ' +
+                        '<div class="ui-grid-b">' +
+                        '<div class="ui-block-a" style="width:10%;margin-left:2%"><img class="thumb" src="' + imgLinkExt + '"></div>' +
+                        '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;color:#0197d4;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
+                        '<div class="ui-block-c" style="width:52%;">' +
+                        '<div class="ui-grid-d">' +
+                        '<div class="ui-block-a" style="width:10%;" id="div_resta' + CART[i].id + '_2"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1,1);"></a></div>' + //setTimeout(function () {displayPopupItemList();}, 550);
+                        '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;color:#0197d4;">' + parseInt(CART[i].online_quantity) + '</label></div>' +
+                        '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '_2"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1,1);"></a></div>' + //setTimeout(function () {displayPopupItemList();}, 550);
+                        '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;color:#0197d4;">' + price + ' €</label></div>' +
+                        '<div class="ui-block-e" style="width:70px; height:40px;"><a id="div_eliminar' + CART[i].id + '_2" onclick="openPopupAction(\'deleteItem\',' + CART[i].id + ');$(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
+                        '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
+                        '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcCentral + '" /></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</li>';
+
+                }
+
             } else if (CART[i].stock_x_central_store > 0) {
 
                 //productosEnWeb++;
 
-                var price = parseFloat(parseInt(CART[i].quantity) * parseFloat(CART[i].price_x_region[0].totalPrice)).toFixed(2);
+                console.log('Añadimos un articulo de online');
+
+                var price = parseFloat(CART[i].quantity * CART[i].price_x_region[0].totalPrice).toFixed(2);
 
                 precioTotalProductosWeb += price;
 
@@ -2487,9 +2523,9 @@ function displayPopupItemList() { //cambios jordi
                     '<div class="ui-block-b" style="width:35%;" onclick="displayPopupItemDetail(' + i + ',\'CART\');"><label style="text-align: center;color:#0197d4;">' + CART[i].name + '<br/> ' + CART[i].sku + ' - ' + CART[i].providerVendor + '</label></div>' +
                     '<div class="ui-block-c" style="width:52%;">' +
                     '<div class="ui-grid-d">' +
-                    '<div class="ui-block-a" style="width:10%;" id="div_resta' + CART[i].id + '"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1); setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+                    '<div class="ui-block-a" style="width:10%;" id="div_resta' + CART[i].id + '"><a style="" data-icon="minus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',-1,1);"></a></div>' + // setTimeout(function () {displayPopupItemList();}, 250);
                     '<div class="ui-block-b" style="width:10%;"><label id="labelPopUpItemListQuant" style="text-align: center;padding-top: 25%;color:#0197d4;">' + parseInt(CART[i].quantity) + '</label></div>' +
-                    '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1);setTimeout(function () {displayPopupItemList();}, 250);"></a></div>' +
+                    '<div class="ui-block-c" style="width:16%;" id="div_suma' + CART[i].id + '"><a style="" data-icon="plus" data-role="button" data-theme="b" data-iconpos="notext" onclick="addToCart(' + CART[i].id + ',1,1);"></a></div>' + //setTimeout(function () {displayPopupItemList();}, 250);
                     '<div class="ui-block-d" style="width:22%;"><label id="labelPopUpItemListPrice" style="text-align: center;padding-top: 15%;color:#0197d4;">' + price + ' €</label></div>' +
                     '<div class="ui-block-e" style="width:70px; height:40px;"><a id="div_eliminar' + CART[i].id + '" onclick="openPopupAction(\'deleteItem\',' + CART[i].id + ');$(\'#lbpopupAction\').val(' + i + '); displayPopupItemList();"><img src="img/bin.png" /></a></div>' +
                     '<div class="ui-block-e" style="width:12%;"><img style="display:block;width:40px;margin-top:15px;margin-left:10px;" src="' + srcTienda + '" /></div>' +
@@ -2505,7 +2541,8 @@ function displayPopupItemList() { //cambios jordi
     var listadoProdOnLine = tituloPopUpWeb + labelsBar + html_online;
     //getSendPrice();
     html = '<div style="width: 100%; height:600px; overflow: scroll;">' +
-        (CART.productosEnTienda > 0 ? listadoProdTienda : '') + (CART.productosSoloEnWeb > 0 ? listadoProdOnLine : '') + '</div>' +
+        //(CART.productosEnTienda > 0 ? listadoProdTienda : '') + (CART.productosSoloEnWeb > 0 ? listadoProdOnLine : '') + '</div>' +
+        (html_store != '' ? listadoProdTienda : '') + (html_online != '' ? listadoProdOnLine : '') + '</div>' +
         //'<div style="list-style-type: none; padding-top: 15px;background-color: #0097d3;height: 100%;"  onclick="opcionesPago();">' +
         //'<label id="label_checkOut" style="font-size:20px; text-transform: uppercase;color:white;"><center>' + jsonIdiomas.pop_checkOut.realizar_pedido + '</center></label>'+
         //'</div>' +
@@ -2554,6 +2591,14 @@ function displayPopupItemList() { //cambios jordi
             $("#div_resta" + CART[i].id).addClass("btn_disabled");
             $("#div_eliminar" + CART[i].id).addClass("btn_disabled");
 
+            if (CART[i].online_quantity > 0) {
+
+                $("#div_suma" + CART[i].id + "_2").addClass("btn_disabled");
+                $("#div_resta" + CART[i].id + "_2").addClass("btn_disabled");
+                $("#div_eliminar" + CART[i].id + "_2").addClass("btn_disabled");
+
+            }
+
         }
 
     } else {
@@ -2566,6 +2611,14 @@ function displayPopupItemList() { //cambios jordi
             $("#div_suma" + CART[i].id).removeClass("btn_disabled");
             $("#div_resta" + CART[i].id).removeClass("btn_disabled");
             $("#div_eliminar" + CART[i].id).removeClass("btn_disabled");
+
+            if (CART[i].online_quantity > 0) {
+
+                $("#div_suma" + CART[i].id + "_2").removeClass("btn_disabled");
+                $("#div_resta" + CART[i].id + "_2").removeClass("btn_disabled");
+                $("#div_eliminar" + CART[i].id + "_2").removeClass("btn_disabled");
+
+            }
 
         }
     }
@@ -2630,7 +2683,8 @@ function displayItemAlter(id_prod_alter, id_product, idnode) {
     }
 
     html = '<ul data-role="listview" data-inset="true">' +
-        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + aux_prod.quantity + '</span></li>' +
+        //'<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + aux_prod.name + ' - ' + aux_prod.sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + aux_prod.quantity + '</span></li>' +
+        '<li data-role="list-divider" data-theme="c"><span style="margin-right: 6%;">' + aux_prod.name + ' - ' + aux_prod.sku + '</span><span style="margin-right: 1%;";>STOCK TIENDA: ' + PRODUCTS[i].stock_x_store + '</span><span>STOCK ONLINE: ' + PRODUCTS[i].stock_x_central_store + '</span></li>' +
         '<li>' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="width: 325px;max-height: 350px;"></div>' +
@@ -2735,6 +2789,7 @@ function displayPopupItemDetail(id, param, idproduct) {
     if (pantallaActual == "catalogo") {
 
         console.log("Mostramos el pop de detalle del producto catalogo");
+
         switch (param) {
         case "CART":
 
@@ -2781,18 +2836,18 @@ function displayPopupItemDetail(id, param, idproduct) {
                         var cantidad = 0;
                     }
 
-                    //var imgLinkExt = PRODUCTS[i].linkext.replace("wide", "bigPreview"); // TEMP !!
+                    var imgLinkExt = PRODUCTS[i].linkext.replace("normalPreview", "wide"); // TEMP !!
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
-                        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
+                        '<li data-role="list-divider" data-theme="c"><span style="margin-right: 6%;">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</span><span style="margin-right: 4%;";>STOCK TIENDA: ' + PRODUCTS[i].stock_x_store + '</span><span>STOCK ONLINE: ' + PRODUCTS[i].stock_x_central_store + '</span><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
                         //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
-                        '<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;width: 100%;"></div>' +
+                        '<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
                         '<div class="ui-block-b">' +
                         '<br><label style="font-size: 20px;margin-top:5px;"><h1>Precio: ' + parseFloat(PRODUCTS[i].price_x_region[0].totalPrice).toFixed(2) + ' €</h1></label>' +
-                        '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + (PRODUCTS[i].position_x_store.section == "undefined" ? '' : PRODUCTS[i].position_x_store.section) + ' ' + (PRODUCTS[i].position_x_store.module == undefined ? '' : PRODUCTS[i].position_x_store.module) + ' ' + (PRODUCTS[i].position_x_store.position == undefined ? '' : PRODUCTS[i].position_x_store.position) + ' </strong></p>' +
+                        '<p><strong><p style="font-size: 15px;margin-top:5px;"> Ubicación: ' + (PRODUCTS[i].position_x_store.section == undefined ? '' : PRODUCTS[i].position_x_store.section) + ' ' + (PRODUCTS[i].position_x_store.module == undefined ? '' : PRODUCTS[i].position_x_store.module) + ' ' + (PRODUCTS[i].position_x_store.position == undefined ? '' : PRODUCTS[i].position_x_store.position) + ' </strong></p>' +
                         '<p><strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"> Descripción: </strong></p>' +
                         '<strong style="font-size: 15px;vertical-align:sub;margin-top:5px;"><p style="white-space: initial;font-size: 15px;">' + definition + '</p></strong>' +
                         '<p class="ui-li-aside"><img src="' + imgAvailability + '" style="width:50px;"></p>' +
@@ -2893,7 +2948,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
-                        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
+                        '<li data-role="list-divider" data-theme="c"><span style="margin-right: 6%;">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</span><span style="margin-right: 4%;";>STOCK TIENDA: ' + PRODUCTS[i].stock_x_store + '</span><span>STOCK ONLINE: ' + PRODUCTS[i].stock_x_central_store + '</span><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
                         //'<div class="ui-block-a"><img src="' + imgLinkExt + '" style="max-width: 325px;width: 100%;"></div>' +
@@ -3009,7 +3064,7 @@ function displayPopupItemDetail(id, param, idproduct) {
 
                     html = html +
                         '<ul data-role="listview" data-inset="true">' +
-                        '<li data-role="list-divider" data-theme="c"><h2 style="margin:5px">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</h2><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
+                        '<li data-role="list-divider" data-theme="c"><span style="margin-right: 6%;">' + PRODUCTS[i].name + ' - ' + PRODUCTS[i].sku + '</span><span style="margin-right: 4%;";>STOCK TIENDA: ' + PRODUCTS[i].stock_x_store + '</span><span>STOCK ONLINE: ' + PRODUCTS[i].stock_x_central_store + '</span><span class="ui-li-count" style="margin-right: 3%;">' + cantidad + '</span></li>' +
                         '<li>' +
                         '<div class="ui-grid-a">' +
                         //'<div class="ui-block-a"><img src="' + PRODUCTS[i].linkext + '" style="max-width: 325px;max-height: 350px;"></div>' +
@@ -3204,8 +3259,10 @@ function loadMenu(data) {
     translateButtons(idiomStore);
 
     $('#btn_finalizarpedido').click(function () { // develop 1
+        
+        updateOpcionCompraProducto();
 
-        console.log('Handler for .click() called. con ' + opcionCompraProductos + ' ' + CART.productosEnTienda + ' ' + CART.productosEnWeb);
+        console.log('Handler for .click() called. con opcionCompraProductos ' + opcionCompraProductos + ' productosEnTienda ' + CART.productosEnTienda + ' productosEnWeb ' + CART.productosEnWeb);
         opcionesPago();
 
     });
@@ -3345,7 +3402,7 @@ function displayPantallaIntermediaAsistFiestas(data) {
         '<h4 style="margin-top:25%;"><label id="label_num_per_fiesta" style="font-size:20px">' + jsonIdiomas.asistente_fiestas.label_num_per_fiesta + '</label></h4>' +
         '<div class="ui-grid-c" style="width: 75%;">' +
         '<div class="ui-block-a">' +
-        '<img src="img/a_fiesta_u_ico.jpg" />' +
+        '<img src="img/a_fiesta_u_ico.png" />' +
         '</div>' +
         '<div class="ui-block-b" onclick=\'$("#personas_fiesta").val("4");\'>' +
         '<img src="img/4.png" />' +
@@ -3969,6 +4026,8 @@ function displayPantallaPreviaDisfraces(idNode, nodeName, isAlgo, aux, backPage)
 
 
 function opcionesPago() { //TEMP
+    
+    updateOpcionCompraProducto();
 
     $("#btn_finalizarpedido").addClass("btn_disabled");
 
@@ -3980,36 +4039,18 @@ function opcionesPago() { //TEMP
 
     switch (opcionCompraProductos) {
     case 1:
+
         OPCIONENVIO = 1;
         var html = '<div>' +
             '<center>' +
-            '<h2 style="margin: 1% 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_uno + '<br>' + jsonIdiomas.proceso_pago.tl_dos + '</h2>' +
+            '<h2 style="margin: 1% 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_cero + '</h2>' + //'<br>' + jsonIdiomas.proceso_pago.tl_dos 
             '<h4 style="margin: 0 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_pregunta + '</h4>' +
-            /*'<a data-corners="false" style="width:600px" onclick="pagarEnCaja();" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label>PAGO EN CAJA Y RECOGER YO MISMO EN TIENDA</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="text-align: right;"><label>Total cesta: ' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '<br>' + CART.length + ' productos disponibles</label></div>' +
-            '</div>' +
-            '</a>' +*/
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pagarEnCaja();">' +
-            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_seis + '</label></div></div>' +
+            '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_ocho + '</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
             '</div>' +
             (CART.length - CART.productosEnWeb == 0 ?
-                /*'<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.ammount + ')" data-role="button" data-theme="b" >' +
-                '<div class="ui-grid-a">' +
-                '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
-                '</div>' +
-                '<div class="ui-grid-a">' +
-                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                //'<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '<br>' + formatoNumero(CART.ammount, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio incluidos</label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br>' + CART.length + ' productos disponibles<label></div>' +
-                '</div>' +
-                '</a>'*/
                 '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.ammount + ')">' +
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_siete + '</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '</strong></label></div></div>' +
@@ -4022,46 +4063,36 @@ function opcionesPago() { //TEMP
         break;
     case 2:
         OPCIONENVIO = 2;
+
+        var prodTienda = CART.productosEnTienda + CART.productosSoloEnTienda;
+        var prodWeb = CART.productosEnWeb + CART.productosSoloEnWeb;
+
+        var precioTienda = CART.precioTotalProductosTienda + CART.precioTotalProductosSoloTienda;
+        var precioWeb = CART.precioTotalProductosWeb + CART.precioTotalProductosSoloWeb;
+
+        console.log("Prod tienda " + prodTienda + " Prod web " + prodWeb + " precio tienda " + precioTienda + " precio web " + precioWeb);
+
         var html = '<div>' +
             '<center>' +
-            '<h2 style="margin: 1% 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_tres + ' ' + CART.productosEnTienda + ' ' + jsonIdiomas.proceso_pago.tl_quatro + '<br>' + jsonIdiomas.proceso_pago.tl_tres + ' ' + CART.productosEnWeb + ' ' + jsonIdiomas.proceso_pago.tl_cinco + '</h2>' +
+            '<h2 style="margin: 1% 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_tres + ' ' + prodTienda + ' ' + jsonIdiomas.proceso_pago.tl_quatro + '<br>' + jsonIdiomas.proceso_pago.tl_tres + ' ' + prodWeb + ' ' + jsonIdiomas.proceso_pago.tl_cinco + '</h2>' +
             '<h4 style="margin: 0 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_pregunta + '</h4>' +
-
-            '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pagarEnCaja();OPCIONPEDIDO=1;">' +
+            ((parseInt(CART.productosSoloEnTienda) > 0 || parseInt(CART.productosEnTienda) > 0) ? '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pagarEnCaja();OPCIONPEDIDO=1;">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_ocho + '</label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): <strong font-size: 20px;>' + formatoNumero(CART.precioTotalProductosTienda, 2, ",", ".", "€") + '</strong></label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.productosEnTienda + ' producto disponibles</label></div></div>' +
-            '</div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos en tienda): <strong font-size: 20px;>' + formatoNumero(precioTienda, 2, ",", ".", "€") + '</strong></label></div></div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + prodTienda + ' producto disponibles</label></div></div>' +
+            '</div>' : '' ) +
+            //si hay prod en solo tienda no podremos compra online
             (parseInt(CART.productosSoloEnTienda) > 0 ? '' :
-                /*'<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.ammount + ');OPCIONPEDIDO=2;" data-role="button" data-theme="b" >' +
-                '<div class="ui-grid-a">' +
-                '<div class="ui-block-a" style="text-align: left;"><label>COMPRAR ONLINE (TODO EL PEDIDO)</label></div>' +
-                '</div>' +
-                '<div class="ui-grid-a">' +
-                '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '<br/> ' + (CART.length) + ' productos disponibles</label></div>' +
-                '</div>' +
-                '</a>'*/
                 '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.ammount + ');OPCIONPEDIDO=2;">' +
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_nueve + '</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(CART.ammount), 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
                 '</div>') +
-            /*'<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.precioTotalProductosSoloWeb + ');OPCIONPEDIDO=3;" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label>RECOGER LO DISPONIBLE EN TIENDA Y EL RESTO PEDIRLO ONLINE</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="width:100%;text-align: right;"><label>Total cesta(solo se tiene en cuenta los articulos online): ' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb), 2, ",", ".", "€") + '<br/>' + CART.length + ' productos disponibles</label></div>' +
-            '</div>' +
-            '</a>' +*/
-            '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.precioTotalProductosSoloWeb + ');OPCIONPEDIDO=3;">' +
+            ((parseInt(CART.productosSoloEnWeb) > 0 && parseInt(CART.productosEnTienda) > 0) ? '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.precioTotalProductosSoloWeb + ');OPCIONPEDIDO=3;">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label style="font-size: smaller;">' + jsonIdiomas.proceso_pago.tl_diez + '</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta(solo tiene en cuenta los articulos web): <strong font-size: 20px;>' + formatoNumero(parseFloat(CART.precioTotalProductosSoloWeb), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.length + ' producto disponibles</label></div></div>' +
-            '</div>' +
-            //'<div data-corners="false" style="width:50%" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</div>' +
+            '</div>' : '' ) +
             '<div class="ui-grid-a" style="width: 50%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
             '</center>' +
             '</div>';
@@ -4073,21 +4104,11 @@ function opcionesPago() { //TEMP
             '<center>' +
             '<h2 style="margin: 1% 0 1% 0;color:#0197d4">NO HAY DISPONIBLE NINGUN PRODUCTO EN TIENDA</h2>' +
             '<h4 style="margin: 0% 0 1% 0;color:#0197d4">' + jsonIdiomas.proceso_pago.tl_pregunta + '</h4>' +
-            /*'<a data-corners="false" style="width:600px" onclick="getSendPrice(' + CART.precioTotalProductosWeb + ');" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label>PEDIDO ONLINE</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; width:100%;text-align: right;"><label>Total cesta: ' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€") + '<br/>(' + CART.productosEnWeb + ' productos disponibles)</label></div>' +
-            '</div>' +
-            '</a>' +*/
-            '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.precioTotalProductosWeb + ');">' +
+            '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="getSendPrice(' + CART.precioTotalProductosSoloWeb + ');">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_once + '</label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(CART.precioTotalProductosWeb, 2, ",", ".", "€") + '</strong></label></div></div>' +
-            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.productosEnWeb + '  producto/os disponibles</label></div></div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(CART.precioTotalProductosSoloWeb, 2, ",", ".", "€") + '</strong></label></div></div>' +
+            '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + CART.productosSoloEnWeb + '  producto/os disponibles</label></div></div>' +
             '</div>' +
-            //'<div data-corners="false" style="width: 50%;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</div>' +
             '<div class="ui-grid-a" style="width: 50%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
             '</center>' +
             '</div>';
@@ -4118,6 +4139,8 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
     //getSendPrice();
     $("#divBack").html('<div onclick="opcionesPago();"><div class="ui-grid-b"><div class="ui-block-a" style="width: 10%;"><span class="flaticon-leftarrow" style="font-size:8px;float:left;text-transform:uppercase;"></span></div><div class="ui-block-b" style="width: 90%;"><label style="font-weight: bold;">Opciones de pago</label></div></div></div>');
 
+    var prodTienda = CART.productosEnTienda + CART.productosSoloEnTienda;
+    var prodWeb = CART.productosEnWeb + CART.productosSoloEnWeb;
 
 
     switch (casoEnvio) {
@@ -4129,24 +4152,12 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             '<center>' +
             '<h2 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_uno + '<br>' + jsonIdiomas.proceso_pago.tl_dos + '</h2>' +
             '<h4 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_pregunta_2 + '</h4>' +
-            /*'<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong><br> ' + formatoNumero(totalCesta, 2, ",", ".", "€") + 'cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div>' +
-            '</div>' +
-            '</a>' +*/
-            //'<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_doce + '</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
-            //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width:4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
             '</div>' +
-            //'<div style="width:50%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b">Cancelar pedido</div>' +
             '<div class="ui-grid-a" style="width: 50%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
             '</center>' +
             '</div>';
@@ -4155,26 +4166,17 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 
         OPCIONENTREGA = "dom";
 
+        console.log();
+
         var html = '<div>' +
             '<center>' +
-            '<h2 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_tres + ' ' + CART.productosEnTienda + ' ' + jsonIdiomas.proceso_pago.tl_quatro + '<br>' + jsonIdiomas.proceso_pago.tl_tres + ' ' + CART.productosEnWeb + ' ' + jsonIdiomas.proceso_pago.tl_cinco + '</h2>' +
+            '<h2 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_tres + ' ' + parseInt(prodTienda) + ' ' + jsonIdiomas.proceso_pago.tl_quatro + '<br>' + jsonIdiomas.proceso_pago.tl_tres + ' ' + parseInt(prodWeb) + ' ' + jsonIdiomas.proceso_pago.tl_cinco + '</h2>' +
             '<h4 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_pregunta_2 + '</h4>' +
-            /*'<a data-corners="false" style="width:600px" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')" data-role="button" data-theme="b" >' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div>' +
-            '</div>' +
-            '<div class="ui-grid-a">' +
-            '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-            '<div class="ui-block-b" style="float:rigth;text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong><br>' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + ' € de gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div>' +
-            '</div>' +
-            '</a>'*/
-            //'<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioForm(\'dom\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
             '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_dom.taxPercent + ',' + SEND_INFO.price_dom.totalPrice + ',' + SEND_INFO.price_dom.basePrice + ')">' +
             '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/camion.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>ENVIO A DOMICILIO 48H</label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(parseFloat(totalCesta) + parseFloat(SEND_INFO.price_dom.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_dom.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
             '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
-            //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_dom.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin-top: 15px;"></div></div>' +
             '</div>';
 
         if (parseInt(STORE.deliveryStore) == 0 || parseInt(SEND_INFO.price_shop.result) == -3) {
@@ -4189,22 +4191,10 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             //NO CUMPLE ENVIO MINIMO HA TIENDA
 
             html +=
-                /*'<a class="btn_disabled" data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')" data-role="button" data-theme="b" >' +
-                               '<div class="ui-grid-a">' +
-                               '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
-                               '</div>' +
-                               '<div class="ui-grid-a">' +
-                               '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                               '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong><br>Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div>' +
-                               '</div>' +
-                               '</a>' +*/
-                //'<div style="width: 50%;margin: 0% 25% 1% 25%;" onclick="displayDomicilioFacturacionForm(' + OPCIONENTREGA + ',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
                 '<div class="btn_disabled" style="width: 50%;margin: 0% 25% 1% 25%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_trece + '</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta, 2, ",", ".", "€") + '</strong></label></div></div>' +
-                //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + '€ gastos de envio </label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio disponible a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
-                //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin-top: 15px;"></div></div>' +
                 '</div>';
 
 
@@ -4213,28 +4203,16 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
             OPCIONENTREGA = "shop";
 
             html +=
-                /*'<a data-corners="false" style="width:600px" onclick="displayDomicilioFacturacionForm(\'shop\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')" data-role="button" data-theme="b" >' +
-                               '<div class="ui-grid-a">' +
-                               '<div class="ui-block-a" style="text-align: left;"><label>CLICK AND COLLECT 48H</label></div>' +
-                               '</div>' +
-                               '<div class="ui-grid-a">' +
-                               '<div class="ui-block-a" style="float:left;"><label></label></div>' +
-                               '<div class="ui-block-b" style="float:rigth; text-align: right;width:100%;"><label>Total cesta: <strong style="font-size: 20px;">' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong><br>' + formatoNumero(totalCesta, 2, ",", ".", "€") + ' cesta + ' + parseFloat(SEND_INFO.price_shop.totalPrice).toFixed(2) + ' € de gastos de envio <br>Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div>' +
-                               '</div>' +
-                               '</a>'+*/
-                //'<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="displayDomicilioFacturacionForm(' + OPCIONENTREGA + ',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
                 '<div style="width: 50%;margin: 0% 0% 1% 0%;" onclick="pantallaInterLoginPago(\'' + OPCIONENTREGA + '\',' + SEND_INFO.price_shop.taxPrice + ',' + SEND_INFO.price_shop.totalPrice + ',' + SEND_INFO.price_shop.basePrice + ')">' +
                 '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/tienda.png" style="width: 45px;"></div><div class="ui-block-b" style="width: 90%;height: 45px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_trece + '</label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label>Total cesta: <strong font-size: 20px;>' + formatoNumero(totalCesta + parseFloat(SEND_INFO.price_shop.totalPrice), 2, ",", ".", "€") + '</strong></label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 40px;line-height: 40px;border-bottom: 2px solid #ccc;" class="ui-grid-solo"><div class="ui-block-a" style="padding-right: 20px;"><label style="font-style: italic;">' + parseFloat(SEND_INFO.price_shop.totalPrice).toFixed(2) + '€ gastos de envio </label></div></div>' +
                 '<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-solo"><div class="ui-block-a" style="height: 45px;text-align: right;">Envio gratuito a partir de ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €<img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin: 0px 20px 0px 4px;"></div></div>' +
-                //'<div style="background-color: #d8d8d8;color: black;text-align: right;width: 100%;height: 45px;line-height: 45px;" class="ui-grid-a"><div class="ui-block-a" style="width: 96%;height: 45px;text-align: right;"><label style="font-style: italic;">Pedido mínimo para el envío ' + parseFloat(SEND_INFO.price_shop.minFreeShipping).toFixed(2) + ' €</label></div><div class="ui-block-b" style="width: 4%;height: 25px;"><img src="http://partyfiesta.youtter.com/app/alb/img/info-01.svg" style="width: 15px;margin-top: 15px;"></div></div>' +
                 '</div>';
 
         }
 
-        html += //'<br>' +
-            //'<div style="width: 50%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </div>' +
+        html +=
             '<div class="ui-grid-a" style="width: 50%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
             '</center>' +
             '</div>';
@@ -4249,7 +4227,7 @@ function opcionesEnvio(casoEnvio, totalCesta) { //TEMP
 }
 
 
-function sistemasPago(soloOnline) { //TEMP
+function sistemasPago(soloOnline) {
 
     console.log('--> sistemasPago ' + soloOnline);
 
@@ -4264,7 +4242,7 @@ function sistemasPago(soloOnline) { //TEMP
         '<input type="hidden" name="cmd" value="_cart">' +
         '<input type="hidden" name="upload" value="1">' +
         '<input type="hidden" name="return" value="http://partyfiesta.youtter.com/app/alb/pedido_finalizado.php?email=' + INFO_USU.email.replace(/\s/g, " ") + '&idUser=' + INFO_USU.id + '&shop=' + STORE.id + '">' +
-        '<input type="hidden" name="cancel_return" value="http://partyfiesta.youtter.com/app/alb/">' +
+        '<input type="hidden" name="cancel_return" value="http://partyfiesta-prod.youtter.com:60780/app/alb/">' +
         '<input type="hidden" name="business" value="tiendaonline@partyfiesta.com">';
 
     var add = '';
@@ -4276,10 +4254,14 @@ function sistemasPago(soloOnline) { //TEMP
         var aux = 0;
         for (i = 0; i < CART.length; i++) {
 
-            if (CART[i].stock_x_store == 0) { //solo cargaremos los productos online
+            if (CART[i].stock_x_store == 0 || CART[i].online_quantity > 0) { //solo cargaremos los productos online
 
                 console.log("Prod ");
                 console.log(CART[i]);
+
+                if (CART[i].online_quantity > 0) var cantidad = CART[i].online_quantity;
+                else var cantidad = CART[i].quantity;
+
 
                 if (aux == 0) {
 
@@ -4288,7 +4270,7 @@ function sistemasPago(soloOnline) { //TEMP
                         '<input type="hidden" name="item_name_' + (aux + 1) + '" value="' + CART[i].name + '">' +
                         '<input type="hidden" name="item_number_' + (aux + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
                         '<input type="hidden" name="amount_' + (aux + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-                        '<input type="hidden" name="quantity_' + (aux + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+                        '<input type="hidden" name="quantity_' + (aux + 1) + '" value="' + parseInt(cantidad) + '">';
 
                 } else {
 
@@ -4296,7 +4278,7 @@ function sistemasPago(soloOnline) { //TEMP
                         '<input type="hidden" name="item_name_' + (aux + 1) + '" value="' + CART[i].name + '">' +
                         '<input type="hidden" name="item_number_' + (aux + 1) + '" value="' + parseInt(CART[i].sku) + '">' +
                         '<input type="hidden" name="amount_' + (aux + 1) + '" value="' + CART[i].price_x_region[0].totalPrice + '">' +
-                        '<input type="hidden" name="quantity_' + (aux + 1) + '" value="' + parseInt(CART[i].quantity) + '">';
+                        '<input type="hidden" name="quantity_' + (aux + 1) + '" value="' + parseInt(cantidad) + '">';
 
                 }
                 aux++;
@@ -4343,18 +4325,14 @@ function sistemasPago(soloOnline) { //TEMP
         if (OPCIONENTREGA == 'shop') {
 
             if (SEND_INFO.price_shop.taxPrice == undefined) {
-                var precio_envio = 0;
+                var precio_envio = SEND_INFO.price_dom.totalPrice;
             } else {
                 var precio_envio = SEND_INFO.price_shop.totalPrice;
             }
 
         } else {
 
-            if (SEND_INFO.price_shop.taxPrice == undefined) {
-                var precio_envio = 0;
-            } else {
-                var precio_envio = SEND_INFO.price_dom.totalPrice;
-            }
+            var precio_envio = SEND_INFO.price_dom.totalPrice;
 
         }
 
@@ -4369,28 +4347,12 @@ function sistemasPago(soloOnline) { //TEMP
 
     }
 
-
-
     var html = '<div>' +
         '<center>' +
         '<h2 style="text-transform: uppercase;color:#0197d4;">' + jsonIdiomas.proceso_pago.tl_catorce + '</h2>' +
-        /*'<a data-corners="false" style="width:600px" onclick="sendBasketAndOrder(\'cash register\');" data-role="button" data-theme="b" >' +
-        '<div class="ui-grid-solo">' +
-        '<div class="ui-block-a"><label>CAJA</label></div>' +
-        '</div>' +
-        '</a>' +*/
         '<div id="caja" style="width: 50%;margin: 0% 0% 1% 0%;" onclick="">' +
         '<div style="background-color: #0197d4;color:white;text-align:left;width:100%;height:60px;line-height:60px;" class="ui-grid-a"><div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div><div class="ui-block-b" style="width: 85%;height: 60px;text-align: left;"><label>' + jsonIdiomas.proceso_pago.tl_quince + '</label></div></div>' +
         '</div>' +
-        //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >' +
-        //'<div class="ui-grid-solo">' +
-        //'<div class="ui-block-a"><label>TARJETA/PAYPAL</label></div>' +
-        //'</div>' +
-        //'</a>' +
-        //'<br>' +
-        //'<a data-corners="false" style="width:600px" onclick="" data-role="button" data-theme="b" >TARJETA / PAYPAL' +
-        ///paypal +
-        //'</a>' +
         '<div id="paypal" style="width: 50%;margin: 0% 0% 1% 0%;">' +
         '<div style="background-color: #0197d4;color: white;text-align: left;width: 100%;height: 60px;line-height: 60px;" class="ui-grid-c">' +
         '<div class="ui-block-a" style="width: 15%;height: 60px;"><img src="http://partyfiesta.youtter.com/app/alb/img/caja_registradora.png" style="width: 60px;"></div>' +
@@ -4400,7 +4362,6 @@ function sistemasPago(soloOnline) { //TEMP
         paypal +
         '</div>' +
         '<br>' +
-        //'<div style="width:50%;background-color:#dd3324;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </div>' +
         '<div class="ui-grid-a" style="width: 50%;background-color:#dd3324;margin; 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
         '</center>';
 
@@ -4410,15 +4371,16 @@ function sistemasPago(soloOnline) { //TEMP
 
     $("#paypal").click(function () {
         $("#popupCargando").popup("open");
-        sendBasketAndOrder('cash register');
+        //sendBasketAndOrder('cash register');
         $("#formPaypal").submit();
     });
 
     $("#caja").click(function () {
 
+        $("#popupCargando").popup("open");
         sendBasketAndOrder('cash register');
 
-        html = '<center>' +
+        /*html = '<center>' +
             '<div style="margin-top:10%;width: 50%;" onclick="getNodes(0);">' +
             '<div class="ui-grid-solo" style="color:#0197d4;">' +
             '<label style="font-size:x-large;">' + jsonIdiomas.pago_caja + '</label>' +
@@ -4435,7 +4397,7 @@ function sistemasPago(soloOnline) { //TEMP
 
         setTimeout(function () {
             getNodes(0);
-        }, 10000);
+        }, 10000);*/
 
     });
 
@@ -4546,6 +4508,8 @@ function loadSelectProvinciasFromCountry(divName, idCountry, idSelect) {
     //getProvinces();
 
     var html = '<select data-corners="false" id="' + idSelect + '" data-native-menu="false" data-theme="b" style="">';
+
+    html = html + '<option value="vacio"><label style="color:white;text-transform: uppercase;"></label></option>';
 
     for (var i = 0; i < PROVINCIAS.length; i++) {
 
@@ -4864,17 +4828,27 @@ function displayDomicilioFacturacionForm() {
     $("#button_continuar_direcciones").click(function () {
 
         if (OPCIONPEDIDO == 3) {
-            console.log("Entra 3");
+            console.log("Entra 3 formulario");
             if (checkForm()) {
-                pagarEnCajaPrevioPago();
-                OPCIONPEDIDO = 0;
+                
+                console.log('ProdEnTienda: ' + CART.productosEnTienda + ' ProdSoloEnTienda: ' + CART.productosSoloEnTienda + 'ProdEnWeb: ' + CART.ProdEnWeb + ' ProdSoloEnWeb: ' + CART.ProdSoloEnWeb);
+                if ( CART.productosEnTienda > 0 || CART.productosSoloEnTienda > 0 )	{
+                	console.log('-> pagarEnCajaPrevioPago');
+					pagarEnCajaPrevioPago();
+				}
+				else	{
+					console.log('-> sistemasPago');
+					sistemasPago('si');
+				}
+                
+                //OPCIONPEDIDO = 0;
             }
 
         } else {
             console.log("Entra no es 3");
             if (checkForm()) {
                 registroUsuarioDomicilio(1);
-                OPCIONPEDIDO = 0;
+                //OPCIONPEDIDO = 0;
             }
         }
 
@@ -5072,15 +5046,25 @@ function displayDomicilioForm(destinoEnvio, taxPrice, totalPrice, basePrice) {
         if (OPCIONPEDIDO == 3) {
             console.log("Entra 3");
             if (checkForm()) {
-                pagarEnCajaPrevioPago();
-                OPCIONPEDIDO = 0;
+                
+                console.log('ProdEnTienda: ' + CART.productosEnTienda + ' ProdSoloEnTienda: ' + CART.productosSoloEnTienda + 'ProdEnWeb: ' + CART.ProdEnWeb + ' ProdSoloEnWeb: ' + CART.ProdSoloEnWeb);
+                if ( CART.productosEnTienda > 0 || CART.productosSoloEnTienda > 0 )	{
+                	console.log('-> pagarEnCajaPrevioPago');
+					pagarEnCajaPrevioPago();
+				}
+				else	{
+					console.log('-> sistemasPago');
+					sistemasPago('si');
+				}
+                
+                //OPCIONPEDIDO = 0;
             }
 
         } else {
             console.log("Entra no es 3");
             if (checkForm()) {
                 registroUsuarioDomicilio();
-                OPCIONPEDIDO = 0;
+                //OPCIONPEDIDO = 0;
             }
         }
 
@@ -5213,14 +5197,14 @@ function checkFormDireccion(tipoDireccion) {
 
     /*var field = $('input_nombreUsuario');
     
-                if (  field.val().localeCompare('') == 0 )	{
-                    field.focus();
-                    
-                    $("#texto_popup").text('Campo Vacio');
-                    $('#popupAlert').popup('open');
-                    
-                    return false;
-                }*/
+                        if (  field.val().localeCompare('') == 0 )	{
+                            field.focus();
+                            
+                            $("#texto_popup").text('Campo Vacio');
+                            $('#popupAlert').popup('open');
+                            
+                            return false;
+                        }*/
 
     console.log('--> Address forms para tipoDireccion: ' + tipoDireccion);
 
@@ -5542,8 +5526,8 @@ function pagarEnCajaPrevioPago() {
         '<br>' +
         '<a  data-corners="false" style="width:35%" onclick="imprimirPedido(1);" data-role="button" data-icon="home" data-iconpos="right" data-theme="b"> Imprimir en tienda </a>' +
         '<br>' +
-        //'<a  data-corners="false" style="width:300px" onclick="pedidoOnline();" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b"> Pedido online </a>' +
-        //'<br>' +
+        '<a  data-corners="false" style="width:35%" onclick="sistemasPago(\'si\');" data-role="button" data-icon="shop" data-iconpos="right" data-theme="b"> Omitir este paso </a>' +
+        '<br>' +
         //'<a  data-corners="false" style="width:300px" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');" data-role="button" data-icon="delete" data-iconpos="right" data-theme="b"> Cancelar pedido </a>' +
         '<div class="ui-grid-a" style="width:41%;background-color:#dd3324;margin: 1% 0 0 0;" onclick="$(\'#popupConfirmacionCancelarPedido\').popup(\'open\');"><div class="ui-block-a" style="width: 90%;height: 45px;color:white;text-transform: uppercase;line-height: 45px;">Cancelar pedido</div><div class="ui-block-b" style="width: 10%;height: 45px;"><img src="http://partyfiesta.youtter.com/app/alb/img/X.png" style="width: 45px;"></div></div>' +
         '</center>' +
@@ -5553,6 +5537,8 @@ function pagarEnCajaPrevioPago() {
 }
 
 function pantallaInterLoginPago(destinoEnvio, taxPrice, totalPrice, basePrice) {
+
+    OPCIONENTREGA = destinoEnvio;
 
     console.log(destinoEnvio + "," + taxPrice + "," + totalPrice + "," + basePrice + " datos del envio ----------------------- ");
 
@@ -5582,6 +5568,15 @@ function pantallaInterLoginPago(destinoEnvio, taxPrice, totalPrice, basePrice) {
 
 function pantallaRegistroPago() {
 
+    var displayNone = "";
+    var displayNoneReg = "display:none;";
+    if (OPCIONENTREGA == 'shop' && (OPCIONPEDIDO == 3 || OPCIONPEDIDO == 2)) {
+        displayNone = "display:none;";
+        displayNoneReg = "";
+    }
+
+    console.log("Se muestra o no? " + displayNone);
+
     var html = '<h2 id="h2_direccion" style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">' + jsonIdiomas.reg_pant_pedido.tl_uno + '</h2><hr style="border-color:#0197d4;">' +
         '<div class="ui-grid-a">' +
         '<div class="ui-block-a">' +
@@ -5603,9 +5598,15 @@ function pantallaRegistroPago() {
         '<div class="" style="width:80%;"><input required data-corners="false" style="width: 100%;border:1px solid #0197d4" id="in_pass_re" name="in_pass_re" data-type="entrega" required="required" type="password" placeholder=""></div>' +
         '</div>' +
         '</div>' +
+        '<div class="ui-grid-a" style="' + displayNoneReg + '">' +
+        '<div class="ui-block-a">' +
+        '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.codPos + ' *</label>' +
+        '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_postal_2" name="in_postal" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
+        '</div>' +
+        '</div>' +
         //direccion de envio
-        '<h2 style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;">' + jsonIdiomas.reg_pant_pedido.direcc + '</h2><hr style="border-color:#0197d4;">' +
-        '<div class="ui-grid-a">' +
+        '<h2 style="margin: 0 0 0 0;color:#0197d4;text-transform:uppercase;' + displayNone + '">' + jsonIdiomas.reg_pant_pedido.direcc + '</h2><hr style="border-color:#0197d4;' + displayNone + '">' +
+        '<div class="ui-grid-a" style="' + displayNone + '">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.nombre + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_name" name="in_name" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
@@ -5615,7 +5616,7 @@ function pantallaRegistroPago() {
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_apellidos" name="in_apellidos" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-        '<div class="ui-grid-a">' +
+        '<div class="ui-grid-a" style="' + displayNone + '">' +
         '<div class="ui-block-a">' +
         '<label class="uname" data-icon="u" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.telf + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_tel" name="in_tel" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
@@ -5625,7 +5626,7 @@ function pantallaRegistroPago() {
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_dni" name="in_dni" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-        '<div class="ui-grid-a">' +
+        '<div class="ui-grid-a" style="' + displayNone + '">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.direcc + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_direc" name="in_direc" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
@@ -5635,7 +5636,7 @@ function pantallaRegistroPago() {
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_num_direc" name="in_num_direc" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-        '<div class="ui-grid-a">' +
+        '<div class="ui-grid-a" style="' + displayNone + '">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.codPos + ' *</label>' +
         '<div class="" style="width:80%;"><input required style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_postal" name="in_postal" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
@@ -5645,7 +5646,7 @@ function pantallaRegistroPago() {
         '<div class="" style="width:80%;"><input style="width: 100%;border:1px solid #0197d4" data-corners="false" id="in_ciudad" name="in_ciudad" data-type="facturacion" required="required" type="text" placeholder=""></div>' +
         '</div>' +
         '</div>' +
-        '<div class="ui-grid-a">' +
+        '<div class="ui-grid-a" style="' + displayNone + '">' +
         '<div class="ui-block-a">' +
         '<label class="youpasswd" data-icon="p" style="color:#0197d4;">' + jsonIdiomas.reg_pant_pedido.pais + ' *</label>' +
         '<div id="div_input_pais" class="" style="width:80%;"></div>' +
@@ -5662,46 +5663,73 @@ function pantallaRegistroPago() {
 
     $("#btn_registro_pago").click(function () {
 
-        console.log("Nos registramos en la pantalla del pedido");
-        //sendBasketAndOrder('cash register');
-        //$("#formulario_reg_pago").submit();
+        if (OPCIONENTREGA == 'shop' && OPCIONPEDIDO == 3) {
 
-        var email = $('#in_email').val();
-        var email_re = $('#in_email_re').val();
-        var pass = $('#in_pass').val();
-        var pass_re = $('#in_pass_re').val();
-        //var codpos = $('#in_codpos').val();
-        var name = $('#in_name').val();
-        var apellidos = $('#in_apellidos').val();
-        var tel = $('#in_tel').val();
-        var dni = $('#in_dni').val();
-        var direc = $('#in_direc').val();
-        var num_direc = $('#in_num_direc').val();
-        var postal = $('#in_postal').val();
-        var ciudad = $('#in_ciudad').val();
-        var selectCountry = $('#selectCountry').val();
-        var selectProvince_2 = $('#selectProvince_2').val();
+            var email = $('#in_email').val();
+            var email_re = $('#in_email_re').val();
+            var pass = $('#in_pass').val();
+            var pass_re = $('#in_pass_re').val();
+            var postal = $('#in_postal').val();
 
-        if (email == email_re && pass == pass_re && name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != "") { //codpos != "" &&
+            if (email == email_re && pass == pass_re && pass.length >= 8 && postal != "") {
 
-            console.log("Todos los campos ok");
-            sendRegistroDomicilio(email, pass, postal,
-                name, apellidos, tel, dni, direc, num_direc, ciudad, selectProvince_2, postal, selectCountry,
-                name, apellidos, tel, dni, direc, num_direc, postal, ciudad, selectCountry, selectProvince_2, 2);
+                getRegistro(email, pass, postal, "pago");
 
+            } else {
+
+                $.jAlert({
+                    'title': 'Alerta',
+                    'content': jsonIdiomas.alertas.form_imcompleto,
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
+
+            }
 
         } else {
 
-            $.jAlert({
-                'title': 'Alerta',
-                'content': jsonIdiomas.alertas.form_imcompleto,
-                'theme': 'gray',
-                'size': 'xsm'
-            });
+            console.log("Nos registramos en la pantalla del pedido");
+            //sendBasketAndOrder('cash register');
+            //$("#formulario_reg_pago").submit();
+
+            var email = $('#in_email').val();
+            var email_re = $('#in_email_re').val();
+            var pass = $('#in_pass').val();
+            var pass_re = $('#in_pass_re').val();
+            //var codpos = $('#in_codpos').val();
+            var name = $('#in_name').val();
+            var apellidos = $('#in_apellidos').val();
+            var tel = $('#in_tel').val();
+            var dni = $('#in_dni').val();
+            var direc = $('#in_direc').val();
+            var num_direc = $('#in_num_direc').val();
+            var postal = $('#in_postal').val();
+            var ciudad = $('#in_ciudad').val();
+            var selectCountry = $('#selectCountry').val();
+            var selectProvince_2 = $('#selectProvince_2').val();
+
+            console.log("");
+
+            if (email == email_re && pass == pass_re && name != "" && apellidos != "" && tel != "" && dni != "" && direc != "" && num_direc != "" && postal != "" && ciudad != "" && selectCountry != "" && selectProvince_2 != "vacio") { //codpos != "" &&
+
+                console.log("Todos los campos ok");
+                sendRegistroDomicilio(email, pass, postal,
+                    name, apellidos, tel, dni, direc, num_direc, ciudad, selectProvince_2, postal, selectCountry,
+                    name, apellidos, tel, dni, direc, num_direc, postal, ciudad, selectCountry, selectProvince_2, 2);
+
+
+            } else {
+
+                $.jAlert({
+                    'title': 'Alerta',
+                    'content': jsonIdiomas.alertas.form_imcompleto,
+                    'theme': 'gray',
+                    'size': 'xsm'
+                });
+
+            }
 
         }
-
-
 
     });
 
